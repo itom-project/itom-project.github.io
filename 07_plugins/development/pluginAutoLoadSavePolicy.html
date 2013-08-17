@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Automatic loading and saving of plugin parameters &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="itom API" href="plugin-itomAPI.html" />
+    <link rel="prev" title="Create a new plugin via CMake" href="pluginCreateCMake.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-itomAPI.html" title="itom API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pluginCreateCMake.html" title="Create a new plugin via CMake"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="automatic-loading-and-saving-of-plugin-parameters">
+<span id="plugin-autoloadsave-policy"></span><h1>Automatic loading and saving of plugin parameters<a class="headerlink" href="#automatic-loading-and-saving-of-plugin-parameters" title="Permalink to this headline">¶</a></h1>
+<p><strong>itom</strong> has the optional ability, that all plugin parameters (type <em>tParam</em>), which are part of the <strong>m_params</strong> vector of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.
+<strong>itom</strong> has the optional ability, that all plugin parameters (of type <strong>Param</strong> or <strong>ParamBase</strong>), which are part of the <strong>m_params</strong> vector of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.</p>
+<p>Additionally, the decision whether these parameters should be saved or not, is set by the member variable <strong>m_autoSavePolicy</strong> of the interface class of the plugin (see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><em>Plugin interface class</em></a>). This variable can have the following values:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoSavePolicy</span> <span class="p">{</span>
+    <span class="n">autoSaveAlways</span>          <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always saves parameters to xml-file at shutdown */</span>
+    <span class="n">autoSaveNever</span>           <span class="o">=</span> <span class="mh">0x2</span>  <span class="cm">/*!&lt; never saves parameters to xml-file at shutdown (default) */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>If the member has the value <em>autoSaveAlways</em>, all parameters contained in the vector <em>m_params</em> of the plugin instance are saved in a xml-subtree. This subtree is dependent on the unique identifier of the plugin. Remember, that only plugins which do not have the flag <em>typeNoAutoSave</em> will be saved (see <a class="reference internal" href="plugin-params.html#plugin-params"><em>Parameter-Container class of itom</em></a>).</p>
+<p>Inversely, saved parameters in a plugin specific xml-file can also be set after that the plugin instance has been created and initialized (with the mandatory and optional parameters given by the constructor in python). The loading of these xml-parameters is dependent on the value of the member variable <strong>m_autoLoadPolicy</strong> of the plugin&#8217;s interface class. This variable can have the following values:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoLoadPolicy</span> <span class="p">{</span>
+    <span class="n">autoLoadAlways</span>           <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always loads xml file by addInManager */</span>
+    <span class="n">autoLoadNever</span>            <span class="o">=</span> <span class="mh">0x2</span><span class="p">,</span> <span class="cm">/*!&lt; never automatically loads parameters from xml-file (default) */</span>
+    <span class="n">autoLoadKeywordDefined</span>   <span class="o">=</span> <span class="mh">0x4</span>  <span class="cm">/*!&lt; only loads parameters if keyword autoLoadParams=1 exists in python-constructor */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>If the variable is set to <em>autoLoadAlways</em>, all parameters in the xml-subtree, having the same unique identifier (ID) than the recently opened plugin instance, are set in the instance. This is done by calling the method <strong>setParam</strong> of the instance for every specific parameter. It is up to you to decide whether you accept the given parameter from the xml-file or not. Remember that <strong>setParam</strong> is called after that the plugin instance is created and the init-method of the plugin has been called. Of course, the init-method gets the mandatory and optional parameters, which are indicated when you create the plugin instance for example in python.</p>
+<p>If the variable is set to <em>autoLoadNever</em>, no parameters of the xml-file will be set to the plugin&#8217;s instance.</p>
+<p>If the variable is set to <em>autoLoadKeywordDefined</em>, the parameters from the xml-subtree are only set to the plugin&#8217;s instance, if the plugin has been created in python with the last keyword-defined parameter <strong>autoLoadParams=1</strong>.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;DummyGrabber&quot;</span><span class="p">,</span><span class="n">param1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">paramN</span><span class="p">,</span><span class="n">autoLoadParams</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pluginCreateCMake.html"
+                        title="previous chapter">Create a new plugin via CMake</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugin-itomAPI.html"
+                        title="next chapter">itom API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/pluginAutoLoadSavePolicy.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-itomAPI.html" title="itom API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pluginCreateCMake.html" title="Create a new plugin via CMake"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

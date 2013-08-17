@@ -1,0 +1,2931 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DataObject - Reference &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dataobject-reference">
+<span id="plugin-dataobject-ref"></span><h1>DataObject - Reference<a class="headerlink" href="#dataobject-reference" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::DataObject</strong></div>
+</div>
+<blockquote>
+<div><p>dataObject contains a n-dimensional matrix </p>
+<p><p>The n-dimensional matrix can have different element types. Recently the following types are supported: int8, uint8, int16, uint16, int32, uint32, float32, float64 (=&gt; double), complex64 (2x float32), complex128 (2x float64)</p>
+<p>In order to handle huge matrices, the data object can divide one matrix into subparts in memory. Each subpart (called matrix-plane) is two-dimensional and covers data of the last two dimensions. Each of these matrix-planes is of type cv::Mat_&lt;type&gt; and can be used with every operator given by the openCV-framework (version 2.3.1 or higher).</p>
+<p>We assume to have a n-dimensional matrix A, where each dimension has its size s_i, hence A=[s_1, s_2, ..., s_(n-2), s_(n-1), s_n]</p>
+<p>Hence, in total there are s_1 * s_2 * ... * s_(n-2) different matrix-planes, which are all accessible by the member m_data, which is a std::vector of the general type int*. This type has to be casted to the specific cv::Mat_&lt;...&gt; when one matrix-plane has to be accessed. Sometimes it is also possible to simply cast to cv::Mat.</p>
+<p>In order to make the data object compatible to continuously organized data structures, like numpy-arrays, it is also possible to have all matrix-planes in one data-block in memory. Then the continuous-flag will be set and the whole data block can be accessed by taking the pointer given by m_data[0]. Nevertheless, the indicated data structure with the two-dimensional sub-matrix-planes is still existing, hence, the pointer to each matrix-planes points to the entry point of its matrix-planes lying withing the huge data block.</p>
+<p>The data organization is equal to the one of open-cv, hence, two-dimensional matrices are stored row-by-row (C-style)...</p>
+<p>The real size of each dimension is stored in the vector m_osize. Since it is possible to set a n-dimensional region of interest (ROI) to each matrix, the virtual dimensions, which will be delivered if the user asks for the matrix size, are stored in the member vector m_size.</p>
+<p>Concept to handle templated and non-templated methods
+ &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</p>
+<p>According to openCV, the class dataObject is not templated, because there are some structures in the entire itom-framework which does not support any templating concept, like the plugin-handling or communication with external dll-functions. Additionally the signal-slot-design of the Qt-framework does not accept templated parameters beside some standard-objects. Therefore the element-data-type is set by the integer-member m_type. The transformation between the real data type and the integer number is coded several times within the whole framework and can be accessed by the enumeration tDataType in typeDefs.h. Since templating has got many advantages concerning low-level calculation, we adapted the transformation-process which is used by openCV:</p>
+<p>1. define a templated helper-method in the following form:</p>
+<p>template&lt;typename _Tp&gt; returnType &#8216;MethodName&#8217;Func(Parameters1)</p>
+<p>2. define the following two lines of code: typedef returnType (*t&#8217;MethodName&#8217;Func)(Parameters1); MAKEFUNCLIST(&#8216;MethodName&#8217;Func);</p>
+<p>3. define the method, accessed for example as public-method of dataObject <a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>::&#8217;PublicMethodName&#8217;(Parameters2) { ... fList&#8217;MethodName&#8217;Func[<a class="reference internal" href="#itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"><em>getType()</em></a>](Parameters1); ... return ... }</p>
+<p>&#8212; By the macro MAKEFUNCLIST a list fList&#8217;MethodName&#8217;Func is generated with each entry being a function pointer to the specific templated version of &#8216;MethodName&#8217;Func. The specific method is accessed by using <a class="reference internal" href="#itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"><em>getType()</em></a> of dataObject. Hence it is important to keep the element-data-types and their order consistent for the whole itom-project. </p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_data_object_1a405fb0d2cfed06ed990579e299b14309"></span><div class="line-block">
+<div class="line">size_t <strong>seekMat</strong>(const size_t matNum, const size_t numMats)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the index vector-index of m_data which corresponds to the given zero-based two-dimensional matrix-index </p>
+<p><p>Since there might be a difference between the &#8220;real&#8221; matrix size in memory and the virtual size which is set by subslicing a matrix and hence setting any ROI, this method transforms a desired matrix-plane index to the real index in memory of the data-vector m_data</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>real vector-index for the desired matrix-plane or 0 if matNum &gt;= numMats. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">matNum</span></tt> - <p>zero-based matrix-plane-index, considering the virtual matrix size (ROI), 0&lt;=matNum&lt;calcNumMats </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">numMats</span></tt> - <p>total number of matrix-planes, lying within the ROI </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1acbc98cb23e0cb28c8b8c8d7a2d05944f"></span><div class="line-block">
+<div class="line">size_t <strong>seekMat</strong>(const size_t matNum)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the index vector-index of m_data which corresponds to the given zero-based two-dimensional matrix-index </p>
+<p><p>Since there might be a difference between the &#8220;real&#8221; matrix size in memory and the virtual size which is set by subslicing a matrix and hence setting any ROI, this method transforms a desired matrix-plane index to the real index in memory of the data-vector m_data</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>real vector-index for the desired matrix-plane </dd>
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="#itomclassito_1_1_data_object_1a405fb0d2cfed06ed990579e299b14309"><em>seekMat</em></a> </p>
+<p class="last"><a class="reference internal" href="#itomclassito_1_1_data_object_1a7094b4f5d2dcaa975ccc6d690d23962a"><em>calcNumMats</em></a> </p>
+</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">matNum</span></tt> - <p>zero-based matrix-plane considering the virtual matrix size (ROI), 0&lt;=matNum&lt;calcNumMats </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a7094b4f5d2dcaa975ccc6d690d23962a"></span><div class="line-block">
+<div class="line">size_t <strong>calcNumMats</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>calculates numbers of single opencv matrices which are part of the ROI which has previously been set. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>0 if empty range or empty matrix, 1 if two dimensional, else product of sizes of all dimensions besides the last two ones. </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aef6f5cc9ed877dff7ebf607314a1c0c0"></span><div class="line-block">
+<div class="line">double <strong>getValueOffset</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function return the offset of the values stored within the dataOject </p>
+<p>Function return the scaling of values stored within the dataOject </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a1f949cfe9c524d032ec1d04125b1bd64"></span><div class="line-block">
+<div class="line">double <strong>getValueScale</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function return the unit description for the values stoerd within the dataOject. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a9e15779be202e179813019ef50880de6"></span><div class="line-block">
+<div class="line">const std::string <strong>getValueUnit</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function return the description for the values stored within the dataOject, if tagspace does not exist, NULL is returned. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a13b3ece1ae4f9f44f36ac74f28367693"></span><div class="line-block">
+<div class="line">std::string <strong>getValueDescription</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function return the axis-offset for the existing axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a9ca1ab7c61f85d6e0232773959a22d91"></span><div class="line-block">
+<div class="line">double <strong>getAxisOffset</strong>(const int axisNum)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the axis-description for the exist axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a44e554b15f9bffd8e6077fb2d61c51e5"></span><div class="line-block">
+<div class="line">double <strong>getAxisScale</strong>(const int axisNum)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the axis-unit-description for the exist axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a8833ed4df6ec8987d5db5888593c38d4"></span><div class="line-block">
+<div class="line">const std::string <strong>getAxisUnit</strong>(const int axisNum, bool &amp; validOperation)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the axis-description for the exist specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a70da3f5e2e7a128bb066e947ee398530"></span><div class="line-block">
+<div class="line">const std::string <strong>getAxisDescription</strong>(const int axisNum, bool &amp; validOperation)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a05b06b04d2dc1659a816c2b404f6423d"></span><div class="line-block">
+<div class="line">DataObjectTagType <strong>getTag</strong>(const std::string key, bool &amp; validOperation)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a418f219bb93698cb411e5bd41052d65b"></span><div class="line-block">
+<div class="line">bool <strong>getTagByIndex</strong>(const int tagNumber, std::string &amp; key, DataObjectTagType  &amp; value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the string-value for &#8216;key&#8217; identified by int tagNumber. If key in the TagMap do not exist NULL is returned. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a56dac06f4679c40a9f632ac97bfd27c4"></span><div class="line-block">
+<div class="line">std::string <strong>getTagKey</strong>(const int tagNumber, bool &amp; validOperation)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the number of elements in the Tags-Maps. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a13f78ec1afc91c174b3e7b449b1a47bc"></span><div class="line-block">
+<div class="line">int <strong>getTagListSize</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aa58d6ed711b01b4cbd4dd282a1d574ec"></span><div class="line-block">
+<div class="line">int <strong>setValueUnit</strong>(const std::string &amp; unit)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to set the string-value of the value unit, return 1 if values does not exist </p>
+<p>Function to set the string-value of the value description, return 1 if values does not exist </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac49d259247fd2f8d665287d8ac764cda"></span><div class="line-block">
+<div class="line">int <strong>setValueDescription</strong>(const std::string &amp; description)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a707f177346aed9923d84304e2c8e4b24"></span><div class="line-block">
+<div class="line">int <strong>setAxisOffset</strong>(const unsigned int axisNum, const double offset)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to set the offset of the specified axis, return 1 if axis does not exist </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a516b5ef3c2dd6ef45003951dba92bddc"></span><div class="line-block">
+<div class="line">int <strong>setAxisScale</strong>(const unsigned int axisNum, const double scale)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to set the scale of the specified axis, return 1 if axis does not exist or scale is 0.0. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac449fa239351ce365bfdde568e15191d"></span><div class="line-block">
+<div class="line">int <strong>setAxisUnit</strong>(const unsigned int axisNum, const std::string &amp; unit)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to set the unit (string value) of the specified axis, return 1 if axis does not exist </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad7af580eef6b5a8ccb40a655c4a3e2ba"></span><div class="line-block">
+<div class="line">int <strong>setAxisDescription</strong>(const unsigned int axisNum, const std::string &amp; description)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to set the description (string value) of the specified axis, return 1 if axis does not exist </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aedbb349d81443ed13def258dcbff1cdf"></span><div class="line-block">
+<div class="line">int <strong>setTag</strong>(const std::string &amp; key, const  DataObjectTagType  &amp; value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to set the string value of the specified tag, if the tag do not exist, it will be added automatically, return 1 if tagspace does not exist </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a88944a762fdf392b6fc00d76cd92b945"></span><div class="line-block">
+<div class="line">bool <strong>existTag</strong>(const std::string &amp; key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function to check whether tag exist or not </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a2bb74c042aba987def8d81052b722981"></span><div class="line-block">
+<div class="line">bool <strong>deleteTag</strong>(const std::string &amp; key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function deletes specified tag. If tag do not exist, return value is 1 else returnvalue is 0 </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aca9d98ceff2cddf4c28e57b8b789c526"></span><div class="line-block">
+<div class="line">bool <strong>deleteAllTags</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1afd006f558971045d9d17021bb38de07c"></span><div class="line-block">
+<div class="line">int <strong>addToProtocol</strong>(const std::string &amp; value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>&lt; Function adds value to the protocol-tag. If this object is an ROI, the ROI-coordinates are added. If string do not end with an 
+, 
+ is added. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a2391196f61281809fed015e36833c413"></span><div class="line-block">
+<div class="line">double <strong>getPhysToPix</strong>(const unsigned int dim, const double phys, bool &amp; isInsideImage)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the not rounded pixel index of a physical coordinate  Function returns the not rounded pixel index of a physical coordinate (Unit-Coordinate = ( px-Coordinate - Offset)* Scale). If the pixel is outside of the image, the isInsideImage-flag is set to false else it is set to true. To avoid memory access-error, the returnvalue is clipped within the range of the image ([0...imagesize-1]) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>(double)( pix / AxisScale + AxisOffset) &amp; [0..imagesize-1] </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>Axis-dimension for which the physical coordinate is calculated </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">pix</span></tt> - <p>Pixel-index as double </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">isInsideImage</span></tt> - <p>flag which is set to true if coordinate is within range of the image. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a2c5f5878df0ece21028f06abdd3ace4c"></span><div class="line-block">
+<div class="line">int <strong>getPhysToPix2D</strong>(const double physY, double &amp; tPxY, bool &amp; isInsideImageY, const double physX, double &amp; tPxX, bool &amp; isInsideImageX)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the not rounded pixel index of a physical coordinate. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac78de8af0bd6570e00b53ce7c1e7cac3"></span><div class="line-block">
+<div class="line">double <strong>getPixToPhys</strong>(const unsigned int dim, const double pix, bool &amp; isInsideImage)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function returns the physical coordinate of a pixel  Function returns the physical coordinate of a pixel index (Unit-Coordinate = ( px-Coordinate - Offset)* Scale). If the pixel is outside of the image, the isInsideImage-flag is set to false else it is set to true. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>(double)( pix - AxisOffset)* AxisScale) </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dim</span></tt> - <p>Axis-dimension for which the physical coordinate is calculated </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">pix</span></tt> - <p>Pixel-index as double </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">isInsideImage</span></tt> - <p>flag which is set to true if coordinate is within range of the image. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ae336de870171cd63196843607dc05189"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>setXYRotationalMatrix</strong>(double r11, double r12, double r13, double r21, double r22, double r23, double r31, double r32, double r33)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function to access (set) the rotiational matrix by each element. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ito::retOk || ito::retError </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">r11</span></tt> - <p>Upper left element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r12</span></tt> - <p>Upper middle element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r13</span></tt> - <p>Upper rigth element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r21</span></tt> - <p>Middle left element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r22</span></tt> - <p>Middle middle element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r23</span></tt> - <p>Middle rigth element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r31</span></tt> - <p>Lower left element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r32</span></tt> - <p>Lower middle element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r33</span></tt> - <p>Lower rigth element </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ab4c8d40d3d7b5497056a6903202ffd12"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>getXYRotationalMatrix</strong>(double &amp; r11, double &amp; r12, double &amp; r13, double &amp; r21, double &amp; r22, double &amp; r23, double &amp; r31, double &amp; r32, double &amp; r33)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Function to access (get) the rotiational matrix by each element. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>ito::retOk || ito::retError </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">r11</span></tt> - <p>Upper left element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r12</span></tt> - <p>Upper middle element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r13</span></tt> - <p>Upper rigth element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r21</span></tt> - <p>Middle left element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r22</span></tt> - <p>Middle middle element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r23</span></tt> - <p>Middle rigth element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r31</span></tt> - <p>Lower left element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r32</span></tt> - <p>Lower middle element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">r33</span></tt> - <p>Lower rigth element </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aecb43ce72bb152b72a572e584e095de7"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyTagMapTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><p>Deep copies the tagmap with all entries to rhs object</p>
+<p>this function makes a deepcopy of the tags map to rhs object from this object. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>DataObjectTags </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix where the map is copied to. The old map of ths object is cleared first </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a3874ac350aa5ec1fc9b14fcf551780af"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyAxisTagsTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><p>Deep copies the axistags to rhs object</p>
+<p>this function makes a deepcopy of the axis and value metadata from this object to rhs object. It copies <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>DataObjectTags </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix where the map is copied from. The old map of this object is cleared first </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"></span><div class="line-block">
+<div class="line">int <strong>getDims</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p>&lt; returns the number of dimensions returns the element data type in form of its type-number </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"></span><div class="line-block">
+<div class="line">int <strong>getType</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p>returns if the data in the first n-2 dimensions is stored within one entire block in memory (true), else (false) </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a06939618cad91af4c856b5489b2c463b"></span><div class="line-block">
+<div class="line">char <strong>getContinuous</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p>returns if the data object is owner of the data, hence, the data will be deleted by this data object, if nobody else is using the data any more </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a69f02792bd3bad65a4f3acf9a4b6c9c7"></span><div class="line-block">
+<div class="line">char <strong>getOwnData</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a31be0faf95d0a36724ee999133e12e70"></span><div class="line-block">
+<div class="line">size_t <strong>getTotal</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>gets total number of elements within the data object&#8217;s ROI </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>number of elements </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"><em>getDims</em></a>, <a class="reference internal" href="#itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"><em>getSize</em></a> </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a93f952b677c892f59943b200673c8231"></span><div class="line-block">
+<div class="line">size_t <strong>getOriginalTotal</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>gets total number of elements of the whole data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>number of elements </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"><em>getDims</em></a>, <a class="reference internal" href="#itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"><em>getSize</em></a> </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad2bbe518c3a3e86adede7804765178e3"></span><div class="line-block">
+<div class="line">void <strong>lockRead</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>locks this dataObject (all header information) and the underlying data block for a read operation </p>
+<p><dl class="docutils">
+<dt><strong>Remark</strong></dt>
+<dd>During the copy-constructor, operator=, eye, zero and ones method, the readWriteLock for the data block will be set to writeLock if any of the participating dataObjects are in writeLock mode. Then the number of readers will be decremented first. The lock of the dataObject, hence the lock for all header information, which are not shared, remains at its level.</dd>
+<dt><strong>See</strong></dt>
+<dd>ReadWriteLock </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a49df9e5d334568f8cc99cfeec1cfd688"></span><div class="line-block">
+<div class="line">void <strong>lockWrite</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>locks this dataObject (all header information) and the underlying data block for a write operation </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>ReadWriteLock </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a1a000f1647f44b5de4952e77aadd9cf4"></span><div class="line-block">
+<div class="line">void <strong>unlock</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>unlocks any lock. If lock is writeLock, lock is set to idle, if lock is readLock, then the number of readers is decremented and lock is freed if no more readers are available </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>ReadWriteLock </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1affdc8a47d061562a1f7dd9a47465fea5"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs, unsigned char regionOnly = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated method to deeply copy the data of this matrix to another matrix rhs </p>
+<p><p>deeply copies the data of this data object to the given rhs-dataObject, whose existing data will be deleted first.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>CopyToFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix where the data is copied to. The old data of rhs is deleted first </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">regionOnly</span><span class="pre">if</span></tt> - <p>true, only the data of the ROI in lhs is copied, hence, the org-size of rhs corresponds to the ROI-size of lhs, else the whole data block is copied and the ROI of rhs is set to the ROI of lhs </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a8c385ca573159fd49cec4112ef92557f"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>convertTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs, const int type, const double alpha = 1, const double beta = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated matrix conversion </p>
+<p><p>Every element of the source matrix is converted to a new, given type. Additionally a floating-point scaling and offset parameter is possible.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>fListConvertToFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the destination data object, whose memory is firstly deleted, then newly allocated </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the type-number of the destination element </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">alpha</span></tt> - <p>scaling factor (default: 1.0) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">beta</span></tt> - <p>offset value (default: 0.0) </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if cast failed, e.g. if cast not possible or types unknown </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ae3de7306dbaf78ea23ea96d034ca3a39"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>deepCopyPartial</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated method. Deeply copies data of this data object which is within its ROI to the ROI of rhs. </p>
+<p><p>copies the values of each element from this data object to the ROI of the given rhs-dataObject. The rhs-dataObject must be allocated yet and its ROI must be the same size than this ROI</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>DeepCopyPartialFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the right-handed data object, where data is copied to. </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception(CV_StsAssert)</span></tt> - <p>if sizes or type of both matrices are not equal </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ae3387eadb8aabb7458c2a5e2bf2e5b54"></span><div class="line-block">
+<div class="line">int ** <strong>get_mdata</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns pointer to vector of cv::_Mat-matrices </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>pointer to vector of matrices </dd>
+<dt><strong>Remark</strong></dt>
+<dd>the returned type of std::vector is int*, you should cast it to the appropriate type (e.g. cv::_Mat&lt;int8&gt;) </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a7f1d803c480bf1c35a1b880338ccab85"></span><div class="line-block">
+<div class="line">int ** <strong>get_mdata</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constant version of get_mdata </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1ae3387eadb8aabb7458c2a5e2bf2e5b54"><em>get_mdata</em></a> </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> <strong>getSize</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the size-member. m_size fits to the physical organization of data in memory. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>size-member of type <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a7fa0a20b7c911588404919a2dd799fc8"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> <strong>getSize</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the size-member. This member does not consider the transpose flag, hence, m_size fits to the physical organization of data in memory. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>size-member of type <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a5d97eb4aa8c9c277fc7b3c038c96fa4e"></span><div class="line-block">
+<div class="line">size_t <strong>getSize</strong>(int index)</div>
+</div>
+</p>
+<blockquote>
+<div><p>gets the size of the given dimension (this is the size within the ROI) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>size or -1 if index is out of boundaries </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">index</span></tt> - <p>is the specific zero-based dimension-index whose size is requested </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a813d34179416b7d27b3aed5622296963"></span><div class="line-block">
+<div class="line">size_t <strong>getOriginalSize</strong>(int index)</div>
+</div>
+</p>
+<blockquote>
+<div><p>gets the original size of the given dimension (this is the size without considering any ROI) </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>size or -1 if index is out of boundaries </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">index</span></tt> - <p>is the specific zero-based dimension-index whose size is requested </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4373c50161d5ba79a9014792f9088dee"></span><div class="line-block">
+<div class="line">DObjIterator <strong>begin</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns 0, this is the index of the first element in valid <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> range. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1abb679e37f6584c18f5a82d949ac86e2b"></span><div class="line-block">
+<div class="line">DObjIterator <strong>end</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns index of last-element in <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> range incremented by one. (equal to number of elements in total range) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ae583be0fd89d3dcdc4ffeb70ac6e0389"></span><div class="line-block">
+<div class="line">DObjConstIterator <strong>constBegin</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aedc32c887c0ff85cf96b197ac508a1c3"></span><div class="line-block">
+<div class="line">DObjConstIterator <strong>constEnd</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad237136b142095093e9dd3aef4fad088"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for empty data object </p>
+<p>no data will be allocated, the number of elements and dimensions is set to zero </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac26aa4e55ee83a4566c43f0407575c71"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const size_t size, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for one-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
+<p><p>In fact, by this constructor a two-dimensional matrix with dimension 1 x size will be created. the owndata-flag is set to true, the continuously-flag, too (since only one matrix-plane will be created)</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>create, tDataType </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">size</span></tt> - <p>is the number of elements </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the data-type of each element (use type of enumeration tDataType) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a23d342956f539e2864951839ef5347c0"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const size_t sizeY, const size_t sizeX, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for two-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
+<p><p>the owndata-flag is set to true, the continuously-flag, too (since only one matrix-plane will be created)</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>create, tDataType </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>is the number of rows in each matrix-plane </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>is the number of columns in each matrix-plane </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the data-type of each element (use type of enumeration tDataType) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4eabd540dbbc04253c8d8088af9df8a3"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for three-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
+<p><p>the owndata-flag is set to true</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>create, tDataType </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeZ</span></tt> - <p>is the number of images in the z-direction </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>is the number of rows in each matrix-plane </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>is the number of columns in each matrix-plane </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the data-type of each element (use type of enumeration tDataType) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">continuous</span></tt> - <p>indicates whether all matrix-planes should continuously lie in memory (1) or not (0) (default: 0) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a166ee1e0965e2a6be13386c8b5c153e3"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type, const uchar * continuousDataPtr, const size_t * steps = NULL)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for 3-dimensional data object which uses the data given by the continuousDataPtr. </p>
+<p><p>In case of the continuousDataPtr, the owndata-flag is set to false, hence this dataObj will not delete the data. Additionally the continuous-flag is set to true.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>create, tDataType </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeZ</span></tt> - <p>is the number of images in the z-direction </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>is the number of rows in each matrix-plane </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>is the number of columns in each matrix-plane </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the data-type of each element (use type of enumeration tDataType) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*continuousDataPtr</span></tt> - <p>points to the first element of a continuous data block of the specific data type </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*steps</span></tt> - <p>may be NULL, if the data in continuousDataPtr should be taken continuously, hence the ROI is the whole matrix, else this is a vector with three elements, where each elements indicates the number of bytes one has to move in order to get from one element to the next one in the same dimension. Hence, the last element in this vector is equal to the size of one single element (in bytes) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a0ea80ead468229f44af3b42cb86a04fd"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const unsigned char dimensions, const size_t * sizes, const int type, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for data object with given dimension. The data is newly allocated and arbitrarily filled. </p>
+<p><p>the owndata-flag is set to true</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>create, tDataType </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dimensions</span></tt> - <p>indicates the total number of dimensions </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*sizes</span></tt> - <p>is a vector of size &#8216;dimensions&#8217;, where each element gives the size (not osize) of the specific dimension </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the data-type of each element (use type of enumeration tDataType) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">continuous</span></tt> - <p>indicates whether all matrix-planes should continuously lie in memory (1) or not (0) (default: 0) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aa10cfc9b3d42d1221f2d90c04e0d87f7"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const unsigned char dimensions, const size_t * sizes, const int type, const uchar * continuousDataPtr, const size_t * steps = NULL)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor for data object which uses the data given by the continuousDataPtr. </p>
+<p><p>In case of the continuousDataPtr, the owndata-flag is set to false, hence this dataObj will not delete the data. Additionally the continuous-flag is set to true.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>create, ito::tDataType </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dimensions</span></tt> - <p>indicates the total number of dimensions </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*sizes</span></tt> - <p>is a vector of size &#8216;dimensions&#8217;, where each element gives the size (not osize) of the specific dimension </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the data-type of each element (use type of enumeration tDataType) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*continuousDataPtr</span></tt> - <p>points to the first element of a continuous data block of the specific data type </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*steps</span></tt> - <p>may be NULL, if the data in continuousDataPtr should be taken continuously, hence the ROI is the whole matrix, else this is a vector of size &#8216;dimensions&#8217;, where each elements indicates the number of bytes one has to move in order to get from one element to the next one in the same dimension. Hence, the last element in this vector is equal to the size of one single element (in bytes) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a0062db2e5750fafde71bfd97fbefa830"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const unsigned char dimensions, const size_t * sizes, const int type, const cv::Mat * planes, const unsigned int nrOfPlanes)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a32e74ff9c1cd0e9fc73d5f7705bce605"></span><div class="line-block">
+<div class="line"> <strong>DataObject</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; copyConstr)</div>
+</div>
+</p>
+<blockquote>
+<div><p>copy constructor for data object </p>
+<p><p>copy constructor</p>
+<p>creates a data object with respect to the given data object. The header information is completely copied, while the data is a shallow copy. The lock of the new data object is unlocked while the lock for the common data block is taken from the current lock status of the given data object.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;copyConstr</span></tt> - <p>is the data object, which will be copied </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a828f90ce03f273216c9314c60ca574d1"></span><div class="line-block">
+<div class="line"> <strong>~DataObject</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>destructor </p>
+<p><p>reference pointer of data is decremented and if &lt;0, data will be deleted if owndata-flag is true. Additionally the allocated memory for header information will be deleted, too.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>freeData </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a04a374f5bbac7fcb0561a66cdb3e38ba"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const cv::Mat &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>assign-operator which creates a two-dimensional data object as a shallow copy of a two dimensional cv::Mat object. </p>
+<p><p>shallow-copy means, that the header information of this data-object is physically created at the hard disk, while the data is shared with the original cv::Mat.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>this data object </dd>
+<dt><strong>See</strong></dt>
+<dd>create </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the cv::Mat where the shallow copy is taken from. At first, the existing data of this object is freed. </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if rhs is not two-dimensional or data type has no compatible data type of dataObject. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aab29e1c4f0da83365614a725293c6b40"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>assign-operator which makes a shallow-copy of the rhs data object and stores it in this data object </p>
+<p><p>shallow-copy means, that the header information of the rhs data-object is physically copied to this-dataObject while the data is shared, hence, only its reference counter is incremented</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>this data object </dd>
+<dt><strong>See</strong></dt>
+<dd>CopyMatFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object where the shallow copy is taken from. At first, the existing data of this object is freed. </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if lock state of both objects is not equal. Please make sure, that both lock states are equal </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a261f0755e25c89fd87278ea17e81df10"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const int8 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4b5619e2c783ffcb526ddad2fd31243f"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const uint8 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a597725a7d7ff849a86b1e15115666830"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const int16 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aaac65ef40fdc2211f6ea7d3d6c9f984c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const uint16 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a6e7809f1696c0541e1eb8647e1269887"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const int32 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a704d29e5a59e7c99ec4f7028a63957e3"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const uint32 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a788f6e4313206860210a02d366902084"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const float32 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1abd6df3f0e743760727902c3c769864ef"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const float64 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ab02ebe64c3f32b59562bf20b4fe8a543"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const complex64 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a836c6a8281b82e86fbaabf1e5ba76e92"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const complex128 value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Every data element in this data object is set to the given value. </p>
+<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>modified data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AssignScalarValue </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">value</span></tt> - <p>is the scalar assignment value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a804e80bb2cbe3e54d9b08e87ecbc0042"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator+=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated arithmetic operator for element-wise addition of values of given data object to this data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>this data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AddFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object whose elements will be added to this data object </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects don&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a423136ed813e0ced63f5c660345d5f43"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator+</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated arithmetic operator for element-wise addition of values of two given data objects </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new resulting data object </dd>
+<dt><strong>See</strong></dt>
+<dd>AddFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object whose elements will be added to this data object </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects don&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac007b5a6c7702cf35dd9e048bd416621"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator-=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated arithmetic operator for element-wise subtraction of values of given data object from values of this data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>this data object </dd>
+<dt><strong>See</strong></dt>
+<dd>SubFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object whose elements will be subtracted from this data object </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects don&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a5a7d34b662e7187dfaf222b5188264da"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator-</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated arithmetic operator for element-wise subtraction of values of given data object from values of this data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new resulting data object </dd>
+<dt><strong>See</strong></dt>
+<dd>SubFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object whose elements will be subtracted from this data object </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects don&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a3dd030faaa211776b0c9ba25e63c554b"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator*=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>brief description </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a25c0d37c69d869712782e654c5146637"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator*</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>brief description </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aab816a84b4265524d15b0ac966572c3d"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator*=</strong>(const double factor)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level method which multiplies every element in this data object by a given floating-point factor </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>OpScalarMulFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">factor</span></tt> - <p></p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad9f37defb627c84a517dd948cae59c08"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator*</strong>(const double factor)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level method which multiplies every element in this data object by a given floating-point factor. The result matrix is returned as a new matrix. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>operator *, OpScalarMulFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">factor</span></tt> - <p></p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1add5792482da07596672d94d1960be999"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&lt;</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>compare operator, compares for &#8220;lower than&#8221; </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
+<dt><strong>See</strong></dt>
+<dd>CmpFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object with which this data object should element-wisely be compared </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects doesn&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a488459b6effcb181b020c053529699f7"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&gt;</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>compare operator, compares for &#8220;bigger than&#8221; </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
+<dt><strong>See</strong></dt>
+<dd>CmpFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object with which this data object should element-wisely be compared </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects doesn&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a46bf4171899fb1d89bdca49156ca7a55"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&lt;=</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>compare operator, compares for &#8220;lower or equal than&#8221; </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
+<dt><strong>See</strong></dt>
+<dd>CmpFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object with which this data object should element-wisely be compared </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects doesn&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a7c850b2e6e0b7c8813f1c75d2ced4a57"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&gt;=</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>compare operator, compares for &#8220;bigger or equal than&#8221; </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
+<dt><strong>See</strong></dt>
+<dd>CmpFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object with which this data object should element-wisely be compared </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects doesn&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a5c3366b3572da2a2ba4cd401ab198b06"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator==</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>compare operator, compares for &#8220;equal to&#8221; </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
+<dt><strong>See</strong></dt>
+<dd>CmpFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object with which this data object should element-wisely be compared </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects doesn&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad6a66bf5d5ba132e4fa3da9302f1dbcb"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator!=</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>compare operator, compares for &#8220;unequal to&#8221; </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
+<dt><strong>See</strong></dt>
+<dd>CmpFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the data object with which this data object should element-wisely be compared </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if both data objects doesn&#8217;t have the same size or type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a7082131ce6b72946be31ef767a9ed02a"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&lt;&lt;</strong>(const unsigned int shiftbit)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the left and returns the new data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object with shifted values </dd>
+<dt><strong>See</strong></dt>
+<dd>operator &lt;&lt;=, ShiftLFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">shiftbit</span></tt> - <p>defines the number of bits to shift </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a39a98696544d8353332866673cae8725"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator&lt;&lt;=</strong>(const unsigned int shiftbit)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the left </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object </dd>
+<dt><strong>See</strong></dt>
+<dd>ShiftLFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">shiftbit</span></tt> - <p>defines the number of bits to shift </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4016a00323cd271ed6366bb922ac5bc5"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&gt;&gt;</strong>(const unsigned int shiftbit)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the right and returns the new data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object with shifted values </dd>
+<dt><strong>See</strong></dt>
+<dd>operator &gt;&gt;=, ShiftRFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">shiftbit</span></tt> - <p>defines the number of bits to shift </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a208d1846b79c62419fed054af4250b6c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator&gt;&gt;=</strong>(const unsigned int shiftbit)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the right </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object </dd>
+<dt><strong>See</strong></dt>
+<dd>ShiftRFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">shiftbit</span></tt> - <p>defines the number of bits to shift </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4221d0565c1df3ba6f058f41ae176fc6"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&amp;</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise and&#8221; between this data object and a given data object </p>
+<p>the result is returned as a newly allocated data object. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object, where the result of the operation is stored </dd>
+<dt><strong>See</strong></dt>
+<dd>operator &amp;=, BitAndFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix which is used for the operator </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not supported or both data objects differs either in their size or data type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a6d2df5af73abd286bd8b810d0585929c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator&amp;=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise and&#8221; between this data object and a given data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object, where the result of the operation is stored </dd>
+<dt><strong>See</strong></dt>
+<dd>BitAndFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix which is used for the operator </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not supported or both data objects differs either in their size or data type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a2e7e0efb4bc0d347b50b28ec2b3004cb"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator|</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
+<p>the result is returned as a newly allocated data object. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object, where the result of the operation is stored </dd>
+<dt><strong>See</strong></dt>
+<dd>operator |=, BitOrFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix which is used for the operator </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not supported or both data objects differs either in their size or data type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad271054f288b123f3c1d8e88352f21ee"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator|=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object, where the result of the operation is stored </dd>
+<dt><strong>See</strong></dt>
+<dd>BitOrFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix which is used for the operator </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not supported or both data objects differs either in their size or data type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a1537e963c49a7be1479cce8460c54294"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator^</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
+<p>the result is returned as a newly allocated data object. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object, where the result of the operation is stored </dd>
+<dt><strong>See</strong></dt>
+<dd>operator ^=, BitXorFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix which is used for the operator </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not supported or both data objects differs either in their size or data type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a0c71ddada50985cfceeb43f32edc01b8"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator^=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise xor&#8221; between this data object and a given data object </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object, where the result of the operation is stored </dd>
+<dt><strong>See</strong></dt>
+<dd>BitXorFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;rhs</span></tt> - <p>is the matrix which is used for the operator </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not supported or both data objects differs either in their size or data type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a zero-value matrix of size 1x1 with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a613de23f31c74337e805e70f4c760f96"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const size_t size, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a zero-value matrix of size 1 x size with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">size</span></tt> - <p>is the desired length of the vector </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ae18e33f8cae1119a3848137108a97222"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const size_t sizeY, const size_t sizeX, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a zero-value matrix of size sizeY x sizeX with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>are the number of rows </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>are the number of columns </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac4d5e5abd8584e2ba0e5756fd6320536"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a zero-value, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeZ</span></tt> - <p>are the number of matrix-planes </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>are the number of rows </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>are the number of columns </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">continuous</span></tt> - <p>indicates wether the data should be in one continuous block (true) or not (false) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1afa41e2888cdfad842e56b702780c2846"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const unsigned char dimensions, const size_t * sizes, const int type, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to zero </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dimensions</span></tt> - <p>indicates the number of dimensions </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*sizes</span></tt> - <p>is a vector with the same length than dimensions. Every element indicates the size of the specific dimension </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired data-element-type </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">continuous</span></tt> - <p>indicates wether the data should be in one continuous block (true) or not (false) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4ff0c10c033bde5c886468693b603817"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a one-value matrix of size 1x1 with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aacd7a8ef10584c0c12de213bb351bff9"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const size_t size, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a one-value matrix of size 1 x size with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">size</span></tt> - <p>is the desired length of the vector </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a0c549fc9e13bd095c1418940f572dfe3"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const size_t sizeY, const size_t sizeX, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a one-value matrix of size sizeY x sizeX with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>are the number of rows </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>are the number of columns </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a10122e7cd805251be2bcacafd9d071f1"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a one-valued, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeZ</span></tt> - <p>are the number of matrix-planes </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>are the number of rows </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>are the number of columns </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">unsigned</span></tt> - <p>char continuous indicates wether the data should be in one continuous block (true) or not (false) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aa07867b126524637ccb6fc93b661b445"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const unsigned char dimensions, const size_t * sizes, const int type, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to one </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>OnesFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dimensions</span></tt> - <p>indicates the number of dimensions </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*sizes</span></tt> - <p>is a vector with the same length than dimensions. Every element indicates the size of the specific dimension </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired data-element-type </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">continuous</span></tt> - <p>indicates wether the data should be in one continuous block (true) or not (false) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a137cff8dcc4e04b37cd3da73090f96e4"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const int type, const bool randMode = false)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a random-value matrix of size 1x1 with the given type </p>
+<p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">randMode</span></tt> - <p>switch mode between uniform distributed(false) and normal distributed noise(true) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a439cb939eaae3172d415202da83e8b24"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const size_t size, const int type, const bool randMode = false)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a random-value matrix of size 1 x size with the given type </p>
+<p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">size</span></tt> - <p>is the desired length of the vector </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">randMode</span></tt> - <p>switch mode between uniform distributed(false) and normal distributed noise(true) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a8f4001ccf47ee03b7b066cdc095763db"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const size_t sizeY, const size_t sizeX, const int type, const bool randMode = false)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a random-value matrix of size sizeY x sizeX with the given type </p>
+<p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>are the number of rows </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>are the number of columns </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">randMode</span></tt> - <p>switch mode between uniform distributed(false) and normal distributed noise(true) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a1b2354c38eeec2687eae1131b9dc3bdf"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type, const bool randMode, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>allocates a random-valued, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
+<p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"><em>zeros</em></a>, ZerosFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sizeZ</span></tt> - <p>are the number of matrix-planes </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeY</span></tt> - <p>are the number of rows </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">sizeX</span></tt> - <p>are the number of columns </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired type-number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">randMode</span></tt> - <p>switch mode between uniform distributed(false) and normal distributed noise(true) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">unsigned</span></tt> - <p>char continuous indicates wether the data should be in one continuous block (true) or not (false) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac002b0b9e459eda4df79cc0b6ead28ea"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const unsigned char dimensions, const size_t * sizes, const int type, const bool randMode, const unsigned char continuous = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to one </p>
+<p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>OnesFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dimensions</span></tt> - <p>indicates the number of dimensions </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*sizes</span></tt> - <p>is a vector with the same length than dimensions. Every element indicates the size of the specific dimension </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired data-element-type </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">randMode</span></tt> - <p>switch mode between uniform distributed(false) and normal distributed noise(true) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">continuous</span></tt> - <p>indicates wether the data should be in one continuous block (true) or not (false) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aa2d2891a7e90fb1fc7224327d3b5895f"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>eye</strong>(const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the matrix of this data object to a two-dimensional eye-matrix of size 1, hence [1] </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a4ff0c10c033bde5c886468693b603817"><em>ones</em></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired element data-type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a14e2ccd80603f1448a08cfb100da9138"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>eye</strong>(const size_t size, const int type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the matrix of this data object to a two-dimensional eye-matrix of given size </p>
+<p><p>At first, a preexisting matrix is freed, before creating the eye-matrix</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>freeData, create, EyeFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">size</span></tt> - <p>is the desired size of the squared eye-matrix </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>is the desired element data-type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a47fe6b5f8038aefcf65f30ad73d8ee2c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>conj</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>converts every element of the data object to its conjugate complex value </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd>ConjFunc </dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not complex. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4cf2c2fe67b96f17fc8139036c0d4a1d"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>adj</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>converts every element of the data object to its adjungate value </p>
+<p>The adjungate is the transposed matrix, where each element is complex conjugated. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a47fe6b5f8038aefcf65f30ad73d8ee2c"><em>conj</em></a> </dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data type is not complex. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1af834677086d1d7adeab2ae5de67f7d24"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>trans</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>transposes this data object </p>
+<p>simply toggles the transpose flag <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a70bd0816c2c3ef57295e8a905d670cae"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>mul</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; mat2, const double scale = 1.0)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ae26cff1f3e3efcc2d10b6062361758de"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>div</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; mat2, const double scale = 1.0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level method which does a element-wise division of elements in this matrix by elements in second source matrix. </p>
+<p><p>The result is stored in a result matrix which is returned. Optionally the division can be scaled by a scaling factor, which is set to one by default.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>result matrix </dd>
+<dt><strong>See</strong></dt>
+<dd>DivFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">&amp;mat2</span></tt> - <p>is the second source matrix </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">scale</span></tt> - <p>is the scaling factor (default: 1.0) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aaacf0fc8228554652c4369a44601ef65"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>squeeze</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a290303624a2b04282f30325f9d20a884"></span><div class="line-block">
+<div class="line">size_t <strong>elemSize</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ad8808bab69b30aa1c1421f39f7cec624"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const int x)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for one-dimensional data object or two-dimensional data object having at least one dimension with size 1. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>is the zero-based index to the element which is requested (considering any ROI) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ab367d263f91d09171612f67c4a06369a"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const int x)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for one-dimensional data object or two-dimensional data object having at least one dimension with size 1. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>const reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>is the zero-based index to the element which is requested (considering any ROI) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a0f61a672538ac07cfb3e7f45b185aaf0"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int y, const unsigned int x)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for two-dimensional data object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>const reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">y</span></tt> - <p>is the zero-based row-index to the element which is requested (considering any ROI) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>is the zero-based column-index to the element which is requested (considering any ROI) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a2003f8329dcfb91aea95d9eef5feb4ef"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int y, const unsigned int x)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for two-dimensional data object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">y</span></tt> - <p>is the zero-based row-index to the element which is requested (considering any ROI) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>is the zero-based column-index to the element which is requested (considering any ROI) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a0aff545034bc6d6e31ac5ac507a91039"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int z, const unsigned int y, const unsigned int x)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for three-dimensional data object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>const reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">z</span></tt> - <p>is the zero-based z-index to the element which is requested (considering any ROI) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">y</span></tt> - <p>is the zero-based row-index to the element which is requested (considering any ROI) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>is the zero-based column-index to the element which is requested (considering any ROI) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a129d4a8d37cf075ec8ac75e0fdf2889d"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int z, const unsigned int y, const unsigned int x)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for three-dimensional data object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">z</span></tt> - <p>is the zero-based z-index to the element which is requested (considering any ROI) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">y</span></tt> - <p>is the zero-based row-index to the element which is requested (considering any ROI) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>is the zero-based column-index to the element which is requested (considering any ROI) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a8c67180004a75ed2c036e151a7a83cc9"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int * idx)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for n-dimensional data object. </p>
+<p><dl class="docutils">
+<dt><strong>Remark</strong></dt>
+<dd>The idx vector must indicate the indizes in &#8220;virtual&#8221;-order (user-friendly order) </dd>
+<dt><strong>Return</strong></dt>
+<dd>const reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">*idx</span></tt> - <p>is vector whose size is equal to the data object&#8217;s dimensions. Each entry indicates the zero-based index of its specific dimension considering any ROI </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ab6e695dfbde713fbd4737ca345c57d09"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int * idx)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for n-dimensional data object. </p>
+<p><dl class="docutils">
+<dt><strong>Remark</strong></dt>
+<dd>The idx vector must indicate the indizes in &#8220;virtual&#8221;-order (user-friendly order) </dd>
+<dt><strong>Return</strong></dt>
+<dd>reference to specific element </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">*idx</span></tt> - <p>is vector whose size is equal to the data object&#8217;s dimensions. Each entry indicates the zero-based index of its specific dimension considering any ROI </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a5f2dbbadffdbebd6bc8ae4e91e565ec3"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>at</strong>(const  ito::Range rowRange, const  ito::Range colRange)</div>
+</div>
+</p>
+<blockquote>
+<div><p>addressing method for two-dimensional data object with two given range-values. returns shallow copy of addressed regions. </p>
+<p><p>addressing method for two-dimensional data object with two given range-values. returns shallow copy of addressed regions</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object which is a shallow copy of this data object and whose ROI is set to the given row- and col-ranges </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">rowRange</span></tt> - <p>is the desired rowRange which should be in the new ROI (considers any existing ROI, too) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">colRange</span></tt> - <p>is the desired colRange which should be in the new ROI (considers any existing ROI, too) </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if number of dimensions is unequal to two. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a892e6ab94407685f44a80686411f3e79"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>at</strong>(ito::Range  * ranges)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><p>addressing method for n-dimensional data object with n given range-values. returns shallow copy of addressed regions</p>
+<p>If any of the given ranges exceed the boundaries of its corresponding dimension, the range will be set to the boundaries. ranges will be given in &#8220;virtual&#8221; order, hence, the transpose-flag is considered by this method.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object with shallow copy of this data object and adjusted ROI with respect to the given ranges </dd>
+<dt><strong>See</strong></dt>
+<dd>GetRangeFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">*ranges</span></tt> - <p>is vector of desired ranges for each dimension </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1aa3beeaaa26357b24ff222ad905bd9e7e"></span><div class="line-block">
+<div class="line">uchar * <strong>rowPtr</strong>(const size_t matNum, const int y)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns pointer to the data in the y-th row in the 2d-matrix plane matNum </p>
+<p><p>cast this pointer to the data type of the matrix elements (as pointer).</p>
+<p><dl class="docutils">
+<dt><strong>Remark</strong></dt>
+<dd>No further error checking (e.g. boundaries) </dd>
+<dt><strong>Return</strong></dt>
+<dd>data-pointer </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a38254ce9fb22a2da7bec07884af26c5b"></span><div class="line-block">
+<div class="line">const uchar * <strong>rowPtr</strong>(const size_t matNum, const int y)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns pointer to the data in the y-th row in the 2d-matrix plane matNum </p>
+<p><p>cast this pointer to the data type of the matrix elements (as pointer).</p>
+<p><dl class="docutils">
+<dt><strong>Remark</strong></dt>
+<dd>No further error checking (e.g. boundaries) </dd>
+<dt><strong>Return</strong></dt>
+<dd>data-pointer </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a149d63105180924256f85099a73e820a"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>row</strong>(const int selRow)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level method which makes a new header for the specified matrix row and returns it. The underlying data of the new matrix is shared with the original matrix. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object </dd>
+<dt><strong>See</strong></dt>
+<dd>RowFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">selRow</span></tt> - <p>is the specific zero-based row index </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if dimension is unequal to two. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4f7924f210854916d5f52bb45995df8f"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>col</strong>(const int selCol)</div>
+</div>
+</p>
+<blockquote>
+<div><p>high-level method which makes a new header for the specified matrix column and returns it. The underlying data of the new matrix is shared with the original matrix. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new data object </dd>
+<dt><strong>See</strong></dt>
+<dd>ColFunc </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">selCol</span></tt> - <p>is the specific zero-based row index </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if dimension is unequal to two. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1adefd7b5822dc68f967ef574e9f841c71"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>adjustROI</strong>(const int dtop, const int dbottom, const int dleft, const int dright)</div>
+</div>
+</p>
+<blockquote>
+<div><p>adjust submatrix size and position within the two-dimensional data-object </p>
+<p><p>changes the boundaries of the ROI of a two-dimensional data object by the given incremental values</p>
+<p><dl class="docutils">
+<dt><strong>Remark</strong></dt>
+<dd>the parameters indicates the shift with respect to the virtual order of the matrix, hence, the transpose flag is considered in this method </dd>
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1adefd7b5822dc68f967ef574e9f841c71"><em>adjustROI</em></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">dtop</span></tt> - <p>The shift of the top submatrix boundary upwards (positive value means upwards) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">dbottom</span></tt> - <p>The shift of the bottom submatrix boundary downwards (positive value means downwards) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">dleft</span></tt> - <p>The shift of the left submatrix boundary to the left (positive value means to the left) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">dright</span></tt> - <p>The shift of the right submatrix boundary to the right (positive value means to the right) </p>
+</li>
+</ul>
+</dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if data object is not two-dimensional </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1acff86dfa8dd2f4757ad361723718424b"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>adjustROI</strong>(const unsigned char dims, const int * lims)</div>
+</div>
+</p>
+<blockquote>
+<div><p>adjust submatrix size and position within the n-dimensional data-object </p>
+<p><p>changes the boundaries of the ROI of a n-dimensional data object by the given incremental values</p>
+<p>dims is the number of dimensions <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>reference to this data object </dd>
+<dt><strong>Remark</strong></dt>
+<dd>lims indicates the shift with respect to the virtual order of the matrix, hence, the transpose flag is considered in this method </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1adefd7b5822dc68f967ef574e9f841c71"><em>adjustROI</em></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">*lims</span></tt> - <p>is a integer array whose length is 2*dims. For every dimension, two adjacent values indicates the shift of the ROI. The first of both values indicates the shift of the ROI towards the first element in the matrix (positive direction). The second value indicates the shift of the ROI towards the last element in the matrix (positive direction). </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a46a1ad505f71c7081690519225bac769"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>locateROI</strong>(int * wholeSizes, int * offsets)</div>
+</div>
+</p>
+<blockquote>
+<div><p>method locates ROI of this data object within its original data block </p>
+<p><p>locates the boundaries of the ROI of a n-dimensional data object and returns the original size and the distances to the physical borders</p>
+<p>long description</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">*wholeSizes</span></tt> - <p>is an allocated array of size m_dims, which is filled with the original matrix-sizes (considering the transpose-flag, hence, the output is in user-friendly form) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">*offsets</span></tt> - <p>is dimension-wise offset in order to get from the original first element of the matrix to the subpart within the region of interest, array must be pre-allocated, too. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1ac6f4f76968bd4317a83a452c597db875"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>locateROI</strong>(int * lims)</div>
+</div>
+</p>
+<blockquote>
+<div><p>method get ROI of this data object within its original data block </p>
+<p><p>locates the boundaries of the ROI of a n-dimensional data object the distances to the physical borders</p>
+<p>dims is the number of dimensions <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retOk </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">*lims</span></tt> - <p>is a integer array whose length is 2*dims. For every dimension, two adjacent values indicates the shift of the ROI. The first of both values indicates the shift of the ROI towards the first element in the matrix (positive direction). The second value indicates the shift of the ROI towards the last element in the matrix (positive direction). </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a31cb9ec00d5576e764154368ebbe56f6"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyFromData2D</strong>(const _Tp * src, const size_t sizeX, const size_t sizeY)</div>
+</div>
+</p>
+<blockquote>
+<div><p>copies 2D continuous data into data object, data object must have correct size and type, otherwise an error is returned </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4f1485c21a0d0d526062c253ff4e083c"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyFromData2D</strong>(const _Tp * src, const size_t sizeX, const size_t sizeY, const int x0, const int y0, const size_t width, const size_t height)</div>
+</div>
+</p>
+<blockquote>
+<div><p>copies 2D continuous data into data object, data object must have correct size and type, otherwise an error is returned </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a4a43f3104ff2cdc50dbef24837a05889"></span><div class="line-block">
+<div class="line">template &lt; typename _Tp &gt;</div>
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>checkType</strong>(const _Tp * src)</div>
+</div>
+</p>
+<blockquote>
+<div><p>verifies if the data type of elements in this data object is equal to the type of the argument. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_data_object_1a87f0d6cfe9dec3410b00fae4edf2fb13"></span><div class="line-block">
+<div class="line">template &lt; typename T2 &gt;</div>
+<div class="line"> <strong>operator T2</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>cast operator for data object </p>
+<p><p>cast operator, tries to cast this data object to another element type</p>
+<p>usage: res = static_cast&lt;ito::float32&gt;(sourceDataObject)</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>cast data object </dd>
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a8c385ca573159fd49cec4112ef92557f"><em>convertTo</em></a>, CastFunc </dd>
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">cv::Exception</span></tt> - <p>if cast failed, e.g. if cast not possible or types unknown </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<p><p id="itomstructito_1_1_data_object_1_1_m_r_o_i"><em>class</em> <strong>MROI</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_data_object_1_1_m_r_o_i_1a9c686a5cb7fef6cf7a0a735c3f4097b0"></span><div class="line-block">
+<div class="line"> <strong>MROI</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_data_object_1_1_m_r_o_i_1a25bf30b6547a54a3b8f0c97bc15654ec"></span><div class="line-block">
+<div class="line">size_t <strong>operator[]</strong>(const int dim)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_data_object_1_1_m_r_o_i_1a631fa36248010f3496ed706cbc5b385f"></span><div class="line-block">
+<div class="line">bool <strong>operator==</strong>(const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_r_o_i"><em>MROI</em></a>  &amp; rroi)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Members</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_data_object_1_1_m_r_o_i_1ac96641f488cf2f7f57407e51d47be19d"></span>size_t * <strong>m_p</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</p>
+<p><p id="itomstructito_1_1_data_object_1_1_m_size"><em>class</em> <strong>MSize</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_data_object_1_1_m_size_1a6a453b7e8f4cba5be26529c3aad3e1bf"></span><div class="line-block">
+<div class="line"> <strong>MSize</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_data_object_1_1_m_size_1ab5622761d16f697513bc54b9b96666b3"></span><div class="line-block">
+<div class="line">size_t <strong>operator[]</strong>(const int dim)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_data_object_1_1_m_size_1a93f35b2cf233456e39afb8fe481ca09b"></span><div class="line-block">
+<div class="line"> <strong>operator const size_t *</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_data_object_1_1_m_size_1a55c7675e7e126bfb6e4b360592dd1cf8"></span><div class="line-block">
+<div class="line">bool <strong>operator==</strong>(const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a>  &amp; sz)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_data_object_1_1_m_size_1a9f9065763a3f3422383cf851c3f4e6a8"></span><div class="line-block">
+<div class="line">bool <strong>operator!=</strong>(const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a>  &amp; sz)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Members</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_data_object_1_1_m_size_1a7b6b63dc398cfb9ecf7fa59eeef66b39"></span>size_t * <strong>m_p</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</p>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-DataObject-Ref.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

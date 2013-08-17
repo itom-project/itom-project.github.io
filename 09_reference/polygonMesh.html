@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>polygonMesh &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="itom Script Reference" href="reference.html" />
+    <link rel="next" title="region" href="region.html" />
+    <link rel="prev" title="pointCloud" href="pointCloud.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="region.html" title="region"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pointCloud.html" title="pointCloud"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">itom Script Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="polygonmesh">
+<h1>polygonMesh<a class="headerlink" href="#polygonmesh" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="itom.polygonMesh">
+<em class="property">class </em><tt class="descclassname">itom.</tt><tt class="descname">polygonMesh</tt><a class="headerlink" href="#itom.polygonMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>polygonMesh([mesh, polygons]) -&gt; creates a polygon mesh.</p>
+<p>This constructor either creates an empty polygon mesh, a shallow copy of another polygon mesh (mesh parameter only) or a deep copy of 
+another polygon mesh where only the polygons, given by the list of indices in the parameter &#8216;polygons&#8217;, are taken. 
+In this case, the containing cloud is reduced and no longer organized (height=1, dense=false)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>mesh</strong> : {polygonMesh}, optional</p>
+<blockquote>
+<div><p>another polygon mesh instance (shallow or deep copy depending on polygons-parameter)</p>
+</div></blockquote>
+<p><strong>polygons</strong> : {sequence or array-like}, optional</p>
+<blockquote class="last">
+<div><p>If given, polygons must be a sequence or one-dimensional array-like structure, where all values can be transformed into unsigned integer values. 
+Polygons must contain a list of indices pointing to all polygon from the given mesh that should be copied to this new instance.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="itom.polygonMesh.data">
+<tt class="descname">data</tt><big>(</big><big>)</big><a class="headerlink" href="#itom.polygonMesh.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints content of polygon mesh</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.polygonMesh.fromCloudAndPolygons">
+<em class="property">static </em><tt class="descname">fromCloudAndPolygons</tt><big>(</big><em>cloud</em>, <em>polygons</em><big>)</big> &rarr; creates a polygon mesh from cloud and polygons.<a class="headerlink" href="#itom.polygonMesh.fromCloudAndPolygons" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>cloud</strong> : {pointCloud}</p>
+<blockquote>
+<div><p>the input point cloud</p>
+</div></blockquote>
+<p><strong>polygons</strong> : {array-like, MxN}</p>
+<blockquote class="last">
+<div><p>an array-like matrix with the indices of the polygons. The array contains M polygons and every row gives the indices of the vertices of the cloud belonging to the polygon.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.polygonMesh.getCloud">
+<tt class="descname">getCloud</tt><big>(</big><em>pointType = point.PointInvalid</em><big>)</big> &rarr; returns the point cloud of this polygon mesh converted to the desired type.<a class="headerlink" href="#itom.polygonMesh.getCloud" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the pointType is not given or point.PointInvalid, the type of the internal pointCloud is guessed with respect to available types.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>pointType</strong> : {int, enum point.PointXXX}, optional</p>
+<blockquote class="last">
+<div><p>the point type value of the desired type, the point cloud should be converted too (default: point.PointInvalid)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.polygonMesh.getPolygons">
+<tt class="descname">getPolygons</tt><big>(</big><big>)</big><a class="headerlink" href="#itom.polygonMesh.getPolygons" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="itom.polygonMesh.name">
+<tt class="descname">name</tt><big>(</big><big>)</big><a class="headerlink" href="#itom.polygonMesh.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="itom.polygonMesh.nrOfPolygons">
+<tt class="descname">nrOfPolygons</tt><a class="headerlink" href="#itom.polygonMesh.nrOfPolygons" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the number of polygons in this mesh</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pointCloud.html"
+                        title="previous chapter">pointCloud</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="region.html"
+                        title="next chapter">region</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/09_reference/polygonMesh.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="region.html" title="region"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pointCloud.html" title="pointCloud"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="reference.html" >itom Script Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

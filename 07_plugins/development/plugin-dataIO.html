@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin class - DataIO &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Plugin class - Actuator" href="plugin-actuator.html" />
+    <link rel="prev" title="AddInBase" href="plugin-AddInBase-Ref.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-actuator.html" title="Plugin class - Actuator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-AddInBase-Ref.html" title="AddInBase"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-class-dataio">
+<span id="id1"></span><h1>Plugin class - DataIO<a class="headerlink" href="#plugin-class-dataio" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="base-idea-behind-any-dataio">
+<h2>Base idea behind any DataIO<a class="headerlink" href="#base-idea-behind-any-dataio" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The DataIO operates with plugged systems require input and output, in generally cameras and frame grabbers but also serial ports or AD-DA-converter.</li>
+<li>One opened DataIO handles only one connected device. More cameras or ADDA-converter of the same type should be managed with a corresponding number of DataIO-ports.</li>
+<li>Depending on the plugin, more than one DataIO can be separately controlled by the plug-number or the vendor/camera-ID.</li>
+<li>Like any other plugin, every DataIO has a set of parameters, which can be set/get using python by the commands <strong>setParam</strong> and <strong>getParam</strong>.</li>
+<li>Every DataIO is executed in its own thread.</li>
+<li>Every DataIO can have one configuration dialog and one docking widget toolbox.</li>
+<li>All parameters are stored in <strong>m_params</strong>. They can be read or changed by methods <strong>getParam</strong> and <strong>setParam</strong>. Some parameters are read only!</li>
+<li>If parameters of DataIO changes, they also must be updated in the <strong>m_params</strong>-map.</li>
+<li>To connection between the dataIO-device (e.g. the camera) is done within the c++-method <strong>init</strong>. The initialization parameter should be given to <strong>m_params</strong>. In the end it must be disconnected by method <strong>close</strong>.</li>
+<li>The data acquisition is performed according to the grabber subtype. These subtypes are &#8216;typeGrabber&#8217;, &#8216;typeADDA&#8217; and &#8216;typeRawIO&#8217;.</li>
+</ul>
+</div>
+<div class="section" id="the-dataio-typegrabber-plugin-class">
+<h2>The DataIO | typeGrabber plugin class<a class="headerlink" href="#the-dataio-typegrabber-plugin-class" title="Permalink to this headline">¶</a></h2>
+<p>This is a subtype of DataIO for camera / framegrabber communication. The data acquisition is managed as followed:</p>
+<ul class="simple">
+<li>The methods <strong>startDevice</strong> and <strong>stopDevice</strong> opens and closes the capture logic of the devices to reduce CDU-load. For serial ports these functions are unnecessary.</li>
+<li>The method <strong>acquire</strong> starts the DataIO grabbing a frame with the current parameters. The function returns after sending the trigger. The function should be callable several times without calling get-/copyVal().</li>
+<li>The methods <strong>getVal</strong> and <strong>copyVal</strong> are the external interfaces for data grabbing. They call <strong>retrieveData</strong>. The function should not be callable without a previous call of <strong>acquire</strong> and than only once.</li>
+<li>In <strong>retrieveData</strong> the data transfer is done and frame has to copied. The function blocks until the triggered data is copied. In case retrieveData is called by getVal the frame has to be copied to <strong>m_data</strong>, an internal <strong>dataObject</strong>.</li>
+<li>The function <strong>getVal</strong> overwrites the IO-<strong>dataObject</strong> by a shallow copy of the internal <strong>dataObject</strong>. Empty objects are allowed. Warning read shallow copy of dataObject before usage.</li>
+<li>The function <strong>copyVal</strong> deep-copies data to the external IO-<strong>dataObject</strong>. The <strong>dataObject</strong> must have the right size and type. <strong>dataObject</strong> with ROI should not be overwritten. The ROI should be filled. Empty objects are allowed. In case of empty <strong>dataObject</strong> a new object with right size is allocated.</li>
+<li>The internal <strong>dataObject</strong> is checked after parameter changes by <strong>checkData</strong> (sizex, sizey and bpp) and, if necessary, reallocated.</li>
+</ul>
+<p>A typical sequence in python is</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">device</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>
+<span class="n">device</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">device</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">dObj</span><span class="p">)</span>
+<span class="n">device</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">device</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">dObj</span><span class="p">)</span>
+<span class="n">device</span><span class="o">.</span><span class="n">stopDevice</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>A sample header file of the DataIO&#8217;s plugin class is illustrated in the following code snippet:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="cp">#include &quot;../../common/addInGrabber.h&quot;</span>
+    <span class="cp">#include &quot;dialogFireGrabber.h&quot;</span>
+    <span class="cp">#include &lt;qsharedpointer.h&gt;</span>
+
+    <span class="k">class</span> <span class="nc">FireGrabber</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInGrabber</span>
+    <span class="p">{</span>
+            <span class="n">Q_OBJECT</span>
+
+            <span class="k">protected</span><span class="o">:</span>
+                    <span class="o">~</span><span class="n">MyDataIO</span><span class="p">();</span> <span class="cm">/*! &lt; Destructor*/</span>
+                    <span class="n">MyDataIO</span><span class="p">();</span>     <span class="cm">/*! &lt; Constructor*/</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">checkData</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="o">*</span><span class="n">externalDataObject</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>      <span class="cm">/*!&lt; Check if objekt has to be reallocated */</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retrieveData</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="o">*</span><span class="n">externalDataObject</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span> <span class="cm">/*!&lt; Wait for acquired picture */</span>
+
+
+            <span class="k">public</span><span class="o">:</span>
+                    <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyDataIOInterface</span><span class="p">;</span>
+                    <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">//! Open the config nonmodal dialog to set camera parameters</span>
+                    <span class="kt">int</span> <span class="n">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span> <span class="c1">//!&lt; indicates that this plugin has got a configuration dialog</span>
+
+
+
+            <span class="k">private</span><span class="o">:</span>
+                    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">m_pDataMatBuffer</span><span class="p">;</span>
+
+                    <span class="kt">int</span> <span class="n">m_CCD_ID</span><span class="p">;</span> <span class="cm">/*!&lt; Camera ID */</span>
+                    <span class="kt">bool</span> <span class="n">m_isgrabbing</span><span class="p">;</span> <span class="cm">/*!&lt; Check if acquire was called */</span>
+
+                    <span class="k">static</span> <span class="kt">int</span> <span class="n">m_numberOfInstances</span><span class="p">;</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">AlliedChkError</span><span class="p">(</span><span class="kt">int</span> <span class="n">errornumber</span><span class="p">);</span> <span class="cm">/*!&lt; Map Allied-Error-Number to ITOM-Errortype and Message */</span>
+                    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">errmsg</span><span class="p">;</span>
+                    <span class="n">UINT8</span>          <span class="o">*</span><span class="n">m_pImage</span><span class="p">;</span>                  <span class="c1">// Pointer to actual image</span>
+
+            <span class="k">public</span> <span class="nl">slots:</span>
+                    <span class="c1">//!&lt; Get Camera-Parameter</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">tParam</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+                    <span class="c1">//!&lt; Set Camera-Parameter</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">tParam</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+                    <span class="c1">//!&lt; Initialise board, load dll, allocate buffer</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">tParam</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">tParam</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+                    <span class="c1">//!&lt; Free buffer, delete board, unload dll</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+                    <span class="c1">//!&lt; Start the camera to enable acquire-commands</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">startDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+                    <span class="c1">//!&lt; Stop the camera to disable acquire-commands</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">stopDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+                    <span class="c1">//!&lt; Softwaretrigger for the camera</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">acquire</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">trigger</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+                    <span class="c1">//!&lt; Wait for acquired picture, copy the picture to dObj of right type and size</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getVal</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">copyVal</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">ConvertY16</span><span class="p">(</span><span class="n">UINT32</span> <span class="n">XSize</span><span class="p">,</span><span class="n">UINT32</span> <span class="n">YSize</span><span class="p">,</span><span class="n">UINT8</span> <span class="o">*</span><span class="n">pBuf</span><span class="p">,</span><span class="n">UINT8</span> <span class="o">*</span><span class="n">pBGR</span><span class="p">);</span>
+
+                    <span class="kt">void</span> <span class="n">updateParameters</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">tParam</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">);</span>
+
+            <span class="k">private</span> <span class="nl">slots:</span>
+
+    <span class="p">};</span>
+
+    <span class="c1">//----------------------------------------------------------------------------------------------------------------------------------</span>
+
+
+    <span class="k">class</span> <span class="nc">DataIOInterface</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
+    <span class="p">{</span>
+            <span class="n">Q_OBJECT</span>
+                    <span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span><span class="p">)</span>
+
+            <span class="k">protected</span><span class="o">:</span>
+
+            <span class="k">public</span><span class="o">:</span>
+                    <span class="n">DataIOInterface</span><span class="p">();</span>
+                    <span class="o">~</span><span class="n">DataIOInterface</span><span class="p">();</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+
+            <span class="k">private</span><span class="o">:</span>
+                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+
+            <span class="nl">signals:</span>
+
+            <span class="k">public</span> <span class="nl">slots:</span>
+    <span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="camera-frame-grabber-parameters-and-units">
+<h3>Camera / Frame Grabber Parameters and Units<a class="headerlink" href="#camera-frame-grabber-parameters-and-units" title="Permalink to this headline">¶</a></h3>
+<p>To achieve a unified interface and allow fast exchange between the different plugIns all dataIO have to follow the predefined conventions.</p>
+<ul class="simple">
+<li>Integrationtime named as &#8220;integration_time&#8221; in [s]</li>
+<li>Colordepth in bit [8,10-16,24]</li>
+</ul>
+<div class="section" id="mandatory-keywords-for-setparam-getparam">
+<h4>Mandatory keywords for setParam / getParam<a class="headerlink" href="#mandatory-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>&#8220;name&#8221;: Name of the plugIn as &#8220;typeString&#8221; || &#8220;readOnly&#8221;</li>
+<li>&#8220;integration_time&#8221;: The integration time as &#8220;typeDouble&#8221;</li>
+<li>&#8220;frame_time&#8221;: The time between to frames as &#8220;typeDouble&#8221; (usually &#8220;readOnly&#8221;)</li>
+<li>&#8220;gain&#8221;: The gain of the AD-Converter normed between 0..1 as &#8220;typeDouble&#8221;</li>
+<li>&#8220;offset&#8221;: The offset of the AD-Converter normed between 0..1 as &#8220;typeDouble&#8221;</li>
+<li>&#8220;x0&#8221;: first pixel of ROI as &#8220;typeInt&#8221;</li>
+<li>&#8220;x1&#8221;: last pixel of ROI as &#8220;typeInt&#8221;</li>
+<li>&#8220;y0&#8221;: first pixel of ROI as &#8220;typeInt&#8221;</li>
+<li>&#8220;y1&#8221;: last pixel of ROI as &#8220;typeInt&#8221;</li>
+<li>&#8220;sizex&#8221;: Current width of the grabber-ROI as &#8220;typeInt&#8221; || &#8220;readOnly&#8221;</li>
+<li>&#8220;sizey&#8221;: Current heigth of the grabber-ROI as &#8220;typeInt&#8221; || &#8220;readOnly&#8221;</li>
+<li>&#8220;bpp&#8221;: Current bits per pixel of the grabber as &#8220;typeInt&#8221;. Usual values are 8-bit, 10-bit - 16-bit, 24-bit color.</li>
+</ul>
+</div>
+<div class="section" id="optional-but-reserved-keywords-for-setparam-getparam">
+<h4>Optional but reserved keywords for setParam / getParam<a class="headerlink" href="#optional-but-reserved-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>&#8220;binning&#8221;: Binning of the pixels in both directions as &#8220;typeInt&#8221; in form [BinningX? BinningY?] between &#8220;0101&#8221; and &#8220;xy&#8221;</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="the-dataio-typeadda-plugin-class">
+<h2>The DataIO | typeADDA plugin class<a class="headerlink" href="#the-dataio-typeadda-plugin-class" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="the-dataio-typerawio-plugin-class">
+<h2>The DataIO | typeRawIO plugin class<a class="headerlink" href="#the-dataio-typerawio-plugin-class" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin class - DataIO</a><ul>
+<li><a class="reference internal" href="#base-idea-behind-any-dataio">Base idea behind any DataIO</a></li>
+<li><a class="reference internal" href="#the-dataio-typegrabber-plugin-class">The DataIO | typeGrabber plugin class</a><ul>
+<li><a class="reference internal" href="#camera-frame-grabber-parameters-and-units">Camera / Frame Grabber Parameters and Units</a><ul>
+<li><a class="reference internal" href="#mandatory-keywords-for-setparam-getparam">Mandatory keywords for setParam / getParam</a></li>
+<li><a class="reference internal" href="#optional-but-reserved-keywords-for-setparam-getparam">Optional but reserved keywords for setParam / getParam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-dataio-typeadda-plugin-class">The DataIO | typeADDA plugin class</a></li>
+<li><a class="reference internal" href="#the-dataio-typerawio-plugin-class">The DataIO | typeRawIO plugin class</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-AddInBase-Ref.html"
+                        title="previous chapter">AddInBase</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugin-actuator.html"
+                        title="next chapter">Plugin class - Actuator</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-dataIO.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-actuator.html" title="Plugin class - Actuator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-AddInBase-Ref.html" title="AddInBase"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

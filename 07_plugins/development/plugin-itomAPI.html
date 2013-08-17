@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>itom API &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Link or load external libraries" href="plugin-externalLibraries.html" />
+    <link rel="prev" title="Automatic loading and saving of plugin parameters" href="pluginAutoLoadSavePolicy.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-externalLibraries.html" title="Link or load external libraries"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pluginAutoLoadSavePolicy.html" title="Automatic loading and saving of plugin parameters"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="itom-api">
+<span id="plugin-itomapi"></span><h1>itom API<a class="headerlink" href="#itom-api" title="Permalink to this headline">¶</a></h1>
+<p>Usually, plugins only have access to the sources which are defined in the <strong>SDK</strong> of <strong>itom</strong>. These are for instance the header and
+source files contained in the folder <strong>common</strong> (e.g. <strong>addInInterface.h</strong>) and in the folder <strong>plot</strong> (only relevant for developing designer
+plugins (hence plots, figures...). Further, the <strong>SDK</strong> contains the header-files and corresponding libraries for the <strong>dataObject</strong> and
+the <strong>pointCloud</strong> library.</p>
+<p>However, it is not desired at all, that plugins also include header or source files from <strong>itom</strong> itself. The intention
+is, that it should be possible to develop plugins without the need to compile <strong>itom</strong> from its sources or have the source
+code available.</p>
+<p>Therefore, <strong>itom</strong> provides an <strong>application programming interface</strong> (API). The API has methods defined, which give plugins the possibility
+to use important functionality of <strong>itom</strong>. All available methods of the <strong>API</strong> are defined in the file <strong>apiFunctionsInc.h</strong>, that also lies
+in the folder <strong>common</strong> of the SDK. For methods concerning plots and figures, there is an additional API definition
+file <strong>apiFunctionsGraphInc.h</strong>.</p>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>If your plugin or designer plugin widget is derived from classes <strong>AddInBase</strong> or <strong>AbstractFigure</strong>, which is usually the case,
+you can use the <strong>API</strong> methods without further steps or includes.</p>
+<p>When you are programming a plugin, derived from <strong>AddInBase</strong>, you can access any <strong>API</strong>-method at any time in your plugin (even in the constructor).
+When programming a designer plugin widget that is handled as plotting plugin (derived from <strong>AbstractFigure</strong>) the APIs only become valid after the
+construction of your plugin.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Due to the software structure, the valid pointer is transmitted by <strong>itom</strong> sending the event with type <strong>QEvent::User+123</strong>,
+that is caught by your plugin after the construction.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>You can call the methods, defined in <strong>apiFunctionsInc.h</strong> or <strong>apiFunctionsGraphInc.h</strong> like normal function calls. In the following example, the filter <strong>saveRPM</strong>, which is defined
+in another plugin should be called. Since, the mandatory, optional and output parameters of this filter are unknown, we will first request their default
+values, then change their values and finally we call the filter-method. If you have knownledge about the parameters, you just can implement the second part.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retVal</span><span class="p">;</span>
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="n">mandParams</span><span class="p">,</span> <span class="n">optParams</span><span class="p">,</span> <span class="n">outParams</span><span class="p">;</span> <span class="c1">//define three, empty parameter vectors</span>
+
+<span class="c1">//now get default values</span>
+<span class="n">retVal</span> <span class="o">=</span> <span class="n">apiFilterParamBase</span><span class="p">(</span><span class="s">&quot;saveRPM&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mandParams</span><span class="p">,</span><span class="o">&amp;</span><span class="n">optParams</span><span class="p">,</span><span class="o">&amp;</span><span class="n">outParams</span><span class="p">);</span>
+<span class="c1">//retVal is retOk if the filter &#39;saveRPM&#39; could be found. If the external plugin does not exist, the return value is retError.</span>
+
+<span class="c1">//change the value of some values</span>
+<span class="n">mandParams</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">setVal</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span> <span class="n">yourDataObjectPtr</span> <span class="p">);</span> <span class="c1">//set data object to save as first mandatory parameter</span>
+<span class="n">mandParams</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">setVal</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span> <span class="s">&quot;C:</span><span class="se">\\</span><span class="s">test.rpm&quot;</span> <span class="p">);</span>
+
+<span class="c1">//now call the filter</span>
+<span class="n">retVal</span> <span class="o">+=</span> <span class="n">apiFilterCall</span><span class="p">(</span><span class="s">&quot;saveRPM&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">mandParams</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">optParams</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">outParams</span><span class="p">);</span>
+
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">retVal</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="c1">//filter could be successfully executed</span>
+    <span class="c1">//you can now evaluate the output parameters, if the filter provided some.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">itom API</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pluginAutoLoadSavePolicy.html"
+                        title="previous chapter">Automatic loading and saving of plugin parameters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugin-externalLibraries.html"
+                        title="next chapter">Link or load external libraries</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-itomAPI.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-externalLibraries.html" title="Link or load external libraries"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pluginAutoLoadSavePolicy.html" title="Automatic loading and saving of plugin parameters"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

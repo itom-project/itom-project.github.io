@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>determine lateral image shift and show images by using itom figure plots &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Python tutorials" href="tutorials.html" />
+    <link rel="next" title="Structure of the manual" href="../structure.html" />
+    <link rel="prev" title="Python tutorials" href="tutorials.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../structure.html" title="Structure of the manual"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorials.html" title="Python tutorials"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="tutorials.html" accesskey="U">Python tutorials</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="determine-lateral-image-shift-and-show-images-by-using-itom-figure-plots">
+<h1>determine lateral image shift and show images by using itom figure plots<a class="headerlink" href="#determine-lateral-image-shift-and-show-images-by-using-itom-figure-plots" title="Permalink to this headline">¶</a></h1>
+<p>A lateral image shift can be determined by cross correlation. To minimize the calculation time, the inverse fourier transformed product of the fourier transformed lateral shifted images, wheras one image is complex conjugated, is calculated</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-----------------------------------------------------------</span>
+<span class="c">#</span>
+<span class="c"># determine the amount of a lateral image shift</span>
+<span class="c">#</span>
+<span class="c">#-----------------------------------------------------------</span>
+
+
+<span class="c"># import necessary modules</span>
+<span class="c">#</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+
+
+<span class="c">#--- create test data (lateral shift an image of Lena) -----</span>
+<span class="c">#</span>
+
+<span class="c"># load an image of Lena</span>
+<span class="c">#</span>
+<span class="n">imageLena</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">lena</span><span class="p">()</span>
+
+<span class="c"># plot lena</span>
+<span class="c">#</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">imageLena</span><span class="p">),</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+
+
+<span class="c"># amount of pixel shift in x- and y-direction</span>
+<span class="c">#</span>
+<span class="n">xPixelShift</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">yPixelShift</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span>
+
+
+<span class="c"># determine the ROI size: relative (centered) size of original image (relativeSize=1: original size)</span>
+<span class="c">#</span>
+<span class="n">row</span><span class="p">,</span> <span class="n">col</span>     <span class="o">=</span> <span class="n">imageLena</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">relativeSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span> <span class="nb">min</span><span class="p">(</span> <span class="mi">1</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">xPixelShift</span><span class="p">)</span><span class="o">/</span><span class="n">col</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">yPixelShift</span><span class="p">)</span><span class="o">/</span><span class="n">row</span> <span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">)</span> <span class="o">/</span><span class="mi">10</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">col</span> <span class="o">-</span> <span class="n">col</span><span class="o">*</span><span class="n">relativeSize</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">col</span><span class="o">-</span><span class="n">x0</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">row</span> <span class="o">-</span> <span class="n">row</span><span class="o">*</span><span class="n">relativeSize</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">row</span><span class="o">-</span><span class="n">y0</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c"># not shifted ROI</span>
+<span class="n">image1</span> <span class="o">=</span> <span class="n">imageLena</span><span class="p">[</span><span class="n">y0</span><span class="p">:</span><span class="n">y1</span><span class="p">,</span><span class="n">x0</span><span class="p">:</span><span class="n">x1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">image1</span><span class="p">),</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+
+<span class="c"># shifted ROI</span>
+<span class="n">image2</span> <span class="o">=</span> <span class="n">imageLena</span><span class="p">[</span><span class="n">y0</span><span class="o">+</span><span class="n">yPixelShift</span><span class="p">:</span><span class="n">y1</span><span class="o">+</span><span class="n">yPixelShift</span><span class="p">,</span><span class="n">x0</span><span class="o">+</span><span class="n">xPixelShift</span><span class="p">:</span><span class="n">x1</span><span class="o">+</span><span class="n">xPixelShift</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">image2</span><span class="p">),</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+
+
+<span class="c">#</span>
+<span class="c">#-----------------------------------------------------------</span>
+
+
+<span class="c">#--- determine the pixel shift -----------------------------</span>
+<span class="c">#</span>
+
+<span class="c"># discrete fast fourier transformation and complex conjugation of image 2</span>
+<span class="c">#</span>
+<span class="n">image1FFT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">image1</span><span class="p">)</span>
+<span class="n">image2FFT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">image2</span><span class="p">)</span> <span class="p">)</span>
+
+
+<span class="c"># inverse fourier transformation of product -&gt; equal to cross correlation</span>
+<span class="c">#</span>
+<span class="n">imageCCor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft2</span><span class="p">(</span> <span class="p">(</span><span class="n">image1FFT</span><span class="o">*</span><span class="n">image2FFT</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+
+
+<span class="c"># Shift the zero-frequency component to the center of the spectrum</span>
+<span class="c">#</span>
+<span class="n">imageCCorShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">imageCCor</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">imageCCorShift</span><span class="p">,</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+
+
+<span class="c"># determine the distance of the maximum from the center</span>
+<span class="c">#</span>
+<span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">image1</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">yShift</span><span class="p">,</span> <span class="n">xShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">imageCCorShift</span><span class="p">),</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">yShift</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xShift</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="n">col</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;shift of image1 in x-direction [pixel]: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xShift</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;shift of image1 in y-direction [pixel]: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">yShift</span><span class="p">))</span>
+
+<span class="c">#</span>
+<span class="c">#-----------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>First the necessary modules have to be imported:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># import necessary modules</span>
+<span class="c">#</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.misc</span>
+</pre></div>
+</div>
+<p>Test data is created by lateral shifting a region of interest (ROI) of the Lena image. First the image of Lena is loaded:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># load an image of Lena</span>
+<span class="c">#</span>
+<span class="n">imageLena</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">misc</span><span class="o">.</span><span class="n">lena</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The image of Lena is plotted by using the itom figure plot &#8216;itom2DQwtFigure&#8217;, which is optimized for 2D static images. Since the row index for images starts at the top of an image and not at the bottom like for matrixes, the image as to be flipped up side down before plotting.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># plot lena</span>
+<span class="c">#</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">imageLena</span><span class="p">),</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The ROI size is determined by the amount of lateral shift in x- and y-direction. One ROI is selected from the center of the original image. Another ROI with the same size is shifted from the center about the defined amount.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># amount of pixel shift in x- and y-direction</span>
+<span class="c">#</span>
+<span class="n">xPixelShift</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">yPixelShift</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span>
+
+
+<span class="c"># determine the ROI size: relative (centered) size of original image (relativeSize=1: original size)</span>
+<span class="c">#</span>
+<span class="n">row</span><span class="p">,</span> <span class="n">col</span>     <span class="o">=</span> <span class="n">imageLena</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">relativeSize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span> <span class="nb">min</span><span class="p">(</span> <span class="mi">1</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">xPixelShift</span><span class="p">)</span><span class="o">/</span><span class="n">col</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">yPixelShift</span><span class="p">)</span><span class="o">/</span><span class="n">row</span> <span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">)</span> <span class="o">/</span><span class="mi">10</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">col</span> <span class="o">-</span> <span class="n">col</span><span class="o">*</span><span class="n">relativeSize</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">col</span><span class="o">-</span><span class="n">x0</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="p">(</span><span class="n">row</span> <span class="o">-</span> <span class="n">row</span><span class="o">*</span><span class="n">relativeSize</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">row</span><span class="o">-</span><span class="n">y0</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c"># not shifted ROI</span>
+<span class="n">image1</span> <span class="o">=</span> <span class="n">imageLena</span><span class="p">[</span><span class="n">y0</span><span class="p">:</span><span class="n">y1</span><span class="p">,</span><span class="n">x0</span><span class="p">:</span><span class="n">x1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">image1</span><span class="p">),</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+
+<span class="c"># shifted ROI</span>
+<span class="n">image2</span> <span class="o">=</span> <span class="n">imageLena</span><span class="p">[</span><span class="n">y0</span><span class="o">+</span><span class="n">yPixelShift</span><span class="p">:</span><span class="n">y1</span><span class="o">+</span><span class="n">yPixelShift</span><span class="p">,</span><span class="n">x0</span><span class="o">+</span><span class="n">xPixelShift</span><span class="p">:</span><span class="n">x1</span><span class="o">+</span><span class="n">xPixelShift</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">image2</span><span class="p">),</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now the lateral shift is determined by calculating the inverse fourier transformed of the product of the fourier transformed ROIs and evaluating the distance from the center of the position of its maximum.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># discrete fast fourier transformation and complex conjugation of image 2</span>
+<span class="c">#</span>
+<span class="n">image1FFT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">image1</span><span class="p">)</span>
+<span class="n">image2FFT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">image2</span><span class="p">)</span> <span class="p">)</span>
+
+
+<span class="c"># inverse fourier transformation of product -&gt; equal to cross correlation</span>
+<span class="c">#</span>
+<span class="n">imageCCor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft2</span><span class="p">(</span> <span class="p">(</span><span class="n">image1FFT</span><span class="o">*</span><span class="n">image2FFT</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+
+
+<span class="c"># Shift the zero-frequency component to the center of the spectrum</span>
+<span class="c">#</span>
+<span class="n">imageCCorShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">imageCCor</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">imageCCorShift</span><span class="p">,</span><span class="s">&#39;itom2DQwtFigure&#39;</span><span class="p">)</span>
+
+
+<span class="c"># determine the distance of the maximum from the center</span>
+<span class="c">#</span>
+<span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">image1</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">yShift</span><span class="p">,</span> <span class="n">xShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">imageCCorShift</span><span class="p">),</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">yShift</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xShift</span> <span class="o">-=</span> <span class="nb">int</span><span class="p">(</span><span class="n">col</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;shift of image1 in x-direction [pixel]: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xShift</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;shift of image1 in y-direction [pixel]: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">yShift</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorials.html"
+                        title="previous chapter">Python tutorials</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../structure.html"
+                        title="next chapter">Structure of the manual</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/12_tutorials/lateralShift.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../structure.html" title="Structure of the manual"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorials.html" title="Python tutorials"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="tutorials.html" >Python tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

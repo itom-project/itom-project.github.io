@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Show messages, input boxes and default dialogs &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3598109',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Extending the user interface of itom" href="extended_gui.html" />
+    <link rel="next" title="Creating advanced dialogs and windows" href="qtdesigner.html" />
+    <link rel="prev" title="Customize the menu and toolbars of itom" href="toolbar.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qtdesigner.html" title="Creating advanced dialogs and windows"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="toolbar.html" title="Customize the menu and toolbars of itom"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="extended_gui.html" accesskey="U">Extending the user interface of <strong>itom</strong></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="show-messages-input-boxes-and-default-dialogs">
+<h1>Show messages, input boxes and default dialogs<a class="headerlink" href="#show-messages-input-boxes-and-default-dialogs" title="Permalink to this headline">¶</a></h1>
+<p><strong>itom</strong> gives you the possibility to show the standard message and input boxes as well as standard dialogs per <strong>Python</strong> script command.</p>
+<div class="section" id="message-boxes">
+<h2>Message boxes<a class="headerlink" href="#message-boxes" title="Permalink to this headline">¶</a></h2>
+<p>There are three types of message boxes that you can show via a script command. These are divided into the four types <strong>Information</strong>, <strong>Warning</strong>,
+<strong>Question</strong> and <strong>Critical</strong>.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/messageBoxes.png"><img alt="../_images/messageBoxes.png" src="../_images/messageBoxes.png" /></a>
+<p class="caption">Appearance of the different message boxes on a Windows 7 operating system. From left to right: <em>Information</em>, <em>Warning</em>, <em>Question</em>, <em>Critical</em></p>
+</div>
+<p>The corresponding commands are the following static methods in the class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><tt class="xref py py-class docutils literal"><span class="pre">ui</span></tt></a>:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgInformation" title="itom.ui.msgInformation"><tt class="xref py py-meth docutils literal"><span class="pre">msgInformation()</span></tt></a></li>
+<li><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgWarning" title="itom.ui.msgWarning"><tt class="xref py py-meth docutils literal"><span class="pre">msgWarning()</span></tt></a></li>
+<li><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgQuestion" title="itom.ui.msgQuestion"><tt class="xref py py-meth docutils literal"><span class="pre">msgQuestion()</span></tt></a></li>
+<li><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgCritical" title="itom.ui.msgCritical"><tt class="xref py py-meth docutils literal"><span class="pre">msgCritical()</span></tt></a></li>
+</ul>
+<p>All these methods have the same syntax:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">button</span><span class="p">,</span><span class="n">buttonText</span><span class="p">)</span> <span class="o">=</span> <span class="n">msgInformation</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span> <span class="p">[,</span><span class="n">buttons</span><span class="p">,</span> <span class="n">defaultButton</span><span class="p">,</span> <span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The parameters <em>title</em> and <em>text</em> are the strings for the titlebar and the content area of the message box respectively. The other three parameters
+are optional: <em>buttons</em> is an or-combination of button-IDs, denoting the different buttons you want to display at the bottom of the message box. The possible values correspond to the enumeration <strong>QMessageBox::StandardButton</strong> of the <em>Qt</em>-framework and are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="69%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Enumeration</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ui.MsgBoxOk</td>
+<td>1024</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxOpen</td>
+<td>8192</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxSave</td>
+<td>2048</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxCancel</td>
+<td>4194304</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxClose</td>
+<td>2097152</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxDiscard</td>
+<td>8388608</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxApply</td>
+<td>33554432</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxReset</td>
+<td>67108864</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxRestoreDefaults</td>
+<td>134217728</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxHelp</td>
+<td>16777216</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxSaveAll</td>
+<td>4096</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxYes</td>
+<td>16384</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxYesToAll</td>
+<td>32768</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxNo</td>
+<td>65536</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxNoToAll</td>
+<td>131072</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxAbort</td>
+<td>262144</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxRetry</td>
+<td>524288</td>
+</tr>
+<tr class="row-odd"><td>ui.MsgBoxIgnore</td>
+<td>1048576</td>
+</tr>
+<tr class="row-even"><td>ui.MsgBoxNoButton</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>For an <strong>or</strong>-combination, use the bar-operator (<strong>|</strong>). The parameter <em>defaultButton</em> only accepts one button value of buttons, listed in the parameter <em>button</em>. The specific button then becomes the default button that is selectable by simply pressing the return-key. Additionally, you
+can let the message box be a child of any other instance of class :py:class`~itom.ui`. This is useful, if you want to make the message box modal with
+respect to any <a class="reference internal" href="qtdesigner.html#qtdesigner"><em>user defined dialog</em></a> and not with respect to the main window of <strong>itom</strong>.</p>
+<p>The return value is a tuple containing two values. The first is the value of the button that has been pressed to close the message box with respect to the enumeration values stated above. The second value is the text of the pressed button (e.g. &#8220;Ok&#8221;).</p>
+<p>An example for a question message box is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="n">btnText</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">msgQuestion</span><span class="p">(</span><span class="s">&quot;Silly question&quot;</span><span class="p">,</span><span class="s">&quot;Do you like itom?&quot;</span><span class="p">,</span> \
+    <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxYes</span> <span class="o">|</span> <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxNo</span><span class="p">,</span> <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxYes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;The user pressed the button&quot;</span><span class="p">,</span> <span class="n">btnText</span><span class="p">,</span> <span class="s">&quot;with ID&quot;</span><span class="p">,</span><span class="n">btn</span><span class="p">)</span>
+<span class="k">if</span><span class="p">(</span><span class="n">btn</span> <span class="o">==</span> <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxNo</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;what can we do in order to change your opinion?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="input-boxes">
+<h2>Input boxes<a class="headerlink" href="#input-boxes" title="Permalink to this headline">¶</a></h2>
+<p>The class :py:class`~itom.ui` also contains another group of static methods, that can be used in order to show modal input boxes. These are:</p>
+<div class="section" id="integer-input-box">
+<h3>Integer input box<a class="headerlink" href="#integer-input-box" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getInt" title="itom.ui.getInt"><tt class="xref py py-meth docutils literal"><span class="pre">getInt()</span></tt></a> in order to ask the user for a fixed-point number:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/getInt.png"><img alt="../_images/getInt.png" src="../_images/getInt.png" /></a>
+</div>
+<p>The minimum and maximum value of the input box is set to the values <em>min</em> and <em>max</em> or to the full integer range, if not otherwise stated. The
+step-size <em>step</em> defines the iteration value when the arrows are clicked. The return value is a tuple that contains the current value of the input
+box and <strong>True</strong> if the dialog has been accepted, otherwise <strong>False</strong>, the value still contains the last value of the spinbox.</p>
+</div>
+<div class="section" id="double-input-box">
+<h3>Double input box<a class="headerlink" href="#double-input-box" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getDouble" title="itom.ui.getDouble"><tt class="xref py py-meth docutils literal"><span class="pre">getDouble()</span></tt></a> in order to ask the user for a double-precision floating-point number:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getDouble</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/getDouble.png"><img alt="../_images/getDouble.png" src="../_images/getDouble.png" /></a>
+</div>
+<p>The minimum and maximum value of the input box is set to the values <em>min</em> and <em>max</em> or to the full double range, if not otherwise stated. In this
+case you can assign the number of decimals that are shown (default:1). The step size is always set to 1. The return tuple has the same form than for
+the integer input box.</p>
+</div>
+<div class="section" id="text-input-box">
+<h3>Text input box<a class="headerlink" href="#text-input-box" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getText" title="itom.ui.getText"><tt class="xref py py-meth docutils literal"><span class="pre">getText()</span></tt></a> in order to ask the user for a string:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getText</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/getText.png"><img alt="../_images/getText.png" src="../_images/getText.png" /></a>
+</div>
+<p>The default text can be passed as parameter <em>defaultValue</em>. The return tuple also returns the current value of the textbox and the boolean variable <strong>True</strong> if the dialog has been accepted, else <strong>False</strong>.</p>
+</div>
+<div class="section" id="option-selection-dialog">
+<h3>Option selection dialog<a class="headerlink" href="#option-selection-dialog" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getItem" title="itom.ui.getItem"><tt class="xref py py-meth docutils literal"><span class="pre">getItem()</span></tt></a> in order to let the user select an item from a given list of items:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">stringList</span> <span class="p">[,</span><span class="n">currentIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">editable</span><span class="o">=</span><span class="bp">False</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/getItem.png"><img alt="../_images/getItem.png" src="../_images/getItem.png" /></a>
+</div>
+<p>Use the parameter <em>stringList</em> in order to pass any sequence (tuple or list) of strings that are displayed as options, the user can choose. You can
+preselect any item by setting the parameter <em>currentIndex</em> to the item&#8217;s index (zero-based, default:0). Additionally it is possible to keep the
+selection dialog editable, hence, the user can also type its own string (if True, default: False).</p>
+<p>The returning tuple again contains the current active or typed string value and the boolean variable, that is only <strong>True</strong> if the dialog has been accepted.</p>
+</div>
+</div>
+<div class="section" id="standard-dialogs">
+<h2>Standard dialogs<a class="headerlink" href="#standard-dialogs" title="Permalink to this headline">¶</a></h2>
+<p><strong>itom</strong> provides access to a standard dialog to indicate an existing directory, to choose an existing file or to indicate a path for saving a file.</p>
+<div class="section" id="indicate-existing-directory">
+<h3>Indicate existing directory<a class="headerlink" href="#indicate-existing-directory" title="Permalink to this headline">¶</a></h3>
+<p>The dialog is wrapped by the static method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getExistingDirectory" title="itom.ui.getExistingDirectory"><tt class="xref py py-meth docutils literal"><span class="pre">getExistingDirectory()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ret</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getExistingDirectory</span><span class="p">(</span><span class="n">caption</span><span class="p">,</span> <span class="n">startDirectory</span> <span class="p">[,</span> <span class="n">options</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The parameters are as follows:</p>
+<ul>
+<li><p class="first"><strong>caption</strong> is the title of the dialog</p>
+</li>
+<li><p class="first"><strong>startDirectory</strong> is a string containing an absolute path to the default directory</p>
+</li>
+<li><p class="first"><strong>options</strong> is an optional or-combination of one of the following options:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">1. ShowDirsOnly [default], only directories are shown in the dialog</div>
+<div class="line">2. DontResolveSymlinks, if indicated symbolic links are not shown</div>
+<div class="line">other values can be taken from the Qt-enumeration <strong>QFileDialog::Option</strong></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>parent</strong> can be an instance of <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><tt class="xref py py-class docutils literal"><span class="pre">ui</span></tt></a>, such that the dialog becomes modal and on top of this user defined dialog</p>
+</li>
+</ul>
+<p>The return value <strong>ret</strong> of this dialog is either <strong>None</strong> if the dialog has been rejected or else the absolute path to the chosen directory.</p>
+</div>
+<div class="section" id="openfilename-dialog">
+<h3>OpenFileName-Dialog<a class="headerlink" href="#openfilename-dialog" title="Permalink to this headline">¶</a></h3>
+<p>Use the static method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getOpenFileName" title="itom.ui.getOpenFileName"><tt class="xref py py-meth docutils literal"><span class="pre">getOpenFileName()</span></tt></a> to show this dialog. By this dialog, the user can select one specific existing file in
+any directory. This is usually taken for opening files.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ret</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">([</span><span class="n">caption</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">startDirectory</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">filters</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> \
+    <span class="n">selectedFilterIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The title of the dialog can be assigned by the parameter <em>caption</em>. You can choose a default directory by the string <em>startDirectory</em>. If this is not
+given or empty, the current working directory is taken. The possible file filters are set by the string <strong>filters</strong>. This is a double-semicolon
+separated list of entries. An example is:</p>
+<div class="highlight-python"><pre>Images(*.png *jpg)
+Text Files (*.txt);;Itom Data Collection (*.idc);;Scripts (*.py *pyc)</pre>
+</div>
+<p>The selected, default index is given by <em>selectedFilterIndex</em>, where 0 selects the first item in <em>filters</em>.
+You can also pass some additional options to the dialog by the parameter <em>options</em>. This basically is an or-combination of the Qt-enumeration
+<em>QFileDialog::Option</em>. Reasonable values are:</p>
+<ul class="simple">
+<li>0x02, DontResolveSymlinks. If given, symbolic links are not shown in the dialog</li>
+<li>0x40, HideNameFilterDetails. This only shows the names of the filters, but not the pattern mask.</li>
+</ul>
+<p>The return value <em>ret</em> is <em>None</em>, if the dialog has been rejected, else it is the absolute filename of the selected file.</p>
+</div>
+<div class="section" id="savefilename-dialog">
+<h3>SaveFileName-Dialog<a class="headerlink" href="#savefilename-dialog" title="Permalink to this headline">¶</a></h3>
+<p>Use the static method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getSaveFileName" title="itom.ui.getSaveFileName"><tt class="xref py py-meth docutils literal"><span class="pre">getSaveFileName()</span></tt></a> to show a dialog, where the user can select a new filename or an existing file in any directory. This is usually taken for saving files.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ret</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">([</span><span class="n">caption</span><span class="p">,</span> <span class="n">startDirectory</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">filters</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> \
+    <span class="n">selectedFilterIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The parameters are the same than for the open-file-dialog above. However for options, reasonable values are now:</p>
+<ul class="simple">
+<li>0x02, DontResolveSymlinks. If given, symbolic links are not shown in the dialog</li>
+<li>0x04, DontConfirmOverwrite. If given, the user don&#8217;t has to confirm if an existing file has been choosen.</li>
+<li>0x40, HideNameFilterDetails. This only shows the names of the filters, but not the pattern mask.</li>
+</ul>
+<p>For combining different options, use the or-operator <strong>|</strong>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Show messages, input boxes and default dialogs</a><ul>
+<li><a class="reference internal" href="#message-boxes">Message boxes</a></li>
+<li><a class="reference internal" href="#input-boxes">Input boxes</a><ul>
+<li><a class="reference internal" href="#integer-input-box">Integer input box</a></li>
+<li><a class="reference internal" href="#double-input-box">Double input box</a></li>
+<li><a class="reference internal" href="#text-input-box">Text input box</a></li>
+<li><a class="reference internal" href="#option-selection-dialog">Option selection dialog</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#standard-dialogs">Standard dialogs</a><ul>
+<li><a class="reference internal" href="#indicate-existing-directory">Indicate existing directory</a></li>
+<li><a class="reference internal" href="#openfilename-dialog">OpenFileName-Dialog</a></li>
+<li><a class="reference internal" href="#savefilename-dialog">SaveFileName-Dialog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="toolbar.html"
+                        title="previous chapter">Customize the menu and toolbars of <strong>itom</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="qtdesigner.html"
+                        title="next chapter">Creating advanced dialogs and windows</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/06_extended_gui/method-itom.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="qtdesigner.html" title="Creating advanced dialogs and windows"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="toolbar.html" title="Customize the menu and toolbars of itom"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="extended_gui.html" >Extending the user interface of <strong>itom</strong></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 17, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
