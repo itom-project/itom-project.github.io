@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Create a new plugin via CMake &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Automatic loading and saving of plugin parameters" href="pluginAutoLoadSavePolicy.html" />
+    <link rel="prev" title="FilterDef" href="plugin-algo-Ref.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginAutoLoadSavePolicy.html" title="Automatic loading and saving of plugin parameters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo-Ref.html" title="FilterDef"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="create-a-new-plugin-via-cmake">
+<h1>Create a new plugin via CMake<a class="headerlink" href="#create-a-new-plugin-via-cmake" title="Permalink to this headline">¶</a></h1>
+<p>Plugins for <strong>itom</strong> are also created using <strong>CMake</strong>. Therefore the sources and the project files of the plugins will also be separated, like it is also the case for <strong>itom</strong>, the designer plugins
+and all other plugins. You can either put your source files in any subfolder of the location where all sources of your plugins lie or you can put it at any arbitrary location on your harddrive.</p>
+<p>The source folder of your plugin mainly consists of these files:</p>
+<ol class="arabic simple">
+<li><strong>CMakeLists.txt</strong>. This is the project file of your plugin, where you insert the files that are included in your plugin or libraries, the plugin should link with. This file is finally interpreted by <strong>CMake</strong> in order to create the real project files, adapted to your generator (e.g. Visual Studio).</li>
+<li><strong>yourPlugin.h</strong> and <strong>yourPlugin.cpp</strong>. This are the main header and source files of your plugin.</li>
+<li><strong>dialogYourPlugin.h</strong> and <strong>dialogYourPlugin.cpp</strong> (optional, not for algorithms). Use these files if you want to provide a configuration dialog for your plugin (can also be added later).</li>
+<li><strong>dockWidgetYourPlugin.h</strong> and <strong>dockWidgetYourPlugin.cpp</strong> (optional, not for algorithms). Use these files if you want to provide a dock widget of your plugin that is inserted into <strong>itom</strong>&#8216;s main window (can also be added later).</li>
+<li><strong>pluginVersion.h</strong> (optional). This header contains some defines for your current plugin version. It sould be included in <strong>yourPlugin.cpp</strong> and under MSVC / windows in <strong>version.rc</strong>.</li>
+<li><strong>version.rc</strong> (optional, only under MSVC / windows). Under windows the content of this file will be automatically added to the meta-Data of your DLL.</li>
+</ol>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>You will find templates for the most important files needed for creating a new plugin in the folder <strong>pluginTemplates</strong> of the SDK-directory of <strong>itom</strong>.</p>
+<p>Copy the file <strong>CMakeLists.txt</strong> from this template-directory and copy it to the source directory of your plugin. Open this file with an arbitrary editor. The commands, starting with #, give you hints
+where you need to adapt this file. Further details about the syntax of these files can be found under <a class="reference external" href="http://www.cmake.org/cmake/help/documentation.html">http://www.cmake.org/cmake/help/documentation.html</a>.</p>
+<p>Furthermore, you will find template implementations of an actuator, algorithm and camera plugin in the <strong>pluginTemplates</strong> folder. Copy the corresponding header and source file of your type into
+your source directory and start replacing the template strings by your versions, e.g. you need to change the name of your plugin hence the class names.</p>
+</div>
+<div class="section" id="generate-project">
+<h2>Generate project<a class="headerlink" href="#generate-project" title="Permalink to this headline">¶</a></h2>
+<p>If you placed the source files of your plugin into a subdirectory of an existing multi-plugin project, then you need to add the subfolder of your plugin into the file <strong>CMakeLists.txt</strong> of the parent-folder.
+This file usually already contains a lot of subdirectories, added by the CMake-command <strong>ADD_SUBDIRECTORY</strong> and has the following form:</p>
+<div class="highlight-python"><pre>project(itom_plugins) #name of the overall project
+
+cmake_minimum_required(VERSION 2.8)
+
+OPTION(BUILD_UNICODE &quot;Build with unicode charset if set to ON, else multibyte charset.&quot; ON)
+OPTION(BUILD_SHARED_LIBS &quot;Build shared library.&quot; ON)
+OPTION(BUILD_TARGET64 &quot;Build for 64 bit target if set to ON or 32 bit if set to OFF.&quot; OFF)
+SET(ITOM_DIR &quot;&quot; CACHE PATH &quot;base path to itom&quot;)
+
+# Insert the following section for your plugin
+
+# by this option, the plugin can be unchecked in order to
+# avoid its generation in cmake.
+OPTION(PLUGIN_YOURNAME &quot;Build with this plugin.&quot; ON)
+if (PLUGIN_YOURNAME)
+    ADD_SUBDIRECTORY(YOURSUBDIRECTORY)
+endif (PLUGIN_YOURNAME)</pre>
+</div>
+<p>Then, reconfigure and regenerate the overall plugin project or simply run the project <strong>ZERO_CHECK</strong> of your overall plugin solution such that the new plugin is generated and added to the overall solution.
+If you have no idea about configuring and generating a <strong>CMake</strong> project, continue reading or check the big <a class="reference internal" href="../../02_installation/build_cmake.html#install-cmake"><em>CMake-section</em></a> about generating <strong>itom</strong> itself.</p>
+<p>In order to generate your plugin as single solution, open the <strong>CMake GUI</strong> and choose the source directory of your plugin as source directory and any arbitrary folder as build directory. The solution
+and project files are then generated in this build directory.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin.png"><img alt="../../_images/CMakePlugin.png" src="../../_images/CMakePlugin.png" /></a>
+</div>
+<p>Then click the configure button to start the configuration. At first, you will be asked for a generator. See <a class="reference internal" href="../../02_installation/build_cmake.html#install-cmake"><em>Build with CMake</em></a> for more information about generators.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin2.png"><img alt="../../_images/CMakePlugin2.png" src="../../_images/CMakePlugin2.png" /></a>
+</div>
+<p>Then, another configuration process is started. Usually, it is now necessary to set the variable <strong>ITOM_SDK_DIR</strong> to the directory of <strong>itom</strong>&#8216;s SDK, usually located in <strong>itom</strong>&#8216;s build directory. Then click <strong>configure</strong>
+again.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin3.png"><img alt="../../_images/CMakePlugin3.png" src="../../_images/CMakePlugin3.png" /></a>
+</div>
+<p>Next, you probably need to indicate the location of the build-directory of <strong>OpenCV</strong> on your harddrive (variable <strong>OpenCV_DIR</strong> in the group <strong>OpenCV</strong> or <strong>Ungrouped Entries</strong> if you activated the <strong>Grouped</strong> checkbox).</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin4.png"><img alt="../../_images/CMakePlugin4.png" src="../../_images/CMakePlugin4.png" /></a>
+</div>
+<p>Continue clicking <strong>configure</strong> until there are no more warnings. Then you can press <strong>Generate</strong> in order to build the project files.
+Change then to the build-directory and open the recently build solution file. In you afterwards change the <strong>CMakeLists.txt</strong>-file, you don&#8217;t need to explicitely run the CMake-GUI again, since Visual Studio is also
+able to directly run CMake and update its project files.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Create a new plugin via CMake</a><ul>
+<li><a class="reference internal" href="#templates">Templates</a></li>
+<li><a class="reference internal" href="#generate-project">Generate project</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-algo-Ref.html"
+                        title="previous chapter">FilterDef</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pluginAutoLoadSavePolicy.html"
+                        title="next chapter">Automatic loading and saving of plugin parameters</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/pluginCreateCMake.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginAutoLoadSavePolicy.html" title="Automatic loading and saving of plugin parameters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo-Ref.html" title="FilterDef"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic programming structure of any itom-plugin &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Plugin interface class" href="pluginInterfaceClass.html" />
+    <link rel="prev" title="Parameters - Validation" href="plugin-paramsValidate.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginInterfaceClass.html" title="Plugin interface class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-paramsValidate.html" title="Parameters - Validation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="basic-programming-structure-of-any-itom-plugin">
+<h1>Basic programming structure of any itom-plugin<a class="headerlink" href="#basic-programming-structure-of-any-itom-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The software <strong>itom</strong> obtains most functionality by mainly two concepts. On the one hand there is the python scripting language, which allows you to use almost all available python modules
+that are available for python 3.2 or higher. On the other hand, the entire measurement system becomes powerful by the possibility to enhance its functionality by several plugins.</p>
+<p>These plugins are separated into three main groups:</p>
+<ul>
+<li><p class="first">Type <strong>actuator</strong>: Plugins of this basic type should be used if you want to connect any actuator, like motor stages, piezo actuators, focussing systems, ... to <strong>itom</strong> (see <a class="reference internal" href="pluginClass.html#plugin-class"><em>Plugin class - Basic information</em></a> and <a class="reference internal" href="plugin-actuator.html#plugin-class-actuator"><em>Plugin class - Actuator</em></a>)</p>
+</li>
+<li><p class="first">Type <strong>dataIO</strong>: Plugins of this basic type should be used for connecting any input or output device to <strong>itom</strong>. The main representative of this group are cameras as input device or the serial port as an input/ouput device (see <a class="reference internal" href="pluginClass.html#plugin-class"><em>Plugin class - Basic information</em></a> and <a class="reference internal" href="plugin-dataIO.html#plugin-class-dataio"><em>Plugin class - DataIO</em></a>). This group is subdivided into the following sub-types:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>grabber</strong> for cameras (Please consider that the class of the camera-plugin should not directly derive from <em>AddInDataIO</em> but from <em>AddInGrabber</em>, which is derived from the first.</li>
+<li><strong>ADDA</strong> for any analog-digital converters</li>
+<li><strong>rawIO</strong> for further input-output devices, like display windows for SLM or LCoS-sensors, serial ports or plugins which do not fit to any other group, since the type <strong>dataIO</strong> is the most flexibel plugin type.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Type <strong>algo</strong>: Plugins of this type mainly contain different algorithms and/or advanced user interfaces like dialogs, main windows, widgets, ...  (see <a class="reference internal" href="pluginClass.html#plugin-class"><em>Plugin class - Basic information</em></a> and <a class="reference internal" href="plugin-algo.html#plugin-class-algo"><em>Plugin class - Algo</em></a>)</p>
+</li>
+</ul>
+<p>Each plugin is a different project in your programming environment and is finally compiled as shared library (DLL on Windows).</p>
+</div>
+<div class="section" id="plugin-load-mechanism-of-itom">
+<h2>Plugin load mechanism of <strong>itom</strong><a class="headerlink" href="#plugin-load-mechanism-of-itom" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>itom</strong>-base directory contains a folder <strong>plugins</strong>. This folder itsself usually consists of different subfolders each having the name of a specific plugin. The folder can then
+contain a release and/or debug-version of the specific plugin DLL as well as further files which are necessary for running the plugin. If your plugin is dependent on other files,
+please consider to read the specific information about how to publish dependencies of each plugin.</p>
+<p>At the startup of <strong>itom</strong>, the application recursively scans the <strong>plugins</strong> folder and looks for any <em>DLL</em>-file on Windows machines or <em>a</em>-file on a Linux operating system. Then each
+DLL is tried to be loaded using the plugin system provided by the <strong>Qt</strong>-framework. The <em>DLL</em> can successfully be loaded if the following prerequisites are fullfilled:</p>
+<ul class="simple">
+<li>The plugin is a release version if <strong>itom</strong> is started in release mode OR</li>
+<li>The plugin is a debug version (this can for example be seen if the DLL-name ends with <em>...d.dll</em>) if <strong>itom</strong> is started in debug mode</li>
+<li>The plugin is compiled using the same major and minor version of <strong>Qt</strong> than <strong>itom</strong> (it is possible to load a plugin compiled with <strong>Qt</strong> 4.8.3 with <strong>itom</strong> compiled with 4.8.2)</li>
+<li>The plugin is compiled with the same compiler than <strong>itom</strong></li>
+<li>If the plugin is dependent on other shared libraries which are not linked using a delay-load mechanism, the plugin can only be loaded if every necessary shared library can be found and successfully be loaded. If the dependency could not be loaded, the plugin-load fails with an error message <em>module could not be loaded</em>.</li>
+<li>The remarks contained in the plugin with respect to a minimum and maximum version number of <strong>itom</strong> must correspond to the version number of your <strong>itom</strong></li>
+<li>The plugin must be compiled with the same version string of the class <strong>ito::AddInInterface</strong> than the version contained in <strong>itom</strong> (this is not the general version of <strong>itom</strong>). The version string of <strong>AddInInterface</strong> can be seen at the end of the file <strong>addInInterface.h</strong> in the <strong>common</strong>-folder.</li>
+</ul>
+<p>An overview about the load status of all detected library files can be seen by calling the dialog <strong>loaded plugins</strong>, accessible by <strong>itom</strong>&#8216;s menu <strong>help &gt;&gt; loaded plugins...</strong>.</p>
+<p>Finally, every successfully loaded plugin is included in the dock-widget <strong>Plugin</strong> of <strong>itom</strong>.</p>
+</div>
+<div class="section" id="basic-plugin-structure">
+<h2>Basic plugin structure<a class="headerlink" href="#basic-plugin-structure" title="Permalink to this headline">¶</a></h2>
+<p>Every plugin consists at least of two classes, which are both derived from two different base classes. All possible base classes are provided in the files:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">addInInterface</span><span class="p">.</span><span class="n">h</span>
+<span class="n">addInInterface</span><span class="p">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>which are contained in the folder <strong>common</strong> of <strong>itom</strong>&#8216;s SDK. This folder contains further files which can be used in every plugin and contain interfaces and helper libaries with usefull functions for successfully and easily program a plugin. Additionally <strong>itom</strong> provides an application programming interface (API) such that plugins can access important methods of <strong>itom</strong>. For more information see <a class="reference internal" href="plugin-itomAPI.html#plugin-itomapi"><em>itom API</em></a>.</p>
+<p>The two classes of the plugin are as follows:</p>
+<ol class="arabic">
+<li><p class="first">Interface- or factory-class (derived from class <strong>AddInInterfaceBase</strong>)</p>
+<blockquote>
+<div><p>This class must be derived from the class <strong>addInInterfaceBase</strong> and is the communcation tunnel between <strong>itom</strong> and the plugin itself using the plugin-framework of <strong>Qt</strong>. The plugin framework creates one single instances of this class when the plugin DLL is loaded (that means at startup of <strong>itom</strong>). Therefore this class is considered to be a singleton instance and since it is always loaded by <strong>itom</strong> even if it is not really needed, this class is kept small and only provides basic information about the plugin itself.</p>
+<p>For further information about the structure of this interface class see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><em>Plugin Interface Class</em></a>.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Individual plugin class (derived from class <strong>AddInDataIO</strong>, <strong>AddInGrabber</strong>, <strong>AddInActuator</strong> or <strong>AddInAlgo</strong>)</p>
+<blockquote>
+<div><p>This class is the main class of the plugin and should contain the main functionality of the plugin. Depending on the plugin type, this class is derived from any of the classes <strong>AddInDataIO</strong>, <strong>AddInGrabber</strong>, <strong>AddInActuator</strong> or <strong>AddInAlgo</strong>, which are also contained in the files mentioned above. All this classes internaly are derived from the base class <strong>AddInBase</strong>, which is the most general class used for plugin handling and organization in <strong>itom</strong>. Please do not directly derive from <strong>AddInBase</strong>.</p>
+<p>In the case of an actuator, a camera or any other IO-device, every opened device is represented by one individual instance of its corresponding plugin class. Hence, it is possible to have multiple instances of every class opened in <strong>itom</strong>. The creation and deletion of any instance is at first requested by the <strong>AddInManager</strong> class (an internal class of <strong>itom</strong>) which itself redirects this request to the singleton instance of the interface class in the corresponding plugin (This is the interface class mentioned in point 1 above).</p>
+<p>In the case of an algorithm-plugin, this class mainly contains a set of static methods, each being one individual algorithm or user interface. At startup of <strong>itom</strong> the singleton instance of the interface-class is created. Additionally, this individual plugin class also is instantiated once (singleton) at startup of itom and its internal <em>init</em>-method provides an overview (list) of all available algorithm and user-interface functions to <strong>itom</strong>. Additionally the default parameter sets for all algorithms and widget-methods are requested by <strong>itom</strong> and startup and are then cached in order to provide faster access in any subsequent function calls.</p>
+<p>Further information about the common parts of the plugin class, independent on the plugin&#8217;s type, see <a class="reference internal" href="pluginClass.html#plugin-class"><em>Plugin class - Basic information</em></a>. For detailed information about the implementation of the different plugin types, see <a class="reference internal" href="plugin-dataIO.html#plugin-class-dataio"><em>Plugin class - DataIO</em></a>, <a class="reference internal" href="plugin-actuator.html#plugin-class-actuator"><em>Plugin class - Actuator</em></a> or <a class="reference internal" href="plugin-algo.html#plugin-class-algo"><em>Plugin class - Algo</em></a>.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="communication-between-itom-python-and-each-plugin">
+<h2>Communication between <strong>itom</strong>, Python and each plugin<a class="headerlink" href="#communication-between-itom-python-and-each-plugin" title="Permalink to this headline">¶</a></h2>
+<p>The communcation to plugins of type <strong>actuator</strong> and <strong>dataIO</strong> is only possible by calling the public methods defined in the base classes <strong>AddInActuator</strong> or <strong>AddInDataIO</strong>. In Python, there exist two classes <strong>dataIO</strong> and <strong>actuator</strong>. Both have an interface that is analog to the corresponding interface <strong>AddInActuator</strong> or <strong>AddInDataIO</strong> in C++. Therefore, if a certain method of these classes is called in python, the call is redirected to the corresponding plugin-method. However, this call is executed across a thread-change, since both python and each plugin (besides the algorith-plugins) &#8220;live&#8221; in their own thread.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic programming structure of any itom-plugin</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#plugin-load-mechanism-of-itom">Plugin load mechanism of <strong>itom</strong></a></li>
+<li><a class="reference internal" href="#basic-plugin-structure">Basic plugin structure</a></li>
+<li><a class="reference internal" href="#communication-between-itom-python-and-each-plugin">Communication between <strong>itom</strong>, Python and each plugin</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-paramsValidate.html"
+                        title="previous chapter">Parameters - Validation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pluginInterfaceClass.html"
+                        title="next chapter">Plugin interface class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/pluginStructure.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginInterfaceClass.html" title="Plugin interface class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-paramsValidate.html" title="Parameters - Validation"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

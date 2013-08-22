@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>AddInBase &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Plugin class - Basic information" href="pluginClass.html" />
+    <link rel="next" title="Plugin class - DataIO" href="plugin-dataIO.html" />
+    <link rel="prev" title="Plugin class - Basic information" href="pluginClass.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-dataIO.html" title="Plugin class - DataIO"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pluginClass.html" title="Plugin class - Basic information"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li>
+          <li><a href="pluginClass.html" accesskey="U">Plugin class - Basic information</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="addinbase">
+<span id="plugin-addinbase-ref"></span><h1>AddInBase<a class="headerlink" href="#addinbase" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::AddInBase</strong></div>
+</div>
+<blockquote>
+<div><p>Base class for all plugins. </p>
+<p>The common methods and members are defined here. The available plugin type (actuator AddInActuator, dataIO AddInDataIO and algo AddInAlgo) are derived from this class. At the main program startup all available plugins located in the plugin directory are searched and matched against the current plugin interface version. Then all compatible plugins can be check with the AddInManager. Up to that stage for each plugin only a lightweight AddInInterface AddInInterfaceBase class has been loaded. To use a plugin instances of the plugin class have to be instantiated. The AddInInterface is run in the calling thread whilst the plugin classes are run in separate threads. Therefore the plugin functions are implemented as slots which can be used e.g. with the invokeMethod function. The base functionality included in this base class is getting the plugin&#8217;s parameter list, getting the classes uniqueID (which is used e.g. for saveing the parameter values) and optinally to bring up a configuration dialog. </p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_add_in_base_1ab0267d2e8d91c23b997301ca2f0c2c41"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> <strong>getParamRec</strong>(const QString name, bool * nameCheckOk = NULL)</div>
+</div>
+</p>
+<blockquote>
+<div><p>method to retrieve a parameter from the parameter map (m_params) </p>
+<p><p>returns parameter from m_params vector. If the parameter could not be found or if the given name is invalid an invalid <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> is returned. If you provide the nameCheckOk-pointer, you will return a boolean value describing whether your name matched the possible regular expression.</p>
+<p>The parameter name, that is search can have the following form:</p>
+<p></p>
+<p>until now, the Idx is ignored by this method.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> as copy of the internal m_params-map or empty <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a>, if name could not be resolved or found </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>is the name of the parameter </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">nameCheckOk</span></tt> - <p>returns true if name corresponds to the necessary syntax, else false </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a09b6b3b2f962d6d333266b80fc8e22b6"></span><div class="line-block">
+<div class="line">AddInInterfaceBase  * <strong>getBasePlugin</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the interface of this instance. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>AddInInterfaceBase </dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a6e94af3ca6633f93066014eb438648b1"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>MoveToThread</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>creates new thread for the class instance and moves this instance to the new thread </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a81b66f4b6f447b47e6b2bbff3f60132c"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>getParamList</strong>(QMap&lt; QString,  <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a>  &gt; ** paramNames)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns a map with the parameters of this plugin. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a266e317b9f95b507ea139753696d3c40"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>getExecFuncList</strong>(QMap&lt; QString,  ExecFuncParams  &gt; ** funcs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns list of registered additional functions </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a26508d8c4e512ec6cc1b56f41f860958"></span><div class="line-block">
+<div class="line">int <strong>getID</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>retrieve the uniqueID of this instance </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1ad426970a04537d4e9614ccd27536fbcb"></span><div class="line-block">
+<div class="line">QString <strong>getIdentifier</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>retrieve the unique identifier of this instance </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a814de7e2fa7dcf8cc484aa96722cd0ee"></span><div class="line-block">
+<div class="line">int <strong>hasConfDialog</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>determine if a configuration dialog is available </p>
+<p><p>method indicates whether this plugin instance has a configuration dialog.</p>
+<p>Overwrite this method if your plugin provides such a configuration dialog by simply returning 1 instead of 0.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>0 since the base implementation of a plugin does not have a configuration dialog. If there is a configuration dialog overwrite this method and return 1. </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a9d188b1abc6896b723d4c26f049a2acc"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>showConfDialog</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>open configuration dialog </p>
+<p><p>method called if the configuration dialog of the plugin should be shown.</p>
+<p>Overwrite this method if your plugin provides a configuration dialog. This method is directly called by the main (GUI) thread. Therefore you can directly show your configuration dialog, connect it with signals and slots of your plugin instance (which possibly is executed in another thread), wait for any commands or that the dialog is closed and handle the result.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>retWarning since you have to overwrite this method in order to show your configuration dialog. </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1adbd6de3600e4940c971f497111d61c92"></span><div class="line-block">
+<div class="line">int <strong>createdByGUI</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns true if this instance has firstly been created by the GUI </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a1b4ad998a9d51903ec70ac62995161a2"></span><div class="line-block">
+<div class="line">void <strong>setCreatedByGUI</strong>(int value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>method to set whether this instance has been firstly created by the GUI (true) or by any other component (Python, C++, other plugin,..) (false) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a6cf78a3a05fa73ede03393bb9a55f0a1"></span><div class="line-block">
+<div class="line">int <strong>getRefCount</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns the reference counter of this instance. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a42113dcd8cd35689cd7e74a90fa7e3d3"></span><div class="line-block">
+<div class="line">bool <strong>hasDockWidget</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns true if this plugin provides a dock widget, that can be shown in the main window. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1af9f57e8c55446b0a4e3b5faad1286173"></span><div class="line-block">
+<div class="line">QDockWidget * <strong>getDockWidget</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns the reference to the dock widget of this plugin or NULL, if no dock widget is provided. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a625afaed6da3d859ed63e37aca846c7c"></span><div class="line-block">
+<div class="line">void <strong>dockWidgetDefaultStyle</strong>(bool &amp; floating, bool &amp; visible, Qt::DockWidgetArea &amp; defaultArea)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns default style properties for dock-widget of plugin </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a79c28171b466429588a8a4a87226e7c2"></span><div class="line-block">
+<div class="line">int <strong>isAlive</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the alive-flag of this plugin </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a60cbb797ab18a0ed82d28e692144ef79"></span><div class="line-block">
+<div class="line">void <strong>setAlive</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the alive-flag to 1 (&#8220;still alive&#8221;) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a2e9915d6a47d02488c6cd8929f9bf922"></span><div class="line-block">
+<div class="line">bool <strong>isInitialized</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns in a thread-safe way the status of the m_initialized-member variable. This variable should be set to true at the end of the init-method. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a5d36521e453a4a2536fa71a29d3cce33"></span><div class="line-block">
+<div class="line">void <strong>setInitialized</strong>(bool initialized)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets in a thread-safe way the status of the m_initialized-member </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a16dc7445be959e80b26709ffe26c39c9"></span><div class="line-block">
+<div class="line">QVector&lt;  <a class="reference internal" href="#itomstructito_1_1_add_in_base_1_1_add_in_ref"><em>ito::AddInBase::AddInRef</em></a>  * &gt; * <strong>getArgAddIns</strong>(void)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns vector of <a class="reference internal" href="#itomstructito_1_1_add_in_base_1_1_add_in_ref"><em>AddInRef</em></a> instances. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Slot</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_add_in_base_1aa103414ac27a5d3f2349aed0d8daa331"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>init</strong></p>
+<blockquote>
+<div><p>method for the initialisation of a new instance of the class (must be overwritten) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a9bdba836719d11455cddd67d48c11225"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>close</strong></p>
+<blockquote>
+<div><p>method for closing an instance (must be overwritten) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a3a06b82223199f6f6946f15e38837385"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>getParam</strong></p>
+<blockquote>
+<div><p>method for the retrieval of a parameter. The actual value is always passed as <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> (must be overwritten). See also <a class="reference internal" href="#itomclassito_1_1_add_in_base_1a3a06b82223199f6f6946f15e38837385"><em>getParam</em></a> </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a1e67fc233437b2ba2620951db31ae259"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>setParam</strong></p>
+<blockquote>
+<div><p>method to set a parameter. The actual value is always passed as ito::tParam (must be overwritten). See also <a class="reference internal" href="#itomclassito_1_1_add_in_base_1a3a06b82223199f6f6946f15e38837385"><em>getParam</em></a> </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1af04488b5335388fb5575ecfe25b5868a"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>setParamVector</strong></p>
+<blockquote>
+<div><p>method for setting various parameters in a sequence </p>
+<p><p>Using this method, only one over-thread call needs to be executed in order to set various parameters by calling setParam for each parameter.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_add_in_base_1a1e67fc233437b2ba2620951db31ae259"><em>setParam</em></a>, <a class="reference internal" href="plugin-paramBase-Ref.html#itomclassito_1_1_param_base"><em>ParamBase</em></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">values</span></tt> - <p>is a vector of parameters to set </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">waitCond</span></tt> - <p>is the locked semaphore that is released at the end of the method. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a1502253de4d944b65a8dc33da85d7edc"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>execFunc</strong></p>
+<blockquote>
+<div><p>this method can handle additional functions of your plugin. </p>
+<p><p>Use registerExecFunc to register a specific function name and a set of mandatory and optional default parameters. It one on those functions is called (for instance by a python-call), this method is executed. Implement a switch case for the function name and start the execution. The mandatory and optional parameters are handled like it is the case for the creation (init-method) of a plugin. Additionally define an optional vector of output parameters, that are finally filled with a valid input during the execution of the function.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_add_in_base_1a390bee47e325b35eb2f1bd7fc70daf8e"><em>registerExecFunc</em></a>, <a class="reference internal" href="#itomclassito_1_1_add_in_base_1aa103414ac27a5d3f2349aed0d8daa331"><em>init</em></a> </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">funcName</span></tt> - <p>is the function name </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">paramsMand</span></tt> - <p>is the vector of mandatory parameters for the specific function name </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">paramsOpt</span></tt> - <p>is the vector of optional parameters for the specific function name </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">paramsOut</span></tt> - <p>is the vector of parameters (must have flag OUT, not IN), that are the return value(s) of the specific function call </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">waitCond</span></tt> - <p>is the semaphore in order guarantee, that the caller of this method waits until the function has been executed. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Signal</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_add_in_base_1a4618271c69595312c79a12ef1529eeb8"></span>void <strong>parametersChanged</strong></p>
+<blockquote>
+<div><p>This signal usually is emitted if the vector m_params is changed. </p>
+<p><p>Emit this signal for instance in setParam if the parameter has been changed in order to inform connected dock-widgets... about the change. This signal is also emitted if you invoke the slot sendParameterRequest.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="#itomclassito_1_1_add_in_base_1a3032c3a3dbefbd631a6c8b92d8fd65e8"><em>m_params</em></a>, sendParameterRequest </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">params</span></tt> - <p>is the parameter-vector to send (usually m_params) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Protected Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_add_in_base_1a6cde50f79e88efddedd5524ed5b83d7e"></span><div class="line-block">
+<div class="line"> <strong>AddInBase</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructor. </p>
+<p><p>This constructor is called by any constructor of classes AddInActuator, AddInDataIO or AddInAlgo. Please make sure to call these constructors in your plugin constructor, since this is not automatically be done (due to the single parameter of the constructor).</p>
+<p>This constructor simply initializes several member variables of this class.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">uniqueID</span></tt> - <p>is the unique identifier of this plugin instance. This identifier can be changed in the constructor or finally at the beginning of in the init-method. Afterwards it is used by different organizers and GUI components. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a52322aeef4b6dbff053864c65b8b07e5"></span><div class="line-block">
+<div class="line"> <strong>~AddInBase</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Destructor. </p>
+<p><p>This destructor is automatically called if any plugin instance is destroyed. It does the following steps:</p>
+<p></p>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1ac72ac59f5d2c35da03c28a8f44fb78c0"></span><div class="line-block">
+<div class="line">void <strong>createDockWidget</strong>(QString title, QDockWidget::DockWidgetFeatures features, Qt::DockWidgetAreas allowedAreas = Qt::AllDockWidgetAreas, QWidget * content = NULL)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Creates the dock-widget for this plugin. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a390bee47e325b35eb2f1bd7fc70daf8e"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>ito::RetVal</em></a> <strong>registerExecFunc</strong>(const QString funcName, const QVector&lt;  <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>  &gt; &amp; paramsMand, const QVector&lt;  <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>  &gt; &amp; paramsOpt, const QVector&lt;  <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>  &gt; &amp; paramsOut, const QString infoString)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Registers an additional function with specific name and default parameters. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a4e4998dc06d3f7a17a2c5ed9354c7ba0"></span><div class="line-block">
+<div class="line">void <strong>setBasePlugin</strong>(AddInInterfaceBase  * base)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the interface of this instance to base. </p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>AddInInterfaceBase </dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Protected Attributes</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_add_in_base_1a8f17d1e4b5da5f3d033d868d44007b00"></span>QThread * <strong>m_pThread</strong></p>
+<blockquote>
+<div><p>the instance&#8217;s thread </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a248ab23d774227b4369d2cbb7c281e6a"></span>AddInInterfaceBase  * <strong>m_pBasePlugin</strong></p>
+<blockquote>
+<div><p>the AddInInterfaceBase instance of this plugin </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a3032c3a3dbefbd631a6c8b92d8fd65e8"></span>QMap&lt; QString,  <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a>  &gt; <strong>m_params</strong></p>
+<blockquote>
+<div><p>map of the available parameters </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a323455d49e0e50782ada27fe0fc7f907"></span>QString <strong>m_identifier</strong></p>
+<blockquote>
+<div><p>unique identifier (serial number, com-port...) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a7ef1d9413f6a9f35be305164d59f953a"></span>int <strong>m_refCount</strong></p>
+<blockquote>
+<div><p>reference counter, used to avoid early deletes (0 means that one instance is holding one reference, 1 that two participants hold the reference...) </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1aab96ef01eab90ca3bb5fdf4a7c04d669"></span>int <strong>m_createdByGUI</strong></p>
+<blockquote>
+<div><p>1 if this instance has firstly been created by GUI, 0: this instance has been created by c++ or python </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a93baf47214644ad3e58b2c619aaf1201"></span>QVector&lt;  <a class="reference internal" href="#itomstructito_1_1_add_in_base_1_1_add_in_ref"><em>ito::AddInBase::AddInRef</em></a>  * &gt; <strong>m_hwDecList</strong></p>
+<blockquote>
+<div><p>list of hardware that was passed to the plugin on initialisation and whose refcounter was incremented </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_add_in_base_1a46caedf88cfc393c60c9321f0792e784"></span>QMap&lt; QString,  ExecFuncParams  &gt; <strong>m_execFuncList</strong></p>
+<blockquote>
+<div><p>map with registered additional functions. funcExec-name -&gt; (default mandParams, default optParams, default outParams, infoString) </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<p><p id="itomstructito_1_1_add_in_base_1_1_add_in_ref"><em>class</em> <strong>AddInRef</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_add_in_base_1_1_add_in_ref_1a3142434384f664af2ca1ac4998cb00d2"></span><div class="line-block">
+<div class="line"> <strong>AddInRef</strong>(void * p, int t)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Members</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_add_in_base_1_1_add_in_ref_1a7a4af07b12a74db1ef1ae81a32257a2c"></span>int <strong>type</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomstructito_1_1_add_in_base_1_1_add_in_ref_1a6aa2a3b1caa6737e5768697c5ebcb3a6"></span>void * <strong>ptr</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Slot</em><blockquote>
+<div><p id=""><span id="itomstructito_1_1_add_in_base_1_1_add_in_ref_1a7c8e15203804cf6378f842025da70b48"></span> <strong>AddInRef</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</p>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pluginClass.html"
+                        title="previous chapter">Plugin class - Basic information</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugin-dataIO.html"
+                        title="next chapter">Plugin class - DataIO</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-AddInBase-Ref.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-dataIO.html" title="Plugin class - DataIO"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pluginClass.html" title="Plugin class - Basic information"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li>
+          <li><a href="pluginClass.html" >Plugin class - Basic information</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
