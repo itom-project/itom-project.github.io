@@ -15,11 +15,12 @@ component. These components are:
 * Matplotlib 1.2
 * Pillow 2.0
 
-The latest version 1.0.13 is available from
+The latest version 1.0.14 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v1.0.13/>`_
+* `<http://sourceforge.net/projects/itom/files/v1.0.14/>`_
 
 Older versions are only hosted at sourceforge.net:
 
+* `itom 1.0.13 <http://sourceforge.net/projects/itom/files/v1.0.13>`_
 * `itom 1.0.12 <http://sourceforge.net/projects/itom/files/v1.0.12>`_
