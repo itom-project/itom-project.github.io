@@ -1,0 +1,985 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ui-elements (GUI) &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="itom Script Reference" href="reference.html" />
+    <link rel="next" title="dataObject" href="dataObject.html" />
+    <link rel="prev" title="plotItem" href="plotItem.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dataObject.html" title="dataObject"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plotItem.html" title="plotItem"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="reference.html" accesskey="U">itom Script Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ui-elements-gui">
+<h1>ui-elements (GUI)<a class="headerlink" href="#ui-elements-gui" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="uiitem-class">
+<h2>uiItem-Class<a class="headerlink" href="#uiitem-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="itom.uiItem">
+<em class="property">class </em><tt class="descclassname">itom.</tt><tt class="descname">uiItem</tt><a class="headerlink" href="#itom.uiItem" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="itom.uiItem.call">
+<tt class="descname">call</tt><big>(</big><em>slotOrPublicMethod</em><span class="optional">[</span>, <em>argument1</em>, <em>argument2</em>, <em>...</em><span class="optional">]</span><big>)</big> &rarr; calls any public slot of this widget or any accessible public method.<a class="headerlink" href="#itom.uiItem.call" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>slotOrPublicMethod</strong> : {str}</p>
+<blockquote>
+<div><p>name of the slot or method</p>
+</div></blockquote>
+<p><strong>arguments</strong> : {various types}, optional</p>
+<blockquote class="last">
+<div><p>Here you must indicate every argument, that the definition of the slot indicates. The type must be convertable into the 
+requested C++ based argument type.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Use this method, to invoke any public slot or wrapped method of the underlying <em>uiItem</em>. For instance, see the Qt-help for slots of 
+the widget of element you are wrapping by this instance of <em>uiItem</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.connect">
+<tt class="descname">connect</tt><big>(</big><em>signalSignature</em>, <em>callableMethod</em><big>)</big> &rarr; connects the signal of the widget with the given callable python method<a class="headerlink" href="#itom.uiItem.connect" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>signalSignature</strong> : {str}</p>
+<blockquote>
+<div><p>This must be the valid signature, known from the Qt-method <em>connect</em> (e.g. &#8216;clicked(bool)&#8217;)</p>
+</div></blockquote>
+<p><strong>callableMethod</strong> : {python method or function}</p>
+<blockquote class="last">
+<div><p>valid method or function that is called if the signal is emitted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.uiItem.disconnect" title="itom.uiItem.disconnect"><tt class="xref py py-obj docutils literal"><span class="pre">disconnect</span></tt></a>, <a class="reference internal" href="#itom.uiItem.invokeKeyboardInterrupt" title="itom.uiItem.invokeKeyboardInterrupt"><tt class="xref py py-obj docutils literal"><span class="pre">invokeKeyboardInterrupt</span></tt></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>This instance of <em>uiItem</em> wraps a widget, that is defined by a C++-class, that is finally derived from <em>QWidget</em>. See Qt-help for more information 
+about the capabilities of every specific widget. Every widget can send various signals. Use this method to connect any signal to any 
+callable python method (bounded or unbounded). This method must have the same number of arguments than the signal and the types of the 
+signal definition must be convertable into a python object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.disconnect">
+<tt class="descname">disconnect</tt><big>(</big><em>signalSignature</em>, <em>callableMethod</em><big>)</big> &rarr; disconnects a connection which must have been established with exactly the same parameters.<a class="headerlink" href="#itom.uiItem.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>signalSignature</strong> : {str}</p>
+<p class="last"><strong>callableMethod</strong> : {python method or function}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.getAttribute">
+<tt class="descname">getAttribute</tt><big>(</big><em>attributeNumber</em><big>)</big> &rarr; returns specified attribute of corresponding widget.<a class="headerlink" href="#itom.uiItem.getAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>attributeNumber</strong> : {int}</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.getProperty">
+<tt class="descname">getProperty</tt><big>(</big><em>propertyName | listOfPropertyNames) -&gt; returns tuple of requested properties (single property or tuple of properties</em><big>)</big><a class="headerlink" href="#itom.uiItem.getProperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method or the operator [] in order to get the value of one specific property of this widget or of multiple properties. 
+Multiple properties are given by a tuple or list of property names. For one single property, its value is returned as it is. 
+If the property names are passed as sequence, a sequence of same size is returned with the corresponding values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>property</strong> : {string, string-list}</p>
+<blockquote>
+<div><p>Name of one property or sequence (tuple,list...) of property names</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>returns the value of one single property or a list of values, if a sequence of names is given as parameter.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.uiItem.setProperty" title="itom.uiItem.setProperty"><tt class="xref py py-obj docutils literal"><span class="pre">setProperty</span></tt></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.getPropertyInfo">
+<tt class="descname">getPropertyInfo</tt><big>(</big><span class="optional">[</span><em>propertyName</em><span class="optional">]</span><big>)</big> &rarr; returns information about the property 'propertyName' of this widget or all properties, if no name indicated.<a class="headerlink" href="#itom.uiItem.getPropertyInfo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><strong>propertyName</strong> : {tuple}, optional</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.getWindowFlags">
+<tt class="descname">getWindowFlags</tt><big>(</big><em>flags</em><big>)</big> &rarr; gets window flags of corresponding widget.<a class="headerlink" href="#itom.uiItem.getWindowFlags" title="Permalink to this definition">¶</a></dt>
+<dd><p>The flags-value is an or-combination of the enumeration Qt::WindowFlag. See Qt documentation for more information.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.invokeKeyboardInterrupt">
+<tt class="descname">invokeKeyboardInterrupt</tt><big>(</big><em>signalSignature</em><big>)</big> &rarr; connects the given signal with a slot immediately invoking a python interrupt signal.<a class="headerlink" href="#itom.uiItem.invokeKeyboardInterrupt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>signalSignature</strong> : {str}</p>
+<blockquote class="last">
+<div><p>This must be the valid signature, known from the Qt-method <em>connect</em> (e.g. &#8216;clicked(bool)&#8217;)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.uiItem.connect" title="itom.uiItem.connect"><tt class="xref py py-obj docutils literal"><span class="pre">connect</span></tt></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>If you use the connect method to link a signal with a python method or function, this method can only be executed if python is in an idle status. 
+However, if you want raise the python interrupt signal if a specific signal is emitted, this interruption should be immediately invoked. Therefore</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.setAttribute">
+<tt class="descname">setAttribute</tt><big>(</big><em>attributeNumber</em>, <em>value</em><big>)</big> &rarr; sets attribute of corresponding widget.<a class="headerlink" href="#itom.uiItem.setAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>attributeNumber</strong> : {int}</p>
+<p class="last"><strong>value</strong> : {bool}</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.setProperty">
+<tt class="descname">setProperty</tt><big>(</big><em>propertyDict</em><big>)</big> &rarr; each property in the parameter dictionary is set to the dictionaries value.<a class="headerlink" href="#itom.uiItem.setProperty" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>propertyDict</strong> : {dict}</p>
+<blockquote class="last">
+<div><p>Dictionary with properties (keyword) and the values that should be set.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.uiItem.getProperty" title="itom.uiItem.getProperty"><tt class="xref py py-obj docutils literal"><span class="pre">getProperty</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.uiItem.setWindowFlags">
+<tt class="descname">setWindowFlags</tt><big>(</big><em>flags</em><big>)</big> &rarr; sets window flags of corresponding widget.<a class="headerlink" href="#itom.uiItem.setWindowFlags" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>flags</strong> : {int}</p>
+<p class="last"><strong>window flags to set (or-combination, see Qt::WindowFlags)</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="ui-class">
+<h2>ui-Class<a class="headerlink" href="#ui-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="itom.ui">
+<em class="property">class </em><tt class="descclassname">itom.</tt><tt class="descname">ui</tt><a class="headerlink" href="#itom.ui" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#itom.uiItem" title="itom.uiItem"><tt class="xref py py-class docutils literal"><span class="pre">itom.uiItem</span></tt></a></p>
+<p>ui(filename, [type, dialogButtonBar, dialogButtons, childOfMainWindow, deleteOnClose]) -&gt; instance of user interface</p>
+<p>The class <strong>ui</strong> wraps a user interface, externally designed and given by a ui-file. If your user interface is a dialog or window, 
+chose <em>ui.TYPEWINDOW</em> as type, if the user interface is a widget (simplest case), chose <em>ui.TYPEDIALOG</em> and your widget 
+will be embedded in a dialog, provided by <em>itom</em>. This dialog can be equiped with a button bar, whose buttons are already 
+connected to <em>itom</em> internal methods. If you then show your dialog in a modal mode, <em>itom</em> knows which button has been 
+clicked in order to accept or reject the dialog.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>filename</strong> : {str}</p>
+<blockquote>
+<div><p>path to user interface file (<a href="#id1"><span class="problematic" id="id2">*</span></a>.ui), absolute or relative to current directory</p>
+</div></blockquote>
+<p><strong>type</strong> : {int}, optional</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>display type: </dt>
+<dd><ul class="first last simple">
+<li>0 (ui.TYPEDIALOG): ui-file is embedded in auto-created dialog (default),</li>
+<li>1 (ui.TYPEWINDOW): ui-file is handled as main window,</li>
+<li>2 (ui.TYPEDOCKWIDGET): ui-file is handled as dock-widget and appended to the main-window dock area</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>dialogButtonBar</strong> :  {int}, optional</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Only for type ui.TYPEDIALOG (0). Indicates whether buttons should automatically be added to the dialog: </dt>
+<dd><blockquote class="first">
+<div><ul class="simple">
+<li>0 (ui.BUTTONBAR_NO): do not add any buttons (default)</li>
+</ul>
+</div></blockquote>
+<ul class="last simple">
+<li>1 (ui.BUTTONBAR_HORIZONTAL): add horizontal button bar</li>
+<li>2 (ui.BUTTONBAR_VERTICAL): add vertical button bar</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>dialogButtons</strong> : {dict}, optional</p>
+<blockquote>
+<div><p>every dictionary-entry is one button. key is the role, value is the button text</p>
+</div></blockquote>
+<p><strong>childOfMainWindow</strong> :  {bool}, optional</p>
+<blockquote>
+<div><p>for type TYPEDIALOG and TYPEWINDOW only. Indicates whether window should be a child of itom main window (default: True)</p>
+</div></blockquote>
+<p><strong>deleteOnClose</strong> : {bool}, optional</p>
+<blockquote class="last">
+<div><p>Indicates whether window should be deleted if user closes it or if it is hidden (default: Hidden, False)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="itom.ui.createNewPluginWidget">
+<em class="property">static </em><tt class="descname">createNewPluginWidget</tt><big>(</big><em>widgetName</em><span class="optional">[</span>, <em>mandparams</em>, <em>optparams</em><span class="optional">]</span><big>)</big> &rarr; creates widget defined by any algorithm plugin and returns the instance of type 'ui'<a class="headerlink" href="#itom.ui.createNewPluginWidget" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>widgetName</strong> : {}</p>
+<blockquote class="last">
+<div><p>name algorithm widget 
+parameters to pass to the plugin. The parameters are parsed and unnamed parameters are used in their     incoming order to fill first mandatory parameters and afterwards optional parameters. Parameters may be passed     with name as well but after the first named parameter no more unnamed parameters are allowed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getDouble">
+<em class="property">static </em><tt class="descname">getDouble</tt><big>(</big><em>title</em>, <em>label</em>, <em>defaultValue</em><span class="optional">[</span>, <em>min</em>, <em>max</em>, <em>decimals=3</em><span class="optional">]</span><big>)</big> &rarr; shows a dialog to get a double value from the user<a class="headerlink" href="#itom.ui.getDouble" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the dialog title</p>
+</div></blockquote>
+<p><strong>label</strong> : {str}</p>
+<blockquote>
+<div><p>is the label above the spin box</p>
+</div></blockquote>
+<p><strong>defaultValue</strong> : {double}, optional</p>
+<blockquote>
+<div><p>is the default value in the spin box</p>
+</div></blockquote>
+<p><strong>min</strong> : {double}, optional</p>
+<blockquote>
+<div><p>default = -2147483647.0
+is the allowed minimal value</p>
+</div></blockquote>
+<p><strong>max</strong> : {double}, optional</p>
+<blockquote>
+<div><p>default = 2147483647.0
+is the allowed maximal value</p>
+</div></blockquote>
+<p><strong>decimals</strong> : {int}, optional</p>
+<blockquote>
+<div><p>the maximum number of decimal places (default: 1)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>A tuple where the first value contains the current double value. The second value is True if the dialog has been accepted, else False.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.ui.getInt" title="itom.ui.getInt"><tt class="xref py py-obj docutils literal"><span class="pre">getInt</span></tt></a>, <a class="reference internal" href="#itom.ui.getText" title="itom.ui.getText"><tt class="xref py py-obj docutils literal"><span class="pre">getText</span></tt></a>, <a class="reference internal" href="#itom.ui.getItem" title="itom.ui.getItem"><tt class="xref py py-obj docutils literal"><span class="pre">getItem</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getExistingDirectory">
+<em class="property">static </em><tt class="descname">getExistingDirectory</tt><big>(</big><em>caption</em>, <em>startDirectory</em><span class="optional">[</span>, <em>options</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens a dialog to choose an existing directory<a class="headerlink" href="#itom.ui.getExistingDirectory" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>caption</strong> : {str}</p>
+<blockquote>
+<div><p>is the caption of this dialog</p>
+</div></blockquote>
+<p><strong>startDirectory</strong> : {str}</p>
+<blockquote>
+<div><p>is the start directory</p>
+</div></blockquote>
+<p><strong>options</strong> : {int}, optional</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>is an or-combination of the following options (see &#8216;QFileDialog::Option&#8217;): </dt>
+<dd><ul class="first last simple">
+<li>1: ShowDirsOnly [default]</li>
+<li>2: DontResolveSymlinks</li>
+<li>... (for others see Qt-Help)</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote>
+<div><p>is a parent dialog or window, this dialog becomes modal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>The selected directory is returned as absolute path or None if the dialog has been rejected.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getInt">
+<em class="property">static </em><tt class="descname">getInt</tt><big>(</big><em>title</em>, <em>label</em>, <em>defaultValue</em><span class="optional">[</span>, <em>min</em>, <em>max</em>, <em>step=1</em><span class="optional">]</span><big>)</big> &rarr; shows a dialog to get an integer value from the user<a class="headerlink" href="#itom.ui.getInt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the dialog title</p>
+</div></blockquote>
+<p><strong>label</strong> : {str}</p>
+<blockquote>
+<div><p>is the label above the spinbox</p>
+</div></blockquote>
+<p><strong>defaultValue</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is the default value in the spinbox</p>
+</div></blockquote>
+<p><strong>min</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is the allowed minimal value (default: -2147483647)</p>
+</div></blockquote>
+<p><strong>max</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is the allowed maximal value (default: 2147483647)</p>
+</div></blockquote>
+<p><strong>step</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is the step size if user presses the up/down arrow (default: 1)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>A tuple where the first value contains the current integer value. The second value is True if the dialog has been accepted, else False.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.ui.getDouble" title="itom.ui.getDouble"><tt class="xref py py-obj docutils literal"><span class="pre">getDouble</span></tt></a>, <a class="reference internal" href="#itom.ui.getText" title="itom.ui.getText"><tt class="xref py py-obj docutils literal"><span class="pre">getText</span></tt></a>, <a class="reference internal" href="#itom.ui.getItem" title="itom.ui.getItem"><tt class="xref py py-obj docutils literal"><span class="pre">getItem</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getItem">
+<em class="property">static </em><tt class="descname">getItem</tt><big>(</big><em>title</em>, <em>label</em>, <em>stringList</em><span class="optional">[</span>, <em>currentIndex=0</em>, <em>editable=True</em><span class="optional">]</span><big>)</big> &rarr; shows a dialog to let the user select an item from a string list<a class="headerlink" href="#itom.ui.getItem" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the dialog title</p>
+</div></blockquote>
+<p><strong>label</strong> : {str}</p>
+<blockquote>
+<div><p>is the label above the text box</p>
+</div></blockquote>
+<p><strong>stringList</strong> : {tuple or list}, optional</p>
+<blockquote>
+<div><p>is a list or tuple of possible string values</p>
+</div></blockquote>
+<p><strong>currentIndex</strong> : {int}, optional</p>
+<blockquote>
+<div><p>defines the preselected value index (default: 0)</p>
+</div></blockquote>
+<p><strong>editable</strong> : {bool}, optional</p>
+<blockquote>
+<div><p>defines whether new entries can be added (True) or not (False, default)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>A tuple where the first value contains the current active or typed string value. The second value is True if the dialog has been accepted, else False.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.ui.getInt" title="itom.ui.getInt"><tt class="xref py py-obj docutils literal"><span class="pre">getInt</span></tt></a>, <a class="reference internal" href="#itom.ui.getDouble" title="itom.ui.getDouble"><tt class="xref py py-obj docutils literal"><span class="pre">getDouble</span></tt></a>, <a class="reference internal" href="#itom.ui.getText" title="itom.ui.getText"><tt class="xref py py-obj docutils literal"><span class="pre">getText</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getOpenFileName">
+<em class="property">static </em><tt class="descname">getOpenFileName</tt><big>(</big><span class="optional">[</span><em>caption</em>, <em>startDirectory</em>, <em>filters</em>, <em>selectedFilterIndex</em>, <em>options</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens dialog for chosing an existing file.<a class="headerlink" href="#itom.ui.getOpenFileName" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>caption</strong> : {str}, optional</p>
+<blockquote>
+<div><p>This is the optional title of the dialog, default: no title</p>
+</div></blockquote>
+<p><strong>startDirectory {str}, optional</strong> :</p>
+<blockquote>
+<div><p>optional, if not indicated currentDirectory will be taken</p>
+</div></blockquote>
+<p><strong>filters</strong> : {str}, optional</p>
+<blockquote>
+<div><p>default = 0
+possible filter list, entries should be separated by ;; , e.g. &#8216;Images (<em>.png *.jpg);;Text files (</em>.txt)&#8217;</p>
+</div></blockquote>
+<p><strong>selectedFilterIndex</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is the index of filters which is set by default (0 is first entry)</p>
+</div></blockquote>
+<p><strong>options</strong> : {int}, optional</p>
+<blockquote>
+<div><p>default =  0 
+or-combination of enum values QFileDialog::Options</p>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote>
+<div><p>is the parent widget of this dialog</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>filename as string or None if dialog has been aborted.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.ui.getSaveFileName" title="itom.ui.getSaveFileName"><tt class="xref py py-obj docutils literal"><span class="pre">getSaveFileName</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getSaveFileName">
+<em class="property">static </em><tt class="descname">getSaveFileName</tt><big>(</big><span class="optional">[</span><em>caption</em>, <em>startDirectory</em>, <em>filters</em>, <em>selectedFilterIndex</em>, <em>options</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens dialog for chosing a file to save.<a class="headerlink" href="#itom.ui.getSaveFileName" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>caption</strong> : {str}, optional</p>
+<blockquote>
+<div><p>This is the title of the dialog</p>
+</div></blockquote>
+<p><strong>startDirectory</strong> : {String}, optional</p>
+<blockquote>
+<div><p>if not indicated, the current working directory will be taken</p>
+</div></blockquote>
+<p><strong>filters</strong> : {str}, optional</p>
+<blockquote>
+<div><p>possible filter list, entries should be separated by ;; , e.g. &#8216;Images (<em>.png *.jpg);;Text files (</em>.txt)&#8217;</p>
+</div></blockquote>
+<p><strong>selectedFilterIndex</strong> : {int}, optional</p>
+<blockquote>
+<div><p>default = 0
+is the index of filters which is set by default (0 is first entry)</p>
+</div></blockquote>
+<p><strong>options</strong> : {int}, optional</p>
+<blockquote>
+<div><p>default = 0
+or-combination of enum values QFileDialog::Options</p>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote>
+<div><p>is the parent widget of this dialog</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>filename as string or None if dialog has been aborted.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.ui.getOpenFileName" title="itom.ui.getOpenFileName"><tt class="xref py py-obj docutils literal"><span class="pre">getOpenFileName</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.getText">
+<em class="property">static </em><tt class="descname">getText</tt><big>(</big><em>title</em>, <em>label</em>, <em>defaultString</em><big>)</big> &rarr; opens a dialog in order to ask the user for a string<a class="headerlink" href="#itom.ui.getText" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the dialog title</p>
+</div></blockquote>
+<p><strong>label</strong> : {str}</p>
+<blockquote>
+<div><p>is the label above the text box</p>
+</div></blockquote>
+<p><strong>defaultString</strong> : {str}</p>
+<blockquote>
+<div><p>is the default string in the text box</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns :</th><td class="field-body"><p class="first last"><strong>A tuple where the first value contains the current string value. The second value is True if the dialog has been accepted, else False.</strong> :</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#itom.ui.getInt" title="itom.ui.getInt"><tt class="xref py py-obj docutils literal"><span class="pre">getInt</span></tt></a>, <a class="reference internal" href="#itom.ui.getDouble" title="itom.ui.getDouble"><tt class="xref py py-obj docutils literal"><span class="pre">getDouble</span></tt></a>, <a class="reference internal" href="#itom.ui.getItem" title="itom.ui.getItem"><tt class="xref py py-obj docutils literal"><span class="pre">getItem</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.ui.hide">
+<tt class="descname">hide</tt><big>(</big><big>)</big> &rarr; hides initialized UI-Dialog<a class="headerlink" href="#itom.ui.hide" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.ui.isVisible">
+<tt class="descname">isVisible</tt><big>(</big><big>)</big> &rarr; returns true if dialog is still visible<a class="headerlink" href="#itom.ui.isVisible" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><strong>dialog visible</strong> : {bool}</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.msgCritical">
+<em class="property">static </em><tt class="descname">msgCritical</tt><big>(</big><em>title</em>, <em>text</em><span class="optional">[</span>, <em>buttons</em>, <em>defaultButton</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens a critical message box<a class="headerlink" href="#itom.ui.msgCritical" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the message box title</p>
+</div></blockquote>
+<p><strong>text</strong> : {str}</p>
+<blockquote>
+<div><p>is the message text</p>
+</div></blockquote>
+<p><strong>buttons</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is an or-combination of ui.MsgBox[...]-constants indicating the buttons to display. Use | for the or-combination.</p>
+</div></blockquote>
+<p><strong>defaultButton</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is a value of ui.MsgBox[...] which indicates the default button</p>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote class="last">
+<div><p>is the parent dialog of the message box.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.msgInformation">
+<em class="property">static </em><tt class="descname">msgInformation</tt><big>(</big><em>title</em>, <em>text</em><span class="optional">[</span>, <em>buttons</em>, <em>defaultButton</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens an information message box<a class="headerlink" href="#itom.ui.msgInformation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the message box title</p>
+</div></blockquote>
+<p><strong>text</strong> : {str}</p>
+<blockquote>
+<div><p>is the message text</p>
+</div></blockquote>
+<p><strong>buttons</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is an or-combination of ui.MsgBox[...]-constants indicating the buttons to display. Use | for the or-combination.</p>
+</div></blockquote>
+<p><strong>defaultButton</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is a value of ui.MsgBox[...] which indicates the default button</p>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote class="last">
+<div><p>is the parent dialog of the message box.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.msgQuestion">
+<em class="property">static </em><tt class="descname">msgQuestion</tt><big>(</big><em>title</em>, <em>text</em><span class="optional">[</span>, <em>buttons</em>, <em>defaultButton</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens a question message box<a class="headerlink" href="#itom.ui.msgQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the message box title</p>
+</div></blockquote>
+<p><strong>text</strong> : {str}</p>
+<blockquote>
+<div><p>is the message text</p>
+</div></blockquote>
+<p><strong>buttons</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is an or-combination of ui.MsgBox[...]-constants indicating the buttons to display. Use | for the or-combination.</p>
+</div></blockquote>
+<p><strong>defaultButton</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is a value of ui.MsgBox[...] which indicates the default button</p>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote class="last">
+<div><p>is the parent dialog of the message box.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="itom.ui.msgWarning">
+<em class="property">static </em><tt class="descname">msgWarning</tt><big>(</big><em>title</em>, <em>text</em><span class="optional">[</span>, <em>buttons</em>, <em>defaultButton</em>, <em>parent</em><span class="optional">]</span><big>)</big> &rarr; opens a warning message box<a class="headerlink" href="#itom.ui.msgWarning" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>title</strong> : {str}</p>
+<blockquote>
+<div><p>is the message box title</p>
+</div></blockquote>
+<p><strong>text</strong> : {str}</p>
+<blockquote>
+<div><p>is the message text</p>
+</div></blockquote>
+<p><strong>buttons</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is an or-combination of ui.MsgBox[...]-constants indicating the buttons to display. Use | for the or-combination.</p>
+</div></blockquote>
+<p><strong>defaultButton</strong> : {int}, optional</p>
+<blockquote>
+<div><p>is a value of ui.MsgBox[...] which indicates the default button</p>
+</div></blockquote>
+<p><strong>parent</strong> : {ui}, optional</p>
+<blockquote class="last">
+<div><p>is the parent dialog of the message box.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>doctodo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.ui.show">
+<tt class="descname">show</tt><big>(</big><em>modal</em><big>)</big> &rarr; shows initialized UI-Dialog<a class="headerlink" href="#itom.ui.show" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>modal</strong> : {int}</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>0: non-modal (default)</li>
+<li>1: modal (python waits until dialog is hidden)</li>
+<li>2: modal (python returns immediately)</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="timer-class">
+<h2>timer-Class<a class="headerlink" href="#timer-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="itom.timer">
+<em class="property">class </em><tt class="descclassname">itom.</tt><tt class="descname">timer</tt><a class="headerlink" href="#itom.timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>timer(interval, callbackFunc, [argTuple]) -&gt; new callback timer</p>
+<p>Creates a timer object that continuously calls a python callback function or method with a certain interval. The timer is active after construction and 
+stops when this instance is destroyed or stop() is called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters :</th><td class="field-body"><p class="first"><strong>interval</strong> : {double}</p>
+<blockquote>
+<div><p>time out interval in ms</p>
+</div></blockquote>
+<p><strong>callbackFunc: {function or method}</strong> :</p>
+<blockquote>
+<div><p>Python function that should be called when timer event raises</p>
+</div></blockquote>
+<p><strong>argTuple: {tuple}, optional</strong> :</p>
+<blockquote class="last">
+<div><p>tuple of parameters passed as arguments to the callback function</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="itom.timer.isActive">
+<tt class="descname">isActive</tt><big>(</big><big>)</big> &rarr; returns timer status<a class="headerlink" href="#itom.timer.isActive" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns :</th><td class="field-body"><p class="first"><strong>status</strong> : {bool}</p>
+<blockquote class="last">
+<div><p>True if the timer is running, otherwise False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.timer.setInterval">
+<tt class="descname">setInterval</tt><big>(</big><em>interval</em><big>)</big> &rarr; sets timer interval in [ms]<a class="headerlink" href="#itom.timer.setInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets the timeout interval in milliseconds. The timer calls the callback function continuously after this interval (if started)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.timer.start">
+<tt class="descname">start</tt><big>(</big><big>)</big> &rarr; starts timer<a class="headerlink" href="#itom.timer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts or restarts the timer with its timeout interval. If the timer is already running, it will be stopped and restarted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="itom.timer.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big> &rarr; stops timer<a class="headerlink" href="#itom.timer.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ui-elements (GUI)</a><ul>
+<li><a class="reference internal" href="#uiitem-class">uiItem-Class</a></li>
+<li><a class="reference internal" href="#ui-class">ui-Class</a></li>
+<li><a class="reference internal" href="#timer-class">timer-Class</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plotItem.html"
+                        title="previous chapter">plotItem</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dataObject.html"
+                        title="next chapter">dataObject</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/09_reference/itom_GUI.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dataObject.html" title="dataObject"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plotItem.html" title="plotItem"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="reference.html" >itom Script Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

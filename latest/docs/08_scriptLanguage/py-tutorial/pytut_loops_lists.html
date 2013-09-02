@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Loops and Lists &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/itom.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3db6a57',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/theme_extras.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Python tutorial" href="../py-tutorial/pytut_about.html" />
+    <link rel="next" title="Classes and Objects" href="../py-tutorial/pytut_classes_objects.html" />
+    <link rel="prev" title="If and else statements" href="../py-tutorial/pytut_if_else.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../../index.html">
+          <span>itom</span></a></h1>
+        <h2 class="heading"><span>Loops and Lists</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="../py-tutorial/pytut_if_else.html">If and else statements</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../py-tutorial/pytut_classes_objects.html">Classes and Objects</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <p>ï»¿.. include:: ../../include/global.inc</p>
+<div class="section" id="loops-and-lists">
+<h1>Loops and Lists<a class="headerlink" href="#loops-and-lists" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="for-statements">
+<h2><em class="xref py py-obj">for</em> Statements<a class="headerlink" href="#for-statements" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">for</span></tt> statement in Python differs a bit from what you may be used to in C or Pascal. Rather than always iterating over an arithmetic progression of numbers, or giving the user the ability to define both the iteration step and halting condition, Python&#8217;s <tt class="docutils literal"><span class="pre">for</span></tt> statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence.  For example:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Measure some strings:</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cat&#39;</span><span class="p">,</span> <span class="s">&#39;window&#39;</span><span class="p">,</span> <span class="s">&#39;defenestrate&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>cat 3
+window 6
+defenestrate 12</pre>
+</div>
+<p>If you need to modify the sequence you are iterating over while inside the loop (for example to duplicate selected items), it is recommended that you first make a copy.  Iterating over a sequence does not implicitly make a copy. The slice notation makes this especially convenient:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[:]:</span>      <span class="c"># Loop over a slice copy of the entire list.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">words</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;defenestrate&#39;</span><span class="p">,</span> <span class="s">&#39;cat&#39;</span><span class="p">,</span> <span class="s">&#39;window&#39;</span><span class="p">,</span> <span class="s">&#39;defenestrate&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-range-function">
+<h2>The range Function<a class="headerlink" href="#the-range-function" title="Permalink to this headline">¶</a></h2>
+<p>If you do need to iterate over a sequence of numbers, the built-in function <a class="reference external" href="http://docs.python.org/3.2/library/functions.html#range" title="(in Python v3.2)"><tt class="xref py py-func docutils literal"><span class="pre">range()</span></tt></a> comes in handy. It generates arithmetic progressions:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>The given end point is never part of the generated sequence; <tt class="docutils literal"><span class="pre">range(10)</span></tt> generates 10 values, the legal indices for items of a sequence of length 10. It is possible to let the range start at another number, or to specify a different increment (even negative; sometimes this is called the &#8216;step&#8217;):</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>                <span class="c"># 5 through 9</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>             <span class="c"># 0, 3, 6, 9</span>
+<span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>       <span class="c"># -10, -40, -70</span>
+</pre></div>
+</td></tr></table></div>
+<p>To iterate over the indices of a sequence, you can combine <a class="reference external" href="http://docs.python.org/3.2/library/functions.html#range" title="(in Python v3.2)"><tt class="xref py py-func docutils literal"><span class="pre">range()</span></tt></a> and <a class="reference external" href="http://docs.python.org/3.2/library/functions.html#len" title="(in Python v3.2)"><tt class="xref py py-func docutils literal"><span class="pre">len()</span></tt></a> as follows:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Mary&#39;</span><span class="p">,</span> <span class="s">&#39;had&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;little&#39;</span><span class="p">,</span> <span class="s">&#39;lamb&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>0 Mary
+1 had
+2 a
+3 little
+4 lamb</pre>
+</div>
+<p>In most such cases, however, it is convenient to use the <a class="reference external" href="http://docs.python.org/3.2/library/functions.html#enumerate" title="(in Python v3.2)"><tt class="xref py py-func docutils literal"><span class="pre">enumerate()</span></tt></a> function.</p>
+</div>
+<div class="section" id="break-and-continue-statements-and-else-clauses-on-loops">
+<h2><em class="xref py py-obj">break</em> and <em class="xref py py-obj">continue</em> Statements, and <em class="xref py py-obj">else</em> Clauses on Loops<a class="headerlink" href="#break-and-continue-statements-and-else-clauses-on-loops" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="xref py py-obj">break</em> statement, like in C, breaks out of the smallest enclosing <em class="xref py py-obj">for</em> or <em class="xref py py-obj">while</em> loop.</p>
+<p>Loop statements may have an <tt class="docutils literal"><span class="pre">else</span></tt> clause; it is executed when the loop terminates through exhaustion of the list (with <em class="xref py py-obj">for</em>) or when the condition becomes false (with <em class="xref py py-obj">while</em>), but not when the loop is terminated by a <em class="xref py py-obj">break</em> statement.  This is exemplified by the following loop, which searches for prime numbers:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">&#39;equals&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">//</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># loop fell through without finding a factor</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">&#39;is a prime number&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>2 is a prime number
+3 is a prime number
+4 equals 2 * 2
+5 is a prime number
+6 equals 2 * 3
+7 is a prime number
+8 equals 2 * 4
+9 equals 3 * 3</pre>
+</div>
+<p>When used with a loop, the <tt class="docutils literal"><span class="pre">else</span></tt> clause has more in common with the <tt class="docutils literal"><span class="pre">else</span></tt> clause of a <em class="xref py py-obj">try</em> statement than it does that of <em class="xref py py-obj">if</em> statements: a <em class="xref py py-obj">try</em> statement&#8217;s <tt class="docutils literal"><span class="pre">else</span></tt> clause runs when no exception occurs, and a loop&#8217;s <tt class="docutils literal"><span class="pre">else</span></tt> clause runs when no <tt class="docutils literal"><span class="pre">break</span></tt> occurs. For more on the <em class="xref py py-obj">try</em> statement and exceptions.</p>
+<p>The <em class="xref py py-obj">continue</em> statement continues with the next iteration of the loop:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Found an even number&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+        <span class="k">continue</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Found a number&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>Found an even number 2
+Found a number 3
+Found an even number 4
+Found a number 5
+Found an even number 6
+Found a number 7
+Found an even number 8
+Found a number 9</pre>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="../py-tutorial/pytut_if_else.html">If and else statements</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../py-tutorial/pytut_classes_objects.html">Classes and Objects</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut for Technical Optics (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on May 28, 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

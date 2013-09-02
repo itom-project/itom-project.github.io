@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Project settings for plugins &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Python scripting language" href="../../08_scriptLanguage/script-language.html" />
+    <link rel="prev" title="Link or load external libraries" href="plugin-externalLibraries.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../08_scriptLanguage/script-language.html" title="Python scripting language"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-externalLibraries.html" title="Link or load external libraries"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="project-settings-for-plugins">
+<h1>Project settings for plugins<a class="headerlink" href="#project-settings-for-plugins" title="Permalink to this headline">¶</a></h1>
+<p>Since you are building your plugins using <strong>CMake</strong> most of the following settings are automatically set. However, this document gives some hints about properties, which can
+maybe be helpful in case of any problems.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>For programming a plugin, you need at least the following things:</p>
+<ul class="simple">
+<li>A C++-compatible IDE. On Windows-machines it is recommended to program with <em>Visual Studio Professional 2010</em>, since <strong>itom</strong> is developped with this IDE, too. On Linux-machines you
+can for instance use the <em>QtCreator</em> or <em>Eclipse</em>. It is difficult to develop with <em>Visual Studio 2010 Express</em>, since you should install the <em>Qt AddIn for Visual Studio</em> in order to
+have a good support of <strong>Qt</strong> within <em>Visual Studio</em>. In the case you don&#8217;t have the professional version of <em>Visual Studio</em>, better consider to use the <em>QtCreator</em> for Windows. You must have the <strong>Qt</strong> version installed, whose major and minor version number is equal than the version <strong>itom</strong> has been built with. Nevertheless the debugging of your plugin only is possible if you also have a debug-version of <strong>itom</strong> available on your computer, hence, you built it by yourself from the sources. Else, you only can test your plugin by extensively streaming debugging messages to the <em>std::cerr</em> or <em>std::cout</em> stream, which finally are displayed in the command line of <strong>itom</strong>.</li>
+<li>For running <em>itom</em>, you need <em>Python 3.2</em> installed on your machine.</li>
+<li>If you want to support the <em>itom</em>-internal <em>DataObject</em> (matrix structures), it is highly recommended to install <em>OpenCV2.3</em> on your machine.</li>
+</ul>
+<p>Please consider to have all libraries, which you need, installed in the same version with respect to the processor type (32bit or 64bit).</p>
+</div>
+<div class="section" id="general-settings">
+<h2>General settings<a class="headerlink" href="#general-settings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>compile your plugin as dynamic library (<em>dll</em> or <em>a</em> on linux).</li>
+<li>for the code generation use as runtime library the setting <strong>Multithreaded-DLL (/Md)</strong> or <strong>Multithreaded-Debug-DLL</strong> (/MDd) respectively.</li>
+<li>Don&#8217;t use any precompiled headers on Windows.</li>
+<li>You can switch <em>openMP</em> on in order to support multi-processor calculations for parallelizable algorithms.</li>
+<li>Call your DLL &#8220;[yourName].dll&#8221; for the release-version and &#8220;[yourName]d.dll&#8221; for the debug-version.</li>
+</ul>
+</div>
+<div class="section" id="qt-dependent-settings">
+<h2>Qt-dependent settings<a class="headerlink" href="#qt-dependent-settings" title="Permalink to this headline">¶</a></h2>
+<p><strong>itom</strong> is written in <em>C++</em> using the <strong>Qt</strong>-framework. <strong>Qt</strong> provides platform-independent modules and classes which extend the possibilities of native C++. For example, <strong>Qt</strong> gives the
+opportunity to build GUI-applications, have network and graphics support or to establish a platform-independent plugin system.</p>
+<p>On the one hand, some functionalities of <strong>Qt</strong> can be used by the help of native Qt-applications, like the designer to build &#8220;what-you-see-is-what-you-get&#8221; user interfaces, the
+translator to create translations of the application..., on the other hand C++ is enlarged by <strong>Qt</strong> by writing specific pre-compiler commands in the code. In both cases, these features
+have to be translated into native C++-code during the pre-compiling process. Therefore the project files have to be adapted, such that the <strong>Qt</strong>-specific pre-steps will be triggered once
+the project&#8217;s compilation process is started. All this is done if you install the <strong>Qt</strong>-AddOn for Visual Studio (if developping with Visual Studio IDE).</p>
+<p>Since the plugin, you will write, is based on <em>Qt</em>&#8216;s plugin system, these steps also have to be added to the plugin&#8217;s pre-compiling steps. This can be realized by different ways:</p>
+<ol class="arabic simple">
+<li>You use the <strong>QtCreator</strong> as IDE and everythings works fine (if the path to <strong>Qt</strong> is contained in the path variable and the environmental variable <em>QTDIR</em>)</li>
+<li>You can use the professional version of Visual Studio together with the installed add-in <strong>Qt Visual Studio Add-In</strong></li>
+<li>You can use any other development environment and you have to add the necessary pre-compilation step by yourself in the appropriate project file.</li>
+</ol>
+<p>The pre-processor-step contains the following steps:</p>
+<ol class="arabic simple">
+<li>In a folder &#8220;generated-files&#8221; additional files will be created for each class, containing the macro <em>Q_OBJECT</em> (moc-process).</li>
+<li>Any user-interface file (<a href="#id1"><span class="problematic" id="id2">*</span></a>.ui) will be transformed into an additional C++-class file, that is also contained in the &#8220;generated-files&#8221; folder (uic-process).</li>
+<li>The translation tables will be created.</li>
+<li>The resource-files will be parsed and an appropriate C++-file is created (rcc-process).</li>
+</ol>
+<p><strong>Qt</strong> is shipped with a number of different libraries (lying in the folder <strong>$QTDIR$bin</strong>). You must link your application against the libraries, whose function you will need in your plugin.
+It is always necessary to link against the library <strong>QtCore</strong> and <strong>QtGui</strong> if your plugin contains any user interface functionality. Other importent libraries are
+<strong>QtOpenGL</strong> for OpenGL-support, <strong>QtSvg</strong> for <em>Svg</em>-support or <strong>QtXml</strong>, <strong>QtSql</strong> or <strong>QtNetwork</strong>. For each of these libraries you plugin must have an entry in the <em>include</em>-directories and the <em>linker</em>-commands.</p>
+<p>The pre-processor-definitions must contain the following entries:
+* WIN32 or _WIN64
+* QT_LARGEFILE_SUPPORT
+* QT_PLUGIN
+* QT_DLL
+* QDESIGNER_EXPORT_WIDGETS</p>
+<p>and for every Qt-library you need (in capital letters)
+* QT_CORE_LIB
+* QT_GUI_LIB
+* ...</p>
+</div>
+<div class="section" id="include-settings">
+<h2>Include settings<a class="headerlink" href="#include-settings" title="Permalink to this headline">¶</a></h2>
+<p>Add the following include-directories ($(ITOM_QTDIR) is the path to the <strong>Qt</strong>-source directory - having subfolders like include or bin):</p>
+<ul class="simple">
+<li>.GeneratedFiles</li>
+<li>.GeneratedFilesDebug or Release</li>
+<li>$(ITOM_QTDIR)include</li>
+<li>$(ITOM_QTDIR)includeqtmain</li>
+</ul>
+<p>and for every further Qt-library
+* $(ITOM_QTDIR)includeQtCore
+* $(ITOM_QTDIR)includeQtGui
+* ...</p>
+<p>Additionally you should add the path to OpenCV&#8217;s include directory, if you are using or linking against the <em>DataObject</em>.</p>
+</div>
+<div class="section" id="linker-settings">
+<h2>Linker settings<a class="headerlink" href="#linker-settings" title="Permalink to this headline">¶</a></h2>
+<p>Add as linker directory:</p>
+<ul class="simple">
+<li>The directory, where itom is saving the library to the dataObject.lib...</li>
+<li>The library-path of OpenCV</li>
+<li>The directory $(ITOM_QTDIR)bin</li>
+</ul>
+<p>Your plugin should at least link agains the following libraries:</p>
+<p><strong>DEBUG</strong>:</p>
+<ul class="simple">
+<li>qtmaind.lib</li>
+<li>QtCored4.lib</li>
+<li>QtGuid4.lib</li>
+<li>...further Qt libraries</li>
+<li>opencv_core$(ITOM_OPENCV_VER)d.lib</li>
+<li>DataObjectd.lib</li>
+<li>...</li>
+</ul>
+<p><strong>RELEASE</strong>:</p>
+<ul class="simple">
+<li>qtmain.lib</li>
+<li>QtCore4.lib</li>
+<li>QtGui4.lib</li>
+<li>...further Qt libraries</li>
+<li>opencv_core$(ITOM_OPENCV_VER).lib</li>
+<li>DataObject.lib</li>
+<li>...</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information about the deployment of plugins, including notes about the <strong>Qt</strong>-version compatibility, see <a class="reference external" href="http://qt-project.org/doc/qt-4.8/deployment-plugins.html">link to Qt-documentation</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Project settings for plugins</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#general-settings">General settings</a></li>
+<li><a class="reference internal" href="#qt-dependent-settings">Qt-dependent settings</a></li>
+<li><a class="reference internal" href="#include-settings">Include settings</a></li>
+<li><a class="reference internal" href="#linker-settings">Linker settings</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-externalLibraries.html"
+                        title="previous chapter">Link or load external libraries</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../08_scriptLanguage/script-language.html"
+                        title="next chapter">Python scripting language</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/projectSettings.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../08_scriptLanguage/script-language.html" title="Python scripting language"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-externalLibraries.html" title="Link or load external libraries"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

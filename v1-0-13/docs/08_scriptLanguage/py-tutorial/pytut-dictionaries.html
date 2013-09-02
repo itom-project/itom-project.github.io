@@ -1,0 +1,654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dictionaries, Lists and Tuples &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Python tutorial" href="pytut-about.html" />
+    <link rel="next" title="If and else statements" href="pytut-if-else.html" />
+    <link rel="prev" title="Strings and text" href="pytut-strings-text.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pytut-if-else.html" title="If and else statements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pytut-strings-text.html" title="Strings and text"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../script-language.html" >Python scripting language</a> &raquo;</li>
+          <li><a href="pytut-about.html" accesskey="U">Python tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <p>ï»¿.. include:: ../../include/global.inc</p>
+<div class="section" id="dictionaries-lists-and-tuples">
+<h1>Dictionaries, Lists and Tuples<a class="headerlink" href="#dictionaries-lists-and-tuples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>One of Python&#8217;s built-in datatypes is the dictionary, which defines one-to-one relationships between keys and values.</p>
+<div class="section" id="defining-dictionaries">
+<h3>Defining Dictionaries<a class="headerlink" href="#defining-dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>It is best to think of a dictionary as an unordered set of <em>key: value</em> pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: <tt class="docutils literal"><span class="pre">{}</span></tt>. Placing a comma-separated list of key:value pairs within the braces adds initial key:value pairs to the dictionary; this is also the way dictionaries are written on output.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;lens&quot;</span><span class="p">:</span><span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;software&quot;</span><span class="p">:</span><span class="s">&quot;itom&quot;</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c"># &#39;lens&#39; is a key and its associated value is &#39;zoom&#39;. It can be referenced by d[&quot;lens&quot;].</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&quot;lens&quot;</span><span class="p">])</span>
+
+<span class="c"># &#39;software&#39; is a key and its associated value is &#39;itom&#39;. It can be referenced by d[&quot;software&quot;].</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&quot;software&quot;</span><span class="p">])</span>
+
+<span class="c"># You can get values by key, but you can&#39;t get keys by value.</span>
+<span class="c"># So d[&quot;lens&quot;] is &#39;zoom&#39;, but d[&quot;zoom&quot;] raises an exception, because &#39;zoom&#39; is not a key.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">&quot;zoom&quot;</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>{&#x27;lens&#x27;: &#x27;zoom&#x27;, &#x27;software&#x27;: &#x27;itom&#x27;}
+zoom
+itom
+Traceback (most recent call last):
+  File &quot;..&quot;, line ?, in &lt;module&gt;
+KeyError: &#x27;zoom&#x27;</pre>
+</div>
+</div>
+<div class="section" id="modifying-dictionaries">
+<h3>Modifying Dictionaries<a class="headerlink" href="#modifying-dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>You can not have duplicate keys in a dictionary. Assigning a value to an existing key will wipe out the old value. You can add new key-value pairs at any time. This syntax is identical to modifying existing values. Dictionaries have no concept of order among elements.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;lens&quot;</span><span class="p">:</span><span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;software&quot;</span><span class="p">:</span><span class="s">&quot;itom&quot;</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s">&quot;software&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;itom&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s">&quot;institute&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;ITO&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c"># Dictionary keys can be modified. The old value is simply replaced with a new one.</span>
+<span class="n">d</span><span class="p">[</span><span class="s">&quot;institute&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c"># Dictionary keys are case-sensitive. Here, a new key-value pair will be created.</span>
+<span class="n">d</span><span class="p">[</span><span class="s">&quot;Institute&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;another&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;none&#39;</span><span class="p">,</span> <span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;Institute&#39;</span><span class="p">:</span> <span class="s">&#39;another&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;none&#39;</span><span class="p">,</span> <span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Dictionaries aren&#8217;t just for strings. Dictionary values can be any datatype, including strings, integers, objects, or even other dictionaries. Within a single dictionary, the values don&#8217;t all need to be the same type; you can mix and match as needed. Dictionary keys are more restricted, but they can be strings, integers, and a few other types. You can also mix and match key datatypes within a dictionary.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">d</span><span class="p">[</span><span class="s">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">d</span><span class="p">[</span><span class="mi">42</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;douglas&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;version&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="s">&#39;douglas&#39;</span><span class="p">,</span> <span class="s">&#39;version&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-items-from-dictionaries">
+<h3>Deleting Items From Dictionaries<a class="headerlink" href="#deleting-items-from-dictionaries" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="s">&#39;douglas&#39;</span><span class="p">,</span> <span class="s">&#39;retrycount&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c"># delete individual items from a dictionary by key</span>
+<span class="k">del</span> <span class="n">d</span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c"># delete all items from a dictionary</span>
+<span class="c"># Note that the set of empty curly braces in the output signifies a dictionary without any items.</span>
+<span class="n">d</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="s">&#39;douglas&#39;</span><span class="p">,</span> <span class="s">&#39;retrycount&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{</span><span class="s">&#39;lens&#39;</span><span class="p">:</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;institute&#39;</span><span class="p">:</span> <span class="s">&#39;ITO&#39;</span><span class="p">,</span> <span class="s">&#39;software&#39;</span><span class="p">:</span> <span class="s">&#39;itom&#39;</span><span class="p">,</span> <span class="s">&#39;retrycount&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>Lists are Python&#8217;s workhorse datatype. Variables can be named anything, and Python keeps track of the datatype internally.</p>
+<div class="section" id="defining-lists">
+<h3>Defining Lists<a class="headerlink" href="#defining-lists" title="Permalink to this headline">¶</a></h3>
+<p>A list is an ordered set of elements enclosed in square brackets. It can be used like a zero-based array.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># A list of five elements is defined. Note that they retain their original order.</span>
+<span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="s">&quot;example&quot;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># The first element of any non-empty list is always li[0]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c"># The last element of this five-element list is li[4].</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">]</span>
+<span class="n">a</span>
+<span class="n">example</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="negative-list-indices">
+<h3>Negative List Indices<a class="headerlink" href="#negative-list-indices" title="Permalink to this headline">¶</a></h3>
+<p>A negative index accesses elements from the end of the list counting backwards. The last element of any non-empty list is always <tt class="docutils literal"><span class="pre">li[-1]</span></tt>. If the negative index is confusing to you, think of it this way: <tt class="docutils literal"><span class="pre">li[-n]</span> <span class="pre">==</span> <span class="pre">li[len(li)</span> <span class="pre">-</span> <span class="pre">n]</span></tt>.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="s">&quot;example&quot;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c"># In this list, li[-3] == li[5 - 3] == li[2]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">]</span>
+<span class="s">&#39;example&#39;</span>
+<span class="s">&#39;zoom&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slicing-a-list">
+<h3>Slicing a List<a class="headerlink" href="#slicing-a-list" title="Permalink to this headline">¶</a></h3>
+<p>You can get a subset of a list, called a <em class="xref py py-obj">slice</em> by specifying two indices. The return value is a new list containing all the elements of the list, in order, starting with the first slice index up to but not including the second slice index.</p>
+<p>If it helps, you can think of it this way: reading the list from left to right, the first slice index specifies the first element you want, and the second slice index specifies the first element you don&#8217;t want. The return value is everything in between.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="s">&quot;example&quot;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># A slice of li[1] up to but not including li[3] will be created</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c"># Slicing works if one or both of the slice indices is negative.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c"># Lists are zero-based, so li[0:3] returns the first three elements of the list, starting at li[0], up to but not including li[3].</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c"># If the left slice index is 0, you can leave it out, and 0 is implied. So li[:3] is the same as li[0:3]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c"># Similarly, if the right slice index is the length of the list, you can leave it out. So li[3:] is the same as li[3:5], because this list has five elements.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+
+<span class="c"># If both slice indices are left out, all elements of the list are included.</span>
+<span class="c"># li[:] is shorthand for making a complete copy of a list.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[:])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-elements-to-lists">
+<h3>Adding Elements to Lists<a class="headerlink" href="#adding-elements-to-lists" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;zoom&quot;</span><span class="p">,</span> <span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="s">&quot;example&quot;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># Single elements can be added to the end of the list with append</span>
+<span class="n">li</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;new&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># insert inserts a single element into a list. The numeric argument is the index of the first element that gets bumped out of position.</span>
+<span class="n">li</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;new&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># Lists can be concatenated with extend. Note that you do not call extend with multiple arguments; you call it with one argument, a list. In this case, that list has two elements.</span>
+<span class="n">li</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s">&quot;two&quot;</span><span class="p">,</span> <span class="s">&quot;elements&quot;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;elements&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="difference-between-append-und-extend">
+<h3>Difference between append und extend<a class="headerlink" href="#difference-between-append-und-extend" title="Permalink to this headline">¶</a></h3>
+<p>Lists have two methods, <tt class="xref py py-func docutils literal"><span class="pre">extend()</span></tt> and <tt class="xref py py-func docutils literal"><span class="pre">append()</span></tt>, that look like they do the same thing, but are in fact completely different. <tt class="xref py py-func docutils literal"><span class="pre">extend()</span></tt> takes a single argument, which is always a list, and adds each of the elements of that list to the original list. On the other hand, <tt class="xref py py-func docutils literal"><span class="pre">append()</span></tt> takes one argument, which can be any data type, and simply adds it to the end of the list.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># extend method</span>
+<span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">]</span>
+
+<span class="c"># li is extended with a list of another three elements (&#39;d&#39;, &#39;e&#39;, and &#39;f&#39;), so you now have a list of six elements.</span>
+<span class="n">li</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s">&#39;d&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;f&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">li</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c">#append method</span>
+<span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">]</span>
+
+<span class="c"># append method is called with a single argument, which is a list of three elements</span>
+<span class="c"># Now the list contains four elements because the last element appended is itself a list. Lists can contain any type of data, including other lists.</span>
+<span class="n">li</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s">&#39;d&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;f&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">li</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;f&#39;</span><span class="p">]</span>
+<span class="mi">6</span>
+<span class="n">f</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;d&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;f&#39;</span><span class="p">]]</span>
+<span class="mi">4</span>
+<span class="p">[</span><span class="s">&#39;d&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;f&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="searching-lists">
+<h3>Searching Lists<a class="headerlink" href="#searching-lists" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;elements&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># index finds (only) the first occurrence of a value in the list and returns the index</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;example&quot;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;new&quot;</span><span class="p">))</span>
+
+<span class="c"># If the value is not found in the list, Python raises an exception.</span>
+<span class="c"># To test whether a value is in the list, use in, which returns True if the value is found or False if it is not.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>5
+2
+Traceback (most recent call last):
+  File &quot;...&quot;, line ?, in ?
+ValueError: &#x27;c&#x27; is not in list</pre>
+</div>
+</div>
+<div class="section" id="deleting-list-elements">
+<h3>Deleting List Elements<a class="headerlink" href="#deleting-list-elements" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;elements&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># remove (only) the first occurrence of a value from a list.</span>
+<span class="n">li</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;z&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># removes only the first occurrence of a value</span>
+<span class="n">li</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;new&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># pop removes the last element of the list, and it returns the value that it removed</span>
+<span class="n">li</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># If the value is not found in the list, Python raises an exception.</span>
+<span class="n">li</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><pre>[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;new&#x27;, &#x27;zoom&#x27;, &#x27;z&#x27;, &#x27;example&#x27;, &#x27;new&#x27;, &#x27;two&#x27;, &#x27;elements&#x27;]
+[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;new&#x27;, &#x27;zoom&#x27;, &#x27;example&#x27;, &#x27;new&#x27;, &#x27;two&#x27;, &#x27;elements&#x27;]
+[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;zoom&#x27;, &#x27;example&#x27;, &#x27;new&#x27;, &#x27;two&#x27;, &#x27;elements&#x27;]
+[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;zoom&#x27;, &#x27;example&#x27;, &#x27;new&#x27;, &#x27;two&#x27;]
+Traceback (most recent call last):
+  File &quot;...&quot;, line ?, in ?
+ValueError: list.remove(x): x not in list</pre>
+</div>
+</div>
+<div class="section" id="using-list-operators">
+<h3>Using List Operators<a class="headerlink" href="#using-list-operators" title="Permalink to this headline">¶</a></h3>
+<p>Lists can also be concatenated with the <tt class="docutils literal"><span class="pre">+</span></tt> operator. <tt class="docutils literal"><span class="pre">list</span> <span class="pre">=</span> <span class="pre">list</span> <span class="pre">+</span> <span class="pre">otherlist</span></tt> has the same result as <tt class="docutils literal"><span class="pre">list.extend(otherlist)</span></tt>. But the <tt class="docutils literal"><span class="pre">+</span></tt> operator returns a new (concatenated) list as a value, whereas extend only alters an existing list. This means that extend is faster, especially for large lists.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">]</span>
+<span class="n">li</span> <span class="o">=</span> <span class="n">li</span> <span class="o">+</span> <span class="p">[</span><span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># li += [&#39;two&#39;] is equivalent to li.extend([&#39;two&#39;])</span>
+<span class="n">li</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&#39;two&#39;</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+
+<span class="c"># The * operator works on lists as a repeater: li = [1, 2] * 3 is equivalent to li = [1, 2] + [1, 2] + [1, 2], which concatenates three lists into one.</span>
+<span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;zoom&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">,</span> <span class="s">&#39;new&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tuples">
+<h2>Tuples<a class="headerlink" href="#tuples" title="Permalink to this headline">¶</a></h2>
+<p>A tuple is an immutable list and can not be changed in any way once it is created. A tuple is defined in the same way as a list, except that the whole set of elements is enclosed in parentheses instead of square brackets. The elements of a tuple have a defined order and the indices are zero-based, just like a list.</p>
+<p>Tuples are faster than lists. If you&#8217;re defining a constant set of values and all you&#8217;re ever going to do with it is iterate through it, use a tuple instead of a list. Tuples can be converted into lists, and vice-versa. The built-in tuple function takes a list and returns a tuple with the same elements, and the list function takes a tuple and returns a list.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">,</span> <span class="s">&quot;mpilgrim&quot;</span><span class="p">,</span> <span class="s">&quot;z&quot;</span><span class="p">,</span> <span class="s">&quot;example&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c"># The first element of a non-empty tuple is always t[0]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c"># Negative indices count from the end of the tuple, just as with a list.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c"># Slicing works too, just like a list.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;mpilgrim&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">)</span>
+<span class="n">a</span>
+<span class="n">example</span>
+<span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;mpilgrim&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Keep in mind that tuples have not methods.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;mpilgrim&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;example&#39;</span><span class="p">)</span>
+
+<span class="c"># all following examples cause errors</span>
+<span class="c"># t.append(&quot;new&quot;)</span>
+<span class="c"># t.remove(&quot;z&quot;)</span>
+<span class="c"># t.index(&quot;example&quot;)</span>
+
+<span class="c"># You can use &quot;in&quot; to see if an element exists in the tuple.</span>
+<span class="s">&quot;z&quot;</span> <span class="ow">in</span> <span class="n">t</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Dictionaries, Lists and Tuples</a><ul>
+<li><a class="reference internal" href="#dictionaries">Dictionaries</a><ul>
+<li><a class="reference internal" href="#defining-dictionaries">Defining Dictionaries</a></li>
+<li><a class="reference internal" href="#modifying-dictionaries">Modifying Dictionaries</a></li>
+<li><a class="reference internal" href="#deleting-items-from-dictionaries">Deleting Items From Dictionaries</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lists">Lists</a><ul>
+<li><a class="reference internal" href="#defining-lists">Defining Lists</a></li>
+<li><a class="reference internal" href="#negative-list-indices">Negative List Indices</a></li>
+<li><a class="reference internal" href="#slicing-a-list">Slicing a List</a></li>
+<li><a class="reference internal" href="#adding-elements-to-lists">Adding Elements to Lists</a></li>
+<li><a class="reference internal" href="#difference-between-append-und-extend">Difference between append und extend</a></li>
+<li><a class="reference internal" href="#searching-lists">Searching Lists</a></li>
+<li><a class="reference internal" href="#deleting-list-elements">Deleting List Elements</a></li>
+<li><a class="reference internal" href="#using-list-operators">Using List Operators</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tuples">Tuples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pytut-strings-text.html"
+                        title="previous chapter">Strings and text</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pytut-if-else.html"
+                        title="next chapter">If and else statements</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/08_scriptLanguage/py-tutorial/pytut-dictionaries.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pytut-if-else.html" title="If and else statements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pytut-strings-text.html" title="Strings and text"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../script-language.html" >Python scripting language</a> &raquo;</li>
+          <li><a href="pytut-about.html" >Python tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
