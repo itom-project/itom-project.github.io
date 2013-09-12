@@ -51,7 +51,7 @@ For specific bug reports or feature requests, please use the issue tracking syst
 
 * `itom <https://bitbucket.org/itom/itom/issues>`_
 * `plugins <https://bitbucket.org/itom/plugins/issues>`_
-* `plugins <https://bitbucket.org/itom/designerplugins/issues>`_
+* `designer plugins <https://bitbucket.org/itom/designerplugins/issues>`_
 
 **itom** is a project provided by
 
