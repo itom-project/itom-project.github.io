@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-itom - an Open Source Measurement, Automation and Evaluation Software Suite
+itom - an Open Source Measurement, Automation and Evaluation Software
 ============================================================================
 
 **itom** is an open source software suite for operating measurement systems, laboratory automation and data evaluation.
