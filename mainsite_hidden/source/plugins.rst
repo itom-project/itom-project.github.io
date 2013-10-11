@@ -98,11 +98,11 @@ Cameras / Grabbers / AD-Converter
 
 * **PCO Cameras - general plugin for PCO cameras**
     
-    will be release soon
+    will be released soon
 
 * **AlliedVision Fire Grabber**
     
-    will be release soon
+    will be released soon
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
