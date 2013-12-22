@@ -1,3 +1,5 @@
+.. _sec-documentation:
+
 Documentation
 ==============
 
@@ -10,6 +12,11 @@ Latest documentations:
 
 * `User documentation <http://itom.bitbucket.org/latest/docs>`_
 * `Doxygen source code documentation <http://itom.bitbucket.org/latest/doxygen>`_
+
+Current setup version 1.0.14:
+
+* `User documentation <http://itom.bitbucket.org/v1-0-14/docs>`_
+* `Doxygen source code documentation <http://itom.bitbucket.org/v1-0-14/doxygen>`_
 
 Previous version 1.0.13:
 

@@ -108,10 +108,6 @@ Cameras / Grabbers / AD-Converter
     
     will be released soon
 
-* **AlliedVision Fire Grabber**
-    
-    will be released soon
-
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
 
