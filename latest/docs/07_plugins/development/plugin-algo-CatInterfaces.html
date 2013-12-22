@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Algorithm Categories and Interfaces &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Plugin class - Algo" href="plugin-algo.html" />
+    <link rel="next" title="FilterDef" href="plugin-algo-Ref.html" />
+    <link rel="prev" title="Plugin class - Algo" href="plugin-algo.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo-Ref.html" title="FilterDef"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo.html" title="Plugin class - Algo"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li>
+          <li><a href="plugin-algo.html" accesskey="U">Plugin class - Algo</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="algorithm-categories-and-interfaces">
+<span id="plugin-algo-catinterfaces"></span><h1>Algorithm Categories and Interfaces<a class="headerlink" href="#algorithm-categories-and-interfaces" title="Permalink to this headline">¶</a></h1>
+<p>You can assign to every filter- or widget-method a certain category and/or algorithm interface, the method belongs or fits to. This is useful such that <strong>itom</strong> can ...</p>
+<ul class="simple">
+<li>categorize your filter or widget.</li>
+<li>is able to integrate the filter in specific parts of the GUI, e.g. the file load or save process or dialog.</li>
+<li>might use your filters in image processing chains.</li>
+<li>...</li>
+</ul>
+<div class="section" id="algorithm-categories">
+<h2>Algorithm Categories<a class="headerlink" href="#algorithm-categories" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="algorithm-interfaces">
+<h2>Algorithm Interfaces<a class="headerlink" href="#algorithm-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>A programmer who wants to implement a filter or widget-method that fits to a specific algorithm interface can be forced by the interface to consider a certain set of rules. These rules can be:</p>
+<ul class="simple">
+<li>The first <strong>n</strong> mandatory parameters can be determined. For each of these parameters the type and optionally some contraints by adding a meta information instance to the parameter are given.</li>
+<li>The first <strong>m</strong> output parameter can be determined. Type and meta information (optional) are given as well).</li>
+<li>The maximum number of mandatory parameters is determined, but can also be set to infinity (INT_MAX).</li>
+<li>The maximum number of optional parameters is determined, but can also be set to infinity (INT_MAX).</li>
+<li>The maximum number of output parameters is determined, but can also be set to infinity (INT_MAX).</li>
+<li>The syntax or general form of the meta information string, added to the classes <strong>FilterDef</strong> or <strong>AlgoWidgetDef</strong> can be given.</li>
+</ul>
+<p>If a filter or widget-method pretends to implement a certain interface, <strong>itom</strong> checks at startup if the contraints are fullfilled are if this is not the case, the filter or widget-method is rejected and cannot be used within <strong>itom</strong>. The reason for the rejection can be seen by open the dialog <strong>loaded plugins...</strong> within the <strong>help</strong>-menu of <strong>itom</strong>.</p>
+<p>The following interfaces are available (in the enumeration <strong>tAlgoInterface</strong>, member of class <strong>ito::AddInAlgo</strong>:</p>
+<div class="section" id="inotspecified">
+<h3>iNotSpecified<a class="headerlink" href="#inotspecified" title="Permalink to this headline">¶</a></h3>
+<p>This is the default implementation and indicates that your filter or widget-method does not fit to any interface.</p>
+</div>
+<div class="section" id="ireaddataobject">
+<h3>iReadDataObject<a class="headerlink" href="#ireaddataobject" title="Permalink to this headline">¶</a></h3>
+<p>Filters fitting to this interface provide the functionality to read a certain file and load its content to an instance of dataObject.</p>
+<p><strong>Argument limitations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter group</th>
+<th class="head">Max. number of parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mandatory parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-odd"><td>optional parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-even"><td>output parameters</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mandatory parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="14%" />
+<col width="37%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Further limitations (meta information)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>#1 dataObject</td>
+<td>DObjPtr, In, Out</td>
+<td>DataObject, where the file is loaded to</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>#2 filename</td>
+<td>String, In</td>
+<td>absolute filename of the file to load</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output parameters</strong></p>
+<ul class="simple">
+<li>No -</li>
+</ul>
+<p><strong>Meta information string</strong></p>
+<p>This string must contain the file-filters with file-endings that this filter is able to load. Different file filters are separated by a double-semicolon (;;). Each
+filter begins with its name (arbitrary string), followed by a space and a sequence of file-endings within a pair of brackets. Examples are:</p>
+<ul class="simple">
+<li>Images (*.bmp *.png *.jpg *.pgm)</li>
+<li>Bitmap (*.bmp);;JPEG (*.jpg)</li>
+<li>Text-Files (*.txt)</li>
+</ul>
+</div>
+<div class="section" id="iwritedataobject">
+<h3>iWriteDataObject<a class="headerlink" href="#iwritedataobject" title="Permalink to this headline">¶</a></h3>
+<p>Filters fitting to this interface provide the functionality to export a dataObject with a specific file format.</p>
+<p><strong>Argument limitations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter group</th>
+<th class="head">Max. number of parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mandatory parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-odd"><td>optional parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-even"><td>output parameters</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mandatory parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="14%" />
+<col width="37%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Further limitations (meta information)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>#1 dataObject</td>
+<td>DObjPtr, In</td>
+<td>DataObject that should be exported</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>#2 filename</td>
+<td>String, In</td>
+<td>absolute filename of the file</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output parameters</strong></p>
+<ul class="simple">
+<li>No -</li>
+</ul>
+<p><strong>Meta information string</strong></p>
+<p>This string must contain the file-filters with file-endings that this filter is able to load. Different file filters are separated by a double-semicolon (;;). Each
+filter begins with its name (arbitrary string), followed by a space and a sequence of file-endings within a pair of brackets. Examples are:</p>
+<ul class="simple">
+<li>Images (*.bmp *.png *.jpg *.pgm)</li>
+<li>Bitmap (*.bmp);;JPEG (*.jpg)</li>
+<li>Text-Files (*.txt)</li>
+</ul>
+</div>
+<div class="section" id="ireadpointcloud">
+<h3>iReadPointCloud<a class="headerlink" href="#ireadpointcloud" title="Permalink to this headline">¶</a></h3>
+<p>Filters fitting to this interface provide the functionality to read a certain file and load its content to an instance of pointCloud.</p>
+<p><strong>Argument limitations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter group</th>
+<th class="head">Max. number of parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mandatory parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-odd"><td>optional parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-even"><td>output parameters</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mandatory parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="15%" />
+<col width="37%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Further limitations (meta information)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>#1 pointCloud</td>
+<td>PointCloudPtr, In, Out</td>
+<td>PointCloud, where the file is loaded to</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>#2 filename</td>
+<td>String, In</td>
+<td>absolute filename of the file to load</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output parameters</strong></p>
+<ul class="simple">
+<li>No -</li>
+</ul>
+<p><strong>Meta information string</strong></p>
+<p>This string must contain the file-filters with file-endings that this filter is able to load. Different file filters are separated by a double-semicolon (;;). Each
+filter begins with its name (arbitrary string), followed by a space and a sequence of file-endings within a pair of brackets. Examples are:</p>
+<ul class="simple">
+<li>Images (*.bmp *.png *.jpg *.pgm)</li>
+<li>Bitmap (*.bmp);;JPEG (*.jpg)</li>
+<li>Text-Files (*.txt)</li>
+</ul>
+</div>
+<div class="section" id="iwritepointcloud">
+<h3>iWritePointCloud<a class="headerlink" href="#iwritepointcloud" title="Permalink to this headline">¶</a></h3>
+<p>Filters fitting to this interface provide the functionality to export a pointCloud with a specific file format.</p>
+<p><strong>Argument limitations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter group</th>
+<th class="head">Max. number of parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mandatory parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-odd"><td>optional parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-even"><td>output parameters</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mandatory parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="14%" />
+<col width="37%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Further limitations (meta information)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>#1 dataObject</td>
+<td>PointCloudPtr, In</td>
+<td>PointCloud that should be exported</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>#2 filename</td>
+<td>String, In</td>
+<td>absolute filename of the file</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output parameters</strong></p>
+<ul class="simple">
+<li>No -</li>
+</ul>
+<p><strong>Meta information string</strong></p>
+<p>This string must contain the file-filters with file-endings that this filter is able to load. Different file filters are separated by a double-semicolon (;;). Each
+filter begins with its name (arbitrary string), followed by a space and a sequence of file-endings within a pair of brackets. Examples are:</p>
+<ul class="simple">
+<li>Images (*.bmp *.png *.jpg *.pgm)</li>
+<li>Bitmap (*.bmp);;JPEG (*.jpg)</li>
+<li>Text-Files (*.txt)</li>
+</ul>
+</div>
+<div class="section" id="ireadpolygonmesh">
+<h3>iReadPolygonMesh<a class="headerlink" href="#ireadpolygonmesh" title="Permalink to this headline">¶</a></h3>
+<p>Filters fitting to this interface provide the functionality to read a certain file and load its content to an instance of polygonMesh.</p>
+<p><strong>Argument limitations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter group</th>
+<th class="head">Max. number of parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mandatory parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-odd"><td>optional parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-even"><td>output parameters</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mandatory parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="15%" />
+<col width="37%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Further limitations (meta information)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>#1 pointCloud</td>
+<td>PolygonMeshPtr, In, Out</td>
+<td>PolygonMesh, where the file is loaded to</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>#2 filename</td>
+<td>String, In</td>
+<td>absolute filename of the file to load</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output parameters</strong></p>
+<ul class="simple">
+<li>No -</li>
+</ul>
+<p><strong>Meta information string</strong></p>
+<p>This string must contain the file-filters with file-endings that this filter is able to load. Different file filters are separated by a double-semicolon (;;). Each
+filter begins with its name (arbitrary string), followed by a space and a sequence of file-endings within a pair of brackets. Examples are:</p>
+<ul class="simple">
+<li>Images (*.bmp *.png *.jpg *.pgm)</li>
+<li>Bitmap (*.bmp);;JPEG (*.jpg)</li>
+<li>Text-Files (*.txt)</li>
+</ul>
+</div>
+<div class="section" id="iwritepolygonmesh">
+<h3>iWritePolygonMesh<a class="headerlink" href="#iwritepolygonmesh" title="Permalink to this headline">¶</a></h3>
+<p>Filters fitting to this interface provide the functionality to export a polygonMesh with a specific file format.</p>
+<p><strong>Argument limitations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter group</th>
+<th class="head">Max. number of parameters</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mandatory parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-odd"><td>optional parameters</td>
+<td>infinity</td>
+</tr>
+<tr class="row-even"><td>output parameters</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mandatory parameters</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="14%" />
+<col width="37%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameters</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Further limitations (meta information)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>#1 polygonMesh</td>
+<td>PolygonMeshPtr, In</td>
+<td>PolygonMesh that should be exported</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>#2 filename</td>
+<td>String, In</td>
+<td>absolute filename of the file</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output parameters</strong></p>
+<ul class="simple">
+<li>No -</li>
+</ul>
+<p><strong>Meta information string</strong></p>
+<p>This string must contain the file-filters with file-endings that this filter is able to load. Different file filters are separated by a double-semicolon (;;). Each
+filter begins with its name (arbitrary string), followed by a space and a sequence of file-endings within a pair of brackets. Examples are:</p>
+<ul class="simple">
+<li>Images (*.bmp *.png *.jpg *.pgm)</li>
+<li>Bitmap (*.bmp);;JPEG (*.jpg)</li>
+<li>Text-Files (*.txt)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="definition-of-new-algorithm-interfaces">
+<h2>Definition of new algorithm interfaces<a class="headerlink" href="#definition-of-new-algorithm-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>At first the categories and interfaces are determined as an enumeration value in the enumerations <strong>ito::AddInAlgo::tAlgoCategory</strong> and <strong>ito::AddInAlgo::tAlgoInterface</strong> (file <strong>addInInterface.h</strong>).</p>
+<p>The constraints and rules for every interface are implemented in the methods <strong>init</strong> and <strong>getTags</strong> of class <strong>AlgoInterfaceValidator</strong>. Besides the syntax of the meta information string all necessary information is given in the method <strong>init</strong>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Algorithm Categories and Interfaces</a><ul>
+<li><a class="reference internal" href="#algorithm-categories">Algorithm Categories</a></li>
+<li><a class="reference internal" href="#algorithm-interfaces">Algorithm Interfaces</a><ul>
+<li><a class="reference internal" href="#inotspecified">iNotSpecified</a></li>
+<li><a class="reference internal" href="#ireaddataobject">iReadDataObject</a></li>
+<li><a class="reference internal" href="#iwritedataobject">iWriteDataObject</a></li>
+<li><a class="reference internal" href="#ireadpointcloud">iReadPointCloud</a></li>
+<li><a class="reference internal" href="#iwritepointcloud">iWritePointCloud</a></li>
+<li><a class="reference internal" href="#ireadpolygonmesh">iReadPolygonMesh</a></li>
+<li><a class="reference internal" href="#iwritepolygonmesh">iWritePolygonMesh</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#definition-of-new-algorithm-interfaces">Definition of new algorithm interfaces</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-algo.html"
+                        title="previous chapter">Plugin class - Algo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugin-algo-Ref.html"
+                        title="next chapter">FilterDef</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-algo-CatInterfaces.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo-Ref.html" title="FilterDef"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo.html" title="Plugin class - Algo"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li>
+          <li><a href="plugin-algo.html" >Plugin class - Algo</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

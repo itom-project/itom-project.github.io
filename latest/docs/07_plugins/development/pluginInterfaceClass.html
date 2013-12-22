@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin interface class &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Plugin class - Basic information" href="pluginClass.html" />
+    <link rel="prev" title="Basic programming structure of any itom-plugin" href="pluginStructure.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginClass.html" title="Plugin class - Basic information"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pluginStructure.html" title="Basic programming structure of any itom-plugin"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-interface-class">
+<span id="id1"></span><h1>Plugin interface class<a class="headerlink" href="#plugin-interface-class" title="Permalink to this headline">¶</a></h1>
+<p>In order to give <strong>itom</strong> by the help of the <strong>Qt</strong>-plugin system access to your plugin, you must create a class which is inherited from the class <strong>AddInInterfaceBase</strong>. This base class is part of the <strong>ito</strong>-namespace and is defined in the files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">addInInterface</span><span class="o">.</span><span class="n">h</span>
+<span class="n">addInInterface</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>These files lie in the <strong>common</strong> folder.</p>
+<p>In your main header file or your plugin, called <strong>MyPlugin</strong> in the following, you can use the following code example in order to create that class:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">//myPlugin.h</span>
+
+<span class="cp">#include &quot;../../common/addInInterface.h&quot; </span><span class="c1">//adapt the path depending on the location of your plugin</span>
+
+<span class="k">class</span> <span class="nc">MyPluginInterface</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span><span class="p">)</span>
+
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">MyPluginInterface</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="o">~</span><span class="n">MyPluginInterface</span><span class="p">()</span> <span class="p">{};</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>In the code example above, the macro directives <em>Q_OBJECT</em> and <em>Q_INTERFACES(ito::AddInInterfaceBase)</em> (lines 7+8) force the compiler in the pre-compilation step to create the necessary code (done by the <strong>Qt</strong> framework) such that the class fits to the <strong>Qt</strong>-plugin system and is able to communicate by the common signal-slot-system of <strong>Qt</strong>. Remember that every class which is finally derived from the <em>QObject</em>-class (like <em>AddInInterfaceBase</em> is, too) must have the <em>Q_OBJECT</em> macro defined.</p>
+<p>The constructor <em>MyPluginInterface(...)</em>, defined in line 11 is called once by the AddIn-Manager of <strong>itom</strong> at startup in order to create the singleton instance of the class <em>MyPluginInterface</em>. In the body of this method you should provide basic information about your plugin (see section <a class="reference internal" href="#plugin-interface-class-constructor"><em>The constructor of the plugin interface class</em></a>).</p>
+<p>The destructor in line 12 usually does not require further implementation, such that the empty body already can be given in the header file.</p>
+<p>Finally, there are also the methods <em>getAddInInst</em> and <em>closeThisInst</em> which are the most important methods. If an user or some other part of <strong>itom</strong> request an instance of this plugin (that means not an instance of the interface we are talking in this section, but of the real plugin), the AddInManager of <strong>itom</strong> calls the method <em>getAddInInst</em> of the corresponding interface class. Then this interface has to create an instance of the plugin and set the given double-pointer parameter to the pointer of this newly created instance.</p>
+<p>Inversely, the AddInManager of <strong>itom</strong> will call <em>closeThisInst</em> of an interface in order to force the plugin interface class to delete the plugin instance, given by the <em>addInInst</em> parameter. This mechanism is usually used by so-called factory-classes. Therefore we can consider the interface class to be a factory for one or more instances of the plugin itself (For information about the plugin class see <a class="reference internal" href="pluginClass.html#plugin-class"><em>Plugin class - Basic information</em></a>).</p>
+<div class="section" id="the-constructor-of-the-plugin-interface-class">
+<span id="plugin-interface-class-constructor"></span><h2>The constructor of the plugin interface class<a class="headerlink" href="#the-constructor-of-the-plugin-interface-class" title="Permalink to this headline">¶</a></h2>
+<p>In your main source file of your plugin you can implement the constructor of the plugin interface class in the following exemplary way:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">MyPluginInterface</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">m_type</span>          <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">typeActuator</span><span class="p">;</span> <span class="c1">//or: ito::typeAlgo, ito::typeDataIO, ito::typeDataIO | ito::typeGrabber ...</span>
+    <span class="n">setObjectName</span><span class="p">(</span><span class="s">&quot;MyPlugin&quot;</span><span class="p">);</span> <span class="c1">//this is the name of the plugin how it appears in itom</span>
+
+    <span class="n">m_description</span>   <span class="o">=</span> <span class="n">QObject</span><span class="o">::</span><span class="n">tr</span><span class="p">(</span><span class="s">&quot;Description of MyPlugin&quot;</span><span class="p">);</span>
+    <span class="n">m_author</span>        <span class="o">=</span> <span class="s">&quot;Author&#39;s name&quot;</span><span class="p">;</span>
+    <span class="n">m_version</span>       <span class="o">=</span> <span class="n">CREATEVERSION</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">m_minItomVer</span>    <span class="o">=</span> <span class="n">CREATEVERSION</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">m_maxItomVer</span>    <span class="o">=</span> <span class="n">MAXVERSION</span><span class="p">;</span>
+
+    <span class="n">m_autoLoadPolicy</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">autoLoadKeywordDefined</span><span class="p">;</span>
+    <span class="n">m_autoSavePolicy</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">autoSaveAlways</span><span class="p">;</span>
+
+    <span class="c1">//initialize mandatory parameters for creating an instance of MyPlugin</span>
+    <span class="n">m_initParamsMand</span><span class="p">.</span><span class="n">append</span><span class="p">(</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="p">(</span><span class="s">&quot;param1&quot;</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">::</span><span class="n">String</span><span class="p">,</span> \
+        <span class="s">&quot;defaultValue&quot;</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">&quot;translatable description&quot;</span><span class="p">).</span><span class="n">toAscii</span><span class="p">().</span><span class="n">data</span><span class="p">())</span> <span class="p">);</span>
+    <span class="p">...</span>
+
+    <span class="c1">//initialize optional parameters for creating an instance of MyPlugin</span>
+    <span class="n">m_initParamsOpt</span><span class="p">.</span><span class="n">append</span><span class="p">(</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="p">(</span><span class="s">&quot;optParam1&quot;</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">::</span><span class="n">Int</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> \
+       <span class="n">tr</span><span class="p">(</span><span class="s">&quot;translatable description of optParam1&quot;</span><span class="p">).</span><span class="n">toAscii</span><span class="p">().</span><span class="n">data</span><span class="p">())</span> <span class="p">)</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>At first, the constructor consists of a section where you define basic information about the plugin itself. In the second part you will define a list of mandatory and optional parameters which are required if any user wants to create an instance of the plugin, e.g. the user wants to open a new camera or connect any motor.</p>
+<p><strong>Part 1 (Basic information):</strong></p>
+<dl class="member">
+<dt id="m_type">
+int <tt class="descname">m_type</tt><a class="headerlink" href="#m_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of this plugin. Possible types are an OR-combination of the enumeration <strong>ito::tPluginType</strong>:</p>
+<ul class="simple">
+<li>typeActuator for actuator-plugins</li>
+<li>typeDataIO | typeGrabber for cameras and other grabbing devices</li>
+<li>typeDataIO | typeADDA for any analog/digital converters</li>
+<li>typeDataIO | typeRawIO for any other input-output-devices, like serial ports, display windows...</li>
+<li>typeAlgo for a plugin providing algorithms, filters or any other methods as well as graphical user interfaces, dialogs, ... which enhance the functionality of <strong>itom</strong></li>
+</ul>
+</dd></dl>
+
+<dl class="member">
+<dt id="setObjectName">
+void <tt class="descname">setObjectName</tt><big>(</big>const QString<em>&nbsp;&amp;name</em><big>)</big><a class="headerlink" href="#setObjectName" title="Permalink to this definition">¶</a></dt>
+<dd><p>use this method to set the name of your plugin. This name should be simple and should not contain special characters, since it not only appears in the list of plugins but is also the string used for initializing a plugin by the python scripting language.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_description">
+QString <tt class="descname">m_description</tt><a class="headerlink" href="#m_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give an advanced description of your plugin.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_author">
+QString <tt class="descname">m_author</tt><a class="headerlink" href="#m_author" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this string to denote the author(s) of this plugin</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_version">
+int <tt class="descname">m_version</tt><a class="headerlink" href="#m_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>This integer variable contains the version of your plugin. A version string always consists of a major, minor and patch value. All these values are combined in the integer variable and can be created using the macro <strong>CREATEVERSION(major,minor,patch)</strong> (defined in <em>sharedStructures.h</em>), where the values major, minor and patch are integer values, too.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_minItomVer">
+int <tt class="descname">m_minItomVer</tt><a class="headerlink" href="#m_minItomVer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this variable to denote the minimum version number of <strong>itom</strong> which is necessary to run this plugin. If you don&#8217;t have any specific minimum version, use the macro <strong>MINVERSION</strong>, defined in <em>sharedStructures.h</em> (folder <em>common</em>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_maxItomVer">
+int <tt class="descname">m_maxItomVer</tt><a class="headerlink" href="#m_maxItomVer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this variable to denote the maximum version number of <strong>itom</strong>. Versions higher than this value do not allow to run this plugin. If you don&#8217;t care about any maximum version, use the macro <strong>MAXVERSION</strong>, defined in <em>sharedStructures.h</em> (folder <em>common</em>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_autoLoadPolicy">
+ito::tAutoLoadPolicy <tt class="descname">m_autoLoadPolicy</tt><a class="headerlink" href="#m_autoLoadPolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depending on the value of this variable, the internal parameters of the plugin can be loaded from a <em>xml</em>-file and set after the plugin&#8217;s <em>init</em>-method has been called. The possible values for that variable are given by the enumeration <strong>ito::tAutoLoadPolicy</strong> and are</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoLoadPolicy</span> <span class="p">{</span>
+    <span class="n">autoLoadAlways</span>           <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always loads xml file by addInManager */</span>
+    <span class="n">autoLoadNever</span>            <span class="o">=</span> <span class="mh">0x2</span><span class="p">,</span> <span class="cm">/*!&lt; never automatically loads parameters from xml-file (default) */</span>
+    <span class="n">autoLoadKeywordDefined</span>   <span class="o">=</span> <span class="mh">0x4</span>  <span class="cm">/*!&lt; only loads parameters if keyword autoLoadParams=1 exists in python-constructor */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>For more information about the loading and/or saving of plugin&#8217;s parameters, see <a class="reference internal" href="pluginAutoLoadSavePolicy.html#plugin-autoloadsave-policy"><em>Automatic loading and saving of plugin parameters</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_autoSavePolicy">
+ito::tAutoSavePolicy <tt class="descname">m_autoSavePolicy</tt><a class="headerlink" href="#m_autoSavePolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depending on the value of this variable, the internal parameters of the plugin can be saved to a <em>xml</em>-file at shutdown of a plugin instance. The possible values for that variable are given by the enumeration <strong>ito::tAutoSavePolicy</strong> and are</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoSavePolicy</span> <span class="p">{</span>
+    <span class="n">autoSaveAlways</span>          <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always saves parameters to xml-file at shutdown */</span>
+    <span class="n">autoSaveNever</span>           <span class="o">=</span> <span class="mh">0x2</span>  <span class="cm">/*!&lt; never saves parameters to xml-file at shutdown (default) */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>For more information about the loading and/or saving of plugin&#8217;s parameters, see <a class="reference internal" href="pluginAutoLoadSavePolicy.html#plugin-autoloadsave-policy"><em>Automatic loading and saving of plugin parameters</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="m_callInitInNewThread">
+bool <tt class="descname">m_callInitInNewThread</tt><a class="headerlink" href="#m_callInitInNewThread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Usually, the plugin&#8217;s init method, where for instance the hardware is started and initialized, is called in a new thread in order to keep the GUI reactive during the whole process. If you change this member from
+its default value <strong>true</strong> to <strong>false</strong>, <strong>init</strong> is executed in the main thread and afterwards the plugin is moved to the new thread. For more information, see <a class="reference internal" href="pluginClass.html#plugin-class"><em>Plugin class - Basic information</em></a> or the info box <em class="xref std std-ref">plugin-class-callInitThread</em>.</p>
+</dd></dl>
+
+<p><strong>Part 2 (mandatory and optional parameters):</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This part is only important if you build plugins of the basic types <strong>dataIO</strong> or <strong>actuator</strong>, since only plugins of these types can have multiple parameters, hence, it is usefull to parametrize their constructors. For algorithm- or filter-plugins, you can let the vectors <strong>m_initParamsMand</strong> and <strong>m_initParamsOpt</strong> unchanged (hence empty).</p>
+</div>
+<p>If you create an instance of a plugin using the python language, you have mainly two possibilites:</p>
+<ul>
+<li><p class="first">Plugins of type <strong>dataIO</strong> are addressed using the python type <strong>dataIO</strong>, which is a class of the module <a class="reference internal" href="../../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a>:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="o">*</span> <span class="c"># usually this import already has been done for you</span>
+<span class="n">variable</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="n">PluginName</span><span class="p">,</span><span class="n">mandatoryParam1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">mandatoryParamN</span><span class="p">,</span> <span class="n">optionalParam1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">optionalParamN</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>OR</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">itom</span>
+<span class="n">variable</span> <span class="o">=</span> <span class="n">itom</span><span class="o">.</span><span class="n">dataIO</span><span class="p">(</span><span class="n">PluginName</span><span class="p">,</span> <span class="n">mandatoryParam1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">optionalParam1</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Plugins of type <strong>actuator* are addressed using the python type **actuator</strong>, which is a class of the module <a class="reference internal" href="../../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a>, too. The call is then analogous to the examples above:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">variable</span> <span class="o">=</span> <span class="n">actuator</span><span class="p">(</span><span class="n">PluginName</span><span class="p">,</span><span class="n">mandatoryParam1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">mandatoryParamN</span><span class="p">,</span> <span class="n">optionalParam1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">optionalParamN</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Plugins of type <strong>algo</strong> do not have any corresponding class in <a class="reference internal" href="../../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a>, since they are globally organized by <strong>itom</strong>. Algorithms can be called using the method <a class="reference external" href="http://docs.python.org/3.2/library/functions.html#filter" title="(in Python v3.2)"><tt class="xref py py-func docutils literal"><span class="pre">filter()</span></tt></a>, windows, dialogs or further user interfaces provided by plugins are loaded using the static method <tt class="xref py py-func docutils literal"><span class="pre">createNewPluginWidget()</span></tt> of class <tt class="xref py py-class docutils literal"><span class="pre">itom.uiDialog</span></tt>.</p>
+</li>
+</ul>
+<p>The constructor of each plugin can have a list of mandatory and optional parameters, which must or can be provided if creating an instance of the plugin. Internally, each parameter is a value of type <strong>Param</strong>, which is a class of <strong>itom</strong> and provides values of different types. Each value has a specific name, a default value and a description string, which should be given or set to NULL. Additionally, depending on the parameters type, a minimum and maximum value can be indicated. For more information about class <em>Param</em> see <a class="reference internal" href="plugin-params.html#plugin-params"><em>Parameter-Container class of itom</em></a>.</p>
+<p>The mandatory parameters are contained in the vector</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">m_initParamsMand</span>
+</pre></div>
+</div>
+<p>Using the methods <em>append</em> or <em>insert</em> you can add an arbitrary number of values (type <em>Param</em>) to this vector. The type <em>QVector</em> is a <strong>Qt</strong>-specific class which is similar to <em>std::vector</em>. The optional parameters are analogously contained in the vector</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">m_initParamsOpt</span>
+</pre></div>
+</div>
+<p>If one is creating an instance of the plugins, e.g. using the python commands above, <strong>itom</strong> is reading the given vector of mandatory of optional parameters. The first parameter of the constructors of the python class <a class="reference internal" href="../../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><tt class="xref py py-class docutils literal"><span class="pre">itom.dataIO</span></tt></a> or <a class="reference internal" href="../../09_reference/actuator.html#itom.actuator" title="itom.actuator"><tt class="xref py py-class docutils literal"><span class="pre">itom.actuator</span></tt></a> stands for the name of the plugin. The number of the following parameters must be equal or bigger than the length of the mandatory parameter vector. The first <em>n</em> parameters must exactly fit to the type, order and possible boundary values of the mandatory parameter vector. This vector is then copied and the values are replaced by the values given by the python-constructors.</p>
+<p>If the following parameters in the constructor don&#8217;t have any keywords, they must also fit to the types,... of the optional parameter vector. If there are not enough parameters given, the default value will be taken. Additionally, if the user gives keywords to the parameters, each parameter will be checked agains its corresponding value in the optional parameter vector where keyword and parameter-name are equal. After the first parameter having a keyword no keyword-less parameters are accepted.</p>
+<p>This is an example of creating a plugin with a set of parameters, where the last two parameters are tagged with their keywords:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">variable</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;MyPlugin&quot;</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="s">&quot;test&quot;</span><span class="p">,</span><span class="n">delay</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="nb">file</span><span class="o">=</span><span class="s">&quot;C:</span><span class="se">\\</span><span class="s">test.dat&quot;&quot;)</span>
+</pre></div>
+</div>
+<p>After that the mandatory and optional parameter vectors are read, copied and that their values are replaced by the values given by the constructor, the instance of the plugin is created and the method <strong>init</strong> of the plugin class is called with the mandatory and optional parameter vector as argument. That&#8217;s the basic way such a plugin instance is created and initialized.</p>
+<p>The set of mandatory and optional parameters of each plugin, including their default, minimum and maximum value, their name and description string, can be returned in python using the method <a class="reference internal" href="../../09_reference/itom_general.html#itom.pluginHelp" title="itom.pluginHelp"><tt class="xref py py-func docutils literal"><span class="pre">itom.pluginHelp()</span></tt></a>.</p>
+</div>
+<div class="section" id="method-getaddininst-of-the-plugin-interface-class">
+<span id="plugin-interface-class-getaddininst"></span><h2>Method <em>getAddInInst</em> of the plugin interface class<a class="headerlink" href="#method-getaddininst-of-the-plugin-interface-class" title="Permalink to this headline">¶</a></h2>
+<p>As default implementation, you can copy the following code block for your implementation of the <em>getAddInInst</em>-method:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">MyPlugin</span><span class="o">*</span> <span class="n">newInst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyPlugin</span><span class="p">();</span>
+    <span class="n">newInst</span><span class="o">-&gt;</span><span class="n">setBasePlugin</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="o">*</span><span class="n">addInInst</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">newInst</span><span class="p">);</span>
+    <span class="n">m_InstList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="o">*</span><span class="n">addInInst</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Since your plugin instance (<strong>MyPlugin</strong>) is finally derived from <strong>AddInBase</strong>, its private member <strong>m_uniqueID</strong> is automatically given an auto-incremented, unique number. Additionally you can also assign a unique
+identification string (member <strong>m_identifier</strong> of class <strong>AddInBase</strong>) to your instance which is then displayed in <strong>itom</strong>. Please only change <strong>m_identifier</strong> in the constructor or <strong>init</strong>-method of your actual plugin.</p>
+<p>In the method above, it is assumed that your main class of your plugin <em>MyPlugin</em> is called <em>MyPlugin</em>, too. Then in line 3, a new instance of that class is created and this new instance is noticed about its own factory class in line 4. The factory class is hereby the pointer to this singleton interface class instance. Finally the given double pointer is set to the pointer of the newly created plugin instance. Finally, every plugin interface class has a protected member vector called <em>m_InstList</em> which contains a list of plugin instances opened by this interface (or factory). The newly created plugin is added to this list in line 6.</p>
+<p>The return value of this method is of type <strong>ito::RetVal</strong>, which is set to the status <strong>Ok</strong>. For more information about the return value class <strong>ito::RetVal</strong> see <a class="reference internal" href="plugin-RetVal.html#plugin-retval"><em>RetVal - The return type of itom methods</em></a>.</p>
+</div>
+<div class="section" id="method-closethisinst-of-the-plugin-interface-class">
+<span id="plugin-interface-class-closethisinst"></span><h2>Method <em>closeThisInst</em> of the plugin interface class<a class="headerlink" href="#method-closethisinst-of-the-plugin-interface-class" title="Permalink to this headline">¶</a></h2>
+<p>For this method, you can basically copy the following default implementation:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">addInInst</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">m_InstList</span><span class="p">.</span><span class="n">removeOne</span><span class="p">(</span><span class="o">*</span><span class="n">addInInst</span><span class="p">);</span>
+        <span class="k">delete</span> <span class="p">((</span><span class="n">MyPlugin</span> <span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="n">addInInst</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The AddInManager of <strong>itom</strong> is calling this method if the given plugin instance (parameter <strong>addInInst</strong>) should be deleted. If the parameter pointer is available, the plugin instance is removed from the list of loaded plugin instances (see <a class="reference internal" href="#plugin-interface-class-getaddininst"><em>Method getAddInInst of the plugin interface class</em></a>) and the plugin instance is deleted.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin interface class</a><ul>
+<li><a class="reference internal" href="#the-constructor-of-the-plugin-interface-class">The constructor of the plugin interface class</a></li>
+<li><a class="reference internal" href="#method-getaddininst-of-the-plugin-interface-class">Method <em>getAddInInst</em> of the plugin interface class</a></li>
+<li><a class="reference internal" href="#method-closethisinst-of-the-plugin-interface-class">Method <em>closeThisInst</em> of the plugin interface class</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pluginStructure.html"
+                        title="previous chapter">Basic programming structure of any itom-plugin</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pluginClass.html"
+                        title="next chapter">Plugin class - Basic information</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/pluginInterfaceClass.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginClass.html" title="Plugin class - Basic information"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pluginStructure.html" title="Basic programming structure of any itom-plugin"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Build with CMake &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Installation" href="install.html" />
+    <link rel="next" title="Build documentation" href="build_documentation.html" />
+    <link rel="prev" title="Get sources from Git" href="git_clone.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="build_documentation.html" title="Build documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="git_clone.html" title="Get sources from Git"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="install.html" accesskey="U">Installation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="build-with-cmake">
+<span id="install-cmake"></span><h1>Build with <strong>CMake</strong><a class="headerlink" href="#build-with-cmake" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter, you will learn how to create the project files from the sources, contained in the specific Git-repositories (<a class="reference internal" href="git_clone.html#install-git-clone"><em>Get sources from Git</em></a>),
+using the open source generator <strong>CMake</strong> (<a class="reference external" href="http://www.cmake.org">http://www.cmake.org</a>). The main concept of CMake will be introduced in the following section, followed by a short explanation of process of building the core of <strong>itom</strong>.</p>
+<div class="section" id="concept-of-cmake">
+<h2>Concept of CMake<a class="headerlink" href="#concept-of-cmake" title="Permalink to this headline">¶</a></h2>
+<p>CMake is a platform independent make system for C or C++ based software projects. Therefore the sources only contain the code base and some simple textfiles (e.g. CMakeLists.txt)
+that describe how a project must be configured such that the code base can correctly be compiled.</p>
+<p>When calling the CMake GUI, the configuration files (CMakeLists.txt) will be analyzed. After indicating your desired compiler or generator of your preferred development system
+(see <a class="reference external" href="http://cmake.org/cmake/help/v2.8.8/cmake.html#section_Generators">http://cmake.org/cmake/help/v2.8.8/cmake.html#section_Generators</a>), CMake will generate the specific makefiles or project files for your generator. Then you can call your
+development environment or compiler like Visual Studio in order to open the recently created project files and finally build your application.</p>
+<p>Experienced Visual Studio user are used to locating the source files (.h, .cpp...), the visual studio project files, the intermediate object files and the final
+compiled application in the same folder structure. This is different for projects that are initiated using CMake, since this process is closer to the base philosophy of Linux.</p>
+<p>In CMake you will have one folder that only contains the code base, some further resource files and the general CMakeLists.txt-files. CMake is called to analyze this
+source-folder and to generate the project files in another, independent folder, that is denoted build-directory in the following text. You will only work in this build-directory,
+that is also the directory, where the intermediate files as well as the compiled executable are located.</p>
+<p>All itom plugins can have one or more own build-directories, such that the code base for some or all plugins can also be totally delocated from itom itself. When generating
+the project files for any plugin using CMake as well, you are asked where the build-directory of itom is located on your harddrive. This is finally used in order to copy the
+relevant output of every plugin to this itom application directory in a post-build step of every plugin or designer-plugin.</p>
+</div>
+<div class="section" id="generating-itom-using-cmake">
+<h2>Generating <strong>itom</strong> using CMake<a class="headerlink" href="#generating-itom-using-cmake" title="Permalink to this headline">¶</a></h2>
+<p>These are the steps you need to execute if you want to generate and build <strong>itom</strong> from sources using CMake:</p>
+<ol class="arabic">
+<li><p class="first">Get the sources of <strong>itom</strong> core from the Git repository (see <a class="reference internal" href="git_clone.html#install-git-clone"><em>Get sources from Git</em></a>).</p>
+</li>
+<li><p class="first">Start <strong>CMake GUI</strong>.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/cmake_start.png"><img alt="../_images/cmake_start.png" src="../_images/cmake_start.png" /></a>
+</div>
+<p>Use the <strong>browse source...</strong> button in order to select the location of the itom source code, e.g. <em>D:/gititom/sources/itom</em>. Use <strong>browse build...</strong> to indicate the build
+directory for itom, e.g. <em>D:/gititom/build/itom</em>. If this directory does not exist, it will be created during the configuration.</p>
+</li>
+<li><p class="first">Now click the <strong>Configure</strong> button in CMake. Then, the file <em>CMakeLists.txt</em> in your source folder is analyzed. If you create this project for the first time,
+you are now asked for your desired generator.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/cmake_generator.png"><img alt="../_images/cmake_generator.png" src="../_images/cmake_generator.png" /></a>
+</div>
+<p>If you compile using Visual Studio, choose <strong>Visual Studio 10</strong> or <strong>Visual Studio 10 Win64</strong>. For the <strong>QtCreator</strong> choose <strong>MinGW Makefiles</strong> on Windows or <strong>Unix Makefiles</strong> on Linux machines.
+Accept your choice by clicking <strong>Finish</strong>.</p>
+</li>
+<li><p class="first">Since <strong>itom</strong> is dependent on other libraries (like OpenCV), CMake is able to automatically guess the location for many common libraries. The resulting variables including many other settings for
+configuring the compiler will then be shown in the huge listbox in CMake. If CMake added a variable for the first time, this entry is displayed using a red background. Clicking <strong>Configure</strong> again,
+the red background becomes white.</p>
+</li>
+<li><p class="first">Usually, the configuration process will fail when clicking the button for the first time, since you need to help CMake with some manual changes. The detailed problem is always written in the
+log-text at the bottom part of the CMake GUI. Help CMake with some further hints (see below) and press <strong>Configure</strong> again. The current configuration is finally cached in a specific cache-file,
+that also is located in the build directory such that any reconfiguration will firstly read the content of this cache file.</p>
+</li>
+<li><p class="first">Click the <strong>Grouped</strong> checkbox, in order to get a better overview of the current configurations. Further variables are shown when clicking the <strong>Advanced</strong> checkbox.
+Usually you need to manually set all or some of the following variables (in this order):</p>
+</li>
+<li><p class="first">reclick <strong>Configure</strong> until no red-backgrounded values are visible and no errors appear. Then click <strong>Generate</strong> to create the project files.</p>
+</li>
+<li><p class="first">If you are using Visual Studio, open it now and load the solution <strong>itom.sln</strong>, contained in the build directory. This solution now contains several sub-projects.
+All projects besides <strong>ALL_BUILD</strong> and <strong>ZERO_CHECK</strong> are itom specific sub-projects. The easiest way to compile itom is to mark qitom as start-project (right click on qitom and
+select as start project) and build <strong>qitom</strong>. The dependent projects <strong>dataobject</strong>, <strong>pointcloud</strong> and <strong>qpropertyeditor</strong> are automatically build before building qitom.
+The project <strong>ALL_BUILD</strong> will firstly start <strong>ZERO_CHECK</strong> and then build all projects contained in the solution in the dependent-optimal order. For more information about <strong>ZERO_CHECK</strong>
+see the Update project settings section below.</p>
+</li>
+<li><p class="first">If you are using <strong>QtCreator</strong>, open it and call the file <em>CMakeLists.txt</em> from the itom source folder. Additionally chose the same output folder defined in the CMake GUI.
+QtCreator can now read the cached configurations from CMake. The <strong>QtCreator</strong> will also run CMake, a process that should be safe and should not fail, as everything should have been properly
+configured in the previous steps using CMake GUI. Usually you don&#8217;t need the CMake GUI with <strong>QtCreator</strong>, however you can not easily change any settings directly in <strong>QtCreator</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="generating-any-plugin-or-designer-plugin-using-cmake">
+<h2>Generating any plugin or designer-plugin using CMake<a class="headerlink" href="#generating-any-plugin-or-designer-plugin-using-cmake" title="Permalink to this headline">¶</a></h2>
+<p>In principle, the build of plugins or designer-plugins follows the same basic steps than the build of <strong>itom</strong> itself. However, both plugins and designer-plugins need some files and libraries, that
+are contained in the <strong>SDK</strong> of <strong>itom</strong>. If you installed <strong>itom</strong> from a setup, the <strong>SDK</strong> is already available, if you built <strong>itom</strong> from sources, you first need to compile <strong>itom</strong> (at least the libraries
+<em>dataObject</em>, <em>pointCloud</em> and <em>qpropertyeditor</em>) in <strong>Debug and Release</strong> before continuing to configure and to generate any plugin project.</p>
+<p>In some cases, multiple plugins or designer-plugins are bundled together in one main directory. You have the choice to either build one project with multiple sub-projects (which is a convenient way) or to build
+one project for each plugin. If you want to generate all plugins, directly use the main directory as source directory in CMake. If you only want to generate single plugins, directly use the corresponding
+subfolder as source directory. Any source directory must always contain a file <em>CMakeLists.txt</em>.</p>
+<p>When configuring any plugin or designer-plugin for the first time, you will probably see that either the variable <strong>ITOM_SDK_DIR</strong> or <strong>OPENCV_DIR</strong> is missing (or both), meaning that their values
+are set to <strong>ITOM_SDK_DIR-NOTFOUND</strong> or <strong>OPENCV_DIR-NOTFOUND</strong>. First set the variable <strong>ITOM_SDK_DIR</strong> to the <strong>SDK</strong>-directory of <strong>itom</strong>. This is either contained in the installation path
+of <strong>itom</strong> created by the setup or in the build-directory of <strong>itom</strong> if built from sources. Afterwards set <strong>OPENCV_DIR</strong> to the build-directory of <strong>OpenCV</strong> (see <em class="xref std std-ref">install-depend-opencv</em> for details where
+the build-directory of <strong>OpenCV</strong> is). If one of these variables is not correctly set, other depending errors may be displayed in <strong>CMAKE</strong>, like:</p>
+<div class="highlight-python"><pre>CMake Error at AMMS/CMakeLists.txt:25 (find_package):
+By not providing &quot;FindOpenCV.cmake&quot; in CMAKE_MODULE_PATH this project has
+asked CMake to find a package configuration file provided by &quot;OpenCV&quot;, but
+CMake did not find one.</pre>
+</div>
+<p>If the path to <strong>ITOM_SDK_DIR</strong> is set correctly and you pressed <strong>Configure</strong> again, the variable <strong>ITOM_DIR</strong> should also contain a valid folder (it should map to the build directory of <strong>itom</strong>, containing
+folders <em>plugins</em> and <em>designer</em>).</p>
+</div>
+<div class="section" id="update-cmake">
+<h2>Update CMake<a class="headerlink" href="#update-cmake" title="Permalink to this headline">¶</a></h2>
+<p>If you want to change any project settings or want to add or delete some source files from any project, then change the corresponding <em>CMakeLists.txt</em> files. If you need to
+change further settings, you should open the CMake GUI and re-configure your project. When done, press the <strong>Generate</strong> button. If Visual Studio is currently opened with
+the same project, the change in the project files is automatically recognized and you will be asked if you want to reload the project. Accept this. If you only changed some
+<em>CMakeLists.txt</em> files, you can also run the project <strong>ZERO_CHECK</strong> in Visual Studio. Visual Studio will call CMake in the command line in order to check for changes.
+The rest is the same as calling the CMake GUI. <strong>QtCreator</strong> is also able to directly run CMake in order to check the project for changes.</p>
+</div>
+<div class="section" id="additional-third-party-libraries">
+<span id="install-third-party-libs"></span><h2>Additional third-party libraries<a class="headerlink" href="#additional-third-party-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Some plugins are dependent on additional third-party libraries. The <strong>itom</strong> SDK provides some find-methods for several commonly used libraries. You will be informed by CMake
+if any library could not be found by this automatic find-method, if a variable of the following style and content is available:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">LIBRARYNAME_DIR</span> <span class="o">=</span> <span class="n">LIBRARYNAME_DIR_NOTFOUND</span>
+</pre></div>
+</div>
+<p><strong>LIBRARYNAME</strong> is then replaced by the real name of any missing library. See the following table for some common names <strong>LIBRARYNAME</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Libraryname</th>
+<th class="head">What to do?</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FFTW</td>
+<td>Set <strong>FFTW_DIR</strong> to the directory of your <strong>fftw</strong> installation. This directory must contain some library files (e.g. libfftw3-3, libfftw3f-3...)</td>
+</tr>
+<tr class="row-odd"><td>GLEW</td>
+<td>Set <strong>GLEW_DIR</strong> to the directory where the binaries of <strong>glew</strong> are located on your computer.</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="fftw">
+<h3>FFTW<a class="headerlink" href="#fftw" title="Permalink to this headline">¶</a></h3>
+<p>Some plugins of <strong>itom</strong> are using the library <strong>fftw</strong> in version 3. This library is always used as shared library. Do the following steps in order to get <strong>FFTW 3</strong> (on Windows):</p>
+<ol class="arabic">
+<li><p class="first">Download the windows binaries (32bit or 64bit, depending on itom) from <a class="reference external" href="http://www.fftw.org/install/windows.html">http://www.fftw.org/install/windows.html</a>.</p>
+</li>
+<li><p class="first">Unpack the binaries (e.g. at <strong>C:fftw3.3</strong>)</p>
+</li>
+<li><p class="first">Now open the Visual Studio Command Line:</p>
+<ul>
+<li><p class="first">If you are compiling with 32bit, go to <strong>Microsoft Visual Studio 2010 &gt;&gt; Visual Studio Tools &gt;&gt; Visual Studio-Command Line (2010)</strong> in the Windows start-menu and open it.</p>
+</li>
+<li><p class="first">If you are compiling with 64bit, go to <strong>Microsoft Visual Studio 2010 &gt;&gt; Visual Studio Tools &gt;&gt; Eingabeaufforderung von Visual Studio x64 Win64 (2010)</strong> in the Windows start-menu and open it.</p>
+</li>
+<li><p class="first">In the opened command line, change to the FFTW directory, e.g. by typing <strong>cd C:fftw3.3</strong> and execute the following commands:</p>
+<div class="highlight-python"><pre>lib /def:libfftw3-3.def
+lib /def:libfftw3f-3.def
+lib /def:libfftw3l-3.def</pre>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Close the command line</p>
+</li>
+</ol>
+<p>If you are generating project files for itom plugins or designer plugins, you probably will sometimes get a FFTW-group. Set FFTW_DIR to <strong>C:fftw3.3</strong> and press configure again. All dependent files should be found.</p>
+</div>
+<div class="section" id="glew">
+<h3>GLEW<a class="headerlink" href="#glew" title="Permalink to this headline">¶</a></h3>
+<p>For Windows users:</p>
+<p>Download the glew binaries from <a class="reference external" href="http://glew.sourceforge.net/index.html">http://glew.sourceforge.net/index.html</a> and unzip them to any folder. The CMake variable <strong>GLEW_DIR</strong> should then point to that folder.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build with <strong>CMake</strong></a><ul>
+<li><a class="reference internal" href="#concept-of-cmake">Concept of CMake</a></li>
+<li><a class="reference internal" href="#generating-itom-using-cmake">Generating <strong>itom</strong> using CMake</a></li>
+<li><a class="reference internal" href="#generating-any-plugin-or-designer-plugin-using-cmake">Generating any plugin or designer-plugin using CMake</a></li>
+<li><a class="reference internal" href="#update-cmake">Update CMake</a></li>
+<li><a class="reference internal" href="#additional-third-party-libraries">Additional third-party libraries</a><ul>
+<li><a class="reference internal" href="#fftw">FFTW</a></li>
+<li><a class="reference internal" href="#glew">GLEW</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="git_clone.html"
+                        title="previous chapter">Get sources from Git</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="build_documentation.html"
+                        title="next chapter">Build documentation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/02_installation/build_cmake.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="build_documentation.html" title="Build documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="git_clone.html" title="Get sources from Git"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="install.html" >Installation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

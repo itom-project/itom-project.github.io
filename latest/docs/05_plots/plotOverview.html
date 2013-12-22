@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Quick tutorial to plots and figures &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Plots and Figures" href="plots.html" />
+    <link rel="next" title="Figure Management" href="figureManagement.html" />
+    <link rel="prev" title="Plots and Figures" href="plots.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="figureManagement.html" title="Figure Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plots.html" title="Plots and Figures"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="plots.html" accesskey="U">Plots and Figures</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="quick-tutorial-to-plots-and-figures">
+<h1>Quick tutorial to plots and figures<a class="headerlink" href="#quick-tutorial-to-plots-and-figures" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plots-of-data-objects">
+<h2>Plots of data objects<a class="headerlink" href="#plots-of-data-objects" title="Permalink to this headline">¶</a></h2>
+<p>The most common way to plot an arbitrary data object is the <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><tt class="xref py py-meth docutils literal"><span class="pre">plot()</span></tt></a> command contained in the module <a class="reference internal" href="../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a>.</p>
+<p>In the first example, we create an one-dimensional data object with random values (16bit, signed, fixed point precision) and simple want
+to visualize this data object in a line plot. itom is able to recognize the type of plot you desire and uses the plot plugin which is
+set to be default for this type of plot (static, line plot). The defaults can be set in the property dialog of itom.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">data1d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span><span class="s">&#39;int16&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">data1d</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please consider that any one-dimensional data object is always exposed as two-dimensional data object, where the first (y) dimension is
+set to 1.</p>
+</div>
+<p>If you have various plot plugins available that can handle that type of data object, you can also force the plot command to use your
+specific plugin, which is defined by its class name (see itom&#8217;s property dialog for the class name). If the class name cannot be found
+or is not able to plot the type of data object, itom falls back to the default plot plugin:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">data1d</span><span class="p">,</span> <span class="s">&quot;Itom1DQwtFigure&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result of both examples can be like this:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/plot1d.png"><img alt="../_images/plot1d.png" src="../_images/plot1d.png" /></a>
+</div>
+<p>Equivalent to the one-dimensional case, the following example shows how to simply plot a two-dimensional data object also using the command
+<a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><tt class="xref py py-meth docutils literal"><span class="pre">plot()</span></tt></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">data2d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">1024</span><span class="p">,</span><span class="mi">768</span><span class="p">],</span><span class="s">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">data2d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, you obtain a figure that looks like this:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/plot2d.png"><img alt="../_images/plot2d.png" src="../_images/plot2d.png" /></a>
+</div>
+<p>If you not only work with data objects but also with numpy</p>
+<p>If the plot is opened in its own figure window, you have a dock-button in the toolbar on the right side. Click on this button in order to dock
+the plot into the main window of itom.</p>
+</div>
+<div class="section" id="live-images-of-cameras-and-grabbers">
+<h2>Live images of cameras and grabbers<a class="headerlink" href="#live-images-of-cameras-and-grabbers" title="Permalink to this headline">¶</a></h2>
+<p>itom is not only able to plot data objects but can also show live streams of connected and opened cameras. Cameras can be all plugins of type
+dataIO that also have the grabber-type flag defined (see the section grabbers of your plugin toolbox in itom). If a live image of a specific camera
+should be created, the following process is started:</p>
+<ol class="arabic simple">
+<li>The camera is asked for its parameters <em>sizex</em> and <em>sizey</em>. If one of these dimensions is equal to one, a live line image is opened, else a two-dimensional live image is opened.</li>
+<li>The command <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.startDevice" title="itom.dataIO.startDevice"><tt class="xref py py-meth docutils literal"><span class="pre">startDevice()</span></tt></a> of the camera is called (idle command if the camera is already started)</li>
+<li>A timer continuously triggers the image acquisition of the camera and sends the result to all currently connected live images. However the timer is not started or stopped whenever the auto-grabbing property of the camera is disabled. This is useful, if you are in the middle of measurement process. Then you don&#8217;t want the timer to force the image acquisition but your process. Therefore, disable to auto-grabbing property before starting your measurement and reset it to its previous status afterwards. In any case, whenever any prcoess triggers an image acquisition, all results will always be sent to connected live images.</li>
+<li>When the live plot is closed or deconnected, the command :py:meth:ìtom.dataIO.stopDevice` is called (this is again an idle command if the camera is still used by other live images or has been started by any python script and not stopped yet).</li>
+</ol>
+<p>In the following example, the dummy grabber camera is started and the live image is opened using the command <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><tt class="xref py py-meth docutils literal"><span class="pre">liveImage()</span></tt></a>. The auto-grabbing property
+is set to True (which is also the default case):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cam</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;DummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">cam</span><span class="o">.</span><span class="n">setAutoGrabbing</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">liveImage</span><span class="p">(</span><span class="n">cam</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also show the live image of any camera using the GUI. Right-click on the opened camera instance in the plugin toolbox and choose <strong>live image</strong>:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/liveImageGUI.png"><img alt="../_images/liveImageGUI.png" src="../_images/liveImageGUI.png" /></a>
+</div>
+</div>
+<div class="section" id="changing-properties-of-plots">
+<h2>Changing properties of plots<a class="headerlink" href="#changing-properties-of-plots" title="Permalink to this headline">¶</a></h2>
+<p>Any plots have properties defined, which indicate the appearance or currently depicted data object or camera. To access these cameras you need to get the
+instance of the plot or live image item. This is always an instance of the class <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><tt class="xref py py-class docutils literal"><span class="pre">plotItem</span></tt></a>. This class is inherited by <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem" title="itom.uiItem"><tt class="xref py py-obj docutils literal"><span class="pre">uiItem</span></tt></a> which
+finally provides the access to the properties by the functionalities described in <a class="reference internal" href="../06_extended_gui/qtdesigner.html#qtdesigner"><em>Creating advanced dialogs and windows</em></a>.</p>
+<p>In order to access the necessary instance of <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><tt class="xref py py-class docutils literal"><span class="pre">plotItem</span></tt></a>, you will see that the return value of the commands <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><tt class="xref py py-meth docutils literal"><span class="pre">plot()</span></tt></a> or <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><tt class="xref py py-meth docutils literal"><span class="pre">liveImage()</span></tt></a>
+is a tuple consisting of a number of the overall figure (window), where the plot is print and of the requested instance as second value.</p>
+<p>In the next example, the title of a two-dimensional data object plot is changed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">data2d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data2d</span><span class="p">)</span>
+<span class="n">h</span><span class="p">[</span><span class="s">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;new title&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all plot plugins have the same properties defined, since this also depends on their type and special features. However it is intended to use the same property names
+for the same meaning in the different plugins.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the figure closed while you still have a reference to its instance, any method of this instance will raise an error saying that the plot does not exist any more.</p>
+</div>
+<p>In order to get a list of all properties of a plot, call the method <tt class="xref py py-meth docutils literal"><span class="pre">info()</span></tt> of the plot instance. This method prints a list of available properties as well as
+slots and signals.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">h</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>There are two other important properties that let you change the displayed data object or camera:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#set new data object</span>
+<span class="n">h</span><span class="p">[</span><span class="s">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+
+<span class="c">#assign new camera</span>
+<span class="n">h</span><span class="p">[</span><span class="s">&quot;camera&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;DummyGrabber&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These properties are also the way to set the content of plot widgets, that are integrated in your user-defined GUIs.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Quick tutorial to plots and figures</a><ul>
+<li><a class="reference internal" href="#plots-of-data-objects">Plots of data objects</a></li>
+<li><a class="reference internal" href="#live-images-of-cameras-and-grabbers">Live images of cameras and grabbers</a></li>
+<li><a class="reference internal" href="#changing-properties-of-plots">Changing properties of plots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plots.html"
+                        title="previous chapter">Plots and Figures</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="figureManagement.html"
+                        title="next chapter">Figure Management</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/05_plots/plotOverview.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="figureManagement.html" title="Figure Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plots.html" title="Plots and Figures"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="plots.html" >Plots and Figures</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

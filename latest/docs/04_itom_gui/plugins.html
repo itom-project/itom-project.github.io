@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugins &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Main Window" href="mainWindow.html" />
+    <link rel="next" title="File System" href="filesystem.html" />
+    <link rel="prev" title="Global and Local Workspace" href="workspace.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="filesystem.html" title="File System"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="workspace.html" title="Global and Local Workspace"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="gui.html" >The <strong>itom</strong> User Interface</a> &raquo;</li>
+          <li><a href="mainWindow.html" accesskey="U">Main Window</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugins">
+<h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
+<img alt="../_images/dockPlugins.png" src="../_images/dockPlugins.png" />
+<p>The plugin toolbox shows all loaded plugins included any opened instances. The plugins are divided into the following types:</p>
+<ul class="simple">
+<li>Actuator (Motor) -&gt; any actuator plugins.</li>
+<li>DataIO &gt;&gt; Grabber -&gt; any cameras.</li>
+<li>DataIO &gt;&gt; ADDA -&gt; any analog-to-digital or digital-to-analog converters.</li>
+<li>DataIO &gt;&gt; RawIO -&gt; further input/output plugins.</li>
+<li>Algorithm -&gt; all algorithm and extended-widget plugins.</li>
+</ul>
+<p>The plugins of type <strong>actuator</strong> or <strong>dataIO</strong> behave in the way, that it is possible to open one or multiple instances of every plugin, while all algorithm plugins
+always provide a set of multiple algorithms (filters) or user interfaces.</p>
+<p>At startup of <strong>itom</strong> all plugin libraries, located somewhere in the subfolder <strong>plugins</strong> of <strong>itom</strong> are loaded. If the load fails (for instance due to missing 3rd party libraries), their load
+is aborted and the reason can be seen in the dialog <strong>loaded plugins...</strong> (menu <strong>file &gt;&gt; loaded plugins</strong>). A right click to any hardware plugin opens the second context menu, depicted in the
+figure above. There you have the possibility to open a <strong>new instance</strong> of this plugin. After having created this instance, the plugin instance is unfolded an you see the instance by its identifier or
+ID like in it is the case for the plugin <strong>DummyMotor</strong> in the figure above. The context menu of an instance is also depicted in the figure.</p>
+<p>Depending on the implementation of the plugin you have the following possibilities:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Configuration Dialog</td>
+<td>If the plugin provides this a configuration dialog is started (else: disabled)</td>
+</tr>
+<tr class="row-odd"><td>Show Plugin Toolbox</td>
+<td>If provided, the instance&#8217;s toolbox is shown in the main window (else: disabled)</td>
+</tr>
+<tr class="row-even"><td>Close Instance</td>
+<td>closes this instance (see note below)</td>
+</tr>
+<tr class="row-odd"><td>Send to Python...</td>
+<td>You can access this plugin&#8217;s instance by a global variable in Python under the name that you give in the input box that appears after clicking on this action.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you want to close an instance of a plugin by this toolbox, you need to consider the following remarks:</p>
+<ul class="last simple">
+<li>If you opened the instance by the toolbox and no python variable is created for this plugin, you can simply close it by the GUI</li>
+<li>If you created the instance by the GUI, however created a python variable, a click on <strong>close instance</strong> deletes the reference, the GUI is holding to the plugin&#8217;s instance. However, the instance is only closed if all Python references are deleted as well.</li>
+<li>If you created the instance by Python, you cannot delete it by the GUI.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="workspace.html"
+                        title="previous chapter">Global and Local Workspace</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="filesystem.html"
+                        title="next chapter">File System</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/04_itom_gui/plugins.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="filesystem.html" title="File System"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="workspace.html" title="Global and Local Workspace"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="gui.html" >The <strong>itom</strong> User Interface</a> &raquo;</li>
+          <li><a href="mainWindow.html" >Main Window</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

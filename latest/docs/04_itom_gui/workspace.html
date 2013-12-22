@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Global and Local Workspace &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Main Window" href="mainWindow.html" />
+    <link rel="next" title="Plugins" href="plugins.html" />
+    <link rel="prev" title="Main Window" href="mainWindow.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugins.html" title="Plugins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mainWindow.html" title="Main Window"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="gui.html" >The <strong>itom</strong> User Interface</a> &raquo;</li>
+          <li><a href="mainWindow.html" accesskey="U">Main Window</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="global-and-local-workspace">
+<h1>Global and Local Workspace<a class="headerlink" href="#global-and-local-workspace" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../_images/dockGlobalVariables.png"><img alt="../_images/dockGlobalVariables.png" class="align-center" src="../_images/dockGlobalVariables.png" /></a>
+<p>In Python, every loaded package has a global workspace, where all global variables are saved. The main workspace of <strong>itom</strong> is a huge
+dictionary, containing all variables as well as method and function pointers and loaded packages and modules. The content of this global
+workspace is listed in the toolbox <strong>Global Variables</strong>. There is a filter, such that all variables of type <strong>method</strong>, <strong>function</strong> and
+<strong>type</strong> (classes...) are not listed in that overview. If you want to access items of this global workspace you can directly access them
+by their variable name, e.g.:</p>
+<div class="highlight-python"><pre>&gt;&gt;print(__name__)
+&#x27;__main__&#x27; #answer</pre>
+</div>
+<p>However, this is only possible if you work in the command line or a script that is not part of a separate module. In this case, you can
+access items of <strong>itom</strong>&#8216;s global workspace by importing the module <strong>__main__</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">__main__</span>
+<span class="k">print</span><span class="p">(</span><span class="n">__main__</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;__name__&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In Python, every module or package has its own global workspace. The main global workspace depicted in the toolbox is related to the
+global workspace of <strong>itom</strong> that is always accessible by other modules using the dictionary <strong>__dict__</strong> of the <strong>__main__</strong>-module.</p>
+</div>
+<p>The toolbox <strong>local variables</strong> is only enabled if you are currently debugging a python script and the execution is stopped at a breakpoint or in
+a certain line. Then, the current workspace (local scope) of the method, where the debugger has been stopped, is shown. If the debugger currently processes
+any code not contained in a method, no local workspace is available.</p>
+<p>Double-clicking on an item opens an small dialog where the content of the variable is printed. This is the same result as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">VARIABLENAME</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The context menu, depicted in the figure above shows some important methods of this toolbox. Most of them are also accessible by the toolboxes
+toolbar. You can always delete <img alt="vardelete" src="../_images/vardelete.png" /> one or multiple selected variables or you can rename <img alt="varrename" src="../_images/varrename.png" /> one selected variable. Additionally, there is the possibility
+to import <img alt="varimport" src="../_images/varimport.png" /> or export <img alt="varexport" src="../_images/varexport.png" /> variables to or from this workspace.</p>
+<p>A click on <strong>import</strong> <img alt="varimport" src="../_images/varimport.png" /> opens a file dialog where you can choose a specific file to import. The following file formats are loadable:</p>
+<ul class="simple">
+<li>itom data collection (.idc). This is a pickled file, that may contain several python variables and is loaded using the module <strong>pickle</strong> of python.</li>
+<li>Matlab file (.mat). You can load matlab files in <strong>itom</strong> if you have the Python package <strong>scipy</strong> installed.</li>
+<li>Several itom algorithm-plugins contain methods that implement one of the following interfaces: <strong>iReadDataObject</strong>, <strong>iReadPointCloud</strong>, <strong>iReadPolygonMesh</strong>. Then the data formats that these methods can load are accessible in the dialog as well for loading.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Existing variable names will be replaced unless the variable points to a class, method or function.</p>
+</div>
+<p>If you selected one or multiple variables and click on <strong>export</strong> <img alt="varexport" src="../_images/varexport.png" />, another file save dialog is shown where you can choose a specific filename in order to export
+the variables. You can export into the following file formats:</p>
+<ul class="simple">
+<li>itom data collection (.idc) [multiple files]. The variables are pickled (python module <strong>pickle</strong>) to the file.</li>
+<li>Matlab file (.mat). [multiple files, Python package <strong>scipy</strong> required].</li>
+<li>If you have itom algorithm-plugins installed that implement one of the following interfaces: <strong>iWriteDataObject</strong>, <strong>iWritePointCloud</strong>, <strong>iWritePolygonMesh</strong>, then you can also export dataObjects, pointClouds or polygonMeshes</li>
+</ul>
+<p>into the specific file formats. [single variable only].</p>
+<p>In both the file open and save dialogs, the filter list always considers all file formats that are available for import and export on your computer.</p>
+<p>All variables which are defined in python console or in any python script are stored as global variables.
+These can be seen in the Global Variables Toolbox.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mainWindow.html"
+                        title="previous chapter">Main Window</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugins.html"
+                        title="next chapter">Plugins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/04_itom_gui/workspace.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugins.html" title="Plugins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mainWindow.html" title="Main Window"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="gui.html" >The <strong>itom</strong> User Interface</a> &raquo;</li>
+          <li><a href="mainWindow.html" >Main Window</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

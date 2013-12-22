@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin class - Actuator &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '8066fd5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Plugin class - Algo" href="plugin-algo.html" />
+    <link rel="prev" title="Plugin class - DataIO" href="plugin-dataIO.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo.html" title="Plugin class - Algo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-dataIO.html" title="Plugin class - DataIO"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-class-actuator">
+<span id="id1"></span><h1>Plugin class - Actuator<a class="headerlink" href="#plugin-class-actuator" title="Permalink to this headline">¶</a></h1>
+<p>If you want to create a plugin in order to access piezo- or motor-stages, multi-axes-machines,... it is intended to derive your plugin class from <strong>ito::AddInActuator</strong>.</p>
+<div class="section" id="base-idea-of-any-actuator">
+<h2>Base idea of any actuator<a class="headerlink" href="#base-idea-of-any-actuator" title="Permalink to this headline">¶</a></h2>
+<p>The actuator interface has been developped with the following base ideas:</p>
+<ul class="simple">
+<li>The actuator can consist of different axes. The first axis is indexed with the number 0.</li>
+<li>The plugin contains a set of parameters (like every other plugin), which can be set or get using the public methods <strong>setParam</strong> or <strong>getParam</strong> or the appropriate methods in Python.</li>
+<li>Some of those parameters must be available, others are optional, but if you implement them, you should follow some rules concerning name and type of the parameter, and of course you can add an infinite list of further parameters.</li>
+<li>Every actuator is executed in its own thread.</li>
+<li>Every actuator can have one configuration dialog and one docking widget toolbox, that is directly included in the GUI of <strong>itom</strong>.</li>
+<li>The current position of all axes should be stored in the vector <strong>m_currentPos</strong>, that is a member of class <strong>AddInActuator</strong>.</li>
+<li>The new target position for all axes must be stored in the vector <strong>m_targetPos</strong>, that is also a member of class <strong>AddInActuator</strong>.</li>
+<li>The current status of all axes should be stored in the vector <strong>m_currentStatus</strong> (member of class <strong>AddInActuator</strong>).</li>
+<li>Make sure at the initialization of your plugin that all three member vectors are initialized with the size of the numbers of axes.</li>
+<li>Changes to the current status or position are signalled by the signal <strong>actuatorStatusChanged</strong> (class <strong>AddInActuator</strong>).</li>
+<li>Changes to the target position vector is signalled by the signal <strong>targetChanged</strong> (class <strong>AddInActuator</strong>).</li>
+<li>Any GUI elements should only get live information about the position and status of the actuator by connecting to these signals (<strong>actuatorStatusChanged</strong> or <strong>targetChanged</strong>), since the communication to GUI elements must be executed across multiple threads.</li>
+<li>Try to only connect to these signals if you really need this information, since the request of live-status and -position-information is time-consuming for certain motors. For example, a dock widget should only connect to these signals, if it is visible. This can be done by overwriting the slot <strong>dockWidgetVisibilityChanged</strong> of class <strong>AddInBase</strong>.</li>
+<li>Methods like <strong>setPosAbs</strong>, <strong>setPosRel</strong>, <strong>setParam</strong>, <strong>calib</strong> or <strong>setOrigin</strong> should only execute their given task if the motor is not moving at this moment. This can be checked using the method <strong>isMotorMoving()</strong>, defined in <strong>AddInActuator</strong> by simply checking the appropriate status flags.</li>
+<li>The method <strong>waitForDone</strong> (pure virtual method of class <strong>AddInActuator</strong>) has to be overwritten. This method should only return if the requested axes reached their target position, reached an end switch or if a timeout occurred. If the hardware is able to give sophisticated live information about the current status and position of each axis, you can continuously adapt the values in the members <strong>m_currentStatus</strong> or <strong>m_currentPos</strong>; else you have to guess these values. If the axes are asynchronously moved, the semaphore <strong>waitCond</strong> has to be released immediately before the loop waiting for the target position starts. Then the caller can directly continue working. In synchronous mode (default behaviour), <strong>waitCond</strong> is only released, if all axes are not moving any more.</li>
+</ul>
+</div>
+<div class="section" id="programming-steps">
+<h2>Programming steps<a class="headerlink" href="#programming-steps" title="Permalink to this headline">¶</a></h2>
+<p>In order to program the actuator plugin, follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Create the header and source file for your plugin &#8220;MyActuatorPlugin&#8221;.</p>
+</li>
+<li><p class="first">Create the interface (or factory) class &#8220;MyActuatorPluginInterface&#8221;. For details about how to create such an interface class, see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><em>Plugin interface class</em></a>.</p>
+</li>
+<li><p class="first">Create the plugin class &#8220;MyActuatorPlugin&#8221; with respect to the exemplary implementation, given in the next section.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Consider which internal parameters, that can be read and/or written by the user, your plugin has. Add these parameters in the constructor of your plugin to the <strong>m_params</strong>-vector.</li>
+<li>Implement the <strong>init</strong>-method that gets the initial parameters, defined in the interface class.</li>
+<li>Implement the methods <strong>getParam</strong> and <strong>setParam</strong>, which are the getter- and setter-methods for the internal parameters.</li>
+<li>Implement the motor-specific methods, including <strong>waitForDone</strong></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="actuator-plugin-class">
+<h2>Actuator plugin class<a class="headerlink" href="#actuator-plugin-class" title="Permalink to this headline">¶</a></h2>
+<p>A sample header file of the actuator&#8217;s plugin class is illustrated in the following code snippet:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &quot;../../common/addInInterface.h&quot;</span>
+
+<span class="cp">#include &quot;dialogMyMotor.h&quot;</span>
+<span class="cp">#include &quot;dockWidgetMyMotor.h&quot;</span>
+
+<span class="k">class</span> <span class="nc">MyMotor</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInActuator</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="k">protected</span><span class="o">:</span>
+        <span class="o">~</span><span class="n">MyMotor</span><span class="p">()</span> <span class="p">{};</span>      <span class="cm">/*! &lt; Destructor*/</span>
+        <span class="n">MyMotor</span><span class="p">(</span><span class="kt">int</span> <span class="n">uniqueID</span><span class="p">);</span><span class="cm">/*! &lt; Constructor*/</span>
+
+
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyMotorInterface</span><span class="p">;</span>
+        <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>     <span class="cm">/*!&lt; Opens the modal configuration dialog (called from main thread) */</span>
+        <span class="kt">int</span> <span class="n">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span> <span class="cm">/*!&lt; indicates that this plugin has got a configuration dialog */</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">waitForDone</span><span class="p">(</span><span class="kt">int</span> <span class="n">timeoutMS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span> <span class="cm">/*if empty -&gt; all axis*/</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span> <span class="cm">/*for your use*/</span><span class="p">);</span>
+
+    <span class="nl">signals:</span>
+        <span class="kt">void</span> <span class="n">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">);</span>   <span class="cm">/*!&lt; Sends a signal if parameters have changes */</span>
+
+    <span class="k">public</span> <span class="nl">slots:</span>
+        <span class="c1">//! get/set parameters</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! init/close method</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="c1">//! calibration for single or multiple axis</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">calib</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">calib</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! current axis position is new zero-position</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setOrigin</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setOrigin</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! Reads out status request answer and gives back ito::retOk or ito::retError</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getStatus</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">status</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="c1">//! get current position of single or multiple axis (in mm or degree)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getPos</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getPos</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="c1">//! move one or more axis to certain absolute positions (in mm or degree)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosAbs</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosAbs</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! move one or more axis by certain relative distances (in mm or degree)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosRel</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosRel</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! if this slot is triggered, the current status and position is emitted (e.g. for actualizing a dock widget)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">RequestStatusAndPosition</span><span class="p">(</span><span class="kt">bool</span> <span class="n">sendActPosition</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">sendTargetPos</span><span class="p">);</span>
+
+    <span class="k">private</span> <span class="nl">slots:</span>
+        <span class="kt">void</span> <span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">visible</span> <span class="p">);</span> <span class="cm">/*!&lt; this slot is invoked if the visibility of the dock widget has changed */</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="signalling-the-current-position-and-status-of-any-axes">
+<h2>Signalling the current position and status of any axes<a class="headerlink" href="#signalling-the-current-position-and-status-of-any-axes" title="Permalink to this headline">¶</a></h2>
+<p>Each actuator has the possibility to signalize the target position, the current position and the current status of each axis. Then its own toolbox or other widgets or slots (general: listeners) can be connected to the corresponding signals in order to be informed about the current activity. The base class <strong>ito::AddInActuator</strong> provides the necessary structures for this:</p>
+<p>1. The vector <strong>m_currentPos</strong> must be initialized to a length corresponding to the number of axes and contains the current position of every axis using the units stated below. Whenever
+the actuator registers a change of any current position, the corresponding value should be changed as well. Listeners are finally informed about this change by calling the method</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span class="n">sendStatusUpdate</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The argument <strong>false</strong> means that not only a change of the current status happened, but also a change of any current position. This method internally emits the signal <strong>actuatorStatusChanged</strong>.</p>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p class="first">The vector <strong>m_targetPos</strong> must also be initialized to a length corresponding to the number of axes. Whenever a positioning operation starts, set the target value of specific axes to the new target value and call</p>
+<blockquote>
+<div><div class="highlight-c++"><div class="highlight"><pre><span class="n">sendTargetUpdate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>that finally emits the signal <strong>targetChanged</strong>.</p>
+</div></blockquote>
+</li>
+<li><p class="first">The status of every axis is stored in the vector <strong>m_currentStatus</strong>. Each item in this vector with a length corresponding to the number of axes, contains an OR combination of the enumeration <strong>ito::tActuatorStatus</strong>. Whenever the status of any axis changes, change its status value, too and use <strong>sendStatusUpdate(true/false)</strong> in order to also emit the signal <strong>actuatorStatusChanged</strong>.</p>
+</li>
+</ol>
+<p>The enumeration <strong>ito::tActuatorStatus</strong> contains the following values that are grouped by specific mask values:</p>
+<p>The <strong>moving flags</strong> contain flags about the current moving status of any axis (bits containing to this group are contained in the mask <strong>ito::actMovingMask</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li>ito::actuatorUnknown: The current status of this axis is unknown</li>
+<li>ito::actuatorInterrupted: The movement of this axis has been interrupted and no further commands followed</li>
+<li>ito::actuatorMoving: The axis is currently moving (or is supposed to move)</li>
+<li>ito::actuatorAtTarget: The axis reached its target position (this is the default value)</li>
+<li>ito::actuatorTimeout: A timeout occurred during the movement of this axis</li>
+</ul>
+</div></blockquote>
+<p>The <strong>status flags</strong> inform about the general status of any axis (bits containing to this group are set in the mask <strong>ito::actStatusMask</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li>ito::actuatorAvailable: This axis is available (usually set)</li>
+<li>ito::actuatorEnabled: This axis is enabled and can be driven (usually set, but there are drivers that allowing disabling selected axis)</li>
+</ul>
+</div></blockquote>
+<p>Axes that have got any reference or end switches can signal related status information using the <strong>switches flags</strong>. All bits belonging to this group are set in the mask <strong>ito::actSwitchesMask</strong> divided into <strong>ito::actEndSwitchMask</strong> and <strong>ito::actRefSwitchMask</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li>ito::actuatorEndSwitch: This bit is set if any (unknown) end switch was reached</li>
+<li>ito::actuatorLeftEndSwitch: This bit is additionally set if the left end switch was reached</li>
+<li>ito::actuatorRightEndSwitch: This bit is additionally set if the right end switch was reached</li>
+<li>ito::actuatorRefSwitch: This bit is set if any (unknown) reference switch was reached</li>
+<li>ito::actuatorLeftRefSwitch: This bit is additionally set if the left reference switch was reached</li>
+<li>ito::actuatorRightRefSwitch: This bit is additionally set if the right reference switch was reached</li>
+</ul>
+</div></blockquote>
+<p>You can either manually set the necessary bit-combination of moving, status and switch flags for signalling the right status of the axis. There are three methods defined in <strong>ito::AddInActuator</strong> that simplify this process:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">setStatus</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">newFlags</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">keepMask</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">setStatus</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">newFlags</span><span class="p">,</span> <span class="k">const</span> <span class="n">in</span> <span class="n">keepMask</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this methods to the set the status of one or multiple axis. The parameter <strong>newFlags</strong> should contain an or-combination of all flags that should be set. The status flags are then set to this value (hence, old values are overwritten). If you want to keep the current bit values of a certain group, pass the specific mask as argument <strong>keepMask</strong>. For instance, if you want to the status of the second axis to <strong>actuatorMoving</strong> without changing the <strong>status flags</strong>, use the following command:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">setStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span>
+<span class="cp"># this command will set all bits of the switches mask to 0!</span>
+</pre></div>
+</div>
+<p>The equivalent command for multiple axis, requires a vector with axes-indices as first argument. This example does the same for the first and third axis:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">;</span>
+<span class="n">axis</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">setStatus</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The similar commands <strong>replaceStatus</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">replaceStatus</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">existingFlag</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">replaceFlag</span><span class="p">)</span>
+<span class="n">replaceStatus</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">existingFlag</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">replaceFlag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>can be used to replace one status flag by another one without changing the other bits. If the bit corresponding to the <strong>existingFlag</strong> is set, it is set to zero and the bit of the <strong>replaceFlag</strong> is set to 1. In the following example, the flag of the first axis is set from moving to atTarget:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">replaceStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorAtTarget</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After using one of these functions to set the current status, call <strong>sendStatusUpdate</strong> to emit the signal <strong>actuatorStatusChanged</strong> such that connected listeners can for instance visualize the current status.</p>
+</div>
+<div class="section" id="unit-conventions">
+<h2>Unit Conventions<a class="headerlink" href="#unit-conventions" title="Permalink to this headline">¶</a></h2>
+<p>In order to have a unique behaviour of all plugins, respect the following unit conditions:</p>
+<ul class="simple">
+<li>Length values in <strong>mm</strong></li>
+<li>Angles in <strong>degree</strong></li>
+<li>Velocity in <strong>mm/sec</strong> or <strong>degree/sec</strong></li>
+<li>Acceleration in <strong>mm/sec^2</strong> or <strong>degree/sec^2</strong></li>
+</ul>
+<div class="section" id="mandatory-keywords-for-setparam-getparam">
+<h3>Mandatory keywords for setParam / getParam<a class="headerlink" href="#mandatory-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>&#8220;name&#8221;: Name of the plugIn as &#8220;typeString&#8221; || &#8220;readOnly&#8221;</li>
+<li>&#8220;numAxis&#8221;: Number of axis as &#8220;typeInt&#8221; || &#8220;readOnly&#8221;</li>
+<li>&#8220;async&#8221;: Toggle wait behaviour during movement. As &#8220;typeInt&#8221;</li>
+<li>&#8220;speed&#8221;: Speed for ever axis of the stage as &#8220;typeDoubleArray&#8221;. For single axis stages as &#8220;typeDouble&#8221;. Single axis must not throw an error of called with speed[0]</li>
+</ul>
+</div>
+<div class="section" id="optional-but-reserved-keywords-for-setparam-getparam">
+<h3>Optional but reserved keywords for setParam / getParam<a class="headerlink" href="#optional-but-reserved-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>&#8220;accel&#8221;: Acceleration for ever axis of the stage as &#8220;typeDoubleArray&#8221;. For single axis stages as &#8220;typeDouble&#8221;. Single axis must not throw an error of called with accel[0]</li>
+<li>&#8220;decel&#8221;: Deceleration for ever axis of the stage as &#8220;typeDoubleArray&#8221;. For single axis stages as &#8220;typeDouble&#8221;. Single axis must not throw an error of called with decel[0]</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin class - Actuator</a><ul>
+<li><a class="reference internal" href="#base-idea-of-any-actuator">Base idea of any actuator</a></li>
+<li><a class="reference internal" href="#programming-steps">Programming steps</a></li>
+<li><a class="reference internal" href="#actuator-plugin-class">Actuator plugin class</a></li>
+<li><a class="reference internal" href="#signalling-the-current-position-and-status-of-any-axes">Signalling the current position and status of any axes</a></li>
+<li><a class="reference internal" href="#unit-conventions">Unit Conventions</a><ul>
+<li><a class="reference internal" href="#mandatory-keywords-for-setparam-getparam">Mandatory keywords for setParam / getParam</a></li>
+<li><a class="reference internal" href="#optional-but-reserved-keywords-for-setparam-getparam">Optional but reserved keywords for setParam / getParam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-dataIO.html"
+                        title="previous chapter">Plugin class - DataIO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="plugin-algo.html"
+                        title="next chapter">Plugin class - Algo</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-actuator.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="plugin-algo.html" title="Plugin class - Algo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-dataIO.html" title="Plugin class - DataIO"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Dec 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
