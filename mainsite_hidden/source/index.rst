@@ -27,8 +27,9 @@ itom - an Open Source Measurement, Automation and Evaluation Software
 News
 -----
 
+* 2014-01-13: The plugins **AerotechEnsemble** (Ensemble controller of Aerotech axes) and **BasicFilters** are online (https://bitbucket.org/itom/plugins).
 * 2013-12-22: Newest documentation :ref:`documentation <sec-documentation>` online (small changes with respect to v1.0.14).
-* 2013-10-10: The plugins **OpenCVFilters** (wrapper for some OpenCV functions) and **DispWindow** (OpenGL based cosine and graycode fringe pattern display) are put online (https://bitbucket.org/itom/plugins)
+* 2013-10-10: The plugins **OpenCVFilters** (wrapper for some OpenCV functions) and **DispWindow** (OpenGL based cosine and graycode fringe pattern display) are put online (https://bitbucket.org/itom/plugins).
 * 2013-10-10: The new section about :ref:`plugins <sec-plugins>` has been added to this website.
 * 2013-09-12: The introduction to **itom** and a poster, presented at the `Fringe 2013 conference <http://www.fringe13.de>`_, is available in the :ref:`media section <sec-media>`.
 * 2013-09-02: Today **itom 1.0.14** has been released. The Windows setups and the sources (tag v1.0.14) are ready for download. It contains many bugfies, an extended set of open-source plugins as well as renamed and improved designer plugins.

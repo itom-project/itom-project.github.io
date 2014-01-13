@@ -111,6 +111,16 @@ Cameras / Grabbers / AD-Converter
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
 
+* **Aerotech Ensemble - plugin for Ensemble controllers of Aerotech with up to 10 axes**
+    
+    This plugin allows communicating with controllers of type Ensemble (4.xx Version) of company Aerotech. 
+
+    If no parameters are given, the plugin connects to all available axes of the controller. Else you can provide a list of axis numbers (0..9) that should be connected. The first axis of this list then gets the axis ID 0, the second the axis ID 1 and so on.
+
+    For running this plugin you need an installed Ensemble driver and a connected device. This plugin comes with version 4.06 of the Ensemble driver. You can change them by newer libraries (Version 4.XX). The manual of Ensemble allows redistributing the Ensemble libraries without having the end-user install the Ensemble software. For further information about license information of Aerotech see their documentation.
+
+    For loading the Ensemble library you need the Visual C++ 2008 SP1 Redistributable Package provided by Microsoft (see Ensemble Programming Help).
+
 * **DummyMotor - a virtual motor to test real actuators**
     
     The DummyMotor is a virtual actuator plugin that emulates up to 10 linear axes.
@@ -174,6 +184,15 @@ Further hardware devices
 
 Algorithms
 ~~~~~~~~~~~
+
+* **BasicFilters - Basic algorithms and filters for data objects (arrays)**
+
+    This plugin provides several basic filter calculations for itom::dataObject. These are for instance:
+
+    * merging of planes
+    * swap byte order of objects
+    * resample slices from dataObjects
+    * mean value filter along axis
 
 * **DataObjectIO - import or export dataObject from/to several file formats**
     
