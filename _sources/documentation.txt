@@ -13,7 +13,12 @@ Latest documentations:
 * `User documentation <http://itom.bitbucket.org/latest/docs>`_
 * `Doxygen source code documentation <http://itom.bitbucket.org/latest/doxygen>`_
 
-Current setup version 1.0.14:
+Current setup version 1.1.0:
+
+* `User documentation <http://itom.bitbucket.org/v1-1-0/docs>`_
+* `Doxygen source code documentation <http://itom.bitbucket.org/v1-1-0/doxygen>`_
+
+Previous setup version 1.0.14:
 
 * `User documentation <http://itom.bitbucket.org/v1-0-14/docs>`_
 * `Doxygen source code documentation <http://itom.bitbucket.org/v1-0-14/doxygen>`_

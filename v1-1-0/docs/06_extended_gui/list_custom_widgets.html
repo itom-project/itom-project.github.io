@@ -1,0 +1,300 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Itom Custom Designer Widgets &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'dac304c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Extending the user interface of itom" href="extended_gui.html" />
+    <link rel="next" title="Implement a more complex GUI in a plugin (C/C++)" href="algo-plugin.html" />
+    <link rel="prev" title="Creating advanced dialogs and windows" href="qtdesigner.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="algo-plugin.html" title="Implement a more complex GUI in a plugin (C/C++)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="qtdesigner.html" title="Creating advanced dialogs and windows"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="extended_gui.html" accesskey="U">Extending the user interface of <strong>itom</strong></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="itom-custom-designer-widgets">
+<span id="listcustomdesignerwidgets"></span><h1><strong>Itom Custom Designer Widgets</strong><a class="headerlink" href="#itom-custom-designer-widgets" title="Permalink to this headline">¶</a></h1>
+<p>Beside QtDesginer-Widgets for plots and figures (see  <a class="reference internal" href="../05_plots/plots.html#plotsandfigures"><em>Plots and Figures</em></a>) some non-plotting widgets have been develop to give the user GUI-based access to itom specific objects and functions.
+The openSource-Widgets are:</p>
+<ul class="simple">
+<li>DataObjectTable</li>
+<li>dObMetaDataTable</li>
+<li>EvaluateGeometricsFigure</li>
+<li>MotorController</li>
+</ul>
+<p>These widgets can be used like any other type of widget within an ui-dialog with 2 exceptions:</p>
+<ol class="arabic simple">
+<li>The ui-Dialog must be loaded and initilized within a itom-python context (e.g. script in itom).</li>
+<li>Some properties are not accesable (DESIGNABLE) in the QtDesigner (e.g. actuator-handles) and must be set during initilization in itom-python.</li>
+</ol>
+<p>To add such a widget to your ui-file, you can drag&amp;drop them in the QtDesigner like any other widget.</p>
+<div class="section" id="dataobjecttable">
+<h2>DataObjectTable<a class="headerlink" href="#dataobjecttable" title="Permalink to this headline">¶</a></h2>
+<p>The &#8220;DataObjectTable&#8221; can be used to visualize or edit a dataObject in a table based widget like in &#8220;Matlab&#8221;. The widget is not inherited from a AbstractDObject and can not be used for a live plot.</p>
+<div class="section" id="properties">
+<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<p><strong>data</strong>: <em>ito::DataObject</em>, the dataObject to be shown</p>
+<p><strong>readOnly</strong>: <em>bool, DESIGNABLE</em>, enable write protection</p>
+<p><strong>min</strong>: <em>double, DESIGNABLE</em>, get/set minimum value</p>
+<p><strong>max</strong>: <em>double, DESIGNABLE</em>, get/set maximum value</p>
+<p><strong>decimals</strong>: <em>int, DESIGNABLE</em>, number of decimals to be shown within each cell</p>
+<p><strong>defaultCols</strong>: <em>int, DESIGNABLE</em>, number of column to be shown</p>
+<p><strong>defaultRows</strong>: <em>int, DESIGNABLE</em>, number of rows to be shown</p>
+<p><strong>horizontalLabels</strong>: <em>QStringList, DESIGNABLE</em>, list with labels for each column row</p>
+<p><strong>verticalLabels</strong>: <em>QStringList, DESIGNABLE</em>, list with labels for each shown row</p>
+</div>
+</div>
+<div class="section" id="dobmetadatatable">
+<h2>dObMetaDataTable<a class="headerlink" href="#dobmetadatatable" title="Permalink to this headline">¶</a></h2>
+<p>The &#8220;dObMetaDataTable&#8221; can be used to visualize the metaData of a dataObject, e.g. to realize a measurement protoco . The widget is not inherited from a AbstractDObject and can not be used for a live plot.</p>
+<div class="section" id="id1">
+<h3>Properties<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><strong>data</strong>: <em>ito::DataObject</em>, the dataObject to be shown</p>
+<p><strong>readOnlyEnabled</strong>: <em>bool, DESIGNABLE</em>, enable write protection</p>
+<p><strong>detailedInfo</strong>: <em>bool, DESIGNABLE</em>, Toogle between basic and detailed metaData</p>
+<p><strong>previewEnabled</strong>: <em>bool, DESIGNABLE</em>, Add a small quadratic image downsampled from the dataObject as a preview to the meta data.</p>
+<p><strong>previewSize</strong>: <em>int, DESIGNABLE</em>, Set the preview size in pixels,</p>
+<p><strong>decimals</strong>: <em>int, DESIGNABLE</em>, number of decimals to be shown within each cell</p>
+<p><strong>colorBar</strong>: <em>QString, DESIGNABLE</em>, the name of the color bar for the preview, <em>not implemented yet</em></p>
+</div>
+</div>
+<div class="section" id="evaluategeometricsfigure">
+<h2>EvaluateGeometricsFigure<a class="headerlink" href="#evaluategeometricsfigure" title="Permalink to this headline">¶</a></h2>
+<p>The evaluateGeomtrics-widget is designed to load geometric definition stored in a float32 dataObject with a column-size of &gt;10 elments and a row for each geometric element to display.
+Further more it allows the evaluation of geometric relations between the geometric primitives. It contains a tableView and although is is inherited by AbstractDObject it should not be used for &#8220;liveVisualisation of dataObject&#8221;.</p>
+<div class="section" id="id2">
+<h3>Properties<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><strong>title</strong>: <em>QString, DESIGNABLE</em>, Title of the plot or &#8216;&lt;auto&gt;&#8217; if the title of the data object should be used. <em>Not implemented yet</em>
+<strong>valueUnit</strong>: <em>QString, DESIGNABLE</em>, The value unit for the metrical calculations that is used within the plot.
+<strong>titleFont</strong>: <em>QFont, DESIGNABLE</em>, Font for title. <em>Not implemented yet</em>
+<strong>labelFont</strong>: <em>QFont, DESIGNABLE</em>, Font for labels. <em>Not implemented yet</em>
+<strong>relations</strong>: <em>ito::DataObject</em>, Get or set N geometric elements via N x 11 dataObject of type float32.
+<strong>relationNames</strong>: <em>QStringList, DESIGNABLE</em>, A string list with the names of possible relation. The first elements [N.A., radius, angle to, distance to, intersection with, length and area] are read only and are calculated with these widget. For external calculated values you can define custom names e.g. roughness..
+<strong>destinationFolder</strong>: <em>QString, DESIGNABLE</em>, Set a default export directory.
+<strong>lastAddedRelation</strong>: <em>int, DESIGNABLE</em>, Get the index of the last added relation.
+<strong>considerOnly2D</strong>: <em>bool, DESIGNABLE</em>, If true, only the x &amp; y coordinates are considered.</p>
+</div>
+<div class="section" id="slots">
+<h3>Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h3>
+<p><strong>ito::RetVal addRelation(ito::DataObject importedData)</strong></p>
+<blockquote>
+<div><p>Add a relation to the current context. The relation must be</p>
+<p><em>importedData, ito::DataObject</em>: geometric element expressed by 1 x 4 dataObject of type float32.</p>
+</div></blockquote>
+<p><strong>ito::RetVal modifyRelation(const int idx, ito::DataObject relation)</strong></p>
+<blockquote>
+<div><p>Modify an existing relation addressed by the idx.</p>
+<p><em>idx, int</em>: Index of relation to modify</p>
+<p><em>relation, ito::DataObject</em>: geometric element expressed by 1 x 4 dataObject of type float32.</p>
+</div></blockquote>
+<p><strong>ito::RetVal addRelationName(const QString newName)</strong></p>
+<blockquote>
+<div><p>Add a new relation name to the relationNameList.</p>
+<p><em>newName, QString</em>: new relation name to be appended</p>
+</div></blockquote>
+<p><strong>ito::RetVal exportData(QString fileName, ito::uint8 exportFlag)</strong></p>
+<blockquote>
+<div><p>Export data to csv or xml</p>
+<p><em>fileName, QString</em>: Destination file name</p>
+<p><em>exportFlag, int</em>: Export flag, exportCSVTree  = 0x00, exportCSVTable = 0x01, exportXMLTree  = 0x02, exportCSVList  = 0x03, showExportWindow = 0x10</p>
+</div></blockquote>
+<p><strong>ito::RetVal plotItemChanged(ito::int32 idx, ito::int32 flags, QVector&lt;ito::float32&gt; values)</strong></p>
+<blockquote>
+<div><p>Slot for direct connection between this widget and a plot (e.g. itom2dQwtPlot) to notify changes within the plotted geometry. Internal relations are automatically updated. External relation values (e.g. roughness) can not be updated automatically.</p>
+<p><em>idx, int</em>: Index of the modified geometric element</p>
+<p><em>flags, int</em>: Type (and meta properties) of geometric elements which was changed. If type differes from original type clear and refill is necessary.</p>
+<p><em>values, QVector&lt;ito::float32&gt;</em>: Geometric parameters of the modified geometric item.</p>
+</div></blockquote>
+<p><strong>ito::RetVal clearAll(void)</strong></p>
+<blockquote>
+<div>Clear all elements and relations in this plot.</div></blockquote>
+</div>
+<div class="section" id="signals">
+<h3>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<p>None</p>
+</div>
+</div>
+<div class="section" id="motorcontroller">
+<h2>MotorController<a class="headerlink" href="#motorcontroller" title="Permalink to this headline">¶</a></h2>
+<p>The &#8220;MotorController&#8221;-widget gives the user the some basic functions for generic motor positioning and position reporting within a complex GUI. The widget can be used for 1 to 6 axis and can be used readOnly or as a type of software control panel.
+The widget updated in a fixed interval (can be deactivated). During measurements the widget should be disabled to avoid user errors. A support for the 3DConnexion-Mouse is planed but <em>Not implemented yet</em>.</p>
+<p>The motor should support up <em>slot: RequestStatusAndPosition</em> and <em>signal: actuatorStatusChanged</em> for semaphore free communication, but this is not necessary.</p>
+<div class="section" id="id3">
+<h3>Properties<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><strong>actuator</strong>: <em>ito::AddInActuator</em>, Handle to the actuator to be used, not DESIGNABLE</p>
+<p><strong>numberOfAxis</strong>: <em>int, DESIGNABLE</em>, Number of axis to be visible</p>
+<p><strong>unit</strong>: <em>QString, DESIGNABLE</em>, Base unit for spinboxes and movements, e.g. nm, micron, mm, m, km</p>
+<p><strong>readOnly</strong>: <em>bool, DESIGNABLE</em>, Toogle read only</p>
+<p><strong>autoUpdate</strong>: <em>bool, DESIGNABLE</em>, Toogle automatic motorposition update</p>
+<p><strong>smallStep</strong>: <em>double, DESIGNABLE</em>, Distances for the small step button, same value for plus and minus</p>
+<p><strong>bigStep</strong>: <em>double, DESIGNABLE</em>, Distances for the large step button, same value for plus and minus</p>
+<p><strong>absRel</strong>: <em>bool, DESIGNABLE</em>, Toogle between absolut or relative position display. Origin can be set via context menu.</p>
+<p><strong>allowJoyStick</strong>: <em>bool, DESIGNABLE</em>, Allow a software joystick, e.g. usb or gameport, not implemented yet.</p>
+</div>
+<div class="section" id="id4">
+<h3>Slots<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p><strong>void triggerActuatorStep(const int axisNo, const bool smallBig, const bool forward)</strong></p>
+<blockquote>
+<div>Trigger a step of axis <em>axisNo</em> with a distance either <em>bigStep (true)</em> or <em>smallStep (false)</em> and either <em>forward (true)</em> or <em>backwards (false)</em></div></blockquote>
+<p><strong>void actuatorStatusChanged(QVector&lt;int&gt; status, QVector&lt;double&gt; actPosition)</strong></p>
+<blockquote>
+<div>Internal slot for c++-Code connected to the corresponding signal of the actuator. Do not call this from python.</div></blockquote>
+<p><strong>void triggerUpdatePosition(void)</strong></p>
+<blockquote>
+<div>Usually called by the internal timer, the context-menu or python to update the current motor position. Uses either Signal-/Slot-communication or invokes getPos blocking.</div></blockquote>
+<p><strong>void guiChangedSmallStep(double value)</strong></p>
+<blockquote>
+<div>Internal slot if the small step size is changed within the GUI (spinbox)</div></blockquote>
+<p><strong>void guiChangedLargeStep(double value)</strong></p>
+<blockquote>
+<div>Internal slot if the large step size is changed within the GUI (spinbox)</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h3>Signals<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p><strong>void RequestStatusAndPosition(bool sendActPosition, bool sendTargetPos)</strong></p>
+<blockquote>
+<div>Internal signal for c++-Code connected to the corresponding slot of the actuator.</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>Itom Custom Designer Widgets</strong></a><ul>
+<li><a class="reference internal" href="#dataobjecttable">DataObjectTable</a><ul>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dobmetadatatable">dObMetaDataTable</a><ul>
+<li><a class="reference internal" href="#id1">Properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#evaluategeometricsfigure">EvaluateGeometricsFigure</a><ul>
+<li><a class="reference internal" href="#id2">Properties</a></li>
+<li><a class="reference internal" href="#slots">Slots</a></li>
+<li><a class="reference internal" href="#signals">Signals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#motorcontroller">MotorController</a><ul>
+<li><a class="reference internal" href="#id3">Properties</a></li>
+<li><a class="reference internal" href="#id4">Slots</a></li>
+<li><a class="reference internal" href="#id5">Signals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="qtdesigner.html"
+                        title="previous chapter">Creating advanced dialogs and windows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="algo-plugin.html"
+                        title="next chapter">Implement a  more complex GUI in a plugin (C/C++)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/06_extended_gui/list_custom_widgets.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="algo-plugin.html" title="Implement a more complex GUI in a plugin (C/C++)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="qtdesigner.html" title="Creating advanced dialogs and windows"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="extended_gui.html" >Extending the user interface of <strong>itom</strong></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Jan 27, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
