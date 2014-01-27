@@ -27,7 +27,7 @@ itom - an Open Source Measurement, Automation and Evaluation Software
 News
 -----
 
-* 2015-01-27: Today, **itom 1.1.0** has been released. The Windows setups and the sources (tag v1.1.0) are ready for download. It contains many bugfixes, better plot functionalities including geometric measurement tools in plots, more open-source plugins (all included in the setups now) and an online script reference as toolbox of itom that also informs about the documentation and parameterization of all loaded algorithm plugins.
+* 2014-01-27: Today, **itom 1.1.0** has been released. The Windows setups and the sources (tag v1.1.0) are ready for download. It contains many bugfixes, better plot functionalities including geometric measurement tools in plots, more open-source plugins (all included in the setups now) and an online script reference as toolbox of itom that also informs about the documentation and parameterization of all loaded algorithm plugins.
 * 2014-01-13: The plugins **AerotechEnsemble** (Ensemble controller of Aerotech axes) and **BasicFilters** are online (https://bitbucket.org/itom/plugins).
 * 2013-12-22: Newest documentation :ref:`documentation <sec-documentation>` online (small changes with respect to v1.0.14).
 * 2013-10-10: The plugins **OpenCVFilters** (wrapper for some OpenCV functions) and **DispWindow** (OpenGL based cosine and graycode fringe pattern display) are put online (https://bitbucket.org/itom/plugins).
