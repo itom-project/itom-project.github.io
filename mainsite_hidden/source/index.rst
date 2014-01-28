@@ -23,6 +23,7 @@ itom - an Open Source Measurement, Automation and Evaluation Software
    media.rst
    features.rst
    plugins.rst
+   screenshots.rst
 
 News
 -----
