@@ -96,13 +96,23 @@ Cameras / Grabbers / AD-Converter
     
     This plugin is released under the LGPL license. The necessary Vistek drivers, header files and libraries have their own license.
 
-* **PointGreyCamera**
+* **PointGreyCamera - PGRFlyCapture**
     
-    will be released soon
+    itom plugin for Point Grey Research cameras that can be run with the **FlyCapture2** camera interface (e.g. the USB 3.0 Flea3 camera).
+    
+    For compiling this plugin, install FlyCapture2 in 32bit or 64bit depending on **itom** and set the CMake variable **PGRFLYCAP_API_DIR** to the base directory of FlyCapture2.
+    
+    This plugin is released under the LGPL license. For the license information of **FlyCapture2** see the specific documentation of Point Grey Research.
+    
+    This plugin is currently supporting monochrome cameras and has only been tested under Windows.
     
 * **XIMEA grabbers**
     
-    will be released soon
+    itom plugin for cameras from Ximea (xiQ interface). It has only been tested under Windows and supports monochrome cameras.
+    
+    For compiling this plugin, please set the CMake variable **XIMEA_APIDIR** to the base directory of the Ximea API. This directory must contain the file *m3Api.h*.
+    
+    This plugin is released under the LGPL license. For further license information of the **xiQ** interface from Ximea see its specific documentation.
 
 * **PCO Cameras - general plugin for PCO cameras**
     
