@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,15 +14,11 @@
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'dac304c',
+        VERSION:     '5c9306a',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -33,9 +28,9 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="itom Documentation" href="../../index.html" />
-    <link rel="up" title="Development under C++" href="../development/plugin-development.html" />
-    <link rel="next" title="Plugin class - Actuator" href="../development/plugin-actuator.html" />
-    <link rel="prev" title="AddInBase" href="../development/plugin-AddInBase-Ref.html" /> 
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Plugin class - Actuator" href="plugin-actuator.html" />
+    <link rel="prev" title="AddInBase" href="plugin-AddInBase-Ref.html" /> 
   </head>
   <body>
     <div class="related">
@@ -48,15 +43,15 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../development/plugin-actuator.html" title="Plugin class - Actuator"
+          <a href="plugin-actuator.html" title="Plugin class - Actuator"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../development/plugin-AddInBase-Ref.html" title="AddInBase"
+          <a href="plugin-AddInBase-Ref.html" title="AddInBase"
              accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">itom</a> &raquo;</li>
           <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
           <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="../development/plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -192,90 +187,90 @@
 81
 82
 83
-84</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">    #include &quot;../../common/addInGrabber.h&quot;</span>
-<span class="cp">    #include &quot;dialogFireGrabber.h&quot;</span>
-<span class="cp">    #include &lt;qsharedpointer.h&gt;</span>
+84</pre></div></td><td class="code"><div class="highlight"><pre>    #include &quot;../../common/addInGrabber.h&quot;
+    #include &quot;dialogFireGrabber.h&quot;
+    #include &lt;qsharedpointer.h&gt;
 
-    <span class="k">class</span> <span class="nc">FireGrabber</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInGrabber</span>
-    <span class="p">{</span>
-            <span class="n">Q_OBJECT</span>
+    class FireGrabber : public ito::AddInGrabber
+    {
+            Q_OBJECT
 
-            <span class="k">protected</span><span class="o">:</span>
-                    <span class="o">~</span><span class="n">MyDataIO</span><span class="p">();</span> <span class="cm">/*! &lt; Destructor*/</span>
-                    <span class="n">MyDataIO</span><span class="p">();</span>     <span class="cm">/*! &lt; Constructor*/</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">checkData</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="o">*</span><span class="n">externalDataObject</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>      <span class="cm">/*!&lt; Check if objekt has to be reallocated */</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retrieveData</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="o">*</span><span class="n">externalDataObject</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span> <span class="cm">/*!&lt; Wait for acquired picture */</span>
-
-
-            <span class="k">public</span><span class="o">:</span>
-                    <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyDataIOInterface</span><span class="p">;</span>
-                    <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">//! Open the config nonmodal dialog to set camera parameters</span>
-                    <span class="kt">int</span> <span class="n">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span> <span class="c1">//!&lt; indicates that this plugin has got a configuration dialog</span>
+            protected:
+                    ~MyDataIO(); /*! &lt; Destructor*/
+                    MyDataIO();     /*! &lt; Constructor*/
+                    ito::RetVal checkData(ito::DataObject *externalDataObject = NULL);      /*!&lt; Check if objekt has to be reallocated */
+                    ito::RetVal retrieveData(ito::DataObject *externalDataObject = NULL); /*!&lt; Wait for acquired picture */
 
 
-
-            <span class="k">private</span><span class="o">:</span>
-                    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">m_pDataMatBuffer</span><span class="p">;</span>
-
-                    <span class="kt">int</span> <span class="n">m_CCD_ID</span><span class="p">;</span> <span class="cm">/*!&lt; Camera ID */</span>
-                    <span class="kt">bool</span> <span class="n">m_isgrabbing</span><span class="p">;</span> <span class="cm">/*!&lt; Check if acquire was called */</span>
-
-                    <span class="k">static</span> <span class="kt">int</span> <span class="n">m_numberOfInstances</span><span class="p">;</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">AlliedChkError</span><span class="p">(</span><span class="kt">int</span> <span class="n">errornumber</span><span class="p">);</span> <span class="cm">/*!&lt; Map Allied-Error-Number to ITOM-Errortype and Message */</span>
-                    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">errmsg</span><span class="p">;</span>
-                    <span class="n">UINT8</span>          <span class="o">*</span><span class="n">m_pImage</span><span class="p">;</span>                  <span class="c1">// Pointer to actual image</span>
-
-            <span class="k">public</span> <span class="nl">slots:</span>
-                    <span class="c1">//!&lt; Get Camera-Parameter</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-                    <span class="c1">//!&lt; Set Camera-Parameter</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-                    <span class="c1">//!&lt; Initialise board, load dll, allocate buffer</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
-                    <span class="c1">//!&lt; Free buffer, delete board, unload dll</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-
-                    <span class="c1">//!&lt; Start the camera to enable acquire-commands</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">startDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-                    <span class="c1">//!&lt; Stop the camera to disable acquire-commands</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">stopDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-                    <span class="c1">//!&lt; Softwaretrigger for the camera</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">acquire</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">trigger</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
-                    <span class="c1">//!&lt; Wait for acquired picture, copy the picture to dObj of right type and size</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getVal</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">copyVal</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
-
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">ConvertY16</span><span class="p">(</span><span class="n">UINT32</span> <span class="n">XSize</span><span class="p">,</span><span class="n">UINT32</span> <span class="n">YSize</span><span class="p">,</span><span class="n">UINT8</span> <span class="o">*</span><span class="n">pBuf</span><span class="p">,</span><span class="n">UINT8</span> <span class="o">*</span><span class="n">pBGR</span><span class="p">);</span>
-
-                    <span class="kt">void</span> <span class="n">updateParameters</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">);</span>
-
-            <span class="k">private</span> <span class="nl">slots:</span>
-
-    <span class="p">};</span>
-
-    <span class="c1">//----------------------------------------------------------------------------------------------------------------------------------</span>
+            public:
+                    friend class MyDataIOInterface;
+                    const ito::RetVal showConfDialog(void); //! Open the config nonmodal dialog to set camera parameters
+                    int hasConfDialog(void) { return 1; }; //!&lt; indicates that this plugin has got a configuration dialog
 
 
-    <span class="k">class</span> <span class="nc">DataIOInterface</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
-    <span class="p">{</span>
-            <span class="n">Q_OBJECT</span>
-                    <span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span><span class="p">)</span>
 
-            <span class="k">protected</span><span class="o">:</span>
+            private:
+                    cv::Mat m_pDataMatBuffer;
 
-            <span class="k">public</span><span class="o">:</span>
-                    <span class="n">DataIOInterface</span><span class="p">();</span>
-                    <span class="o">~</span><span class="n">DataIOInterface</span><span class="p">();</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+                    int m_CCD_ID; /*!&lt; Camera ID */
+                    bool m_isgrabbing; /*!&lt; Check if acquire was called */
 
-            <span class="k">private</span><span class="o">:</span>
-                    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+                    static int m_numberOfInstances;
+                    ito::RetVal AlliedChkError(int errornumber); /*!&lt; Map Allied-Error-Number to ITOM-Errortype and Message */
+                    const char* errmsg;
+                    UINT8          *m_pImage;                  // Pointer to actual image
 
-            <span class="nl">signals:</span>
+            public slots:
+                    //!&lt; Get Camera-Parameter
+                    ito::RetVal getParam(QSharedPointer&lt;ito::Param&gt; val, ItomSharedSemaphore *waitCond);
+                    //!&lt; Set Camera-Parameter
+                    ito::RetVal setParam(QSharedPointer&lt;ito::Param&gt; val, ItomSharedSemaphore *waitCond);
+                    //!&lt; Initialise board, load dll, allocate buffer
+                    ito::RetVal init(QVector&lt;ito::Param&gt; *paramsMand, QVector&lt;ito::Param&gt; *paramsOpt, ItomSharedSemaphore *waitCond = NULL);
+                    //!&lt; Free buffer, delete board, unload dll
+                    ito::RetVal close(ItomSharedSemaphore *waitCond);
 
-            <span class="k">public</span> <span class="nl">slots:</span>
-    <span class="p">};</span>
+                    //!&lt; Start the camera to enable acquire-commands
+                    ito::RetVal startDevice(ItomSharedSemaphore *waitCond);
+                    //!&lt; Stop the camera to disable acquire-commands
+                    ito::RetVal stopDevice(ItomSharedSemaphore *waitCond);
+                    //!&lt; Softwaretrigger for the camera
+                    ito::RetVal acquire(const int trigger, ItomSharedSemaphore *waitCond = NULL);
+                    //!&lt; Wait for acquired picture, copy the picture to dObj of right type and size
+                    ito::RetVal getVal(void *vpdObj, ItomSharedSemaphore *waitCond);
+
+                    ito::RetVal copyVal(void *vpdObj, ItomSharedSemaphore *waitCond);
+
+                    ito::RetVal ConvertY16(UINT32 XSize,UINT32 YSize,UINT8 *pBuf,UINT8 *pBGR);
+
+                    void updateParameters(QMap&lt;QString, ito::Param&gt; params);
+
+            private slots:
+
+    };
+
+    //----------------------------------------------------------------------------------------------------------------------------------
+
+
+    class DataIOInterface : public ito::AddInInterfaceBase
+    {
+            Q_OBJECT
+                    Q_INTERFACES(ito::AddInInterfaceBase)
+
+            protected:
+
+            public:
+                    DataIOInterface();
+                    ~DataIOInterface();
+                    ito::RetVal getAddInInst(ito::AddInBase **addInInst);
+
+            private:
+                    ito::RetVal closeThisInst(ito::AddInBase **addInInst);
+
+            signals:
+
+            public slots:
+    };
 </pre></div>
 </td></tr></table></div>
 <div class="section" id="camera-frame-grabber-parameters-and-units">
@@ -343,10 +338,10 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../development/plugin-AddInBase-Ref.html"
+  <p class="topless"><a href="plugin-AddInBase-Ref.html"
                         title="previous chapter">AddInBase</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../development/plugin-actuator.html"
+  <p class="topless"><a href="plugin-actuator.html"
                         title="next chapter">Plugin class - Actuator</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
@@ -380,21 +375,21 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../development/plugin-actuator.html" title="Plugin class - Actuator"
+          <a href="plugin-actuator.html" title="Plugin class - Actuator"
              >next</a> |</li>
         <li class="right" >
-          <a href="../development/plugin-AddInBase-Ref.html" title="AddInBase"
+          <a href="plugin-AddInBase-Ref.html" title="AddInBase"
              >previous</a> |</li>
         <li><a href="../../index.html">itom</a> &raquo;</li>
           <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
           <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="../development/plugin-development.html" >Development under C++</a> &raquo;</li> 
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Jan 27, 2014.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Last updated on Feb 26, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
