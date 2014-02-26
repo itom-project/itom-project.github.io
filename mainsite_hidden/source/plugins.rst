@@ -94,6 +94,10 @@ Cameras / Grabbers / AD-Converter
     
     Some files of the SVGigE SDK are shipped within this plugin (currently 1.4.24). Please check the SVSVistek website for newer versions of the SDK and replace the files if desired. Additionally, it is stated that SVS Vistek does not provide any support for this specific plugin wrapping the official SDK of SVS Vistek.
     
+    This plugin requires the necessary libraries from the SVS Vistek SDK (SVGigE.dll, SVGigETLFilter.dll, SVGigETLWinsock.dll or 64bit versions). Please check the right version and make these libraries available for itom (PATH environment variable, system directory...).
+    
+    For a robust data communication please install the SVGigE FilterDriver and enable Jumbo frames at your network adapter.
+    
     This plugin is released under the LGPL license. The necessary Vistek drivers, header files and libraries have their own license.
 
 * **PointGreyCamera - PGRFlyCapture**
