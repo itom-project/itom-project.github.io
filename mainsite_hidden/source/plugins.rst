@@ -246,6 +246,20 @@ Algorithms
     
     This plugin is released under the LGPL license.
 
+* **x3p - file format support for x3p (ISO5436-2 XML)**
+
+    This plugin provides methods to save and load dataObjects in/from the file format 'x3p'.
+    This format is specified in ISO 25178 - Geometrical product specification (GPS).
+    
+    The corresponding filters are named 'loadX3p' and 'saveX3p'. Once the plugin is loaded you can save or load a dataObject
+    to or from this file format, even by the GUI of itom.
+    
+    This plugin is released under the LGPL license.
+
+    The library ISO 5436-2 XML, that is necessary for this plugin and included in the sources,
+    is licensed under the LGPL license and uses further libraries. For more information about the license
+    of the library itself see http://www.opengps.eu.
+    
     
 Plugin Development
 -------------------
