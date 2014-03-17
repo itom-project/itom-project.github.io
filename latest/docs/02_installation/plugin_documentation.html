@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugin documentation &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'ae0dc09',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Installation" href="install.html" />
+    <link rel="next" title="Getting Started" href="../03_gettingStarted/getting-started.html" />
+    <link rel="prev" title="Build documentation" href="build_documentation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../03_gettingStarted/getting-started.html" title="Getting Started"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="build_documentation.html" title="Build documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="install.html" accesskey="U">Installation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugin-documentation">
+<h1>Plugin documentation<a class="headerlink" href="#plugin-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Besides the user documentation, there is also a plugin documentation for all currently available plugins. On a setup installation, the main files
+for the plugin documentation is contained in the subfolders <em>doc</em> of each plugin in the plugin directory of <strong>itom</strong>. Based on these files, <strong>itom</strong> scans
+their modification date when the <strong>itom</strong> interal help is called for the first time. If the help needs to be rebuild, a bundle is collected from all plugin
+sub-documentations and saved in the <em>docs/pluginDoc/build</em> directory of the build directory of <strong>itom</strong>. Finally this bundle is packed and prepared for the
+help assistant of <strong>itom</strong>.</p>
+<div class="section" id="create-the-plugin-documentation-of-any-plugin">
+<h2>Create the plugin documentation of any plugin<a class="headerlink" href="#create-the-plugin-documentation-of-any-plugin" title="Permalink to this headline">¶</a></h2>
+<p>In order to generate the plugin documentation of any plugin, the following requirements need to be fulfilled:</p>
+<p>1. In the sources of the plugin there must be a folder <strong>docs</strong> that contains at least on *.rst with the plugin documentation. This documentation needs to
+be written in the so called reStructured-Text format rst (see <a class="reference external" href="http://sphinx-doc.org/rest.html">http://sphinx-doc.org/rest.html</a>)</p>
+<ol class="arabic" start="2">
+<li><p class="first">The file <strong>CMakeLists.txt</strong> of the specific plugin must contain the following line in order to register the rst-file as plugin documentation file:</p>
+<div class="highlight-python"><div class="highlight"><pre>PLUGIN_DOCUMENTATION(${target_name} &lt;filenameOfTheRstFile&gt;) #the filename must not contain the suffix *.rst*.
+</pre></div>
+</div>
+</li>
+<li><p class="first">If the plugin is build, its build folder with have a <strong>docs</strong> subfolder, too. This subfolder consists of a file <strong>plugin_doc_config.cfg</strong>.</p>
+</li>
+</ol>
+<p>If these requirements are given, start <strong>itom</strong> and execute the script <strong>create_plugin_doc.py</strong> in the <strong>docs/pluginDoc</strong> directory of the build directory of <strong>itom</strong>.
+Then select the <a href="#id1"><span class="problematic" id="id2">*</span></a>.cfg-file describing the plugin documentation in its specific build folder.</p>
+<p>In order to simultaneously create the documentations of many plugins, execute <strong>create_all_plugin_docs.py</strong> and indicate the build folder that contains the build-subfolders
+of many plugins. These subfolders are searched for appropriate <a href="#id3"><span class="problematic" id="id4">*</span></a>.cfg files and all sub-documentations are created.</p>
+</div>
+<div class="section" id="plugin-documentation-source-files">
+<h2>plugin documentation source files<a class="headerlink" href="#plugin-documentation-source-files" title="Permalink to this headline">¶</a></h2>
+<p>The source files of each plugin documentation are written in the reStructuredText-format (<em>.rst). You can use all possibilities given by this format including the additions
+provided by **sphinx*</em> (see <a class="reference external" href="http://sphinx-doc.org/rest.html">http://sphinx-doc.org/rest.html</a>). Additionally, when the documentation is build using <strong>itom</strong>, specific directives, roles and a pyitom-domain is added in
+order to automatically create parts of the documentation depending on information that can for instance be obtained using the command <a class="reference internal" href="../09_reference/itom_general.html#itom.pluginHelp" title="itom.pluginHelp"><tt class="xref py py-meth docutils literal"><span class="pre">itom.pluginHelp()</span></tt></a>.</p>
+<p>Use the following roles as placeholders in the text. The placeholders will be replaced with information obtained by the plugin with the given name. This is only possible if
+this specific plugin is loaded in <strong>itom</strong>:</p>
+<div class="highlight-rst"><div class="highlight"><pre><span class="na">:pluginsummary:</span><span class="nv">`pluginname`</span> -&gt; short description of the plugin
+<span class="na">:plugintype:</span><span class="nv">`pluginname`</span> -&gt; type of the plugin (DataIO, Actuator, Algorithm)
+<span class="na">:pluginlicense:</span><span class="nv">`pluginname`</span> -&gt; license string
+<span class="na">:pluginauthor:</span><span class="nv">`pluginname`</span> -&gt; author(s) of the plugin
+<span class="na">:pluginversion:</span><span class="nv">`pluginname`</span> -&gt; current version string
+</pre></div>
+</div>
+<p>Furthermore, there are directives that you can use in order insert more information into your documentation file:</p>
+<p>For inserting the detailed description of the plugin, write:</p>
+<div class="highlight-rst"><div class="highlight"><pre><span class="p">..</span> <span class="ow">pluginsummaryextended</span><span class="p">::</span>
+    <span class="nc">:plugin:</span> <span class="nf">pluginname</span>
+</pre></div>
+</div>
+<p>A table with all mandatory and optional parameters that are required to start an instance of a <em>dataIO</em> or <em>actuator</em> plugin, write:</p>
+<div class="highlight-rst"><div class="highlight"><pre><span class="p">..</span> <span class="ow">plugininitparams</span><span class="p">::</span>
+    <span class="nc">:plugin:</span> <span class="nf">pluginname</span>
+</pre></div>
+</div>
+<p>The last directive is created for algorithm plugins. An list of all available filters is obtained via</p>
+<div class="highlight-rst"><div class="highlight"><pre><span class="p">..</span> <span class="ow">pluginfilterlist</span><span class="p">::</span>
+    <span class="nc">:plugin:</span> <span class="nf">pluginname</span>
+    <span class="nc">:overviewonly:</span>
+</pre></div>
+</div>
+<p>Omit the option <em>:overviewonly:</em> in order to get an extended overview of all filters including their mandatory, optional and return arguments.
+If this overview is inserted all filters in the short list will link to their specific long description.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugin documentation</a><ul>
+<li><a class="reference internal" href="#create-the-plugin-documentation-of-any-plugin">Create the plugin documentation of any plugin</a></li>
+<li><a class="reference internal" href="#plugin-documentation-source-files">plugin documentation source files</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="build_documentation.html"
+                        title="previous chapter">Build documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../03_gettingStarted/getting-started.html"
+                        title="next chapter">Getting Started</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/02_installation/plugin_documentation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../03_gettingStarted/getting-started.html" title="Getting Started"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="build_documentation.html" title="Build documentation"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="install.html" >Installation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Mar 17, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
