@@ -66,6 +66,23 @@ Cameras / Grabbers / AD-Converter
     
     This plugin is released under the LGPL license. You need an installed AVT FirePackage driver, which requires further licenses if you are not using any AVT camera (see AVT FirePackage documentation).
 
+* **MSMediaFoundation - Microsoft Media Foundation Video Capturing Device (e.g. USB-Cameras), (Windows only)**
+    
+    This plugin uses the Microsoft Media Foundation framework (Windows Vista, 7, 8) for capturing supported camera devices (e.g. ordinary USB or integrated cameras).
+
+    This driver detects an interal list of connected cameras. The parameter *cameraNumber* indicates the device to open (until now, there is no mechanism to open the next
+    not yet opened device!). The camera can either be used as colored camera, as gray valued camera or it is also possible to only select one color channel that is mapped
+    to the gray output.
+
+    Any detected and supported device can offer multiple framerates and sizes. Use the parameter *mediaTypeID* to select the right value. Open your device with *mediaTypeID* = -1
+    to let the plugin print a list of supported formats (the plugin initialization then stops with a desired error).
+
+    For building this plugin the Windows SDK needs to be installed and Windows Vista or higher is required. If the Windows SDK cannot be installed, try to uninstall the VS redistributable
+    packages for VS2010 and VS2008 first, since the Windows SDK comes with its own version of these redistributable packages (fully usable and compatible).
+
+    This plugin internally used a modified version of VideoInput, proposed by Evgeny Pereguda and published under
+    http://www.codeproject.com/Articles/559437/Capturing-video-from-web-camera-on-Windows-7-and-8 (Code Project Open License)
+
 * **OpenCVGrabber - OpenCV Video Capture (USB-Cameras, Firewire CMU1394)**
     
     This plugin wraps the video capture framework of OpenCV. Therefore it requires further libraries of OpenCV (core, highgui, improc and partially tbb).
@@ -75,12 +92,24 @@ Cameras / Grabbers / AD-Converter
     Some supported cameras are only available if OpenCV is compiled with their support, e.g. CMU1394 (not included per default in pre-compiled binaries of OpenCV.
     
     This plugin is released under the LGPL license.
+    
+    Notice: If possible also consider using the MSMediaFoundation plugin (Windows only). This provides support for the same or similar cameras but provides a faster
+    and more flexibel (more parameters) connection to the camera devices.
 
-* **PCOPixelFly - PCO Pixelfly cameras**
+* **PCOPixelFly - PCO Pixelfly cameras (Windows only)**
     
     This plugin connects the grabber family Pixelfly from PCO to itom. It has mainly been tested with the camera 'pixelfly qe', that is connected to the computer by the PCO PCI interface board 540.
     
     Please install first the necessary drivers for the camera and grabber board from www.pco.de. This plugin supports two families of drivers. The driver with major version 1 only supports Windows, 32bit operating systems, while the new driver version 2 also operates on 64bit Windows systems.
+    
+    This plugin is released under the LGPL license, the necessary camera SDK belongs to PCO - Computer Optics GmbH.
+
+* **PCOCamera - PCO Cameras supported by the pco.sdk (Windows only)**
+    
+    This plugin supports all cameras from PCO that are connectable via the pco.sdk (e.g. PCO.1300 or PCO.2000).
+    
+    For compiling this plugin, set the CMake variable **PCO_SDK_DIR** to the base directory of the pco.sdk. The SDK from PCO can be downloaded from http://www.pco.de (pco Software-Development-Toolkit (SDK)).
+    Download the SDK and install it at any location. Additionally you need to install the drivers for operating your framegrabber board.
     
     This plugin is released under the LGPL license, the necessary camera SDK belongs to PCO - Computer Optics GmbH.
 
@@ -110,6 +139,16 @@ Cameras / Grabbers / AD-Converter
     
     This plugin is currently supporting monochrome cameras and has only been tested under Windows.
     
+* **V4L2 grabbers (Linux only)**
+    
+    This plugin uses the Video4Linux2 (V4L2) for capturing supported camera devices (e.g. ordinary USB or integrated cameras).
+    
+    This driver detects an internal list of connected cameras. The parameter *cameraNumber* indicates the device to open, it is linked to the devices (/dev/videoX, where X is the *cameraNumber*).
+    Any detected and supported device can offer multiple framerates and sizes. Use the parameter *mediaTypeID* to select the right value. Open your device with *mediaTypeID* = -1
+    to let the plugin print a list of supported formats (the plugin initialization then stops with a desired error).
+    
+    This plugin is released under the LGPL license.
+    
 * **XIMEA grabbers**
     
     itom plugin for cameras from Ximea (xiQ interface). It has only been tested under Windows and supports monochrome cameras.
@@ -118,9 +157,7 @@ Cameras / Grabbers / AD-Converter
     
     This plugin is released under the LGPL license. For further license information of the **xiQ** interface from Ximea see its specific documentation.
 
-* **PCO Cameras - general plugin for PCO cameras**
-    
-    will be released soon
+
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
@@ -243,6 +280,27 @@ Algorithms
     * feature detections (circles, chessboard corners...)
     
     This plugin not only requires access to the core library of OpenCV but also to further libraries like imgproc and calib3d.
+    
+    This plugin is released under the LGPL license.
+
+* **PclTools - point cloud and polygon mesh tools and functions**
+    
+    This plugin contains methods for filtering, transforming, saving and loading
+    point clouds and polygon meshes. Most methods are wrappers for functions provided
+    by the open source project PointCloudLibrary (pcl). The function calls are usually
+    implemented for the cloud types supported by the itom classes itom.pointCloud
+    and itom.polygonMesh (XYZ,XYZI,XYZRGBA,XYZNormals...).
+    
+    This library uses also methods from the current pcl version 1.7.1, however also
+    compiles with older versions. In this case some methods are not compiled.
+
+    This plugin also covers the methods for loading and saving point clouds and polygon
+    meshes to common formats like pcd, ply, stl, obj... Once the plugin is loaded
+    itom in general is also able to load and save such structures using the methods provided
+    by this plugin.
+    
+    For compiling this plugin, itom needs to be compiled with pointCloudLibrary support.
+    Additionally you need to have the VTK Toolkit on your computer.
     
     This plugin is released under the LGPL license.
 

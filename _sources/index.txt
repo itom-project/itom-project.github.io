@@ -28,6 +28,7 @@ itom - an Open Source Measurement, Automation and Evaluation Software
 News
 -----
 
+* 2014-04-05: The sources for the plugins **V4L2** (Video for Linux), **MSMediaFoundation** (Windows Vista or higher), **PCOCamera** (cameras supported by the pco.sdk) and **PCLTools** (point cloud processing, filtering... using the PointCloudLibrary) are online.
 * 2014-03-12: The plugin for support of x3p-file format is online (see :ref:`plugins <sec-plugins>`).
 * 2014-02-25: From today on, **itom** can be build using Qt5. Get the current sources and have Qt5 ready on your computer (no Qt4). The right version of Qt is automatically selected.
 * 2014-02-24: The cameras :ref:`plugins <sec-plugins>` **Ximea** and **PGRFlyCapture** are online (https://bitbucket.org/itom/plugins).
