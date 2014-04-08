@@ -1,0 +1,542 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DataObjectIO &mdash; itom</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="itom" href="../../index.html" />
+    <link rel="up" title="Plugins" href="../../plugins.html" />
+    <link rel="next" title="Fitting Filters" href="fittingFilters.html" />
+    <link rel="prev" title="Basic Filters" href="basicFilters.html" />
+ 
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-40524649-1']);
+  _gaq.push(['_trackPageview']);
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="fittingFilters.html" title="Fitting Filters"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="basicFilters.html" title="Basic Filters"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../plugins.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/itomlogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media.html">Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../plugins.html">Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html#add-a-plugin-to-itom">Add a plugin to itom</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../plugins.html#available-plugins">Available plugins</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#cameras-grabbers-ad-converter">Cameras / Grabbers / AD-Converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#further-hardware-devices">Further hardware devices</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../plugins.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="basicFilters.html">Basic Filters</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">DataObjectIO</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="fittingFilters.html">Fitting Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="openCVFilters.html">OpenCV Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pclTools.html">PclTools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="x3p.html">X3P Input Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html#plugin-development">Plugin Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../screenshots.html">Screenshots</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basicFilters.html"
+                        title="previous chapter">Basic Filters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fittingFilters.html"
+                        title="next chapter">Fitting Filters</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dataobjectio">
+<h1>DataObjectIO<a class="headerlink" href="#dataobjectio" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>import or export dataObject from/to several file formats.</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>Algorithm</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>Licensed under LPGL.</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows, Linux</td>
+</tr>
+<tr class="row-odd"><td><strong>Author</strong>:</td>
+<td><span>W. Lyda, M. Gronle, ITO, University Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This filter contains two different export- / import-functionalities for dataObjects, image or raw.</p>
+<p>Image-export functions converts dataObjects to image data and saves them as common image-formats.
+uint8 or uint16 are saved as gray-values (8bit or if suppored as 16bit) or if the image format allows color are saved according to the defined color palette.
+float32 or float64 are saved as gray-values (8bit or if suppored as 16bit) or according to the defined color palette. Therefore the values must be between 0.0 and 1.0.
+Values outside these borders are clipped. If the image format supports RGBA, invalid values are saved as 00 00 00 FF else as 00 00 00.</p>
+<p>Basic export-filter definition: source-obj, filename, palette, ...
+Basic import-filter definition: dst-obj, filename, chanel-specification, ...</p>
+<p>Raw-export functions write/read the data to/from txt-based or binary file formats.</p>
+<p>These filters are defined in the plugin:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#saveIDO" title="saveIDO"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveIDO</span></tt></a></li>
+<li><a class="reference internal" href="#savePNG" title="savePNG"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">savePNG</span></tt></a></li>
+<li><a class="reference internal" href="#loadAnyImage" title="loadAnyImage"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">loadAnyImage</span></tt></a></li>
+<li><a class="reference internal" href="#saveBMP" title="saveBMP"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveBMP</span></tt></a></li>
+<li><a class="reference internal" href="#loadIDO" title="loadIDO"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">loadIDO</span></tt></a></li>
+<li><a class="reference internal" href="#loadSDF" title="loadSDF"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">loadSDF</span></tt></a></li>
+<li><a class="reference internal" href="#saveSDF" title="saveSDF"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveSDF</span></tt></a></li>
+<li><a class="reference internal" href="#savePPM" title="savePPM"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">savePPM</span></tt></a></li>
+<li><a class="reference internal" href="#saveRAS" title="saveRAS"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveRAS</span></tt></a></li>
+<li><a class="reference internal" href="#saveDataObject" title="saveDataObject"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveDataObject</span></tt></a></li>
+<li><a class="reference internal" href="#saveJPG" title="saveJPG"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveJPG</span></tt></a></li>
+<li><a class="reference internal" href="#savePGM" title="savePGM"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">savePGM</span></tt></a></li>
+<li><a class="reference internal" href="#saveTiff" title="saveTiff"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">saveTiff</span></tt></a></li>
+<li><a class="reference internal" href="#loadDataObject" title="loadDataObject"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">loadDataObject</span></tt></a></li>
+</ol>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>Detailed overview about all defined filters:</p>
+<dl class="filter">
+<dt id="saveIDO">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveIDO&quot;</tt><em class="property">,</em><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>headerOnly</em>, <em>tags2Binary</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#saveIDO" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject or only its header as xml-compatible file (ido, idh)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceObject</strong> (<em>dataObject</em>) &#8211; Any type of dataObject</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>headerOnly</strong> (<em>int (int)</em>) &#8211; If 0 the complete dataObject is saved (data + metadata), else the filter saves only metadata</li>
+<li><strong>tags2Binary</strong> (<em>int (int)</em>) &#8211; If 0 the metaData is saved as clear text, else double tags are saved as binary</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="savePNG">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;savePNG&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>compression</em>, <em>addAlphaChannel</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#savePNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as portabel networl graphic via openCV (png)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, gray16, ...].</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>compression</strong> (<em>int (int)</em>) &#8211; Compression rate, 0: high, 9: low</li>
+<li><strong>addAlphaChannel</strong> (<em>int (int)</em>) &#8211; If enabled and in case of floating point values, invalid will have alpha low else high</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="loadAnyImage">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;loadAnyImage&quot;</tt><em class="property">,</em><em>DestinationImage</em>, <em>filename</em><span class="optional">[</span>, <em>ColorElement</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#loadAnyImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads 1D and 2D dataObject from common image formats via openCV</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>DestinationImage</strong> (<em>dataObject</em>) &#8211; Empty dataObjet</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Source file name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>ColorElement</strong> (<em>str (char*)</em>) &#8211; Color element character: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="saveBMP">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveBMP&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><big>)</big><a class="headerlink" href="#saveBMP" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as windows bitmap via openCV (bmp, dib)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, ...]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="loadIDO">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;loadIDO&quot;</tt><em class="property">,</em><em>destinationObject</em>, <em>filename</em><big>)</big><a class="headerlink" href="#loadIDO" title="Permalink to this definition">¶</a></dt>
+<dd><p>loadOject or its header from an xml-compatible file (ido, idh) into a dataObject</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>destinationObject</strong> (<em>dataObject</em>) &#8211; Empty dataObjet</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Source file name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="loadSDF">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;loadSDF&quot;</tt><em class="property">,</em><em>DestinationImage</em>, <em>filename</em><big>)</big><a class="headerlink" href="#loadSDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads an ascii-based surface data file to a 1D or 2D data object (sdf), version aNIST-1.0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>DestinationImage</strong> (<em>dataObject</em>) &#8211; Empty dataObjet</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Source file name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="saveSDF">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveSDF&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em><span class="optional">[</span>, <em>decimalSigns</em>, <em>verticalScale</em>, <em>invalidHandling</em>, <em>invalidValue</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#saveSDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves 1D and 2D dataObject to the ascii surface data file format (sdf), version aNIST-1.0</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype or 3-planes DataObject of uint8</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>decimalSigns</strong> (<em>int (int)</em>) &#8211; Number of decimal signs (default: 3). For MountainsMaps reduce total number of digits to 5</li>
+<li><strong>verticalScale</strong> (<em>int (int)</em>) &#8211; Power of 10 for the zValue (Default: -3, micrometer), only for floating point objects.</li>
+<li><strong>invalidHandling</strong> (<em>int (int)</em>) &#8211; Toggles NaN handling if dataObject is floating-type. 0: Write NaN (Default); 1: Skip Value, 2: Substitut by InvalidValue, 3: Substitute by BAD for MountainsMaps.</li>
+<li><strong>invalidValue</strong> (<em>float (double)</em>) &#8211; New value for invalid substitution. Default is 0.0</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="savePPM">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;savePPM&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>binaryOut</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#savePPM" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as portabel pixel map via openCV (ppm)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, ...]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>binaryOut</strong> (<em>int (int)</em>) &#8211; Enable binary coding</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="saveRAS">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveRAS&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><big>)</big><a class="headerlink" href="#saveRAS" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as sun raster via openCV (sr, ras)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, ...]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="saveDataObject">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveDataObject&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>Format</em>, <em>bitscaling</em><span class="optional">[</span>, <em>lowLimit</em>, <em>highLimit</em>, <em>Color_Format</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#saveDataObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves 1D and 2D dataObject to image formats via QImage (<a href="#id1"><span class="problematic" id="id2">*</span></a>.xbm <a href="#id3"><span class="problematic" id="id4">*</span></a>.xpm)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype or 3-planes DataObject of uint8</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>Format</strong> (<em>str (char*)</em>) &#8211; Format of the Image according to QImage: [&#8216;QImage::Format_Mono&#8217;, &#8216;QImage::Format_MonoLSB&#8217;, &#8216;QImage::Format_Indexed8&#8217;, &#8216;QImage::Format_RGB32&#8217;, &#8216;QImage::Format_ARGB32&#8217;</li>
+<li><strong>bitscaling</strong> (<em>int (int)</em>) &#8211; Toggle bit-scaling, 0 = off, 1 = autoscale (default), 2 = userdefined ranges</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>lowLimit</strong> (<em>float (double)</em>) &#8211; Lowest limit. Will become 0</li>
+<li><strong>highLimit</strong> (<em>float (double)</em>) &#8211; Lowest limit. Will become max&lt;bitdepth&gt;</li>
+<li><strong>Color_Format</strong> (<em>str (char*)</em>) &#8211; When DataObject of type float32, their format should be &#8211;&gt;Gray&lt;&#8211; or &#8211;&gt;RGB&lt;&#8211;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="saveJPG">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveJPG&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>compression</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#saveJPG" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as jpg via openCV (jpg)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, gray16, ...]. &#8216;gray16&#8217; supported for &#8216;.jp2&#8217; only</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>compression</strong> (<em>int (int)</em>) &#8211; Compression rate, 0: high, 100: low</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="savePGM">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;savePGM&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>binaryOut</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#savePGM" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as portabel gray map via openCV (pgm, pbm)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, gray16]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>binaryOut</strong> (<em>int (int)</em>) &#8211; Enable binary coding</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="saveTiff">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;saveTiff&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>filename</em>, <em>palette</em><big>)</big><a class="headerlink" href="#saveTiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>saveObject as tiff via openCV (tif)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<em>str (char*)</em>) &#8211; Color palette name [gray, gray16, ...]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="loadDataObject">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;loadDataObject&quot;</tt><em class="property">,</em><em>DestinationImage</em>, <em>filename</em><span class="optional">[</span>, <em>ColorElement</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#loadDataObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads 1D and 2D dataObject from image formats via QImage  (<a href="#id5"><span class="problematic" id="id6">*</span></a>.gif <a href="#id7"><span class="problematic" id="id8">*</span></a>.xbm <a href="#id9"><span class="problematic" id="id10">*</span></a>.xpm)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>DestinationImage</strong> (<em>dataObject</em>) &#8211; Empty dataObjet</li>
+<li><strong>filename</strong> (<em>str (char*)</em>) &#8211; Source file name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>ColorElement</strong> (<em>str (char*)</em>) &#8211; Color element character: R or G or B or RGB</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="fittingFilters.html" title="Fitting Filters"
+             >next</a></li>
+        <li class="right" >
+          <a href="basicFilters.html" title="Basic Filters"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../plugins.html" >Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+<div class="footer">This page uses <a href="http://analytics.google.com/">
+Google Analytics</a> to collect statistics. You can disable it by blocking
+the JavaScript coming from www.google-analytics.com.
+<script type="text/javascript">
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ?
+              'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+  })();
+</script>
+</div>
+
+  </body>
+</html>

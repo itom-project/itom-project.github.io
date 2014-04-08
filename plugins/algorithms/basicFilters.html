@@ -1,0 +1,535 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Filters &mdash; itom</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="itom" href="../../index.html" />
+    <link rel="up" title="Plugins" href="../../plugins.html" />
+    <link rel="next" title="DataObjectIO" href="dataObjectIO.html" />
+    <link rel="prev" title="SerialIO" href="../generalDataIO/serialIO.html" />
+ 
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-40524649-1']);
+  _gaq.push(['_trackPageview']);
+</script>
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="dataObjectIO.html" title="DataObjectIO"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../generalDataIO/serialIO.html" title="SerialIO"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../plugins.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/itomlogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media.html">Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../plugins.html">Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html#add-a-plugin-to-itom">Add a plugin to itom</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../plugins.html#available-plugins">Available plugins</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#cameras-grabbers-ad-converter">Cameras / Grabbers / AD-Converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#further-hardware-devices">Further hardware devices</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../plugins.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="">Basic Filters</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dataObjectIO.html">DataObjectIO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fittingFilters.html">Fitting Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="openCVFilters.html">OpenCV Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pclTools.html">PclTools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="x3p.html">X3P Input Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html#plugin-development">Plugin Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../screenshots.html">Screenshots</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../generalDataIO/serialIO.html"
+                        title="previous chapter">SerialIO</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dataObjectIO.html"
+                        title="next chapter">DataObjectIO</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="basic-filters">
+<h1>Basic Filters<a class="headerlink" href="#basic-filters" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>ITO developed filter-functions for dateObjects</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>Algorithm</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>LGPL</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows, Linux</td>
+</tr>
+<tr class="row-odd"><td><strong>Author</strong>:</td>
+<td><span>W. Lyda, T. Boettcher, University Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin provides several basic filter calculations for itom::dataObject. These are for instance:</p>
+<ul class="simple">
+<li>merging of planes</li>
+<li>swap byte order of objects</li>
+<li>resample slices from dataObjects</li>
+<li>mean value filter along axis</li>
+</ul>
+<p>This plugin does not have any unusual dependencies.</p>
+<p>These filters are defined in the plugin:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#highValueFilter" title="highValueFilter"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">highValueFilter</span></tt></a></li>
+<li><a class="reference internal" href="#replaceInfAndNaN" title="replaceInfAndNaN"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">replaceInfAndNaN</span></tt></a></li>
+<li><a class="reference internal" href="#mergeColorPlane" title="mergeColorPlane"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">mergeColorPlane</span></tt></a></li>
+<li><a class="reference internal" href="#calcHist" title="calcHist"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">calcHist</span></tt></a></li>
+<li><a class="reference internal" href="#lowValueFilter" title="lowValueFilter"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">lowValueFilter</span></tt></a></li>
+<li><a class="reference internal" href="#swapByteOrder" title="swapByteOrder"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">swapByteOrder</span></tt></a></li>
+<li><a class="reference internal" href="#lowPassFilter" title="lowPassFilter"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">lowPassFilter</span></tt></a></li>
+<li><a class="reference internal" href="#clipValues" title="clipValues"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">clipValues</span></tt></a></li>
+<li><a class="reference internal" href="#flatten3Dto2D" title="flatten3Dto2D"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">flatten3Dto2D</span></tt></a></li>
+<li><a class="reference internal" href="#calcObjSlice" title="calcObjSlice"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">calcObjSlice</span></tt></a></li>
+<li><a class="reference internal" href="#medianFilter" title="medianFilter"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">medianFilter</span></tt></a></li>
+<li><a class="reference internal" href="#calcMeanZ" title="calcMeanZ"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">calcMeanZ</span></tt></a></li>
+<li><a class="reference internal" href="#clipAbyB" title="clipAbyB"><tt class="xref pyitom pyitom-filt docutils literal"><span class="pre">clipAbyB</span></tt></a></li>
+</ol>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>Detailed overview about all defined filters:</p>
+<dl class="filter">
+<dt id="highValueFilter">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;highValueFilter&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#highValueFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set each pixel to the highest value within the kernel (x ,y) using the generic mcpp filter engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in y</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>replaceNaN</strong> (<em>int (int)</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="replaceInfAndNaN">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;replaceInfAndNaN&quot;</tt><em class="property">,</em><em>srcImg</em>, <em>replaceImg</em>, <em>destImg</em><big>)</big><a class="headerlink" href="#replaceInfAndNaN" title="Permalink to this definition">¶</a></dt>
+<dd><p>replaces infinite and/or nan-values by values of second matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; Input image</li>
+<li><strong>replaceImg</strong> (<em>dataObject</em>) &#8211; Image with values which will be used for replacement</li>
+<li><strong>destImg</strong> (<em>dataObject</em>) &#8211; Output image</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>nrOfReplacements</strong> (<em>int (int)</em>) &#8211; number of replacments</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="mergeColorPlane">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;mergeColorPlane&quot;</tt><em class="property">,</em><em>srcImg</em>, <em>destImg</em><span class="optional">[</span>, <em>toogleByteOrder</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#mergeColorPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge 3 or 4 color planes to a single tRGBA32 or tInt32-plane.</p>
+<p>If second object is tInt32 and of right size in x and y, the stack object will be convertet to tInt32. In all other cases the object will be tRGBA32</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; Input image with 3 or 4 uint8 planes</li>
+<li><strong>destImg</strong> (<em>dataObject</em>) &#8211; Output image with uint32 planes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>toogleByteOrder</strong> (<em>int (int)</em>) &#8211; Switch between RGBA = 0, BGRA = 1, ARGB = 2, ABGR = 3</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="calcHist">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;calcHist&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>Steps</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#calcHist" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates histgram of real input data object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Image of type Integer or float</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; (Empty) dataObject-hanlde. Will be source type later</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>Steps</strong> (<em>int (int)</em>) &#8211; Number of steps</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="lowValueFilter">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;lowValueFilter&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#lowValueFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set each pixel to the lowest value within the kernel (x ,y) using the generic mcpp filter engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in y</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>replaceNaN</strong> (<em>int (int)</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="swapByteOrder">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;swapByteOrder&quot;</tt><em class="property">,</em><em>scrImage</em>, <em>destImage</em><big>)</big><a class="headerlink" href="#swapByteOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swap byte order for input image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>scrImage</strong> (<em>dataObject</em>) &#8211; Input image</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; Output image</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="lowPassFilter">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;lowPassFilter&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#lowPassFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a low-pass filter with kernelsize (x ,y) using the generic mcpp filter engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in y</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>replaceNaN</strong> (<em>int (int)</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="clipValues">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;clipValues&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>destinationImage</em>, <em>minValue</em>, <em>maxValue</em><span class="optional">[</span>, <em>newValue</em>, <em>insideFlag</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#clipValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>clip values outside or inside of minValue and maxValue to newValue (default = 0)</p>
+<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values within (1) or outside (0) of the range (minValue, maxValue) to the value given by &#8216;newValue&#8217;. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object]</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image (inplace possible)</li>
+<li><strong>minValue</strong> (<em>float (double)</em>) &#8211; lowest value in range</li>
+<li><strong>maxValue</strong> (<em>float (double)</em>) &#8211; highest value in range</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>newValue</strong> (<em>float (double)</em>) &#8211; value set to clipped values (default: 0.0)</li>
+<li><strong>insideFlag</strong> (<em>int (int)</em>) &#8211; 0: clip values outside of given range (default), 1: clip inside</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="flatten3Dto2D">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;flatten3Dto2D&quot;</tt><em class="property">,</em><em>scrImage</em>, <em>destImage</em><big>)</big><a class="headerlink" href="#flatten3Dto2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens a z-Stack of Mx1xN or MxNx1 matrixes to NxM or MxN.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>scrImage</strong> (<em>dataObject</em>) &#8211; Input image</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; Output image</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="calcObjSlice">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;calcObjSlice&quot;</tt><em class="property">,</em><em>srcImg</em>, <em>dstSlice</em>, <em>x0</em>, <em>y0</em>, <em>x1</em>, <em>y1</em><span class="optional">[</span>, <em>interpolation mode</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#calcObjSlice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate 1D-slice from along the defined line from a 2D-Object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; 2D image or single plane n-D object</li>
+<li><strong>dstSlice</strong> (<em>dataObject</em>) &#8211; Slice with output data</li>
+<li><strong>x0</strong> (<em>float (double)</em>) &#8211; x0-coordinate for slice</li>
+<li><strong>y0</strong> (<em>float (double)</em>) &#8211; y0-coordinate for slice</li>
+<li><strong>x1</strong> (<em>float (double)</em>) &#8211; x1-coordinate for slice</li>
+<li><strong>y1</strong> (<em>float (double)</em>) &#8211; y1-coordinate for slice</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>mode</strong> (<em>interpolation</em>) &#8211; 0: Bresenham or Nearest, 1: weighted</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="medianFilter">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;medianFilter&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#medianFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a median filter with kernelsize (x ,y) using the generic mcpp filter engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<em>int (int)</em>) &#8211; Odd kernelsize in y</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last"><strong>replaceNaN</strong> (<em>int (int)</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="calcMeanZ">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;calcMeanZ&quot;</tt><em class="property">,</em><em>srcImg</em>, <em>destImg</em><span class="optional">[</span>, <em>ignoreInf</em>, <em>calcStd</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#calcMeanZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate meanValue of a 3D-Object stack in z-directon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; Input object with multiple z-planes</li>
+<li><strong>destImg</strong> (<em>dataObject</em>) &#8211; Output image with 1 or 2 float64 planes</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>ignoreInf</strong> (<em>int (int)</em>) &#8211; Ignore invalid-Values for floating point</li>
+<li><strong>calcStd</strong> (<em>int (int)</em>) &#8211; If true, calculate standard deviation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="filter">
+<dt id="clipAbyB">
+<em class="property">itom.filter</em><big>(</big><tt class="descname">&quot;clipAbyB&quot;</tt><em class="property">,</em><em>sourceImage</em>, <em>comparisonImage</em>, <em>destinationImage</em>, <em>minValue</em>, <em>maxValue</em><span class="optional">[</span>, <em>newValue</em>, <em>insideFlag</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#clipAbyB" title="Permalink to this definition">¶</a></dt>
+<dd><p>clip values of image A to newValue (default = 0) outside or inside of minValue and maxValue in image B</p>
+<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values in image A depending on image B within (1) or outside (0) of the range (minValue, maxValue) to the value given by &#8216;newValue&#8217;. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Mandatory parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object]</li>
+<li><strong>comparisonImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object] for comparision</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image (inplace possible)</li>
+<li><strong>minValue</strong> (<em>float (double)</em>) &#8211; lowest value in range</li>
+<li><strong>maxValue</strong> (<em>float (double)</em>) &#8211; highest value in range</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Optional parameters:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first last simple">
+<li><strong>newValue</strong> (<em>float (double)</em>) &#8211; value set to clipped values (default: 0.0)</li>
+<li><strong>insideFlag</strong> (<em>int (int)</em>) &#8211; 0: clip values outside of given range (default), 1: clip inside</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="dataObjectIO.html" title="DataObjectIO"
+             >next</a></li>
+        <li class="right" >
+          <a href="../generalDataIO/serialIO.html" title="SerialIO"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../plugins.html" >Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+<div class="footer">This page uses <a href="http://analytics.google.com/">
+Google Analytics</a> to collect statistics. You can disable it by blocking
+the JavaScript coming from www.google-analytics.com.
+<script type="text/javascript">
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ?
+              'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+  })();
+</script>
+</div>
+
+  </body>
+</html>
