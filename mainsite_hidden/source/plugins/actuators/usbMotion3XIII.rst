@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/USBMotion3XIII/docs/usbMotion3XIII.rst

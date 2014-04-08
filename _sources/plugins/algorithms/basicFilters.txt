@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/BasicFilters/docs/basicFilters.rst

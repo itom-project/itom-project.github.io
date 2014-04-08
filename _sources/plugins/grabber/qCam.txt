@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/QCam/docs/qCam.rst

@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/MSMediaFoundation/docs/msMediaFoundation.rst

@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/PCOCamera/docs/pcoCamera.rst

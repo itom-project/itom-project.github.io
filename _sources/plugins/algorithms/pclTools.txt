@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/PclTools/docs/pclTools.rst

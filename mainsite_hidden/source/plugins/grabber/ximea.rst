@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/Ximea/docs/ximea.rst

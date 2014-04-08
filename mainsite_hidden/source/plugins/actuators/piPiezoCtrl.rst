@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/PIPiezoCtrl/docs/piPiezoCtrl.rst

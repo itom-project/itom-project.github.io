@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/FittingFilters/docs/fittingFilters.rst

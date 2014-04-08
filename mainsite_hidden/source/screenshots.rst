@@ -105,7 +105,7 @@ displayed).
    
    1D line plot
 
-.. figure:: _static/screenshots/win8/workspacetoolbox.png
+.. figure:: _static/screenshots/win8/plot2d.png
    :width: 400px
    :align: center
    :alt: 2D plot

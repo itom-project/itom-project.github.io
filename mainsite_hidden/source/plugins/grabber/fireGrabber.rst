@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/FireGrabber/docs/fireGrabber.rst
