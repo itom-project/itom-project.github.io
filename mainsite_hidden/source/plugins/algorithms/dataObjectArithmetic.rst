@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/dataobjectarithmetic/docs/dataObjectArithmetic.rst

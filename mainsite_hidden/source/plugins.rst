@@ -72,6 +72,7 @@ Algorithms
    :maxdepth: 1
    
    plugins/algorithms/basicFilters.rst
+   plugins/algorithms/dataObjectArithmetic.rst
    plugins/algorithms/dataObjectIO.rst
    plugins/algorithms/fittingFilters.rst
    plugins/algorithms/openCVFilters.rst

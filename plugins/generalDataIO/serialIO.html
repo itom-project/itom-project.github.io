@@ -26,6 +26,8 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="Basic Filters" href="../algorithms/basicFilters.html" />
@@ -72,6 +74,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#clear-input-or-output-buffer">Clear input or output buffer</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#installation">Installation</a></li>
 </ul>
 </li>
@@ -305,6 +308,18 @@ for the current position is <strong>POS?n</strong>, then use the <strong>setVal<
 the size of the allocated buffer <em>ba</em>. If the serial port does not respond at all within the given timeout time, an error is raised.
 <em>getVal</em> does not wait until the entire buffer is filled or the timeout occurs but returns immediately with the content of the buffer that
 has been filled until this time. In order to get the full answer, it is also possible to repeatedly call <em>getVal</em>.</p>
+</div>
+<div class="section" id="clear-input-or-output-buffer">
+<h2>Clear input or output buffer<a class="headerlink" href="#clear-input-or-output-buffer" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, it is necessary to immediately clear all characters inside of the input buffer (obtained by <em>getVal</em>) and/or output buffer (send by <em>setVal</em>). This can be done using specific <strong>exec</strong>-functions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;clearInputBuffer&quot;</span><span class="p">)</span> <span class="c">#clear input buffer</span>
+<span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;clearOutputBuffer&quot;</span><span class="p">)</span> <span class="c">#clear output buffer</span>
+
+<span class="c">#alternative:</span>
+<span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;clearBuffer&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c">#clear input buffer</span>
+<span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;clearBuffer&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c">#clear output buffer</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
