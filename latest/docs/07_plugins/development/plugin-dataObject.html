@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'ae0dc09',
+        VERSION:     '9380688',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -65,8 +63,8 @@
   <div class="section" id="dataobject">
 <span id="plugin-dataobject"></span><h1>DataObject<a class="headerlink" href="#dataobject" title="Permalink to this headline">¶</a></h1>
 <p>The class <strong>DataObject</strong> (part of the library <strong>dataObject</strong>) provides a <em>n</em>-dimensional matrix that is used both in the core of <strong>itom</strong> as well as
-in any plugins. The <em>n</em>-dimensional matrix can have different element types. These types and their often used enumeration value are defined
-in the file <em>typeDefs.h</em> and are as follows.</p>
+in any plugin. The <em>n</em>-dimensional matrix can have different element types. These types and their often used enumeration value are defined
+in the file <em>typeDefs.h</em> and are as follows:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="22%" />
@@ -122,35 +120,17 @@ in the file <em>typeDefs.h</em> and are as follows.</p>
 </tr>
 </tbody>
 </table>
-<p>The last two dimensions of each dataObject are denoted <em>plane</em> and physically correspond to images. In order to also handle huge matrices in memory,
-The entire matrix is divided into planes, where each plane can be allocated at arbitrary positions and memory and is of type <strong>cv::Mat_&lt;type&gt;</strong>,
-derived from <strong>cv::Mat</strong> of the <strong>OpenCV</strong> library. Therefore every plane can be used with every operator given by the <strong>OpenCV</strong>-framework (version 2.3.1
-or higher). If available, the first <em>(n-2)</em> are allocated as one vector of pointers, each pointing to its corresponding plane. This kind of
-dataObject and its way of allocating memory is called <em>unorganized</em>.</p>
-<p>In order to make the <em>dataObject</em> compatible to matrices that are allocated in one huge memory block (like Numpy arrays), it is also possible to
-make any <em>dataObject</em> continuous. Then, a huge data block is allocated, such that all planes lie consecutively in memory. Nevertheless, the pointer-tree
-is still available, pointing to the starting points of all planes. This reallocation is implicitly done, when creating a Numpy-array from a dataObject.</p>
-<p>DataObject can be declared in different possible ways with different dimensions and different data types.
-Various possible implementations of declaring DataObject are listed below.</p>
-<ol class="arabic simple">
-<li>DataObject();</li>
-<li>DataObject(const size_t size, const int type);</li>
-<li>DataObject(const size_t sizeY, const size_t sizeX, const int type);</li>
-<li>DataObject(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type ,const unsigned char continuous = (unsigned char)&#8216;000&#8217;);</li>
-<li>DataObject(const unsigned char diimesions, const size_t <a href="#id1"><span class="problematic" id="id2">*</span></a>sizes, const int type, const unsigned char continuous = (unsigned char)&#8216;000&#8217;);</li>
-<li>DataObject(const unsigned char dimensions, const size_t <a href="#id3"><span class="problematic" id="id4">*</span></a>sizes, const int type, const uchar &#8220;continousouDataPtr, const size_t <a href="#id5"><span class="problematic" id="id6">*</span></a>steps = (const size_t <a href="#id7"><span class="problematic" id="id8">*</span></a>)0);</li>
-<li>DataObject(const size_t sizeZ, const size_t sizeY, const size_t sizeX, const int type, const uchar*continuousDataPtr, const size_t <a href="#id9"><span class="problematic" id="id10">*</span></a>steps = (const size_t <a href="#id11"><span class="problematic" id="id12">*</span></a>)0);</li>
-<li>DataObject(const ito::DataObject &amp;copyConstr);</li>
-<li>DataObject(const unsigned char dimensions, const size_t <a href="#id13"><span class="problematic" id="id14">*</span></a>sizes, const int type, const cv::Mat <a href="#id15"><span class="problematic" id="id16">*</span></a>planes, const unsigned int nrOfPlanes);</li>
-<li>DataObject(const ito::DataObject dObj);</li>
-</ol>
-<p>Let&#8217;s take an example of a data object with a dimensions 3x2x5. It can be imagined as shown in the figure below.</p>
+<p>The last two dimensions of each DataObject are denoted <em>plane</em> and physically correspond to images. Since no one-dimensional DataObject is available, each DataObject at least consists of one plane. In order to also handle huge matrices in memory,
+usually the different planes are stored at different locations in memory. Internally, each plane is an OpenCV matrix of type <strong>cv::Mat_&lt;type&gt;</strong>,
+derived from <strong>cv::Mat</strong>. Therefore every plane can be used with every operator given by the <strong>OpenCV</strong>-framework (version 2.3.1
+or higher). This kind of DataObject and its way of allocating memory is called <em>non-continuous</em>.</p>
+<p>In order to make the <em>DataObject</em> compatible to matrices that are allocated in one huge memory block (like Numpy arrays), it is also possible to
+make any <em>DataObject</em> continuous. Then, a huge data block is allocated, such that all planes lie consecutively in memory. This reallocation is implicitly done, when creating a Numpy-array from a non-continuous DataObject.</p>
+<p>DataObject can be declared in different possible ways with different dimensions and different data types.</p>
+<p>Let&#8217;s take an example of a 3x2x5 data object. It can be imagined as shown in the figure below.</p>
 <a class="reference internal image-reference" href="../../_images/DataObject.png"><img alt="../../_images/DataObject.png" src="../../_images/DataObject.png" style="width: 812.0px; height: 369.0px;" /></a>
-<p>As we can see in this figure, each plane is of a type <strong>cv::Mat</strong> class from <strong>openCV</strong> library which we know.
-<strong>m_data</strong> corresponds to the zero-based two-dimensional matrix-index for a particular plane.
-This matrix-index can be retrieved using <strong>seekMat()</strong> method and later on with the use of <strong>get_mdata()</strong> method, we can have the matrix pointer of the whole plane. The return type of <strong>get_mdata()</strong> method is <strong>int*</strong> which can be type-casted by <strong>cv:Mat*</strong> easily.
+<p>As we can see in this figure, each plane is of a type <strong>cv::Mat</strong> class from <strong>OpenCV</strong> library which we know. The internal index of a specific plane can safely be retrieved using the method <strong>seekMat()</strong>. Usually the i-th plane has got the index <em>i</em>, however in case of data objects representing a subpart or region of interest of another data object, the i-th plane with respect to the current region of interest can in reality have a bigger index than <em>i</em>. The pointers to all planes are stored in one linear vector, represented by the array member <strong>m_data</strong>. It is accessible via <strong>get_mdata()</strong> and is of type <strong>int*</strong>. However, it can directly and safely be type-casted to <strong>cv:Mat*</strong> or <strong>cv::Mat_&lt;Type&gt;</strong>.
 Please read the section <a class="reference internal" href="#direct-access-to-the-underlying-cv-mat">Direct Access to the underlying cv::Mat</a> to understand this concept in detail with a working example.</p>
-<p>Following are some sample codes to get one quickly understand <em>basic programming structure of Data Objects</em>.</p>
 <p>The following code creates an empty data object with no dimensions (0) and no type (0).</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -161,12 +141,8 @@ Please read the section <a class="reference internal" href="#direct-access-to-th
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; type: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">d0</span><span class="p">.</span><span class="n">getType</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Here <strong>getDims()</strong> method returns the dimensions of data object d0, whereas <strong>getType()</strong> method returns the type of d0.</p>
-</div>
-<p>Now, lets take an example of creating a two dimensional data object.</p>
-<p>The following code creates such 2 dimensional data object of dimensions Y=2, X=5 and of type float32.</p>
+<p>The number of dimensions of this data object are obtained by <strong>getDims()</strong>, whereas its type value in terms of the enumeration above is returned via <strong>getType()</strong>.</p>
+<p>The following code creates a 2 dimensional data object of dimensions Y=2, X=5 and of type <em>float32</em>.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -182,20 +158,50 @@ Please read the section <a class="reference internal" href="#direct-access-to-th
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d1</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Here, <strong>getSize()</strong> method returns the size of each dimension of a data object d1.
-<strong>getDims()</strong> method returns the number of dimensions of d1.
-<strong>getType()</strong> method returns the type of d1.
-<strong>getTotal()</strong> method returns total number of elements in d1.</p>
+<p>The size of the specific dimensions is obtained by <strong>getSize</strong> where the argument is the index of the dimensions (<em>x</em> is always the last dimension with the biggest index value). <strong>getTotal</strong> returns the total number of elements within this data object.</p>
+<div class="section" id="creating-a-data-object">
+<h2>Creating a data object<a class="headerlink" href="#creating-a-data-object" title="Permalink to this headline">¶</a></h2>
+<p>For creating a data object in <em>C++</em>, there are different constructors available. They are discussed in this section.</p>
+<p>An empty data object is created using the argument-less, default constructor:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>It has no dimensions and contains no elements. For creating a two or three dimensional data object of a desired type, filled with arbitrary, but not random values, use one of the following constructors:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">sizeY</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">sizeX</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">type</span><span class="p">);</span> <span class="c1">//type is one of the enumeration values</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">sizeZ</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">sizeY</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">sizeX</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">continuous</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The optional <em>continuous</em> parameter indicates, whether a continuous object (one block in memory) should be allocated (1), or not (0, default).
+For higher dimensional objects, there is a constructors that requires an allocated integer array that contains the sizes of all dimensions:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">dimensions</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">sizes</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">continuous</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">//e.g.</span>
+<span class="kt">int</span> <span class="n">sizes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">ito</span><span class="o">::</span><span class="n">tFloat32</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>One other important constructor is - of course - the copy constructor. It creates a shallow copy of an existing data object. A shallow copy means, that both data objects share the same data (hence the array itself), but
+the header information is separated (dimensions, sizes...). All meta information is shared as well (axes descriptions, scales, protocol...). If a value of the one object is changed, the corresponding value in the other
+object is changed as well. The principle of using shallow copies is a common principle in C programming and highly used in OpenCV. It speeds up the calculation and requires less memory. On the other hand, you need to take
+care about the values. If you want to have a so called deep copy of an object, use the <strong>copy</strong> method.</p>
+<p>If you know what you do, you can also create a data object from multiple <em>cv:Mat</em> of the same type and size. If so, you need to have an array of all cv::Mat (each corresponding to one plane). The created data object then
+creates a fast shallow copy of all planes and uses them:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">dimensions</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">sizes</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">*</span> <span class="n">planes</span><span class="p">,</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">nrOfPlanes</span><span class="p">);</span>
+
+<span class="c1">//e.g.</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">planes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">ones</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">CV_8U</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">zeros</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">CV_8U</span><span class="p">)};</span>
+<span class="kt">int</span> <span class="n">sizes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">};</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sizes</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">tUInt8</span><span class="p">,</span> <span class="n">planes</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Furthermore, there are several constructors to create data objects whose values are already set to the values of a given array. The reader is referred to the detailed documentation of class <strong>ito::DataObject</strong> for this.</p>
 </div>
 <div class="section" id="addressing-the-elements-of-a-data-object">
 <h2>Addressing the elements of a data object<a class="headerlink" href="#addressing-the-elements-of-a-data-object" title="Permalink to this headline">¶</a></h2>
 <p>Now, we know how to create a data object, so lets have a look at how can one address the elements of a data object.
 Sometimes it is necessary to read or set single values in one matrix, sometimes one want to access all elements
 in the matrix or a certain subregion. Therefore, the addressing can be done in one of the following ways:</p>
-<div class="section" id="direct-access-of-one-single-element-of-a-data-object-using-at-method">
-<h3>Direct access of one single element of a Data Object using <strong>at()</strong> method<a class="headerlink" href="#direct-access-of-one-single-element-of-a-data-object-using-at-method" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="direct-access-of-one-single-element-of-a-data-object-using-at-tp-method">
+<h3>Direct access of one single element of a Data Object using <strong>at&lt;_Tp&gt;()</strong> method<a class="headerlink" href="#direct-access-of-one-single-element-of-a-data-object-using-at-tp-method" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">tFloat32</span><span class="p">);</span>
@@ -203,8 +209,8 @@ in the matrix or a certain subregion. Therefore, the addressing can be done in o
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;d1(0,1) = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">d1</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">float32</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, the addressing is done by the method <strong>at()</strong> under the class ito::DataObject, which is pretty similar to the same method
-under the <strong>OpenCV</strong> class <strong>cv::Mat</strong>. The <strong>at()</strong> method can either be used to get the value at a certain position or
+<p>Here, the addressing is done by the member method <strong>at()</strong>, which is pretty similar to the same method
+of the <strong>OpenCV</strong> class <strong>cv::Mat</strong>. The <strong>at()</strong> method can either be used to get the value at a certain position or
 to set value at that position in a data object. There are special implementations of <strong>at()</strong> for addressing values in a two- or three-dimensional
 data object, where the first argument always is the <strong>z-index</strong> (3D), followed by the <strong>y-index</strong> and the <strong>x-index</strong>.
 All indices are zero-based, hence the first element can be referred by addressing <strong>0th position</strong> in every dimension.</p>
@@ -216,19 +222,18 @@ data object.</p>
 <p>Let&#8217;s try to summarize some pros and cons of this method.</p>
 <p><strong>Advantages</strong></p>
 <ul class="simple">
-<li>This method gives flexibility to a developer to access any element of a data object directly.</li>
+<li>This method gives flexibility to a developer to directly access any element of a data object.</li>
 <li>A developer can also access a part of a data object as well using <strong>at()</strong> method as described in <a class="reference internal" href="#direct-access-to-the-underlying-cv-mat">Direct Access to the underlying cv::Mat</a>.</li>
 </ul>
 <p><strong>Drawbacks</strong></p>
 <ul class="simple">
 <li>Developer has to implement the code under the nest of <strong>if...else</strong> conditions if one needs to access the whole data object.</li>
-<li>It is a slower method to execute performance wise if compared to the other methods of accessing the data object.</li>
+<li>It is slow for accessing a lot of values of the matrix compared to the other possible methods.</li>
 </ul>
 </div>
 <div class="section" id="addressing-elements-of-a-data-object-using-row-pointer">
 <h3>Addressing elements of a data object using row pointer<a class="headerlink" href="#addressing-elements-of-a-data-object-using-row-pointer" title="Permalink to this headline">¶</a></h3>
-<p>When one needs to iterate through certain region of a data object, then the previous method of accessing a data object using <strong>at</strong> method seems quite insufficient.
-In such case, one can define a row pointer for each row in matrix and work with row pointer to address elements of a data object in a following way.</p>
+<p>When one needs to iterate through certain regions of a data object, then the previous method of accessing a data object using <strong>at</strong> method seems quite insufficient. In such case, one can define a row pointer for each row in matrix and work with row pointer to address elements of a data object in the following way.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -244,15 +249,15 @@ In such case, one can define a row pointer for each row in matrix and work with 
 13
 14
 15</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">tInt16</span><span class="p">);</span>
-<span class="kt">size_t</span> <span class="n">planeID</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">seekMat</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>   <span class="c1">//get internal plane number for the first plane</span>
-<span class="n">ito</span><span class="o">::</span><span class="n">int16</span> <span class="o">*</span><span class="n">rowPtr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">int16</span><span class="o">*</span><span class="p">)</span><span class="n">d1</span><span class="p">.</span><span class="n">rowPtr</span><span class="p">(</span><span class="n">planeID</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
-<span class="kt">size_t</span> <span class="n">height</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="kt">size_t</span> <span class="n">width</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">m</span><span class="o">&lt;</span> <span class="n">height</span> <span class="p">;</span> <span class="n">m</span><span class="o">++</span><span class="p">)</span>
+<span class="kt">int</span> <span class="n">planeID</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">seekMat</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>   <span class="c1">//get internal plane number for the first plane</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">int16</span> <span class="o">*</span><span class="n">rowPtr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="n">m</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">rowPtr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">int16</span><span class="o">*</span><span class="p">)</span><span class="n">d1</span><span class="p">.</span><span class="n">rowPtr</span><span class="p">(</span><span class="n">planeID</span><span class="p">,</span><span class="n">m</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Row &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;:&quot;</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span> <span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="n">rowPtr</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>                 <span class="c1">//accessing each element of data object with row pointer</span>
     <span class="p">}</span>
@@ -261,8 +266,8 @@ In such case, one can define a row pointer for each row in matrix and work with 
 </pre></div>
 </td></tr></table></div>
 <p>Here, <strong>seekMat()</strong> method gets the internal plane number of the 1st plane in line #2.
-In line #3, dynamic array rowPtr is defined as row pointer to the 0th plane of the data object d1.
-Now accessing each element of row pointer will access each element of the data object in that row.</p>
+In line #8, the pointer to the data array of the m-th row in the 2D-plane is obtained and safed in <em>rowPtr</em>.
+By iterating through the array given by the <em>rowPtr</em>, each element in this row can be read and set to a specific value.</p>
 <p>To use this row pointer method for data objects more than 2 dimensions, following code can be used.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -295,21 +300,21 @@ Now accessing each element of row pointer will access each element of the data o
 <span class="kt">int</span> <span class="n">dim3</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">dim4</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">dim5</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
-<span class="kt">size_t</span> <span class="n">dataIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">dataIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">dim1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">dim2</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">dim2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">dim3</span><span class="p">;</span><span class="n">k</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">dim3</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
         <span class="p">{</span>
-            <span class="n">dataIdx</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">dim2</span><span class="o">*</span><span class="n">dim3</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span><span class="o">*</span><span class="n">dim3</span> <span class="o">+</span> <span class="n">k</span><span class="p">;</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">l</span><span class="o">&lt;</span><span class="n">dim4</span><span class="p">;</span><span class="n">l</span><span class="o">++</span><span class="p">)</span>
+            <span class="n">dataIdx</span> <span class="o">=</span> <span class="n">d1</span><span class="p">.</span><span class="n">seekMat</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">dim2</span><span class="o">*</span><span class="n">dim3</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span><span class="o">*</span><span class="n">dim3</span> <span class="o">+</span> <span class="n">k</span><span class="p">);</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">l</span><span class="o">&lt;</span><span class="n">dim4</span><span class="p">;</span> <span class="n">l</span><span class="o">++</span><span class="p">)</span>
             <span class="p">{</span>
-                <span class="n">rowPtr1</span><span class="o">=</span> <span class="p">(</span><span class="n">TypeParam</span><span class="o">*</span><span class="p">)</span><span class="n">d1</span><span class="p">.</span><span class="n">rowPtr</span><span class="p">(</span><span class="n">dataIdx</span><span class="p">,</span><span class="n">l</span><span class="p">);</span>
-                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">m</span><span class="o">&lt;</span><span class="n">dim5</span><span class="p">;</span><span class="n">m</span><span class="o">++</span><span class="p">)</span>
+                <span class="n">rowPtr1</span><span class="o">=</span> <span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">int16</span><span class="o">*</span><span class="p">)</span><span class="n">d1</span><span class="p">.</span><span class="n">rowPtr</span><span class="p">(</span><span class="n">dataIdx</span><span class="p">,</span><span class="n">l</span><span class="p">);</span>
+                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">m</span><span class="o">&lt;</span><span class="n">dim5</span><span class="p">;</span> <span class="n">m</span><span class="o">++</span><span class="p">)</span>
                 <span class="p">{</span>
                     <span class="c1">//Assigning unique value to each element of d1.</span>
-                    <span class="n">rowPtr1</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">saturate_cast</span><span class="o">&lt;</span><span class="n">TypeParam</span><span class="o">&gt;</span><span class="p">(</span><span class="n">calcUniqueValue5D</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">m</span><span class="p">));</span>
+                    <span class="n">rowPtr1</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">yourValue</span><span class="p">;</span>
                 <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">}</span>
@@ -322,51 +327,42 @@ Now accessing each element of row pointer will access each element of the data o
 <p class="last">Here <strong>dataIdx</strong> represents the number of the plane in the matrix.
 The formula in line #14 assigns a non repeating increasing value to dataIdx such that each plane of the data object can be pointed out without any overlapping.</p>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Usually it is not allowed to use the <em>rowPtr</em> to access the items of one of the following rows,
+since it is not sure if the elements of the next row directly follow to the last value of this row.
+For instance, this is not the case, if the current plane represents a region of interest of a bigger plane.
+You can only iterate through one entire plane using the row-pointer of the first row if the plane is continuous.
+This can be checked by the continuous property of the <em>cv::Mat</em> that represents this plane.</p>
+</div>
 <p>Some advantages and disadvantages of using this method are given in the section below.</p>
-<div class="section" id="advantages">
-<h4>Advantages<a class="headerlink" href="#advantages" title="Permalink to this headline">¶</a></h4>
+<p><strong>Advantages</strong></p>
 <ul class="simple">
 <li>This method is the most efficient way to access the data object.</li>
 <li>This method gives flexibility to access some rows or the full data object at once.</li>
 </ul>
-</div>
-<div class="section" id="drawbacks">
-<h4>Drawbacks<a class="headerlink" href="#drawbacks" title="Permalink to this headline">¶</a></h4>
+<p><strong>Drawbacks</strong></p>
 <ul class="simple">
 <li>Complex implementation. One needs deep understanding of pointers to implement this method to access data object.</li>
 <li>This is not an advisable method if one needs to access a few elements of the data object which are not in sequence.</li>
 </ul>
 </div>
-</div>
 <div class="section" id="assigning-a-single-value-to-all-elements-of-a-data-object">
-<h3>Assigning a single value to all elements of a Data Object<a class="headerlink" href="#assigning-a-single-value-to-all-elements-of-a-data-object" title="Permalink to this headline">¶</a></h3>
-<p>One can assign a single value to all elements of a data object using assignment operator &#8220;=&#8221; in the following way.
+<h3>Assigning a single value to all elements of a data object<a class="headerlink" href="#assigning-a-single-value-to-all-elements-of-a-data-object" title="Permalink to this headline">¶</a></h3>
+<p>One can assign a single value to all elements of a data object using the assignment operator &#8220;=&#8221; in the following way.
 Here we will also have a look on how to declare a 5 dimensional data object and assign a single floating point value to each element of the data object.</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">size_t</span> <span class="o">*</span><span class="n">temp_size</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">size_t</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
-<span class="n">temp_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">temp_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
-<span class="n">temp_size</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-<span class="n">temp_size</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
-<span class="n">temp_size</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">temp_size</span><span class="p">,</span><span class="n">ito</span><span class="o">::</span><span class="n">tFloat32</span><span class="p">);</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="n">temp_size</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">};</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">d1</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="n">temp_size</span><span class="p">,</span><span class="n">ito</span><span class="o">::</span><span class="n">tFloat32</span><span class="p">);</span>
 <span class="n">d1</span> <span class="o">=</span> <span class="mf">3.7</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d1</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="k">delete</span><span class="p">[]</span> <span class="n">temp_size</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here line #7 uses implementation #4 for declaring 5 dimensional data object d1.</p>
 </div>
 <div class="section" id="direct-access-to-the-underlying-cv-mat">
-<h3>Direct Access to the underlying cv::Mat<a class="headerlink" href="#direct-access-to-the-underlying-cv-mat" title="Permalink to this headline">¶</a></h3>
+<h3>Direct access to the underlying cv::Mat<a class="headerlink" href="#direct-access-to-the-underlying-cv-mat" title="Permalink to this headline">¶</a></h3>
 <p>In some cases, one needs to assign values of elements of a data objects based on some portion of another data object.
 This can be done by using this method of accessing the underlying matrix (cv::Mat) of a data object directly.
 Following example shows the method to access underlying planes in multidimensional matrices.</p>
@@ -390,7 +386,7 @@ Following example shows the method to access underlying planes in multidimension
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;DataObject (4x5x3), int16 </span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">d4</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>        <span class="c1">//assign value 3 to all elements</span>
 <span class="c1">//access to the third plane (index 2)</span>
-<span class="n">planeID</span> <span class="o">=</span> <span class="n">d4</span><span class="p">.</span><span class="n">seekMat</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">planeID</span> <span class="o">=</span> <span class="n">d4</span><span class="p">.</span><span class="n">seekMat</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="o">*</span><span class="n">plane3</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">*</span><span class="p">)</span><span class="n">d4</span><span class="p">.</span><span class="n">get_mdata</span><span class="p">()[</span><span class="n">planeID</span><span class="p">];</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;OpenCV plane&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">plane3</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -411,20 +407,27 @@ in plane 3 of data object d4 as a revision to the previous method of accessing e
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">Range</span> <span class="o">*</span><span class="n">ranges</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">Range</span> <span class="o">*</span><span class="n">ranges</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
 <span class="n">ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
 <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
 <span class="n">ranges</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">();</span>
+<span class="k">delete</span> <span class="n">ranges</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>This code shows the way to modify ranges individually, which can be very useful if one needs to modify this range later in this code to work on other data objects perhaps.</p>
+<p>..note:</p>
+<div class="highlight-python"><div class="highlight"><pre>Please consider, that the first index of the range is the first zero-based index inside of the selected range. The second value is always **one** index after the last index
+inside of the region of interest. This is very important!! This behaviour is somehow unintuitive, however similar to OpenCV and Python.
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>get_mdata()</strong> is a function declared under <em>DataObject</em> class. It returns pointer to vector of <em>cv::_Mat-matrices</em>.</p>
 </div>
 </div>
 <div class="section" id="accessing-all-elements-of-a-data-object-using-iterators">
-<h3>Accessing all elements of a Data Object using iterators<a class="headerlink" href="#accessing-all-elements-of-a-data-object-using-iterators" title="Permalink to this headline">¶</a></h3>
+<h3>Accessing all elements of a data object using iterators<a class="headerlink" href="#accessing-all-elements-of-a-data-object-using-iterators" title="Permalink to this headline">¶</a></h3>
 <p>There are two classes defined, called <strong>DObjIterator</strong> and <strong>DObjConstIterator</strong> respectively, under the namespace <strong>ITOM</strong>, which support the developer with an easy way to iterate through
 the whole data object.
 This method can be used only if one needs to iterate through all elements of a data object at once.
@@ -440,7 +443,7 @@ Following code snippet shows the example of this method.</p>
 <span class="n">ito</span><span class="o">::</span><span class="n">DObjIterator</span> <span class="n">it</span><span class="p">;</span>    <span class="c1">// Declaration of DObjIterator</span>
 <span class="k">for</span><span class="p">(</span><span class="n">it</span><span class="o">=</span><span class="n">d6</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="n">it</span><span class="o">!=</span><span class="n">d6</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="o">++</span><span class="n">it</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="o">*</span><span class="p">((</span><span class="n">ito</span><span class="o">::</span><span class="n">int16</span><span class="o">*</span><span class="p">)(</span><span class="o">*</span><span class="n">it_2d</span><span class="p">))</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">saturate_cast</span><span class="o">&lt;</span><span class="n">TypeParam</span><span class="o">&gt;</span><span class="p">(</span><span class="n">temp</span><span class="o">++</span><span class="p">);</span>     <span class="c1">// Assigning a unique value to each element of a data object using iterator.</span>
+    <span class="o">*</span><span class="p">((</span><span class="n">ito</span><span class="o">::</span><span class="n">int16</span><span class="o">*</span><span class="p">)(</span><span class="o">*</span><span class="n">it_2d</span><span class="p">))</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">saturate_cast</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">int16</span><span class="o">&gt;</span><span class="p">(</span><span class="n">temp</span><span class="o">++</span><span class="p">);</span>     <span class="c1">// Assigning a unique value to each element of a data object using iterator.</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
@@ -450,28 +453,24 @@ These methods contains pointers to the first and last elements of any data objec
 Line #4 makes a meaningful use of these methods in for loop to iterate through the data object <strong>d6</strong>. We first initiate the iterator <strong>it</strong> with the pointer returned by
 <strong>d6.begin()</strong>, iterate through the whole data object increasing the iterator value by one in each iteration till the pointer value in iterator <strong>it</strong> reaches the pointer value of the
 last element of the data object checking the condition <strong>it!=d6.end()</strong>.</p>
-<div class="section" id="id17">
-<h4>Advantages<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<p><strong>Advantages</strong></p>
 <ul class="simple">
 <li>This method is a compromise between its usability with ease and performance on execution level. Integration of this method in code is fast and easy.</li>
 <li>Developer does not think about <strong>if...else</strong> conditions to decide the boundaries of Region of Interest to access any data object.</li>
 </ul>
-</div>
-<div class="section" id="id18">
-<h4>Drawbacks<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<p><strong>Drawbacks</strong></p>
 <ul class="simple">
 <li>Performance degrades against the method <a class="reference internal" href="#addressing-elements-of-a-data-object-using-row-pointer">Addressing elements of a data object using row pointer</a>.</li>
 <li>It is not advisable to use this method if one needs to access some part or a single element of a data object.</li>
 </ul>
 </div>
 </div>
-</div>
 <div class="section" id="working-with-data-objects">
-<h2>Working with Data Objects<a class="headerlink" href="#working-with-data-objects" title="Permalink to this headline">¶</a></h2>
+<h2>Working with data objects<a class="headerlink" href="#working-with-data-objects" title="Permalink to this headline">¶</a></h2>
 <p>Now, lets have a look on various methods to work with data objects.</p>
 <div class="section" id="creating-eye-matrix">
 <h3>Creating Eye Matrix<a class="headerlink" href="#creating-eye-matrix" title="Permalink to this headline">¶</a></h3>
-<p>Any square Data Object might need to be converted in eye matrix during many operations in matrix calculations.
+<p>Any square data object might need to be converted in eye matrix during many operations in matrix calculations.
 This can be quickly done using function <strong>eye()</strong> declared under <em>DataObject</em> class.
 Syntax for the function <strong>eye()</strong> is shown below.</p>
 <p><em>dataObjectName.eye(noOfDimensions, dataType);</em></p>
@@ -512,7 +511,7 @@ Syntax for the function <strong>ones()</strong> is shown below.</p>
 <span class="n">d3</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, the function ones() has been used in Line #2 with pointer variable d3 to convert the data object d3 into ones matrix of dimension 2x3x4.</p>
+<p>Here, the function ones() has been used in line #2 with pointer variable d3 to convert the data object d3 into ones matrix of dimension 2x3x4.</p>
 </div>
 <div class="section" id="creating-zeros-matrix">
 <h3>Creating Zeros Matrix<a class="headerlink" href="#creating-zeros-matrix" title="Permalink to this headline">¶</a></h3>
@@ -672,11 +671,62 @@ Syntax for the setAxisScale() function is shown below:</p>
 Line #8 prints down these retrieved axis values at the end of this code snippet.</p>
 </div>
 </div>
+<div class="section" id="copy-data-into-an-existing-data-object">
+<h2>Copy data into an existing data object<a class="headerlink" href="#copy-data-into-an-existing-data-object" title="Permalink to this headline">¶</a></h2>
+<p>Often, it is necessary to copy external data arrays into a region of interest, an entire plane or an entire data object. Of course this can be done using the methods from the accessing and assigning section above.
+However for the common case of copying 2D matrices into a two-dimensional region of interest or a 2D-plane of a data object, there exists the method <strong>copyFromData2D</strong>. The main requirement is, that the size of the
+data object exactly fits to the given size of the external array. Additionally, the types of the data must fit as well. Let&#8217;s describe the method using two examples:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">//example for method</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">copyFromData2D</span><span class="p">(</span><span class="k">const</span> <span class="n">_Tp</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sizeX</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sizeY</span><span class="p">);</span>
+
+<span class="c1">//create 6 uint16 values</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">uint16</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">};</span>
+
+<span class="c1">//create a 3x2x3, uint16 data object filled with 0</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">ito</span><span class="o">::</span><span class="n">tUInt16</span><span class="p">);</span>
+
+<span class="c1">//get a slice of the second plane (careful: index (1,2) only selects one! plane)</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">Range</span> <span class="n">ranges2</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">(),</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">()};</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">ranges2</span><span class="p">);</span>
+
+<span class="c1">//let all values of c set to the values given by the first argument</span>
+<span class="c1">//3,2 indicates the width and height of data, since arr is a one dimensional array.</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">copyFromData2D</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">//prints the resulting overall object b, where the second plane is [1,2,3;4,5,6]</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The second example allows to only copy a subpart of the given data block into the data object</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">//example for method</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">copyFromData2D</span><span class="p">(</span><span class="k">const</span> <span class="n">_Tp</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sizeX</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sizeY</span><span class="p">,</span> \
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">x0</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">y0</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">height</span><span class="p">);</span>
+
+<span class="c1">//create 6 uint16 values</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">uint16</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">};</span>
+
+<span class="c1">//create a 3x2x3, uint16 data object filled with 0</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">b</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">ito</span><span class="o">::</span><span class="n">tUInt16</span><span class="p">);</span>
+
+<span class="c1">//let the values 2,3 and 5,6 be copied into the second and third column of the second plane</span>
+<span class="c1">//of b.</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">Range</span> <span class="n">ranges2</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">(),</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)};</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">ranges2</span><span class="p">);</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">copyFromData2D</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c1">//prints the resulting overall object b, where the second plane is [0,2,3;0,5,6]</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <em>copyFromData2D</em> is often used for copying camera data inside an internal or an externally given data object.</p>
+</div>
 <div class="section" id="operations-on-data-objects">
-<h2>Operations on Data Objects<a class="headerlink" href="#operations-on-data-objects" title="Permalink to this headline">¶</a></h2>
+<h2>Operations on data objects<a class="headerlink" href="#operations-on-data-objects" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we will learn some basic operations which can be performed using data objects.</p>
-<div class="section" id="adjugate-the-data-object">
-<h3>Adjugate the Data Object<a class="headerlink" href="#adjugate-the-data-object" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="adjugate-of-a-data-object">
+<h3>Adjugate of a data object<a class="headerlink" href="#adjugate-of-a-data-object" title="Permalink to this headline">¶</a></h3>
 <p>In many matrix calculations, there occurs a need to adjugate a matrix. Here, we also have a function <strong>adj()</strong> declared under <em>DataObject</em> class, which returns an adjugated matrix of the original data object.
 Syntax for this method is shown below.</p>
 <p><em>DataObjectName.adj();</em></p>
@@ -698,8 +748,8 @@ Syntax for this method is shown below.</p>
 <p>In the code above, a 6x5x3 data object d10 of data type <em>ito::tComplex128</em> is created. Later on, in line #2-4, some complex values are assigned at data object elements (0,1,2), (1,0,1) and (2,2,1).
 In line #5, an adjugated matrix of data object d10 is created using <strong>adj()</strong> function and stored in new data object called <strong>adjugatedDataObj</strong>. Line #6 prints out this adjugated matrix.</p>
 </div>
-<div class="section" id="transpose-the-data-object">
-<h3>Transpose the Data Object<a class="headerlink" href="#transpose-the-data-object" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="transpose-a-data-object">
+<h3>Transpose a data object<a class="headerlink" href="#transpose-a-data-object" title="Permalink to this headline">¶</a></h3>
 <p>Transposing a data object is also one of the very important techniques in matrix calculations. With the use of <em>trans()</em> function, we can achieve a transposed matrix of the original data object.
 This function is also declared under <em>DataObject</em> class. Syntax for this function is shown below.</p>
 <p><em>DataObjectName.trans()</em></p>
@@ -736,8 +786,42 @@ This function is also declared under <em>DataObject</em> class. Syntax for this 
 <p class="last">Transposing the data object also transposes the axis related informations.</p>
 </div>
 </div>
+<div class="section" id="squeeze-a-data-object">
+<h3>Squeeze a data object<a class="headerlink" href="#squeeze-a-data-object" title="Permalink to this headline">¶</a></h3>
+<p>The squeeze method of a data object is a convenient function to return a shallow copy of the data object where all dimensions with a size of 1 are eliminated. This does not have any impact on the underlying data of
+the data object but only the header information is changed. Therefore, a shallow copy is possible. The squeeze operations is often used, if another function requires for instance a two dimensional data object, but
+a three dimensional is given. Even, if only one plane of the three dimensional object is selected using any slicing operation (region of interest...), it is still three dimensional. After the squeeze-method however,
+a two dimensional object is obtained.</p>
+<p>Example:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="c1">//3 x 3 x 2, float32 data object, all values = 0</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">tFloat32</span><span class="p">);</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">//create view or shallow copy of the first plane, using the range objects</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">Range</span> <span class="n">ranges</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">(),</span> <span class="n">ito</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">()};</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">secondPlane</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">ranges</span><span class="p">);</span>
+
+<span class="c1">//secondPlane has a size of 1 x 3 x 2, this is squeezed</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">squeezed</span> <span class="o">=</span> <span class="n">secondPlane</span><span class="p">.</span><span class="n">squeeze</span><span class="p">();</span>
+
+<span class="c1">//squeezed has now a size of 3 x 2, set its first element to 2</span>
+<span class="n">squeezed</span><span class="p">.</span><span class="n">at</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">float32</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c1">//print out the original object</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="c1">//the result is:</span>
+<span class="o">/*</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">;</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The last two dimensions belonging to planes are never squeezed, since this would require a full recreation of the
+data object including a deep copy of the data.</p>
+</div>
+</div>
 <div class="section" id="basic-operators-with-data-objects">
-<h3>Basic Operators with Data Objects<a class="headerlink" href="#basic-operators-with-data-objects" title="Permalink to this headline">¶</a></h3>
+<h3>Basic operators with data objects<a class="headerlink" href="#basic-operators-with-data-objects" title="Permalink to this headline">¶</a></h3>
 <p>(Same syntax can be used for other operators like &#8216;+&#8217;,&#8217;-&#8216;,&#8217;=+&#8217;,&#8217;=-&#8216;, div, cross multiplication (!=), &lt;&lt;(shift left), &gt;&gt; ( shift right))
 For the sake of simplicity, some arithmetic operators are overloaded to work upon data objects easily. In this section, such operators to work upon data objects are discussed in details with example codes and syntaxes.
 Let us start with basic Add &#8220;+&#8221; operator. Following is one example shown to add two data objects with &#8220;+&#8221; operator.</p>
@@ -756,229 +840,97 @@ Let us start with basic Add &#8220;+&#8221; operator. Following is one example s
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Addition of two matrix is:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">d14</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, two data objects d12 and d13 are added element-wise and the resultant data object is stored in d14. In the same way many other arithmetic, compare, bitwise operators can work with data objects.
-Following is the explanation of each possible operator to work with data object.</p>
-<div class="section" id="add-operator">
-<h4><strong>Add Operator &#8216;+&#8217;</strong><a class="headerlink" href="#add-operator" title="Permalink to this headline">¶</a></h4>
-<p>If mat1, mat2 and mat3 are data objects of same size and same type, then &#8220;+&#8221; operator can be used to perform element-wise addition in the following way.</p>
-<p><em>mat3 = mat1 + mat2;</em></p>
-<p>&#8220;+&#8221; operator performs element-wise addition on mat1 and mat2 and returns a resultant data object. This operator returns the resultant data object of same size and type which needs to be stored in some other data object of same size and type (mat3) as shown in the statement above.</p>
+<p>Here, two data objects <em>d12</em> and <em>d13</em> are added element-wise and the resultant data object is stored in <em>d14</em>. In the same way many other arithmetic, compare or bitwise operators can work with data objects.
+In the following, many operators are introduced that are overloaded for working with data objects as argument.</p>
+<div class="section" id="arithmetic-operators">
+<h4>Arithmetic operators<a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h4>
+<p><strong>addition and subtraction</strong></p>
+<p>Using the <em>+</em> or <em>-</em> operator, two data objects of the same size and same type can be added/subtracted by means of an element-wise addition/subtraction:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">mat3</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">+</span> <span class="n">mat2</span><span class="p">;</span>
+<span class="n">mat3</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">-</span> <span class="n">mat2</span><span class="p">;</span>
+</pre></div>
 </div>
-<div class="section" id="add-and-assign-operator">
-<h4><strong>Add and Assign Operator &#8216;+=&#8217;</strong><a class="headerlink" href="#add-and-assign-operator" title="Permalink to this headline">¶</a></h4>
-<p>If mat1 and mat2 are data objects of same size and same type, then &#8220;+=&#8221; operator can be used to perform element-wise add and assign operation in the following way.</p>
-<p><em>mat2 += mat1;</em></p>
-<p>&#8220;+=&#8221; operator performs element-wise addition operation on mat1 and mat2 and stores the resulting data object leftside of this it.</p>
+<p>The same operations can also be done inplace, such that one data object is added to or subtracted from another data object, that is directly modified:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">mat2</span> <span class="o">+=</span> <span class="n">mat1</span><span class="p">;</span>
+<span class="n">mat2</span> <span class="o">-=</span> <span class="n">mat1</span><span class="p">;</span>
+</pre></div>
 </div>
-<div class="section" id="subtract-operator">
-<h4><strong>Subtract Operator &#8216;-&#8216;</strong><a class="headerlink" href="#subtract-operator" title="Permalink to this headline">¶</a></h4>
-<p>If mat1, mat2 and mat3 are data objects of same size and type, then &#8220;-&#8221; operator can be used to perform element-wise subtraction between these data objects in the following way.</p>
-<p><em>mat3 = mat1 - mat2;</em></p>
-<p>In the statement above, mat2 is subtracted from mat1 element-wise and the resultant data object is stored in mat3.</p>
+<p><strong>multiplication and division</strong></p>
+<p>At first, the star-operator &#8220;*&#8221; is overloaded, such it is possible to multiply a constant factor to all values of the given data object. This can also be done inplace:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">mat2</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">;</span>
+<span class="n">mat1</span> <span class="o">*=</span> <span class="mf">2.0</span><span class="p">;</span> <span class="c1">//inplace</span>
+</pre></div>
 </div>
-<div class="section" id="subtract-and-assign-operator">
-<h4><strong>Subtract and Assign Operator &#8216;-=&#8217;</strong><a class="headerlink" href="#subtract-and-assign-operator" title="Permalink to this headline">¶</a></h4>
-<p>If mat1 and mat2 are data objects of same size and type, then &#8220;-=&#8221; operator can be used to perform element-wise subtraction between these data objects in the following way.</p>
-<p><em>mat2 -= mat1;</em></p>
-<p>In the statement above, mat1 is subtracted from mat2 element-wise and the resultant data object is stored back to mat2.</p>
+<p>When using the star-operator with two data objects, one needs to know that this indicates a matrix-multiplication in the mathematical sense, hence a <strong>m x n</strong> matrix multiplied
+with a <strong>n x k</strong> matrix results in a <strong>m x k</strong> matrix:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">mat3</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">*</span> <span class="n">mat2</span><span class="p">;</span>
+</pre></div>
 </div>
-<div class="section" id="multiplication-with-constant-factor">
-<h4><strong>Multiplication with Constant Factor &#8216;*&#8217;</strong><a class="headerlink" href="#multiplication-with-constant-factor" title="Permalink to this headline">¶</a></h4>
-<p>Operator &#8220;*&#8221; is overloaded to perform multiplication of a data object with constant factor in the following way.</p>
-<p><em>mat2 = mat1 * x;</em></p>
-<p>Here, the data type of mat2 must proper enough to store the correct resultant data object obtained from multiplication of each element of mat1 with constant factor <strong>&#8220;x&#8221;</strong>.</p>
-</div>
-<div class="section" id="multiplication-with-constant-factor-and-assign">
-<h4><strong>Multiplication with Constant Factor and Assign &#8216;*=&#8217;</strong><a class="headerlink" href="#multiplication-with-constant-factor-and-assign" title="Permalink to this headline">¶</a></h4>
-<p>One can multiply all elements of a data object with a constant factor and assign the result back to the same data object as shown in the following statement.</p>
-<p><em>mat1 *= x;</em></p>
-<p>Here each element of the data object <strong>mat1</strong> gets multiplied with a constant factor <strong>&#8220;x&#8221;</strong> and the result is stored back into data object <em class="xref py py-obj">mat1</em>.</p>
-</div>
-<div class="section" id="cross-multiplication-operator">
-<h4><strong>Cross Multiplication Operator &#8216;*&#8217;</strong><a class="headerlink" href="#cross-multiplication-operator" title="Permalink to this headline">¶</a></h4>
-<p>One can use the operator &#8220;*&#8221; to perform a cross multiplication between two data objects with adequate dimensions in the following way.</p>
-<p><em>crossMul_mat = mat1 * mat2;</em></p>
-<p>In the statement above, operator <strong>&#8220;*&#8221;</strong> is used to perform cross multiplication between data objects mat1 and mat2. If sizes of mat1 and mat2 are <em class="xref py py-obj">axb</em> and <em class="xref py py-obj">bxc</em> respectively, then the size of crossMul_mat should be declared <em class="xref py py-obj">axc</em> according to the principle of cross multiplication of matrices.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This operator is defined only for &#8220;float32&#8221; and &#8220;float64&#8221; datatypes.</p>
+<p class="last">This operation is only defined for <em>float32</em> and <em>float64</em> datatypes.</p>
 </div>
+<p>An element-wise multiplication of two data objects of same size and type is obtained by using the <strong>mul</strong> method of the first data object:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">mat3</span> <span class="o">=</span> <span class="n">mat1</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">mat2</span><span class="p">);</span>
+</pre></div>
 </div>
-<div class="section" id="dot-multiplication-operator-mul">
-<h4><strong>Dot Multiplication Operator &#8216;mul&#8217;</strong><a class="headerlink" href="#dot-multiplication-operator-mul" title="Permalink to this headline">¶</a></h4>
-<p>With the use of &#8220;mul&#8221; operator, one can perform dot product (element-wise multiplication) between two data objects in the following way.</p>
-<p><em>mul_mat=mat1.mul(mat2);</em></p>
-<p>Here, &#8220;mul&#8221; operator takes two data objects mat1 and mat2 of same type and same size as arguments and perform dot product between them. The result of this dot product is saved in data object of same size mul_mat. Here, the size of mul_mat should be big enough to store correct result of dot product.</p>
-<p><strong>Division Operator &#8216;div&#8217;</strong>
-&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;&#8221;&#8220;+</p>
-<p>This operator is used to perform element-wise division between two data objects in the following way.</p>
-<p><em>div_mat = mat1.div(mat2);</em></p>
-<p>Here, data object <strong>mat1</strong> is divided from data object <strong>mat2</strong> element-wise using <strong>&#8220;div&#8221;</strong> operator and the result is stored in data object <strong>div_mat</strong>. Sizes and data types of mat1, mat2 and mat2 should be same.</p>
+<p>The element-wise division is finally obtained by the corresponding <strong>div</strong> method:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">mat3</span> <span class="o">=</span> <span class="n">mat1</span><span class="p">.</span><span class="n">div</span><span class="p">(</span><span class="n">mat2</span><span class="p">);</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>&#8220;div&#8221;</strong> operator can not be used to calculate inverse matrix.</p>
-</div>
-<div class="section" id="compare-operators">
-<h5><strong>Compare Operators</strong><a class="headerlink" href="#compare-operators" title="Permalink to this headline">¶</a></h5>
-<p>Compare operations are frequently needed while working with data objects. Keeping this in mind, we have developed some overloaded compare operators as well which we will discuss in this section.</p>
+<p class="last">The <strong>&#8220;div&#8221;</strong> operator can not be used to calculate inverse matrix.</p>
 </div>
 </div>
-<div class="section" id="equal-to-elementwise-operator">
-<h4><strong>== (Equal to)  (Elementwise operator)</strong><a class="headerlink" href="#equal-to-elementwise-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator compares the element values of two different data objects on respective positions and returns a resultant data object with <strong>0s</strong> and <strong>1s</strong> according to the comparison result.
-If two values on the respective positions match in two data objects, then a <strong>1</strong> is returned, otherwise a <strong>0</strong> is returned for that position in the resultant data object.
-The way to use this <strong>== (Equal to)</strong> operator is shown as follows.</p>
-<p><em>mat3 = mat1 == mat2;</em></p>
-<p>Here, a comparison between data objects mat1 and mat2 is done with <strong>==</strong> operator and the result is stored in the data object mat3. As a result, mat3 contains &#8216;1&#8217; at the positions where the values in mat1 and mat2 are equal, otherwise &#8216;0&#8217; where the values are unequal.
-Sizes of mat1, mat2 and mat3 should be equal.</p>
+<div class="section" id="comparison-operators">
+<h4>Comparison operators<a class="headerlink" href="#comparison-operators" title="Permalink to this headline">¶</a></h4>
+<p>The comparison operators can be used to element-wisely compare the elements of two data objects of same size and type. The result of all comparisons is a data object with the same size
+than the compared objects but with the fixed type <em>uint8</em>. Depending on the comparison, this resulting matrix contains a value of <strong>0</strong> or <strong>1</strong>. The comparison operators are not
+supported for the <strong>int8</strong> and <strong>int32</strong> data types (OpenCV restriction). Available operators are:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">mat1</span> <span class="o">==</span> <span class="n">mat2</span><span class="p">);</span> <span class="c1">//equal to</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">mat1</span> <span class="o">!=</span> <span class="n">mat2</span><span class="p">);</span> <span class="c1">//unequal to</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">mat1</span> <span class="o">&lt;</span> <span class="n">mat2</span><span class="p">);</span> <span class="c1">//lower than</span>
+<span class="n">mat1</span> <span class="o">&lt;=</span> <span class="n">mat2</span><span class="p">;</span> <span class="c1">//lower or equal than</span>
+<span class="n">mat1</span> <span class="o">&gt;</span> <span class="n">mat2</span><span class="p">;</span> <span class="c1">//bigger than</span>
+<span class="n">mat1</span> <span class="o">&gt;=</span> <span class="n">mat2</span><span class="p">;</span> <span class="c1">//bigger or equal than</span>
+</pre></div>
 </div>
-<div class="section" id="unequal-to-elementwise-operator">
-<h4><strong>!= (unEqual to) (Elementwise operator)</strong><a class="headerlink" href="#unequal-to-elementwise-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator compares the element values of two different data objects on respective positions and returns a resultant data object with <strong>0s</strong> and <strong>1s</strong> according to the comparison result.
-If two values on the respective positions differ in two data objects, then a <strong>1</strong> is returned, otherwise a <strong>0</strong> is returned for that position in the resultant data object.
-The way to use this <strong>!= (unEqual to)</strong> operator is shown as follows.</p>
-<p><em>mat3 = mat1 != mat2;</em></p>
-<p>Here, a comparison between data objects mat1 and mat2 is done with <strong>!=</strong> operator and the result is stored in the data object mat3. As a result, mat3 contains &#8216;1&#8217; at the positions where the values in mat1 and mat2 are unequal, otherwise &#8216;0&#8217; where the values are equal.
-Sizes of mat1, mat2 and mat3 should be equal.</p>
 </div>
-<div class="section" id="lower-than-elementwise-operator">
-<h4><strong>&lt; (lower than) (Elementwise operator)</strong><a class="headerlink" href="#lower-than-elementwise-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs &#8220;lower than&#8221; comparison operation between the element values of two data objects. The way to perform this comparison is shown in the following statement.</p>
-<p><em>mat3 = mat1 &lt; mat2;</em></p>
-<p>In the statement above, elements of <strong>mat1 are</strong> compared with elements of mat2 for <strong>lower than</strong> operation with use of <strong>&lt;</strong> operator. The resultant data object <strong>mat3</strong> contains <strong>&#8216;1&#8217;</strong> at the positions where the element values in data object mat1 are lower than those of mat2 at respective positions, otherwise it contains <strong>&#8216;0&#8217;</strong> where this condition doesn&#8217;t satisfy.
-Sizes of all three data objects mat1, mat2 and mat3 should be the same.</p>
-</div>
-<div class="section" id="lower-or-equal-to-element-wise-operator">
-<h4><strong>&lt;= (lower or equal to) (Element-wise operator)</strong><a class="headerlink" href="#lower-or-equal-to-element-wise-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator compares two data objects and helps us to find out which elements in one data object are <strong>&#8220;lower or equal to&#8221;</strong> the respective elements in the other data object in the following way.</p>
-<p><em>mat3 = mat1 &lt;= mat2;</em></p>
-<p>Here, <strong>&#8220;&lt;=&#8221;</strong> operator compares data object <strong>mat1</strong> with <strong>mat2</strong> and generates a resultant data object mat3 such as, mat3 contains <strong>1s</strong> at the positions where elements in <strong>mat1</strong> are lower or equal to the respective elements in <strong>mat2</strong>, otherwise contains <strong>0s</strong> where the condition doesn&#8217;t satisfy.
-Sizes of mat1, mat2 and mat3 should be equal.</p>
-</div>
-<div class="section" id="bigger-than-element-wise-operator">
-<h4><strong>&gt; (bigger than) (Element-wise operator)</strong><a class="headerlink" href="#bigger-than-element-wise-operator" title="Permalink to this headline">¶</a></h4>
-<p>With the use of this over loaded operator, one can easily find out at which positions the values of elements in one data object are <strong>bigger than</strong> the values of the other data object in the following way.</p>
-<p><em>mat3 = mat1 &gt; mat2;</em></p>
-<p>Here in the above statement, comparison operation between <strong>mat1</strong> and <strong>mat2</strong> is done with <strong>&#8220;&gt;&#8221;</strong> operator and the final result is stored in data object <strong>mat3</strong>. As a result, <strong>mat3</strong> contains <strong>1s</strong> at the positions where the element values in <strong>mat1</strong> are bigger than the element values on the respective positions in <strong>mat2</strong>.
-Data sizes of mat1, mat2 and mat3 should be the same for the successful comparison with this operator.</p>
-</div>
-<div class="section" id="bigger-or-equal-to-element-wise-operator">
-<h4><strong>&gt;= (bigger or equal to) (Element-wise operator)</strong><a class="headerlink" href="#bigger-or-equal-to-element-wise-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator is used to find out if the element values of one data objects are <strong>bigger or equal to</strong> the element values of the other data object.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>mat3 = mat1 &gt;= mat2;</em></p>
-<p>As shown above, element values of <strong>mat1</strong> are compared with the element values of <strong>mat2</strong> and the result is stored in <strong>mat3</strong>. As a result, <strong>mat3</strong> contains <strong>1s</strong> at the positions where the element values in <strong>mat1</strong> are <strong>bigger or equal to</strong> the element values in <strong>mat2</strong>, otherwise contains <strong>0s</strong> at the positions where the condition doesn&#8217;t satisfy.
-Sizes of mat1, mat2 and mat3 should be equal.</p>
 <div class="section" id="shift-operators">
-<h5><strong>Shift Operators</strong><a class="headerlink" href="#shift-operators" title="Permalink to this headline">¶</a></h5>
-<p>Shift operators play a significant role during some arithmetic operations (i.e. division/multiplication by 2), bit level calculations, etc. With the over loading of some shift operators to let them be used for data objects, many matrix calculations can be made much easier.
-We will go through such over loaded shift operators in this section.</p>
+<h4>Shift operators<a class="headerlink" href="#shift-operators" title="Permalink to this headline">¶</a></h4>
+<p>Shift operators play a significant role during some arithmetic operations (i.e. division/multiplication by 2), bit level calculations, etc. The shift operators are only defined for
+signed or unsigned fixed point data types. A left shift can either return the resulting data object or can be done in-place. The left shift moves every element in a data object by
+<em>x</em> places to the left such that the resulting number is multiplied by two to the power of <em>x</em>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">;</span> <span class="c1">//left-shift</span>
+<span class="n">mat</span> <span class="o">&lt;&lt;=</span> <span class="n">x</span><span class="p">;</span> <span class="c1">//in-place</span>
+</pre></div>
+</div>
+<p>The right-shift is similar but it moves the binary number by <em>x</em> places to the right, hence, the number is divided by two to the power of <em>x</em>.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">;</span> <span class="c1">//right-shift</span>
+<span class="n">mat</span> <span class="o">&gt;&gt;=</span> <span class="n">x</span><span class="p">;</span> <span class="c1">//in-place</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="shift-left">
-<h4><strong>&lt;&lt; (shift left)</strong><a class="headerlink" href="#shift-left" title="Permalink to this headline">¶</a></h4>
-<p><strong>&lt;&lt;</strong> or in words <strong>&#8220;Shift Left&#8221;</strong> operator is overloaded to work with data objects. It shifts the element values of the data object at the bit level by a required amount on left.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>mat2 = mat1 &lt;&lt; &#8216;x&#8217;;</em></p>
-<p>Here <strong>&#8216;x&#8217;</strong> is the Shiftbits number.
-The values of the elements in mat1 are shifted left by &#8216;x&#8217; number of times and the resultant data object is stored in mat2d. Data type of the Shiftbits &#8216;x&#8217; is const unsigned int.</p>
-</div>
-<div class="section" id="shift-left-and-assign">
-<h4><strong>&lt;&lt;= (shift left and assign)</strong><a class="headerlink" href="#shift-left-and-assign" title="Permalink to this headline">¶</a></h4>
-<p>This operator is used to <strong>shift left</strong> the element values on a data object at a bit level and <strong>assign back</strong> these values to the same data object.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>mat1 &lt;&lt;= &#8216;x&#8217;;</em></p>
-<p>Here &#8216;x&#8217; is the Shiftbits number.
-The values of the elements in mat1 are shifted left by &#8216;x&#8217; number of times and assigned to the same data object. Data type of the Shiftbits &#8216;x&#8217; is const unsigned int.</p>
-</div>
-<div class="section" id="shift-right">
-<h4><strong>&gt;&gt; (shift right)</strong><a class="headerlink" href="#shift-right" title="Permalink to this headline">¶</a></h4>
-<p>This operator is used to <strong>shift right</strong> the elements of a data object at a bit level. As a result, this operation returns a data object with shifted element values which needs to be stored in some data object with same size and type.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>mat2 = mat1 &gt;&gt; &#8216;x&#8217;;</em></p>
-<p>Here &#8216;x&#8217; is the Shiftbits number.
-The values of the elements in mat1 are shifted right by &#8216;x&#8217; number of times and the resultant data object is stored in mat2. Data type of the Shiftbits &#8216;x&#8217; is const unsigned int.</p>
-</div>
-<div class="section" id="shift-right-and-assign">
-<h4><strong>&gt;&gt;= (shift right and assign)</strong><a class="headerlink" href="#shift-right-and-assign" title="Permalink to this headline">¶</a></h4>
-<p>This operator is used to <strong>shift right</strong> the elements of a data object at a bit level and <strong>assign back</strong> the shifted values to the same data object.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>mat1 &gt;&gt;= &#8216;x&#8217;;</em></p>
-<p>Here &#8216;x&#8217; is the Shiftbits number.
-The values of the elements in mat1are shifted right by &#8216;x&#8217; number of times and assigned to the same data object. Data type of the Shiftbits &#8216;x&#8217; is const unsigned int.</p>
 <div class="section" id="bitwise-operations">
-<h5><strong>Bitwise Operations</strong><a class="headerlink" href="#bitwise-operations" title="Permalink to this headline">¶</a></h5>
-<p>Bitwise operators play important role in logical operations such as AND, OR and NOT. In this section, some of such over loaded logical operators for data objects are described.</p>
-</div>
-</div>
-<div class="section" id="bitwise-and-operator">
-<h4><strong>&#8216;&amp;&#8217; (Bitwise AND) Operator</strong><a class="headerlink" href="#bitwise-and-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs a <strong>bitwise AND</strong> operation between the elements of two data objects.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>d3 = d1 &amp; d2 ;</em></p>
-<p>As shown in the statement above, with the use of <strong>&#8216;&amp;&#8217;</strong> operator, <strong>elementwise AND</strong> operation occurs at the bit level between the elements on the same locations of d1 and d2 and the resultant values are stored at the respective locations of d3.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sizes and data types of data objects d1, d2 and d3 should be same, otherwise exception is thrown.</p>
-</div>
-</div>
-<div class="section" id="bitwise-or-operator">
-<h4><strong>&#8220;|&#8221; (Bitwise OR) Operator</strong><a class="headerlink" href="#bitwise-or-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs a <strong>bitwise OR</strong> operation between the elements of two data objects.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>d3 = d1 | d2 ;</em></p>
-<p>With the use of <strong>&#8216;|&#8217;</strong> operator, <strong>elementwise OR</strong> operation occurs at the bit level between the elements on the same locations of d1 and d2 and the resultant values are stored at the respective locations of d3.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sizes and data types of data objects d1, d2 and d3 should be same, otherwise exception is thrown.</p>
-</div>
-</div>
-<div class="section" id="bitwise-not-operator">
-<h4><strong>&#8220;^&#8221; (Bitwise NOT) Operator</strong><a class="headerlink" href="#bitwise-not-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs a <strong>bitwise NOT</strong> operation between the elements of two data objects.</p>
-<p>Syntax to use this operator with data objects is shown below.</p>
-<p><em>d3 = d1 ^ d2 ;</em></p>
-<p>With the use of <strong>&#8216;^&#8217;</strong> operator, <strong>elementwise NOT</strong> operation at the bit level occurs between the elements on the same locations of d1 and d2 and the resultant values are stored at the respective locations of d3.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sizes and data types of data objects d1, d2 and d3 should be same, otherwise exception is thrown.</p>
-</div>
-</div>
-<div class="section" id="bitwise-and-and-assign-operator">
-<h4><strong>&#8220;&amp;=&#8221; (Bitwise AND and Assign) Operator</strong><a class="headerlink" href="#bitwise-and-and-assign-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs a <strong>bitwise AND</strong> operation between the elements of two data objects and <strong>assigns back</strong> the result into the first data object.</p>
-<p>Syntax to use this operator with data objects is given below.</p>
-<p><em>d2 &amp;= d1;</em></p>
-<p>With the use of <strong>&#8216;&amp;=&#8217;</strong> operator, <strong>elementwise AND</strong> operation occurs at bit level between the elements on the same locations of d1 and d2 and the resultant values are assigned at the respective locations of d1 back.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sizes and data types of data objects d1 and d2 should be same, otherwise exception is thrown.</p>
-</div>
-</div>
-<div class="section" id="bitwise-or-and-assign-operator">
-<h4><strong>&#8220;|=&#8221; (Bitwise OR and Assign) Operator</strong><a class="headerlink" href="#bitwise-or-and-assign-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs a <strong>bitwise OR</strong> operation between the elements of two data objects and <strong>assigns back</strong> the result into the first data objects.</p>
-<p>Syntax to use this operator with data objects is given below.</p>
-<p><em>d2 |= d1;</em></p>
-<p>With the use of <strong>&#8216;|=&#8217;</strong> operator, <strong>elementwise OR</strong> operation  at bit level occurs between the elements on the same locations of d1 and d2 and the resultant values are assigned at the respective locations of d1 again.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sizes and data types of data objects d1 and d2 should be same, otherwise exception is thrown.</p>
-</div>
-</div>
-<div class="section" id="bitwise-not-and-assign-operator">
-<h4><strong>&#8220;^=&#8221; (Bitwise NOT and Assign) Operator</strong><a class="headerlink" href="#bitwise-not-and-assign-operator" title="Permalink to this headline">¶</a></h4>
-<p>This operator performs a <strong>bitwise NOT</strong> operation between the elements of two data objects and <strong>assign back</strong> the result into the first data object.</p>
-<p>Syntax to use this operator with data objects is given below.</p>
-<p><em>d2 ^= d1;</em></p>
-<p>With the use of <strong>&#8216;^=&#8217;</strong> operator, <strong>elementwise NOT</strong> operation at bit level occurs between the elements on the same locations of d1 and d2 and the resultant values are assigned at the respective locations of d1 again.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Sizes and data types of data objects d1 and d2 should be same, otherwise exception is thrown.</p>
+<h4>Bitwise operations<a class="headerlink" href="#bitwise-operations" title="Permalink to this headline">¶</a></h4>
+<p>The bitwise operators are also executed as an element-wise operation and are defined for all data types. The participating data objects must again have the same size and type.
+Examples are:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">&amp;</span> <span class="n">mat2</span><span class="p">;</span> <span class="c1">//bitwise and-combination</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">|</span> <span class="n">mat2</span><span class="p">;</span> <span class="c1">//bitwise or-combination</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mat1</span> <span class="o">^</span> <span class="n">mat2</span><span class="p">;</span> <span class="c1">//bitwise nor-combination</span>
+
+<span class="c1">//inplace:</span>
+<span class="n">mat1</span> <span class="o">&amp;=</span> <span class="n">mat2</span><span class="p">;</span>
+<span class="n">mat1</span> <span class="o">|=</span> <span class="n">mat2</span><span class="p">;</span>
+<span class="n">mat1</span> <span class="o">^=</span> <span class="n">mat2</span><span class="p">;</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="combination-of-different-operators">
-<h4><strong>Combination of Different Operators</strong><a class="headerlink" href="#combination-of-different-operators" title="Permalink to this headline">¶</a></h4>
+<h4>Combination of different operators<a class="headerlink" href="#combination-of-different-operators" title="Permalink to this headline">¶</a></h4>
 <p>Different operators (explained above) can be used in different possible combinations with data objects for speedy calculations.</p>
 <p>Some of the examples of such combinations are shown below.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -1009,23 +961,16 @@ The values of the elements in mat1are shifted right by &#8216;x&#8217; number of
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">DataObject</a><ul>
+<li><a class="reference internal" href="#creating-a-data-object">Creating a data object</a></li>
 <li><a class="reference internal" href="#addressing-the-elements-of-a-data-object">Addressing the elements of a data object</a><ul>
-<li><a class="reference internal" href="#direct-access-of-one-single-element-of-a-data-object-using-at-method">Direct access of one single element of a Data Object using <strong>at()</strong> method</a></li>
-<li><a class="reference internal" href="#addressing-elements-of-a-data-object-using-row-pointer">Addressing elements of a data object using row pointer</a><ul>
-<li><a class="reference internal" href="#advantages">Advantages</a></li>
-<li><a class="reference internal" href="#drawbacks">Drawbacks</a></li>
+<li><a class="reference internal" href="#direct-access-of-one-single-element-of-a-data-object-using-at-tp-method">Direct access of one single element of a Data Object using <strong>at&lt;_Tp&gt;()</strong> method</a></li>
+<li><a class="reference internal" href="#addressing-elements-of-a-data-object-using-row-pointer">Addressing elements of a data object using row pointer</a></li>
+<li><a class="reference internal" href="#assigning-a-single-value-to-all-elements-of-a-data-object">Assigning a single value to all elements of a data object</a></li>
+<li><a class="reference internal" href="#direct-access-to-the-underlying-cv-mat">Direct access to the underlying cv::Mat</a></li>
+<li><a class="reference internal" href="#accessing-all-elements-of-a-data-object-using-iterators">Accessing all elements of a data object using iterators</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#assigning-a-single-value-to-all-elements-of-a-data-object">Assigning a single value to all elements of a Data Object</a></li>
-<li><a class="reference internal" href="#direct-access-to-the-underlying-cv-mat">Direct Access to the underlying cv::Mat</a></li>
-<li><a class="reference internal" href="#accessing-all-elements-of-a-data-object-using-iterators">Accessing all elements of a Data Object using iterators</a><ul>
-<li><a class="reference internal" href="#id17">Advantages</a></li>
-<li><a class="reference internal" href="#id18">Drawbacks</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#working-with-data-objects">Working with Data Objects</a><ul>
+<li><a class="reference internal" href="#working-with-data-objects">Working with data objects</a><ul>
 <li><a class="reference internal" href="#creating-eye-matrix">Creating Eye Matrix</a></li>
 <li><a class="reference internal" href="#creating-ones-matrix">Creating Ones Matrix</a></li>
 <li><a class="reference internal" href="#creating-zeros-matrix">Creating Zeros Matrix</a></li>
@@ -1034,44 +979,17 @@ The values of the elements in mat1are shifted right by &#8216;x&#8217; number of
 <li><a class="reference internal" href="#setting-and-getting-axis-scale">Setting and Getting Axis Scale</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#operations-on-data-objects">Operations on Data Objects</a><ul>
-<li><a class="reference internal" href="#adjugate-the-data-object">Adjugate the Data Object</a></li>
-<li><a class="reference internal" href="#transpose-the-data-object">Transpose the Data Object</a></li>
-<li><a class="reference internal" href="#basic-operators-with-data-objects">Basic Operators with Data Objects</a><ul>
-<li><a class="reference internal" href="#add-operator"><strong>Add Operator &#8216;+&#8217;</strong></a></li>
-<li><a class="reference internal" href="#add-and-assign-operator"><strong>Add and Assign Operator &#8216;+=&#8217;</strong></a></li>
-<li><a class="reference internal" href="#subtract-operator"><strong>Subtract Operator &#8216;-&#8216;</strong></a></li>
-<li><a class="reference internal" href="#subtract-and-assign-operator"><strong>Subtract and Assign Operator &#8216;-=&#8217;</strong></a></li>
-<li><a class="reference internal" href="#multiplication-with-constant-factor"><strong>Multiplication with Constant Factor &#8216;*&#8217;</strong></a></li>
-<li><a class="reference internal" href="#multiplication-with-constant-factor-and-assign"><strong>Multiplication with Constant Factor and Assign &#8216;*=&#8217;</strong></a></li>
-<li><a class="reference internal" href="#cross-multiplication-operator"><strong>Cross Multiplication Operator &#8216;*&#8217;</strong></a></li>
-<li><a class="reference internal" href="#dot-multiplication-operator-mul"><strong>Dot Multiplication Operator &#8216;mul&#8217;</strong></a><ul>
-<li><a class="reference internal" href="#compare-operators"><strong>Compare Operators</strong></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#equal-to-elementwise-operator"><strong>== (Equal to)  (Elementwise operator)</strong></a></li>
-<li><a class="reference internal" href="#unequal-to-elementwise-operator"><strong>!= (unEqual to) (Elementwise operator)</strong></a></li>
-<li><a class="reference internal" href="#lower-than-elementwise-operator"><strong>&lt; (lower than) (Elementwise operator)</strong></a></li>
-<li><a class="reference internal" href="#lower-or-equal-to-element-wise-operator"><strong>&lt;= (lower or equal to) (Element-wise operator)</strong></a></li>
-<li><a class="reference internal" href="#bigger-than-element-wise-operator"><strong>&gt; (bigger than) (Element-wise operator)</strong></a></li>
-<li><a class="reference internal" href="#bigger-or-equal-to-element-wise-operator"><strong>&gt;= (bigger or equal to) (Element-wise operator)</strong></a><ul>
-<li><a class="reference internal" href="#shift-operators"><strong>Shift Operators</strong></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#shift-left"><strong>&lt;&lt; (shift left)</strong></a></li>
-<li><a class="reference internal" href="#shift-left-and-assign"><strong>&lt;&lt;= (shift left and assign)</strong></a></li>
-<li><a class="reference internal" href="#shift-right"><strong>&gt;&gt; (shift right)</strong></a></li>
-<li><a class="reference internal" href="#shift-right-and-assign"><strong>&gt;&gt;= (shift right and assign)</strong></a><ul>
-<li><a class="reference internal" href="#bitwise-operations"><strong>Bitwise Operations</strong></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#bitwise-and-operator"><strong>&#8216;&amp;&#8217; (Bitwise AND) Operator</strong></a></li>
-<li><a class="reference internal" href="#bitwise-or-operator"><strong>&#8220;|&#8221; (Bitwise OR) Operator</strong></a></li>
-<li><a class="reference internal" href="#bitwise-not-operator"><strong>&#8220;^&#8221; (Bitwise NOT) Operator</strong></a></li>
-<li><a class="reference internal" href="#bitwise-and-and-assign-operator"><strong>&#8220;&amp;=&#8221; (Bitwise AND and Assign) Operator</strong></a></li>
-<li><a class="reference internal" href="#bitwise-or-and-assign-operator"><strong>&#8220;|=&#8221; (Bitwise OR and Assign) Operator</strong></a></li>
-<li><a class="reference internal" href="#bitwise-not-and-assign-operator"><strong>&#8220;^=&#8221; (Bitwise NOT and Assign) Operator</strong></a></li>
-<li><a class="reference internal" href="#combination-of-different-operators"><strong>Combination of Different Operators</strong></a></li>
+<li><a class="reference internal" href="#copy-data-into-an-existing-data-object">Copy data into an existing data object</a></li>
+<li><a class="reference internal" href="#operations-on-data-objects">Operations on data objects</a><ul>
+<li><a class="reference internal" href="#adjugate-of-a-data-object">Adjugate of a data object</a></li>
+<li><a class="reference internal" href="#transpose-a-data-object">Transpose a data object</a></li>
+<li><a class="reference internal" href="#squeeze-a-data-object">Squeeze a data object</a></li>
+<li><a class="reference internal" href="#basic-operators-with-data-objects">Basic operators with data objects</a><ul>
+<li><a class="reference internal" href="#arithmetic-operators">Arithmetic operators</a></li>
+<li><a class="reference internal" href="#comparison-operators">Comparison operators</a></li>
+<li><a class="reference internal" href="#shift-operators">Shift operators</a></li>
+<li><a class="reference internal" href="#bitwise-operations">Bitwise operations</a></li>
+<li><a class="reference internal" href="#combination-of-different-operators">Combination of different operators</a></li>
 </ul>
 </li>
 </ul>
@@ -1131,8 +1049,8 @@ The values of the elements in mat1are shifted right by &#8216;x&#8217; number of
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 17, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Apr 14, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

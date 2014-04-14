@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'ae0dc09',
+        VERSION:     '9380688',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -64,13 +62,13 @@
             
   <div class="section" id="plugin-interface-class">
 <span id="id1"></span><h1>Plugin interface class<a class="headerlink" href="#plugin-interface-class" title="Permalink to this headline">¶</a></h1>
-<p>In order to give <strong>itom</strong> by the help of the <strong>Qt</strong>-plugin system access to your plugin, you must create a class which is inherited from the class <strong>AddInInterfaceBase</strong>. This base class is part of the <strong>ito</strong>-namespace and is defined in the files:</p>
+<p>Every <strong>itom</strong> plugin must consist of at least two classes. One class is the real plugin class, that represents one device. Therefore it is possible to create multiple instances of this class, hence, open multiple devices of the same plugin. The other class is a necessary structure in order to allow the communication between <strong>itom</strong> and the plugin. This is the so-called interface class, inherited from the abstract base class <strong>AddInInterfaceBase</strong>.</p>
+<p>This base class is part of the <strong>ito</strong>-namespace and is defined in the file:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">addInInterface</span><span class="o">.</span><span class="n">h</span>
-<span class="n">addInInterface</span><span class="o">.</span><span class="n">cpp</span>
 </pre></div>
 </div>
-<p>These files lie in the <strong>common</strong> folder.</p>
-<p>In your main header file or your plugin, called <strong>MyPlugin</strong> in the following, you can use the following code example in order to create that class:</p>
+<p>This file is located in the <em>common</em> directory of the include directory of the <strong>itom</strong> SDK. You need to link against the library <strong>itomCommonQtLib</strong> in the SDK.</p>
+<p>In the main header file of your plugin (with the exemplary name <strong>MyPlugin</strong>), use the following demo code in order to create that class:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -90,7 +88,7 @@
 17
 18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">//myPlugin.h</span>
 
-<span class="cp">#include &quot;../../common/addInInterface.h&quot; </span><span class="c1">//adapt the path depending on the location of your plugin</span>
+<span class="cp">#include &quot;common/addInInterface.h&quot; </span><span class="c1">//adapt the path depending on the location of your plugin</span>
 
 <span class="k">class</span> <span class="nc">MyPluginInterface</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
 <span class="p">{</span>
@@ -282,21 +280,28 @@ its default value <strong>true</strong> to <strong>false</strong>, <strong>init<
 2
 3
 4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">MyPlugin</span><span class="o">*</span> <span class="n">newInst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyPlugin</span><span class="p">();</span>
-    <span class="n">newInst</span><span class="o">-&gt;</span><span class="n">setBasePlugin</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="o">*</span><span class="n">addInInst</span> <span class="o">=</span> <span class="n">qobject_cast</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">newInst</span><span class="p">);</span>
-    <span class="n">m_InstList</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="o">*</span><span class="n">addInInst</span><span class="p">);</span>
+    <span class="n">NEW_PLUGININSTANCE</span><span class="p">(</span><span class="n">MyPlugin</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Since your plugin instance (<strong>MyPlugin</strong>) is finally derived from <strong>AddInBase</strong>, its private member <strong>m_uniqueID</strong> is automatically given an auto-incremented, unique number. Additionally you can also assign a unique
-identification string (member <strong>m_identifier</strong> of class <strong>AddInBase</strong>) to your instance which is then displayed in <strong>itom</strong>. Please only change <strong>m_identifier</strong> in the constructor or <strong>init</strong>-method of your actual plugin.</p>
+<p>In case of an algorithm plugin use:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">NEW_PLUGININSTANCE</span><span class="p">(</span><span class="n">MyPlugin</span><span class="p">)</span>
+    <span class="n">REGISTER_FILTERS_AND_WIDGETS</span>
+    <span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Since your plugin instance (<strong>MyPlugin</strong>) is finally derived from <strong>AddInBase</strong>, its private member <strong>m_uniqueID</strong> is automatically given an auto-incremented, unique number. Additionally if possible assign a string identifier that helps to identify the opened device. Set the identifier using the method <strong>setIdentifier</strong>. Please only set the identifier in the constructor or in the <strong>init</strong>-method of the plugin itself. The identifier is saved in the member <strong>m_identifier</strong>.</p>
 <p>In the method above, it is assumed that your main class of your plugin <em>MyPlugin</em> is called <em>MyPlugin</em>, too. Then in line 3, a new instance of that class is created and this new instance is noticed about its own factory class in line 4. The factory class is hereby the pointer to this singleton interface class instance. Finally the given double pointer is set to the pointer of the newly created plugin instance. Finally, every plugin interface class has a protected member vector called <em>m_InstList</em> which contains a list of plugin instances opened by this interface (or factory). The newly created plugin is added to this list in line 6.</p>
 <p>The return value of this method is of type <strong>ito::RetVal</strong>, which is set to the status <strong>Ok</strong>. For more information about the return value class <strong>ito::RetVal</strong> see <a class="reference internal" href="plugin-RetVal.html#plugin-retval"><em>RetVal - The return type of itom methods</em></a>.</p>
 </div>
@@ -307,17 +312,9 @@ identification string (member <strong>m_identifier</strong> of class <strong>Add
 2
 3
 4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPluginInterface</span><span class="o">::</span><span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">addInInst</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">m_InstList</span><span class="p">.</span><span class="n">removeOne</span><span class="p">(</span><span class="o">*</span><span class="n">addInInst</span><span class="p">);</span>
-        <span class="k">delete</span> <span class="p">((</span><span class="n">MyPlugin</span> <span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="n">addInInst</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="n">REMOVE_PLUGININSTANCE</span><span class="p">(</span><span class="n">MyPlugin</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -393,8 +390,8 @@ identification string (member <strong>m_identifier</strong> of class <strong>Add
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 17, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Apr 14, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

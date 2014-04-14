@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'ae0dc09',
+        VERSION:     '9380688',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -77,8 +75,17 @@ in the folder <strong>common</strong> of the SDK. For methods concerning plots a
 file <strong>apiFunctionsGraphInc.h</strong>.</p>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
-<p>If your plugin or designer plugin widget is derived from classes <strong>AddInBase</strong> or <strong>AbstractFigure</strong>, which is usually the case,
-you can use the <strong>API</strong> methods without further steps or includes.</p>
+<p>If your plugin or designer plugin widget is derived from classes <strong>AddInBase</strong> or <strong>AbstractFigure</strong>, which is usually the case, you need to do the
+following steps in order to use the <strong>API</strong> methods:</p>
+<p>Write</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#define ITOM_IMPORT_API</span>
+<span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
+</pre></div>
+</div>
+<p>at the top of the main <em>cpp</em>-file of your plugin. This definition must be before the include of the corresponding header-file and any other includes.</p>
+<p>The <strong>API</strong> methods then become accessible through the files <strong>apiFunctionsInc.h</strong> or <strong>apiFunctionsGraphInc.h</strong> included in the SDK of <strong>itom</strong>. These files
+already are included in the file <strong>addInInterface.h</strong>. If this is included in your source file, you don&#8217;t need to include the other header files. If you use
+<strong>API</strong> functions for instance in a dialog or dock widget class include <strong>apiFunctionsInc.h</strong> or <strong>apiFunctionsGraphInc.h</strong> one more time.</p>
 <p>When you are programming a plugin, derived from <strong>AddInBase</strong>, you can access any <strong>API</strong>-method at any time in your plugin (even in the constructor).
 When programming a designer plugin widget that is handled as plotting plugin (derived from <strong>AbstractFigure</strong>) the APIs only become valid after the
 construction of your plugin.</p>
@@ -183,8 +190,8 @@ values, then change their values and finally we call the filter-method. If you h
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 17, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Apr 14, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
