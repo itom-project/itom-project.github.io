@@ -116,272 +116,274 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a>00031 <span class="comment">//    #define NO_IMPORT_ARRAY</span>
 <a name="l00032"></a>00032 <span class="comment">//#endif</span>
 <a name="l00033"></a>00033 
-<a name="l00034"></a>00034 <span class="comment">//#define NPY_NO_DEPRECATED_API 0x00000007 //see comment in pythonNpDataObject.cpp</span>
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="preprocessor">#ifndef Q_MOC_RUN</span>
-<a name="l00037"></a>00037 <span class="preprocessor"></span>    <span class="comment">//python</span>
-<a name="l00038"></a>00038     <span class="comment">// see http://vtk.org/gitweb?p=VTK.git;a=commitdiff;h=7f3f750596a105d48ea84ebfe1b1c4ca03e0bab3</span>
-<a name="l00039"></a>00039 <span class="preprocessor">    #if (defined _DEBUG) &amp;&amp; (!defined linux)</span>
-<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">        #undef _DEBUG</span>
-<a name="l00041"></a>00041 <span class="preprocessor"></span><span class="preprocessor">        #if (defined linux) | (defined CMAKE)</span>
-<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">            #include &quot;Python.h&quot;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">            #include &quot;node.h&quot;</span>
-<a name="l00044"></a>00044 <span class="preprocessor">            #include &quot;numpy/arrayobject.h&quot;</span>
-<a name="l00045"></a>00045 <span class="preprocessor">        #else</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="preprocessor">            #include &quot;Python.h&quot;</span>
-<a name="l00047"></a>00047 <span class="preprocessor">            #include &quot;node.h&quot;</span>
-<a name="l00048"></a>00048 <span class="preprocessor">            #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
-<a name="l00049"></a>00049 <span class="preprocessor">        #endif</span>
-<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="preprocessor">        #define _DEBUG</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">    #ifdef linux</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
-<a name="l00054"></a>00054 <span class="preprocessor">        #include &quot;node.h&quot;</span>
-<a name="l00055"></a>00055 <span class="preprocessor">        #include &quot;numpy/arrayobject.h&quot;</span>
-<a name="l00056"></a>00056 <span class="preprocessor">    #else</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
-<a name="l00058"></a>00058 <span class="preprocessor">        #include &quot;node.h&quot;</span>
-<a name="l00059"></a>00059 <span class="preprocessor">        #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
-<a name="l00060"></a>00060 <span class="preprocessor">    #endif</span>
-<a name="l00061"></a>00061 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
-<a name="l00062"></a>00062 <span class="preprocessor"></span><span class="preprocessor">#endif // Q_MOC_RUN</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span>
-<a name="l00064"></a>00064 <span class="comment">/* includes */</span>
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#include &quot;pythonNpDataObject.h&quot;</span>
-<a name="l00067"></a>00067 <span class="preprocessor">#include &quot;pythonItom.h&quot;</span>
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="comment">/*</span>
-<a name="l00070"></a>00070 <span class="comment">#ifdef linux</span>
-<a name="l00071"></a>00071 <span class="comment">    #include &quot;frameobject.h&quot;</span>
-<a name="l00072"></a>00072 <span class="comment">    #include &quot;traceback.h&quot;</span>
-<a name="l00073"></a>00073 <span class="comment">#else</span>
-<a name="l00074"></a>00074 <span class="comment">    #include &quot;include/frameobject.h&quot; //!&lt; for traceback</span>
-<a name="l00075"></a>00075 <span class="comment">    #include &quot;include/traceback.h&quot;</span>
-<a name="l00076"></a>00076 <span class="comment">#endif</span>
-<a name="l00077"></a>00077 <span class="comment">*/</span>
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079 <span class="preprocessor">#include &quot;../models/breakPointModel.h&quot;</span>
-<a name="l00080"></a>00080 <span class="preprocessor">#include &quot;../../common/sharedStructuresQt.h&quot;</span>
-<a name="l00081"></a>00081 <span class="preprocessor">#include &quot;../../common/addInInterface.h&quot;</span>
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <span class="preprocessor">#include &quot;pythonWorkspace.h&quot;</span>
+<a name="l00034"></a>00034 <span class="preprocessor">#ifndef ITOM_NPDATAOBJECT</span>
+<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">    #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION //see comment in pythonNpDataObject.cpp</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>
+<a name="l00038"></a>00038 <span class="preprocessor">#ifndef Q_MOC_RUN</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>    <span class="comment">//python</span>
+<a name="l00040"></a>00040     <span class="comment">// see http://vtk.org/gitweb?p=VTK.git;a=commitdiff;h=7f3f750596a105d48ea84ebfe1b1c4ca03e0bab3</span>
+<a name="l00041"></a>00041 <span class="preprocessor">    #if (defined _DEBUG) &amp;&amp; (!defined linux)</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">        #undef _DEBUG</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span><span class="preprocessor">        #if (defined linux) | (defined CMAKE)</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="preprocessor">            #include &quot;Python.h&quot;</span>
+<a name="l00045"></a>00045 <span class="preprocessor">            #include &quot;node.h&quot;</span>
+<a name="l00046"></a>00046 <span class="preprocessor">            #include &quot;numpy/arrayobject.h&quot;</span>
+<a name="l00047"></a>00047 <span class="preprocessor">        #else</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span><span class="preprocessor">            #include &quot;Python.h&quot;</span>
+<a name="l00049"></a>00049 <span class="preprocessor">            #include &quot;node.h&quot;</span>
+<a name="l00050"></a>00050 <span class="preprocessor">            #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
+<a name="l00051"></a>00051 <span class="preprocessor">        #endif</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">        #define _DEBUG</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="preprocessor">    #ifdef linux</span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
+<a name="l00056"></a>00056 <span class="preprocessor">        #include &quot;node.h&quot;</span>
+<a name="l00057"></a>00057 <span class="preprocessor">        #include &quot;numpy/arrayobject.h&quot;</span>
+<a name="l00058"></a>00058 <span class="preprocessor">    #else</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
+<a name="l00060"></a>00060 <span class="preprocessor">        #include &quot;node.h&quot;</span>
+<a name="l00061"></a>00061 <span class="preprocessor">        #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
+<a name="l00062"></a>00062 <span class="preprocessor">    #endif</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span><span class="preprocessor">    #endif</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span><span class="preprocessor">#endif // Q_MOC_RUN</span>
+<a name="l00065"></a>00065 <span class="preprocessor"></span>
+<a name="l00066"></a>00066 <span class="comment">/* includes */</span>
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="preprocessor">#include &quot;pythonNpDataObject.h&quot;</span>
+<a name="l00069"></a>00069 <span class="preprocessor">#include &quot;pythonItom.h&quot;</span>
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071 <span class="comment">/*</span>
+<a name="l00072"></a>00072 <span class="comment">#ifdef linux</span>
+<a name="l00073"></a>00073 <span class="comment">    #include &quot;frameobject.h&quot;</span>
+<a name="l00074"></a>00074 <span class="comment">    #include &quot;traceback.h&quot;</span>
+<a name="l00075"></a>00075 <span class="comment">#else</span>
+<a name="l00076"></a>00076 <span class="comment">    #include &quot;include/frameobject.h&quot; //!&lt; for traceback</span>
+<a name="l00077"></a>00077 <span class="comment">    #include &quot;include/traceback.h&quot;</span>
+<a name="l00078"></a>00078 <span class="comment">#endif</span>
+<a name="l00079"></a>00079 <span class="comment">*/</span>
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 <span class="preprocessor">#include &quot;../models/breakPointModel.h&quot;</span>
+<a name="l00082"></a>00082 <span class="preprocessor">#include &quot;../../common/sharedStructuresQt.h&quot;</span>
+<a name="l00083"></a>00083 <span class="preprocessor">#include &quot;../../common/addInInterface.h&quot;</span>
 <a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <span class="preprocessor">#include &lt;qstringlist.h&gt;</span>
-<a name="l00086"></a>00086 <span class="preprocessor">#include &lt;qqueue.h&gt;</span>
-<a name="l00087"></a>00087 <span class="preprocessor">#include &lt;qset.h&gt;</span>
-<a name="l00088"></a>00088 <span class="preprocessor">#include &lt;qpointer.h&gt;</span>
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="comment">/* definition and macros */</span>
+<a name="l00085"></a>00085 <span class="preprocessor">#include &quot;pythonWorkspace.h&quot;</span>
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 <span class="preprocessor">#include &lt;qstringlist.h&gt;</span>
+<a name="l00088"></a>00088 <span class="preprocessor">#include &lt;qqueue.h&gt;</span>
+<a name="l00089"></a>00089 <span class="preprocessor">#include &lt;qset.h&gt;</span>
+<a name="l00090"></a>00090 <span class="preprocessor">#include &lt;qpointer.h&gt;</span>
+<a name="l00091"></a>00091 
 <a name="l00092"></a>00092 
-<a name="l00093"></a>00093 <span class="comment">/* global variables (avoid) */</span>
+<a name="l00093"></a>00093 <span class="comment">/* definition and macros */</span>
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="comment">/* content */</span>
+<a name="l00095"></a>00095 <span class="comment">/* global variables (avoid) */</span>
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097 <span class="keyword">class </span>QDesktopWidget;
-<a name="l00098"></a>00098 <span class="keyword">class </span>QTimer;
-<a name="l00099"></a>00099 
-<a name="l00100"></a><a class="code" href="class_python_engine.html">00100</a> <span class="keyword">class </span><a class="code" href="class_python_engine.html">PythonEngine</a> : <span class="keyword">public</span> QObject
-<a name="l00101"></a>00101 {
-<a name="l00102"></a>00102     Q_OBJECT
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104 <span class="keyword">public</span>:
-<a name="l00105"></a>00105     <a class="code" href="class_python_engine.html">PythonEngine</a>();                                 <span class="comment">//constructor</span>
-<a name="l00106"></a>00106     ~<a class="code" href="class_python_engine.html">PythonEngine</a>();                                <span class="comment">//destructor</span>
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108     Q_INVOKABLE <span class="keywordtype">void</span> <a class="code" href="class_python_engine.html#a8b83ae66aab23877b7d8c9742115fadd">pythonSetup</a>(<a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> *retValue);               <span class="comment">//setup</span>
-<a name="l00109"></a>00109     Q_INVOKABLE <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> scanAndRunAutostartFolder(QString currentDirAfterScan = QString() );
-<a name="l00110"></a>00110     Q_INVOKABLE <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> pythonShutdown(<a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *aimWait = NULL);            <span class="comment">//shutdown</span>
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112     Q_INVOKABLE <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> stringEncodingChanged();
+<a name="l00097"></a>00097 <span class="comment">/* content */</span>
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="keyword">class </span>QDesktopWidget;
+<a name="l00100"></a>00100 <span class="keyword">class </span>QTimer;
+<a name="l00101"></a>00101 
+<a name="l00102"></a><a class="code" href="class_python_engine.html">00102</a> <span class="keyword">class </span><a class="code" href="class_python_engine.html">PythonEngine</a> : <span class="keyword">public</span> QObject
+<a name="l00103"></a>00103 {
+<a name="l00104"></a>00104     Q_OBJECT
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106 <span class="keyword">public</span>:
+<a name="l00107"></a>00107     <a class="code" href="class_python_engine.html">PythonEngine</a>();                                 <span class="comment">//constructor</span>
+<a name="l00108"></a>00108     ~<a class="code" href="class_python_engine.html">PythonEngine</a>();                                <span class="comment">//destructor</span>
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110     Q_INVOKABLE <span class="keywordtype">void</span> <a class="code" href="class_python_engine.html#a8b83ae66aab23877b7d8c9742115fadd">pythonSetup</a>(<a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> *retValue);               <span class="comment">//setup</span>
+<a name="l00111"></a>00111     Q_INVOKABLE <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> scanAndRunAutostartFolder(QString currentDirAfterScan = QString() );
+<a name="l00112"></a>00112     Q_INVOKABLE <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> pythonShutdown(<a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *aimWait = NULL);            <span class="comment">//shutdown</span>
 <a name="l00113"></a>00113 
-<a name="l00114"></a>00114     <span class="keyword">inline</span> <a class="code" href="class_break_point_model.html" title="model for management of all breakpoints. This model will be displayed by a viewer-widget in the main ...">BreakPointModel</a> *getBreakPointModel()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> bpModel; }
-<a name="l00115"></a>00115     <span class="keyword">inline</span> <span class="keywordtype">bool</span> isPythonBusy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> pythonState != pyStateIdle; }
-<a name="l00116"></a>00116     <span class="keyword">inline</span> <span class="keywordtype">bool</span> isPythonDebugging()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (pythonState == pyStateDebuggingWaitingButBusy || pythonState == pyStateDebugging || pythonState == pyStateDebuggingWaiting); }
-<a name="l00117"></a>00117     <span class="keyword">inline</span> <span class="keywordtype">bool</span> isPythonDebuggingAndWaiting()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> pythonState == pyStateDebuggingWaiting; }
-<a name="l00118"></a>00118     <span class="keyword">inline</span> <span class="keywordtype">bool</span> execInternalCodeByDebugger()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b" title="if true, button events, user interface connections to python methods... will be executed by debugger...">m_executeInternalPythonCodeInDebugMode</a>; }
-<a name="l00119"></a>00119     <span class="keyword">inline</span> <span class="keywordtype">void</span> setExecInternalCodeByDebugger(<span class="keywordtype">bool</span> value) { <a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b" title="if true, button events, user interface connections to python methods... will be executed by debugger...">m_executeInternalPythonCodeInDebugMode</a> = value; }
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> checkForPyExceptions();
-<a name="l00122"></a>00122     <span class="keywordtype">void</span> printPythonErrorWithoutTraceback();
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124     <span class="keywordtype">void</span> pythonDebugFunction(PyObject *callable, PyObject *argTuple);
-<a name="l00125"></a>00125     <span class="keywordtype">void</span> pythonRunFunction(PyObject *callable, PyObject *argTuple);
-<a name="l00126"></a>00126 
-<a name="l00127"></a><a class="code" href="class_python_engine.html#ab720dc6c75988eb69c245612017325a1">00127</a>     <span class="keyword">inline</span> PyObject *<a class="code" href="class_python_engine.html#ab720dc6c75988eb69c245612017325a1">getGlobalDictionary</a>()  { <span class="keywordflow">return</span> <a class="code" href="class_python_engine.html#a93841d32fa7dc00dafba374529203589" title="global dictionary of python [borrowed], equals to mainDictionary unless if debugger is in &quot;interactio...">globalDictionary</a>;  }  
-<a name="l00129"></a>00129     <span class="keyword">inline</span> <span class="keywordtype">bool</span> pySyntaxCheckAvailable()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (m_pyModSyntaxCheck != NULL); }
-<a name="l00130"></a>00130 
-<a name="l00131"></a>00131     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_python_engine.html">PythonEngine</a> *getInstance();
+<a name="l00114"></a>00114     Q_INVOKABLE <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> stringEncodingChanged();
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116     <span class="keyword">inline</span> <a class="code" href="class_break_point_model.html" title="model for management of all breakpoints. This model will be displayed by a viewer-widget in the main ...">BreakPointModel</a> *getBreakPointModel()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> bpModel; }
+<a name="l00117"></a>00117     <span class="keyword">inline</span> <span class="keywordtype">bool</span> isPythonBusy()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> pythonState != pyStateIdle; }
+<a name="l00118"></a>00118     <span class="keyword">inline</span> <span class="keywordtype">bool</span> isPythonDebugging()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (pythonState == pyStateDebuggingWaitingButBusy || pythonState == pyStateDebugging || pythonState == pyStateDebuggingWaiting); }
+<a name="l00119"></a>00119     <span class="keyword">inline</span> <span class="keywordtype">bool</span> isPythonDebuggingAndWaiting()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> pythonState == pyStateDebuggingWaiting; }
+<a name="l00120"></a>00120     <span class="keyword">inline</span> <span class="keywordtype">bool</span> execInternalCodeByDebugger()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b" title="if true, button events, user interface connections to python methods... will be executed by debugger...">m_executeInternalPythonCodeInDebugMode</a>; }
+<a name="l00121"></a>00121     <span class="keyword">inline</span> <span class="keywordtype">void</span> setExecInternalCodeByDebugger(<span class="keywordtype">bool</span> value) { <a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b" title="if true, button events, user interface connections to python methods... will be executed by debugger...">m_executeInternalPythonCodeInDebugMode</a> = value; }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> checkForPyExceptions();
+<a name="l00124"></a>00124     <span class="keywordtype">void</span> printPythonErrorWithoutTraceback();
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126     <span class="keywordtype">void</span> pythonDebugFunction(PyObject *callable, PyObject *argTuple);
+<a name="l00127"></a>00127     <span class="keywordtype">void</span> pythonRunFunction(PyObject *callable, PyObject *argTuple);
+<a name="l00128"></a>00128 
+<a name="l00129"></a><a class="code" href="class_python_engine.html#ab720dc6c75988eb69c245612017325a1">00129</a>     <span class="keyword">inline</span> PyObject *<a class="code" href="class_python_engine.html#ab720dc6c75988eb69c245612017325a1">getGlobalDictionary</a>()  { <span class="keywordflow">return</span> <a class="code" href="class_python_engine.html#a93841d32fa7dc00dafba374529203589" title="global dictionary of python [borrowed], equals to mainDictionary unless if debugger is in &quot;interactio...">globalDictionary</a>;  }  
+<a name="l00131"></a>00131     <span class="keyword">inline</span> <span class="keywordtype">bool</span> pySyntaxCheckAvailable()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (m_pyModSyntaxCheck != NULL); }
 <a name="l00132"></a>00132 
-<a name="l00133"></a>00133     QList&lt;int&gt; parseAndSplitCommandInMainComponents(<span class="keyword">const</span> <span class="keywordtype">char</span> *str, QByteArray &amp;encoding) <span class="keyword">const</span>; <span class="comment">//can be directly called from different thread</span>
+<a name="l00133"></a>00133     <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="class_python_engine.html">PythonEngine</a> *getInstance();
 <a name="l00134"></a>00134 
-<a name="l00135"></a>00135 <span class="keyword">protected</span>:
-<a name="l00136"></a>00136     <span class="comment">//RetVal syntaxCheck(char* pythonFileName);       // syntaxCheck for file with filename pythonFileName</span>
-<a name="l00137"></a>00137     RetVal <a class="code" href="class_python_engine.html#a6064b24e19582d993ed7804c1214bd5b">runPyFile</a>(<span class="keyword">const</span> QString &amp;pythonFileName);         <span class="comment">// run file pythonFileName</span>
-<a name="l00138"></a>00138     RetVal <a class="code" href="class_python_engine.html#a8300327f589c00358813de89d02aee6b">debugFile</a>(<span class="keyword">const</span> QString &amp;pythonFileName);         <span class="comment">// debug file pythonFileName</span>
-<a name="l00139"></a>00139     RetVal runString(<span class="keyword">const</span> QString &amp;command);          <span class="comment">// run string command</span>
-<a name="l00140"></a>00140     RetVal <a class="code" href="class_python_engine.html#aa6162ed4a976dc32c23bae8a3e28c010">debugString</a>(<span class="keyword">const</span> QString &amp;command);        <span class="comment">// debug string command</span>
-<a name="l00141"></a>00141     RetVal <a class="code" href="class_python_engine.html#afe19f4b90cf42054b5bb441c433c63e0">debugFunction</a>(PyObject *callable, PyObject *argTuple);
-<a name="l00142"></a>00142     RetVal runFunction(PyObject *callable, PyObject *argTuple);
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144     RetVal modifyTracebackDepth(<span class="keywordtype">int</span> NrOfLevelsToPopAtFront = -1, <span class="keywordtype">bool</span> showTraceback = <span class="keyword">true</span>);
+<a name="l00135"></a>00135     QList&lt;int&gt; parseAndSplitCommandInMainComponents(<span class="keyword">const</span> <span class="keywordtype">char</span> *str, QByteArray &amp;encoding) <span class="keyword">const</span>; <span class="comment">//can be directly called from different thread</span>
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137 <span class="keyword">protected</span>:
+<a name="l00138"></a>00138     <span class="comment">//RetVal syntaxCheck(char* pythonFileName);       // syntaxCheck for file with filename pythonFileName</span>
+<a name="l00139"></a>00139     RetVal <a class="code" href="class_python_engine.html#a6064b24e19582d993ed7804c1214bd5b">runPyFile</a>(<span class="keyword">const</span> QString &amp;pythonFileName);         <span class="comment">// run file pythonFileName</span>
+<a name="l00140"></a>00140     RetVal <a class="code" href="class_python_engine.html#a8300327f589c00358813de89d02aee6b">debugFile</a>(<span class="keyword">const</span> QString &amp;pythonFileName);         <span class="comment">// debug file pythonFileName</span>
+<a name="l00141"></a>00141     RetVal runString(<span class="keyword">const</span> QString &amp;command);          <span class="comment">// run string command</span>
+<a name="l00142"></a>00142     RetVal <a class="code" href="class_python_engine.html#aa6162ed4a976dc32c23bae8a3e28c010">debugString</a>(<span class="keyword">const</span> QString &amp;command);        <span class="comment">// debug string command</span>
+<a name="l00143"></a>00143     RetVal <a class="code" href="class_python_engine.html#afe19f4b90cf42054b5bb441c433c63e0">debugFunction</a>(PyObject *callable, PyObject *argTuple);
+<a name="l00144"></a>00144     RetVal runFunction(PyObject *callable, PyObject *argTuple);
 <a name="l00145"></a>00145 
-<a name="l00146"></a>00146 <span class="keyword">private</span>:
-<a name="l00147"></a>00147     <span class="keyword">static</span> <a class="code" href="class_python_engine.html">PythonEngine</a> *getInstanceInternal();
-<a name="l00148"></a>00148 
-<a name="l00149"></a><a class="code" href="class_python_engine.html#a925753c5d9fe2dbbc7526cef453aab9e">00149</a>     <span class="keyword">inline</span> PyObject *<a class="code" href="class_python_engine.html#a925753c5d9fe2dbbc7526cef453aab9e">getLocalDictionary</a>() { <span class="keywordflow">return</span> <a class="code" href="class_python_engine.html#af2475d8ce3bad022a337492c8d5be49e" title="local dictionary of python [borrowed], usually NULL unless if debugger is in &quot;interaction-mode&quot;, then globalDictionary is equal to the local dictionary of the current frame">localDictionary</a>; } 
-<a name="l00151"></a>00151     PyObject *getPyObjectByFullName(<span class="keywordtype">bool</span> globalNotLocal, QStringList &amp;fullName);
-<a name="l00152"></a>00152 
-<a name="l00153"></a>00153     <span class="keywordtype">void</span> setGlobalDictionary(PyObject* mainDict = NULL);
-<a name="l00154"></a>00154     <span class="keywordtype">void</span> setLocalDictionary(PyObject* localDict);
-<a name="l00155"></a>00155 
-<a name="l00156"></a>00156     <span class="keywordtype">void</span> emitPythonDictionary(<span class="keywordtype">bool</span> emitGlobal, <span class="keywordtype">bool</span> emitLocal, PyObject* globalDict, PyObject* localDict);
+<a name="l00146"></a>00146     RetVal modifyTracebackDepth(<span class="keywordtype">int</span> NrOfLevelsToPopAtFront = -1, <span class="keywordtype">bool</span> showTraceback = <span class="keyword">true</span>);
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148 <span class="keyword">private</span>:
+<a name="l00149"></a>00149     <span class="keyword">static</span> <a class="code" href="class_python_engine.html">PythonEngine</a> *getInstanceInternal();
+<a name="l00150"></a>00150 
+<a name="l00151"></a><a class="code" href="class_python_engine.html#a925753c5d9fe2dbbc7526cef453aab9e">00151</a>     <span class="keyword">inline</span> PyObject *<a class="code" href="class_python_engine.html#a925753c5d9fe2dbbc7526cef453aab9e">getLocalDictionary</a>() { <span class="keywordflow">return</span> <a class="code" href="class_python_engine.html#af2475d8ce3bad022a337492c8d5be49e" title="local dictionary of python [borrowed], usually NULL unless if debugger is in &quot;interaction-mode&quot;, then globalDictionary is equal to the local dictionary of the current frame">localDictionary</a>; } 
+<a name="l00153"></a>00153     PyObject *getPyObjectByFullName(<span class="keywordtype">bool</span> globalNotLocal, QStringList &amp;fullName);
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155     <span class="keywordtype">void</span> setGlobalDictionary(PyObject* mainDict = NULL);
+<a name="l00156"></a>00156     <span class="keywordtype">void</span> setLocalDictionary(PyObject* localDict);
 <a name="l00157"></a>00157 
-<a name="l00158"></a>00158     RetVal pickleDictionary(PyObject *dict, QString filename);
-<a name="l00159"></a>00159     RetVal unpickleDictionary(PyObject *destinationDict, QString filename, <span class="keywordtype">bool</span> overwrite);
-<a name="l00160"></a>00160     RetVal saveDictAsMatlab(PyObject *dict, QString filename);
-<a name="l00161"></a>00161     RetVal loadMatlabToDict(PyObject *destinationDict, QString filename);
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163     <span class="comment">//methods for maintaining python functionality</span>
-<a name="l00164"></a>00164     RetVal <a class="code" href="class_python_engine.html#ab5ed7f434c5767c5dbcf46f497c1ead0">addMethodToModule</a>(PyMethodDef* def);
-<a name="l00165"></a>00165     RetVal <a class="code" href="class_python_engine.html#a9a1877e702b19ae81c88919d946cb42c">delMethodFromModule</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ml_name);
-<a name="l00166"></a>00166     RetVal <a class="code" href="class_python_engine.html#a1c9882d57954c0088880fb1ba68f3ca0">pythonAddBuiltinMethods</a>();
-<a name="l00167"></a>00167 
-<a name="l00168"></a>00168     <span class="comment">//methods for debugging</span>
-<a name="l00169"></a>00169     <span class="keywordtype">void</span> enqueueDbgCmd(tPythonDbgCmd dbgCmd);
-<a name="l00170"></a>00170     tPythonDbgCmd dequeueDbgCmd();
-<a name="l00171"></a>00171     <span class="keywordtype">bool</span> DbgCommandsAvailable();
-<a name="l00172"></a>00172     <span class="keywordtype">void</span> clearDbgCmdLoop();
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174     RetVal pythonStateTransition(tPythonTransitions transition);
+<a name="l00158"></a>00158     <span class="keywordtype">void</span> emitPythonDictionary(<span class="keywordtype">bool</span> emitGlobal, <span class="keywordtype">bool</span> emitLocal, PyObject* globalDict, PyObject* localDict);
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160     RetVal pickleDictionary(PyObject *dict, QString filename);
+<a name="l00161"></a>00161     RetVal unpickleDictionary(PyObject *destinationDict, QString filename, <span class="keywordtype">bool</span> overwrite);
+<a name="l00162"></a>00162     RetVal saveDictAsMatlab(PyObject *dict, QString filename);
+<a name="l00163"></a>00163     RetVal loadMatlabToDict(PyObject *destinationDict, QString filename);
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165     <span class="comment">//methods for maintaining python functionality</span>
+<a name="l00166"></a>00166     RetVal <a class="code" href="class_python_engine.html#ab5ed7f434c5767c5dbcf46f497c1ead0">addMethodToModule</a>(PyMethodDef* def);
+<a name="l00167"></a>00167     RetVal <a class="code" href="class_python_engine.html#a9a1877e702b19ae81c88919d946cb42c">delMethodFromModule</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ml_name);
+<a name="l00168"></a>00168     RetVal <a class="code" href="class_python_engine.html#a1c9882d57954c0088880fb1ba68f3ca0">pythonAddBuiltinMethods</a>();
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170     <span class="comment">//methods for debugging</span>
+<a name="l00171"></a>00171     <span class="keywordtype">void</span> enqueueDbgCmd(tPythonDbgCmd dbgCmd);
+<a name="l00172"></a>00172     tPythonDbgCmd dequeueDbgCmd();
+<a name="l00173"></a>00173     <span class="keywordtype">bool</span> DbgCommandsAvailable();
+<a name="l00174"></a>00174     <span class="keywordtype">void</span> clearDbgCmdLoop();
 <a name="l00175"></a>00175 
-<a name="l00176"></a>00176     <span class="comment">//methods for breakpoint</span>
-<a name="l00177"></a>00177     RetVal <a class="code" href="class_python_engine.html#aadfd988e825062d4cdb7604d9eeda158">pythonAddBreakpoint</a>(<span class="keyword">const</span> QString &amp;filename, <span class="keyword">const</span> <span class="keywordtype">int</span> lineno, <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled, <span class="keyword">const</span> <span class="keywordtype">bool</span> temporary, <span class="keyword">const</span> QString &amp;condition, <span class="keyword">const</span> <span class="keywordtype">int</span> ignoreCount, <span class="keywordtype">int</span> &amp;pyBpNumber);
-<a name="l00178"></a>00178     RetVal pythonEditBreakpoint(<span class="keyword">const</span> <span class="keywordtype">int</span> pyBpNumber, <span class="keyword">const</span> QString &amp;filename, <span class="keyword">const</span> <span class="keywordtype">int</span> lineno, <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled, <span class="keyword">const</span> <span class="keywordtype">bool</span> temporary, <span class="keyword">const</span> QString &amp;condition, <span class="keyword">const</span> <span class="keywordtype">int</span> ignoreCount);
-<a name="l00179"></a>00179     RetVal pythonDeleteBreakpoint(<span class="keyword">const</span> <span class="keywordtype">int</span> pyBpNumber);
-<a name="l00180"></a>00180 
-<a name="l00181"></a>00181     <span class="comment">//member variables</span>
-<a name="l00182"></a>00182     <span class="keywordtype">bool</span> started;
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184     <span class="comment">//PyGILState_STATE threadState;</span>
+<a name="l00176"></a>00176     RetVal pythonStateTransition(tPythonTransitions transition);
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178     <span class="comment">//methods for breakpoint</span>
+<a name="l00179"></a>00179     RetVal <a class="code" href="class_python_engine.html#aadfd988e825062d4cdb7604d9eeda158">pythonAddBreakpoint</a>(<span class="keyword">const</span> QString &amp;filename, <span class="keyword">const</span> <span class="keywordtype">int</span> lineno, <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled, <span class="keyword">const</span> <span class="keywordtype">bool</span> temporary, <span class="keyword">const</span> QString &amp;condition, <span class="keyword">const</span> <span class="keywordtype">int</span> ignoreCount, <span class="keywordtype">int</span> &amp;pyBpNumber);
+<a name="l00180"></a>00180     RetVal pythonEditBreakpoint(<span class="keyword">const</span> <span class="keywordtype">int</span> pyBpNumber, <span class="keyword">const</span> QString &amp;filename, <span class="keyword">const</span> <span class="keywordtype">int</span> lineno, <span class="keyword">const</span> <span class="keywordtype">bool</span> enabled, <span class="keyword">const</span> <span class="keywordtype">bool</span> temporary, <span class="keyword">const</span> QString &amp;condition, <span class="keyword">const</span> <span class="keywordtype">int</span> ignoreCount);
+<a name="l00181"></a>00181     RetVal pythonDeleteBreakpoint(<span class="keyword">const</span> <span class="keywordtype">int</span> pyBpNumber);
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183     <span class="comment">//member variables</span>
+<a name="l00184"></a>00184     <span class="keywordtype">bool</span> started;
 <a name="l00185"></a>00185 
-<a name="l00186"></a>00186     QMutex dbgCmdMutex;
-<a name="l00187"></a>00187     QMutex pythonStateChangeMutex;
-<a name="l00188"></a>00188     QMutex dictChangeMutex;
-<a name="l00189"></a>00189     QDesktopWidget *m_pDesktopWidget;
-<a name="l00190"></a>00190     QQueue&lt;tPythonDbgCmd&gt; debugCommandQueue;
-<a name="l00191"></a>00191     tPythonDbgCmd debugCommand;
-<a name="l00192"></a>00192     
-<a name="l00193"></a>00193     tPythonState pythonState;
+<a name="l00186"></a>00186     <span class="comment">//PyGILState_STATE threadState;</span>
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188     QMutex dbgCmdMutex;
+<a name="l00189"></a>00189     QMutex pythonStateChangeMutex;
+<a name="l00190"></a>00190     QMutex dictChangeMutex;
+<a name="l00191"></a>00191     QDesktopWidget *m_pDesktopWidget;
+<a name="l00192"></a>00192     QQueue&lt;tPythonDbgCmd&gt; debugCommandQueue;
+<a name="l00193"></a>00193     tPythonDbgCmd debugCommand;
 <a name="l00194"></a>00194     
-<a name="l00195"></a>00195     <a class="code" href="class_break_point_model.html" title="model for management of all breakpoints. This model will be displayed by a viewer-widget in the main ...">BreakPointModel</a> *bpModel;
-<a name="l00196"></a>00196 
-<a name="l00197"></a><a class="code" href="class_python_engine.html#a47d086c041b45b7314b60702bf784785">00197</a>     PyObject* <a class="code" href="class_python_engine.html#a47d086c041b45b7314b60702bf784785" title="main module of python (builtin) [borrowed]">mainModule</a>;          
-<a name="l00198"></a><a class="code" href="class_python_engine.html#ae0b7d2fdaf6cbcc9f77642b7ab9827ef">00198</a>     PyObject* <a class="code" href="class_python_engine.html#ae0b7d2fdaf6cbcc9f77642b7ab9827ef" title="main dictionary of python [borrowed]">mainDictionary</a>;      
-<a name="l00199"></a><a class="code" href="class_python_engine.html#af2475d8ce3bad022a337492c8d5be49e">00199</a>     PyObject* <a class="code" href="class_python_engine.html#af2475d8ce3bad022a337492c8d5be49e" title="local dictionary of python [borrowed], usually NULL unless if debugger is in &quot;interaction-mode&quot;, then globalDictionary is equal to the local dictionary of the current frame">localDictionary</a>;     
-<a name="l00200"></a><a class="code" href="class_python_engine.html#a93841d32fa7dc00dafba374529203589">00200</a>     PyObject* <a class="code" href="class_python_engine.html#a93841d32fa7dc00dafba374529203589" title="global dictionary of python [borrowed], equals to mainDictionary unless if debugger is in &quot;interactio...">globalDictionary</a>;    
-<a name="l00201"></a><a class="code" href="class_python_engine.html#a48d50e135a2453c58fa8491be7173c48">00201</a>     PyObject *<a class="code" href="class_python_engine.html#a48d50e135a2453c58fa8491be7173c48" title="debugger module">itomDbgModule</a>;       
-<a name="l00202"></a><a class="code" href="class_python_engine.html#a1bba0b80766c55d0274d775feb15a6d9">00202</a>     PyObject *<a class="code" href="class_python_engine.html#a1bba0b80766c55d0274d775feb15a6d9" title="debugger instance">itomDbgInstance</a>;     
-<a name="l00203"></a><a class="code" href="class_python_engine.html#a4db9a2e0a016d77e999a1b022a2baeeb">00203</a>     PyObject *<a class="code" href="class_python_engine.html#a4db9a2e0a016d77e999a1b022a2baeeb" title="itom module [new ref]">itomModule</a>;          
-<a name="l00204"></a><a class="code" href="class_python_engine.html#a42508b083e200b49e77889e6e7e0c76b">00204</a>     PyObject *<a class="code" href="class_python_engine.html#a42508b083e200b49e77889e6e7e0c76b" title="ito functions [additional python methods] [new ref]">itomFunctions</a>;       
-<a name="l00205"></a>00205     PyObject *m_pyModGC;
-<a name="l00206"></a>00206     PyObject *m_pyModSyntaxCheck;
-<a name="l00207"></a>00207     <span class="comment">//PyObject *itomReturnException; //!&lt; if this exception is thrown, the execution of the main application is stopped</span>
-<a name="l00208"></a>00208 
-<a name="l00209"></a>00209     PyObject *dictUnicode;
+<a name="l00195"></a>00195     tPythonState pythonState;
+<a name="l00196"></a>00196     
+<a name="l00197"></a>00197     <a class="code" href="class_break_point_model.html" title="model for management of all breakpoints. This model will be displayed by a viewer-widget in the main ...">BreakPointModel</a> *bpModel;
+<a name="l00198"></a>00198 
+<a name="l00199"></a><a class="code" href="class_python_engine.html#a47d086c041b45b7314b60702bf784785">00199</a>     PyObject* <a class="code" href="class_python_engine.html#a47d086c041b45b7314b60702bf784785" title="main module of python (builtin) [borrowed]">mainModule</a>;          
+<a name="l00200"></a><a class="code" href="class_python_engine.html#ae0b7d2fdaf6cbcc9f77642b7ab9827ef">00200</a>     PyObject* <a class="code" href="class_python_engine.html#ae0b7d2fdaf6cbcc9f77642b7ab9827ef" title="main dictionary of python [borrowed]">mainDictionary</a>;      
+<a name="l00201"></a><a class="code" href="class_python_engine.html#af2475d8ce3bad022a337492c8d5be49e">00201</a>     PyObject* <a class="code" href="class_python_engine.html#af2475d8ce3bad022a337492c8d5be49e" title="local dictionary of python [borrowed], usually NULL unless if debugger is in &quot;interaction-mode&quot;, then globalDictionary is equal to the local dictionary of the current frame">localDictionary</a>;     
+<a name="l00202"></a><a class="code" href="class_python_engine.html#a93841d32fa7dc00dafba374529203589">00202</a>     PyObject* <a class="code" href="class_python_engine.html#a93841d32fa7dc00dafba374529203589" title="global dictionary of python [borrowed], equals to mainDictionary unless if debugger is in &quot;interactio...">globalDictionary</a>;    
+<a name="l00203"></a><a class="code" href="class_python_engine.html#a48d50e135a2453c58fa8491be7173c48">00203</a>     PyObject *<a class="code" href="class_python_engine.html#a48d50e135a2453c58fa8491be7173c48" title="debugger module">itomDbgModule</a>;       
+<a name="l00204"></a><a class="code" href="class_python_engine.html#a1bba0b80766c55d0274d775feb15a6d9">00204</a>     PyObject *<a class="code" href="class_python_engine.html#a1bba0b80766c55d0274d775feb15a6d9" title="debugger instance">itomDbgInstance</a>;     
+<a name="l00205"></a><a class="code" href="class_python_engine.html#a4db9a2e0a016d77e999a1b022a2baeeb">00205</a>     PyObject *<a class="code" href="class_python_engine.html#a4db9a2e0a016d77e999a1b022a2baeeb" title="itom module [new ref]">itomModule</a>;          
+<a name="l00206"></a><a class="code" href="class_python_engine.html#a42508b083e200b49e77889e6e7e0c76b">00206</a>     PyObject *<a class="code" href="class_python_engine.html#a42508b083e200b49e77889e6e7e0c76b" title="ito functions [additional python methods] [new ref]">itomFunctions</a>;       
+<a name="l00207"></a>00207     PyObject *m_pyModGC;
+<a name="l00208"></a>00208     PyObject *m_pyModSyntaxCheck;
+<a name="l00209"></a>00209     <span class="comment">//PyObject *itomReturnException; //!&lt; if this exception is thrown, the execution of the main application is stopped</span>
 <a name="l00210"></a>00210 
-<a name="l00211"></a>00211     QSet&lt;PyWorkspaceContainer*&gt; m_mainWorkspaceContainer;
-<a name="l00212"></a>00212     QSet&lt;PyWorkspaceContainer*&gt; m_localWorkspaceContainer;
-<a name="l00213"></a><a class="code" href="class_python_engine.html#a93a6dbf87f1df17e3e17730fe5cd5a4f">00213</a>     QHash&lt;QString, QPair&lt;PyObject*,PyObject*&gt; &gt; <a class="code" href="class_python_engine.html#a93a6dbf87f1df17e3e17730fe5cd5a4f" title="hash table containing weak reference to callable python methods or functions and as second...">m_pyFuncWeakRefHashes</a>; 
-<a name="l00214"></a>00214     <span class="keywordtype">int</span> m_pyFuncWeakRefHashesAutoInc;
-<a name="l00215"></a><a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b">00215</a>     <span class="keywordtype">bool</span> <a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b" title="if true, button events, user interface connections to python methods... will be executed by debugger...">m_executeInternalPythonCodeInDebugMode</a>; 
-<a name="l00216"></a>00216     PyMethodDef* <a class="code" href="class_python_engine.html#a0eb39af89f336c59b759d5e1454c368d" title="debugger functionality">PythonAdditionalModuleITOM</a>;
-<a name="l00217"></a>00217 
-<a name="l00219"></a>00219     <span class="keyword">static</span> PyMethodDef PyMethodItomDbg[];
-<a name="l00220"></a>00220     <span class="keyword">static</span> PyModuleDef PyModuleItomDbg;
-<a name="l00221"></a>00221     <span class="keyword">static</span> PyObject* PyInitItomDbg(<span class="keywordtype">void</span>);
-<a name="l00222"></a>00222     <span class="keyword">static</span> PyObject* <a class="code" href="class_python_engine.html#ac37d2d6c72a48d9c627d74316fdb0bef">PyDbgCommandLoop</a>(PyObject *pSelf, PyObject *pArgs);
-<a name="l00223"></a>00223 
-<a name="l00224"></a>00224     <span class="comment">//helper methods</span>
-<a name="l00225"></a>00225     <span class="comment">//static PyObject* checkForTimeoutHelper(ItomSharedSemaphore* semaphore, int timeout, PyObject *retValueOk);</span>
-<a name="l00226"></a>00226 
-<a name="l00227"></a>00227     <span class="comment">//other static members</span>
-<a name="l00228"></a>00228     <span class="keyword">static</span> QMutex instatiated;
-<a name="l00229"></a>00229     <span class="keyword">static</span> QMutex instancePtrProtection;
-<a name="l00230"></a>00230 
-<a name="l00231"></a>00231     <span class="keyword">static</span> <a class="code" href="class_python_engine.html">PythonEngine</a>* instance;
+<a name="l00211"></a>00211     PyObject *dictUnicode;
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213     QSet&lt;PyWorkspaceContainer*&gt; m_mainWorkspaceContainer;
+<a name="l00214"></a>00214     QSet&lt;PyWorkspaceContainer*&gt; m_localWorkspaceContainer;
+<a name="l00215"></a><a class="code" href="class_python_engine.html#a93a6dbf87f1df17e3e17730fe5cd5a4f">00215</a>     QHash&lt;QString, QPair&lt;PyObject*,PyObject*&gt; &gt; <a class="code" href="class_python_engine.html#a93a6dbf87f1df17e3e17730fe5cd5a4f" title="hash table containing weak reference to callable python methods or functions and as second...">m_pyFuncWeakRefHashes</a>; 
+<a name="l00216"></a>00216     <span class="keywordtype">int</span> m_pyFuncWeakRefHashesAutoInc;
+<a name="l00217"></a><a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b">00217</a>     <span class="keywordtype">bool</span> <a class="code" href="class_python_engine.html#a5d9af8f8aabce262c9a2bf26796f7d7b" title="if true, button events, user interface connections to python methods... will be executed by debugger...">m_executeInternalPythonCodeInDebugMode</a>; 
+<a name="l00218"></a>00218     PyMethodDef* <a class="code" href="class_python_engine.html#a0eb39af89f336c59b759d5e1454c368d" title="debugger functionality">PythonAdditionalModuleITOM</a>;
+<a name="l00219"></a>00219 
+<a name="l00221"></a>00221     <span class="keyword">static</span> PyMethodDef PyMethodItomDbg[];
+<a name="l00222"></a>00222     <span class="keyword">static</span> PyModuleDef PyModuleItomDbg;
+<a name="l00223"></a>00223     <span class="keyword">static</span> PyObject* PyInitItomDbg(<span class="keywordtype">void</span>);
+<a name="l00224"></a>00224     <span class="keyword">static</span> PyObject* <a class="code" href="class_python_engine.html#ac37d2d6c72a48d9c627d74316fdb0bef">PyDbgCommandLoop</a>(PyObject *pSelf, PyObject *pArgs);
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226     <span class="comment">//helper methods</span>
+<a name="l00227"></a>00227     <span class="comment">//static PyObject* checkForTimeoutHelper(ItomSharedSemaphore* semaphore, int timeout, PyObject *retValueOk);</span>
+<a name="l00228"></a>00228 
+<a name="l00229"></a>00229     <span class="comment">//other static members</span>
+<a name="l00230"></a>00230     <span class="keyword">static</span> QMutex instatiated;
+<a name="l00231"></a>00231     <span class="keyword">static</span> QMutex instancePtrProtection;
 <a name="l00232"></a>00232 
-<a name="l00233"></a>00233     <span class="comment">// friend class</span>
-<a name="l00234"></a>00234     <span class="keyword">friend</span> <span class="keyword">class </span>PythonDataObject;
-<a name="l00235"></a>00235     <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classito_1_1_python_itom.html">ito::PythonItom</a>;
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237 signals:
-<a name="l00238"></a>00238     <span class="keywordtype">void</span> pythonDebugPositionChanged(QString filename, <span class="keywordtype">int</span> lineNo);
-<a name="l00239"></a>00239     <span class="keywordtype">void</span> pythonStateChanged(tPythonTransitions pyTransition);
-<a name="l00240"></a>00240     <span class="keywordtype">void</span> pythonModifyLocalDict(PyObject* localDict, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a>* semaphore);
-<a name="l00241"></a>00241     <span class="keywordtype">void</span> pythonModifyGlobalDict(PyObject* globalDict, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a>* semaphore);
-<a name="l00242"></a>00242     <span class="keywordtype">void</span> pythonAddToolbarButton(QString toolbarName, QString buttonName, QString buttonIconFilename, QString pythonCode);
-<a name="l00243"></a>00243     <span class="keywordtype">void</span> pythonRemoveToolbarButton(QString toolbarName, QString buttonName);
-<a name="l00244"></a>00244     <span class="keywordtype">void</span> pythonAddMenuElement(<span class="keywordtype">int</span> typeID, QString key, QString name, QString code, QString icon);
-<a name="l00245"></a>00245     <span class="keywordtype">void</span> pythonRemoveMenuElement(QString key);
-<a name="l00246"></a>00246     <span class="keywordtype">void</span> pythonCurrentDirChanged();
-<a name="l00247"></a>00247     <span class="keywordtype">void</span> updateCallStack(QStringList filenames, IntList lines, QStringList methods);
-<a name="l00248"></a>00248     <span class="keywordtype">void</span> deleteCallStack();
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250     <span class="keywordtype">void</span> pythonSetCursor(<span class="keyword">const</span> Qt::CursorShape cursor);
-<a name="l00251"></a>00251     <span class="keywordtype">void</span> pythonResetCursor();
-<a name="l00252"></a>00252 
-<a name="l00253"></a>00253 <span class="keyword">public</span> slots:
-<a name="l00254"></a>00254     <span class="keywordtype">void</span> pythonRunString(QString cmd);
-<a name="l00255"></a>00255     <span class="keywordtype">void</span> pythonDebugString(QString cmd);
-<a name="l00256"></a>00256     <span class="keywordtype">void</span> pythonExecStringFromCommandLine(QString cmd);
-<a name="l00257"></a>00257     <span class="keywordtype">void</span> pythonRunFile(QString filename);
-<a name="l00258"></a>00258     <span class="keywordtype">void</span> pythonDebugFile(QString filename);
-<a name="l00259"></a>00259     <span class="keywordtype">void</span> pythonRunStringOrFunction(QString cmdOrFctHash);
-<a name="l00260"></a>00260     <span class="keywordtype">void</span> pythonDebugStringOrFunction(QString cmdOrFctHash);
-<a name="l00261"></a>00261     <span class="keywordtype">void</span> pythonInterruptExecution() <span class="keyword">const</span>;
-<a name="l00262"></a>00262     <span class="keywordtype">void</span> pythonDebugCommand(tPythonDbgCmd cmd);
-<a name="l00263"></a>00263 
-<a name="l00264"></a>00264     <span class="keywordtype">void</span> pythonSyntaxCheck(<span class="keyword">const</span> QString &amp;code, QPointer&lt;QObject&gt; sender);
+<a name="l00233"></a>00233     <span class="keyword">static</span> <a class="code" href="class_python_engine.html">PythonEngine</a>* instance;
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235     <span class="comment">// friend class</span>
+<a name="l00236"></a>00236     <span class="keyword">friend</span> <span class="keyword">class </span>PythonDataObject;
+<a name="l00237"></a>00237     <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classito_1_1_python_itom.html">ito::PythonItom</a>;
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239 signals:
+<a name="l00240"></a>00240     <span class="keywordtype">void</span> pythonDebugPositionChanged(QString filename, <span class="keywordtype">int</span> lineNo);
+<a name="l00241"></a>00241     <span class="keywordtype">void</span> pythonStateChanged(tPythonTransitions pyTransition);
+<a name="l00242"></a>00242     <span class="keywordtype">void</span> pythonModifyLocalDict(PyObject* localDict, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a>* semaphore);
+<a name="l00243"></a>00243     <span class="keywordtype">void</span> pythonModifyGlobalDict(PyObject* globalDict, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a>* semaphore);
+<a name="l00244"></a>00244     <span class="keywordtype">void</span> pythonAddToolbarButton(QString toolbarName, QString buttonName, QString buttonIconFilename, QString pythonCode);
+<a name="l00245"></a>00245     <span class="keywordtype">void</span> pythonRemoveToolbarButton(QString toolbarName, QString buttonName);
+<a name="l00246"></a>00246     <span class="keywordtype">void</span> pythonAddMenuElement(<span class="keywordtype">int</span> typeID, QString key, QString name, QString code, QString icon);
+<a name="l00247"></a>00247     <span class="keywordtype">void</span> pythonRemoveMenuElement(QString key);
+<a name="l00248"></a>00248     <span class="keywordtype">void</span> pythonCurrentDirChanged();
+<a name="l00249"></a>00249     <span class="keywordtype">void</span> updateCallStack(QStringList filenames, IntList lines, QStringList methods);
+<a name="l00250"></a>00250     <span class="keywordtype">void</span> deleteCallStack();
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252     <span class="keywordtype">void</span> pythonSetCursor(<span class="keyword">const</span> Qt::CursorShape cursor);
+<a name="l00253"></a>00253     <span class="keywordtype">void</span> pythonResetCursor();
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255 <span class="keyword">public</span> slots:
+<a name="l00256"></a>00256     <span class="keywordtype">void</span> pythonRunString(QString cmd);
+<a name="l00257"></a>00257     <span class="keywordtype">void</span> pythonDebugString(QString cmd);
+<a name="l00258"></a>00258     <span class="keywordtype">void</span> pythonExecStringFromCommandLine(QString cmd);
+<a name="l00259"></a>00259     <span class="keywordtype">void</span> pythonRunFile(QString filename);
+<a name="l00260"></a>00260     <span class="keywordtype">void</span> pythonDebugFile(QString filename);
+<a name="l00261"></a>00261     <span class="keywordtype">void</span> pythonRunStringOrFunction(QString cmdOrFctHash);
+<a name="l00262"></a>00262     <span class="keywordtype">void</span> pythonDebugStringOrFunction(QString cmdOrFctHash);
+<a name="l00263"></a>00263     <span class="keywordtype">void</span> pythonInterruptExecution() <span class="keyword">const</span>;
+<a name="l00264"></a>00264     <span class="keywordtype">void</span> pythonDebugCommand(tPythonDbgCmd cmd);
 <a name="l00265"></a>00265 
-<a name="l00266"></a>00266     <span class="keywordtype">void</span> <a class="code" href="class_python_engine.html#ae0d3b806c1cc41af0e9369241a53d5b5" title="these slots are only connected if python in debug-mode; while waiting these slots will be treated due...">pythonGenericSlot</a>(PyObject* callable, PyObject *argumentTuple);
+<a name="l00266"></a>00266     <span class="keywordtype">void</span> pythonSyntaxCheck(<span class="keyword">const</span> QString &amp;code, QPointer&lt;QObject&gt; sender);
 <a name="l00267"></a>00267 
-<a name="l00269"></a>00269     <span class="keywordtype">void</span> breakPointAdded(<a class="code" href="struct_break_point_item.html" title="item of BreakPointModel">BreakPointItem</a> bp, <span class="keywordtype">int</span> row);
-<a name="l00270"></a>00270     <span class="keywordtype">void</span> breakPointDeleted(QString filename, <span class="keywordtype">int</span> lineNo, <span class="keywordtype">int</span> pyBpNumber);
-<a name="l00271"></a>00271     <span class="keywordtype">void</span> breakPointChanged(<a class="code" href="struct_break_point_item.html" title="item of BreakPointModel">BreakPointItem</a> oldBp, <a class="code" href="struct_break_point_item.html" title="item of BreakPointModel">BreakPointItem</a> newBp);
-<a name="l00272"></a>00272     RetVal setupBreakPointDebugConnections();
-<a name="l00273"></a>00273     RetVal shutdownBreakPointDebugConnections();
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275     <span class="keywordtype">bool</span> renameVariable(<span class="keywordtype">bool</span> globalNotLocal, QString oldKey, QString newKey, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00276"></a>00276     <span class="keywordtype">bool</span> deleteVariable(<span class="keywordtype">bool</span> globalNotLocal, QStringList keys, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00277"></a>00277     RetVal pickleVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, QStringList varNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00278"></a>00278     RetVal unpickleVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00279"></a>00279     RetVal saveMatlabVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, QStringList varNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00280"></a>00280     RetVal loadMatlabVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00281"></a>00281     RetVal registerAddInInstance(QString varname, <a class="code" href="classito_1_1_add_in_base.html" title="Base class for all plugins.">ito::AddInBase</a> *instance, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00282"></a>00282     RetVal getSysModules(QSharedPointer&lt;QStringList&gt; modNames, QSharedPointer&lt;QStringList&gt; modFilenames, QSharedPointer&lt;IntList&gt; modTypes, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00283"></a>00283     RetVal reloadSysModules(QSharedPointer&lt;QStringList&gt; modNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00284"></a>00284 
-<a name="l00285"></a>00285     <span class="keywordtype">void</span> registerWorkspaceContainer(PyWorkspaceContainer *container, <span class="keywordtype">bool</span> registerNotUnregister, <span class="keywordtype">bool</span> globalNotLocal);
-<a name="l00286"></a>00286     <span class="keywordtype">void</span> workspaceGetChildNode(<a class="code" href="classito_1_1_py_workspace_container.html">ito::PyWorkspaceContainer</a> *container, QString fullNameParentItem);
-<a name="l00287"></a>00287     <span class="keywordtype">void</span> workspaceGetValueInformation(PyWorkspaceContainer *container, QString fullItemName, QSharedPointer&lt;QString&gt; extendedValue, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00288"></a>00288 
-<a name="l00289"></a>00289     <span class="keywordtype">void</span> putParamsToWorkspace(<span class="keywordtype">bool</span> globalNotLocal, QStringList names, QVector&lt;SharedParamBasePointer &gt; values, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00290"></a>00290     <span class="keywordtype">void</span> getParamsFromWorkspace(<span class="keywordtype">bool</span> globalNotLocal, QStringList names, QVector&lt;int&gt; paramBaseTypes, QSharedPointer&lt;SharedParamBasePointerVector &gt; values, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00291"></a>00291 
-<a name="l00292"></a>00292 <span class="keyword">private</span> slots:
+<a name="l00268"></a>00268     <span class="keywordtype">void</span> <a class="code" href="class_python_engine.html#ae0d3b806c1cc41af0e9369241a53d5b5" title="these slots are only connected if python in debug-mode; while waiting these slots will be treated due...">pythonGenericSlot</a>(PyObject* callable, PyObject *argumentTuple);
+<a name="l00269"></a>00269 
+<a name="l00271"></a>00271     <span class="keywordtype">void</span> breakPointAdded(<a class="code" href="struct_break_point_item.html" title="item of BreakPointModel">BreakPointItem</a> bp, <span class="keywordtype">int</span> row);
+<a name="l00272"></a>00272     <span class="keywordtype">void</span> breakPointDeleted(QString filename, <span class="keywordtype">int</span> lineNo, <span class="keywordtype">int</span> pyBpNumber);
+<a name="l00273"></a>00273     <span class="keywordtype">void</span> breakPointChanged(<a class="code" href="struct_break_point_item.html" title="item of BreakPointModel">BreakPointItem</a> oldBp, <a class="code" href="struct_break_point_item.html" title="item of BreakPointModel">BreakPointItem</a> newBp);
+<a name="l00274"></a>00274     RetVal setupBreakPointDebugConnections();
+<a name="l00275"></a>00275     RetVal shutdownBreakPointDebugConnections();
+<a name="l00276"></a>00276 
+<a name="l00277"></a>00277     <span class="keywordtype">bool</span> renameVariable(<span class="keywordtype">bool</span> globalNotLocal, QString oldKey, QString newKey, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00278"></a>00278     <span class="keywordtype">bool</span> deleteVariable(<span class="keywordtype">bool</span> globalNotLocal, QStringList keys, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00279"></a>00279     RetVal pickleVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, QStringList varNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00280"></a>00280     RetVal unpickleVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00281"></a>00281     RetVal saveMatlabVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, QStringList varNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00282"></a>00282     RetVal loadMatlabVariables(<span class="keywordtype">bool</span> globalNotLocal, QString filename, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00283"></a>00283     RetVal registerAddInInstance(QString varname, <a class="code" href="classito_1_1_add_in_base.html" title="Base class for all plugins.">ito::AddInBase</a> *instance, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00284"></a>00284     RetVal getSysModules(QSharedPointer&lt;QStringList&gt; modNames, QSharedPointer&lt;QStringList&gt; modFilenames, QSharedPointer&lt;IntList&gt; modTypes, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00285"></a>00285     RetVal reloadSysModules(QSharedPointer&lt;QStringList&gt; modNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00286"></a>00286 
+<a name="l00287"></a>00287     <span class="keywordtype">void</span> registerWorkspaceContainer(PyWorkspaceContainer *container, <span class="keywordtype">bool</span> registerNotUnregister, <span class="keywordtype">bool</span> globalNotLocal);
+<a name="l00288"></a>00288     <span class="keywordtype">void</span> workspaceGetChildNode(<a class="code" href="classito_1_1_py_workspace_container.html">ito::PyWorkspaceContainer</a> *container, QString fullNameParentItem);
+<a name="l00289"></a>00289     <span class="keywordtype">void</span> workspaceGetValueInformation(PyWorkspaceContainer *container, QString fullItemName, QSharedPointer&lt;QString&gt; extendedValue, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00290"></a>00290 
+<a name="l00291"></a>00291     <span class="keywordtype">void</span> putParamsToWorkspace(<span class="keywordtype">bool</span> globalNotLocal, QStringList names, QVector&lt;SharedParamBasePointer &gt; values, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00292"></a>00292     <span class="keywordtype">void</span> getParamsFromWorkspace(<span class="keywordtype">bool</span> globalNotLocal, QStringList names, QVector&lt;int&gt; paramBaseTypes, QSharedPointer&lt;SharedParamBasePointerVector &gt; values, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
 <a name="l00293"></a>00293 
-<a name="l00294"></a>00294 };
+<a name="l00294"></a>00294 <span class="keyword">private</span> slots:
 <a name="l00295"></a>00295 
-<a name="l00296"></a>00296 
-<a name="l00297"></a>00297 <span class="preprocessor">#endif</span>
+<a name="l00296"></a>00296 };
+<a name="l00297"></a>00297 
+<a name="l00298"></a>00298 
+<a name="l00299"></a>00299 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>pythonEngine.h</b>      </li>
-      <li class="footer">Generated on Mon Apr 14 2014 22:49:50 for itom by&#160;
+      <li class="footer">Generated on Wed Apr 16 2014 16:27:02 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

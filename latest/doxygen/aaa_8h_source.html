@@ -90,52 +90,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00005"></a>00005 <span class="comment">// qt stuff so we make this class which is first in the file list and first in alphabet and gets included</span>
 <a name="l00006"></a>00006 <span class="comment">// in the automoccer cpp file first </span>
 <a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="comment">//#define NPY_NO_DEPRECATED_API 0x00000007 //see comment in pythonNpDataObject.cpp</span>
-<a name="l00009"></a>00009 <span class="comment">//python</span>
-<a name="l00010"></a>00010 <span class="comment">// see http://vtk.org/gitweb?p=VTK.git;a=commitdiff;h=7f3f750596a105d48ea84ebfe1b1c4ca03e0bab3</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#if (defined _DEBUG) &amp;&amp; (!defined linux)</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">    #undef _DEBUG</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="preprocessor">    #if (defined linux) | (defined CMAKE)</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">        #include &quot;node.h&quot;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">        #include &quot;numpy/arrayobject.h&quot;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">    #else</span>
-<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
-<a name="l00019"></a>00019 <span class="preprocessor">        #include &quot;node.h&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">        #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
-<a name="l00021"></a>00021 <span class="preprocessor">    #endif</span>
-<a name="l00022"></a>00022 <span class="preprocessor"></span><span class="preprocessor">    #define _DEBUG</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span><span class="preprocessor">#else</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">    #ifdef linux</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">        #include &quot;node.h&quot;</span>
-<a name="l00027"></a>00027 <span class="preprocessor">        #include &quot;numpy/arrayobject.h&quot;</span>
-<a name="l00028"></a>00028 <span class="preprocessor">    #else</span>
-<a name="l00029"></a>00029 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
-<a name="l00030"></a>00030 <span class="preprocessor">        #include &quot;node.h&quot;</span>
-<a name="l00031"></a>00031 <span class="preprocessor">        #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
-<a name="l00032"></a>00032 <span class="preprocessor">    #endif</span>
-<a name="l00033"></a>00033 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
-<a name="l00034"></a>00034 <span class="preprocessor"></span>
-<a name="l00035"></a>00035 <span class="preprocessor">#include &lt;qobject.h&gt;</span>
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="classq_dummy_class.html">00037</a> <span class="keyword">class </span><a class="code" href="classq_dummy_class.html">qDummyClass</a> : <span class="keyword">public</span> QObject
-<a name="l00038"></a>00038 {
-<a name="l00039"></a>00039     Q_OBJECT
-<a name="l00040"></a>00040     <span class="keyword">public</span>:
-<a name="l00041"></a>00041         <a class="code" href="classq_dummy_class.html">qDummyClass</a>() {};
-<a name="l00042"></a>00042         ~<a class="code" href="classq_dummy_class.html">qDummyClass</a>() {};
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044     <span class="keyword">private</span>:
-<a name="l00045"></a>00045 };
+<a name="l00008"></a>00008 <span class="preprocessor">#ifndef ITOM_NPDATAOBJECT</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">    #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION //see comment in pythonNpDataObject.cpp</span>
+<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>
+<a name="l00012"></a>00012 <span class="comment">//python</span>
+<a name="l00013"></a>00013 <span class="comment">// see http://vtk.org/gitweb?p=VTK.git;a=commitdiff;h=7f3f750596a105d48ea84ebfe1b1c4ca03e0bab3</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#if (defined _DEBUG) &amp;&amp; (!defined linux)</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="preprocessor">    #undef _DEBUG</span>
+<a name="l00016"></a>00016 <span class="preprocessor"></span><span class="preprocessor">    #if (defined linux) | (defined CMAKE)</span>
+<a name="l00017"></a>00017 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">        #include &quot;node.h&quot;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">        #include &quot;numpy/arrayobject.h&quot;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">    #else</span>
+<a name="l00021"></a>00021 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
+<a name="l00022"></a>00022 <span class="preprocessor">        #include &quot;node.h&quot;</span>
+<a name="l00023"></a>00023 <span class="preprocessor">        #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
+<a name="l00024"></a>00024 <span class="preprocessor">    #endif</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">    #define _DEBUG</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span><span class="preprocessor">#else</span>
+<a name="l00027"></a>00027 <span class="preprocessor"></span><span class="preprocessor">    #ifdef linux</span>
+<a name="l00028"></a>00028 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
+<a name="l00029"></a>00029 <span class="preprocessor">        #include &quot;node.h&quot;</span>
+<a name="l00030"></a>00030 <span class="preprocessor">        #include &quot;numpy/arrayobject.h&quot;</span>
+<a name="l00031"></a>00031 <span class="preprocessor">    #else</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span><span class="preprocessor">        #include &quot;Python.h&quot;</span>
+<a name="l00033"></a>00033 <span class="preprocessor">        #include &quot;node.h&quot;</span>
+<a name="l00034"></a>00034 <span class="preprocessor">        #include &quot;../Lib/site-packages/numpy/core/include/numpy/arrayobject.h&quot;</span> <span class="comment">//for numpy arrays</span>
+<a name="l00035"></a>00035 <span class="preprocessor">    #endif</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span>
+<a name="l00038"></a>00038 <span class="preprocessor">#include &lt;qobject.h&gt;</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a><a class="code" href="classq_dummy_class.html">00040</a> <span class="keyword">class </span><a class="code" href="classq_dummy_class.html">qDummyClass</a> : <span class="keyword">public</span> QObject
+<a name="l00041"></a>00041 {
+<a name="l00042"></a>00042     Q_OBJECT
+<a name="l00043"></a>00043     <span class="keyword">public</span>:
+<a name="l00044"></a>00044         <a class="code" href="classq_dummy_class.html">qDummyClass</a>() {};
+<a name="l00045"></a>00045         ~<a class="code" href="classq_dummy_class.html">qDummyClass</a>() {};
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047 <span class="preprocessor">#endif // AAA_H</span>
+<a name="l00047"></a>00047     <span class="keyword">private</span>:
+<a name="l00048"></a>00048 };
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="preprocessor">#endif // AAA_H</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>aaa.h</b>      </li>
-      <li class="footer">Generated on Mon Apr 14 2014 22:49:50 for itom by&#160;
+      <li class="footer">Generated on Wed Apr 16 2014 16:27:02 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

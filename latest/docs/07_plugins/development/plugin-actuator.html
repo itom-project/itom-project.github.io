@@ -13,12 +13,11 @@
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '9380688',
+        VERSION:     'c91f2be',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -65,23 +64,25 @@
 <p>If you want to create a plugin in order to access piezo- or motor-stages, multi-axes-machines,... it is intended to derive your plugin class from <strong>ito::AddInActuator</strong>.</p>
 <div class="section" id="base-idea-of-any-actuator">
 <h2>Base idea of any actuator<a class="headerlink" href="#base-idea-of-any-actuator" title="Permalink to this headline">¶</a></h2>
-<p>The actuator interface has been developped with the following base ideas:</p>
+<p>The actuator interface has been developed with the following base ideas:</p>
 <ul class="simple">
-<li>The actuator can consist of different axes. The first axis is indexed with the number 0.</li>
+<li>The actuator can consist of different axes. The first axis is indexed with the number 0. Create the read-only, integer parameter <strong>numAxis</strong> for the number of connected axes.</li>
 <li>The plugin contains a set of parameters (like every other plugin), which can be set or get using the public methods <strong>setParam</strong> or <strong>getParam</strong> or the appropriate methods in Python.</li>
-<li>Some of those parameters must be available, others are optional, but if you implement them, you should follow some rules concerning name and type of the parameter, and of course you can add an infinite list of further parameters.</li>
+<li>emit the signal <strong>parametersChanged(m_params)</strong> if any parameter has been changed in order to inform the GUI about these changes.</li>
+<li>Some of those parameters must be available, others are optional, but if you implement them, you should follow some rules concerning name and type of the parameter, and of course you can add an infinite list of further parameters (see below).</li>
 <li>Every actuator is executed in its own thread.</li>
-<li>Every actuator can have one configuration dialog and one docking widget toolbox, that is directly included in the GUI of <strong>itom</strong>.</li>
-<li>The current position of all axes should be stored in the vector <strong>m_currentPos</strong>, that is a member of class <strong>AddInActuator</strong>.</li>
+<li>Every actuator can have one configuration dialog and one dockable toolbox, that is directly included in the GUI of <strong>itom</strong>.</li>
+<li>The current position of all axes should be stored in the vector <strong>m_currentPos</strong>, that is a member of class <strong>AddInActuator</strong> (bitmask of enumeration <strong>ito::tActuatorStatus</strong>.</li>
 <li>The new target position for all axes must be stored in the vector <strong>m_targetPos</strong>, that is also a member of class <strong>AddInActuator</strong>.</li>
 <li>The current status of all axes should be stored in the vector <strong>m_currentStatus</strong> (member of class <strong>AddInActuator</strong>).</li>
 <li>Make sure at the initialization of your plugin that all three member vectors are initialized with the size of the numbers of axes.</li>
-<li>Changes to the current status or position are signalled by the signal <strong>actuatorStatusChanged</strong> (class <strong>AddInActuator</strong>).</li>
-<li>Changes to the target position vector is signalled by the signal <strong>targetChanged</strong> (class <strong>AddInActuator</strong>).</li>
+<li>Changes to the current status or position are signalled by the signal <strong>actuatorStatusChanged</strong> (class <strong>AddInActuator</strong>). This is usually emitted by calling <strong>sendStatusUpdate(...)</strong>.</li>
+<li>Changes to the target position vector is signalled by the signal <strong>targetChanged</strong> (class <strong>AddInActuator</strong>). This is usually emitted by calling <strong>sendTargetUpdate()</strong>. Connected toolboxes as well as further GUI elements are then informed about the changes.</li>
 <li>Any GUI elements should only get live information about the position and status of the actuator by connecting to these signals (<strong>actuatorStatusChanged</strong> or <strong>targetChanged</strong>), since the communication to GUI elements must be executed across multiple threads.</li>
 <li>Try to only connect to these signals if you really need this information, since the request of live-status and -position-information is time-consuming for certain motors. For example, a dock widget should only connect to these signals, if it is visible. This can be done by overwriting the slot <strong>dockWidgetVisibilityChanged</strong> of class <strong>AddInBase</strong>.</li>
 <li>Methods like <strong>setPosAbs</strong>, <strong>setPosRel</strong>, <strong>setParam</strong>, <strong>calib</strong> or <strong>setOrigin</strong> should only execute their given task if the motor is not moving at this moment. This can be checked using the method <strong>isMotorMoving()</strong>, defined in <strong>AddInActuator</strong> by simply checking the appropriate status flags.</li>
-<li>The method <strong>waitForDone</strong> (pure virtual method of class <strong>AddInActuator</strong>) has to be overwritten. This method should only return if the requested axes reached their target position, reached an end switch or if a timeout occurred. If the hardware is able to give sophisticated live information about the current status and position of each axis, you can continuously adapt the values in the members <strong>m_currentStatus</strong> or <strong>m_currentPos</strong>; else you have to guess these values. If the axes are asynchronously moved, the semaphore <strong>waitCond</strong> has to be released immediately before the loop waiting for the target position starts. Then the caller can directly continue working. In synchronous mode (default behaviour), <strong>waitCond</strong> is only released, if all axes are not moving any more.</li>
+<li>The method <strong>waitForDone</strong> (pure virtual method of class <strong>AddInActuator</strong>) <strong>has to be overwritten</strong>. This method continuously checks the moving status of all (moving) axes are returns if all requested axes reached their target position, reached a switch or if a time-out occurred. User interrupts are also checked within this function. In case of such an interrupt the axes status are set to <em>interrupt</em> as well and the method returns. If the hardware is able to give sophisticated live information about the current status and position of each axis, you can continuously adapt the values in the members <strong>m_currentStatus</strong> or <strong>m_currentPos</strong>; else you can to guess these values. Signal changes to these vectors using the methods <strong>sendStatusUpdate()</strong> or <strong>sendStatusUpdate(...)</strong>. If the axes are asynchronously moved, the semaphore <strong>waitCond</strong> has to be released immediately before the loop waiting for the target position starts. Then the caller can directly continue working. In synchronous mode (default behaviour), <strong>waitCond</strong> is only released, if no requested axis is moving any more.</li>
+<li>There is a slot <strong>requestStatusAndPosition(bool sendActPosition, bool sendTargetPos)</strong>, defined in <strong>ito::AddInActuator</strong>. This slot is invoked e.g. by a toolbox or configuration dialog in order to force the actuator to directly emit the signals <strong>actuatorStatusChanged</strong> and/or <strong>targetChanged</strong>. The original caller is then immediately informed about the current status and position values. Overload this function if you want to update <strong>m_currentStatus</strong>, <strong>m_currentPos</strong> or <strong>m_targetPos</strong> before they are emitted to the caller. In the default implementation, they are emitted as they are.</li>
 </ul>
 </div>
 <div class="section" id="programming-steps">
@@ -169,10 +170,7 @@
 60
 61
 62
-63
-64
-65
-66</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#define ITOM_IMPORT_API</span>
+63</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#define ITOM_IMPORT_API</span>
 <span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
 
 <span class="cp">#include &quot;../../common/addInInterface.h&quot;</span>
@@ -186,19 +184,14 @@
 
     <span class="nl">protected:</span>
         <span class="o">~</span><span class="n">MyMotor</span><span class="p">()</span> <span class="p">{};</span>      <span class="cm">/*! &lt; Destructor*/</span>
-        <span class="n">MyMotor</span><span class="p">(</span><span class="kt">int</span> <span class="n">uniqueID</span><span class="p">);</span><span class="cm">/*! &lt; Constructor*/</span>
+        <span class="n">MyMotor</span><span class="p">();</span><span class="cm">/*! &lt; Constructor*/</span>
 
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">waitForDone</span><span class="p">(</span><span class="kt">int</span> <span class="n">timeoutMS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span> <span class="cm">/*if empty -&gt; all axis*/</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span> <span class="cm">/*for your use*/</span><span class="p">);</span>
 
     <span class="nl">public:</span>
         <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyMotorInterface</span><span class="p">;</span>
         <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>     <span class="cm">/*!&lt; Opens the modal configuration dialog (called from main thread) */</span>
         <span class="kt">int</span> <span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span> <span class="cm">/*!&lt; indicates that this plugin has got a configuration dialog */</span>
-
-    <span class="nl">private:</span>
-        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">waitForDone</span><span class="p">(</span><span class="kt">int</span> <span class="n">timeoutMS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span> <span class="cm">/*if empty -&gt; all axis*/</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span> <span class="cm">/*for your use*/</span><span class="p">);</span>
-
-    <span class="nl">signals:</span>
-        <span class="kt">void</span> <span class="nf">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">);</span>   <span class="cm">/*!&lt; Sends a signal if parameters have changes */</span>
 
     <span class="k">public</span> <span class="n">slots</span><span class="o">:</span>
         <span class="c1">//! get/set parameters</span>
@@ -234,6 +227,8 @@
 
         <span class="c1">//! if this slot is triggered, the current status and position is emitted (e.g. for actualizing a dock widget)</span>
         <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">RequestStatusAndPosition</span><span class="p">(</span><span class="kt">bool</span> <span class="n">sendActPosition</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">sendTargetPos</span><span class="p">);</span>
+
+        <span class="c1">//ito::RetVal requestStatusAndPosition(bool sendCurrentPos, bool sendTargetPos); //!see notes above</span>
 
     <span class="k">private</span> <span class="n">slots</span><span class="o">:</span>
         <span class="kt">void</span> <span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">visible</span> <span class="p">);</span> <span class="cm">/*!&lt; this slot is invoked if the visibility of the dock widget has changed */</span>
@@ -334,31 +329,71 @@ the actuator registers a change of any current position, the corresponding value
 </div>
 <p>After using one of these functions to set the current status, call <strong>sendStatusUpdate</strong> to emit the signal <strong>actuatorStatusChanged</strong> such that connected listeners can for instance visualize the current status.</p>
 </div>
-<div class="section" id="unit-conventions">
-<h2>Unit Conventions<a class="headerlink" href="#unit-conventions" title="Permalink to this headline">¶</a></h2>
-<p>In order to have a unique behaviour of all plugins, respect the following unit conditions:</p>
+<div class="section" id="interruption-of-movement">
+<h2>Interruption of movement<a class="headerlink" href="#interruption-of-movement" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to implement an interrupt button in the toolbox of the actuator that becomes active once at least one axis is moving. Once the button is clicked it must <strong>directly</strong> call the thread-safe function <strong>setInterrupt()</strong> of the actuator plugin (If the toolbox inherits from <strong>ito::AbstractAddInDockWidget</strong> call its method <strong>setActuatorInterrupt()</strong>.</p>
+<p>In the method <strong>waitForDone</strong> regularly check if the interrupt flag has been set, using the actuator&#8217;s method <strong>isInterrupted()</strong>. If this method
+returns true, set the moving state of all moving axes to <strong>ito::actuatorInterrupted</strong> and return with an appropriate return value, like:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retError</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;movement interrupted&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Once <strong>isInterrupted()</strong> returns true, the internal interrupt flag is reset to false. Therefore consider to call this function to reset the interrupt flag if desired (e.g. at the begin of the next movement).</p>
+</div>
+</div>
+<div class="section" id="parameters-and-unit-conventions">
+<h2>Parameters and Unit Conventions<a class="headerlink" href="#parameters-and-unit-conventions" title="Permalink to this headline">¶</a></h2>
+<p>In order to have a unique behaviour of all actuator plugins, respect the following unit conventions. That means, the plugin should store related parameters using these conventions, such that <strong>getParam</strong> and <strong>setParam</strong> returns and obtains values using these units. Internally, it is sometimes
+necessary to convert these units to the units required by the interface of the real actuator device.</p>
 <ul class="simple">
 <li>Length values in <strong>mm</strong></li>
 <li>Angles in <strong>degree</strong></li>
 <li>Velocity in <strong>mm/sec</strong> or <strong>degree/sec</strong></li>
-<li>Acceleration in <strong>mm/sec^2</strong> or <strong>degree/sec^2</strong></li>
+<li>Acceleration, deceleration in <strong>mm/sec^2</strong> or <strong>degree/sec^2</strong></li>
 </ul>
-<div class="section" id="mandatory-keywords-for-setparam-getparam">
-<h3>Mandatory keywords for setParam / getParam<a class="headerlink" href="#mandatory-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>&#8220;name&#8221;: Name of the plugIn as &#8220;typeString&#8221; || &#8220;readOnly&#8221;</li>
-<li>&#8220;numAxis&#8221;: Number of axis as &#8220;typeInt&#8221; || &#8220;readOnly&#8221;</li>
-<li>&#8220;async&#8221;: Toggle wait behaviour during movement. As &#8220;typeInt&#8221;</li>
-<li>&#8220;speed&#8221;: Speed for ever axis of the stage as &#8220;typeDoubleArray&#8221;. For single axis stages as &#8220;typeDouble&#8221;. Single axis must not throw an error of called with speed[0]</li>
+<p>Implement the following mandatory parameters in the map <strong>m_params</strong>:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>&#8220;name&#8221;: {string | readonly}</dt>
+<dd><p class="first last">name of the plugin</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;numAxis&#8221;: {int | readonly}</dt>
+<dd><p class="first last">number of connected axes</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;async&#8221;: {int, [0,1]}</dt>
+<dd><p class="first last">If 1: asynchronous movement. Methods like <strong>setPosAbs</strong> or <strong>setPosRel</strong> only start the movement and immediately return. Hence, the <em>waitCond</em> in <strong>waitForDone</strong> is directly released before the loop waiting for the end of the movement is executed. If 0: synchronous movement (default). <strong>setPosAbs</strong> and <strong>setPosRel</strong> block until the end of the movement, hence, <em>waitCond</em> in <strong>waitForDone</strong> is only released at the end of the movement. Since <strong>waitForDone</strong> always is running during the movement, the plugin thread is blocked and no further commands can be executed, even in asynchronous mode.</p>
+</dd>
+</dl>
+</li>
 </ul>
-</div>
-<div class="section" id="optional-but-reserved-keywords-for-setparam-getparam">
-<h3>Optional but reserved keywords for setParam / getParam<a class="headerlink" href="#optional-but-reserved-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>&#8220;accel&#8221;: Acceleration for ever axis of the stage as &#8220;typeDoubleArray&#8221;. For single axis stages as &#8220;typeDouble&#8221;. Single axis must not throw an error of called with accel[0]</li>
-<li>&#8220;decel&#8221;: Deceleration for ever axis of the stage as &#8220;typeDoubleArray&#8221;. For single axis stages as &#8220;typeDouble&#8221;. Single axis must not throw an error of called with decel[0]</li>
+<p>If desired implement the following optional parameters in the map <strong>m_params</strong>:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>&#8220;speed&#8221;: {double or doubleArray}</dt>
+<dd><p class="first last">Desired speed for the axes. If <em>double</em>, the speed holds for all axes, else the <em>doubleArray</em> must have the same length than the number of axes, holding the axis specific speed values. Make sure, that it is not possible to set an array of another length in <strong>setParam</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;accel&#8221;: {double or doubleArray}</dt>
+<dd><p class="first last">Acceleration values (similar to <em>speed</em>)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;decel&#8221;: {double or doubleArray}</dt>
+<dd><p class="first last">Deceleration values (similar to <em>speed</em>)</p>
+</dd>
+</dl>
+</li>
 </ul>
-</div>
 </div>
 </div>
 
@@ -375,11 +410,8 @@ the actuator registers a change of any current position, the corresponding value
 <li><a class="reference internal" href="#programming-steps">Programming steps</a></li>
 <li><a class="reference internal" href="#actuator-plugin-class">Actuator plugin class</a></li>
 <li><a class="reference internal" href="#signalling-the-current-position-and-status-of-any-axes">Signalling the current position and status of any axes</a></li>
-<li><a class="reference internal" href="#unit-conventions">Unit Conventions</a><ul>
-<li><a class="reference internal" href="#mandatory-keywords-for-setparam-getparam">Mandatory keywords for setParam / getParam</a></li>
-<li><a class="reference internal" href="#optional-but-reserved-keywords-for-setparam-getparam">Optional but reserved keywords for setParam / getParam</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#interruption-of-movement">Interruption of movement</a></li>
+<li><a class="reference internal" href="#parameters-and-unit-conventions">Parameters and Unit Conventions</a></li>
 </ul>
 </li>
 </ul>
@@ -435,7 +467,7 @@ the actuator registers a change of any current position, the corresponding value
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Apr 14, 2014.
+      Last updated on Apr 16, 2014.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
