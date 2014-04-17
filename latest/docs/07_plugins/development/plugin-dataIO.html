@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -76,16 +75,16 @@
 <li>The data acquisition is performed according to the grabber subtype. These subtypes are &#8216;typeGrabber&#8217;, &#8216;typeADDA&#8217; and &#8216;typeRawIO&#8217;.</li>
 </ul>
 </div>
-<div class="section" id="the-dataio-typegrabber-plugin-class">
-<h2>The DataIO | typeGrabber plugin class<a class="headerlink" href="#the-dataio-typegrabber-plugin-class" title="Permalink to this headline">¶</a></h2>
-<p>This is a subtype of DataIO for camera / framegrabber communication. The data acquisition is managed as followed:</p>
+<div class="section" id="grabber-plugin">
+<h2>Grabber plugin<a class="headerlink" href="#grabber-plugin" title="Permalink to this headline">¶</a></h2>
+<p>This is a subtype of DataIO for camera / framegrabber communication. Plugins of this type are inherited from <strong>ito::AddInGrabber</strong>. The data acquisition is managed as follows:</p>
 <ul class="simple">
-<li>The methods <strong>startDevice</strong> and <strong>stopDevice</strong> opens and closes the capture logic of the devices to reduce CDU-load. For serial ports these functions are unnecessary.</li>
+<li>The methods <strong>startDevice</strong> and <strong>stopDevice</strong> opens and closes the capture logic of the devices to reduce CPU-load. For serial ports these functions are unnecessary.</li>
 <li>The method <strong>acquire</strong> starts the DataIO grabbing a frame with the current parameters. The function returns after sending the trigger. The function should be callable several times without calling get-/copyVal().</li>
 <li>The methods <strong>getVal</strong> and <strong>copyVal</strong> are the external interfaces for data grabbing. They call <strong>retrieveData</strong>. The function should not be callable without a previous call of <strong>acquire</strong> and than only once.</li>
 <li>In <strong>retrieveData</strong> the data transfer is done and frame has to copied. The function blocks until the triggered data is copied. In case retrieveData is called by getVal the frame has to be copied to <strong>m_data</strong>, an internal <strong>dataObject</strong>.</li>
 <li>The function <strong>getVal</strong> overwrites the IO-<strong>dataObject</strong> by a shallow copy of the internal <strong>dataObject</strong>. Empty objects are allowed. Warning read shallow copy of dataObject before usage.</li>
-<li>The function <strong>copyVal</strong> deep-copies data to the external IO-<strong>dataObject</strong>. The <strong>dataObject</strong> must have the right size and type. <strong>dataObject</strong> with ROI should not be overwritten. The ROI should be filled. Empty objects are allowed. In case of empty <strong>dataObject</strong> a new object with right size is allocated.</li>
+<li>The function <strong>copyVal</strong> deeply copies data to the externally given <strong>dataObject</strong>. The <strong>dataObject</strong> must have the right size and type. <strong>dataObject</strong> with ROI must not be overwritten. The ROI should be filled. Empty objects are allowed. In case of empty <strong>dataObject</strong> a new object with right size and type must be allocated.</li>
 <li>The internal <strong>dataObject</strong> is checked after parameter changes by <strong>checkData</strong> (sizex, sizey and bpp) and, if necessary, reallocated.</li>
 </ul>
 <p>A typical sequence in python is</p>
@@ -161,154 +160,162 @@
 56
 57
 58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84</pre></div></td><td class="code"><div class="highlight"><pre>    #include &quot;../../common/addInGrabber.h&quot;
-    #include &quot;dialogFireGrabber.h&quot;
-    #include &lt;qsharedpointer.h&gt;
+59</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &quot;common/addInGrabber.h&quot;</span>
+<span class="cp">#include &lt;qsharedpointer.h&gt;</span>
 
-    class FireGrabber : public ito::AddInGrabber
-    {
-            Q_OBJECT
+<span class="k">class</span> <span class="nc">MyCamera</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInGrabber</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
 
-            protected:
-                    ~MyDataIO(); /*! &lt; Destructor*/
-                    MyDataIO();     /*! &lt; Constructor*/
-                    ito::RetVal checkData(ito::DataObject *externalDataObject = NULL);      /*!&lt; Check if objekt has to be reallocated */
-                    ito::RetVal retrieveData(ito::DataObject *externalDataObject = NULL); /*!&lt; Wait for acquired picture */
+    <span class="nl">protected:</span>
+        <span class="o">~</span><span class="n">MyDataIO</span><span class="p">();</span> <span class="cm">/*! &lt; Destructor*/</span>
+        <span class="n">MyDataIO</span><span class="p">();</span>    <span class="cm">/*! &lt; Constructor*/</span>
 
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retrieveData</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span> <span class="o">*</span><span class="n">externalDataObject</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span> <span class="cm">/*!&lt; Wait for acquired picture */</span>
 
-            public:
-                    friend class MyDataIOInterface;
-                    const ito::RetVal showConfDialog(void); //! Open the config nonmodal dialog to set camera parameters
-                    int hasConfDialog(void) { return 1; }; //!&lt; indicates that this plugin has got a configuration dialog
+    <span class="nl">public:</span>
+        <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyDataIOInterface</span><span class="p">;</span>
+        <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>    <span class="c1">//! Open the config nonmodal dialog to set camera parameters</span>
+        <span class="kt">int</span> <span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span> <span class="c1">//!&lt; indicates that this plugin has got a configuration dialog</span>
 
+    <span class="nl">private:</span>
 
+    <span class="k">public</span> <span class="n">slots</span><span class="o">:</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 
-            private:
-                    cv::Mat m_pDataMatBuffer;
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 
-                    int m_CCD_ID; /*!&lt; Camera ID */
-                    bool m_isgrabbing; /*!&lt; Check if acquire was called */
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">startDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">stopDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 
-                    static int m_numberOfInstances;
-                    ito::RetVal AlliedChkError(int errornumber); /*!&lt; Map Allied-Error-Number to ITOM-Errortype and Message */
-                    const char* errmsg;
-                    UINT8          *m_pImage;                  // Pointer to actual image
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">acquire</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">trigger</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
 
-            public slots:
-                    //!&lt; Get Camera-Parameter
-                    ito::RetVal getParam(QSharedPointer&lt;ito::Param&gt; val, ItomSharedSemaphore *waitCond);
-                    //!&lt; Set Camera-Parameter
-                    ito::RetVal setParam(QSharedPointer&lt;ito::Param&gt; val, ItomSharedSemaphore *waitCond);
-                    //!&lt; Initialise board, load dll, allocate buffer
-                    ito::RetVal init(QVector&lt;ito::Param&gt; *paramsMand, QVector&lt;ito::Param&gt; *paramsOpt, ItomSharedSemaphore *waitCond = NULL);
-                    //!&lt; Free buffer, delete board, unload dll
-                    ito::RetVal close(ItomSharedSemaphore *waitCond);
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getVal</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 
-                    //!&lt; Start the camera to enable acquire-commands
-                    ito::RetVal startDevice(ItomSharedSemaphore *waitCond);
-                    //!&lt; Stop the camera to disable acquire-commands
-                    ito::RetVal stopDevice(ItomSharedSemaphore *waitCond);
-                    //!&lt; Softwaretrigger for the camera
-                    ito::RetVal acquire(const int trigger, ItomSharedSemaphore *waitCond = NULL);
-                    //!&lt; Wait for acquired picture, copy the picture to dObj of right type and size
-                    ito::RetVal getVal(void *vpdObj, ItomSharedSemaphore *waitCond);
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">copyVal</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 
-                    ito::RetVal copyVal(void *vpdObj, ItomSharedSemaphore *waitCond);
+    <span class="k">private</span> <span class="n">slots</span><span class="o">:</span>
+        <span class="kt">void</span> <span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span><span class="kt">bool</span> <span class="n">visible</span><span class="p">);</span>
+<span class="p">};</span>
 
-                    ito::RetVal ConvertY16(UINT32 XSize,UINT32 YSize,UINT8 *pBuf,UINT8 *pBGR);
+<span class="k">class</span> <span class="nc">MyCameraInterface</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+<span class="cp">#if QT_VERSION &gt;=  QT_VERSION_CHECK(5, 0, 0)</span>
+    <span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s">&quot;ito.AddInInterfaceBase&quot;</span> <span class="p">)</span>
+<span class="cp">#endif</span>
+    <span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span><span class="p">)</span>
+    <span class="n">PLUGIN_ITOM_API</span>
 
-                    void updateParameters(QMap&lt;QString, ito::Param&gt; params);
+    <span class="nl">protected:</span>
 
-            private slots:
+    <span class="nl">public:</span>
+        <span class="n">MyCameraInterface</span><span class="p">();</span>
+        <span class="o">~</span><span class="n">MyCameraInterface</span><span class="p">();</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
 
-    };
-
-    //----------------------------------------------------------------------------------------------------------------------------------
-
-
-    class DataIOInterface : public ito::AddInInterfaceBase
-    {
-            Q_OBJECT
-                    Q_INTERFACES(ito::AddInInterfaceBase)
-
-            protected:
-
-            public:
-                    DataIOInterface();
-                    ~DataIOInterface();
-                    ito::RetVal getAddInInst(ito::AddInBase **addInInst);
-
-            private:
-                    ito::RetVal closeThisInst(ito::AddInBase **addInInst);
-
-            signals:
-
-            public slots:
-    };
+    <span class="nl">private:</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+<span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<div class="section" id="camera-frame-grabber-parameters-and-units">
-<h3>Camera / Frame Grabber Parameters and Units<a class="headerlink" href="#camera-frame-grabber-parameters-and-units" title="Permalink to this headline">¶</a></h3>
-<p>To achieve a unified interface and allow fast exchange between the different plugIns all dataIO have to follow the predefined conventions.</p>
+<div class="section" id="parameters-and-unit-conventions">
+<h3>Parameters and Unit Conventions<a class="headerlink" href="#parameters-and-unit-conventions" title="Permalink to this headline">¶</a></h3>
+<p>In order to have a unified behaviour of all camera plugins, respect the following unit conventions. That means, the plugin should store related parameters using these conventions, such that <strong>getParam</strong> and <strong>setParam</strong> returns and obtains values using these units. Internally, it is sometimes
+necessary to convert these units to the units required by the interface of the real camera device.</p>
 <ul class="simple">
-<li>Integrationtime named as &#8220;integration_time&#8221; in [s]</li>
-<li>Colordepth in bit [8,10-16,24]</li>
+<li>Integration time, frame time... in <strong>sec</strong></li>
+<li>bit depth / resolution in bit [8, 10, 12, 14, 16, 24]</li>
 </ul>
-<div class="section" id="mandatory-keywords-for-setparam-getparam">
-<h4>Mandatory keywords for setParam / getParam<a class="headerlink" href="#mandatory-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>&#8220;name&#8221;: Name of the plugIn as &#8220;typeString&#8221; || &#8220;readOnly&#8221;</li>
-<li>&#8220;integration_time&#8221;: The integration time as &#8220;typeDouble&#8221;</li>
-<li>&#8220;frame_time&#8221;: The time between to frames as &#8220;typeDouble&#8221; (usually &#8220;readOnly&#8221;)</li>
-<li>&#8220;gain&#8221;: The gain of the AD-Converter normed between 0..1 as &#8220;typeDouble&#8221;</li>
-<li>&#8220;offset&#8221;: The offset of the AD-Converter normed between 0..1 as &#8220;typeDouble&#8221;</li>
-<li>&#8220;x0&#8221;: first pixel of ROI as &#8220;typeInt&#8221;</li>
-<li>&#8220;x1&#8221;: last pixel of ROI as &#8220;typeInt&#8221;</li>
-<li>&#8220;y0&#8221;: first pixel of ROI as &#8220;typeInt&#8221;</li>
-<li>&#8220;y1&#8221;: last pixel of ROI as &#8220;typeInt&#8221;</li>
-<li>&#8220;sizex&#8221;: Current width of the grabber-ROI as &#8220;typeInt&#8221; || &#8220;readOnly&#8221;</li>
-<li>&#8220;sizey&#8221;: Current heigth of the grabber-ROI as &#8220;typeInt&#8221; || &#8220;readOnly&#8221;</li>
-<li>&#8220;bpp&#8221;: Current bits per pixel of the grabber as &#8220;typeInt&#8221;. Usual values are 8-bit, 10-bit - 16-bit, 24-bit color.</li>
+<p>Implement the following mandatory parameters in the map <strong>m_params</strong>:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>&#8220;name&#8221;: {string | readonly}</dt>
+<dd><p class="first last">name of the plugin</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;bpp&#8221;: {int}</dt>
+<dd><p class="first last">current bit depth (will be read e.g. when opening a live window)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;sizex&#8221;: {int | readonly}</dt>
+<dd><p class="first last">current width of the camera image (considering a possible ROI). This parameter is always read-only and needs to be changed if the optional
+parameters <em>x0</em> or <em>x1</em> change. This parameter is read e.g. when a live window is opened.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;sizey&#8221;: {int | readonly}</dt>
+<dd><p class="first last">current height of the camera image (considering a possible ROI). This parameter is always read-only and needs to be changed if the optional
+parameters <em>y0</em> or <em>y1</em> change. This parameter is read e.g. when a live window is opened.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If desired implement the following optional parameters in the map <strong>m_params</strong>:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>&#8220;integration_time&#8221;: {double}</dt>
+<dd><p class="first last">Exposure or integration time in seconds</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;frame_time&#8221;: {double}</dt>
+<dd><p class="first last">The time between two frames (in seconds, often read-only)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;gain&#8221;: {double}</dt>
+<dd><p class="first last">Normalized gain in the range [0.0,1.0]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;offset&#8221;: {double}</dt>
+<dd><p class="first last">Normalized offset in the range [0.0,1.0]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;x0&#8221;, &#8220;y0&#8221;: {int}</dt>
+<dd><p class="first last">pixel coordinate of the left top corner of the image or ROI [0..width-1/height-1]
+If this changes, &#8220;sizex&#8221; or &#8220;sizey&#8221; must be changed, too.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;x1&#8221;, &#8220;y1&#8221;: {int}</dt>
+<dd><p class="first last">pixel coordinate of the right bottom corner of the image or ROI [x0+1/y0+1..width-1/height-1]
+If this changes, &#8220;sizex&#8221; or &#8220;sizey&#8221; must be changed, too.</p>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
-<div class="section" id="optional-but-reserved-keywords-for-setparam-getparam">
-<h4>Optional but reserved keywords for setParam / getParam<a class="headerlink" href="#optional-but-reserved-keywords-for-setparam-getparam" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li>&#8220;binning&#8221;: Binning of the pixels in both directions as &#8220;typeInt&#8221; in form [BinningX? BinningY?] between &#8220;0101&#8221; and &#8220;xy&#8221;</li>
-</ul>
+</div>
+<div class="section" id="ad-converters">
+<h2>AD-Converters<a class="headerlink" href="#ad-converters" title="Permalink to this headline">¶</a></h2>
+<p>AD-Converter plugins are directly inherited from <strong>ito::AddInDataIO</strong>.</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">documentation for AD-converters</p>
 </div>
 </div>
+<div class="section" id="rawio-plugins">
+<h2>RawIO-Plugins<a class="headerlink" href="#rawio-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Further IO plugins are directly inherited from <strong>ito::AddInDataIO</strong>.</p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">documentation for other IO devices</p>
 </div>
-<div class="section" id="the-dataio-typeadda-plugin-class">
-<h2>The DataIO | typeADDA plugin class<a class="headerlink" href="#the-dataio-typeadda-plugin-class" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="the-dataio-typerawio-plugin-class">
-<h2>The DataIO | typeRawIO plugin class<a class="headerlink" href="#the-dataio-typerawio-plugin-class" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -322,16 +329,12 @@
   <ul>
 <li><a class="reference internal" href="#">Plugin class - DataIO</a><ul>
 <li><a class="reference internal" href="#base-idea-behind-any-dataio">Base idea behind any DataIO</a></li>
-<li><a class="reference internal" href="#the-dataio-typegrabber-plugin-class">The DataIO | typeGrabber plugin class</a><ul>
-<li><a class="reference internal" href="#camera-frame-grabber-parameters-and-units">Camera / Frame Grabber Parameters and Units</a><ul>
-<li><a class="reference internal" href="#mandatory-keywords-for-setparam-getparam">Mandatory keywords for setParam / getParam</a></li>
-<li><a class="reference internal" href="#optional-but-reserved-keywords-for-setparam-getparam">Optional but reserved keywords for setParam / getParam</a></li>
+<li><a class="reference internal" href="#grabber-plugin">Grabber plugin</a><ul>
+<li><a class="reference internal" href="#parameters-and-unit-conventions">Parameters and Unit Conventions</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#the-dataio-typeadda-plugin-class">The DataIO | typeADDA plugin class</a></li>
-<li><a class="reference internal" href="#the-dataio-typerawio-plugin-class">The DataIO | typeRawIO plugin class</a></li>
+<li><a class="reference internal" href="#ad-converters">AD-Converters</a></li>
+<li><a class="reference internal" href="#rawio-plugins">RawIO-Plugins</a></li>
 </ul>
 </li>
 </ul>
@@ -387,7 +390,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Apr 16, 2014.
+      Last updated on Apr 17, 2014.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
