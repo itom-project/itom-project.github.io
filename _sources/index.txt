@@ -65,14 +65,29 @@ For specific bug reports or feature requests, please use the issue tracking syst
 * `plugins <https://bitbucket.org/itom/plugins/issues>`_
 * `designer plugins <https://bitbucket.org/itom/designerplugins/issues>`_
 
+Licensing and Copyright
+------------------------
+
+The core components and the main application of **itom** are covered by the **GNU Library General Public Licence** (GNU LGPL). All components belonging to the SDK of **itom** (e.g. dataObject, pointCloud, addInInterface,...) are additionally covered by an **itom** exception. The main idea of this exception is to allow other libraries (e.g. plugins) to include and link agains components of **itom** SDK independent on the specific license model of the respective “other” library. For more information see http://itom.bitbucket.org/latest/docs/01_introduction/introduction.html#licensing.
+
 **itom** is a project provided by
 
-| Institut für Technische Optik
-| Universität Stuttgart
-| Pfaffenwaldring 9
-| 70569 Stuttgart
-| http://www.uni-stuttgart.de/ito
++--------------------+--------------------------------------+
+| |itologo|          | | Institut für Technische Optik      |
+|                    | | Universität Stuttgart              |
+|                    | | Pfaffenwaldring 9                  |
+|                    | | 70569 Stuttgart                    |
+|                    | | http://www.uni-stuttgart.de/ito    |
++--------------------+--------------------------------------+
 
+.. |itologo| image:: _static\\ITO_Logo_standard.png
+                         :width: 150px
 
+.. |ito| replace:: Institut für Technische Optik
+                   Universität Stuttgart
+                   Pfaffenwaldring 9
+                   70569 Stuttgart
+                   Germany
+                   http://www.uni-stuttgart.de/ito
 
 
