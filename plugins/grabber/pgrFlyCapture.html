@@ -72,6 +72,7 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">PGRFlyCapture</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="qCam.html">QCam</a></li>
@@ -127,33 +128,105 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>Plugin for PGR FlyCapture2 Camerainterface</span></td>
+<td><span>Point Grey FlyCapture2 Cameras</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
 <td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><span>licensed under LGPL. For the license information of **FlyCapture2** see the specific documentation of Point Grey Research.</span></td>
+<td><span>GPL / this plugin needs to link agains the FlyCapture2 SDK from Point Grey Research, that comes with its own license. The FlyCapture2 SDK contains components that are licensed under GPL.</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, (Linux possible but yet not implemented)</td>
 </tr>
 <tr class="row-odd"><td><strong>Devices</strong>:</td>
-<td>PointGrey cameras supported by Fly Capture driver</td>
+<td>Point Grey cameras (USB3) supported by Fly Capture driver. (GigE possible, but yet not implemented)</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><span>W. Lyda, ITO, University Stuttgart</span></td>
+<td><span>W. Lyda, M. Gronle, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>itom plugin for Point Grey Research cameras that can be run with the <strong>FlyCapture2</strong> camera interface (e.g. the USB 3.0 Flea3 camera).</p>
-<p>For compiling this plugin, install FlyCapture2 in 32bit or 64bit depending on <strong>itom</strong> and set the CMake variable <strong>PGRFLYCAP_API_DIR</strong> to the base directory of FlyCapture2.</p>
+<p>This plugin supports Point Grey cameras (currently USB models only) that can be run by the FlyCapture2 interface from Point Grey Research.
+The development of this plugin has mainly be done using the USB 3.0 Flea3 camera.</p>
+<p>The plugin has been compiled using the FlyCapture2 library version 2.6.3.4.</p>
+<p>In order to compile the plugin by yourself, you need to install the FlyCapture2 SDK in 32bit or 64bit (depending on itom) and make
+sure that the development files (include files and libraries) are installed as well. Then set the CMake variable PGRFLYCAP_INCLUDE_DIR
+to the include directory of the FlyCapture2 SDK. The depending variable PGRFYLCAP_API_DIR is then automatically set (if not, delete it and
+re-configure CMake).</p>
+<p>This plugin automatically copies the necessary FlyCapture2 DLLs to the lib-folder of itom.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>cameraNumber</strong>: {int (int), optional} [-1,10], default: -1, step: 1</dt>
+<dd><p class="first last">Continuous camera number [0,10], default: -1 uses the next free camera.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>bppLimit</strong>: {int (int), optional} [-1,16], default: -1, step: 1</dt>
+<dd><p class="first last">Limits the bitdepth to the given level [8, 12, 16]. As default the maximum level is used (-1)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>forceSync</strong>: {int (int), optional} [0,1], default: 0, step: 1</dt>
+<dd><p class="first last">Direct enable software sync if present</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>These parameters are available and can be used to configure the <strong>PGRFlyCapture</strong> instance. Many of them are directly initialized by the
+parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable
+parameters can be changed using <em>setParam</em>. If a parameter is read-only, it is not writeable or supported by the specific camera.</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of the plugin (<em>PGRFlyCapture</em>)</dd>
+<dt><strong>integration_time</strong>: {double}</dt>
+<dd>integration time in seconds. The range of the integration is limited if <em>extended_shutter</em> is False. Enable extended shutter to set bigger values for the integration time.</dd>
+<dt><strong>frame_time</strong>: {double}</dt>
+<dd>frame time in seconds, inverse of frame rate in fps. The frame time is a constant time step at which images can be acquired. The frame time is only writeable if extended shutter is False. If the extended shutter is enabled, the maximum acquisition speed is given by the integration time only.</dd>
+<dt><strong>extended_shutter</strong>: {int}</dt>
+<dd>0: extended shutter is disabled, 1 (default): extended shutter is enabled. See frame_time and integration_time for more information.</dd>
+<dt><strong>gain</strong>: {double}</dt>
+<dd>The normalized gain of the camera [0,1]. Read-only if not available.</dd>
+<dt><strong>offset</strong>: {double}</dt>
+<dd>The normalized offset of the camera[0,1]. Read-only if not available. Corresponds to Point Grey property Brightness.</dd>
+<dt><strong>exposureEV</strong>: {int}</dt>
+<dd>Camera brightness control in absolute values. Read-only if not available.</dd>
+<dt><strong>sharpness</strong>: {int}</dt>
+<dd>Camera sharpness control in absolute values. Read-only if not available.</dd>
+<dt><strong>gamma</strong>: {int}</dt>
+<dd>Camera gamma control in absolute values. Read-only if not available.</dd>
+<dt><strong>sizex</strong>, <strong>sizey</strong>: {int}, read-only</dt>
+<dd>Current width and height in pixel of the region of interest. Adjustable via x0, x1, y0, y1</dd>
+<dt><strong>x0</strong>, <strong>x1</strong>: {int}</dt>
+<dd>Use these zero-based values to set the left and right margin of the region of interest. 0 &lt;= x0 &lt; x1 &lt; width of camera chip.</dd>
+<dt><strong>y0</strong>, <strong>y1</strong>: {int}</dt>
+<dd>Use these zero-based values to set the top and bottom margin of the region of interest. 0 &lt;= y0 &lt; y1 &lt; height of camera chip.</dd>
+<dt><strong>bpp</strong>: {int}</dt>
+<dd>Bitdepth of the returned camera image (e.g. 8, 12 or 16 bits per pixel). Please consider that some cameras having an 12bit A/D converter
+allow to obtain 16bit values. This possible however results in a bigger data volume that needs to be transmitted. Consider to use 12bit instead
+that is also mapped to an uint16 data object. At startup, the highest possible value is set, it can be limited by the initialization parameter <strong>bppLimit</strong>.</dd>
+<dt><strong>timeout</strong>: {double}</dt>
+<dd>Timeout in seconds when acquiring an image and waiting for the resulting data.</dd>
+<dt><strong>camSerialNumber</strong>, <strong>camModel</strong>, <strong>camVendor</strong>, <strong>camSensor</strong>, <strong>camResolution</strong>: {str}</dt>
+<dd>Information about the connected camera</dd>
+<dt><strong>camFirmwareVersion</strong>, <strong>camFirmwareBuildTime</strong>, <strong>camInterface</strong>: {str}</dt>
+<dd>Further information about the connected camera</dd>
+<dt><strong>timestamp</strong>: {double}</dt>
+<dd>Time in ms since last image acquisition</dd>
+</dl>
 </div>
 </div>
 
