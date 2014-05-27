@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/LeicaMotorFocus/docs/leicaMotorFocus.rst

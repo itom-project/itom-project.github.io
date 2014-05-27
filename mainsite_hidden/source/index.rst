@@ -28,6 +28,7 @@ itom - an Open Source Measurement, Automation and Evaluation Software
 News
 -----
 
+* 2014-05-27: Today **itom 1.2.0** has been released. The Windows setups and the sources (tag v1.2.0) are ready for download. It consists now of all plugins that are released under an open source license. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html
 * 2014-04-09: An improved and more detailed version of the plugin documentation is now online, see :ref:`plugins <sec-plugins>`.
 * 2014-04-05: The sources for the plugins **V4L2** (Video for Linux), **MSMediaFoundation** (Windows Vista or higher), **PCOCamera** (cameras supported by the pco.sdk) and **PCLTools** (point cloud processing, filtering... using the PointCloudLibrary) are online.
 * 2014-03-12: The plugin for support of x3p-file format is online (see :ref:`plugins <sec-plugins>`).

@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/dispWindow/docs/dispWindow.rst

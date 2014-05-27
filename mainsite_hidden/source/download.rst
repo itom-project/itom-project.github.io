@@ -10,18 +10,22 @@ the necessary runtime libraries while the all-in-one solution also contains 3rd 
 component. These components are:
 
 * Python 3.3
-* Numpy 1.7
-* Scipy 0.12
-* Matplotlib 1.2
+* Numpy 1.8.1
+* Scipy 0.14.0
+* Matplotlib 1.3.1
 * Pillow 2.0
+* PyParsing 2.0
+* six 1.6.1
+* dateutil 2.2
 
-The current version 1.1.0 is available from
+The current version 1.2.0 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v1.1.0/>`_
+* `<http://sourceforge.net/projects/itom/files/v1.2.0/>`_
 
 Older versions are only hosted at sourceforge.net:
 
+* `itom 1.1.0 <http://sourceforge.net/projects/itom/files/v1.1.0>`_
 * `itom 1.0.14 <http://sourceforge.net/projects/itom/files/v1.0.14>`_
 * `itom 1.0.13 <http://sourceforge.net/projects/itom/files/v1.0.13>`_
 * `itom 1.0.12 <http://sourceforge.net/projects/itom/files/v1.0.12>`_

@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/OpenCVFilters/docs/openCVFilters.rst

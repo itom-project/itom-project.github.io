@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/DummyGrabber/docs/dummyGrabber.rst

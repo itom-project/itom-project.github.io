@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Call Stack &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'e29f2f4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Main Window" href="mainWindow.html" />
+    <link rel="next" title="Editor" href="editor.html" />
+    <link rel="prev" title="Command History" href="commandHistory.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="editor.html" title="Editor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="commandHistory.html" title="Command History"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="gui.html" >The itom User Interface</a> &raquo;</li>
+          <li><a href="mainWindow.html" accesskey="U">Main Window</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="call-stack">
+<h1>Call Stack<a class="headerlink" href="#call-stack" title="Permalink to this headline">¶</a></h1>
+<p>The call stack toolbox is only active and useful when debugging any python script with <strong>itom</strong>.</p>
+<p>The usage of the call stack should be presented using one simple example. The script <strong>create_doc.py</strong> is executed in debug mode
+and the debugger is currently waiting in the constructor of the class <strong>Sphinx</strong>, implemented in the file <strong>application.py</strong>.
+When opening this file in <strong>itom</strong>, a yellow array shows the current position of the debugger in line 69 of the file <strong>application.py</strong>.</p>
+<p>The corresponding call stack is then visible in the toolbox, like depicted below:</p>
+<a class="reference internal image-reference" href="../_images/callstack.png"><img alt="../_images/callstack.png" class="align-center" src="../_images/callstack.png" style="width: 433.0px; height: 267.0px;" /></a>
+<p>A call stack shows the current function stack. At first, the debug process in <strong>itom</strong> is started by calling some functions in the
+files <strong>bdb.py</strong>, <strong>itoDebugger.py</strong> and <strong>&lt;script&gt;</strong>. Afterwards the currently debugged line in the script, where the debug process is started,
+is listed. If this script calls another method or class in the same or a different script, an entry is added on top of the call stack. Once this
+method is finished, the entry is removed from the stack and the debugger continues at the position, that is currently on top of the stack.</p>
+<p>By double-clicking on any enabled entry of the call stack, the corresponding python script is opened in <strong>itom</strong> and the position of the debugger
+becomes the current line. You can use the call stack in order to trace the entire call history for an improved debugging of the script(s).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you think, that the debugger shows another line in the script that does not correspond to the real executed code, you may need to reload this
+or further scripts. Python has an improved caching mechanism for all modules and packages that have been imported at any place of your script.
+Once imported, the modules and packages are translated in an intermediate file that is cached and saved in a <strong>__pycache__</strong> folder. Further changes
+in any related script file are not executed if the old files are still cached. In order to force <strong>itom</strong> reloading any modules, either delete the
+cache folders, use the <strong>reload</strong> method from the module <strong>imp</strong> or use the dialog <strong>reloadModules</strong> from <strong>itom</strong>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="commandHistory.html"
+                        title="previous chapter">Command History</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="editor.html"
+                        title="next chapter">Editor</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/04_itom_gui/callStack.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="editor.html" title="Editor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="commandHistory.html" title="Command History"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="gui.html" >The itom User Interface</a> &raquo;</li>
+          <li><a href="mainWindow.html" >Main Window</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on May 26, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+.. include:: ../../../../../plugins/GWInstekPSP/docs/gwInstekPSP.rst
