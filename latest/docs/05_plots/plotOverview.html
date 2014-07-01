@@ -14,12 +14,11 @@
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'e23e20f',
+        VERSION:     'bde8ce7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -80,12 +79,12 @@ set to 1.</p>
 <p>If you have various plot plugins available that can handle that type of data object, you can also force the plot command to use your
 specific plugin, which is defined by its class name (see itom&#8217;s property dialog for the class name). If the class name cannot be found
 or is not able to plot the type of data object, itom falls back to the default plot plugin:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">data1d</span><span class="p">,</span> <span class="s">&quot;Itom1DQwtFigure&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">data1d</span><span class="p">,</span> <span class="s">&quot;Itom1DQwtPlot&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The result of both examples can be like this:</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/plot1d.png"><img alt="../_images/plot1d.png" src="../_images/plot1d.png" /></a>
+<a class="reference internal image-reference" href="../_images/plot1d.png"><img alt="../_images/plot1d.png" src="../_images/plot1d.png" style="width: 443.79999999999995px; height: 244.99999999999997px;" /></a>
 </div>
 <p>Equivalent to the one-dimensional case, the following example shows how to simply plot a two-dimensional data object also using the command
 <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><tt class="xref py py-meth docutils literal"><span class="pre">plot()</span></tt></a>.</p>
@@ -95,7 +94,7 @@ or is not able to plot the type of data object, itom falls back to the default p
 </div>
 <p>Then, you obtain a figure that looks like this:</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/plot2d.png"><img alt="../_images/plot2d.png" src="../_images/plot2d.png" /></a>
+<a class="reference internal image-reference" href="../_images/plot2d.png"><img alt="../_images/plot2d.png" src="../_images/plot2d.png" style="width: 501.2px; height: 306.59999999999997px;" /></a>
 </div>
 <p>If you not only work with data objects but also with numpy</p>
 <p>If the plot is opened in its own figure window, you have a dock-button in the toolbar on the right side. Click on this button in order to dock
@@ -121,11 +120,11 @@ is set to True (which is also the default case):</p>
 </div>
 <p>You can also show the live image of any camera using the GUI. Right-click on the opened camera instance in the plugin toolbox and choose <strong>live image</strong>:</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/liveImageGUI.png"><img alt="../_images/liveImageGUI.png" src="../_images/liveImageGUI.png" /></a>
+<a class="reference internal image-reference" href="../_images/liveImageGUI.png"><img alt="../_images/liveImageGUI.png" src="../_images/liveImageGUI.png" style="width: 285.59999999999997px; height: 304.5px;" /></a>
 </div>
 </div>
-<div class="section" id="changing-properties-of-plots">
-<h2>Changing properties of plots<a class="headerlink" href="#changing-properties-of-plots" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="properties-of-plots">
+<h2>Properties of plots<a class="headerlink" href="#properties-of-plots" title="Permalink to this headline">¶</a></h2>
 <p>Any plots have properties defined, which indicate the appearance or currently depicted data object or camera. To access these cameras you need to get the
 instance of the plot or live image item. This is always an instance of the class <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><tt class="xref py py-class docutils literal"><span class="pre">plotItem</span></tt></a>. This class is inherited by <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem" title="itom.uiItem"><tt class="xref py py-obj docutils literal"><span class="pre">uiItem</span></tt></a> which
 finally provides the access to the properties by the functionalities described in <a class="reference internal" href="../06_extended_gui/qtdesigner.html#qtdesigner"><em>Creating advanced dialogs and windows</em></a>.</p>
@@ -160,6 +159,11 @@ slots and signals.</p>
 </pre></div>
 </div>
 <p>These properties are also the way to set the content of plot widgets, that are integrated in your user-defined GUIs.</p>
+<p>The properties can also be changed using the properties toolbox of each plot or live image that is accessible via the menu <em>View &gt;&gt; Properties</em>. Furthermore it is possible to directly
+set some properties by passing a dictionary with all name, values pairs to the &#8216;properties&#8217; argument of commands <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><tt class="xref py py-meth docutils literal"><span class="pre">plot()</span></tt></a> or <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><tt class="xref py py-meth docutils literal"><span class="pre">liveImage()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">data2d</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;yAxisFlipped&quot;</span><span class="p">:</span><span class="bp">True</span><span class="p">,</span> <span class="s">&quot;title&quot;</span><span class="p">:</span><span class="s">&quot;My self configured plot&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -174,7 +178,7 @@ slots and signals.</p>
 <li><a class="reference internal" href="#">Quick tutorial to plots and figures</a><ul>
 <li><a class="reference internal" href="#plots-of-data-objects">Plots of data objects</a></li>
 <li><a class="reference internal" href="#live-images-of-cameras-and-grabbers">Live images of cameras and grabbers</a></li>
-<li><a class="reference internal" href="#changing-properties-of-plots">Changing properties of plots</a></li>
+<li><a class="reference internal" href="#properties-of-plots">Properties of plots</a></li>
 </ul>
 </li>
 </ul>
@@ -229,8 +233,8 @@ slots and signals.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Jun 22, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Jul 01, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

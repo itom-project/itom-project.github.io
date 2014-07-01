@@ -14,12 +14,11 @@
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'e23e20f',
+        VERSION:     'bde8ce7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -72,16 +71,16 @@ be obtained by the specific package manager of your Linux distribution.</p>
 <ul class="simple">
 <li>IDE, Compiler (e.g. Visual Studio 2010 Professional, QtCreator...)</li>
 <li>CMake (recommended 2.8.9 or higher)</li>
-<li>Qt-framework (4.7 or higher, 4.8 recommended, no 5.x)</li>
-<li>QScintilla2</li>
+<li>Qt-framework (4.7 or higher, 4.8 recommended, 5.x in preparation)</li>
+<li>QScintilla2 (2.6 or higher)</li>
 <li>OpenCV 2.3 or higher (2.4 recommended)</li>
-<li>PointCloudLibrary 1.6 or higher</li>
 <li>Python 3.2 or higher</li>
 <li>Git (git-scm.com) + GUI (e.g. TortoiseGit or GitExtensions) for accessing the remote repository</li>
 <li>Python-Package: NumPy</li>
 </ul>
 <p><strong>Optional Software-Packages</strong></p>
 <ul class="simple">
+<li>PointCloudLibrary 1.6 or higher (optional)</li>
 <li>Qt-AddOn for Visual Studio (requires .NET 2.0 framework with SP 1.0)</li>
 <li>Doxygen (for creating the source code documentation)</li>
 <li>Python-Packages: SciPy, Distribute, Sphinx (user documentation generation), scikit-image, matplotlib...</li>
@@ -90,17 +89,21 @@ be obtained by the specific package manager of your Linux distribution.</p>
 <div class="section" id="detailed-information">
 <h2>Detailed information<a class="headerlink" href="#detailed-information" title="Permalink to this headline">¶</a></h2>
 <p><strong>Compiler, IDE</strong> (mandatory)</p>
-<p>You can use any compiler and integrated developement environment (IDE) which is supported by <strong>CMake</strong> (<a class="reference external" href="http://www.cmake.org/cmake/help/v2.8.10/cmake.html#section_Generators">http://www.cmake.org/cmake/help/v2.8.10/cmake.html#section_Generators</a>).
-On Windows systems, we develop with <strong>Visual Studio 2010 Professional</strong>, whereas we use <strong>QtCreator</strong> for the developement under Linux. QtCreator is no generator of CMake, however
+<p>You can use any compiler and integrated development environment (IDE) which is supported by <strong>CMake</strong> (<a class="reference external" href="http://www.cmake.org/cmake/help/v2.8.10/cmake.html#section_Generators">http://www.cmake.org/cmake/help/v2.8.10/cmake.html#section_Generators</a>).
+On Windows systems, we develop with <strong>Visual Studio 2010 Professional</strong>, whereas we use <strong>QtCreator</strong> for the development under Linux. QtCreator is no specific CMake generator, however
 QtCreator directly supports CMakeLists.txt-files. It is also possible to use the free express edition of Visual Studio.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Please consider that you need to install the Service Pack 1 for Visual Studio 2010 Professional when compiling a 64bit version of <strong>itom</strong>.</p>
+<p class="last">Please consider that you need to install the Service Pack 1 for Visual Studio 2010 Professional when compiling a 64bit version of <strong>itom</strong>. It is even recommended to install the service
+pack for a 32bit compilation.</p>
 </div>
 <p><strong>CMake</strong> (mandatory)</p>
 <p>Download <strong>CMake</strong> from <a class="reference external" href="http://www.cmake.org/cmake/resources/software.html">http://www.cmake.org/cmake/resources/software.html</a> and install it. If possible use any version higher than 2.8.8. CMake reads the platform-independent project files of <strong>itom</strong> (CMakeList.txt) and generates the corresponding project files for your compiler, IDE and platform.</p>
 <p><strong>Qt-framework</strong> (mandatory)</p>
-<p>Download the <strong>Qt-framework</strong> (version 4.7 or higher, branch 5 is not supported yet) from <a class="reference external" href="http://qt-project.org/downloads">http://qt-project.org/downloads</a>. If you find a setup version for your IDE and compiler, you can directly install it. Otherwise, you need to configure and build <strong>Qt</strong> on your computer. This is also required if you want to compile <strong>itom</strong> with Visual Studio for 64bit (see box below).</p>
+<p>Download the <strong>Qt-framework</strong> (version 4.7 or higher, 4.8.x recommended, 5.x is coming soon) from <a class="reference external" href="http://qt-project.org/downloads">http://qt-project.org/downloads</a>. If you find a setup version for your IDE and compiler,
+you can directly install it. Otherwise, you need to configure and build <strong>Qt</strong> on your computer - see box below (e.g. Qt 4.8.x with Visual Studio 2010, 64bit needs to be compiled). For
+Qt5 either download the ready-to-use binaries from qt-project.org or compile it from sources and follow the instruction in the box below). If you use the ready-to-use binaries, make sure
+to use a version with OpenGL.</p>
 <p>Create the following environment variables (Windows only - you need to log-off from your computer in order to activate changes to environment variables):</p>
 <ul class="simple">
 <li>create an entry <strong>QTDIR</strong> and set it to the <em>Qt</em>-base directory (e.g. <strong>C:\Qt\4.8.0</strong>)</li>
@@ -109,7 +112,7 @@ QtCreator directly supports CMakeLists.txt-files. It is also possible to use the
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p><strong>Compiling Qt for 64bit, Visual Studio</strong></p>
+<p><strong>Compiling Qt 4.7.x or 4.8.x (using the example 64bit, Visual Studio)</strong></p>
 <p>This side-note explains how to configure and build Qt for a 64bit build using Visual Studio 2010. The general approach for other configurations is similar.</p>
 <ul>
 <li><p class="first">Delete files beginning with <em>sync</em> from the <strong>%QTDIR%\bin</strong> directory (in order to avoid the requirement of Perl during compilation, which is not necessary in our case).</p>
@@ -118,7 +121,7 @@ QtCreator directly supports CMakeLists.txt-files. It is also possible to use the
 </li>
 <li><p class="first">(for 32bit always use the <strong>Visual Studio Commandline (2010)</strong>)</p>
 </li>
-<li><p class="first">change to Qt-Dir by typing:</p>
+<li><p class="first">change to Qt-directory by typing:</p>
 <div class="highlight-python"><div class="highlight"><pre>cd %QTDIR%
 </pre></div>
 </div>
@@ -143,9 +146,51 @@ execute:</p>
 </pre></div>
 </div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Compiling Qt 5.x (using the example 64bit, Visual Studio 2010)</strong></p>
+<p>This side-note explains how to configure and build Qt5 for a 64bit build using Visual Studio 2010. The general approach for other configurations is similar.</p>
+<ul>
+<li><p class="first">Download the Qt5 sources a zip or tar.gz archive from qt-project.org and unpack them (e.g. to C:Qt5.3.0)</p>
+</li>
+<li><p class="first">Make sure that Python 3.x is installed and verify that the path, containing the application <strong>python.exe</strong> is contained in the Windows environment variable.</p>
+</li>
+<li><p class="first">Open <strong>Visual Studio Commandline x64 Win64 (2010)</strong> (64bit) or <strong>Visual Studio Commandline (2010)</strong> (32bit) e.g. via <em>Windows &gt;&gt; Start &gt;&gt; Microsoft Visual Studio &gt;&gt; Visual Studio Tools</em>.</p>
+</li>
+<li><p class="first">Change to Qt-directory by typing:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd %QTDIR%
+</pre></div>
+</div>
+</li>
+<li><p class="first">configure Qt by executing the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>configure -platform win32-msvc2010 -debug-and-release -opensource -nomake tests -nomake examples -qt-sql-odbc -qt-sql-sqlite -qt-zlib -qt-libpng -opengl desktop -skip qtwebkit -no-icu -no-openssl -skip qtscript -skip qtquick1
+</pre></div>
+</div>
+</li>
+<li><p class="first">choose the option <strong>open source version</strong> and accept the license information.</p>
+</li>
+<li><p class="first">now start the time-intense compilation process by executing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">nmake</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If ready type:</p>
+<div class="highlight-python"><div class="highlight"><pre>nmake install
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If you want to restart the entire compilation you need to completely remove any possible older configuration. Then open the appropriate Visual Studio command line and
+execute:</p>
+<div class="highlight-python"><div class="highlight"><pre>nmake distclean
+</pre></div>
+</div>
+<p class="last">If Python could not be accessed, an error during the compilation may occur. Then make sure that Python is accessible via the Path environment variable and delete
+the possibly available file <em>C:/Qt/Qt5.3.0/qtdeclarative/src/qml/RegExpJitTables.h</em>.</p>
+</div>
 <p><strong>Qt-Visual Studio-AddIn</strong> (optional, only for Visual Studio, not necessary for QtCreator)</p>
 <p>If you want to have a better integration of <strong>Qt</strong> into <strong>Visual Studio</strong> (e.g. better debugging information for Qt-types like lists or vectors), you should download the
-<strong>Qt-Visual Studio-AddIn</strong> (1.1.11 for Qt 4.8.x, 1.1.10 for Qt 4.7.x) from <a class="reference external" href="http://qt-project.org/downloads#qt-other">http://qt-project.org/downloads#qt-other</a> and install it. Since we are using <strong>CMake</strong> it is not
+<strong>Qt-Visual Studio-AddIn</strong> (1.2.x for Qt 5.x, 1.1.11 for Qt 4.8.x, 1.1.10 for Qt 4.7.x) from <a class="reference external" href="http://qt-project.org/downloads#qt-other">http://qt-project.org/downloads#qt-other</a> and install it. Since we are using <strong>CMake</strong> it is not
 mandatory to use this <strong>AddIn</strong> like it is usually the case when developing any Qt-project with Visual Studio. Therefore it is also possible to use the Express edition of
 Visual Studio, where you cannot install this add-in. The <strong>Qt Visual Studio AddIn</strong> requires that you have the <strong>.NET framework 2.0 SP 1</strong> installed on your PC.</p>
 <div class="admonition note">
@@ -204,13 +249,13 @@ project settings are not ready for a multi-configuration build in <strong>Visual
 <p class="last">If the batch file breaks with some strange error messages, please make sure, that the location where <strong>QScintilla</strong> is installed is writable by the batch file (e.g. the
 Windows program directory under Windows Vista or higher). Therefore it is recommended to locate <strong>QScintilla</strong> in another directory than the program-directory.</p>
 </div>
-<p id="install-depend-opencv"><strong>OpenCV</strong> (mandatory, 2.3 or higher)</p>
+<p id="install-depend-opencv"><strong>OpenCV</strong> (mandatory, 2.3 or higher, 2.4.x recommended)</p>
 <p>You have different possibilities in order to get the binaries from OpenCV:</p>
 <ol class="arabic simple">
 <li>Download the OpenCV-Superpack (version 2.3) from <a class="reference external" href="http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3/">http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3/</a>. This superpack is a self-extracting archive. Unpack it.
 The superpack contains pre-compiled binaries for VS2008, VS2010, MinGW in 32bit and 64bit. (Later map the CMake variable <strong>OpenCV_DIR</strong> to the <strong>build</strong> subdirectory of the
 extracted archive).</li>
-<li>Download the current setup (version 2.4 or higher) from <a class="reference external" href="http://opencv.org/">http://opencv.org/</a> and install it. This installation also contains pre-compiled binaries for VS2008, VS2010 and MinGW.
+<li>Download the current setup (version 2.4 or higher, recommended) from <a class="reference external" href="http://opencv.org/">http://opencv.org/</a> and install it. This installation also contains pre-compiled binaries for VS2008, VS2010 and MinGW.
 In this case map <strong>OpenCV_DIR</strong> to the <strong>opencv/build</strong> subdirectory.</li>
 <li>Get the sources from OpenCV and use CMake to generate project files and build the binaries by yourself. Then map <strong>OpenCV_DIR</strong> to the build-directory, indicated in CMake.</li>
 </ol>
@@ -232,10 +277,17 @@ This is the folder where the dll&#8217;s are located as well.</p>
 <ul class="simple">
 <li>Add to the path-variable: <strong>;C:PCL1.6.0bin</strong> (or similar)</li>
 </ul>
-<p><strong>Python</strong> (mandatory, 3.2)</p>
-<p>Download the installer from <a class="reference external" href="http://www.python.org/download/">http://www.python.org/download/</a> and install python in version 3.2. You can simultaneously run different versions of python.</p>
+<p><strong>Python</strong> (mandatory, 3.2 or higher)</p>
+<p>Download the installer from <a class="reference external" href="http://www.python.org/download/">http://www.python.org/download/</a> and install python in version 3.2 or higher. You can simultaneously run different versions of python.</p>
 <p><strong>NumPy</strong> (mandatory)</p>
-<p>Get a version of NumPy that fits to python 3.2 and install it. On Windows, binaries for many python packages can be found under <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a>.</p>
+<p>Get a version of NumPy that fits to your python version and install it. On Windows, binaries for many python packages can be found under <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a>.</p>
+<p><strong>pip</strong> (optional)</p>
+<p><strong>Pip</strong> is the new package installation tool for <strong>Python</strong> packages. If you don&#8217;t have <strong>pip</strong> already installed use the following hints to get <strong>pip</strong>. Download the file from <a class="reference external" href="https://raw.github.com/pypa/pip/master/contrib/get-pip.py">https://raw.github.com/pypa/pip/master/contrib/get-pip.py</a> and save it to any temporary directory. Then open the file <strong>get-pip.py</strong> with the python version used for compiling <strong>itom</strong> (e.g. python32.exe). As an alternative, open a command line and switch to the directory where you save the file <strong>get-pip.py</strong>.</p>
+<p>Assuming that Python is located under <strong>C:Python32</strong>, execute the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre>C:\python32\python.exe get-pip.py
+</pre></div>
+</div>
+<p><strong>pip</strong> is installed and you can use the <strong>pip</strong> tool (see <strong>Sphinx</strong> installation above).</p>
 <p><strong>Sphinx</strong> (optional)</p>
 <p>The Python package <strong>Sphinx</strong> is used for generating the user documentation of <strong>itom</strong>. You can also download sphinx from <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a>. However,
 sphinx is dependent on other packages, such that it is worth to install Sphinx using the <strong>Python</strong> tool <strong>pip</strong> (If you don&#8217;t have <strong>pip</strong> see the next section). Then open a command-line (cmd.exe) and switch to the directory <strong>[YourPythonPath]/Scripts</strong>. Type the following command in order to download <strong>sphinx</strong> including dependecies from the internet and install it:</p>
@@ -246,13 +298,12 @@ sphinx is dependent on other packages, such that it is worth to install Sphinx u
 <div class="highlight-python"><div class="highlight"><pre>pip install sphinx --upgrade
 </pre></div>
 </div>
-<p><strong>pip</strong> (optional)</p>
-<p><strong>Pip</strong> is the new package installation tool for <strong>Python</strong> packages. If you don&#8217;t have <strong>pip</strong> already installed use the following hints to get <strong>pip</strong>. Download the file from <a class="reference external" href="https://raw.github.com/pypa/pip/master/contrib/get-pip.py">https://raw.github.com/pypa/pip/master/contrib/get-pip.py</a> and save it to any temporary directory. Then open the file <strong>get-pip.py</strong> with the python version used for compiling <strong>itom</strong> (e.g. python32.exe). As an alternative, open a command line and switch to the directory where you save the file <strong>get-pip.py</strong>.</p>
-<p>Assuming that Python is located under <strong>C:Python32</strong>, execute the following command:</p>
-<div class="highlight-python"><div class="highlight"><pre>C:\python32\python.exe get-pip.py
+<p><strong>frosted</strong> (optional)</p>
+<p>The Python package <strong>frosted</strong> can be installed in order to enable a code syntax checker in <strong>itom</strong>. If installed, your scripts are automatically checked for syntax errors that are marked
+as bug symbols in each line. The detailed messages are displayed as tool tip texts of the bug symbol. Use pip to install this package:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install frosted
 </pre></div>
 </div>
-<p><strong>pip</strong> is installed and you can use the <strong>pip</strong> tool (see <strong>Sphinx</strong> installation above).</p>
 <p><strong>Other python packages</strong> (optional)</p>
 <p>You can always check the website <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> for appropriate binaries of your desired python package.</p>
 <div class="admonition note">
@@ -328,8 +379,8 @@ some methods can not be executed and a python error message is raised, saying th
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Jun 22, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Jul 01, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

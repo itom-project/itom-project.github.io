@@ -14,12 +14,11 @@
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'e23e20f',
+        VERSION:     'bde8ce7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -63,8 +62,8 @@
             
   <div class="section" id="automatic-loading-and-saving-of-plugin-parameters">
 <span id="plugin-autoloadsave-policy"></span><h1>Automatic loading and saving of plugin parameters<a class="headerlink" href="#automatic-loading-and-saving-of-plugin-parameters" title="Permalink to this headline">¶</a></h1>
-<p><strong>itom</strong> has the optional ability, that all plugin parameters (type <em>Param</em>), which are part of the <strong>m_params</strong> vector of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.
-<strong>itom</strong> has the optional ability, that all plugin parameters (of type <strong>Param</strong> or <strong>ParamBase</strong>), which are part of the <strong>m_params</strong> vector of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.</p>
+<p><strong>itom</strong> has the optional ability, that all plugin parameters (type <em>Param</em>), which are part of the <strong>m_params</strong> map of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.
+<strong>itom</strong> has the optional ability, that all plugin parameters (of type <strong>Param</strong> or <strong>ParamBase</strong>), which are part of the <strong>m_params</strong> map of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.</p>
 <p>Additionally, the decision whether these parameters should be saved or not, is set by the member variable <strong>m_autoSavePolicy</strong> of the interface class of the plugin (see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><em>Plugin interface class</em></a>). This variable can have the following values:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoSavePolicy</span> <span class="p">{</span>
     <span class="n">autoSaveAlways</span>          <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always saves parameters to xml-file at shutdown */</span>
@@ -72,7 +71,7 @@
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>If the member has the value <em>autoSaveAlways</em>, all parameters contained in the vector <em>m_params</em> of the plugin instance are saved in a xml-subtree. This subtree is dependent on the unique identifier of the plugin. Remember, that only plugins which do not have the flag <em>typeNoAutoSave</em> will be saved (see <a class="reference internal" href="plugin-params.html#plugin-params"><em>Parameter-Container class of itom</em></a>).</p>
+<p>If the member has the value <em>autoSaveAlways</em>, all parameters contained in the map <em>m_params</em> of the plugin instance are saved in a xml-subtree. This subtree is dependent on the unique identifier of the plugin. Remember, that only plugins which do not have the flag <em>typeNoAutoSave</em> will be saved (see <a class="reference internal" href="plugin-params.html#plugin-params"><em>Parameter-Container class of itom</em></a>).</p>
 <p>Inversely, saved parameters in a plugin specific xml-file can also be set after that the plugin instance has been created and initialized (with the mandatory and optional parameters given by the constructor in python). The loading of these xml-parameters is dependent on the value of the member variable <strong>m_autoLoadPolicy</strong> of the plugin&#8217;s interface class. This variable can have the following values:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoLoadPolicy</span> <span class="p">{</span>
     <span class="n">autoLoadAlways</span>           <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always loads xml file by addInManager */</span>
@@ -147,8 +146,8 @@
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Jun 22, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Jul 01, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

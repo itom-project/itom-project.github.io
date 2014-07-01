@@ -14,12 +14,11 @@
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'e23e20f',
+        VERSION:     'bde8ce7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -172,7 +171,9 @@ invalid, its type is set to the type of the point.</p>
 <dl class="staticmethod">
 <dt id="itom.pointCloud.fromDisparity">
 <em class="property">static </em><tt class="descname">fromDisparity</tt><big>(</big><em>disparity [,intensity] [,deleteNaN]</em><big>)</big> &rarr; creates a point cloud from a given disparity dataObject.<a class="headerlink" href="#itom.pointCloud.fromDisparity" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p>Creates a point cloud from the 2.5D data set given by the disparity dataObject. The x and y-components of each point are taken from the regular grid 
+values of &#8216;disparity&#8217; (considering the scaling and offset of the object). The corresponding z-value is the disparity&#8217;s value itself.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -182,9 +183,15 @@ invalid, its type is set to the type of the point.</p>
 </div></blockquote>
 <p><strong>intensity</strong> : {MxN data object, float32}, optional</p>
 <blockquote>
-<div><p>If given, an XYZI-point cloud is created whose intensity values are determined by this dataObject 
-deleteNaN : {bool}, optional 
-If true (default: false), all NaN-values in the disparity map will not be copied into the point cloud.</p>
+<div><p>If given, an XYZI-point cloud is created whose intensity values are determined by this dataObject (cannot be used together with &#8216;color&#8217;)</p>
+</div></blockquote>
+<p><strong>deleteNaN</strong> : {bool}, optional</p>
+<blockquote>
+<div><p>If true (default: false), NaN-values (z) in the disparity map will not be copied into the point cloud.</p>
+</div></blockquote>
+<p><strong>color</strong> : {MxN data object, rgba32}, optional</p>
+<blockquote>
+<div><p>If given, a XYZRGBA-point cloud is created whose color values are determined by this dataObject (cannot be used together with &#8216;intensity&#8217;)</p>
 </div></blockquote>
 </td>
 </tr>
@@ -407,8 +414,8 @@ specifies the width of the point cloud dataset in the number of points. WIDTH ha
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Jun 22, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Last updated on Jul 01, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
