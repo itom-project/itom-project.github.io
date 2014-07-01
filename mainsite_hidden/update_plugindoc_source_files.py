@@ -1,4 +1,4 @@
-import os, re, shutil
+import os, re, shutil, itom
 
 #this scripts overwrites the .rst-files for the single plugin documentations from the real source
 #of the plugin documentation files
