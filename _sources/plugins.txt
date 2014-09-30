@@ -31,6 +31,7 @@ Cameras / Grabbers / AD-Converter
    
    plugins/grabber/cmu1394.rst
    plugins/grabber/dummyGrabber.rst
+   plugins/grabber/IDSuEyeCamera.rst
    plugins/grabber/fileGrabber.rst
    plugins/grabber/fireGrabber.rst
    plugins/grabber/msMediaFoundation.rst
@@ -39,6 +40,7 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/pcoPixelFly.rst
    plugins/grabber/pgrFlyCapture.rst
    plugins/grabber/qCam.rst
+   plugins/grabber/thorlabsCCS.rst
    plugins/grabber/v4l2.rst
    plugins/grabber/vistek.rst
    plugins/grabber/ximea.rst

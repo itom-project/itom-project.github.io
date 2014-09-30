@@ -63,6 +63,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="../../plugins.html#cameras-grabbers-ad-converter">Cameras / Grabbers / AD-Converter</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="cmu1394.html">CMU1394</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dummyGrabber.html">DummyGrabber</a></li>
+<li class="toctree-l4"><a class="reference internal" href="IDSuEyeCamera.html">IDS uEye</a></li>
 <li class="toctree-l4"><a class="reference internal" href="fileGrabber.html">FileGrabber</a></li>
 <li class="toctree-l4"><a class="reference internal" href="fireGrabber.html">FireGrabber</a></li>
 <li class="toctree-l4"><a class="reference internal" href="msMediaFoundation.html">MSMediaFoundation</a></li>
@@ -74,9 +75,11 @@
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#changelog">Changelog</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#linux">Linux</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="qCam.html">QCam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thorlabsCCS.html">Thorlabs CCS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="v4l2.html">V4L2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="vistek.html">Vistek</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ximea.html">Ximea</a></li>
@@ -138,7 +141,7 @@
 <td><span>GPL / this plugin needs to link agains the FlyCapture2 SDK from Point Grey Research, that comes with its own license. The FlyCapture2 SDK contains components that are licensed under GPL.</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
-<td>Windows, (Linux possible but yet not implemented)</td>
+<td>Windows, Linux</td>
 </tr>
 <tr class="row-odd"><td><strong>Devices</strong>:</td>
 <td>Point Grey cameras (USB3) supported by Fly Capture driver. (GigE possible, but yet not implemented)</td>
@@ -158,6 +161,7 @@ sure that the development files (include files and libraries) are installed as w
 to the include directory of the FlyCapture2 SDK. The depending variable PGRFYLCAP_API_DIR is then automatically set (if not, delete it and
 re-configure CMake).</p>
 <p>This plugin automatically copies the necessary FlyCapture2 DLLs to the lib-folder of itom.</p>
+<p>This plugin has mainly been tested with cameras of type Flea3 and Grasshopper3.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
@@ -179,6 +183,12 @@ re-configure CMake).</p>
 <li><dl class="first docutils">
 <dt><strong>forceSync</strong>: {int (int), optional} [0,1], default: 0, step: 1</dt>
 <dd><p class="first last">Direct enable software sync if present</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>colorMode</strong>: {str (char*), optional} default: gray</dt>
+<dd><p class="first last">colorMode: &#8216;gray&#8217; (default) or &#8216;color&#8217; if color camera. In color mode, bpp is limited to 8 per color.</p>
 </dd>
 </dl>
 </li>
@@ -234,6 +244,11 @@ that is also mapped to an uint16 data object. At startup, the highest possible v
 <ul class="simple">
 <li>itom setup 1.2.0: This plugin has been compiled using the FlyCapture 2.6.3.4</li>
 </ul>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<p>For linux, please consider the document &#8220;Using Linux with USB 3.0&#8221;, published by Point Grey as technical application note TAN2012007. Starting the camera crashed (or came to a timeout when
+calling <em>startDevice</em> for cameras with an image size bigger than 2MB if the notes in section <strong>Configuration USBFS</strong> are not considered.</p>
 </div>
 </div>
 
