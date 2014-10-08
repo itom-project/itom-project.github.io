@@ -1,8 +1,3 @@
-.. itom documentation master file, created by
-   sphinx-quickstart on Thu Aug 22 22:45:55 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 itom - an Open Source Measurement, Automation and Evaluation Software
 ============================================================================
 
@@ -12,6 +7,8 @@ itom - an Open Source Measurement, Automation and Evaluation Software
     :alt: itom software
     :width: 740px
     :align: center
+    
+One main application of itom is the development and operation of sensor and measurement system for instance in a laboratory environment. Therefore, the software has to be able to communicate with a wide range of different hardware systems, such as cameras or actuators and should provide a diversified and as complete as possible set of evaluation and data processing methods. Additionally, the rapid prototyping of modern measurement and inspection setups requires a system, where parameters or components can easily be changed at runtime, necessitating the availability of an embedded scripting language. Finally, when operating a measurement system, it is also desirable to extend the graphical user interface by system adapted dialogs and windows.
 
 **Contents:**
 

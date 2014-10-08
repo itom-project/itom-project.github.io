@@ -10,13 +10,6 @@
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -30,7 +23,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="index.html" />
     <link rel="next" title="Plugins" href="plugins.html" />
@@ -62,7 +54,10 @@
 <li class="toctree-l1"><a class="reference internal" href="download.html">Downloads</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="media.html">Media</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="screenshots.html">Screenshots</a></li>
 </ul>
@@ -106,6 +101,10 @@
 <li><em>itom</em> benefits from a modular software architecture. Therefore, all external hardware components are provided by external libraries (plugins) that are dynamically loaded at runtime. All itom-plugins are divided into different groups, where each group is defined by a specific interface, allowing communication with the corresponding plugin via itom or specific scriptable commands. One group of plugins provides access to hardware components, such as cameras or actuators. Since their implementation must follow the rules given by specific interfaces, it is guaranteed that the call to any camera or actuator plugin is the same, hence, plugins can be simply changed without adaption to your scripted code. Other plugins contain data processing and analysis algorithms as well as complex user interfaces like additional windows or dialogs. Another group of plugins provides plotting and figure components for showing live images of cameras or visualizing other data structures. One example of enhanced plugin is the project MacroSim, that provides a GUI for a GPU accelerated ray tracing engine.</li>
 <li>Measurement systems can be extended by specific user interfaces. Therefore, a WYSIWYG design tool allows the creation of personalized user interfaces at runtime without requiring C++ programming experience. Furthermore, it is possible to integrate itom&#8217;s plot and visualization tools into these interfaces. Afterwards, interface elements can be connected to scripted functionalities. As a result, users can configure the appearance of their measurement system to optimally enable or protect the underlying functionalities.</li>
 </ul>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<p>itom is written in C++ using the open source framework Qt. Qt enhances the functionalities of C++, mainly by providing a cross-platform GUI, allowing itom to run on both Windows and Linux operating systems. Since itom is also designed for multi-core processors, its modules run partly in different threads that allow operating an actuator, simultaneously acquiring images while keeping the main window reactive for user interaction. Therefore, the core application, the python script engine as well as all plugins run in their separate threads.</p>
+</div>
 </div>
 
 
