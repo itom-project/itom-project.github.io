@@ -18,13 +18,14 @@ component. These components are:
 * six 1.6.1
 * dateutil 2.2
 
-The current version 1.2.0 is available from
+The current version 1.3.0 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v1.2.0/>`_
+* `<http://sourceforge.net/projects/itom/files/v1.3.0/>`_
 
 Older versions are only hosted at sourceforge.net:
 
+* `itom 1.2.0 <http://sourceforge.net/projects/itom/files/v1.2.0>`_
 * `itom 1.1.0 <http://sourceforge.net/projects/itom/files/v1.1.0>`_
 * `itom 1.0.14 <http://sourceforge.net/projects/itom/files/v1.0.14>`_
 * `itom 1.0.13 <http://sourceforge.net/projects/itom/files/v1.0.13>`_
