@@ -66,6 +66,7 @@ Further hardware devices
    plugins/generalDataIO/dispWindow.rst
    plugins/generalDataIO/gwInstekPSP.rst
    plugins/generalDataIO/serialIO.rst
+   plugins/generalDataIO/glDisplay.rst
 
 Algorithms
 ~~~~~~~~~~~
