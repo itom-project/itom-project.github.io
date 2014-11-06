@@ -26,6 +26,7 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2014-11-06: **itom** is used by many people around the world. The new page :ref:`collaboration <sec-collaboration>` has been added to see who helped to improve **itom**, to fix bugs or to add plugins.
 * 2014-10-08: Today **itom 1.3.0** has been released. The Windows setups and the sources (tag v1.3.0) are ready for download. It comes with a lot of bugfixes, improvements and the new hardware plugins *IDSuEye*, **ThorlabsCCS** and **GLDisplay**. Additionally the 3D plot widget **TwipOGLFigure** has been added to the Windows installers, that is created by `twip optical solutions GmbH <http://www.twip-os.com/>`_. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html
 * 2014-09-30: The plugin **IDSuEye** for cameras of the uEye family of company IDS (driver 4.41) imaging is online now (https://bitbucket.org/itom/plugins)
 * 2014-08-01: The plugin **ThorlabsCCS** for the thorlabs spectrometer (CCS - Compact Spectrometer) is online now (https://bitbucket.org/itom/plugins)
