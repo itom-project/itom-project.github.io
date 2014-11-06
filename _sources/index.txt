@@ -21,6 +21,7 @@ One main application of itom is the development and operation of sensor and meas
    features.rst
    plugins.rst
    screenshots.rst
+   collaboration.rst
 
 News
 -----
