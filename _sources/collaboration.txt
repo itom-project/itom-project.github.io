@@ -25,7 +25,7 @@ Among others, we thank the following institutions for their support:
    :align: center
    :alt: IPROM University of Braunschweig
 
-   Company |Institut für Produktionsmesstechnik, University of Braunschweig|_
+   |Institut für Produktionsmesstechnik, University of Braunschweig|_
    
    for their development and contribution to several plugins (e.g. AVTVimba).
 
@@ -47,7 +47,7 @@ Among others, we thank the following institutions for their support:
    :align: center
    :alt: SLAM, Swansea University
 
-   Company |Group Swansea Lab for Animal Movement - Animal ecology and behaviour of Swansea University(UK)|_
+   |Group Swansea Lab for Animal Movement - Animal ecology and behaviour of Swansea University(UK)|_
    
    for their contribution to plugins (QImaging camera).
 
