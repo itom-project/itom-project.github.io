@@ -17,6 +17,8 @@ Among others, we thank the following institutions for their support:
    Company |twip optical solutions GmbH|_
    
    for their intense contribution to the core, to many plugins as well as designer plugins.
+   They also provide their own plugin repository for **itom** under http://twipos.bitbucket.org/
+   where you can find an enhanced 3D visualization plugin (also part of the **itom** Windows setup)
 
 -----
 
