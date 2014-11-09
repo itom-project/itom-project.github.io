@@ -18,16 +18,19 @@ Among others, we thank the following institutions for their support:
    
    for their intense contribution to the core, to many plugins as well as designer plugins.
    They also provide their own plugin repository for **itom** under http://twipos.bitbucket.org/
-   where you can find an enhanced 3D visualization plugin (also part of the **itom** Windows setup)
+   where you can find an enhanced 3D visualization plugin (also part of the **itom** Windows setup).
+   
+   **twip optical solutions** also offers commercial support for **itom** as well as the development of plugins. For more
+   information see http://www.twip-os.com/?lang=en#services.
 
 -----
 
 .. figure:: _static\\iprom.png
    :width: 120px
    :align: center
-   :alt: IPROM University of Braunschweig
+   :alt: IPROM, TU Braunschweig
 
-   |Institut für Produktionsmesstechnik, University of Braunschweig|_
+   |Institut für Produktionsmesstechnik, TU Braunschweig|_
    
    for their development and contribution to several plugins (e.g. AVTVimba).
 
@@ -64,8 +67,8 @@ You can also register to the `mailing list <https://lists.sourceforge.net/lists/
 .. |twip optical solutions GmbH| replace:: *twip optical solutions GmbH*
 .. _twip optical solutions GmbH: http://www.twip-os.com/
 
-.. |Institut für Produktionsmesstechnik, University of Braunschweig| replace:: *Institut für Produktionsmesstechnik, University of Braunschweig*
-.. _Institut für Produktionsmesstechnik, University of Braunschweig: http://iprom.tu-bs.de/
+.. |Institut für Produktionsmesstechnik, TU Braunschweig| replace:: *Institut für Produktionsmesstechnik, TU Braunschweig*
+.. _Institut für Produktionsmesstechnik, TU Braunschweig: http://iprom.tu-bs.de/
 
 .. |Pulsar Photonics GmbH| replace:: *Pulsar Photonics GmbH*
 .. _Pulsar Photonics GmbH: http://www.pulsar-photonics.de
