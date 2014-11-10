@@ -44,6 +44,8 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/v4l2.rst
    plugins/grabber/vistek.rst
    plugins/grabber/ximea.rst
+   plugins/grabber/avtVimba.rst
+   plugins/grabber/AndorSDK3.rst
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
@@ -55,6 +57,7 @@ Motors / Actuators
    plugins/actuators/dummyMotor.rst
    plugins/actuators/leicaMotorFocus.rst
    plugins/actuators/piPiezoCtrl.rst
+   plugins/actuators/piGCS2.rst
    plugins/actuators/usbMotion3XIII.rst
 
 Further hardware devices

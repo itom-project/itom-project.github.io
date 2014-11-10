@@ -13,6 +13,7 @@ Among others, we thank the following institutions for their support:
    :width: 120px
    :align: center
    :alt: twip optical solutions GmbH
+   :target: http://www.twip-os.com
 
    Company |twip optical solutions GmbH|_
    
@@ -29,6 +30,7 @@ Among others, we thank the following institutions for their support:
    :width: 120px
    :align: center
    :alt: IPROM, TU Braunschweig
+   :target: http://iprom.tu-bs.de/
 
    |Institut für Produktionsmesstechnik, TU Braunschweig|_
    
@@ -40,6 +42,7 @@ Among others, we thank the following institutions for their support:
    :width: 120px
    :align: center
    :alt: Pulsar Photonics GmbH
+   :target: http://www.pulsar-photonics.de
 
    Company |Pulsar Photonics GmbH|_
    
@@ -51,6 +54,7 @@ Among others, we thank the following institutions for their support:
    :width: 120px
    :align: center
    :alt: SLAM, Swansea University
+   :target: http://www.swansea.ac.uk/biosci/researchgroups/slam/
 
    |Group Swansea Lab for Animal Movement - Animal ecology and behaviour of Swansea University(UK)|_
    
