@@ -111,56 +111,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00026"></a>00026 <span class="preprocessor">#include &lt;qobject.h&gt;</span>
 <a name="l00027"></a>00027 <span class="preprocessor">#include &quot;../../common/addInInterface.h&quot;</span>
 <a name="l00028"></a>00028 <span class="preprocessor">#include &quot;../../common/sharedStructures.h&quot;</span>
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="preprocessor">#include &lt;qvector.h&gt;</span>
-<a name="l00031"></a>00031 <span class="preprocessor">#include &lt;qvariant.h&gt;</span>
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="keyword">namespace </span>ito {
-<a name="l00034"></a>00034 
-<a name="l00035"></a><a class="code" href="classito_1_1_algo_interface_validator.html">00035</a> <span class="keyword">class </span><a class="code" href="classito_1_1_algo_interface_validator.html" title="The class AlgoInterfaceValidator provides validators and checks in order to verify that a certain fil...">AlgoInterfaceValidator</a> : <span class="keyword">public</span> QObject
-<a name="l00036"></a>00036 {
-<a name="l00037"></a>00037 <span class="keyword">public</span>:
-<a name="l00038"></a>00038     <a class="code" href="classito_1_1_algo_interface_validator.html#a1a564a226d758d9c38dd9246b9ccea3d" title="constructor">AlgoInterfaceValidator</a>(<a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;retValue);
-<a name="l00039"></a>00039     <a class="code" href="classito_1_1_algo_interface_validator.html#aeec7bd449f29b241045c7fd1ec0684d3" title="destructor">~AlgoInterfaceValidator</a>();
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> <a class="code" href="classito_1_1_algo_interface_validator.html#aa4762630a1abef5773dd9a53d040e26f" title="addInterface">addInterface</a>(<a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, QVector&lt;ito::Param&gt; &amp;mandParams, QVector&lt;ito::Param&gt; &amp;outParams, <span class="keywordtype">int</span> maxNumMand, <span class="keywordtype">int</span> maxNumOpt, <span class="keywordtype">int</span> maxNumOut);
-<a name="l00042"></a>00042     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#a3e28dbabe628a108de6fd230b3b8c3be" title="verifies a given filter with respect to its indicated interface">isValidFilter</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo_1_1_filter_def.html" title="container for publishing filters provided by any plugin">ito::AddInAlgo::FilterDef</a> &amp;filter, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret, QStringList &amp;tags) <span class="keyword">const</span>;
-<a name="l00043"></a>00043     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#a4f41d8c864e6d0aa03e8f847eb5fce2f" title="verifies a given algo-widget with respect to its indicated interface">isValidWidget</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo_1_1_algo_widget_def.html" title="container for publishing widgets provided by any plugin">ito::AddInAlgo::AlgoWidgetDef</a> &amp;widget, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret, QStringList &amp;tags) <span class="keyword">const</span>;
-<a name="l00044"></a>00044     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> getInterfaceParameters(<a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, QVector&lt;ito::ParamBase&gt; &amp;mandParams, QVector&lt;ito::ParamBase&gt; &amp;outParams) <span class="keyword">const</span>;
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">protected</span>:
-<a name="l00047"></a><a class="code" href="structito_1_1_algo_interface_validator_1_1_algo_interface.html">00047</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_algo_interface_validator_1_1_algo_interface.html">AlgoInterface</a>
-<a name="l00048"></a>00048     {
-<a name="l00049"></a>00049         <a class="code" href="structito_1_1_algo_interface_validator_1_1_algo_interface.html">AlgoInterface</a>() : maxNumMand(0), maxNumOpt(0), maxNumOut(0) {}
-<a name="l00050"></a>00050         QVector&lt;ito::Param&gt; mandParams;
-<a name="l00051"></a>00051         QVector&lt;ito::Param&gt; outParams;
-<a name="l00052"></a>00052         <span class="keywordtype">int</span> maxNumMand;
-<a name="l00053"></a>00053         <span class="keywordtype">int</span> maxNumOpt;
-<a name="l00054"></a>00054         <span class="keywordtype">int</span> maxNumOut;
-<a name="l00055"></a>00055     };
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057     <span class="keyword">enum</span> tCompareResult { tCmpEqual, tCmpCompatible, tCmpFailed };
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     QMap&lt;int,AlgoInterface&gt; m_interfaces;
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> <a class="code" href="classito_1_1_algo_interface_validator.html#ac63132722589bf735859ddd65648e721" title="loads the requirements for every interface defined in the enumeration AddInAlgo::tAlgoInterface">init</a>(<span class="keywordtype">void</span>);
-<a name="l00062"></a>00062     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#a1714dcc8bd1de347f52a5c3bfc845bb5">isValid</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, <span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo.html#a28deea9a1beecbd759d7451c80f79515" title="possible categories for filter or widget-methods">ito::AddInAlgo::t_filterParam</a> filterParamFunc, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret) <span class="keyword">const</span>;
-<a name="l00063"></a>00063     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#af08269b4f4d4652fe6bc54f1371fd997" title="verifies and parses the meta information string of any filter or algoWidget">getTags</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, <span class="keyword">const</span> QString &amp;metaInformation, QStringList &amp;tags) <span class="keyword">const</span>;
-<a name="l00064"></a>00064     tCompareResult <a class="code" href="classito_1_1_algo_interface_validator.html#a6bf276a205b9ce2e75643ef832596270">compareParam</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_param.html">ito::Param</a> &amp;paramTemplate, <span class="keyword">const</span> <a class="code" href="classito_1_1_param.html">ito::Param</a> &amp;param, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret) <span class="keyword">const</span>;
-<a name="l00065"></a>00065     tCompareResult <a class="code" href="classito_1_1_algo_interface_validator.html#ae5e43343932e003674d0302f418c2398">compareMetaParam</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ito::ParamMeta</a> *metaTemplate, <span class="keyword">const</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ito::ParamMeta</a> *meta, <span class="keyword">const</span> <span class="keywordtype">char</span>* nameTemplate, <span class="keyword">const</span> <span class="keywordtype">char</span> *name, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret) <span class="keyword">const</span>;
+<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;../helper/paramHelper.h&quot;</span>
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="preprocessor">#include &lt;qvector.h&gt;</span>
+<a name="l00032"></a>00032 <span class="preprocessor">#include &lt;qvariant.h&gt;</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 <span class="keyword">namespace </span>ito {
+<a name="l00035"></a>00035 
+<a name="l00036"></a><a class="code" href="classito_1_1_algo_interface_validator.html">00036</a> <span class="keyword">class </span><a class="code" href="classito_1_1_algo_interface_validator.html" title="The class AlgoInterfaceValidator provides validators and checks in order to verify that a certain fil...">AlgoInterfaceValidator</a> : <span class="keyword">public</span> QObject
+<a name="l00037"></a>00037 {
+<a name="l00038"></a>00038 <span class="keyword">public</span>:
+<a name="l00039"></a>00039     <a class="code" href="classito_1_1_algo_interface_validator.html#a1a564a226d758d9c38dd9246b9ccea3d" title="constructor">AlgoInterfaceValidator</a>(<a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;retValue);
+<a name="l00040"></a>00040     <a class="code" href="classito_1_1_algo_interface_validator.html#aeec7bd449f29b241045c7fd1ec0684d3" title="destructor">~AlgoInterfaceValidator</a>();
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> <a class="code" href="classito_1_1_algo_interface_validator.html#aa4762630a1abef5773dd9a53d040e26f" title="addInterface">addInterface</a>(<a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, QVector&lt;ito::Param&gt; &amp;mandParams, QVector&lt;ito::Param&gt; &amp;outParams, <span class="keywordtype">int</span> maxNumMand, <span class="keywordtype">int</span> maxNumOpt, <span class="keywordtype">int</span> maxNumOut);
+<a name="l00043"></a>00043     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#a3e28dbabe628a108de6fd230b3b8c3be" title="verifies a given filter with respect to its indicated interface">isValidFilter</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo_1_1_filter_def.html" title="container for publishing filters provided by any plugin">ito::AddInAlgo::FilterDef</a> &amp;filter, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret, QStringList &amp;tags) <span class="keyword">const</span>;
+<a name="l00044"></a>00044     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#a4f41d8c864e6d0aa03e8f847eb5fce2f" title="verifies a given algo-widget with respect to its indicated interface">isValidWidget</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo_1_1_algo_widget_def.html" title="container for publishing widgets provided by any plugin">ito::AddInAlgo::AlgoWidgetDef</a> &amp;widget, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret, QStringList &amp;tags) <span class="keyword">const</span>;
+<a name="l00045"></a>00045     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> getInterfaceParameters(<a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, QVector&lt;ito::ParamBase&gt; &amp;mandParams, QVector&lt;ito::ParamBase&gt; &amp;outParams) <span class="keyword">const</span>;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="keyword">protected</span>:
+<a name="l00048"></a><a class="code" href="structito_1_1_algo_interface_validator_1_1_algo_interface.html">00048</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_algo_interface_validator_1_1_algo_interface.html">AlgoInterface</a>
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050         <a class="code" href="structito_1_1_algo_interface_validator_1_1_algo_interface.html">AlgoInterface</a>() : maxNumMand(0), maxNumOpt(0), maxNumOut(0) {}
+<a name="l00051"></a>00051         QVector&lt;ito::Param&gt; mandParams;
+<a name="l00052"></a>00052         QVector&lt;ito::Param&gt; outParams;
+<a name="l00053"></a>00053         <span class="keywordtype">int</span> maxNumMand;
+<a name="l00054"></a>00054         <span class="keywordtype">int</span> maxNumOpt;
+<a name="l00055"></a>00055         <span class="keywordtype">int</span> maxNumOut;
+<a name="l00056"></a>00056     };
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058     QMap&lt;int,AlgoInterface&gt; m_interfaces;
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060     <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> <a class="code" href="classito_1_1_algo_interface_validator.html#ac63132722589bf735859ddd65648e721" title="loads the requirements for every interface defined in the enumeration AddInAlgo::tAlgoInterface">init</a>(<span class="keywordtype">void</span>);
+<a name="l00061"></a>00061     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#a1714dcc8bd1de347f52a5c3bfc845bb5">isValid</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, <span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo.html#a28deea9a1beecbd759d7451c80f79515" title="possible categories for filter or widget-methods">ito::AddInAlgo::t_filterParam</a> filterParamFunc, <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> &amp;ret) <span class="keyword">const</span>;
+<a name="l00062"></a>00062     <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_algo_interface_validator.html#af08269b4f4d4652fe6bc54f1371fd997" title="verifies and parses the meta information string of any filter or algoWidget">getTags</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520">ito::AddInAlgo::tAlgoInterface</a> iface, <span class="keyword">const</span> QString &amp;metaInformation, QStringList &amp;tags) <span class="keyword">const</span>;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 <span class="keyword">private</span>:
+<a name="l00065"></a>00065 };
 <a name="l00066"></a>00066 
-<a name="l00067"></a>00067 <span class="keyword">private</span>:
-<a name="l00068"></a>00068 };
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070 } <span class="comment">//end namespace ito</span>
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <span class="preprocessor">#endif</span>
+<a name="l00067"></a>00067 } <span class="comment">//end namespace ito</span>
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>algoInterfaceValidator.h</b>      </li>
-      <li class="footer">Generated on Wed Oct 8 2014 17:19:33 for itom by&#160;
+      <li class="footer">Generated on Tue Nov 11 2014 12:33:42 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

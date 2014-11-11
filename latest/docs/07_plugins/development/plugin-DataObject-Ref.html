@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'da482c7',
+        VERSION:     '5ccf5f9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -63,12 +61,11 @@
             
   <div class="section" id="dataobject-reference">
 <span id="plugin-dataobject-ref"></span><h1>DataObject - Reference<a class="headerlink" href="#dataobject-reference" title="Permalink to this headline">¶</a></h1>
-<div class="line-block" id="itomclassito_1_1_data_object">
-<div class="line"><em>class</em> <strong>ito::DataObject</strong></div>
-</div>
-<blockquote>
-<div><p>dataObject contains a n-dimensional matrix </p>
-<p><p>The n-dimensional matrix can have different element types. Recently the following types are supported: int8, uint8, int16, uint16, int32, uint32, float32, float64 (=&gt; double), complex64 (2x float32), complex128 (2x float64)</p>
+<dl class="class">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object"></span><em>class</em> <tt class="descname">ito::DataObject</tt></dt>
+<dd><p>dataObject contains a n-dimensional matrix </p>
+<p>The n-dimensional matrix can have different element types. Recently the following types are supported: int8, uint8, int16, uint16, int32, uint32, float32, float64 (=&gt; double), complex64 (2x float32), complex128 (2x float64)</p>
 <p>In order to handle huge matrices, the data object can divide one matrix into subparts in memory. Each subpart (called matrix-plane) is two-dimensional and covers data of the last two dimensions. Each of these matrix-planes is of type cv::Mat_&lt;type&gt; and can be used with every operator given by the openCV-framework (version 2.3.1 or higher).</p>
 <p>We assume to have a n-dimensional matrix A, where each dimension has its size s_i, hence A=[s_1, s_2, ..., s_(n-2), s_(n-1), s_n]</p>
 <p>Hence, in total there are s_1 * s_2 * ... * s_(n-2) different matrix-planes, which are all accessible by the member m_data, which is a std::vector of the general type int*. This type has to be casted to the specific cv::Mat_&lt;...&gt; when one matrix-plane has to be accessed. Sometimes it is also possible to simply cast to cv::Mat.</p>
@@ -83,15 +80,13 @@
 <p>2. define the following two lines of code: typedef returnType (*t&#8217;MethodName&#8217;Func)(Parameters1); MAKEFUNCLIST(&#8216;MethodName&#8217;Func);</p>
 <p>3. define the method, accessed for example as public-method of dataObject <a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>::&#8217;PublicMethodName&#8217;(Parameters2) { ... fList&#8217;MethodName&#8217;Func[<a class="reference internal" href="#itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"><em>getType()</em></a>](Parameters1); ... return ... }</p>
 <p>&#8212; By the macro MAKEFUNCLIST a list fList&#8217;MethodName&#8217;Func is generated with each entry being a function pointer to the specific templated version of &#8216;MethodName&#8217;Func. The specific method is accessed by using <a class="reference internal" href="#itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"><em>getType()</em></a> of dataObject. Hence it is important to keep the element-data-types and their order consistent for the whole itom-project. </p>
-</p>
-<em>Public Functions</em><blockquote>
-<div><p><span class="target" id="itomclassito_1_1_data_object_1ae4f5dd0146a04aca4829a04a663a04c3"></span><div class="line-block">
-<div class="line">int <strong>seekMat</strong>(const int matNum, const int numMats)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns the index vector-index of m_data which corresponds to the given zero-based two-dimensional matrix-index </p>
-<p><p>Since there might be a difference between the &#8220;real&#8221; matrix size in memory and the virtual size which is set by subslicing a matrix and hence setting any ROI, this method transforms a desired matrix-plane index to the real index in memory of the data-vector m_data</p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ae4f5dd0146a04aca4829a04a663a04c3"></span>int <tt class="descname">seekMat</tt><big>(</big>const int <em>matNum</em>, const int <em>numMats</em><big>)</big> const</dt>
+<dd><p>returns the index vector-index of m_data which corresponds to the given zero-based two-dimensional matrix-index </p>
+<p>Since there might be a difference between the &#8220;real&#8221; matrix size in memory and the virtual size which is set by subslicing a matrix and hence setting any ROI, this method transforms a desired matrix-plane index to the real index in memory of the data-vector m_data</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>real vector-index for the desired matrix-plane or 0 if matNum &gt;= numMats. </dd>
@@ -105,15 +100,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4ae40c26292db6f275cdf068901440ea"></span><div class="line-block">
-<div class="line">int <strong>seekMat</strong>(const int matNum)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns the index vector-index of m_data which corresponds to the given zero-based two-dimensional matrix-index </p>
-<p><p>Since there might be a difference between the &#8220;real&#8221; matrix size in memory and the virtual size which is set by subslicing a matrix and hence setting any ROI, this method transforms a desired matrix-plane index to the real index in memory of the data-vector m_data</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4ae40c26292db6f275cdf068901440ea"></span>int <tt class="descname">seekMat</tt><big>(</big>const int <em>matNum</em><big>)</big> const</dt>
+<dd><p>returns the index vector-index of m_data which corresponds to the given zero-based two-dimensional matrix-index </p>
+<p>Since there might be a difference between the &#8220;real&#8221; matrix size in memory and the virtual size which is set by subslicing a matrix and hence setting any ROI, this method transforms a desired matrix-plane index to the real index in memory of the data-vector m_data</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>real vector-index for the desired matrix-plane </dd>
@@ -129,212 +122,140 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a0a55be7cee711d97f4ffae685401eb06"></span><div class="line-block">
-<div class="line">int <strong>calcNumMats</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>calculates numbers of single opencv matrices which are part of the ROI which has previously been set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a0a55be7cee711d97f4ffae685401eb06"></span>int <tt class="descname">calcNumMats</tt><big>(</big>void<big>)</big> const</dt>
+<dd><p>calculates numbers of single opencv matrices which are part of the ROI which has previously been set. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>0 if empty range or empty matrix, 1 if two dimensional, else product of sizes of all dimensions besides the last two ones. </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aef6f5cc9ed877dff7ebf607314a1c0c0"></span><div class="line-block">
-<div class="line">double <strong>getValueOffset</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function return the offset of the values stored within the dataOject </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aef6f5cc9ed877dff7ebf607314a1c0c0"></span>double <tt class="descname">getValueOffset</tt><big>(</big><big>)</big> const</dt>
+<dd><p>&lt; Function return the offset of the values stored within the dataOject </p>
 <p>Function return the scaling of values stored within the dataOject </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a1f949cfe9c524d032ec1d04125b1bd64"></span><div class="line-block">
-<div class="line">double <strong>getValueScale</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function return the unit description for the values stoerd within the dataOject. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a9e15779be202e179813019ef50880de6"></span><div class="line-block">
-<div class="line">const std::string <strong>getValueUnit</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function return the description for the values stored within the dataOject, if tagspace does not exist, NULL is returned. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a13b3ece1ae4f9f44f36ac74f28367693"></span><div class="line-block">
-<div class="line">std::string <strong>getValueDescription</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function return the axis-offset for the existing axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a9ca1ab7c61f85d6e0232773959a22d91"></span><div class="line-block">
-<div class="line">double <strong>getAxisOffset</strong>(const int axisNum)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the axis-description for the exist axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a44e554b15f9bffd8e6077fb2d61c51e5"></span><div class="line-block">
-<div class="line">double <strong>getAxisScale</strong>(const int axisNum)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the axis-unit-description for the exist axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a8833ed4df6ec8987d5db5888593c38d4"></span><div class="line-block">
-<div class="line">const std::string <strong>getAxisUnit</strong>(const int axisNum, bool &amp; validOperation)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the axis-description for the exist specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1abcce15400b05f0ae65b100cf3e7c274d"></span><div class="line-block">
-<div class="line">std::string <strong>getAxisDescription</strong>(const int axisNum, bool &amp; validOperation)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a816fabf91d61ed766121d102b890d843"></span><div class="line-block">
-<div class="line">DataObjectTagType <strong>getTag</strong>(const std::string &amp; key, bool &amp; validOperation)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a418f219bb93698cb411e5bd41052d65b"></span><div class="line-block">
-<div class="line">bool <strong>getTagByIndex</strong>(const int tagNumber, std::string &amp; key, DataObjectTagType  &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the string-value for &#8216;key&#8217; identified by int tagNumber. If key in the TagMap do not exist NULL is returned. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a56dac06f4679c40a9f632ac97bfd27c4"></span><div class="line-block">
-<div class="line">std::string <strong>getTagKey</strong>(const int tagNumber, bool &amp; validOperation)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the number of elements in the Tags-Maps. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a13f78ec1afc91c174b3e7b449b1a47bc"></span><div class="line-block">
-<div class="line">int <strong>getTagListSize</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function to set the string-value of the value unit, return 1 if values does not exist. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aa58d6ed711b01b4cbd4dd282a1d574ec"></span><div class="line-block">
-<div class="line">int <strong>setValueUnit</strong>(const std::string &amp; unit)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function to set the string-value of the value description, return 1 if values does not exist. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac49d259247fd2f8d665287d8ac764cda"></span><div class="line-block">
-<div class="line">int <strong>setValueDescription</strong>(const std::string &amp; description)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a707f177346aed9923d84304e2c8e4b24"></span><div class="line-block">
-<div class="line">int <strong>setAxisOffset</strong>(const unsigned int axisNum, const double offset)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function to set the offset of the specified axis, return 1 if axis does not exist </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a516b5ef3c2dd6ef45003951dba92bddc"></span><div class="line-block">
-<div class="line">int <strong>setAxisScale</strong>(const unsigned int axisNum, const double scale)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function to set the scale of the specified axis, return 1 if axis does not exist or scale is 0.0. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac449fa239351ce365bfdde568e15191d"></span><div class="line-block">
-<div class="line">int <strong>setAxisUnit</strong>(const unsigned int axisNum, const std::string &amp; unit)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function to set the unit (string value) of the specified axis, return 1 if axis does not exist </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad7af580eef6b5a8ccb40a655c4a3e2ba"></span><div class="line-block">
-<div class="line">int <strong>setAxisDescription</strong>(const unsigned int axisNum, const std::string &amp; description)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function to set the description (string value) of the specified axis, return 1 if axis does not exist </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aedbb349d81443ed13def258dcbff1cdf"></span><div class="line-block">
-<div class="line">int <strong>setTag</strong>(const std::string &amp; key, const  DataObjectTagType  &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function to set the string value of the specified tag, if the tag do not exist, it will be added automatically, return 1 if tagspace does not exist </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a88944a762fdf392b6fc00d76cd92b945"></span><div class="line-block">
-<div class="line">bool <strong>existTag</strong>(const std::string &amp; key)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function to check whether tag exist or not </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2bb74c042aba987def8d81052b722981"></span><div class="line-block">
-<div class="line">bool <strong>deleteTag</strong>(const std::string &amp; key)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function deletes specified tag. If tag do not exist, return value is 1 else returnvalue is 0 </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aca9d98ceff2cddf4c28e57b8b789c526"></span><div class="line-block">
-<div class="line">bool <strong>deleteAllTags</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1afd006f558971045d9d17021bb38de07c"></span><div class="line-block">
-<div class="line">int <strong>addToProtocol</strong>(const std::string &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>&lt; Function adds value to the protocol-tag. If this object is an ROI, the ROI-coordinates are added. If string do not end with an 
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a1f949cfe9c524d032ec1d04125b1bd64"></span>double <tt class="descname">getValueScale</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Function return the unit description for the values stoerd within the dataOject. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a9e15779be202e179813019ef50880de6"></span>const std::string <tt class="descname">getValueUnit</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Function return the description for the values stored within the dataOject, if tagspace does not exist, NULL is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a13b3ece1ae4f9f44f36ac74f28367693"></span>std::string <tt class="descname">getValueDescription</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Function return the axis-offset for the existing axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a9ca1ab7c61f85d6e0232773959a22d91"></span>double <tt class="descname">getAxisOffset</tt><big>(</big>const int <em>axisNum</em><big>)</big> const</dt>
+<dd><p>Function returns the axis-description for the exist axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a44e554b15f9bffd8e6077fb2d61c51e5"></span>double <tt class="descname">getAxisScale</tt><big>(</big>const int <em>axisNum</em><big>)</big> const</dt>
+<dd><p>Function returns the axis-unit-description for the exist axis specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a8833ed4df6ec8987d5db5888593c38d4"></span>const std::string <tt class="descname">getAxisUnit</tt><big>(</big>const int <em>axisNum</em>, bool &amp; <em>validOperation</em><big>)</big> const</dt>
+<dd><p>Function returns the axis-description for the exist specified by axisNum. If axisNum is out of dimension range it returns NULL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a418f219bb93698cb411e5bd41052d65b"></span>bool <tt class="descname">getTagByIndex</tt><big>(</big>const int <em>tagNumber</em>, std::string &amp; <em>key</em>, DataObjectTagType &amp; <em>value</em><big>)</big> const</dt>
+<dd><p>Function returns the string-value for &#8216;key&#8217; identified by int tagNumber. If key in the TagMap do not exist NULL is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a56dac06f4679c40a9f632ac97bfd27c4"></span>std::string <tt class="descname">getTagKey</tt><big>(</big>const int <em>tagNumber</em>, bool &amp; <em>validOperation</em><big>)</big> const</dt>
+<dd><p>Function returns the number of elements in the Tags-Maps. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a13f78ec1afc91c174b3e7b449b1a47bc"></span>int <tt class="descname">getTagListSize</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Function to set the string-value of the value unit, return 1 if values does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aa58d6ed711b01b4cbd4dd282a1d574ec"></span>int <tt class="descname">setValueUnit</tt><big>(</big>const std::string &amp; <em>unit</em><big>)</big></dt>
+<dd><p>Function to set the string-value of the value description, return 1 if values does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a707f177346aed9923d84304e2c8e4b24"></span>int <tt class="descname">setAxisOffset</tt><big>(</big>const unsigned int <em>axisNum</em>, const double <em>offset</em><big>)</big></dt>
+<dd><p>&lt; Function to set the offset of the specified axis, return 1 if axis does not exist </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a516b5ef3c2dd6ef45003951dba92bddc"></span>int <tt class="descname">setAxisScale</tt><big>(</big>const unsigned int <em>axisNum</em>, const double <em>scale</em><big>)</big></dt>
+<dd><p>&lt; Function to set the scale of the specified axis, return 1 if axis does not exist or scale is 0.0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac449fa239351ce365bfdde568e15191d"></span>int <tt class="descname">setAxisUnit</tt><big>(</big>const unsigned int <em>axisNum</em>, const std::string &amp; <em>unit</em><big>)</big></dt>
+<dd><p>&lt; Function to set the unit (string value) of the specified axis, return 1 if axis does not exist </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad7af580eef6b5a8ccb40a655c4a3e2ba"></span>int <tt class="descname">setAxisDescription</tt><big>(</big>const unsigned int <em>axisNum</em>, const std::string &amp; <em>description</em><big>)</big></dt>
+<dd><p>&lt; Function to set the description (string value) of the specified axis, return 1 if axis does not exist </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aedbb349d81443ed13def258dcbff1cdf"></span>int <tt class="descname">setTag</tt><big>(</big>const std::string &amp; <em>key</em>, const DataObjectTagType &amp; <em>value</em><big>)</big></dt>
+<dd><p>&lt; Function to set the string value of the specified tag, if the tag do not exist, it will be added automatically, return 1 if tagspace does not exist </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a88944a762fdf392b6fc00d76cd92b945"></span>bool <tt class="descname">existTag</tt><big>(</big>const std::string &amp; <em>key</em><big>)</big> const</dt>
+<dd><p>&lt; Function to check whether tag exist or not </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2bb74c042aba987def8d81052b722981"></span>bool <tt class="descname">deleteTag</tt><big>(</big>const std::string &amp; <em>key</em><big>)</big></dt>
+<dd><p>&lt; Function deletes specified tag. If tag do not exist, return value is 1 else returnvalue is 0 </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1afd006f558971045d9d17021bb38de07c"></span>int <tt class="descname">addToProtocol</tt><big>(</big>const std::string &amp; <em>value</em><big>)</big></dt>
+<dd><p>&lt; Function adds value to the protocol-tag. If this object is an ROI, the ROI-coordinates are added. If string do not end with an 
 , 
  is added. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2391196f61281809fed015e36833c413"></span><div class="line-block">
-<div class="line">double <strong>getPhysToPix</strong>(const unsigned int dim, const double phys, bool &amp; isInsideImage)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the not rounded pixel index of a physical coordinate  Function returns the not rounded pixel index of a physical coordinate (Unit-Coordinate = ( px-Coordinate - Offset)* Scale). If the pixel is outside of the image, the isInsideImage-flag is set to false else it is set to true. To avoid memory access-error, the returnvalue is clipped within the range of the image ([0...imagesize-1]) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2391196f61281809fed015e36833c413"></span>double <tt class="descname">getPhysToPix</tt><big>(</big>const unsigned int <em>dim</em>, const double <em>phys</em>, bool &amp; <em>isInsideImage</em><big>)</big> const</dt>
+<dd><p>Function returns the not rounded pixel index of a physical coordinate  Function returns the not rounded pixel index of a physical coordinate (Unit-Coordinate = ( px-Coordinate - Offset)* Scale). If the pixel is outside of the image, the isInsideImage-flag is set to false else it is set to true. To avoid memory access-error, the returnvalue is clipped within the range of the image ([0...imagesize-1]) </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>(double)( pix / AxisScale + AxisOffset) &amp; [0..imagesize-1] </dd>
@@ -350,21 +271,18 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2c5f5878df0ece21028f06abdd3ace4c"></span><div class="line-block">
-<div class="line">int <strong>getPhysToPix2D</strong>(const double physY, double &amp; tPxY, bool &amp; isInsideImageY, const double physX, double &amp; tPxX, bool &amp; isInsideImageX)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the not rounded pixel index of a physical coordinate. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac78de8af0bd6570e00b53ce7c1e7cac3"></span><div class="line-block">
-<div class="line">double <strong>getPixToPhys</strong>(const unsigned int dim, const double pix, bool &amp; isInsideImage)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function returns the physical coordinate of a pixel  Function returns the physical coordinate of a pixel index (Unit-Coordinate = ( px-Coordinate - Offset)* Scale). If the pixel is outside of the image, the isInsideImage-flag is set to false else it is set to true. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2c5f5878df0ece21028f06abdd3ace4c"></span>int <tt class="descname">getPhysToPix2D</tt><big>(</big>const double <em>physY</em>, double &amp; <em>tPxY</em>, bool &amp; <em>isInsideImageY</em>, const double <em>physX</em>, double &amp; <em>tPxX</em>, bool &amp; <em>isInsideImageX</em><big>)</big> const</dt>
+<dd><p>Function returns the not rounded pixel index of a physical coordinate. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac78de8af0bd6570e00b53ce7c1e7cac3"></span>double <tt class="descname">getPixToPhys</tt><big>(</big>const unsigned int <em>dim</em>, const double <em>pix</em>, bool &amp; <em>isInsideImage</em><big>)</big> const</dt>
+<dd><p>Function returns the physical coordinate of a pixel  Function returns the physical coordinate of a pixel index (Unit-Coordinate = ( px-Coordinate - Offset)* Scale). If the pixel is outside of the image, the isInsideImage-flag is set to false else it is set to true. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>(double)( pix - AxisOffset)* AxisScale) </dd>
@@ -380,13 +298,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ae336de870171cd63196843607dc05189"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>setXYRotationalMatrix</strong>(double r11, double r12, double r13, double r21, double r22, double r23, double r31, double r32, double r33)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function to access (set) the rotiational matrix by each element. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ae336de870171cd63196843607dc05189"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">setXYRotationalMatrix</tt><big>(</big>double <em>r11</em>, double <em>r12</em>, double <em>r13</em>, double <em>r21</em>, double <em>r22</em>, double <em>r23</em>, double <em>r31</em>, double <em>r32</em>, double <em>r33</em><big>)</big></dt>
+<dd><p>Function to access (set) the rotiational matrix by each element. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>ito::retOk || ito::retError </dd>
@@ -414,13 +331,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ab4c8d40d3d7b5497056a6903202ffd12"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>getXYRotationalMatrix</strong>(double &amp; r11, double &amp; r12, double &amp; r13, double &amp; r21, double &amp; r22, double &amp; r23, double &amp; r31, double &amp; r32, double &amp; r33)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Function to access (get) the rotiational matrix by each element. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ab4c8d40d3d7b5497056a6903202ffd12"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">getXYRotationalMatrix</tt><big>(</big>double &amp; <em>r11</em>, double &amp; <em>r12</em>, double &amp; <em>r13</em>, double &amp; <em>r21</em>, double &amp; <em>r22</em>, double &amp; <em>r23</em>, double &amp; <em>r31</em>, double &amp; <em>r32</em>, double &amp; <em>r33</em><big>)</big> const</dt>
+<dd><p>Function to access (get) the rotiational matrix by each element. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>ito::retOk || ito::retError </dd>
@@ -448,14 +364,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aecb43ce72bb152b72a572e584e095de7"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyTagMapTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><p>Deep copies the tagmap with all entries to rhs object</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aecb43ce72bb152b72a572e584e095de7"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">copyTagMapTo</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big> const</dt>
+<dd><p>Deep copies the tagmap with all entries to rhs object</p>
 <p>this function makes a deepcopy of the tags map to rhs object from this object. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -469,15 +383,12 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a3874ac350aa5ec1fc9b14fcf551780af"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyAxisTagsTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><p>Deep copies the axistags to rhs object</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a3874ac350aa5ec1fc9b14fcf551780af"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">copyAxisTagsTo</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big> const</dt>
+<dd><p>Deep copies the axistags to rhs object</p>
 <p>this function makes a deepcopy of the axis and value metadata from this object to rhs object. It copies <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -491,46 +402,30 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"></span><div class="line-block">
-<div class="line">int <strong>getDims</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>&lt; returns the number of dimensions returns the element data type in form of its type-number </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"></span><div class="line-block">
-<div class="line">int <strong>getType</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>returns if the data in the first n-2 dimensions is stored within one entire block in memory (true), else (false) </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a06939618cad91af4c856b5489b2c463b"></span><div class="line-block">
-<div class="line">char <strong>getContinuous</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p>returns if the data object is owner of the data, hence, the data will be deleted by this data object, if nobody else is using the data any more </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a69f02792bd3bad65a4f3acf9a4b6c9c7"></span><div class="line-block">
-<div class="line">char <strong>getOwnData</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad5a110972bbf5e38eb0bb2668694aff4"></span><div class="line-block">
-<div class="line">int <strong>getTotal</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>gets total number of elements within the data object&#8217;s ROI </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"></span>int <tt class="descname">getDims</tt><big>(</big>void<big>)</big> const</dt>
+<dd><p>&lt; returns the number of dimensions returns the element data type in form of its type-number </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a96676055bdf8c9128c1d07f866921dcb"></span>int <tt class="descname">getType</tt><big>(</big>void<big>)</big> const</dt>
+<dd><p>returns if the data in the first n-2 dimensions is stored within one entire block in memory (true), else (false) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a06939618cad91af4c856b5489b2c463b"></span>char <tt class="descname">getContinuous</tt><big>(</big>void<big>)</big> const</dt>
+<dd><p>returns if the data object is owner of the data, hence, the data will be deleted by this data object, if nobody else is using the data any more </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad5a110972bbf5e38eb0bb2668694aff4"></span>int <tt class="descname">getTotal</tt><big>(</big><big>)</big> const</dt>
+<dd><p>gets total number of elements within the data object&#8217;s ROI </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>number of elements </dd>
@@ -538,13 +433,12 @@
 <dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"><em>getDims</em></a>, <a class="reference internal" href="#itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"><em>getSize</em></a> </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a45d2a9d58736c37b80b2b7f484a16c9d"></span><div class="line-block">
-<div class="line">int <strong>getOriginalTotal</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>gets total number of elements of the whole data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a45d2a9d58736c37b80b2b7f484a16c9d"></span>int <tt class="descname">getOriginalTotal</tt><big>(</big><big>)</big> const</dt>
+<dd><p>gets total number of elements of the whole data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>number of elements </dd>
@@ -552,13 +446,12 @@
 <dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a65c56fb3e99963794f1c7b854edf1aa3"><em>getDims</em></a>, <a class="reference internal" href="#itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"><em>getSize</em></a> </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad2bbe518c3a3e86adede7804765178e3"></span><div class="line-block">
-<div class="line">void <strong>lockRead</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>locks this dataObject (all header information) and the underlying data block for a read operation </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad2bbe518c3a3e86adede7804765178e3"></span>void <tt class="descname">lockRead</tt><big>(</big><big>)</big></dt>
+<dd><p>locks this dataObject (all header information) and the underlying data block for a read operation </p>
 <p><dl class="docutils">
 <dt><strong>Remark</strong></dt>
 <dd>During the copy-constructor, operator=, eye, zero and ones method, the readWriteLock for the data block will be set to writeLock if any of the participating dataObjects are in writeLock mode. Then the number of readers will be decremented first. The lock of the dataObject, hence the lock for all header information, which are not shared, remains at its level.</dd>
@@ -566,38 +459,35 @@
 <dd>ReadWriteLock </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a49df9e5d334568f8cc99cfeec1cfd688"></span><div class="line-block">
-<div class="line">void <strong>lockWrite</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>locks this dataObject (all header information) and the underlying data block for a write operation </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a49df9e5d334568f8cc99cfeec1cfd688"></span>void <tt class="descname">lockWrite</tt><big>(</big><big>)</big></dt>
+<dd><p>locks this dataObject (all header information) and the underlying data block for a write operation </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>ReadWriteLock </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a1a000f1647f44b5de4952e77aadd9cf4"></span><div class="line-block">
-<div class="line">void <strong>unlock</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>unlocks any lock. If lock is writeLock, lock is set to idle, if lock is readLock, then the number of readers is decremented and lock is freed if no more readers are available </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a1a000f1647f44b5de4952e77aadd9cf4"></span>void <tt class="descname">unlock</tt><big>(</big><big>)</big></dt>
+<dd><p>unlocks any lock. If lock is writeLock, lock is set to idle, if lock is readLock, then the number of readers is decremented and lock is freed if no more readers are available </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>ReadWriteLock </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1affdc8a47d061562a1f7dd9a47465fea5"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs, unsigned char regionOnly = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated method to deeply copy the data of this matrix to another matrix rhs </p>
-<p><p>deeply copies the data of this data object to the given rhs-dataObject, whose existing data will be deleted first.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1affdc8a47d061562a1f7dd9a47465fea5"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">copyTo</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em>, unsigned char <em>regionOnly</em> = 0<big>)</big></dt>
+<dd><p>high-level, non-templated method to deeply copy the data of this matrix to another matrix rhs </p>
+<p>deeply copies the data of this data object to the given rhs-dataObject, whose existing data will be deleted first.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -613,15 +503,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a8c385ca573159fd49cec4112ef92557f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>convertTo</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs, const int type, const double alpha = 1, const double beta = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated matrix conversion </p>
-<p><p>Every element of the source matrix is converted to a new, given type. Additionally a floating-point scaling and offset parameter is possible.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a8c385ca573159fd49cec4112ef92557f"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">convertTo</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em>, const int <em>type</em>, const double <em>alpha</em> = 1, const double <em>beta</em> = 0<big>)</big> const</dt>
+<dd><p>high-level, non-templated matrix conversion </p>
+<p>Every element of the source matrix is converted to a new, given type. Additionally a floating-point scaling and offset parameter is possible.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -647,15 +535,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ae3de7306dbaf78ea23ea96d034ca3a39"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>deepCopyPartial</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated method. Deeply copies data of this data object which is within its ROI to the ROI of rhs. </p>
-<p><p>copies the values of each element from this data object to the ROI of the given rhs-dataObject. The rhs-dataObject must be allocated yet and its ROI must be the same size than this ROI</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ae3de7306dbaf78ea23ea96d034ca3a39"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">deepCopyPartial</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level, non-templated method. Deeply copies data of this data object which is within its ROI to the ROI of rhs. </p>
+<p>copies the values of each element from this data object to the ROI of the given rhs-dataObject. The rhs-dataObject must be allocated yet and its ROI must be the same size than this ROI</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -675,14 +561,12 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a3cea82c6684d6018ae03511b6e6a5819"></span><div class="line-block">
-<div class="line">uchar ** <strong>get_mdata</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns pointer to vector of cv::_Mat-matrices </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a3cea82c6684d6018ae03511b6e6a5819"></span>uchar ** <tt class="descname">get_mdata</tt><big>(</big>void<big>)</big></dt>
+<dd><p>returns pointer to vector of cv::_Mat-matrices </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>pointer to vector of matrices </dd>
@@ -690,26 +574,24 @@
 <dd>the returned type of std::vector is int*, you should cast it to the appropriate type (e.g. cv::_Mat&lt;int8&gt;) </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a246e0454900b64708fead50f63b2f2ab"></span><div class="line-block">
-<div class="line">uchar ** <strong>get_mdata</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constant version of get_mdata </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a246e0454900b64708fead50f63b2f2ab"></span>uchar ** <tt class="descname">get_mdata</tt><big>(</big>void<big>)</big> const</dt>
+<dd><p>constant version of get_mdata </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd><a class="reference internal" href="#itomclassito_1_1_data_object_1a3cea82c6684d6018ae03511b6e6a5819"><em>get_mdata</em></a> </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ab8b9f20513d12545361bca85619c36f8"></span><div class="line-block">
-<div class="line">cv::Mat * <strong>getCvPlaneMat</strong>(const int planeIndex)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns the pointer to the underlying cv::Mat that represents the plane with given planeIndex of the entire data object. </p>
-<p><p>This command is equivalent to (cv::Mat*)(m_data[seekMat(planeIndex)]) but checks for out-of-range errors.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ab8b9f20513d12545361bca85619c36f8"></span>cv::Mat * <tt class="descname">getCvPlaneMat</tt><big>(</big>const int <em>planeIndex</em><big>)</big></dt>
+<dd><p>returns the pointer to the underlying cv::Mat that represents the plane with given planeIndex of the entire data object. </p>
+<p>This command is equivalent to (cv::Mat*)(m_data[seekMat(planeIndex)]) but checks for out-of-range errors.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>pointer to the cv::Mat plane or NULL if planeIndex is out of range </dd>
@@ -725,15 +607,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1af0a043e3d40ad8c1dbdff5f1473e449a"></span><div class="line-block">
-<div class="line">const cv::Mat * <strong>getCvPlaneMat</strong>(const int planeIndex)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns the pointer to the underlying cv::Mat that represents the plane with given planeIndex of the entire data object. </p>
-<p><p>This command is equivalent to (cv::Mat*)(m_data[seekMat(planeIndex)]) but checks for out-of-range errors.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1af0a043e3d40ad8c1dbdff5f1473e449a"></span>const cv::Mat * <tt class="descname">getCvPlaneMat</tt><big>(</big>const int <em>planeIndex</em><big>)</big> const</dt>
+<dd><p>returns the pointer to the underlying cv::Mat that represents the plane with given planeIndex of the entire data object. </p>
+<p>This command is equivalent to (cv::Mat*)(m_data[seekMat(planeIndex)]) but checks for out-of-range errors.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>pointer to the cv::Mat plane or NULL if planeIndex is out of range </dd>
@@ -749,38 +629,34 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> <strong>getSize</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns the size-member. m_size fits to the physical organization of data in memory. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a5bb75ea76bc186f15b41388da88d2df9"></span>MSize <tt class="descname">getSize</tt><big>(</big>void<big>)</big></dt>
+<dd><p>returns the size-member. m_size fits to the physical organization of data in memory. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>size-member of type <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> </dd>
+<dd>size-member of type MSize </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a7fa0a20b7c911588404919a2dd799fc8"></span><div class="line-block">
-<div class="line">const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> <strong>getSize</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns the size-member. This member does not consider the transpose flag, hence, m_size fits to the physical organization of data in memory. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a7fa0a20b7c911588404919a2dd799fc8"></span>const MSize <tt class="descname">getSize</tt><big>(</big>void<big>)</big> const</dt>
+<dd><p>returns the size-member. This member does not consider the transpose flag, hence, m_size fits to the physical organization of data in memory. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
-<dd>size-member of type <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a> </dd>
+<dd>size-member of type MSize </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1af3221bc6558e63f37179a0f910240796"></span><div class="line-block">
-<div class="line">int <strong>getSize</strong>(int index)</div>
-</div>
-</p>
-<blockquote>
-<div><p>gets the size of the given dimension (this is the size within the ROI) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1af3221bc6558e63f37179a0f910240796"></span>int <tt class="descname">getSize</tt><big>(</big>int <em>index</em><big>)</big> const</dt>
+<dd><p>gets the size of the given dimension (this is the size within the ROI) </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>size or -1 if index is out of boundaries </dd>
@@ -792,13 +668,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac9a668e474f5669d615f448bff9c9b25"></span><div class="line-block">
-<div class="line">int <strong>getOriginalSize</strong>(int index)</div>
-</div>
-</p>
-<blockquote>
-<div><p>gets the original size of the given dimension (this is the size without considering any ROI) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac9a668e474f5669d615f448bff9c9b25"></span>int <tt class="descname">getOriginalSize</tt><big>(</big>int <em>index</em><big>)</big> const</dt>
+<dd><p>gets the original size of the given dimension (this is the size without considering any ROI) </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>size or -1 if index is out of boundaries </dd>
@@ -810,54 +685,32 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4373c50161d5ba79a9014792f9088dee"></span><div class="line-block">
-<div class="line">DObjIterator <strong>begin</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns 0, this is the index of the first element in valid <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> range. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1abb679e37f6584c18f5a82d949ac86e2b"></span><div class="line-block">
-<div class="line">DObjIterator <strong>end</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns index of last-element in <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> range incremented by one. (equal to number of elements in total range) </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ae583be0fd89d3dcdc4ffeb70ac6e0389"></span><div class="line-block">
-<div class="line">DObjConstIterator <strong>constBegin</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aedc32c887c0ff85cf96b197ac508a1c3"></span><div class="line-block">
-<div class="line">DObjConstIterator <strong>constEnd</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad237136b142095093e9dd3aef4fad088"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for empty data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4373c50161d5ba79a9014792f9088dee"></span>DObjIterator <tt class="descname">begin</tt><big>(</big><big>)</big></dt>
+<dd><p>returns 0, this is the index of the first element in valid <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> range. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1abb679e37f6584c18f5a82d949ac86e2b"></span>DObjIterator <tt class="descname">end</tt><big>(</big><big>)</big></dt>
+<dd><p>returns index of last-element in <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> range incremented by one. (equal to number of elements in total range) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad237136b142095093e9dd3aef4fad088"></span><tt class="descname">DataObject</tt><big>(</big>void<big>)</big></dt>
+<dd><p>constructor for empty data object </p>
 <p>no data will be allocated, the number of elements and dimensions is set to zero </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a24d160413bf038b87fa777b8f411dfc0"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const int size, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for one-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
-<p><p>In fact, by this constructor a two-dimensional matrix with dimension 1 x size will be created. the owndata-flag is set to true, the continuously-flag, too (since only one matrix-plane will be created)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a24d160413bf038b87fa777b8f411dfc0"></span><tt class="descname">DataObject</tt><big>(</big>const int <em>size</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>constructor for one-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
+<p>In fact, by this constructor a two-dimensional matrix with dimension 1 x size will be created. the owndata-flag is set to true, the continuously-flag, too (since only one matrix-plane will be created)</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>create, tDataType </dd>
@@ -871,15 +724,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a6c26ca0e8110e8117571fb6e7b4503f7"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const int sizeY, const int sizeX, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for two-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
-<p><p>the owndata-flag is set to true, the continuously-flag, too (since only one matrix-plane will be created)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a6c26ca0e8110e8117571fb6e7b4503f7"></span><tt class="descname">DataObject</tt><big>(</big>const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>constructor for two-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
+<p>the owndata-flag is set to true, the continuously-flag, too (since only one matrix-plane will be created)</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>create, tDataType </dd>
@@ -895,15 +746,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a38809e4d3575abf73b471a4d398ec2fa"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const int sizeZ, const int sizeY, const int sizeX, const int type, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for three-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
-<p><p>the owndata-flag is set to true</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a38809e4d3575abf73b471a4d398ec2fa"></span><tt class="descname">DataObject</tt><big>(</big>const int <em>sizeZ</em>, const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>constructor for three-dimensional data object. The data is newly allocated and arbitrarily filled. </p>
+<p>the owndata-flag is set to true</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>create, tDataType </dd>
@@ -923,15 +772,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a209892c043b0a92ec7544e4d454d1897"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const int sizeZ, const int sizeY, const int sizeX, const int type, const uchar * continuousDataPtr, const int * steps = NULL)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for 3-dimensional data object which uses the data given by the continuousDataPtr. </p>
-<p><p>In case of the continuousDataPtr, the owndata-flag is set to false, hence this dataObj will not delete the data. Additionally the continuous-flag is set to true.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a209892c043b0a92ec7544e4d454d1897"></span><tt class="descname">DataObject</tt><big>(</big>const int <em>sizeZ</em>, const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em>, const uchar * <em>continuousDataPtr</em>, const int * <em>steps</em> = NULL<big>)</big></dt>
+<dd><p>constructor for 3-dimensional data object which uses the data given by the continuousDataPtr. </p>
+<p>In case of the continuousDataPtr, the owndata-flag is set to false, hence this dataObj will not delete the data. Additionally the continuous-flag is set to true.</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>create, tDataType </dd>
@@ -953,15 +800,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aea1baa881708adca106e192a2765f2cc"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const unsigned char dimensions, const int * sizes, const int type, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for data object with given dimension. The data is newly allocated and arbitrarily filled. </p>
-<p><p>the owndata-flag is set to true</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aea1baa881708adca106e192a2765f2cc"></span><tt class="descname">DataObject</tt><big>(</big>const unsigned char <em>dimensions</em>, const int * <em>sizes</em>, const int <em>type</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>constructor for data object with given dimension. The data is newly allocated and arbitrarily filled. </p>
+<p>the owndata-flag is set to true</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>create, tDataType </dd>
@@ -979,15 +824,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a74de525fbc69cb348b82a97371f9413a"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const unsigned char dimensions, const int * sizes, const int type, const uchar * continuousDataPtr, const int * steps = NULL)</div>
-</div>
-</p>
-<blockquote>
-<div><p>constructor for data object which uses the data given by the continuousDataPtr. </p>
-<p><p>In case of the continuousDataPtr, the owndata-flag is set to false, hence this dataObj will not delete the data. Additionally the continuous-flag is set to true.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a74de525fbc69cb348b82a97371f9413a"></span><tt class="descname">DataObject</tt><big>(</big>const unsigned char <em>dimensions</em>, const int * <em>sizes</em>, const int <em>type</em>, const uchar * <em>continuousDataPtr</em>, const int * <em>steps</em> = NULL<big>)</big></dt>
+<dd><p>constructor for data object which uses the data given by the continuousDataPtr. </p>
+<p>In case of the continuousDataPtr, the owndata-flag is set to false, hence this dataObj will not delete the data. Additionally the continuous-flag is set to true.</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>create, ito::tDataType </dd>
@@ -1007,23 +850,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad894c380abb8013b7f6f0abeb621436c"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const unsigned char dimensions, const int * sizes, const int type, const cv::Mat * planes, const unsigned int nrOfPlanes)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a32e74ff9c1cd0e9fc73d5f7705bce605"></span><div class="line-block">
-<div class="line"> <strong>DataObject</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; copyConstr)</div>
-</div>
-</p>
-<blockquote>
-<div><p>copy constructor for data object </p>
-<p><p>copy constructor</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a32e74ff9c1cd0e9fc73d5f7705bce605"></span><tt class="descname">DataObject</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>copyConstr</em><big>)</big></dt>
+<dd><p>copy constructor for data object </p>
+<p>copy constructor</p>
 <p>creates a data object with respect to the given data object. The header information is completely copied, while the data is a shallow copy. The lock of the new data object is unlocked while the lock for the common data block is taken from the current lock status of the given data object.</p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
@@ -1034,29 +867,25 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a828f90ce03f273216c9314c60ca574d1"></span><div class="line-block">
-<div class="line"> <strong>~DataObject</strong>(void)</div>
-</div>
-</p>
-<blockquote>
-<div><p>destructor </p>
-<p><p>reference pointer of data is decremented and if &lt;0, data will be deleted if owndata-flag is true. Additionally the allocated memory for header information will be deleted, too.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a828f90ce03f273216c9314c60ca574d1"></span><tt class="descname">~DataObject</tt><big>(</big>void<big>)</big></dt>
+<dd><p>destructor </p>
+<p>reference pointer of data is decremented and if &lt;0, data will be deleted if owndata-flag is true. Additionally the allocated memory for header information will be deleted, too.</p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>freeData </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a04a374f5bbac7fcb0561a66cdb3e38ba"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const cv::Mat &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>assign-operator which creates a two-dimensional data object as a shallow copy of a two dimensional cv::Mat object. </p>
-<p><p>shallow-copy means, that the header information of this data-object is physically created at the hard disk, while the data is shared with the original cv::Mat.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a04a374f5bbac7fcb0561a66cdb3e38ba"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const cv::Mat &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>assign-operator which creates a two-dimensional data object as a shallow copy of a two dimensional cv::Mat object. </p>
+<p>shallow-copy means, that the header information of this data-object is physically created at the hard disk, while the data is shared with the original cv::Mat.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>this data object </dd>
@@ -1076,15 +905,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aab29e1c4f0da83365614a725293c6b40"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>assign-operator which makes a shallow-copy of the rhs data object and stores it in this data object </p>
-<p><p>shallow-copy means, that the header information of the rhs data-object is physically copied to this-dataObject while the data is shared, hence, only its reference counter is incremented</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aab29e1c4f0da83365614a725293c6b40"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>assign-operator which makes a shallow-copy of the rhs data object and stores it in this data object </p>
+<p>shallow-copy means, that the header information of the rhs data-object is physically copied to this-dataObject while the data is shared, hence, only its reference counter is incremented</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>this data object </dd>
@@ -1104,15 +931,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a5dc296c7d79cf3816340b22a9eb2d17c"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const int8 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a5dc296c7d79cf3816340b22a9eb2d17c"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const int8 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1126,15 +951,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a26e5459ce0cc070a15ef4c00a4d04f23"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const uint8 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a26e5459ce0cc070a15ef4c00a4d04f23"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const uint8 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1148,15 +971,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ada4d9abec4bd93c07198c01f6daed4f6"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const int16 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ada4d9abec4bd93c07198c01f6daed4f6"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const int16 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1170,15 +991,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aeca3a45a0c86eb3c6a4333b9806848dd"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const uint16 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aeca3a45a0c86eb3c6a4333b9806848dd"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const uint16 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1192,15 +1011,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a6ee4b55776652b3bcc4098f06a49c50f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const int32 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a6ee4b55776652b3bcc4098f06a49c50f"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const int32 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1214,15 +1031,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a5c4b02001e4403c807ea2b04befcaa71"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const uint32 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a5c4b02001e4403c807ea2b04befcaa71"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const uint32 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1236,15 +1051,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad36d1c634d9fa43c61fac1e589cb4a53"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const float32 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad36d1c634d9fa43c61fac1e589cb4a53"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const float32 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1258,15 +1071,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac332590e4e5eb35f776707978f8b2fd8"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const float64 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac332590e4e5eb35f776707978f8b2fd8"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const float64 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1280,15 +1091,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a52862545a9c5e5ff8a5673fd8841c671"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const complex64 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a52862545a9c5e5ff8a5673fd8841c671"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const complex64 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1302,15 +1111,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a6ad5e7128bcaced01c943bb967ea0265"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const complex128 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a6ad5e7128bcaced01c943bb967ea0265"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const complex128 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1324,15 +1131,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a342a81ec4f668ea0f1a8d7077b936744"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator=</strong>(const  ito::Rgba32  &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p>Every data element in this data object is set to the given value. </p>
-<p><p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a342a81ec4f668ea0f1a8d7077b936744"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator=</tt><big>(</big>const ito::Rgba32 &amp; <em>value</em><big>)</big></dt>
+<dd><p>Every data element in this data object is set to the given value. </p>
+<p>sets all elements of the data object to the given value. Value is cast to the data object&#8217;s type</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>modified data object </dd>
@@ -1346,14 +1151,12 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a804e80bb2cbe3e54d9b08e87ecbc0042"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator+=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated arithmetic operator for element-wise addition of values of given data object to this data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a804e80bb2cbe3e54d9b08e87ecbc0042"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator+=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level, non-templated arithmetic operator for element-wise addition of values of given data object to this data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>this data object </dd>
@@ -1373,21 +1176,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a10f66a505406b068a8b5bffa8b8b97e3"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator+=</strong>(const float64 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a423136ed813e0ced63f5c660345d5f43"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator+</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated arithmetic operator for element-wise addition of values of two given data objects </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a423136ed813e0ced63f5c660345d5f43"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator+</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level, non-templated arithmetic operator for element-wise addition of values of two given data objects </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new resulting data object </dd>
@@ -1407,21 +1201,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a38597bede262f799f74d1b418d521069"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator+</strong>(const float64 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac007b5a6c7702cf35dd9e048bd416621"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator-=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated arithmetic operator for element-wise subtraction of values of given data object from values of this data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac007b5a6c7702cf35dd9e048bd416621"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator-=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level, non-templated arithmetic operator for element-wise subtraction of values of given data object from values of this data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>this data object </dd>
@@ -1441,21 +1226,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a48d8978c03bf5d25fcf675e7f50c76de"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator-=</strong>(const float64 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a5a7d34b662e7187dfaf222b5188264da"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator-</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated arithmetic operator for element-wise subtraction of values of given data object from values of this data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a5a7d34b662e7187dfaf222b5188264da"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator-</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level, non-templated arithmetic operator for element-wise subtraction of values of given data object from values of this data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new resulting data object </dd>
@@ -1475,29 +1251,19 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aac4b1731bf578fcd42133d7b134dab42"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator-</strong>(const float64 &amp; value)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a3dd030faaa211776b0c9ba25e63c554b"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator*=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>brief description </p>
 <p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a3dd030faaa211776b0c9ba25e63c554b"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator*=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>brief description </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a01d245d6e0d0f9c144c8225860efea4d"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator*=</strong>(const float64 &amp; factor)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level method which multiplies every element in this data object by a given floating-point factor </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a01d245d6e0d0f9c144c8225860efea4d"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator*=</tt><big>(</big>const float64 &amp; <em>factor</em><big>)</big></dt>
+<dd><p>high-level method which multiplies every element in this data object by a given floating-point factor </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>OpScalarMulFunc </dd>
@@ -1509,21 +1275,19 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a25c0d37c69d869712782e654c5146637"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator*</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>brief description </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a25c0d37c69d869712782e654c5146637"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator*</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>brief description </p>
 <p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aa3c56503d53ec7b3009911ec7ef0a5b6"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator*</strong>(const float64 &amp; factor)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level method which multiplies every element in this data object by a given floating-point factor. The result matrix is returned as a new matrix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aa3c56503d53ec7b3009911ec7ef0a5b6"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator*</tt><big>(</big>const float64 &amp; <em>factor</em><big>)</big></dt>
+<dd><p>high-level method which multiplies every element in this data object by a given floating-point factor. The result matrix is returned as a new matrix. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>operator *, OpScalarMulFunc </dd>
@@ -1535,13 +1299,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1add5792482da07596672d94d1960be999"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&lt;</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>compare operator, compares for &#8220;lower than&#8221; </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1add5792482da07596672d94d1960be999"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>compare operator, compares for &#8220;lower than&#8221; </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
@@ -1561,13 +1324,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a488459b6effcb181b020c053529699f7"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&gt;</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>compare operator, compares for &#8220;bigger than&#8221; </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a488459b6effcb181b020c053529699f7"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&gt;</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>compare operator, compares for &#8220;bigger than&#8221; </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
@@ -1587,13 +1349,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a46bf4171899fb1d89bdca49156ca7a55"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&lt;=</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>compare operator, compares for &#8220;lower or equal than&#8221; </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a46bf4171899fb1d89bdca49156ca7a55"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&lt;=</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>compare operator, compares for &#8220;lower or equal than&#8221; </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
@@ -1613,13 +1374,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a7c850b2e6e0b7c8813f1c75d2ced4a57"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&gt;=</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>compare operator, compares for &#8220;bigger or equal than&#8221; </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a7c850b2e6e0b7c8813f1c75d2ced4a57"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&gt;=</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>compare operator, compares for &#8220;bigger or equal than&#8221; </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
@@ -1639,13 +1399,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a5c3366b3572da2a2ba4cd401ab198b06"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator==</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>compare operator, compares for &#8220;equal to&#8221; </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a5c3366b3572da2a2ba4cd401ab198b06"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>compare operator, compares for &#8220;equal to&#8221; </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
@@ -1665,13 +1424,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad6a66bf5d5ba132e4fa3da9302f1dbcb"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator!=</strong>(<a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>compare operator, compares for &#8220;unequal to&#8221; </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad6a66bf5d5ba132e4fa3da9302f1dbcb"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>compare operator, compares for &#8220;unequal to&#8221; </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>compare matrix of type uint8, which contains 0 or 1, depending on the result of the element-wise comparison </dd>
@@ -1691,13 +1449,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a7082131ce6b72946be31ef767a9ed02a"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&lt;&lt;</strong>(const unsigned int shiftbit)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the left and returns the new data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a7082131ce6b72946be31ef767a9ed02a"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&lt;&lt;</tt><big>(</big>const unsigned int <em>shiftbit</em><big>)</big></dt>
+<dd><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the left and returns the new data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object with shifted values </dd>
@@ -1711,13 +1468,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a39a98696544d8353332866673cae8725"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator&lt;&lt;=</strong>(const unsigned int shiftbit)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the left </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a39a98696544d8353332866673cae8725"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator&lt;&lt;=</tt><big>(</big>const unsigned int <em>shiftbit</em><big>)</big></dt>
+<dd><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the left </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object </dd>
@@ -1731,13 +1487,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4016a00323cd271ed6366bb922ac5bc5"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&gt;&gt;</strong>(const unsigned int shiftbit)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the right and returns the new data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4016a00323cd271ed6366bb922ac5bc5"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&gt;&gt;</tt><big>(</big>const unsigned int <em>shiftbit</em><big>)</big></dt>
+<dd><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the right and returns the new data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object with shifted values </dd>
@@ -1751,13 +1506,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a208d1846b79c62419fed054af4250b6c"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator&gt;&gt;=</strong>(const unsigned int shiftbit)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the right </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a208d1846b79c62419fed054af4250b6c"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator&gt;&gt;=</tt><big>(</big>const unsigned int <em>shiftbit</em><big>)</big></dt>
+<dd><p>high-level operator, which shifts the elements of this data objects by a given number of bits to the right </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object </dd>
@@ -1771,13 +1525,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4221d0565c1df3ba6f058f41ae176fc6"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator&amp;</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise and&#8221; between this data object and a given data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4221d0565c1df3ba6f058f41ae176fc6"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator&amp;</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level operator, which executes the element-wise operation &#8220;bitwise and&#8221; between this data object and a given data object </p>
 <p>the result is returned as a newly allocated data object. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object, where the result of the operation is stored </dd>
@@ -1797,13 +1550,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a6d2df5af73abd286bd8b810d0585929c"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator&amp;=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise and&#8221; between this data object and a given data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a6d2df5af73abd286bd8b810d0585929c"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator&amp;=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level operator, which executes the element-wise operation &#8220;bitwise and&#8221; between this data object and a given data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object, where the result of the operation is stored </dd>
@@ -1823,13 +1575,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2e7e0efb4bc0d347b50b28ec2b3004cb"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator|</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2e7e0efb4bc0d347b50b28ec2b3004cb"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator|</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
 <p>the result is returned as a newly allocated data object. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object, where the result of the operation is stored </dd>
@@ -1849,13 +1600,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad271054f288b123f3c1d8e88352f21ee"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator|=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad271054f288b123f3c1d8e88352f21ee"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator|=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object, where the result of the operation is stored </dd>
@@ -1875,13 +1625,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a1537e963c49a7be1479cce8460c54294"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>operator^</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a1537e963c49a7be1479cce8460c54294"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">operator^</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level operator, which executes the element-wise operation &#8220;bitwise or&#8221; between this data object and a given data object </p>
 <p>the result is returned as a newly allocated data object. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object, where the result of the operation is stored </dd>
@@ -1901,13 +1650,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a0c71ddada50985cfceeb43f32edc01b8"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>operator^=</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; rhs)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level operator, which executes the element-wise operation &#8220;bitwise xor&#8221; between this data object and a given data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a0c71ddada50985cfceeb43f32edc01b8"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">operator^=</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>rhs</em><big>)</big></dt>
+<dd><p>high-level operator, which executes the element-wise operation &#8220;bitwise xor&#8221; between this data object and a given data object </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object, where the result of the operation is stored </dd>
@@ -1927,13 +1675,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a zero-value matrix of size 1x1 with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4502b8f52617660be595474cc92d7066"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">zeros</tt><big>(</big>const int <em>type</em><big>)</big></dt>
+<dd><p>allocates a zero-value matrix of size 1x1 with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -1947,13 +1694,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac9ac3cb349de8d3d20bbab5921b37276"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const int size, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a zero-value matrix of size 1 x size with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac9ac3cb349de8d3d20bbab5921b37276"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">zeros</tt><big>(</big>const int <em>size</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>allocates a zero-value matrix of size 1 x size with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -1969,13 +1715,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a8ea22a32a674f5e98da92b8d71b39afd"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const int sizeY, const int sizeX, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a zero-value matrix of size sizeY x sizeX with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a8ea22a32a674f5e98da92b8d71b39afd"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">zeros</tt><big>(</big>const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>allocates a zero-value matrix of size sizeY x sizeX with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -1993,13 +1738,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a8bba1adb3a524810129950b40dad87ee"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const int sizeZ, const int sizeY, const int sizeX, const int type, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a zero-value, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a8bba1adb3a524810129950b40dad87ee"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">zeros</tt><big>(</big>const int <em>sizeZ</em>, const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>allocates a zero-value, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2021,13 +1765,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad78939c32e7fb190ec07086bfcef218b"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>zeros</strong>(const unsigned char dimensions, const int * sizes, const int type, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to zero </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad78939c32e7fb190ec07086bfcef218b"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">zeros</tt><big>(</big>const unsigned char <em>dimensions</em>, const int * <em>sizes</em>, const int <em>type</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to zero </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2047,13 +1790,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4ff0c10c033bde5c886468693b603817"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a one-value matrix of size 1x1 with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4ff0c10c033bde5c886468693b603817"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">ones</tt><big>(</big>const int <em>type</em><big>)</big></dt>
+<dd><p>allocates a one-value matrix of size 1x1 with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2067,13 +1809,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a022db2964affa34453ef44f6afe5d089"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const int size, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a one-value matrix of size 1 x size with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a022db2964affa34453ef44f6afe5d089"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">ones</tt><big>(</big>const int <em>size</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>allocates a one-value matrix of size 1 x size with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2089,13 +1830,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2b2bf2cc2eccb0ab5c57a4895e6a6b3a"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const int sizeY, const int sizeX, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a one-value matrix of size sizeY x sizeX with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2b2bf2cc2eccb0ab5c57a4895e6a6b3a"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">ones</tt><big>(</big>const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>allocates a one-value matrix of size sizeY x sizeX with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2113,13 +1853,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aaf9a1cb9f6577da990ffb7ddd0de5a2f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const int sizeZ, const int sizeY, const int sizeX, const int type, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a one-valued, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aaf9a1cb9f6577da990ffb7ddd0de5a2f"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">ones</tt><big>(</big>const int <em>sizeZ</em>, const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>allocates a one-valued, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2141,13 +1880,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aa8b173d1d01f7282590b0b3f85bc186f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>ones</strong>(const unsigned char dimensions, const int * sizes, const int type, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to one </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aa8b173d1d01f7282590b0b3f85bc186f"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">ones</tt><big>(</big>const unsigned char <em>dimensions</em>, const int * <em>sizes</em>, const int <em>type</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to one </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2167,13 +1905,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a137cff8dcc4e04b37cd3da73090f96e4"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const int type, const bool randMode = false)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a random-value matrix of size 1x1 with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a137cff8dcc4e04b37cd3da73090f96e4"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">rand</tt><big>(</big>const int <em>type</em>, const bool <em>randMode</em> = false<big>)</big></dt>
+<dd><p>allocates a random-value matrix of size 1x1 with the given type </p>
 <p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2189,13 +1926,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a07f11eae8039ccf079641027d9f73425"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const int size, const int type, const bool randMode = false)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a random-value matrix of size 1 x size with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a07f11eae8039ccf079641027d9f73425"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">rand</tt><big>(</big>const int <em>size</em>, const int <em>type</em>, const bool <em>randMode</em> = false<big>)</big></dt>
+<dd><p>allocates a random-value matrix of size 1 x size with the given type </p>
 <p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2213,13 +1949,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a5a8f330f43a65552d19fb8c2b8fdc320"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const int sizeY, const int sizeX, const int type, const bool randMode = false)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a random-value matrix of size sizeY x sizeX with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a5a8f330f43a65552d19fb8c2b8fdc320"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">rand</tt><big>(</big>const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em>, const bool <em>randMode</em> = false<big>)</big></dt>
+<dd><p>allocates a random-value matrix of size sizeY x sizeX with the given type </p>
 <p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2239,13 +1974,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a1d60276efa79a8bf940106594e52957c"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const int sizeZ, const int sizeY, const int sizeX, const int type, const bool randMode, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>allocates a random-valued, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a1d60276efa79a8bf940106594e52957c"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">rand</tt><big>(</big>const int <em>sizeZ</em>, const int <em>sizeY</em>, const int <em>sizeX</em>, const int <em>type</em>, const bool <em>randMode</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>allocates a random-valued, 3D- matrix of size sizeZ x sizeY x sizeX with the given type </p>
 <p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(inclusiv). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2269,13 +2003,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a7ed62089d65dae7d7fa6b50ab21bd2f5"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>rand</strong>(const unsigned char dimensions, const int * sizes, const int type, const bool randMode, const unsigned char continuous = 0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to one </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a7ed62089d65dae7d7fa6b50ab21bd2f5"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">rand</tt><big>(</big>const unsigned char <em>dimensions</em>, const int * <em>sizes</em>, const int <em>type</em>, const bool <em>randMode</em>, const unsigned char <em>continuous</em> = 0<big>)</big></dt>
+<dd><p>high-level, non-templated base function for allocation of new matrix whose elements are all set to one </p>
 <p>this function allocates an random value matrix using cv::randu for uniform (randMode = false) or gausion noise (randMode = true). In case of an integer type, the uniform noise is from min(inclusiv) to max(exclusive). For floating point types, the noise is between 0(inclusiv) and 1(exclusiv). In case of an integer type, the gausian noise mean value is (max+min)/2.0 and the standard deviation is (max-min/)6.0 to max. For floating point types, the noise mean value is 0 and the standard deviation is 1.0/3.0. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2297,13 +2030,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aa2d2891a7e90fb1fc7224327d3b5895f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>eye</strong>(const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>sets the matrix of this data object to a two-dimensional eye-matrix of size 1, hence [1] </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aa2d2891a7e90fb1fc7224327d3b5895f"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">eye</tt><big>(</big>const int <em>type</em><big>)</big></dt>
+<dd><p>sets the matrix of this data object to a two-dimensional eye-matrix of size 1, hence [1] </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2317,14 +2049,13 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ab72f234a86aaadf463314ef3a750175f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>eye</strong>(const int size, const int type)</div>
-</div>
-</p>
-<blockquote>
-<div><p>sets the matrix of this data object to a two-dimensional eye-matrix of given size </p>
-<p><p>At first, a preexisting matrix is freed, before creating the eye-matrix</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ab72f234a86aaadf463314ef3a750175f"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">eye</tt><big>(</big>const int <em>size</em>, const int <em>type</em><big>)</big></dt>
+<dd><p>sets the matrix of this data object to a two-dimensional eye-matrix of given size </p>
+<p>At first, a preexisting matrix is freed, before creating the eye-matrix</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2340,14 +2071,12 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a47fe6b5f8038aefcf65f30ad73d8ee2c"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>conj</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>converts every element of the data object to its conjugate complex value </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a47fe6b5f8038aefcf65f30ad73d8ee2c"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">conj</tt><big>(</big><big>)</big></dt>
+<dd><p>converts every element of the data object to its conjugate complex value </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2361,13 +2090,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4cf2c2fe67b96f17fc8139036c0d4a1d"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>adj</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>converts every element of the data object to its adjungate value </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4cf2c2fe67b96f17fc8139036c0d4a1d"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">adj</tt><big>(</big><big>)</big> const</dt>
+<dd><p>converts every element of the data object to its adjungate value </p>
 <p>The adjungate is the transposed matrix, where each element is complex conjugated. <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2381,34 +2109,24 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1af834677086d1d7adeab2ae5de67f7d24"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>trans</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>transposes this data object </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1af834677086d1d7adeab2ae5de67f7d24"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">trans</tt><big>(</big><big>)</big> const</dt>
+<dd><p>transposes this data object </p>
 <p>simply toggles the transpose flag <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a70bd0816c2c3ef57295e8a905d670cae"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>mul</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; mat2, const double scale = 1.0)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ae26cff1f3e3efcc2d10b6062361758de"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>div</strong>(const  <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; mat2, const double scale = 1.0)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level method which does a element-wise division of elements in this matrix by elements in second source matrix. </p>
-<p><p>The result is stored in a result matrix which is returned. Optionally the division can be scaled by a scaling factor, which is set to one by default.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ae26cff1f3e3efcc2d10b6062361758de"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">div</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <em>mat2</em>, const double <em>scale</em> = 1.0<big>)</big></dt>
+<dd><p>high-level method which does a element-wise division of elements in this matrix by elements in second source matrix. </p>
+<p>The result is stored in a result matrix which is returned. Optionally the division can be scaled by a scaling factor, which is set to one by default.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>result matrix </dd>
@@ -2424,31 +2142,14 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aaacf0fc8228554652c4369a44601ef65"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>squeeze</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a104419da8324368932f253cfa8450377"></span><div class="line-block">
-<div class="line">int <strong>elemSize</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1aa402e6379c1103824a8be2ad4eb05692"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int y, const unsigned int x)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for two-dimensional data object. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1aa402e6379c1103824a8be2ad4eb05692"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp &amp; <tt class="descname">at</tt><big>(</big>const unsigned int <em>y</em>, const unsigned int <em>x</em><big>)</big> const</dt>
+<dd><p>addressing method for two-dimensional data object. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>const reference to specific element </dd>
@@ -2462,14 +2163,14 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ae3e41069740631df2d9bb2b12cfda2b7"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int y, const unsigned int x)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for two-dimensional data object. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ae3e41069740631df2d9bb2b12cfda2b7"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp &amp; <tt class="descname">at</tt><big>(</big>const unsigned int <em>y</em>, const unsigned int <em>x</em><big>)</big></dt>
+<dd><p>addressing method for two-dimensional data object. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to specific element </dd>
@@ -2483,14 +2184,14 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad17da8ea2c7ea61875583304bb9e01d0"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int z, const unsigned int y, const unsigned int x)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for three-dimensional data object. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad17da8ea2c7ea61875583304bb9e01d0"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp &amp; <tt class="descname">at</tt><big>(</big>const unsigned int <em>z</em>, const unsigned int <em>y</em>, const unsigned int <em>x</em><big>)</big> const</dt>
+<dd><p>addressing method for three-dimensional data object. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>const reference to specific element </dd>
@@ -2506,14 +2207,14 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1afde0e1d6112bff635a7fc4cb397f2741"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int z, const unsigned int y, const unsigned int x)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for three-dimensional data object. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1afde0e1d6112bff635a7fc4cb397f2741"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp &amp; <tt class="descname">at</tt><big>(</big>const unsigned int <em>z</em>, const unsigned int <em>y</em>, const unsigned int <em>x</em><big>)</big></dt>
+<dd><p>addressing method for three-dimensional data object. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to specific element </dd>
@@ -2529,14 +2230,14 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a676825cedde732acb375bb12d842ee62"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int * idx)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for n-dimensional data object. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a676825cedde732acb375bb12d842ee62"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp &amp; <tt class="descname">at</tt><big>(</big>const unsigned int * <em>idx</em><big>)</big> const</dt>
+<dd><p>addressing method for n-dimensional data object. </p>
 <p><dl class="docutils">
 <dt><strong>Remark</strong></dt>
 <dd>The idx vector must indicate the indizes in &#8220;virtual&#8221;-order (user-friendly order) </dd>
@@ -2550,14 +2251,14 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ab9df465c97173b76bfa161be6ac66db7"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line">_Tp &amp; <strong>at</strong>(const unsigned int * idx)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for n-dimensional data object. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ab9df465c97173b76bfa161be6ac66db7"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp &amp; <tt class="descname">at</tt><big>(</big>const unsigned int * <em>idx</em><big>)</big></dt>
+<dd><p>addressing method for n-dimensional data object. </p>
 <p><dl class="docutils">
 <dt><strong>Remark</strong></dt>
 <dd>The idx vector must indicate the indizes in &#8220;virtual&#8221;-order (user-friendly order) </dd>
@@ -2571,14 +2272,13 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2254fc5b170895bbb11108a939c4cd22"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>at</strong>(const  ito::Range  &amp; rowRange, const  ito::Range  &amp; colRange)</div>
-</div>
-</p>
-<blockquote>
-<div><p>addressing method for two-dimensional data object with two given range-values. returns shallow copy of addressed regions. </p>
-<p><p>addressing method for two-dimensional data object with two given range-values. returns shallow copy of addressed regions</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2254fc5b170895bbb11108a939c4cd22"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">at</tt><big>(</big>const ito::Range &amp; <em>rowRange</em>, const ito::Range &amp; <em>colRange</em><big>)</big></dt>
+<dd><p>addressing method for two-dimensional data object with two given range-values. returns shallow copy of addressed regions. </p>
+<p>addressing method for two-dimensional data object with two given range-values. returns shallow copy of addressed regions</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object which is a shallow copy of this data object and whose ROI is set to the given row- and col-ranges </dd>
@@ -2598,15 +2298,12 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a892e6ab94407685f44a80686411f3e79"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>at</strong>(ito::Range  * ranges)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p><p>addressing method for n-dimensional data object with n given range-values. returns shallow copy of addressed regions</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a892e6ab94407685f44a80686411f3e79"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">at</tt><big>(</big>ito::Range * <em>ranges</em><big>)</big></dt>
+<dd><p>addressing method for n-dimensional data object with n given range-values. returns shallow copy of addressed regions</p>
 <p>If any of the given ranges exceed the boundaries of its corresponding dimension, the range will be set to the boundaries. ranges will be given in &#8220;virtual&#8221; order, hence, the transpose-flag is considered by this method.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -2621,15 +2318,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a8fa5972fda005a676bc0c6e932fe4159"></span><div class="line-block">
-<div class="line">uchar * <strong>rowPtr</strong>(const int matNum, const int y)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns pointer to the data in the y-th row in the 2d-matrix plane matNum </p>
-<p><p>cast this pointer to the data type of the matrix elements (as pointer).</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a8fa5972fda005a676bc0c6e932fe4159"></span>uchar * <tt class="descname">rowPtr</tt><big>(</big>const int <em>matNum</em>, const int <em>y</em><big>)</big></dt>
+<dd><p>returns pointer to the data in the y-th row in the 2d-matrix plane matNum </p>
+<p>cast this pointer to the data type of the matrix elements (as pointer).</p>
 <p><dl class="docutils">
 <dt><strong>Remark</strong></dt>
 <dd>No further error checking (e.g. boundaries) </dd>
@@ -2637,15 +2332,13 @@
 <dd>data-pointer </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a2973db67dd9b07a6c22f66d7076fecf8"></span><div class="line-block">
-<div class="line">const uchar * <strong>rowPtr</strong>(const int matNum, const int y)</div>
-</div>
-</p>
-<blockquote>
-<div><p>returns pointer to the data in the y-th row in the 2d-matrix plane matNum </p>
-<p><p>cast this pointer to the data type of the matrix elements (as pointer).</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a2973db67dd9b07a6c22f66d7076fecf8"></span>const uchar * <tt class="descname">rowPtr</tt><big>(</big>const int <em>matNum</em>, const int <em>y</em><big>)</big> const</dt>
+<dd><p>returns pointer to the data in the y-th row in the 2d-matrix plane matNum </p>
+<p>cast this pointer to the data type of the matrix elements (as pointer).</p>
 <p><dl class="docutils">
 <dt><strong>Remark</strong></dt>
 <dd>No further error checking (e.g. boundaries) </dd>
@@ -2653,14 +2346,12 @@
 <dd>data-pointer </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a149d63105180924256f85099a73e820a"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>row</strong>(const int selRow)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level method which makes a new header for the specified matrix row and returns it. The underlying data of the new matrix is shared with the original matrix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a149d63105180924256f85099a73e820a"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">row</tt><big>(</big>const int <em>selRow</em><big>)</big></dt>
+<dd><p>high-level method which makes a new header for the specified matrix row and returns it. The underlying data of the new matrix is shared with the original matrix. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object </dd>
@@ -2680,13 +2371,12 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a4f7924f210854916d5f52bb45995df8f"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>col</strong>(const int selCol)</div>
-</div>
-</p>
-<blockquote>
-<div><p>high-level method which makes a new header for the specified matrix column and returns it. The underlying data of the new matrix is shared with the original matrix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a4f7924f210854916d5f52bb45995df8f"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">col</tt><big>(</big>const int <em>selCol</em><big>)</big></dt>
+<dd><p>high-level method which makes a new header for the specified matrix column and returns it. The underlying data of the new matrix is shared with the original matrix. </p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>new data object </dd>
@@ -2706,14 +2396,13 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ad01199f352a3f560c7e5712cf521d9fa"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <strong>toGray</strong>(const int destinationType = ito::tUInt8)</div>
-</div>
-</p>
-<blockquote>
-<div><p>converts a color image (rgba32) to a gray-scale image </p>
-<p><p>usage: res = static_cast&lt;ito::float32&gt;(sourceDataObject)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ad01199f352a3f560c7e5712cf521d9fa"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> <tt class="descname">toGray</tt><big>(</big>const int <em>destinationType</em> = ito::tUInt8<big>)</big></dt>
+<dd><p>converts a color image (rgba32) to a gray-scale image </p>
+<p>usage: res = static_cast&lt;ito::float32&gt;(sourceDataObject)</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>cast data object </dd>
@@ -2727,15 +2416,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1adefd7b5822dc68f967ef574e9f841c71"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>adjustROI</strong>(const int dtop, const int dbottom, const int dleft, const int dright)</div>
-</div>
-</p>
-<blockquote>
-<div><p>adjust submatrix size and position within the two-dimensional data-object </p>
-<p><p>changes the boundaries of the ROI of a two-dimensional data object by the given incremental values</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1adefd7b5822dc68f967ef574e9f841c71"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">adjustROI</tt><big>(</big>const int <em>dtop</em>, const int <em>dbottom</em>, const int <em>dleft</em>, const int <em>dright</em><big>)</big></dt>
+<dd><p>adjust submatrix size and position within the two-dimensional data-object </p>
+<p>changes the boundaries of the ROI of a two-dimensional data object by the given incremental values</p>
 <p><dl class="docutils">
 <dt><strong>Remark</strong></dt>
 <dd>the parameters indicates the shift with respect to the virtual order of the matrix, hence, the transpose flag is considered in this method </dd>
@@ -2763,15 +2450,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1acff86dfa8dd2f4757ad361723718424b"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a>  &amp; <strong>adjustROI</strong>(const unsigned char dims, const int * lims)</div>
-</div>
-</p>
-<blockquote>
-<div><p>adjust submatrix size and position within the n-dimensional data-object </p>
-<p><p>changes the boundaries of the ROI of a n-dimensional data object by the given incremental values</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1acff86dfa8dd2f4757ad361723718424b"></span><a class="reference internal" href="#itomclassito_1_1_data_object"><em>DataObject</em></a> &amp; <tt class="descname">adjustROI</tt><big>(</big>const unsigned char <em>dims</em>, const int * <em>lims</em><big>)</big></dt>
+<dd><p>adjust submatrix size and position within the n-dimensional data-object </p>
+<p>changes the boundaries of the ROI of a n-dimensional data object by the given incremental values</p>
 <p>dims is the number of dimensions <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>reference to this data object </dd>
@@ -2787,15 +2472,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a46a1ad505f71c7081690519225bac769"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>locateROI</strong>(int * wholeSizes, int * offsets)</div>
-</div>
-</p>
-<blockquote>
-<div><p>method locates ROI of this data object within its original data block </p>
-<p><p>locates the boundaries of the ROI of a n-dimensional data object and returns the original size and the distances to the physical borders</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a46a1ad505f71c7081690519225bac769"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">locateROI</tt><big>(</big>int * <em>wholeSizes</em>, int * <em>offsets</em><big>)</big></dt>
+<dd><p>method locates ROI of this data object within its original data block </p>
+<p>locates the boundaries of the ROI of a n-dimensional data object and returns the original size and the distances to the physical borders</p>
 <p>long description</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -2810,15 +2493,13 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ac6f4f76968bd4317a83a452c597db875"></span><div class="line-block">
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>locateROI</strong>(int * lims)</div>
-</div>
-</p>
-<blockquote>
-<div><p>method get ROI of this data object within its original data block </p>
-<p><p>locates the boundaries of the ROI of a n-dimensional data object the distances to the physical borders</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ac6f4f76968bd4317a83a452c597db875"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">locateROI</tt><big>(</big>int * <em>lims</em><big>)</big></dt>
+<dd><p>method get ROI of this data object within its original data block </p>
+<p>locates the boundaries of the ROI of a n-dimensional data object the distances to the physical borders</p>
 <p>dims is the number of dimensions <dl class="docutils">
 <dt><strong>Return</strong></dt>
 <dd>retOk </dd>
@@ -2830,16 +2511,15 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a9ddee41673c73428a8e10843d249347e"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyFromData2D</strong>(const _Tp * src, const int sizeX, const int sizeY)</div>
-</div>
-</p>
-<blockquote>
-<div><p>copies the externally given source data inside this data object </p>
-<p><p>This method obtains an externally given source array that must have the same element type than this data object. Its dimension is given by sizeX and sizeY and must correspond to the x-size and y-size of this data object. It is allowed that this data object is a shallow copy with a possible region of interest of another (bigger) object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a9ddee41673c73428a8e10843d249347e"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+<a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">copyFromData2D</tt><big>(</big>const _Tp * <em>src</em>, const int <em>sizeX</em>, const int <em>sizeY</em><big>)</big></dt>
+<dd><p>copies the externally given source data inside this data object </p>
+<p>This method obtains an externally given source array that must have the same element type than this data object. Its dimension is given by sizeX and sizeY and must correspond to the x-size and y-size of this data object. It is allowed that this data object is a shallow copy with a possible region of interest of another (bigger) object.</p>
 <p>Then, the given array is copied inside of the values of the data object. The external array must have a row-wise data arrangment (c-style), hence, one row follows after the other one.</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -2856,16 +2536,15 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1a1580fdcb324b66a08b527793b2c31824"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>copyFromData2D</strong>(const _Tp * src, const int sizeX, const int sizeY, const int x0, const int y0, const int width, const int height)</div>
-</div>
-</p>
-<blockquote>
-<div><p>copies the externally given source data inside this data object </p>
-<p><p>This method obtains an externally given source array that must have the same element type than this data object. Its dimension is given by sizeX and sizeY and must correspond to the x-size and y-size of this data object. It is allowed that this data object is a shallow copy with a possible region of interest of another (bigger) object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1a1580fdcb324b66a08b527793b2c31824"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+<a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">copyFromData2D</tt><big>(</big>const _Tp * <em>src</em>, const int <em>sizeX</em>, const int <em>sizeY</em>, const int <em>x0</em>, const int <em>y0</em>, const int <em>width</em>, const int <em>height</em><big>)</big></dt>
+<dd><p>copies the externally given source data inside this data object </p>
+<p>This method obtains an externally given source array that must have the same element type than this data object. Its dimension is given by sizeX and sizeY and must correspond to the x-size and y-size of this data object. It is allowed that this data object is a shallow copy with a possible region of interest of another (bigger) object.</p>
 <p>Then, the given array is copied inside of the values of the data object. The external array must have a row-wise data arrangment (c-style), hence, one row follows after the other one.</p>
 <p>In this method, it is allowed that the original width and height of the given data is different than the plane size of this data object. Then only a subregion of the external data is copied, indicated by the x0 and y0 indices of the first value and its width and height (sizeX and sizeY are the original size of the given data). width and height must correspond to the plane size of the data object.</p>
 <p><dl class="docutils">
@@ -2891,25 +2570,23 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1af3449b6273836334d76aedbbf08a0ca8"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>checkType</strong>(const _Tp * src)</div>
-</div>
-</p>
-<blockquote>
-<div><p>verifies if the data type of elements in this data object is equal to the type of the argument. </p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1af882720bd05e2b9a9d2b184ff7ff4095"></span><div class="line-block">
-<div class="line">template &lt; typename T2 &gt;</div>
-<div class="line"> <strong>operator T2</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p>cast operator for data object </p>
-<p><p>cast operator, tries to cast this data object to another element type</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1af3449b6273836334d76aedbbf08a0ca8"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+<a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">checkType</tt><big>(</big>const _Tp * <em>src</em><big>)</big></dt>
+<dd><p>verifies if the data type of elements in this data object is equal to the type of the argument. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1af882720bd05e2b9a9d2b184ff7ff4095"></span>template &lt;typename T2&gt; </dt>
+<dt>
+<tt class="descname">operator T2</tt><big>(</big><big>)</big></dt>
+<dd><p>cast operator for data object </p>
+<p>cast operator, tries to cast this data object to another element type</p>
 <p>usage: res = static_cast&lt;ito::float32&gt;(sourceDataObject)</p>
 <p><dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -2924,15 +2601,14 @@
 </dd>
 </dl>
 </p>
-</p>
-</div></blockquote>
-<p><span class="target" id="itomclassito_1_1_data_object_1ab18a4903e6939f1d2ee0ddbd420f9540"></span><div class="line-block">
-<div class="line">template &lt; typename _Tp &gt;</div>
-<div class="line"><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <strong>linspace</strong>(const _Tp start, const _Tp end, const _Tp inc, const int transposed)</div>
-</div>
-</p>
-<blockquote>
-<div><p>equivalent to matlab linspace functino </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_data_object_1ab18a4903e6939f1d2ee0ddbd420f9540"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+<a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><em>RetVal</em></a> <tt class="descname">linspace</tt><big>(</big>const _Tp <em>start</em>, const _Tp <em>end</em>, const _Tp <em>inc</em>, const int <em>transposed</em><big>)</big></dt>
+<dd><p>equivalent to matlab linspace functino </p>
 <p>
 ! missing documentation ! ! missing documentation ! <dl class="docutils">
 <dt><strong>Return</strong></dt>
@@ -2947,103 +2623,11 @@
 </dd>
 </dl>
 </p>
-</div></blockquote>
-</div></blockquote>
-<p><p id="itomstructito_1_1_data_object_1_1_m_r_o_i"><em>class</em> <strong>MROI</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Public Functions</em><blockquote>
-<div><p><span class="target" id="itomstructito_1_1_data_object_1_1_m_r_o_i_1a9c686a5cb7fef6cf7a0a735c3f4097b0"></span><div class="line-block">
-<div class="line"> <strong>MROI</strong>()</div>
+</dd></dl>
+
 </div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomstructito_1_1_data_object_1_1_m_r_o_i_1ac17c57551cdece8666e698f6a7487ea0"></span><div class="line-block">
-<div class="line">int <strong>operator[]</strong>(const int dim)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomstructito_1_1_data_object_1_1_m_r_o_i_1a631fa36248010f3496ed706cbc5b385f"></span><div class="line-block">
-<div class="line">bool <strong>operator==</strong>(const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_r_o_i"><em>MROI</em></a>  &amp; rroi)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-<em>Public Members</em><blockquote>
-<div><p><span class="target" id="itomstructito_1_1_data_object_1_1_m_r_o_i_1aecb13ae5d49c4b41b6f1bf30ba0bc561"></span>int * <strong>m_p</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
-</p>
-<p><p id="itomstructito_1_1_data_object_1_1_m_size"><em>class</em> <strong>MSize</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-<em>Public Functions</em><blockquote>
-<div><p><span class="target" id="itomstructito_1_1_data_object_1_1_m_size_1a6a453b7e8f4cba5be26529c3aad3e1bf"></span><div class="line-block">
-<div class="line"> <strong>MSize</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomstructito_1_1_data_object_1_1_m_size_1ae05b85bdf618e937f2a48fac50d0102f"></span><div class="line-block">
-<div class="line">int <strong>operator[]</strong>(const int dim)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomstructito_1_1_data_object_1_1_m_size_1ac77c1b0226521974152fd8564cb7dc3e"></span><div class="line-block">
-<div class="line"> <strong>operator const int *</strong>()</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomstructito_1_1_data_object_1_1_m_size_1a55c7675e7e126bfb6e4b360592dd1cf8"></span><div class="line-block">
-<div class="line">bool <strong>operator==</strong>(const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a>  &amp; sz)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-<p><span class="target" id="itomstructito_1_1_data_object_1_1_m_size_1a9f9065763a3f3422383cf851c3f4e6a8"></span><div class="line-block">
-<div class="line">bool <strong>operator!=</strong>(const  <a class="reference internal" href="#itomstructito_1_1_data_object_1_1_m_size"><em>MSize</em></a>  &amp; sz)</div>
-</div>
-</p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-<em>Public Members</em><blockquote>
-<div><p><span class="target" id="itomstructito_1_1_data_object_1_1_m_size_1a80af28e8ac8df59785d0629656d18dbd"></span>int * <strong>m_p</strong></p>
-<blockquote>
-<div><p></p>
-<p></p>
-</div></blockquote>
-</div></blockquote>
-</div></blockquote>
-</p>
-</div></blockquote>
+</dd></dl>
+
 </div>
 
 
@@ -3104,7 +2688,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Oct 09, 2014.
+      Last updated on Nov 11, 2014.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>

@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'da482c7',
+        VERSION:     '5ccf5f9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -286,16 +284,24 @@ parameters <em>y0</em> or <em>y1</em> change. This parameter is read e.g. when a
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&#8220;x0&#8221;, &#8220;y0&#8221;: {int}</dt>
+<dt>&#8220;x0&#8221;, &#8220;y0&#8221;: {int, deprecated (see roi)}</dt>
 <dd><p class="first last">pixel coordinate of the left top corner of the image or ROI [0..width-1/height-1]
 If this changes, &#8220;sizex&#8221; or &#8220;sizey&#8221; must be changed, too.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>&#8220;x1&#8221;, &#8220;y1&#8221;: {int}</dt>
+<dt>&#8220;x1&#8221;, &#8220;y1&#8221;: {int, deprecated (see roi)}</dt>
 <dd><p class="first last">pixel coordinate of the right bottom corner of the image or ROI [x0+1/y0+1..width-1/height-1]
 If this changes, &#8220;sizex&#8221; or &#8220;sizey&#8221; must be changed, too.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;roi&#8221;: {int-array}</dt>
+<dd><p class="first last">Since itom AddIn Interface version 1.3.1 (itom 1.4.0 or higher), it is recommended to replace <em>x0</em> <em>y0</em>, <em>x1</em> and <em>y1</em> by the integer array based
+parameter <strong>roi</strong> which expects an array [left, top, width, height]. This parameter can easily be parametrized using the meta information ito::RectMeta
+and allows the direct configuration of the entire ROI or a single access to one of the four components, by passing the parametername <em>roi[0]</em>, <em>roi[1]</em>....</p>
 </dd>
 </dl>
 </li>
@@ -320,7 +326,7 @@ If this changes, &#8220;sizex&#8221; or &#8220;sizey&#8221; must be changed, too
 <blockquote>
 <div><ul class="simple">
 <li>If you have one or multiple input channels, use the definition <strong>getVal(void *dObj, ItomSharedSemaphore *waitCond)</strong>. The parameter dObj is then a pointer to ito::DataObject and can be cast to this class. Return an MxN data object, where M corresponds to the number of read input channels and N corresponds to the data samples per channel. If you want to, you can also force the user to previously allocate the given data object such that you can get a hint how many samples should be registered.</li>
-<li>For only one input channel, it is also possible to implement the definition <strong>getVal(QSharedPointer&lt;char&gt; data, QSharedPointer&lt;int&gt; length, ItomSharedSemaphore *waitCond = NULL)</strong> where an allocated char-buffer whose size is given by <em>length</em> is given. Fill in the data samples into the buffer (considering the given length) or use the length value to see how many samples are requested.</li>
+<li>For only one input channel, it is also possible to implement the definition <strong>getVal(QSharedPointer&lt;char&gt; data, QSharedPointer&lt;int&gt; length, ItomSharedSemaphore *waitCond = NULL)</strong> where an allocated char-buffer whose size is defined by <em>length</em> is given. Fill in the data samples into the buffer (considering the given length) or use the length value to see how many samples are requested.</li>
 </ul>
 </div></blockquote>
 </li>
@@ -521,7 +527,7 @@ If this changes, &#8220;sizex&#8221; or &#8220;sizey&#8221; must be changed, too
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Oct 09, 2014.
+      Last updated on Nov 11, 2014.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>

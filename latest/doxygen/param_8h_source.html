@@ -119,736 +119,540 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00034"></a>00034 <span class="preprocessor">#include &quot;typeDefs.h&quot;</span>
 <a name="l00035"></a>00035 <span class="preprocessor">#include &quot;byteArray.h&quot;</span>
 <a name="l00036"></a>00036 <span class="preprocessor">#include &quot;retVal.h&quot;</span>
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00039"></a>00039 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00040"></a>00040 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
-<a name="l00041"></a>00041 <span class="preprocessor">#include &lt;stdarg.h&gt;</span>
-<a name="l00042"></a>00042 <span class="preprocessor">#include &lt;limits&gt;</span>
-<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045 <span class="comment">/* definition and macros */</span>
-<a name="l00046"></a>00046 <span class="comment">/* global variables (avoid) */</span>
-<a name="l00047"></a>00047 <span class="comment">/* content */</span>
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="keyword">namespace </span>ito
-<a name="l00050"></a>00050 {
-<a name="l00051"></a>00051     <span class="keyword">class </span>Param;
-<a name="l00052"></a>00052     <span class="keyword">class </span>ParamHelper;
-<a name="l00053"></a>00053     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">struct </span>ItomParamHelper;
-<a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6">00055</a>     <span class="keyword">const</span> uint32 <a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6" title="bits of type lying within this mask are flags (e.g. typeNoAutosave, typeReadonly...)">paramFlagMask</a> = 0xFFFF0000; 
-<a name="l00056"></a><a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906">00056</a>     <span class="keyword">const</span> uint32 <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a> = 0x0000FFFF; 
-<a name="l00057"></a>00057 
+<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;paramMeta.h&quot;</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00040"></a>00040 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00041"></a>00041 <span class="preprocessor">#include &lt;stdio.h&gt;</span>
+<a name="l00042"></a>00042 <span class="preprocessor">#include &lt;stdarg.h&gt;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &lt;limits&gt;</span>
+<a name="l00044"></a>00044 <span class="preprocessor">#include &lt;stdexcept&gt;</span>
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="comment">/* definition and macros */</span>
+<a name="l00047"></a>00047 <span class="comment">/* global variables (avoid) */</span>
+<a name="l00048"></a>00048 <span class="comment">/* content */</span>
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="keyword">namespace </span>ito
+<a name="l00051"></a>00051 {
+<a name="l00052"></a>00052     <span class="keyword">class </span>Param;
+<a name="l00053"></a>00053     <span class="keyword">class </span>ParamHelper;
+<a name="l00054"></a>00054     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">struct </span>ItomParamHelper;
+<a name="l00055"></a>00055 
+<a name="l00056"></a><a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6">00056</a>     <span class="keyword">const</span> uint32 <a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6" title="bits of type lying within this mask are flags (e.g. typeNoAutosave, typeReadonly...)">paramFlagMask</a> = 0xFFFF0000; 
+<a name="l00057"></a><a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906">00057</a>     <span class="keyword">const</span> uint32 <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a> = 0x0000FFFF; 
 <a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="classito_1_1_param_base.html">00059</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_param_base.html">ParamBase</a>
-<a name="l00060"></a>00060     {
-<a name="l00061"></a>00061     <span class="keyword">protected</span>:
-<a name="l00062"></a>00062         uint32 m_type;
-<a name="l00063"></a><a class="code" href="classito_1_1_param_base.html#ac73ad2d131f3404f6abd64172558ed07">00063</a>         <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> <a class="code" href="classito_1_1_param_base.html#ac73ad2d131f3404f6abd64172558ed07" title="parameter name">m_name</a>;      
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065         <span class="keywordtype">void</span> InOutCheck();
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067     <span class="keyword">private</span>:
-<a name="l00068"></a><a class="code" href="classito_1_1_param_base.html#a72d6fa02ff29c3ad80ed8e13bdec69ca">00068</a>         <span class="keywordtype">double</span> <a class="code" href="classito_1_1_param_base.html#a72d6fa02ff29c3ad80ed8e13bdec69ca" title="internal value for double typed values">m_dVal</a>;      
-<a name="l00069"></a><a class="code" href="classito_1_1_param_base.html#abb1cc0d405bb898cc127254a415d5c67">00069</a>         <span class="keywordtype">int</span> <a class="code" href="classito_1_1_param_base.html#abb1cc0d405bb898cc127254a415d5c67" title="internal value for integer typed values">m_iVal</a>;         
-<a name="l00070"></a><a class="code" href="classito_1_1_param_base.html#ae697b74e88640ebf73fd2ce2b8033832">00070</a>         <span class="keywordtype">char</span> *<a class="code" href="classito_1_1_param_base.html#ae697b74e88640ebf73fd2ce2b8033832" title="internal pointer for pointer type values (also strings)">m_cVal</a>;       
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072     <span class="keyword">public</span>:
-<a name="l00073"></a>00073         <span class="keyword">enum</span> Type {
-<a name="l00074"></a>00074             <span class="comment">//flags (bit 17-32)</span>
-<a name="l00075"></a>00075             NoAutosave      = 0x010000,
-<a name="l00076"></a>00076             Readonly        = 0x020000, <span class="comment">// this flag is not used inside tParam but you can check for it</span>
-<a name="l00077"></a>00077             In              = 0x040000,
-<a name="l00078"></a>00078             Out             = 0x080000,
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080             <span class="comment">//type (bit 1-16)</span>
-<a name="l00081"></a>00081             Pointer         = 0x000001,
-<a name="l00082"></a>00082             Char            = 0x000002,
-<a name="l00083"></a>00083             Int             = 0x000004,
-<a name="l00084"></a>00084             Double          = 0x000008,
-<a name="l00085"></a>00085             <span class="comment">//DObj            = 0x000010,</span>
-<a name="l00086"></a>00086             String          = 0x000020 | Pointer,
-<a name="l00087"></a>00087             HWRef           = 0x000040 | Pointer | NoAutosave,
-<a name="l00088"></a>00088             DObjPtr         = 0x000010 | Pointer | NoAutosave,
-<a name="l00089"></a>00089             CharArray       = Char     | Pointer,
-<a name="l00090"></a>00090             IntArray        = Int      | Pointer,
-<a name="l00091"></a>00091             DoubleArray     = Double   | Pointer,
-<a name="l00092"></a>00092             PointCloudPtr   = 0x000080 | Pointer | NoAutosave,
-<a name="l00093"></a>00093             PointPtr        = 0x000100 | Pointer | NoAutosave,
-<a name="l00094"></a>00094             PolygonMeshPtr  = 0x000200 | Pointer | NoAutosave
-<a name="l00095"></a>00095         };
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097         <span class="keyword">static</span> <span class="keyword">inline</span> uint32 typeFilter(uint32 type) { <span class="keywordflow">return</span> type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>; }
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099         <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00100"></a>00100         <span class="comment">//  CONSTRUCTORS, COPY-CONSTRUCTOR, DESTRUCTOR</span>
-<a name="l00101"></a>00101         <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00103"></a><a class="code" href="classito_1_1_param_base.html#abbf1dacce700c4e22be21fcadda4c68c">00103</a> <span class="comment"></span>        <a class="code" href="classito_1_1_param_base.html#abbf1dacce700c4e22be21fcadda4c68c" title="default constructor, creates &quot;empty&quot; tParam">ParamBase</a>() : m_type(0), m_name(NULL), m_dVal(0.0), m_iVal(0), m_cVal(NULL) {}
-<a name="l00104"></a>00104         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);                                                               <span class="comment">// type-less ParamBase with name only</span>
-<a name="l00105"></a>00105         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type);                                               <span class="comment">// constructor with type and name</span>
-<a name="l00106"></a>00106         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *val);                              <span class="comment">// constructor with name and type, char val</span>
-<a name="l00107"></a>00107         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> val);                             <span class="comment">// constructor with name and type, double val and optional info</span>
-<a name="l00108"></a>00108         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> val);                                <span class="comment">// constructor with name and type, int val and optional info</span>
-<a name="l00109"></a>00109         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *val);                              <span class="comment">// constructor with name and type, char val</span>
-<a name="l00110"></a>00110         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> val);                             <span class="comment">// constructor with name and type, double val and optional info</span>
-<a name="l00111"></a>00111         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> val);                                <span class="comment">// constructor with name and type, int val and optional info</span>
-<a name="l00112"></a>00112         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span> *values);  <span class="comment">// array constructor with name and type, size and array</span>
-<a name="l00113"></a>00113         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">int</span> *values);   <span class="comment">// array constructor with name and type, size and array</span>
-<a name="l00114"></a>00114         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">double</span> *values);<span class="comment">// array constructor with name and type, size and array</span>
-<a name="l00115"></a>00115         <span class="keyword">virtual</span> ~<a class="code" href="classito_1_1_param_base.html">ParamBase</a>(); <span class="comment">//Destructor</span>
-<a name="l00116"></a>00116         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a> &amp;copyConstr); <span class="comment">//Copy-Constructor</span>
-<a name="l00117"></a>00117 
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="classito_1_1_param_base.html">00060</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_param_base.html">ParamBase</a>
+<a name="l00061"></a>00061     {
+<a name="l00062"></a>00062     <span class="keyword">protected</span>:
+<a name="l00063"></a>00063         uint32 m_type;
+<a name="l00064"></a><a class="code" href="classito_1_1_param_base.html#ac73ad2d131f3404f6abd64172558ed07">00064</a>         <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> <a class="code" href="classito_1_1_param_base.html#ac73ad2d131f3404f6abd64172558ed07" title="parameter name">m_name</a>;      
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066         <span class="keywordtype">void</span> InOutCheck();
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068     <span class="keyword">private</span>:
+<a name="l00069"></a><a class="code" href="classito_1_1_param_base.html#a72d6fa02ff29c3ad80ed8e13bdec69ca">00069</a>         <span class="keywordtype">double</span> <a class="code" href="classito_1_1_param_base.html#a72d6fa02ff29c3ad80ed8e13bdec69ca" title="internal value for double typed values">m_dVal</a>;      
+<a name="l00070"></a><a class="code" href="classito_1_1_param_base.html#abb1cc0d405bb898cc127254a415d5c67">00070</a>         <span class="keywordtype">int</span> <a class="code" href="classito_1_1_param_base.html#abb1cc0d405bb898cc127254a415d5c67" title="internal value for integer typed values">m_iVal</a>;         
+<a name="l00071"></a><a class="code" href="classito_1_1_param_base.html#ae697b74e88640ebf73fd2ce2b8033832">00071</a>         <span class="keywordtype">char</span> *<a class="code" href="classito_1_1_param_base.html#ae697b74e88640ebf73fd2ce2b8033832" title="internal pointer for pointer type values (also strings)">m_cVal</a>;       
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073     <span class="keyword">public</span>:
+<a name="l00074"></a>00074         <span class="keyword">enum</span> Type {
+<a name="l00075"></a>00075             <span class="comment">//flags (bit 17-32)</span>
+<a name="l00076"></a>00076             NoAutosave      = 0x010000,
+<a name="l00077"></a>00077             Readonly        = 0x020000, <span class="comment">// this flag is not used inside tParam but you can check for it</span>
+<a name="l00078"></a>00078             In              = 0x040000,
+<a name="l00079"></a>00079             Out             = 0x080000,
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081             <span class="comment">//type (bit 1-16)</span>
+<a name="l00082"></a>00082             Pointer         = 0x000001,
+<a name="l00083"></a>00083             Char            = 0x000002,
+<a name="l00084"></a>00084             Int             = 0x000004,
+<a name="l00085"></a>00085             Double          = 0x000008,
+<a name="l00086"></a>00086             <span class="comment">//DObj            = 0x000010,</span>
+<a name="l00087"></a>00087             String          = 0x000020 | Pointer,
+<a name="l00088"></a>00088             HWRef           = 0x000040 | Pointer | NoAutosave,
+<a name="l00089"></a>00089             DObjPtr         = 0x000010 | Pointer | NoAutosave,
+<a name="l00090"></a>00090             CharArray       = Char     | Pointer,
+<a name="l00091"></a>00091             IntArray        = Int      | Pointer,
+<a name="l00092"></a>00092             DoubleArray     = Double   | Pointer,
+<a name="l00093"></a>00093             PointCloudPtr   = 0x000080 | Pointer | NoAutosave,
+<a name="l00094"></a>00094             PointPtr        = 0x000100 | Pointer | NoAutosave,
+<a name="l00095"></a>00095             PolygonMeshPtr  = 0x000200 | Pointer | NoAutosave
+<a name="l00096"></a>00096         };
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098         <span class="keyword">static</span> <span class="keyword">inline</span> uint32 typeFilter(uint32 type) { <span class="keywordflow">return</span> type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>; }
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100         <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00101"></a>00101         <span class="comment">//  CONSTRUCTORS, COPY-CONSTRUCTOR, DESTRUCTOR</span>
+<a name="l00102"></a>00102         <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00104"></a><a class="code" href="classito_1_1_param_base.html#abbf1dacce700c4e22be21fcadda4c68c">00104</a> <span class="comment"></span>        <a class="code" href="classito_1_1_param_base.html#abbf1dacce700c4e22be21fcadda4c68c" title="default constructor, creates &quot;empty&quot; tParam">ParamBase</a>() : m_type(0), m_name(NULL), m_dVal(0.0), m_iVal(0), m_cVal(NULL) {}
+<a name="l00105"></a>00105         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name);                                                                  <span class="comment">// type-less ParamBase with name only</span>
+<a name="l00106"></a>00106         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type);                                               <span class="comment">// constructor with type and name</span>
+<a name="l00107"></a>00107         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *val);                              <span class="comment">// constructor with name and type, char val</span>
+<a name="l00108"></a>00108         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> val);                             <span class="comment">// constructor with name and type, double val and optional info</span>
+<a name="l00109"></a>00109         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> val);                                <span class="comment">// constructor with name and type, int val and optional info</span>
+<a name="l00110"></a>00110         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span> *values);  <span class="comment">// array constructor with name and type, size and array</span>
+<a name="l00111"></a>00111         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">int</span> *values);   <span class="comment">// array constructor with name and type, size and array</span>
+<a name="l00112"></a>00112         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">double</span> *values);<span class="comment">// array constructor with name and type, size and array</span>
+<a name="l00113"></a>00113         <span class="keyword">virtual</span> ~<a class="code" href="classito_1_1_param_base.html">ParamBase</a>(); <span class="comment">//Destructor</span>
+<a name="l00114"></a>00114         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a> &amp;copyConstr); <span class="comment">//Copy-Constructor</span>
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116         <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00117"></a>00117         <span class="comment">//  ASSIGNMENT AND OPERATORS</span>
 <a name="l00118"></a>00118         <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00119"></a>00119         <span class="comment">//  ASSIGNMENT AND OPERATORS</span>
-<a name="l00120"></a>00120         <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00121"></a>00121         <span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a> operator [] (<span class="keyword">const</span> <span class="keywordtype">int</span> num) <span class="keyword">const</span>;     
-<a name="l00122"></a>00122         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>&amp; operator = (<span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a> &amp;rhs);          
-<a name="l00123"></a>00123         <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> copyValueFrom(<span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ito::ParamBase</a> *rhs);  
-<a name="l00124"></a>00124 
+<a name="l00119"></a>00119         <span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a> operator [] (<span class="keyword">const</span> <span class="keywordtype">int</span> num) <span class="keyword">const</span>;     
+<a name="l00120"></a>00120         <a class="code" href="classito_1_1_param_base.html">ParamBase</a>&amp; operator = (<span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a> &amp;rhs);          
+<a name="l00121"></a>00121         <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> copyValueFrom(<span class="keyword">const</span> <a class="code" href="classito_1_1_param_base.html">ito::ParamBase</a> *rhs);  
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123         <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00124"></a>00124         <span class="comment">//  SET/GET FURTHER PROPERTIES</span>
 <a name="l00125"></a>00125         <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00126"></a>00126         <span class="comment">//  SET/GET FURTHER PROPERTIES</span>
-<a name="l00127"></a>00127         <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00128"></a>00128 
-<a name="l00130"></a><a class="code" href="classito_1_1_param_base.html#ad6cf4551dd5e549d8b956dece74301ae">00130</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> isNumeric(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00131"></a>00131 <span class="keyword">        </span>{
-<a name="l00132"></a>00132             <span class="keyword">static</span> <span class="keywordtype">int</span> numericTypeMask = ito::ParamBase::Char | ParamBase::Int | ParamBase::Double;
-<a name="l00133"></a>00133             <span class="keywordtype">int</span> type = getType();
-<a name="l00134"></a>00134             <span class="keywordflow">return</span> (type &amp; numericTypeMask) &amp;&amp; !(type &amp; ito::ParamBase::Pointer);
-<a name="l00135"></a>00135         }
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137         <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> addNameSuffix(<span class="keyword">const</span> <span class="keywordtype">char</span> *suffix) 
-<a name="l00138"></a>00138         { 
-<a name="l00139"></a>00139             <span class="keywordflow">if</span> (suffix)  
-<a name="l00140"></a>00140             { 
-<a name="l00141"></a>00141                 m_name.append(suffix);
-<a name="l00142"></a>00142             }
-<a name="l00143"></a>00143             <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a59b8253725a061086f085758a117002b">ito::retWarning</a>;
-<a name="l00144"></a>00144         }
-<a name="l00146"></a><a class="code" href="classito_1_1_param_base.html#a82eb2aefcbdc055235391daafa2b1d0a">00146</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_param_base.html#a82eb2aefcbdc055235391daafa2b1d0a" title="returns whether tParam contains a valid type (true) or is an empty parameter (false, type == 0). The default tParam-constructor is always an invalid tParam.">isValid</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_type != 0; }
-<a name="l00147"></a>00147 
-<a name="l00149"></a><a class="code" href="classito_1_1_param_base.html#a5fb4da5606df31f317372bf247837655">00149</a>         <span class="keyword">inline</span> uint32 getType(<span class="keywordtype">bool</span> filterFlags = <span class="keyword">true</span>)<span class="keyword"> const </span>
-<a name="l00150"></a>00150 <span class="keyword">        </span>{ 
-<a name="l00151"></a>00151             <span class="keywordflow">if</span> (filterFlags) 
-<a name="l00152"></a>00152                 <span class="keywordflow">return</span> m_type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>; 
-<a name="l00153"></a>00153             <span class="keywordflow">else</span>
-<a name="l00154"></a>00154                 <span class="keywordflow">return</span> m_type;
-<a name="l00155"></a>00155         }
-<a name="l00156"></a>00156 
-<a name="l00158"></a><a class="code" href="classito_1_1_param_base.html#a5da19c5b31db536a4fc49e749d5607ab">00158</a>         <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_param_base.html#a5da19c5b31db536a4fc49e749d5607ab" title="returns parameter flags (parameter type is not included)">getFlags</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_type &amp; <a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6" title="bits of type lying within this mask are flags (e.g. typeNoAutosave, typeReadonly...)">paramFlagMask</a>; }
-<a name="l00159"></a>00159         
-<a name="l00161"></a><a class="code" href="classito_1_1_param_base.html#ac5766f6d74e499381008a44f4b053b88">00161</a>         <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_param_base.html#ac5766f6d74e499381008a44f4b053b88" title="sets parameter flags (parameter type remains untouched), for possible flags see tParamType">setFlags</a>(<span class="keyword">const</span> uint32 flags) { m_type = getType() | (flags &amp; <a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6" title="bits of type lying within this mask are flags (e.g. typeNoAutosave, typeReadonly...)">paramFlagMask</a>); <span class="keywordflow">return</span> 0; }
-<a name="l00162"></a>00162    
-<a name="l00164"></a><a class="code" href="classito_1_1_param_base.html#ab1e082e77f2a4a2ecbde3440bc7e9ff7">00164</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classito_1_1_param_base.html#ab1e082e77f2a4a2ecbde3440bc7e9ff7" title="returns parameter name (string is not copid)">getName</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_name.data(); }
-<a name="l00167"></a><a class="code" href="classito_1_1_param_base.html#a73ff167920174fbea6306487a0b201f9">00167</a>         <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_param_base.html#a73ff167920174fbea6306487a0b201f9">getAutosave</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> ((m_type &amp; NoAutosave) &gt; 0 ? 0 : 1); }
-<a name="l00170"></a><a class="code" href="classito_1_1_param_base.html#aafdf038f376248848f98f12cfb04cba7">00170</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_param_base.html#aafdf038f376248848f98f12cfb04cba7">setAutosave</a>(<span class="keyword">const</span> uint32 autosave) { m_type = autosave &gt; 0 ? m_type &amp; ~NoAutosave : m_type | NoAutosave; <span class="keywordflow">return</span>; }
-<a name="l00171"></a>00171 
-<a name="l00172"></a>00172         <span class="keywordtype">int</span> getLen(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
-<a name="l00173"></a>00173         
-<a name="l00174"></a>00174             
-<a name="l00181"></a><a class="code" href="classito_1_1_param_base.html#ae22dc83069391f94cea79e26cbc455ba">00181</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(_Tp val)
-<a name="l00182"></a>00182         {
-<a name="l00183"></a>00183             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::setVal</a>(getType(), m_cVal, m_iVal, m_dVal, val, 0);
-<a name="l00184"></a>00184         }
-<a name="l00185"></a>00185 
-<a name="l00193"></a><a class="code" href="classito_1_1_param_base.html#a495d1918610e4742b48d727d5e886a78">00193</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(_Tp val, <span class="keywordtype">int</span> len)
-<a name="l00194"></a>00194         {
-<a name="l00195"></a>00195             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::setVal</a>(getType(), m_cVal, m_iVal, m_dVal, val, len);
-<a name="l00196"></a>00196         }
-<a name="l00197"></a>00197 
-<a name="l00204"></a><a class="code" href="classito_1_1_param_base.html#afa0989f3f40bc08653c63215a0e3bba0">00204</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> _Tp getVal(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
-<a name="l00205"></a>00205 <span class="keyword">        </span>{
-<a name="l00206"></a>00206             <span class="keywordtype">int</span> len = 0;
-<a name="l00207"></a>00207             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::getVal</a>(getType(), m_cVal, m_iVal, m_dVal, len);
-<a name="l00208"></a>00208         }
-<a name="l00209"></a>00209 
-<a name="l00216"></a><a class="code" href="classito_1_1_param_base.html#a71c41419f101bad04e788ab05366767a">00216</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> _Tp getVal(<span class="keywordtype">int</span> &amp;len)<span class="keyword"> const</span>
-<a name="l00217"></a>00217 <span class="keyword">        </span>{
-<a name="l00218"></a>00218             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::getVal</a>(getType(), m_cVal, m_iVal, m_dVal, len);
-<a name="l00219"></a>00219         }
+<a name="l00126"></a>00126 
+<a name="l00128"></a><a class="code" href="classito_1_1_param_base.html#ad6cf4551dd5e549d8b956dece74301ae">00128</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> isNumeric(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00129"></a>00129 <span class="keyword">        </span>{
+<a name="l00130"></a>00130             <span class="keyword">static</span> <span class="keywordtype">int</span> numericTypeMask = ito::ParamBase::Char | ParamBase::Int | ParamBase::Double;
+<a name="l00131"></a>00131             <span class="keywordtype">int</span> type = getType();
+<a name="l00132"></a>00132             <span class="keywordflow">return</span> (type &amp; numericTypeMask) &amp;&amp; !(type &amp; ito::ParamBase::Pointer);
+<a name="l00133"></a>00133         }
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135         <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> addNameSuffix(<span class="keyword">const</span> <span class="keywordtype">char</span> *suffix) 
+<a name="l00136"></a>00136         { 
+<a name="l00137"></a>00137             <span class="keywordflow">if</span> (suffix)  
+<a name="l00138"></a>00138             { 
+<a name="l00139"></a>00139                 m_name.append(suffix);
+<a name="l00140"></a>00140             }
+<a name="l00141"></a>00141             <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a59b8253725a061086f085758a117002b">ito::retWarning</a>;
+<a name="l00142"></a>00142         }
+<a name="l00144"></a><a class="code" href="classito_1_1_param_base.html#a82eb2aefcbdc055235391daafa2b1d0a">00144</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_param_base.html#a82eb2aefcbdc055235391daafa2b1d0a" title="returns whether tParam contains a valid type (true) or is an empty parameter (false, type == 0). The default tParam-constructor is always an invalid tParam.">isValid</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_type != 0; }
+<a name="l00145"></a>00145 
+<a name="l00147"></a><a class="code" href="classito_1_1_param_base.html#a5fb4da5606df31f317372bf247837655">00147</a>         <span class="keyword">inline</span> uint32 getType(<span class="keywordtype">bool</span> filterFlags = <span class="keyword">true</span>)<span class="keyword"> const </span>
+<a name="l00148"></a>00148 <span class="keyword">        </span>{ 
+<a name="l00149"></a>00149             <span class="keywordflow">if</span> (filterFlags) 
+<a name="l00150"></a>00150                 <span class="keywordflow">return</span> m_type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>; 
+<a name="l00151"></a>00151             <span class="keywordflow">else</span>
+<a name="l00152"></a>00152                 <span class="keywordflow">return</span> m_type;
+<a name="l00153"></a>00153         }
+<a name="l00154"></a>00154 
+<a name="l00156"></a><a class="code" href="classito_1_1_param_base.html#a5da19c5b31db536a4fc49e749d5607ab">00156</a>         <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_param_base.html#a5da19c5b31db536a4fc49e749d5607ab" title="returns parameter flags (parameter type is not included)">getFlags</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_type &amp; <a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6" title="bits of type lying within this mask are flags (e.g. typeNoAutosave, typeReadonly...)">paramFlagMask</a>; }
+<a name="l00157"></a>00157         
+<a name="l00159"></a><a class="code" href="classito_1_1_param_base.html#ac5766f6d74e499381008a44f4b053b88">00159</a>         <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_param_base.html#ac5766f6d74e499381008a44f4b053b88" title="sets parameter flags (parameter type remains untouched), for possible flags see tParamType">setFlags</a>(<span class="keyword">const</span> uint32 flags) { m_type = getType() | (flags &amp; <a class="code" href="namespaceito.html#a568df211be05e76f53d2262087e4b0b6" title="bits of type lying within this mask are flags (e.g. typeNoAutosave, typeReadonly...)">paramFlagMask</a>); <span class="keywordflow">return</span> 0; }
+<a name="l00160"></a>00160    
+<a name="l00162"></a><a class="code" href="classito_1_1_param_base.html#ab1e082e77f2a4a2ecbde3440bc7e9ff7">00162</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classito_1_1_param_base.html#ab1e082e77f2a4a2ecbde3440bc7e9ff7" title="returns parameter name (string is not copid)">getName</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_name.data(); }
+<a name="l00165"></a><a class="code" href="classito_1_1_param_base.html#a73ff167920174fbea6306487a0b201f9">00165</a>         <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_param_base.html#a73ff167920174fbea6306487a0b201f9">getAutosave</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> ((m_type &amp; NoAutosave) &gt; 0 ? 0 : 1); }
+<a name="l00168"></a><a class="code" href="classito_1_1_param_base.html#aafdf038f376248848f98f12cfb04cba7">00168</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_param_base.html#aafdf038f376248848f98f12cfb04cba7">setAutosave</a>(<span class="keyword">const</span> uint32 autosave) { m_type = autosave &gt; 0 ? m_type &amp; ~NoAutosave : m_type | NoAutosave; <span class="keywordflow">return</span>; }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170         <span class="keywordtype">int</span> getLen(<span class="keywordtype">void</span>) <span class="keyword">const</span>;
+<a name="l00171"></a>00171         
+<a name="l00172"></a>00172             
+<a name="l00179"></a><a class="code" href="classito_1_1_param_base.html#ae22dc83069391f94cea79e26cbc455ba">00179</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(_Tp val)
+<a name="l00180"></a>00180         {
+<a name="l00181"></a>00181             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::setVal</a>(getType(), m_cVal, m_iVal, m_dVal, val, 0);
+<a name="l00182"></a>00182         }
+<a name="l00183"></a>00183 
+<a name="l00191"></a><a class="code" href="classito_1_1_param_base.html#a495d1918610e4742b48d727d5e886a78">00191</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(_Tp val, <span class="keywordtype">int</span> len)
+<a name="l00192"></a>00192         {
+<a name="l00193"></a>00193             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::setVal</a>(getType(), m_cVal, m_iVal, m_dVal, val, len);
+<a name="l00194"></a>00194         }
+<a name="l00195"></a>00195 
+<a name="l00202"></a><a class="code" href="classito_1_1_param_base.html#afa0989f3f40bc08653c63215a0e3bba0">00202</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> _Tp getVal(<span class="keywordtype">void</span>)<span class="keyword"> const</span>
+<a name="l00203"></a>00203 <span class="keyword">        </span>{
+<a name="l00204"></a>00204             <span class="keywordtype">int</span> len = 0;
+<a name="l00205"></a>00205             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::getVal</a>(getType(), m_cVal, m_iVal, m_dVal, len);
+<a name="l00206"></a>00206         }
+<a name="l00207"></a>00207 
+<a name="l00214"></a><a class="code" href="classito_1_1_param_base.html#a71c41419f101bad04e788ab05366767a">00214</a>         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">inline</span> _Tp getVal(<span class="keywordtype">int</span> &amp;len)<span class="keyword"> const</span>
+<a name="l00215"></a>00215 <span class="keyword">        </span>{
+<a name="l00216"></a>00216             <span class="keywordflow">return</span> <a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper&lt;_Tp&gt;::getVal</a>(getType(), m_cVal, m_iVal, m_dVal, len);
+<a name="l00217"></a>00217         }
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219     };
 <a name="l00220"></a>00220 
-<a name="l00221"></a>00221     };
-<a name="l00222"></a>00222 
-<a name="l00228"></a><a class="code" href="classito_1_1_param_meta.html">00228</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
+<a name="l00221"></a>00221     <span class="comment">//----------------------------------------------------------------------------------------------------------------------------------</span>
+<a name="l00228"></a><a class="code" href="classito_1_1_param.html">00228</a> <span class="comment"></span>    <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_param.html" title="class for parameter handling e.g. to pass paramters to plugins">Param</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a>
 <a name="l00229"></a>00229     {
-<a name="l00230"></a>00230     <span class="keyword">public</span>:
-<a name="l00231"></a>00231         <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>() : m_type(0) {}
-<a name="l00232"></a>00232         <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(uint32 type) : m_type(type) {}
-<a name="l00233"></a>00233         <span class="keyword">virtual</span> ~<a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>() {}
-<a name="l00234"></a>00234         <span class="keyword">inline</span> uint32 getType()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_type; }
-<a name="l00235"></a>00235     <span class="keyword">protected</span>:
-<a name="l00236"></a>00236         uint32 m_type;
-<a name="l00237"></a>00237     };
-<a name="l00238"></a>00238 
-<a name="l00244"></a><a class="code" href="classito_1_1_char_meta.html">00244</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_char_meta.html" title="Meta-information for Param of type Char or CharArray.">CharMeta</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
-<a name="l00245"></a>00245     {
-<a name="l00246"></a>00246     <span class="keyword">public</span>:
-<a name="l00248"></a><a class="code" href="classito_1_1_char_meta.html#a9b42798855857d10e125a50e0685fbed">00248</a>         <span class="keyword">explicit</span> <a class="code" href="classito_1_1_char_meta.html#a9b42798855857d10e125a50e0685fbed" title="constructor with minimum and maximum value">CharMeta</a>(<span class="keywordtype">char</span> minVal, <span class="keywordtype">char</span> maxVal, <span class="keywordtype">char</span> stepSize=1) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::Char), m_minVal(minVal), m_maxVal(maxVal), m_stepSize(stepSize) { <span class="keywordflow">if</span>(m_maxVal &lt; m_minVal) std::swap(m_minVal,m_maxVal); }
-<a name="l00249"></a><a class="code" href="classito_1_1_char_meta.html#ae11bae0e1a71433b181cd80a19868ba3">00249</a>         <span class="keyword">static</span> <a class="code" href="classito_1_1_char_meta.html" title="Meta-information for Param of type Char or CharArray.">CharMeta</a>* <a class="code" href="classito_1_1_char_meta.html#ae11bae0e1a71433b181cd80a19868ba3" title="returns a new instance of CharMeta, where the min and max are set to the full range available for cha...">all</a>() { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classito_1_1_char_meta.html" title="Meta-information for Param of type Char or CharArray.">CharMeta</a>(std::numeric_limits&lt;char&gt;::min(), std::numeric_limits&lt;char&gt;::max() ); } 
-<a name="l00250"></a><a class="code" href="classito_1_1_char_meta.html#a3beaf700d22198e0a96331588c03334c">00250</a>         <span class="keyword">inline</span> <span class="keywordtype">char</span> <a class="code" href="classito_1_1_char_meta.html#a3beaf700d22198e0a96331588c03334c" title="returns minimum value">getMin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_minVal; } 
-<a name="l00251"></a><a class="code" href="classito_1_1_char_meta.html#a0470ec77d461262260587a9b8aec95f9">00251</a>         <span class="keyword">inline</span> <span class="keywordtype">char</span> <a class="code" href="classito_1_1_char_meta.html#a0470ec77d461262260587a9b8aec95f9" title="returns maximum value">getMax</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_maxVal; } 
-<a name="l00252"></a><a class="code" href="classito_1_1_char_meta.html#a627a434cef04c0ce45e55d8589d59d17">00252</a>         <span class="keyword">inline</span> <span class="keywordtype">char</span> <a class="code" href="classito_1_1_char_meta.html#a627a434cef04c0ce45e55d8589d59d17" title="returns step size">getStepSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_stepSize; } 
-<a name="l00253"></a>00253 
-<a name="l00255"></a>00255 
-<a name="l00258"></a><a class="code" href="classito_1_1_char_meta.html#a47cb733fc79fdca6d6e24e465aa324d3">00258</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_char_meta.html#a47cb733fc79fdca6d6e24e465aa324d3" title="sets the minimum value">setMin</a>(<span class="keywordtype">char</span> val) { m_minVal = val; m_maxVal = std::max(m_maxVal,m_minVal); }
-<a name="l00259"></a>00259         
-<a name="l00261"></a>00261 
-<a name="l00264"></a><a class="code" href="classito_1_1_char_meta.html#a06d085b6bcb7397dd3f719c1f8dc39c1">00264</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_char_meta.html#a06d085b6bcb7397dd3f719c1f8dc39c1" title="sets the maximum value">setMax</a>(<span class="keywordtype">char</span> val) { m_maxVal = val; m_minVal = std::min(m_maxVal,m_minVal); }
+<a name="l00230"></a>00230         <span class="keyword">private</span>:
+<a name="l00231"></a>00231             <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a> *m_pMeta;
+<a name="l00232"></a>00232             <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> m_info;
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234         <span class="keyword">public</span>:
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236             <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00237"></a>00237             <span class="comment">//  CONSTRUCTORS, COPY-CONSTRUCTOR, DESTRUCTOR</span>
+<a name="l00238"></a>00238             <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00240"></a><a class="code" href="classito_1_1_param.html#afa72a4a4bc579046a41b6d9842654bb7">00240</a> <span class="comment"></span>            <a class="code" href="classito_1_1_param.html#afa72a4a4bc579046a41b6d9842654bb7" title="default constructor, creates &quot;empty&quot; tParam">Param</a>() : <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(), m_pMeta(NULL), m_info(NULL) {}
+<a name="l00241"></a>00241             <a class="code" href="classito_1_1_param.html" title="class for parameter handling e.g. to pass paramters to plugins">Param</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> &amp;name) : <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(name), m_pMeta(NULL), m_info(NULL) {}                         <span class="comment">// type-less Param with name only</span>
+<a name="l00242"></a>00242             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type) : ParamBase(name, type), m_pMeta(NULL), m_info(NULL) {}   <span class="comment">// constructor with type and name</span>
+<a name="l00243"></a>00243             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);                        <span class="comment">// constructor with name and type, char val and optional info</span>
+<a name="l00244"></a>00244             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> minVal, <span class="keyword">const</span> <span class="keywordtype">double</span> maxVal, <span class="keyword">const</span> <span class="keywordtype">double</span> val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info); <span class="comment">// constructor with name and type, double val, double minVal, double maxVal and optional info</span>
+<a name="l00245"></a>00245             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> minVal, <span class="keyword">const</span> <span class="keywordtype">int</span> maxVal, <span class="keyword">const</span> <span class="keywordtype">int</span> val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info); <span class="comment">// constructor with name and type, int val, int minVal, int maxVal and optional info</span>
+<a name="l00246"></a>00246             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> minVal, <span class="keyword">const</span> <span class="keywordtype">char</span> maxVal, <span class="keyword">const</span> <span class="keywordtype">char</span> val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info); <span class="comment">// constructor with name and type, int val, int minVal, int maxVal and optional info</span>
+<a name="l00247"></a>00247             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span> *values, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);  <span class="comment">// array constructor with name and type, size and array</span>
+<a name="l00248"></a>00248             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">int</span> *values, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);   <span class="comment">// array constructor with name and type, size and array</span>
+<a name="l00249"></a>00249             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">double</span> *values, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);<span class="comment">// array constructor with name and type, size and array</span>
+<a name="l00250"></a>00250             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> val, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
+<a name="l00251"></a>00251             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> val, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
+<a name="l00252"></a>00252             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> val, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
+<a name="l00253"></a>00253             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">double</span> *values, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
+<a name="l00254"></a>00254             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">int</span> *values, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
+<a name="l00255"></a>00255             Param(<span class="keyword">const</span> ByteArray &amp;name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span> *values, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
+<a name="l00256"></a>00256             ~Param();                        
+<a name="l00257"></a>00257             Param(<span class="keyword">const</span> Param &amp;copyConstr); 
+<a name="l00258"></a>00258 
+<a name="l00259"></a>00259             <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00260"></a>00260             <span class="comment">//  ASSIGNMENT AND OPERATORS</span>
+<a name="l00261"></a>00261             <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00262"></a>00262             <span class="keyword">const</span> Param operator [] (<span class="keyword">const</span> <span class="keywordtype">int</span> num) <span class="keyword">const</span>;    
+<a name="l00263"></a>00263             Param&amp; operator = (<span class="keyword">const</span> Param &amp;rhs);             
+<a name="l00264"></a>00264             <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> copyValueFrom(<span class="keyword">const</span> ParamBase *rhs);  
 <a name="l00265"></a>00265 
-<a name="l00267"></a>00267 
-<a name="l00270"></a><a class="code" href="classito_1_1_char_meta.html#a14f2365548aab6df1518e0afc7c9bd05">00270</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_char_meta.html#a14f2365548aab6df1518e0afc7c9bd05" title="sets the step size">setStepSize</a>(<span class="keywordtype">char</span> val) { m_stepSize = val; }
-<a name="l00271"></a>00271     <span class="keyword">private</span>:
-<a name="l00272"></a>00272         <span class="keywordtype">char</span> m_minVal;
-<a name="l00273"></a>00273         <span class="keywordtype">char</span> m_maxVal;
-<a name="l00274"></a>00274         <span class="keywordtype">char</span> m_stepSize; <span class="comment">// &gt;= 1</span>
-<a name="l00275"></a>00275     };
-<a name="l00276"></a>00276 
-<a name="l00282"></a><a class="code" href="classito_1_1_int_meta.html">00282</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_int_meta.html" title="Meta-information for Param of type Int or IntArray.">IntMeta</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
-<a name="l00283"></a>00283     {
-<a name="l00284"></a>00284     <span class="keyword">public</span>:
-<a name="l00286"></a><a class="code" href="classito_1_1_int_meta.html#afc100b81acf12057e7c51a57a3ffa41f">00286</a>         <span class="keyword">explicit</span> <a class="code" href="classito_1_1_int_meta.html#afc100b81acf12057e7c51a57a3ffa41f" title="constructor with minimum and maximum value">IntMeta</a>(<span class="keywordtype">int</span> minVal, <span class="keywordtype">int</span> maxVal, <span class="keywordtype">int</span> stepSize=1) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::Int), m_minVal(minVal), m_maxVal(maxVal), m_stepSize(stepSize) { <span class="keywordflow">if</span>(m_maxVal &lt; m_minVal) std::swap(m_minVal,m_maxVal); }
-<a name="l00287"></a><a class="code" href="classito_1_1_int_meta.html#a9252dac2613ec3615a4a0344a5d32cea">00287</a>         <span class="keyword">static</span> <a class="code" href="classito_1_1_int_meta.html" title="Meta-information for Param of type Int or IntArray.">IntMeta</a>* <a class="code" href="classito_1_1_int_meta.html#a9252dac2613ec3615a4a0344a5d32cea" title="returns a new instance of IntMeta, where the min and max are set to the full range available for inte...">all</a>() { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classito_1_1_int_meta.html" title="Meta-information for Param of type Int or IntArray.">IntMeta</a>(std::numeric_limits&lt;int&gt;::min(), std::numeric_limits&lt;int&gt;::max() ); } 
-<a name="l00288"></a><a class="code" href="classito_1_1_int_meta.html#aeae7b78ab54b30ec9bdfdef67ad9e44c">00288</a>         <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_int_meta.html#aeae7b78ab54b30ec9bdfdef67ad9e44c" title="returns minimum value">getMin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_minVal; } 
-<a name="l00289"></a><a class="code" href="classito_1_1_int_meta.html#a1b56940b7c7ec855b7c02016c8e67ad8">00289</a>         <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_int_meta.html#a1b56940b7c7ec855b7c02016c8e67ad8" title="returns maximum value">getMax</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_maxVal; } 
-<a name="l00290"></a><a class="code" href="classito_1_1_int_meta.html#a274d3356dc93c0babc9de9a871b64391">00290</a>         <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_int_meta.html#a274d3356dc93c0babc9de9a871b64391" title="returns step size">getStepSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_stepSize; } 
-<a name="l00291"></a>00291         
+<a name="l00266"></a>00266             <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00267"></a>00267             <span class="comment">//  SET/GET FURTHER PROPERTIES</span>
+<a name="l00268"></a>00268             <span class="comment">//--------------------------------------------------------------------------------------------</span>
+<a name="l00270"></a><a class="code" href="classito_1_1_param.html#a6f239fa52412701d8f3ce55ed5842c16">00270</a> <span class="comment"></span>            <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classito_1_1_param.html#a6f239fa52412701d8f3ce55ed5842c16" title="&lt; returns content of info string (string is not copied)">getInfo</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_info.data(); }
+<a name="l00271"></a>00271 
+<a name="l00273"></a>00273             <span class="keyword">inline</span> <span class="keywordtype">void</span> setInfo(<span class="keyword">const</span> <span class="keywordtype">char</span> *info)
+<a name="l00274"></a>00274             {
+<a name="l00275"></a>00275                 m_info = info;
+<a name="l00276"></a>00276             }
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278             <span class="keyword">inline</span> <span class="keywordtype">void</span> setInfo(<span class="keyword">const</span> ByteArray &amp;info)
+<a name="l00279"></a>00279             {
+<a name="l00280"></a>00280                 m_info = info;
+<a name="l00281"></a>00281             }
+<a name="l00282"></a>00282 
+<a name="l00283"></a><a class="code" href="classito_1_1_param.html#afd4a8f896371765756d0d6be699aa8b9">00283</a>             <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>* <a class="code" href="classito_1_1_param.html#afd4a8f896371765756d0d6be699aa8b9" title="returns const-pointer to meta-information instance or NULL if not available">getMeta</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_pMeta; } 
+<a name="l00284"></a><a class="code" href="classito_1_1_param.html#afa33afd484e7eb66a5b0bf2816453c0c">00284</a>             <span class="keyword">inline</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>* <a class="code" href="classito_1_1_param.html#afa33afd484e7eb66a5b0bf2816453c0c" title="returns pointer to meta-information instance or NULL if not available">getMeta</a>(<span class="keywordtype">void</span>) { <span class="keywordflow">return</span> m_pMeta; }                
+<a name="l00285"></a>00285 
+<a name="l00287"></a>00287 
+<a name="l00292"></a>00292             <span class="keywordtype">void</span> setMeta(<a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>* meta, <span class="keywordtype">bool</span> takeOwnership = <span class="keyword">false</span>);
 <a name="l00293"></a>00293 
-<a name="l00296"></a><a class="code" href="classito_1_1_int_meta.html#aa7fc03ef88b4211a846edee58c150ebf">00296</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_int_meta.html#aa7fc03ef88b4211a846edee58c150ebf" title="sets the minimum value">setMin</a>(<span class="keywordtype">int</span> val) { m_minVal = val; m_maxVal = std::max(m_maxVal,m_minVal); }
-<a name="l00297"></a>00297         
-<a name="l00299"></a>00299 
-<a name="l00302"></a><a class="code" href="classito_1_1_int_meta.html#abffd2da2f28f1cffc9dcad4058a81e4c">00302</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_int_meta.html#abffd2da2f28f1cffc9dcad4058a81e4c" title="sets the maximum value">setMax</a>(<span class="keywordtype">int</span> val) { m_maxVal = val; m_minVal = std::min(m_maxVal,m_minVal); }
-<a name="l00303"></a>00303 
-<a name="l00305"></a>00305 
-<a name="l00308"></a><a class="code" href="classito_1_1_int_meta.html#a206490913c10c1c2d117e4d9127f83a1">00308</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_int_meta.html#a206490913c10c1c2d117e4d9127f83a1" title="sets the step size">setStepSize</a>(<span class="keywordtype">int</span> val) { m_stepSize = val; }
-<a name="l00309"></a>00309     <span class="keyword">private</span>:
-<a name="l00310"></a>00310         <span class="keywordtype">int</span> m_minVal;
-<a name="l00311"></a>00311         <span class="keywordtype">int</span> m_maxVal;
-<a name="l00312"></a>00312         <span class="keywordtype">int</span> m_stepSize; <span class="comment">// &gt;= 1</span>
-<a name="l00313"></a>00313     };
+<a name="l00294"></a>00294             <span class="keywordtype">double</span> getMin() <span class="keyword">const</span>;
+<a name="l00295"></a>00295             <span class="keywordtype">double</span> getMax() <span class="keyword">const</span>;
+<a name="l00296"></a>00296     };
+<a name="l00297"></a>00297 
+<a name="l00298"></a>00298     <span class="comment">//---------------------------------------------------------------------------------------------------------------------</span>
+<a name="l00299"></a>00299     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;
+<a name="l00300"></a><a class="code" href="structito_1_1_itom_param_helper.html">00300</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>
+<a name="l00301"></a>00301     {
+<a name="l00302"></a>00302         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;cVal, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;<span class="comment">/*dVal*/</span>, _Tp val, <span class="keywordtype">int</span> len = 0)
+<a name="l00303"></a>00303         {
+<a name="l00304"></a>00304             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00305"></a>00305             {
+<a name="l00306"></a>00306                 <span class="keywordflow">case</span> (ito::ParamBase::HWRef &amp; paramTypeMask):
+<a name="l00307"></a>00307                 <span class="keywordflow">case</span> (ito::ParamBase::DObjPtr &amp; paramTypeMask):
+<a name="l00308"></a>00308                 <span class="keywordflow">case</span> ito::ParamBase::PointCloudPtr &amp; paramTypeMask:
+<a name="l00309"></a>00309                 <span class="keywordflow">case</span> ito::ParamBase::PointPtr &amp; paramTypeMask:
+<a name="l00310"></a>00310                 <span class="keywordflow">case</span> ito::ParamBase::PolygonMeshPtr &amp; paramTypeMask:
+<a name="l00311"></a>00311 <span class="comment">//                case ito::ParamBase::Pointer &amp; paramTypeMask:</span>
+<a name="l00312"></a>00312                     cVal = <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(val);
+<a name="l00313"></a>00313                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
 <a name="l00314"></a>00314 
-<a name="l00320"></a><a class="code" href="classito_1_1_double_meta.html">00320</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_double_meta.html" title="Meta-information for Param of type Double or DoubleArray.">DoubleMeta</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
-<a name="l00321"></a>00321     {
-<a name="l00322"></a>00322     <span class="keyword">public</span>:
-<a name="l00324"></a><a class="code" href="classito_1_1_double_meta.html#a2df5a315e7fdd31917e7a7d320a77026">00324</a>         <span class="keyword">explicit</span> <a class="code" href="classito_1_1_double_meta.html#a2df5a315e7fdd31917e7a7d320a77026" title="constructor with minimum and maximum value">DoubleMeta</a>(<span class="keywordtype">double</span> minVal, <span class="keywordtype">double</span> maxVal, <span class="keywordtype">double</span> stepSize=0.0 <span class="comment">/*0.0 means no specific step size*/</span>) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::Double), m_minVal(minVal), m_maxVal(maxVal), m_stepSize(stepSize) { <span class="keywordflow">if</span>(m_maxVal &lt; m_minVal) std::swap(m_minVal,m_maxVal); }
-<a name="l00325"></a><a class="code" href="classito_1_1_double_meta.html#ae69b60bd40fc7e667c84e2d641f7168c">00325</a>         <span class="keyword">static</span> <a class="code" href="classito_1_1_double_meta.html" title="Meta-information for Param of type Double or DoubleArray.">DoubleMeta</a>* <a class="code" href="classito_1_1_double_meta.html#ae69b60bd40fc7e667c84e2d641f7168c" title="returns a new instance of DoubleMeta, where the min and max are set to the full range available for d...">all</a>() { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classito_1_1_double_meta.html" title="Meta-information for Param of type Double or DoubleArray.">DoubleMeta</a>(-std::numeric_limits&lt;double&gt;::max(), std::numeric_limits&lt;double&gt;::max() ); } 
-<a name="l00326"></a><a class="code" href="classito_1_1_double_meta.html#abd572f14b6128fc22532fc684d0ac016">00326</a>         <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classito_1_1_double_meta.html#abd572f14b6128fc22532fc684d0ac016" title="returns minimum value">getMin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_minVal; } 
-<a name="l00327"></a><a class="code" href="classito_1_1_double_meta.html#add59cc98d78bf7c673d7ebd8653b0c6c">00327</a>         <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classito_1_1_double_meta.html#add59cc98d78bf7c673d7ebd8653b0c6c" title="returns maximum value">getMax</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_maxVal; } 
-<a name="l00328"></a><a class="code" href="classito_1_1_double_meta.html#a53b4d32b8e2fec829d4a515c0e331af7">00328</a>         <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="classito_1_1_double_meta.html#a53b4d32b8e2fec829d4a515c0e331af7" title="returns step size">getStepSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_stepSize; } 
-<a name="l00329"></a>00329         
-<a name="l00331"></a>00331 
-<a name="l00334"></a><a class="code" href="classito_1_1_double_meta.html#a3dbb8cb6b98b401294ff49a818555edb">00334</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_double_meta.html#a3dbb8cb6b98b401294ff49a818555edb" title="sets the minimum value">setMin</a>(<span class="keywordtype">double</span> val) { m_minVal = val; m_maxVal = std::max(m_maxVal,m_minVal); }
-<a name="l00335"></a>00335         
-<a name="l00337"></a>00337 
-<a name="l00340"></a><a class="code" href="classito_1_1_double_meta.html#a4e3d450472f22ad3fcb745ab208e2e84">00340</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_double_meta.html#a4e3d450472f22ad3fcb745ab208e2e84" title="sets the maximum value">setMax</a>(<span class="keywordtype">double</span> val) { m_maxVal = val; m_minVal = std::min(m_maxVal,m_minVal); }
-<a name="l00341"></a>00341 
-<a name="l00343"></a>00343 
-<a name="l00346"></a><a class="code" href="classito_1_1_double_meta.html#a95a03794886f364c6cb1ff869efa999c">00346</a>         <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_double_meta.html#a95a03794886f364c6cb1ff869efa999c" title="sets the step size">setStepSize</a>(<span class="keywordtype">double</span> val) { m_stepSize = val; }
-<a name="l00347"></a>00347     <span class="keyword">private</span>:
-<a name="l00348"></a>00348         <span class="keywordtype">double</span> m_minVal;
-<a name="l00349"></a>00349         <span class="keywordtype">double</span> m_maxVal;
-<a name="l00350"></a>00350         <span class="keywordtype">double</span> m_stepSize; <span class="comment">// &gt;= 0, 0.0 means no specific step size</span>
-<a name="l00351"></a>00351     };
-<a name="l00352"></a>00352 
-<a name="l00358"></a><a class="code" href="classito_1_1_h_w_meta.html">00358</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_h_w_meta.html" title="Meta-information for Param of type HWPtr.">HWMeta</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
-<a name="l00359"></a>00359     {
-<a name="l00360"></a>00360         <span class="keyword">public</span>:
-<a name="l00362"></a>00362 
-<a name="l00368"></a><a class="code" href="classito_1_1_h_w_meta.html#a7398d8f65264c1af4f9356f1745fdd67">00368</a>             <span class="keyword">explicit</span> <a class="code" href="classito_1_1_h_w_meta.html#a7398d8f65264c1af4f9356f1745fdd67" title="constructor">HWMeta</a>(uint32 minType) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::HWRef), m_minType(minType), m_pHWAddInName(NULL) {}
-<a name="l00369"></a>00369 
-<a name="l00371"></a>00371 
-<a name="l00376"></a><a class="code" href="classito_1_1_h_w_meta.html#aea10c28ce9633e4cbc67a764bc20480f">00376</a>             <span class="keyword">explicit</span> <a class="code" href="classito_1_1_h_w_meta.html" title="Meta-information for Param of type HWPtr.">HWMeta</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *HWAddInName) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::HWRef), m_minType(0), m_pHWAddInName(NULL)
-<a name="l00377"></a>00377             {
-<a name="l00378"></a>00378                 <span class="keywordflow">if</span>(HWAddInName) m_pHWAddInName = _strdup(HWAddInName);
-<a name="l00379"></a>00379             }
-<a name="l00380"></a>00380             <a class="code" href="classito_1_1_h_w_meta.html" title="Meta-information for Param of type HWPtr.">HWMeta</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_h_w_meta.html" title="Meta-information for Param of type HWPtr.">HWMeta</a>&amp; cpy) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::HWRef), m_minType(cpy.m_minType), m_pHWAddInName(NULL)
-<a name="l00381"></a>00381             {
-<a name="l00382"></a>00382                 <span class="keywordflow">if</span>(cpy.<a class="code" href="classito_1_1_h_w_meta.html#a4ce33c383f0399b94c30e2979d94fc9d" title="zero-terminated name of specific plugin-name of NULL if not specified.">m_pHWAddInName</a>) m_pHWAddInName = _strdup(cpy.<a class="code" href="classito_1_1_h_w_meta.html#a4ce33c383f0399b94c30e2979d94fc9d" title="zero-terminated name of specific plugin-name of NULL if not specified.">m_pHWAddInName</a>);
-<a name="l00383"></a>00383             }
-<a name="l00384"></a><a class="code" href="classito_1_1_h_w_meta.html#a040822a0570b1c2c3bb955b12dcbfde0">00384</a>             <a class="code" href="classito_1_1_h_w_meta.html#a040822a0570b1c2c3bb955b12dcbfde0" title="destructor">~HWMeta</a>() { <span class="keywordflow">if</span>(m_pHWAddInName) free(m_pHWAddInName); }            
-<a name="l00385"></a><a class="code" href="classito_1_1_h_w_meta.html#ae6bc4771f9f7599d4c4833a57d126e8b">00385</a>             <span class="keyword">inline</span> uint32 <a class="code" href="classito_1_1_h_w_meta.html#ae6bc4771f9f7599d4c4833a57d126e8b" title="returns type-bitmask which is minimally required by plugin-reference. Default 0.">getMinType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_minType; }                
-<a name="l00386"></a><a class="code" href="classito_1_1_h_w_meta.html#a5c64ba24b1ddeef836375a2113d25383">00386</a>             <span class="keyword">inline</span> <span class="keywordtype">char</span> * <a class="code" href="classito_1_1_h_w_meta.html#a5c64ba24b1ddeef836375a2113d25383" title="returns zero-terminated name of specific plugin-name or NULL if not specified.">getHWAddInName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_pHWAddInName; } 
-<a name="l00387"></a>00387         <span class="keyword">private</span>:
-<a name="l00388"></a><a class="code" href="classito_1_1_h_w_meta.html#aa8b3be1d0c7ddb73a7ffbebd4431e93c">00388</a>             uint32 <a class="code" href="classito_1_1_h_w_meta.html#aa8b3be1d0c7ddb73a7ffbebd4431e93c" title="type-bitmask which is minimally required. default: 0">m_minType</a>;            
-<a name="l00389"></a><a class="code" href="classito_1_1_h_w_meta.html#a4ce33c383f0399b94c30e2979d94fc9d">00389</a>             <span class="keywordtype">char</span> *<a class="code" href="classito_1_1_h_w_meta.html#a4ce33c383f0399b94c30e2979d94fc9d" title="zero-terminated name of specific plugin-name of NULL if not specified.">m_pHWAddInName</a>;    
-<a name="l00390"></a>00390     };
-<a name="l00391"></a>00391 
-<a name="l00397"></a><a class="code" href="classito_1_1_string_meta.html">00397</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_string_meta.html" title="Meta-information for Param of type String.">StringMeta</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
-<a name="l00398"></a>00398     {
-<a name="l00399"></a>00399         <span class="keyword">public</span>:
-<a name="l00400"></a><a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ece">00400</a>             <span class="keyword">enum</span> <a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ece">tType</a> {
-<a name="l00401"></a><a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ecea20af9e31cfe4dabff437c350c5e195e3">00401</a>                 <a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ecea20af9e31cfe4dabff437c350c5e195e3" title="string elements should be considered as strings (exact match)">String</a>, 
-<a name="l00402"></a><a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ecea304eb6f3cc1a770823d2a12758037e55">00402</a>                 <a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ecea304eb6f3cc1a770823d2a12758037e55" title="string elements should be considered as wildcard-expressions (e.g. *.doc)">Wildcard</a>, 
-<a name="l00403"></a><a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ecea45b35c17d5590d07427686f48115bd7d">00403</a>                 RegExp    
-<a name="l00404"></a>00404             };
-<a name="l00405"></a>00405 
-<a name="l00407"></a>00407 
-<a name="l00412"></a><a class="code" href="classito_1_1_string_meta.html#a5913aadb97aaf5bc41b17b5fba343411">00412</a>             <a class="code" href="classito_1_1_string_meta.html#a5913aadb97aaf5bc41b17b5fba343411" title="constructor">StringMeta</a>(<a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ece">tType</a> type) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::String), m_stringType(type), m_len(0), m_val(NULL) {}
-<a name="l00413"></a>00413 
-<a name="l00415"></a>00415 
-<a name="l00421"></a><a class="code" href="classito_1_1_string_meta.html#a5dddc9ec40b620f03b7d4a19b6583821">00421</a>             <a class="code" href="classito_1_1_string_meta.html" title="Meta-information for Param of type String.">StringMeta</a>(<a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ece">tType</a> type, <span class="keyword">const</span> <span class="keywordtype">char</span>* val) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::String), m_stringType(type), m_len(1)
-<a name="l00422"></a>00422             {
-<a name="l00423"></a>00423                 <span class="keywordflow">if</span>(val)
-<a name="l00424"></a>00424                 {
-<a name="l00425"></a>00425                     m_val = (<span class="keywordtype">char</span>**) calloc(1, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));
-<a name="l00426"></a>00426                     m_val[0] = _strdup(val);
-<a name="l00427"></a>00427                 }
-<a name="l00428"></a>00428                 <span class="keywordflow">else</span>
-<a name="l00429"></a>00429                 {
-<a name="l00430"></a>00430                     m_len = 0;
-<a name="l00431"></a>00431                     m_val = NULL;
-<a name="l00432"></a>00432                 }
-<a name="l00433"></a>00433             }
-<a name="l00434"></a>00434 
-<a name="l00436"></a><a class="code" href="classito_1_1_string_meta.html#afc91bd151bde1d848c90586c80a835e8">00436</a>             <a class="code" href="classito_1_1_string_meta.html" title="Meta-information for Param of type String.">StringMeta</a>(<span class="keyword">const</span> <a class="code" href="classito_1_1_string_meta.html" title="Meta-information for Param of type String.">StringMeta</a>&amp; cpy) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(<a class="code" href="classito_1_1_param_base.html">ParamBase</a>::String), m_stringType(cpy.m_stringType), m_len(cpy.m_len), m_val(NULL)
-<a name="l00437"></a>00437             {
-<a name="l00438"></a>00438                 <span class="keywordflow">if</span>(m_len &gt; 0)
-<a name="l00439"></a>00439                 {
-<a name="l00440"></a>00440                     m_val = (<span class="keywordtype">char</span>**) calloc(m_len, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));
-<a name="l00441"></a>00441                     <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;m_len;++i) m_val[i] = _strdup(cpy.m_val[i]);
-<a name="l00442"></a>00442                 }
-<a name="l00443"></a>00443             }
-<a name="l00444"></a>00444 
-<a name="l00446"></a><a class="code" href="classito_1_1_string_meta.html#a50b47912b2ee1072fc7401fcbed7a127">00446</a>             ~<a class="code" href="classito_1_1_string_meta.html" title="Meta-information for Param of type String.">StringMeta</a>()
-<a name="l00447"></a>00447             {
-<a name="l00448"></a>00448                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;m_len;++i) free(m_val[i]);
-<a name="l00449"></a>00449                 free(m_val);
-<a name="l00450"></a>00450             }
-<a name="l00451"></a>00451 
-<a name="l00452"></a><a class="code" href="classito_1_1_string_meta.html#a9637137e270d83d7def4e2a371b592e1">00452</a>             <span class="keyword">inline</span> <a class="code" href="classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ece">tType</a> <a class="code" href="classito_1_1_string_meta.html#a9637137e270d83d7def4e2a371b592e1" title="returns the type how strings in list should be considered.">getStringType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_stringType; } 
-<a name="l00453"></a><a class="code" href="classito_1_1_string_meta.html#a8fed2e9214ac7703bee9451f7b4d1d63">00453</a>             <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_string_meta.html#a8fed2e9214ac7703bee9451f7b4d1d63" title="returns the number of string elements in meta information class.">getLen</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_len; } 
-<a name="l00454"></a><a class="code" href="classito_1_1_string_meta.html#a3d5cc001e981c65793bbc088850b3e20">00454</a>             <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="classito_1_1_string_meta.html#a3d5cc001e981c65793bbc088850b3e20" title="returns string from list at index position or NULL, if index is out of range.">getString</a>(<span class="keywordtype">int</span> idx = 0)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (idx &gt;= m_len) ? NULL : m_val[idx]; } 
-<a name="l00455"></a><a class="code" href="classito_1_1_string_meta.html#a8f47569a605543736531e39f268d3490">00455</a>             <span class="keywordtype">bool</span> addItem(<span class="keyword">const</span> <span class="keywordtype">char</span> *val) 
-<a name="l00456"></a>00456             {
-<a name="l00457"></a>00457                 <span class="keywordflow">if</span>(m_val)
-<a name="l00458"></a>00458                 {
-<a name="l00459"></a>00459                     <span class="keywordtype">char</span> **m_val_old = m_val;
-<a name="l00460"></a>00460                                         m_val = (<span class="keywordtype">char</span>**)realloc(m_val, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*) * (++m_len) ); <span class="comment">//m_val can change its address. if NULL, reallocation failed and m_val_old still contains old values</span>
-<a name="l00461"></a>00461                                         <span class="keywordflow">if</span> (!m_val)
-<a name="l00462"></a>00462                                         {
-<a name="l00463"></a>00463                         m_val = m_val_old;
-<a name="l00464"></a>00464                                                 m_len--; <span class="comment">//failed to add new value</span>
-<a name="l00465"></a>00465                         <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00466"></a>00466                                         }
-<a name="l00467"></a>00467                 }
-<a name="l00468"></a>00468                 <span class="keywordflow">else</span>
-<a name="l00469"></a>00469                 {
-<a name="l00470"></a>00470                     m_val = (<span class="keywordtype">char</span>**) calloc(++m_len, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>*));
-<a name="l00471"></a>00471                 }
-<a name="l00472"></a>00472                 m_val[m_len-1] = _strdup(val);
-<a name="l00473"></a>00473                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00474"></a>00474             }
-<a name="l00475"></a>00475 
-<a name="l00476"></a>00476             <a class="code" href="classito_1_1_string_meta.html" title="Meta-information for Param of type String.">StringMeta</a> &amp; operator += (<span class="keyword">const</span> <span class="keywordtype">char</span> *val)
-<a name="l00477"></a>00477             {
-<a name="l00478"></a>00478                 addItem(val);
-<a name="l00479"></a>00479                 <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00480"></a>00480             }
-<a name="l00481"></a>00481 
-<a name="l00482"></a>00482         <span class="keyword">private</span>:
-<a name="l00483"></a>00483             tType m_stringType;
-<a name="l00484"></a>00484             <span class="keywordtype">int</span> m_len;
-<a name="l00485"></a>00485             <span class="keywordtype">char</span> **m_val;
-<a name="l00486"></a>00486     };
-<a name="l00487"></a>00487 
-<a name="l00493"></a><a class="code" href="classito_1_1_d_obj_meta.html">00493</a>     <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_d_obj_meta.html" title="Meta-information for Param of type DObjPtr.">DObjMeta</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>
-<a name="l00494"></a>00494     {
-<a name="l00495"></a>00495         <span class="keyword">public</span>:
-<a name="l00496"></a>00496             <span class="keyword">explicit</span> <a class="code" href="classito_1_1_d_obj_meta.html" title="Meta-information for Param of type DObjPtr.">DObjMeta</a>(uint32 allowedTypes = 0xFFFF, <span class="keywordtype">int</span> minDim = 0, <span class="keywordtype">int</span> maxDim = std::numeric_limits&lt;int&gt;::max()) : <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>(ParamBase::DObjPtr), m_allowedTypes(allowedTypes), m_minDim(minDim), m_maxDim(maxDim) {}
-<a name="l00497"></a>00497             <span class="keyword">inline</span> <span class="keywordtype">int</span> getAllowedTypes()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_allowedTypes; }
-<a name="l00498"></a><a class="code" href="classito_1_1_d_obj_meta.html#abcbc447b8cd9ac45a6cf3260b8ad8e45">00498</a>             <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_d_obj_meta.html#abcbc447b8cd9ac45a6cf3260b8ad8e45" title="returns maximum allowed dimensions of data object">getMinDim</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_minDim; } 
-<a name="l00499"></a><a class="code" href="classito_1_1_d_obj_meta.html#a1c33266b4811e4e653c4e17f6f210a02">00499</a>             <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_d_obj_meta.html#a1c33266b4811e4e653c4e17f6f210a02" title="returns minimum number of dimensions of data object">getMaxDim</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_maxDim; } 
-<a name="l00500"></a>00500 
-<a name="l00501"></a>00501         <span class="keyword">private</span>:
-<a name="l00502"></a>00502             uint32 m_allowedTypes;
-<a name="l00503"></a>00503             <span class="keywordtype">int</span> m_minDim;
-<a name="l00504"></a>00504             <span class="keywordtype">int</span> m_maxDim;
-<a name="l00505"></a>00505     };
-<a name="l00506"></a>00506 
+<a name="l00315"></a>00315                 <span class="keywordflow">case</span> ito::ParamBase::String &amp; paramTypeMask:
+<a name="l00316"></a>00316                     {
+<a name="l00317"></a>00317                         <span class="keywordtype">char</span> *cVal_ = cVal;
+<a name="l00318"></a>00318                         <span class="keywordflow">if</span> (val)
+<a name="l00319"></a>00319                         {
+<a name="l00320"></a>00320                             cVal = _strdup(const_cast&lt;const char*&gt;((<span class="keywordtype">char</span>*)val));
+<a name="l00321"></a>00321                             iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(strlen(cVal));
+<a name="l00322"></a>00322                         }
+<a name="l00323"></a>00323                         <span class="keywordflow">else</span>
+<a name="l00324"></a>00324                         {
+<a name="l00325"></a>00325                             cVal = 0;
+<a name="l00326"></a>00326                             iVal = -1;
+<a name="l00327"></a>00327                         }
+<a name="l00328"></a>00328                         <span class="keywordflow">if</span> (cVal_)
+<a name="l00329"></a>00329                         {
+<a name="l00330"></a>00330                             free(cVal_);
+<a name="l00331"></a>00331                         }
+<a name="l00332"></a>00332                     }
+<a name="l00333"></a>00333                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00334"></a>00334 
+<a name="l00335"></a>00335                 <span class="keywordflow">case</span> ito::ParamBase::CharArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00336"></a>00336                     {
+<a name="l00337"></a>00337                         <span class="keywordtype">char</span> *cVal_ = cVal;
+<a name="l00338"></a>00338                         <span class="keywordflow">if</span> ((val) &amp;&amp; (len &gt; 0))
+<a name="l00339"></a>00339                         {
+<a name="l00340"></a>00340                             cVal = (<span class="keywordtype">char</span>*)malloc(len * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));
+<a name="l00341"></a>00341                             memcpy(cVal, val, len * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));
+<a name="l00342"></a>00342                             iVal = len;
+<a name="l00343"></a>00343                         }
+<a name="l00344"></a>00344                         <span class="keywordflow">else</span>
+<a name="l00345"></a>00345                         {
+<a name="l00346"></a>00346                             cVal = NULL;
+<a name="l00347"></a>00347                             iVal = -1;
+<a name="l00348"></a>00348                         }
+<a name="l00349"></a>00349                         <span class="keywordflow">if</span> (cVal_)
+<a name="l00350"></a>00350                         {
+<a name="l00351"></a>00351                             free(cVal_);
+<a name="l00352"></a>00352                         }
+<a name="l00353"></a>00353                     }
+<a name="l00354"></a>00354                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00355"></a>00355 
+<a name="l00356"></a>00356                 <span class="keywordflow">case</span> ito::ParamBase::IntArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00357"></a>00357                     {
+<a name="l00358"></a>00358                         <span class="keywordtype">char</span> *cVal_ = cVal;
+<a name="l00359"></a>00359                         <span class="keywordflow">if</span> ((val) &amp;&amp; (len &gt; 0))
+<a name="l00360"></a>00360                         {
+<a name="l00361"></a>00361                             cVal = (<span class="keywordtype">char</span>*)malloc(len * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));
+<a name="l00362"></a>00362                             memcpy(cVal, val, len * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));
+<a name="l00363"></a>00363                             iVal = len;
+<a name="l00364"></a>00364                         }
+<a name="l00365"></a>00365                         <span class="keywordflow">else</span>
+<a name="l00366"></a>00366                         {
+<a name="l00367"></a>00367                             cVal = NULL;
+<a name="l00368"></a>00368                             iVal = -1;
+<a name="l00369"></a>00369                         }
+<a name="l00370"></a>00370                         <span class="keywordflow">if</span> (cVal_)
+<a name="l00371"></a>00371                         {
+<a name="l00372"></a>00372                             free(cVal_);
+<a name="l00373"></a>00373                         }
+<a name="l00374"></a>00374                     }
+<a name="l00375"></a>00375                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00376"></a>00376 
+<a name="l00377"></a>00377                 <span class="keywordflow">case</span> ito::ParamBase::DoubleArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00378"></a>00378                     {
+<a name="l00379"></a>00379                         <span class="keywordtype">char</span> *cVal_ = cVal;
+<a name="l00380"></a>00380                         <span class="keywordflow">if</span> ((val) &amp;&amp; (len &gt; 0))
+<a name="l00381"></a>00381                         {
+<a name="l00382"></a>00382                             cVal = (<span class="keywordtype">char</span>*)malloc(len * <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));
+<a name="l00383"></a>00383                             memcpy(cVal, val, len * <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));
+<a name="l00384"></a>00384                             iVal = len;
+<a name="l00385"></a>00385                         }
+<a name="l00386"></a>00386                         <span class="keywordflow">else</span>
+<a name="l00387"></a>00387                         {
+<a name="l00388"></a>00388                             cVal = NULL;
+<a name="l00389"></a>00389                             iVal = -1;
+<a name="l00390"></a>00390                         }
+<a name="l00391"></a>00391                         <span class="keywordflow">if</span> (cVal_)
+<a name="l00392"></a>00392                         {
+<a name="l00393"></a>00393                             free(cVal_);
+<a name="l00394"></a>00394                         }
+<a name="l00395"></a>00395                     }
+<a name="l00396"></a>00396                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00397"></a>00397 
+<a name="l00398"></a>00398                 <span class="keywordflow">default</span>:
+<a name="l00399"></a>00399                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
+<a name="l00400"></a>00400             }
+<a name="l00401"></a>00401         }
+<a name="l00402"></a>00402 
+<a name="l00403"></a>00403         <span class="keyword">static</span> _Tp getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *cVal, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<span class="comment">/*dVal*/</span>, <span class="keywordtype">int</span> &amp;len)
+<a name="l00404"></a>00404         {
+<a name="l00405"></a>00405             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00406"></a>00406             {
+<a name="l00407"></a>00407                 <span class="keywordflow">case</span> ito::ParamBase::String &amp; paramTypeMask:
+<a name="l00408"></a>00408                     <span class="keywordflow">if</span> (cVal)
+<a name="l00409"></a>00409                     {
+<a name="l00410"></a>00410                         len = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(strlen(cVal));
+<a name="l00411"></a>00411                         <span class="comment">//return reinterpret_cast&lt;_Tp&gt;(_strdup(cVal));</span>
+<a name="l00412"></a>00412                         <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>_Tp<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(cVal));
+<a name="l00413"></a>00413                     }
+<a name="l00414"></a>00414                     <span class="keywordflow">else</span>
+<a name="l00415"></a>00415                     {
+<a name="l00416"></a>00416                         len = 0;
+<a name="l00417"></a>00417                         <span class="keywordflow">return</span> 0;
+<a name="l00418"></a>00418                     }
+<a name="l00419"></a>00419 
+<a name="l00420"></a>00420                 <span class="keywordflow">case</span> ito::ParamBase::CharArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00421"></a>00421                 <span class="keywordflow">case</span> ito::ParamBase::IntArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00422"></a>00422                 <span class="keywordflow">case</span> ito::ParamBase::DoubleArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00423"></a>00423                     <span class="keywordflow">if</span> (cVal)
+<a name="l00424"></a>00424                     {
+<a name="l00425"></a>00425                         len = iVal;
+<a name="l00426"></a>00426                         <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>_Tp<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(cVal));
+<a name="l00427"></a>00427                     }
+<a name="l00428"></a>00428                     <span class="keywordflow">else</span>
+<a name="l00429"></a>00429                     {
+<a name="l00430"></a>00430                         len = 0;
+<a name="l00431"></a>00431                         <span class="keywordflow">return</span> 0;
+<a name="l00432"></a>00432                     }
+<a name="l00433"></a>00433 
+<a name="l00434"></a>00434                 <span class="keywordflow">case</span> (ito::ParamBase::HWRef &amp; paramTypeMask):
+<a name="l00435"></a>00435                 <span class="keywordflow">case</span> (ito::ParamBase::DObjPtr &amp; paramTypeMask):
+<a name="l00436"></a>00436                 <span class="keywordflow">case</span> ito::ParamBase::PointCloudPtr &amp; paramTypeMask:
+<a name="l00437"></a>00437                 <span class="keywordflow">case</span> ito::ParamBase::PointPtr &amp; paramTypeMask:
+<a name="l00438"></a>00438                 <span class="keywordflow">case</span> ito::ParamBase::PolygonMeshPtr &amp; paramTypeMask:
+<a name="l00439"></a>00439                     <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>_Tp<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(cVal));
+<a name="l00440"></a>00440 
+<a name="l00441"></a>00441                 <span class="keywordflow">default</span>:
+<a name="l00442"></a>00442                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;_Tp&gt;: Non-matching type!&quot;</span>);
+<a name="l00443"></a>00443                     <span class="keywordflow">return</span> (_Tp)0;
+<a name="l00444"></a>00444             }
+<a name="l00445"></a>00445         }
+<a name="l00446"></a>00446     };
+<a name="l00447"></a>00447 
+<a name="l00448"></a>00448     <span class="keyword">template</span>&lt;&gt;
+<a name="l00449"></a><a class="code" href="structito_1_1_itom_param_helper_3_01double_01_4.html">00449</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;double&gt;
+<a name="l00450"></a>00450     {
+<a name="l00451"></a>00451         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">double</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
+<a name="l00452"></a>00452         {
+<a name="l00453"></a>00453             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00454"></a>00454             {
+<a name="l00455"></a>00455                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00456"></a>00456                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(val);
+<a name="l00457"></a>00457                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00458"></a>00458 
+<a name="l00459"></a>00459                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00460"></a>00460                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00461"></a>00461                     iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(val);
+<a name="l00462"></a>00462                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00463"></a>00463 
+<a name="l00464"></a>00464                 <span class="keywordflow">default</span>:
+<a name="l00465"></a>00465                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
+<a name="l00466"></a>00466             }
+<a name="l00467"></a>00467         }
+<a name="l00468"></a>00468 
+<a name="l00469"></a>00469         <span class="keyword">static</span> <span class="keywordtype">double</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
+<a name="l00470"></a>00470         {
+<a name="l00471"></a>00471             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00472"></a>00472             {
+<a name="l00473"></a>00473                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00474"></a>00474                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00475"></a>00475                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(iVal);
+<a name="l00476"></a>00476 
+<a name="l00477"></a>00477                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00478"></a>00478                     <span class="keywordflow">return</span> dVal;
+<a name="l00479"></a>00479 
+<a name="l00480"></a>00480                 <span class="keywordflow">default</span>:
+<a name="l00481"></a>00481                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;double&gt;: Non-matching type!&quot;</span>);
+<a name="l00482"></a>00482                     <span class="keywordflow">return</span> 0;
+<a name="l00483"></a>00483             }
+<a name="l00484"></a>00484         }
+<a name="l00485"></a>00485     };
+<a name="l00486"></a>00486 
+<a name="l00487"></a>00487     <span class="keyword">template</span>&lt;&gt;
+<a name="l00488"></a><a class="code" href="structito_1_1_itom_param_helper_3_01int_01_4.html">00488</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;int&gt;
+<a name="l00489"></a>00489     {
+<a name="l00490"></a>00490         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
+<a name="l00491"></a>00491         {
+<a name="l00492"></a>00492             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00493"></a>00493             {
+<a name="l00494"></a>00494                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00495"></a>00495                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(val);
+<a name="l00496"></a>00496                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00497"></a>00497 
+<a name="l00498"></a>00498                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00499"></a>00499                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00500"></a>00500                     iVal = val;
+<a name="l00501"></a>00501                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00502"></a>00502 
+<a name="l00503"></a>00503                 <span class="keywordflow">default</span>:
+<a name="l00504"></a>00504                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
+<a name="l00505"></a>00505             }
+<a name="l00506"></a>00506         }
 <a name="l00507"></a>00507 
-<a name="l00508"></a>00508 
-<a name="l00509"></a>00509     <span class="comment">//----------------------------------------------------------------------------------------------------------------------------------</span>
-<a name="l00516"></a><a class="code" href="classito_1_1_param.html">00516</a> <span class="comment"></span>    <span class="keyword">class </span>ITOMCOMMON_EXPORT <a class="code" href="classito_1_1_param.html">Param</a> : <span class="keyword">public</span> <a class="code" href="classito_1_1_param_base.html">ParamBase</a>
-<a name="l00517"></a>00517     {
-<a name="l00518"></a>00518         <span class="keyword">private</span>:
-<a name="l00519"></a>00519             <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a> *m_pMeta;
-<a name="l00520"></a>00520             <a class="code" href="classito_1_1_byte_array.html">ByteArray</a> m_info;
+<a name="l00508"></a>00508         <span class="keyword">static</span> <span class="keywordtype">int</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
+<a name="l00509"></a>00509         {
+<a name="l00510"></a>00510             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00511"></a>00511             {
+<a name="l00512"></a>00512                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00513"></a>00513                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00514"></a>00514                     <span class="keywordflow">return</span> iVal;
+<a name="l00515"></a>00515 
+<a name="l00516"></a>00516                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00517"></a>00517                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(dVal);
+<a name="l00518"></a>00518 
+<a name="l00519"></a>00519                 <span class="keywordflow">case</span> 0:
+<a name="l00520"></a>00520                     <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Param::getVal&lt;int&gt;: non existent parameter&quot;</span>);
 <a name="l00521"></a>00521 
-<a name="l00522"></a>00522         <span class="keyword">public</span>:
-<a name="l00523"></a>00523 
-<a name="l00524"></a>00524             <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00525"></a>00525             <span class="comment">//  CONSTRUCTORS, COPY-CONSTRUCTOR, DESTRUCTOR</span>
-<a name="l00526"></a>00526             <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00528"></a><a class="code" href="classito_1_1_param.html#afa72a4a4bc579046a41b6d9842654bb7">00528</a> <span class="comment"></span>            <a class="code" href="classito_1_1_param.html#afa72a4a4bc579046a41b6d9842654bb7" title="default constructor, creates &quot;empty&quot; tParam">Param</a>() : <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(), m_pMeta(NULL), m_info(NULL) {}
-<a name="l00529"></a>00529             <a class="code" href="classito_1_1_param.html">Param</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name) : <a class="code" href="classito_1_1_param_base.html">ParamBase</a>(name), m_pMeta(NULL), m_info(NULL) {}                         <span class="comment">// type-less Param with name only</span>
-<a name="l00530"></a>00530             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type) : ParamBase(name, type), m_pMeta(NULL), m_info(NULL) {}   <span class="comment">// constructor with type and name</span>
-<a name="l00531"></a>00531             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);                        <span class="comment">// constructor with name and type, char val and optional info</span>
-<a name="l00532"></a>00532             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> minVal, <span class="keyword">const</span> <span class="keywordtype">double</span> maxVal, <span class="keyword">const</span> <span class="keywordtype">double</span> val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info); <span class="comment">// constructor with name and type, double val, double minVal, double maxVal and optional info</span>
-<a name="l00533"></a>00533             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> minVal, <span class="keyword">const</span> <span class="keywordtype">int</span> maxVal, <span class="keyword">const</span> <span class="keywordtype">int</span> val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info); <span class="comment">// constructor with name and type, int val, int minVal, int maxVal and optional info</span>
-<a name="l00534"></a>00534             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> minVal, <span class="keyword">const</span> <span class="keywordtype">char</span> maxVal, <span class="keyword">const</span> <span class="keywordtype">char</span> val, <span class="keyword">const</span> <span class="keywordtype">char</span> *info); <span class="comment">// constructor with name and type, int val, int minVal, int maxVal and optional info</span>
-<a name="l00535"></a>00535             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span> *values, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);  <span class="comment">// array constructor with name and type, size and array</span>
-<a name="l00536"></a>00536             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">int</span> *values, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);   <span class="comment">// array constructor with name and type, size and array</span>
-<a name="l00537"></a>00537             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">double</span> *values, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);<span class="comment">// array constructor with name and type, size and array</span>
-<a name="l00538"></a>00538             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">int</span> val, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
-<a name="l00539"></a>00539             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">double</span> val, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
-<a name="l00540"></a>00540             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> val, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
-<a name="l00541"></a>00541             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">double</span> *values, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
-<a name="l00542"></a>00542             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">int</span> *values, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
-<a name="l00543"></a>00543             Param(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size, <span class="keyword">const</span> <span class="keywordtype">char</span> *values, ParamMeta *meta, <span class="keyword">const</span> <span class="keywordtype">char</span> *info);
-<a name="l00544"></a>00544             ~Param();                        
-<a name="l00545"></a>00545             Param(<span class="keyword">const</span> Param &amp;copyConstr); 
-<a name="l00546"></a>00546 
-<a name="l00547"></a>00547             <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00548"></a>00548             <span class="comment">//  ASSIGNMENT AND OPERATORS</span>
-<a name="l00549"></a>00549             <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00550"></a>00550             <span class="keyword">const</span> Param operator [] (<span class="keyword">const</span> <span class="keywordtype">int</span> num) <span class="keyword">const</span>;    
-<a name="l00551"></a>00551             Param&amp; operator = (<span class="keyword">const</span> Param &amp;rhs);             
-<a name="l00552"></a>00552             <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> copyValueFrom(<span class="keyword">const</span> ParamBase *rhs);  
-<a name="l00553"></a>00553 
-<a name="l00554"></a>00554             <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00555"></a>00555             <span class="comment">//  SET/GET FURTHER PROPERTIES</span>
-<a name="l00556"></a>00556             <span class="comment">//--------------------------------------------------------------------------------------------</span>
-<a name="l00558"></a><a class="code" href="classito_1_1_param.html#a6f239fa52412701d8f3ce55ed5842c16">00558</a> <span class="comment"></span>            <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classito_1_1_param.html#a6f239fa52412701d8f3ce55ed5842c16" title="&lt; returns content of info string (string is not copied)">getInfo</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_info.data(); }
+<a name="l00522"></a>00522                 <span class="keywordflow">default</span>:
+<a name="l00523"></a>00523                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;int&gt;: Non-matching type!&quot;</span>);
+<a name="l00524"></a>00524             }
+<a name="l00525"></a>00525         }
+<a name="l00526"></a>00526     };
+<a name="l00527"></a>00527 
+<a name="l00528"></a>00528     <span class="keyword">template</span>&lt;&gt;
+<a name="l00529"></a><a class="code" href="structito_1_1_itom_param_helper_3_01char_01_4.html">00529</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;char&gt;
+<a name="l00530"></a>00530     {
+<a name="l00531"></a>00531         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">char</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
+<a name="l00532"></a>00532         {
+<a name="l00533"></a>00533             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00534"></a>00534             {
+<a name="l00535"></a>00535                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00536"></a>00536                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
+<a name="l00537"></a>00537                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00538"></a>00538 
+<a name="l00539"></a>00539                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00540"></a>00540                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00541"></a>00541                     iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
+<a name="l00542"></a>00542                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00543"></a>00543 
+<a name="l00544"></a>00544                 <span class="keywordflow">default</span>:
+<a name="l00545"></a>00545                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
+<a name="l00546"></a>00546             }
+<a name="l00547"></a>00547         }
+<a name="l00548"></a>00548 
+<a name="l00549"></a>00549         <span class="keyword">static</span> <span class="keywordtype">char</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
+<a name="l00550"></a>00550         {
+<a name="l00551"></a>00551             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00552"></a>00552             {
+<a name="l00553"></a>00553                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00554"></a>00554                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00555"></a>00555                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(iVal);
+<a name="l00556"></a>00556 
+<a name="l00557"></a>00557                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00558"></a>00558                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(dVal);
 <a name="l00559"></a>00559 
-<a name="l00561"></a>00561             <span class="keyword">inline</span> <span class="keywordtype">void</span> setInfo(<span class="keyword">const</span> <span class="keywordtype">char</span> *info)
-<a name="l00562"></a>00562             {
-<a name="l00563"></a>00563                 m_info = info;
-<a name="l00564"></a>00564             }
-<a name="l00565"></a>00565 
-<a name="l00566"></a><a class="code" href="classito_1_1_param.html#afd4a8f896371765756d0d6be699aa8b9">00566</a>             <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>* <a class="code" href="classito_1_1_param.html#afd4a8f896371765756d0d6be699aa8b9" title="returns const-pointer to meta-information instance or NULL if not available">getMeta</a>(<span class="keywordtype">void</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_pMeta; } 
-<a name="l00567"></a><a class="code" href="classito_1_1_param.html#afa33afd484e7eb66a5b0bf2816453c0c">00567</a>             <span class="keyword">inline</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>* <a class="code" href="classito_1_1_param.html#afa33afd484e7eb66a5b0bf2816453c0c" title="returns pointer to meta-information instance or NULL if not available">getMeta</a>(<span class="keywordtype">void</span>) { <span class="keywordflow">return</span> m_pMeta; }                
+<a name="l00560"></a>00560                 <span class="keywordflow">case</span> 0:
+<a name="l00561"></a>00561                     <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Param::getVal&lt;char&gt;: non existent parameter&quot;</span>);
+<a name="l00562"></a>00562 
+<a name="l00563"></a>00563                 <span class="keywordflow">default</span>:
+<a name="l00564"></a>00564                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;char&gt;: Non-matching type!&quot;</span>);
+<a name="l00565"></a>00565             }
+<a name="l00566"></a>00566         }
+<a name="l00567"></a>00567     };
 <a name="l00568"></a>00568 
-<a name="l00570"></a>00570 
-<a name="l00575"></a>00575             <span class="keywordtype">bool</span> setMeta(<a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a>* meta, <span class="keywordtype">bool</span> takeOwnership = <span class="keyword">false</span>);
-<a name="l00576"></a>00576 
-<a name="l00577"></a>00577             <span class="keywordtype">bool</span> copyMetaFrom(<span class="keyword">const</span> <a class="code" href="classito_1_1_param_meta.html" title="Base class for all meta-information classes.">ParamMeta</a> *meta);
-<a name="l00578"></a>00578 
-<a name="l00579"></a>00579             <span class="keywordtype">double</span> getMin() <span class="keyword">const</span>;
-<a name="l00580"></a>00580             <span class="keywordtype">double</span> getMax() <span class="keyword">const</span>;
-<a name="l00581"></a>00581     };
-<a name="l00582"></a>00582 
-<a name="l00583"></a>00583     <span class="comment">//---------------------------------------------------------------------------------------------------------------------</span>
-<a name="l00584"></a>00584     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;
-<a name="l00585"></a><a class="code" href="structito_1_1_itom_param_helper.html">00585</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>
-<a name="l00586"></a>00586     {
-<a name="l00587"></a>00587         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;cVal, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;<span class="comment">/*dVal*/</span>, _Tp val, <span class="keywordtype">int</span> len = 0)
-<a name="l00588"></a>00588         {
-<a name="l00589"></a>00589             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00590"></a>00590             {
-<a name="l00591"></a>00591                 <span class="keywordflow">case</span> (ito::ParamBase::HWRef &amp; paramTypeMask):
-<a name="l00592"></a>00592                 <span class="keywordflow">case</span> (ito::ParamBase::DObjPtr &amp; paramTypeMask):
-<a name="l00593"></a>00593                 <span class="keywordflow">case</span> ito::ParamBase::PointCloudPtr &amp; paramTypeMask:
-<a name="l00594"></a>00594                 <span class="keywordflow">case</span> ito::ParamBase::PointPtr &amp; paramTypeMask:
-<a name="l00595"></a>00595                 <span class="keywordflow">case</span> ito::ParamBase::PolygonMeshPtr &amp; paramTypeMask:
-<a name="l00596"></a>00596 <span class="comment">//                case ito::ParamBase::Pointer &amp; paramTypeMask:</span>
-<a name="l00597"></a>00597                     cVal = <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(val);
-<a name="l00598"></a>00598                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00599"></a>00599 
-<a name="l00600"></a>00600                 <span class="keywordflow">case</span> ito::ParamBase::String &amp; paramTypeMask:
-<a name="l00601"></a>00601                     {
-<a name="l00602"></a>00602                         <span class="keywordtype">char</span> *cVal_ = cVal;
-<a name="l00603"></a>00603                         <span class="keywordflow">if</span> (val)
-<a name="l00604"></a>00604                         {
-<a name="l00605"></a>00605                             cVal = _strdup(const_cast&lt;const char*&gt;((<span class="keywordtype">char</span>*)val));
-<a name="l00606"></a>00606                             iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(strlen(cVal));
-<a name="l00607"></a>00607                         }
-<a name="l00608"></a>00608                         <span class="keywordflow">else</span>
-<a name="l00609"></a>00609                         {
-<a name="l00610"></a>00610                             cVal = 0;
-<a name="l00611"></a>00611                             iVal = -1;
-<a name="l00612"></a>00612                         }
-<a name="l00613"></a>00613                         <span class="keywordflow">if</span> (cVal_)
-<a name="l00614"></a>00614                         {
-<a name="l00615"></a>00615                             free(cVal_);
-<a name="l00616"></a>00616                         }
-<a name="l00617"></a>00617                     }
-<a name="l00618"></a>00618                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00619"></a>00619 
-<a name="l00620"></a>00620                 <span class="keywordflow">case</span> ito::ParamBase::CharArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00621"></a>00621                     {
-<a name="l00622"></a>00622                         <span class="keywordtype">char</span> *cVal_ = cVal;
-<a name="l00623"></a>00623                         <span class="keywordflow">if</span> ((val) &amp;&amp; (len &gt; 0))
-<a name="l00624"></a>00624                         {
-<a name="l00625"></a>00625                             cVal = (<span class="keywordtype">char</span>*)malloc(len * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));
-<a name="l00626"></a>00626                             memcpy(cVal, val, len * <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));
-<a name="l00627"></a>00627                             iVal = len;
-<a name="l00628"></a>00628                         }
-<a name="l00629"></a>00629                         <span class="keywordflow">else</span>
-<a name="l00630"></a>00630                         {
-<a name="l00631"></a>00631                             cVal = NULL;
-<a name="l00632"></a>00632                             iVal = -1;
-<a name="l00633"></a>00633                         }
-<a name="l00634"></a>00634                         <span class="keywordflow">if</span> (cVal_)
-<a name="l00635"></a>00635                         {
-<a name="l00636"></a>00636                             free(cVal_);
-<a name="l00637"></a>00637                         }
-<a name="l00638"></a>00638                     }
-<a name="l00639"></a>00639                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00640"></a>00640 
-<a name="l00641"></a>00641                 <span class="keywordflow">case</span> ito::ParamBase::IntArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00642"></a>00642                     {
-<a name="l00643"></a>00643                         <span class="keywordtype">char</span> *cVal_ = cVal;
-<a name="l00644"></a>00644                         <span class="keywordflow">if</span> ((val) &amp;&amp; (len &gt; 0))
-<a name="l00645"></a>00645                         {
-<a name="l00646"></a>00646                             cVal = (<span class="keywordtype">char</span>*)malloc(len * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));
-<a name="l00647"></a>00647                             memcpy(cVal, val, len * <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));
-<a name="l00648"></a>00648                             iVal = len;
-<a name="l00649"></a>00649                         }
-<a name="l00650"></a>00650                         <span class="keywordflow">else</span>
-<a name="l00651"></a>00651                         {
-<a name="l00652"></a>00652                             cVal = NULL;
-<a name="l00653"></a>00653                             iVal = -1;
-<a name="l00654"></a>00654                         }
-<a name="l00655"></a>00655                         <span class="keywordflow">if</span> (cVal_)
-<a name="l00656"></a>00656                         {
-<a name="l00657"></a>00657                             free(cVal_);
-<a name="l00658"></a>00658                         }
-<a name="l00659"></a>00659                     }
-<a name="l00660"></a>00660                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00661"></a>00661 
-<a name="l00662"></a>00662                 <span class="keywordflow">case</span> ito::ParamBase::DoubleArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00663"></a>00663                     {
-<a name="l00664"></a>00664                         <span class="keywordtype">char</span> *cVal_ = cVal;
-<a name="l00665"></a>00665                         <span class="keywordflow">if</span> ((val) &amp;&amp; (len &gt; 0))
-<a name="l00666"></a>00666                         {
-<a name="l00667"></a>00667                             cVal = (<span class="keywordtype">char</span>*)malloc(len * <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));
-<a name="l00668"></a>00668                             memcpy(cVal, val, len * <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>));
-<a name="l00669"></a>00669                             iVal = len;
-<a name="l00670"></a>00670                         }
-<a name="l00671"></a>00671                         <span class="keywordflow">else</span>
-<a name="l00672"></a>00672                         {
-<a name="l00673"></a>00673                             cVal = NULL;
-<a name="l00674"></a>00674                             iVal = -1;
-<a name="l00675"></a>00675                         }
-<a name="l00676"></a>00676                         <span class="keywordflow">if</span> (cVal_)
-<a name="l00677"></a>00677                         {
-<a name="l00678"></a>00678                             free(cVal_);
-<a name="l00679"></a>00679                         }
-<a name="l00680"></a>00680                     }
-<a name="l00681"></a>00681                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00682"></a>00682 
-<a name="l00683"></a>00683                 <span class="keywordflow">default</span>:
-<a name="l00684"></a>00684                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
-<a name="l00685"></a>00685             }
-<a name="l00686"></a>00686         }
-<a name="l00687"></a>00687 
-<a name="l00688"></a>00688         <span class="keyword">static</span> _Tp getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> *cVal, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;<span class="comment">/*dVal*/</span>, <span class="keywordtype">int</span> &amp;len)
-<a name="l00689"></a>00689         {
-<a name="l00690"></a>00690             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00691"></a>00691             {
-<a name="l00692"></a>00692                 <span class="keywordflow">case</span> ito::ParamBase::String &amp; paramTypeMask:
-<a name="l00693"></a>00693                     <span class="keywordflow">if</span> (cVal)
-<a name="l00694"></a>00694                     {
-<a name="l00695"></a>00695                         len = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(strlen(cVal));
-<a name="l00696"></a>00696                         <span class="comment">//return reinterpret_cast&lt;_Tp&gt;(_strdup(cVal));</span>
-<a name="l00697"></a>00697                         <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>_Tp<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(cVal));
-<a name="l00698"></a>00698                     }
-<a name="l00699"></a>00699                     <span class="keywordflow">else</span>
-<a name="l00700"></a>00700                     {
-<a name="l00701"></a>00701                         len = 0;
-<a name="l00702"></a>00702                         <span class="keywordflow">return</span> 0;
-<a name="l00703"></a>00703                     }
-<a name="l00704"></a>00704 
-<a name="l00705"></a>00705                 <span class="keywordflow">case</span> ito::ParamBase::CharArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00706"></a>00706                 <span class="keywordflow">case</span> ito::ParamBase::IntArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00707"></a>00707                 <span class="keywordflow">case</span> ito::ParamBase::DoubleArray &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00708"></a>00708                     <span class="keywordflow">if</span> (cVal)
-<a name="l00709"></a>00709                     {
-<a name="l00710"></a>00710                         len = iVal;
-<a name="l00711"></a>00711                         <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>_Tp<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(cVal));
-<a name="l00712"></a>00712                     }
-<a name="l00713"></a>00713                     <span class="keywordflow">else</span>
-<a name="l00714"></a>00714                     {
-<a name="l00715"></a>00715                         len = 0;
-<a name="l00716"></a>00716                         <span class="keywordflow">return</span> 0;
-<a name="l00717"></a>00717                     }
-<a name="l00718"></a>00718 
-<a name="l00719"></a>00719                 <span class="keywordflow">case</span> (ito::ParamBase::HWRef &amp; paramTypeMask):
-<a name="l00720"></a>00720                 <span class="keywordflow">case</span> (ito::ParamBase::DObjPtr &amp; paramTypeMask):
-<a name="l00721"></a>00721                 <span class="keywordflow">case</span> ito::ParamBase::PointCloudPtr &amp; paramTypeMask:
-<a name="l00722"></a>00722                 <span class="keywordflow">case</span> ito::ParamBase::PointPtr &amp; paramTypeMask:
-<a name="l00723"></a>00723                 <span class="keywordflow">case</span> ito::ParamBase::PolygonMeshPtr &amp; paramTypeMask:
-<a name="l00724"></a>00724                     <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>_Tp<span class="keyword">&gt;</span>(<span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(cVal));
-<a name="l00725"></a>00725 
-<a name="l00726"></a>00726                 <span class="keywordflow">default</span>:
-<a name="l00727"></a>00727                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;_Tp&gt;: Non-matching type!&quot;</span>);
-<a name="l00728"></a>00728                     <span class="keywordflow">return</span> (_Tp)0;
-<a name="l00729"></a>00729             }
-<a name="l00730"></a>00730         }
-<a name="l00731"></a>00731     };
-<a name="l00732"></a>00732 
-<a name="l00733"></a>00733     <span class="keyword">template</span>&lt;&gt;
-<a name="l00734"></a><a class="code" href="structito_1_1_itom_param_helper_3_01double_01_4.html">00734</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;double&gt;
-<a name="l00735"></a>00735     {
-<a name="l00736"></a>00736         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">double</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
-<a name="l00737"></a>00737         {
-<a name="l00738"></a>00738             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00739"></a>00739             {
-<a name="l00740"></a>00740                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00741"></a>00741                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(val);
-<a name="l00742"></a>00742                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00743"></a>00743 
-<a name="l00744"></a>00744                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00745"></a>00745                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00746"></a>00746                     iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(val);
-<a name="l00747"></a>00747                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00748"></a>00748 
-<a name="l00749"></a>00749                 <span class="keywordflow">default</span>:
-<a name="l00750"></a>00750                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
-<a name="l00751"></a>00751             }
-<a name="l00752"></a>00752         }
-<a name="l00753"></a>00753 
-<a name="l00754"></a>00754         <span class="keyword">static</span> <span class="keywordtype">double</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
-<a name="l00755"></a>00755         {
-<a name="l00756"></a>00756             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00757"></a>00757             {
-<a name="l00758"></a>00758                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00759"></a>00759                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00760"></a>00760                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(iVal);
-<a name="l00761"></a>00761 
-<a name="l00762"></a>00762                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00763"></a>00763                     <span class="keywordflow">return</span> dVal;
-<a name="l00764"></a>00764 
-<a name="l00765"></a>00765                 <span class="keywordflow">default</span>:
-<a name="l00766"></a>00766                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;double&gt;: Non-matching type!&quot;</span>);
-<a name="l00767"></a>00767                     <span class="keywordflow">return</span> 0;
-<a name="l00768"></a>00768             }
-<a name="l00769"></a>00769         }
-<a name="l00770"></a>00770     };
-<a name="l00771"></a>00771 
-<a name="l00772"></a>00772     <span class="keyword">template</span>&lt;&gt;
-<a name="l00773"></a><a class="code" href="structito_1_1_itom_param_helper_3_01int_01_4.html">00773</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;int&gt;
-<a name="l00774"></a>00774     {
-<a name="l00775"></a>00775         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
-<a name="l00776"></a>00776         {
-<a name="l00777"></a>00777             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00778"></a>00778             {
-<a name="l00779"></a>00779                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00780"></a>00780                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(val);
-<a name="l00781"></a>00781                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00782"></a>00782 
-<a name="l00783"></a>00783                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00784"></a>00784                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00785"></a>00785                     iVal = val;
-<a name="l00786"></a>00786                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00787"></a>00787 
-<a name="l00788"></a>00788                 <span class="keywordflow">default</span>:
-<a name="l00789"></a>00789                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
-<a name="l00790"></a>00790             }
-<a name="l00791"></a>00791         }
-<a name="l00792"></a>00792 
-<a name="l00793"></a>00793         <span class="keyword">static</span> <span class="keywordtype">int</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
-<a name="l00794"></a>00794         {
-<a name="l00795"></a>00795             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00796"></a>00796             {
-<a name="l00797"></a>00797                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00798"></a>00798                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00799"></a>00799                     <span class="keywordflow">return</span> iVal;
-<a name="l00800"></a>00800 
-<a name="l00801"></a>00801                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00802"></a>00802                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(dVal);
-<a name="l00803"></a>00803 
-<a name="l00804"></a>00804                 <span class="keywordflow">case</span> 0:
-<a name="l00805"></a>00805                     <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Param::getVal&lt;int&gt;: non existent parameter&quot;</span>);
-<a name="l00806"></a>00806 
-<a name="l00807"></a>00807                 <span class="keywordflow">default</span>:
-<a name="l00808"></a>00808                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;int&gt;: Non-matching type!&quot;</span>);
-<a name="l00809"></a>00809             }
-<a name="l00810"></a>00810         }
-<a name="l00811"></a>00811     };
-<a name="l00812"></a>00812 
-<a name="l00813"></a>00813     <span class="keyword">template</span>&lt;&gt;
-<a name="l00814"></a><a class="code" href="structito_1_1_itom_param_helper_3_01char_01_4.html">00814</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;char&gt;
-<a name="l00815"></a>00815     {
-<a name="l00816"></a>00816         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">char</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
-<a name="l00817"></a>00817         {
-<a name="l00818"></a>00818             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00819"></a>00819             {
-<a name="l00820"></a>00820                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00821"></a>00821                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
-<a name="l00822"></a>00822                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00823"></a>00823 
-<a name="l00824"></a>00824                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00825"></a>00825                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00826"></a>00826                     iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
-<a name="l00827"></a>00827                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00828"></a>00828 
-<a name="l00829"></a>00829                 <span class="keywordflow">default</span>:
-<a name="l00830"></a>00830                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
-<a name="l00831"></a>00831             }
-<a name="l00832"></a>00832         }
-<a name="l00833"></a>00833 
-<a name="l00834"></a>00834         <span class="keyword">static</span> <span class="keywordtype">char</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
-<a name="l00835"></a>00835         {
-<a name="l00836"></a>00836             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00837"></a>00837             {
-<a name="l00838"></a>00838                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00839"></a>00839                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00840"></a>00840                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(iVal);
-<a name="l00841"></a>00841 
-<a name="l00842"></a>00842                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00843"></a>00843                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(dVal);
-<a name="l00844"></a>00844 
-<a name="l00845"></a>00845                 <span class="keywordflow">case</span> 0:
-<a name="l00846"></a>00846                     <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Param::getVal&lt;char&gt;: non existent parameter&quot;</span>);
-<a name="l00847"></a>00847 
-<a name="l00848"></a>00848                 <span class="keywordflow">default</span>:
-<a name="l00849"></a>00849                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;char&gt;: Non-matching type!&quot;</span>);
-<a name="l00850"></a>00850             }
-<a name="l00851"></a>00851         }
-<a name="l00852"></a>00852     };
-<a name="l00853"></a>00853 
-<a name="l00854"></a>00854     <span class="keyword">template</span>&lt;&gt;
-<a name="l00855"></a><a class="code" href="structito_1_1_itom_param_helper_3_01unsigned_01char_01_4.html">00855</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;unsigned char&gt;
-<a name="l00856"></a>00856     {
-<a name="l00857"></a>00857         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">char</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
-<a name="l00858"></a>00858         {
-<a name="l00859"></a>00859             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00860"></a>00860             {
-<a name="l00861"></a>00861                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00862"></a>00862                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
-<a name="l00863"></a>00863                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00864"></a>00864 
-<a name="l00865"></a>00865                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00866"></a>00866                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00867"></a>00867                     iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
-<a name="l00868"></a>00868                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
-<a name="l00869"></a>00869 
-<a name="l00870"></a>00870                 <span class="keywordflow">default</span>:
-<a name="l00871"></a>00871                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
-<a name="l00872"></a>00872             }
-<a name="l00873"></a>00873         }
-<a name="l00874"></a>00874 
-<a name="l00875"></a>00875         <span class="keyword">static</span> <span class="keywordtype">char</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
-<a name="l00876"></a>00876         {
-<a name="l00877"></a>00877             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
-<a name="l00878"></a>00878             {
-<a name="l00879"></a>00879                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00880"></a>00880                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00881"></a>00881                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(iVal);
-<a name="l00882"></a>00882 
-<a name="l00883"></a>00883                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
-<a name="l00884"></a>00884                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(dVal);
-<a name="l00885"></a>00885 
-<a name="l00886"></a>00886                 <span class="keywordflow">case</span> 0:
-<a name="l00887"></a>00887                     <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Param::getVal&lt;uchar&gt;: non existent parameter&quot;</span>);
-<a name="l00888"></a>00888                     <span class="keywordflow">return</span> 0;
-<a name="l00889"></a>00889 
-<a name="l00890"></a>00890                 <span class="keywordflow">default</span>:
-<a name="l00891"></a>00891                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;uchar&gt;: Non-matching type!&quot;</span>);
-<a name="l00892"></a>00892                     <span class="keywordflow">return</span> 0;
-<a name="l00893"></a>00893             }
-<a name="l00894"></a>00894         }
-<a name="l00895"></a>00895     };
-<a name="l00896"></a>00896 
-<a name="l00897"></a>00897 } <span class="comment">//end namespace ito</span>
-<a name="l00898"></a>00898 
-<a name="l00899"></a>00899 <span class="preprocessor">#endif</span>
+<a name="l00569"></a>00569     <span class="keyword">template</span>&lt;&gt;
+<a name="l00570"></a><a class="code" href="structito_1_1_itom_param_helper_3_01unsigned_01char_01_4.html">00570</a>     <span class="keyword">struct </span><a class="code" href="structito_1_1_itom_param_helper.html">ItomParamHelper</a>&lt;unsigned char&gt;
+<a name="l00571"></a>00571     {
+<a name="l00572"></a>00572         <span class="keyword">static</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for error value management.">ito::RetVal</a> setVal(uint32 type, <span class="keywordtype">char</span> *&amp;<span class="comment">/*cVal*/</span>, <span class="keywordtype">int</span> &amp;iVal, <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">char</span> val, <span class="keywordtype">int</span> <span class="comment">/*len = 0*/</span>)
+<a name="l00573"></a>00573         {
+<a name="l00574"></a>00574             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00575"></a>00575             {
+<a name="l00576"></a>00576                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00577"></a>00577                     dVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
+<a name="l00578"></a>00578                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00579"></a>00579 
+<a name="l00580"></a>00580                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00581"></a>00581                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00582"></a>00582                     iVal = <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(val);
+<a name="l00583"></a>00583                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a2ced39cc25866a04f2fb1c9f1d6a542e">ito::retOk</a>;
+<a name="l00584"></a>00584 
+<a name="l00585"></a>00585                 <span class="keywordflow">default</span>:
+<a name="l00586"></a>00586                     <span class="keywordflow">return</span> <a class="code" href="namespaceito.html#af3656645e7f004701417ecdc79b10202a199f41b7779e742e0a3cc281c42c97c0">ito::retError</a>;
+<a name="l00587"></a>00587             }
+<a name="l00588"></a>00588         }
+<a name="l00589"></a>00589 
+<a name="l00590"></a>00590         <span class="keyword">static</span> <span class="keywordtype">char</span> getVal(<span class="keyword">const</span> uint32 type, <span class="keyword">const</span> <span class="keywordtype">char</span> * <span class="comment">/*cVal*/</span>, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;iVal, <span class="keyword">const</span> <span class="keywordtype">double</span> &amp;dVal, <span class="keywordtype">int</span> &amp; <span class="comment">/*len*/</span>)
+<a name="l00591"></a>00591         {
+<a name="l00592"></a>00592             <span class="keywordflow">switch</span> (type &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">paramTypeMask</a>)
+<a name="l00593"></a>00593             {
+<a name="l00594"></a>00594                 <span class="keywordflow">case</span> ito::ParamBase::Int &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00595"></a>00595                 <span class="keywordflow">case</span> ito::ParamBase::Char &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00596"></a>00596                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(iVal);
+<a name="l00597"></a>00597 
+<a name="l00598"></a>00598                 <span class="keywordflow">case</span> ito::ParamBase::Double &amp; <a class="code" href="namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906" title="bits of param type lying withing this mask describe the type (typeNoAutosave must be included there)...">ito::paramTypeMask</a>:
+<a name="l00599"></a>00599                     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span><span class="keyword">&gt;</span>(dVal);
+<a name="l00600"></a>00600 
+<a name="l00601"></a>00601                 <span class="keywordflow">case</span> 0:
+<a name="l00602"></a>00602                     <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Param::getVal&lt;uchar&gt;: non existent parameter&quot;</span>);
+<a name="l00603"></a>00603                     <span class="keywordflow">return</span> 0;
+<a name="l00604"></a>00604 
+<a name="l00605"></a>00605                 <span class="keywordflow">default</span>:
+<a name="l00606"></a>00606                     <span class="keywordflow">throw</span> std::logic_error(<span class="stringliteral">&quot;Param::getVal&lt;uchar&gt;: Non-matching type!&quot;</span>);
+<a name="l00607"></a>00607                     <span class="keywordflow">return</span> 0;
+<a name="l00608"></a>00608             }
+<a name="l00609"></a>00609         }
+<a name="l00610"></a>00610     };
+<a name="l00611"></a>00611 
+<a name="l00612"></a>00612 } <span class="comment">//end namespace ito</span>
+<a name="l00613"></a>00613 
+<a name="l00614"></a>00614 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>param.h</b>      </li>
-      <li class="footer">Generated on Wed Oct 8 2014 17:19:33 for itom by&#160;
+      <li class="footer">Generated on Tue Nov 11 2014 12:33:42 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>
