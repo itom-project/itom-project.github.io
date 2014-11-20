@@ -59,6 +59,7 @@ Motors / Actuators
    plugins/actuators/piPiezoCtrl.rst
    plugins/actuators/piGCS2.rst
    plugins/actuators/usbMotion3XIII.rst
+   plugins/actuators/SMC100.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,6 +71,7 @@ Further hardware devices
    plugins/generalDataIO/gwInstekPSP.rst
    plugins/generalDataIO/serialIO.rst
    plugins/generalDataIO/glDisplay.rst
+   plugins/generalDataIO/LibModBus.rst
 
 Algorithms
 ~~~~~~~~~~~

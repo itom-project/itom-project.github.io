@@ -26,6 +26,7 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2014-11-20: The sources for the plugins **NewportSMC100** (Newport Stepper Motion Controller) and **LibModBus** (data transfer via ModBus - recently TCP only) are online. For more information see :ref:`plugins <sec-plugins>`.
 * 2014-11-10: The sources for the plugins **PI_GCS2** (Physik Instrumente General Command Set 2), **AndorSDK3** (Andor cameras with SDK3 support) and **AVTVimba** (Allied Vision cameras, Vimba interface) are now online (https://bitbucket.org/itom/plugins)
 * 2014-11-06: **itom** is used by many people around the world. The new page :ref:`collaboration <sec-collaboration>` has been added to see who helped to improve **itom**, to fix bugs or to add plugins.
 * 2014-10-08: Today **itom 1.3.0** has been released. The Windows setups and the sources (tag v1.3.0) are ready for download. It comes with a lot of bugfixes, improvements and the new hardware plugins *IDSuEye*, **ThorlabsCCS** and **GLDisplay**. Additionally the 3D plot widget **TwipOGLFigure** has been added to the Windows installers, that is created by `twip optical solutions GmbH <http://www.twip-os.com/>`_. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html
