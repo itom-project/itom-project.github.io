@@ -72,6 +72,7 @@ Further hardware devices
    plugins/generalDataIO/serialIO.rst
    plugins/generalDataIO/glDisplay.rst
    plugins/generalDataIO/LibModBus.rst
+   plugins/generalDataIO/SuperlumBS.rst
 
 Algorithms
 ~~~~~~~~~~~

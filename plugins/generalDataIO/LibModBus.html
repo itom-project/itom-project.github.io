@@ -24,10 +24,9 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
-    <link rel="next" title="Basic Filters" href="../algorithms/basicFilters.html" />
+    <link rel="next" title="SuperlumBS" href="SuperlumBS.html" />
     <link rel="prev" title="GLDisplay" href="glDisplay.html" />
  
 
@@ -38,7 +37,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../algorithms/basicFilters.html" title="Basic Filters"
+          <a href="SuperlumBS.html" title="SuperlumBS"
              accesskey="N">next</a></li>
         <li class="right" >
           <a href="glDisplay.html" title="GLDisplay"
@@ -75,6 +74,7 @@
 <li class="toctree-l5"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="SuperlumBS.html">SuperlumBS</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#algorithms">Algorithms</a></li>
@@ -91,8 +91,8 @@
   <p class="topless"><a href="glDisplay.html"
                         title="previous chapter">GLDisplay</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../algorithms/basicFilters.html"
-                        title="next chapter">Basic Filters</a></p>
+  <p class="topless"><a href="SuperlumBS.html"
+                        title="next chapter">SuperlumBS</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
@@ -135,17 +135,17 @@
 <td>Windows, Linux</td>
 </tr>
 <tr class="row-odd"><td><strong>Devices</strong>:</td>
-<td>Modbus communication over TCP/IP</td>
+<td>Modbus communication over TCP/IP and RTU</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><span>J.Nitsche, IPROM, University Braunschweig</span></td>
+<td><span>J.Nitsche, IPROM, TU Braunschweig</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>LibModBus is a itom-Plugin which provides modbusTCP communication.
-The plugin is based on libmodbus v3.1.1 library and under development for Windows only atm.
+<p>LibModBus is a itom-Plugin which provides modbusTCP and modbusRTU communication.
+The plugin is based on libmodbus v3.1.1 library and tested under Windows only atm.
 Registers are addressed using the modbus_read_registers (0x03) and modbus_write_registers (0x10) functions of libmodbus.
 The plugin-functions used are getVal(dObj) and setVal(dObj) with a data object of the size 1xN with N the number of registers to be read/written.
 The content of the registers is expected as data in the uint16 data object, the addressing of the registers is performed by a dObj-MetaTag &#8216;registers&#8217; containing a string with address and number of consecutive registers seperated by &#8216;,&#8217; and different registers seperated by &#8216;;&#8217; i.e.: &#8216;10,2;34,1;77,4&#8217; to address registers 10,11;34;77..80. Number 1 of consecutive registers can be left out i.e.:&#8216;10,2;34;77,4&#8217;
@@ -157,14 +157,38 @@ If no MetaTag is set, values of m_params[&#8216;registers&#8217;] is tried to be
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
-<dt><strong>IP</strong>: {str (char*)} default: 127.0.0.1</dt>
-<dd><p class="first last">IP-Adress of the target device (for ModBus TCP)</p>
+<dt><strong>target</strong>: {str (char*)} default: 127.0.0.1</dt>
+<dd><p class="first last">Adress of the target device. IP-Adress for ModbusTCP (i.e. 127.0.0.1) or COM-Port for ModbusRTU (i.e. COM1)</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>port</strong>: {int (int)} [0,1024], default: 502, step: 1</dt>
-<dd><p class="first last">The number of the TCP port for ModBus Communication (default 502)</p>
+<dt><strong>port</strong>: {int (int), optional} [0,1024], default: 502, step: 1</dt>
+<dd><p class="first last">The number of the TCP port for ModBusTCP (default 502) or slave ID for ModbusRTU</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>baud</strong>: {int (int), optional} [50,4000000], default: 9600, step: 1</dt>
+<dd><p class="first last">The baudrate of the port for RTU communication</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>parity</strong>: {str (char*), optional} default: N</dt>
+<dd><p class="first last">Parity for RTU communication (N,E,O)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>databit</strong>: {int (int), optional} [5,8], default: 8, step: 1</dt>
+<dd><p class="first last">Number of bits to be written in line for RTU communication</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>stopbit</strong>: {int (int), optional} [1,2], default: 1, step: 1</dt>
+<dd><p class="first last">Stop bits after every n bits for RTU communication</p>
 </dd>
 </dl>
 </li>
@@ -183,10 +207,20 @@ parameters can be changed using <em>setParam</em>.</p>
 <dl class="docutils">
 <dt><strong>name</strong>: {str}, read-only</dt>
 <dd>name of the plugin (<em>LibModBus</em>)</dd>
-<dt><strong>IP</strong>: {str}, read-only</dt>
-<dd>IP-Address of the connected Modbus-TCP device</dd>
+<dt><strong>target</strong>: {str}, read-only</dt>
+<dd>IP-Address of the connected Modbus-TCP device or serial port for Modbus-RTU connection. Under Windows COM1-COM9 is supported, unix-based systems should use /dev/ttyS0.. or /dev/ttyUSB0..</dd>
 <dt><strong>port</strong>: {int}, read-only</dt>
-<dd>port used for ip communication</dd>
+<dd>port used for IP communication or device ID for ModbusRTU</dd>
+<dt><strong>baud</strong>: {int}, read-only</dt>
+<dd>The baudrate of the port for RTU communication</dd>
+<dt><strong>parity</strong>: {str}, read-only</dt>
+<dd>Parity for RTU communication (N-&gt;None, E-&gt;Even, O-&gt;Odd)</dd>
+<dt><strong>databit</strong>: {int}, read-only</dt>
+<dd>Number of bits to be written in line for RTU communication</dd>
+<dt><strong>stopbit</strong>: {int}, read-only</dt>
+<dd>Stop bits after every n bits for RTU communication</dd>
+<dt><strong>output_mode</strong>: {bool}</dt>
+<dd>if output_mode is true, multiple outputs will be sent to command line, e.g. register values of getVal function. Default is false</dd>
 <dt><strong>registers</strong>: {str}</dt>
 <dd>fallback addressing for modbus registers. This value will be used, if a dataObject without &#8216;registers&#8217;-tag is sent to the getVal- or setVal-function.
 <em>registers</em> needs to be stored with address and number of consecutive registers seperated by &#8216;,&#8217; and different registers seperated by &#8216;;&#8217; i.e.: &#8216;10,2;34,1;77,4&#8217; to address registers 10,11;34;77..80. Number 1 of consecutive registers can be left out i.e.:&#8216;10,2;34;77,4&#8217;</dd>
@@ -195,7 +229,7 @@ parameters can be changed using <em>setParam</em>.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Values can be read or written via modbus communication using the <em>getVal(dObj)</em> and <em>setVal(dObj)</em> functions. The dataObject <em>dObj</em> needs to be two dimensional with the first dimension set to 1,
-the second dimension has to have the exact size of the numbers of written or read registers. As modbus uses 16bit integer values, dObj should be initialized as &#8216;uint16&#8217;.</p>
+the second dimension has to have the exact size of the numbers of written or read registers. As modbus uses 16bit integer values, dObj must be initialized as &#8216;uint16&#8217;.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s">&#39;uint16&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -225,7 +259,7 @@ The parameter is useful if the same registers need to be read/written multiple t
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../algorithms/basicFilters.html" title="Basic Filters"
+          <a href="SuperlumBS.html" title="SuperlumBS"
              >next</a></li>
         <li class="right" >
           <a href="glDisplay.html" title="GLDisplay"
