@@ -26,6 +26,7 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2015-01-15: A cheatsheet about using itom with Python is available in the :ref:`media section <sec-media>`.
 * 2014-12-09: The plugin **SuperlumBS** for broadsweepers from Superlum is online now.
 * 2014-11-20: The sources for the plugins **NewportSMC100** (Newport Stepper Motion Controller) and **LibModBus** (data transfer via ModBus - recently TCP only) are online. For more information see :ref:`plugins <sec-plugins>`.
 * 2014-11-10: The sources for the plugins **PI_GCS2** (Physik Instrumente General Command Set 2), **AndorSDK3** (Andor cameras with SDK3 support) and **AVTVimba** (Allied Vision cameras, Vimba interface) are now online (https://bitbucket.org/itom/plugins)

@@ -7,6 +7,7 @@ Here you will find presentations and posters about **itom**:
 
 * `Introduction to itom <documents/itomPresentationSept2013_Fringe.pdf>`_, presented at the `Fringe 2013 conference <http://www.fringe13.de>`_.
 * `Poster about itom <documents/itomPosterSept2013_Fringe.pdf>`_, also presented at the `Fringe 2013 conference <http://www.fringe13.de>`_.
+* `Cheatsheet for Python with itom <documents/itom_cheatsheet.pdf>`_.
 
 The following publications are available and can also be used as references:
 
