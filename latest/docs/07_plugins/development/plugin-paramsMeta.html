@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2895a9c',
+        VERSION:     '2431b2c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -76,131 +74,104 @@ base instance to the right meta information class that fits to the type.</p>
 <span id="classparammeta"></span><h2>Class ParamMeta<a class="headerlink" href="#class-parammeta" title="Permalink to this headline">¶</a></h2>
 <p>The class <strong>ParamMeta</strong> is the base class for all meta information classes. Parameters of class <strong>Param</strong> may
 contain pointers of that class, which then must be cast to the final implementation.</p>
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_param_meta"></span><em>class</em> <tt class="descname">ito::ParamMeta</tt></dt>
-<dd><p>Base class for all meta-information classes. </p>
-<p>Parameters of type <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> can have a pointer to this class. Consider this base class to be abstract, such that it is only allowed to pass the right implementation (derived from this class) that fits to the type of the parameter. The runtime type information value m_type indicates the real type of this pointer, such that a direct cast can be executed.</p>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::ParamMeta</strong></div>
+</div>
+<blockquote>
+<div><p>Base class for all meta-information classes. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="#itomclassito_1_1_char_meta"><em>ito::CharMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_int_meta"><em>ito::IntMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_double_meta"><em>ito::DoubleMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_string_meta"><em>ito::StringMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_h_w_meta"><em>ito::HWMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_d_obj_meta"><em>ito::DObjMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_char_array_meta"><em>ito::CharArrayMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_int_array_meta"><em>ito::IntArrayMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_double_array_meta"><em>ito::DoubleArrayMeta</em></a> </dd>
+<dd><a class="reference internal" href="#itomclassito_1_1_int_meta"><em>IntMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_double_meta"><em>DoubleMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_char_meta"><em>CharMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_string_meta"><em>StringMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_h_w_meta"><em>HWMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_d_obj_meta"><em>DObjMeta</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Type</p>
-<dl class="enum">
-<dt>
-<span class="target" id="itomclassito_1_1_param_meta_1a58b89769afcccb920b31261493127069"></span><strong>MetaRtti enum</strong></dt>
-<dd><p>Runtime type information. </p>
-<p>MetaRtti is used to cast param meta objects, without having to enable runtime type information of the compiler. </p>
-<p><em>Values:</em></p>
-<ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">rttiUnknown</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">0</span></tt> - <p>unknown parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiCharMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">1</span></tt> - <p>meta for a char parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiIntMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">2</span></tt> - <p>meta for an integer parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiDoubleMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">3</span></tt> - <p>meta for a double parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiStringMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">4</span></tt> - <p>meta for a string parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiHWMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">5</span></tt> - <p>meta for a hardware plugin parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiDObjMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">6</span></tt> - <p>meta for a data object parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiIntArrayMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">7</span></tt> - <p>meta for an integer array parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiDoubleArrayMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">8</span></tt> - <p>meta for a double array parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiCharArrayMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">9</span></tt> - <p>meta for a char array parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiIntervalMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">10</span></tt> - <p>meta for an integer array with two values that represent an interval [value1, value2] parameter </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiDoubleIntervalMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">11</span></tt> - <p>meta for a double array with two values that represent an interval [value1, value2] parameter (size of the interval is value2-value1) </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiRangeMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">12</span></tt> - <p>meta for an integer array with two values that represent a range [value1, value2] parameter (size of a range is 1+value2-value1) </p>
-</li>
-<li><tt class="first docutils literal"><span class="pre">rttiRectMeta</span></tt><tt class="docutils literal"> <span class="pre">=</span>  <span class="pre">13</span></tt> - <p>meta for an integer array with four values that consists of two ranges (vertical and horizontal, e.g. for ROIs of cameras) </p>
-</li>
-</ul>
-</dd></dl>
-
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_param_meta_1abfe991d79dd3d92e50bfbde6c3e95de8"></span><div class="line-block">
+<div class="line"> <strong>ParamMeta</strong>()</div>
 </div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_param_meta_1abfe991d79dd3d92e50bfbde6c3e95de8"></span><tt class="descname">ParamMeta</tt><big>(</big><big>)</big></dt>
-<dd><p>default constructor with an unknown meta information type </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_param_meta_1a18e64006c5a04ce79467c1be8f854333"></span><tt class="descname">ParamMeta</tt><big>(</big><a class="reference internal" href="#itomclassito_1_1_param_meta_1a58b89769afcccb920b31261493127069"><em>MetaRtti</em></a> <em>type</em><big>)</big></dt>
-<dd><p>constructor used by derived classes to indicate their real type </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_param_meta_1a0e4c11c7514b4416d07782a9b55866d3"></span>virtual <tt class="descname">~ParamMeta</tt><big>(</big><big>)</big></dt>
-<dd><p>destructor </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_param_meta_1af295ee481d465463b99365d65ff8cfbc"></span><a class="reference internal" href="#itomclassito_1_1_param_meta_1a58b89769afcccb920b31261493127069"><em>MetaRtti</em></a> <tt class="descname">getType</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns runtime type information value </p>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_param_meta_1ad802aacf72d952818fb652a465abcfbf"></span><div class="line-block">
+<div class="line"> <strong>ParamMeta</strong>(uint32 type)</div>
 </div>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_param_meta_1a0e4c11c7514b4416d07782a9b55866d3"></span><div class="line-block">
+<div class="line"> <strong>~ParamMeta</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_param_meta_1aabfb5e101a2d54dcfdace6d72b3b70b9"></span><div class="line-block">
+<div class="line">uint32 <strong>getType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="class-charmeta-intmeta-and-doublemeta">
 <h2>Class CharMeta, IntMeta and DoubleMeta<a class="headerlink" href="#class-charmeta-intmeta-and-doublemeta" title="Permalink to this headline">¶</a></h2>
 <p>The classes <strong>CharMeta</strong>, <strong>IntMeta</strong> and <strong>DoubleMeta</strong> provide meta information for parameters of single numeric types.</p>
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta"></span><em>class</em> <tt class="descname">ito::CharMeta</tt></dt>
-<dd><p>meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type Char. </p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::Char. If set, the given char number can be limited with respect to given minimum and maximum values as well as an optional step size (default: 1).</p>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::CharMeta</strong></div>
+</div>
+<blockquote>
+<div><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type Char or CharArray. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a> </dd>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a9b42798855857d10e125a50e0685fbed"></span><tt class="descname">CharMeta</tt><big>(</big>char <em>minVal</em>, char <em>maxVal</em>, char <em>stepSize</em> = 1<big>)</big></dt>
-<dd><p>constructor with minimum and maximum value </p>
-<p>constructor with minimum and maximum value as well as optional step size (default: 1) </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a3beaf700d22198e0a96331588c03334c"></span>char <tt class="descname">getMin</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a0470ec77d461262260587a9b8aec95f9"></span>char <tt class="descname">getMax</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a627a434cef04c0ce45e55d8589d59d17"></span>char <tt class="descname">getStepSize</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns step size </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a47cb733fc79fdca6d6e24e465aa324d3"></span>void <tt class="descname">setMin</tt><big>(</big>char <em>val</em><big>)</big></dt>
-<dd><p>sets the minimum value </p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_char_meta_1a9b42798855857d10e125a50e0685fbed"></span><div class="line-block">
+<div class="line"> <strong>CharMeta</strong>(char minVal, char maxVal, char stepSize = 1)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor with minimum and maximum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_char_meta_1a3beaf700d22198e0a96331588c03334c"></span><div class="line-block">
+<div class="line">char <strong>getMin</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns minimum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_char_meta_1a0470ec77d461262260587a9b8aec95f9"></span><div class="line-block">
+<div class="line">char <strong>getMax</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns maximum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_char_meta_1a627a434cef04c0ce45e55d8589d59d17"></span><div class="line-block">
+<div class="line">char <strong>getStepSize</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns step size </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_char_meta_1a47cb733fc79fdca6d6e24e465aa324d3"></span><div class="line-block">
+<div class="line">void <strong>setMin</strong>(char val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the minimum value </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -210,12 +181,13 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a06d085b6bcb7397dd3f719c1f8dc39c1"></span>void <tt class="descname">setMax</tt><big>(</big>char <em>val</em><big>)</big></dt>
-<dd><p>sets the maximum value </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_char_meta_1a06d085b6bcb7397dd3f719c1f8dc39c1"></span><div class="line-block">
+<div class="line">void <strong>setMax</strong>(char val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the maximum value </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -225,12 +197,13 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a14f2365548aab6df1518e0afc7c9bd05"></span>void <tt class="descname">setStepSize</tt><big>(</big>char <em>val</em><big>)</big></dt>
-<dd><p>sets the step size </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_char_meta_1a14f2365548aab6df1518e0afc7c9bd05"></span><div class="line-block">
+<div class="line">void <strong>setStepSize</strong>(char val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the step size </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -240,60 +213,68 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functons</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_char_meta_1ae11bae0e1a71433b181cd80a19868ba3"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_char_meta"><em>CharMeta</em></a>  * <strong>all</strong>()</div>
 </div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_meta_1a535b982cd2d26e1ad7eea806fda926f4"></span><a class="reference internal" href="#itomclassito_1_1_char_meta"><em>CharMeta</em></a> * <tt class="descname">all</tt><big>(</big><big>)</big></dt>
-<dd><p>returns a new instance of <a class="reference internal" href="#itomclassito_1_1_char_meta"><em>CharMeta</em></a>, where the min and max are set to the full range available for char. </p>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p>returns a new instance of <a class="reference internal" href="#itomclassito_1_1_char_meta"><em>CharMeta</em></a>, where the min and max are set to the full range available for char. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::IntMeta</strong></div>
 </div>
-</dd></dl>
-
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta"></span><em>class</em> <tt class="descname">ito::IntMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type Int. </p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::Int. If set, the given integer number can be limited with respect to given minimum and maximum values as well as an optional step size (default: 1).</p>
+<blockquote>
+<div><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type Int or IntArray. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a> </dd>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1afc100b81acf12057e7c51a57a3ffa41f"></span><tt class="descname">IntMeta</tt><big>(</big>int <em>minVal</em>, int <em>maxVal</em>, int <em>stepSize</em> = 1<big>)</big></dt>
-<dd><p>constructor with minimum and maximum value as well as optional step size (default: 1) </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1aeae7b78ab54b30ec9bdfdef67ad9e44c"></span>int <tt class="descname">getMin</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1a1b56940b7c7ec855b7c02016c8e67ad8"></span>int <tt class="descname">getMax</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1a274d3356dc93c0babc9de9a871b64391"></span>int <tt class="descname">getStepSize</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns step size </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1aa7fc03ef88b4211a846edee58c150ebf"></span>void <tt class="descname">setMin</tt><big>(</big>int <em>val</em><big>)</big></dt>
-<dd><p>sets the minimum value </p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_int_meta_1afc100b81acf12057e7c51a57a3ffa41f"></span><div class="line-block">
+<div class="line"> <strong>IntMeta</strong>(int minVal, int maxVal, int stepSize = 1)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor with minimum and maximum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_int_meta_1aeae7b78ab54b30ec9bdfdef67ad9e44c"></span><div class="line-block">
+<div class="line">int <strong>getMin</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns minimum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_int_meta_1a1b56940b7c7ec855b7c02016c8e67ad8"></span><div class="line-block">
+<div class="line">int <strong>getMax</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns maximum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_int_meta_1a274d3356dc93c0babc9de9a871b64391"></span><div class="line-block">
+<div class="line">int <strong>getStepSize</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns step size </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_int_meta_1aa7fc03ef88b4211a846edee58c150ebf"></span><div class="line-block">
+<div class="line">void <strong>setMin</strong>(int val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the minimum value </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -303,12 +284,13 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1abffd2da2f28f1cffc9dcad4058a81e4c"></span>void <tt class="descname">setMax</tt><big>(</big>int <em>val</em><big>)</big></dt>
-<dd><p>sets the maximum value </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_int_meta_1abffd2da2f28f1cffc9dcad4058a81e4c"></span><div class="line-block">
+<div class="line">void <strong>setMax</strong>(int val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the maximum value </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -318,12 +300,13 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1a206490913c10c1c2d117e4d9127f83a1"></span>void <tt class="descname">setStepSize</tt><big>(</big>int <em>val</em><big>)</big></dt>
-<dd><p>sets the step size </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_int_meta_1a206490913c10c1c2d117e4d9127f83a1"></span><div class="line-block">
+<div class="line">void <strong>setStepSize</strong>(int val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the step size </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -333,60 +316,68 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functons</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_int_meta_1a9252dac2613ec3615a4a0344a5d32cea"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_int_meta"><em>IntMeta</em></a>  * <strong>all</strong>()</div>
 </div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_meta_1a69730fad9a4df18abfcae7e4b727dd05"></span><a class="reference internal" href="#itomclassito_1_1_int_meta"><em>IntMeta</em></a> * <tt class="descname">all</tt><big>(</big><big>)</big></dt>
-<dd><p>returns a new instance of <a class="reference internal" href="#itomclassito_1_1_int_meta"><em>IntMeta</em></a>, where the min and max are set to the full range available for integers. </p>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p>returns a new instance of <a class="reference internal" href="#itomclassito_1_1_int_meta"><em>IntMeta</em></a>, where the min and max are set to the full range available for integers. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::DoubleMeta</strong></div>
 </div>
-</dd></dl>
-
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta"></span><em>class</em> <tt class="descname">ito::DoubleMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> of type Double. </p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::Double. If set, the given double number can be limited with respect to given minimum and maximum values as well as an optional step size (default: 0.0 -&gt; no step size).</p>
+<blockquote>
+<div><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type Double or DoubleArray. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a> </dd>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1a2df5a315e7fdd31917e7a7d320a77026"></span><tt class="descname">DoubleMeta</tt><big>(</big>double <em>minVal</em>, double <em>maxVal</em>, double <em>stepSize</em> = 0.0<big>)</big></dt>
-<dd><p>constructor with minimum and maximum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1abd572f14b6128fc22532fc684d0ac016"></span>double <tt class="descname">getMin</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1add59cc98d78bf7c673d7ebd8653b0c6c"></span>double <tt class="descname">getMax</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum value </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1a53b4d32b8e2fec829d4a515c0e331af7"></span>double <tt class="descname">getStepSize</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns step size </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1a3dbb8cb6b98b401294ff49a818555edb"></span>void <tt class="descname">setMin</tt><big>(</big>double <em>val</em><big>)</big></dt>
-<dd><p>sets the minimum value </p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_double_meta_1a2df5a315e7fdd31917e7a7d320a77026"></span><div class="line-block">
+<div class="line"> <strong>DoubleMeta</strong>(double minVal, double maxVal, double stepSize = 0.0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor with minimum and maximum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_double_meta_1abd572f14b6128fc22532fc684d0ac016"></span><div class="line-block">
+<div class="line">double <strong>getMin</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns minimum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_double_meta_1add59cc98d78bf7c673d7ebd8653b0c6c"></span><div class="line-block">
+<div class="line">double <strong>getMax</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns maximum value </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_double_meta_1a53b4d32b8e2fec829d4a515c0e331af7"></span><div class="line-block">
+<div class="line">double <strong>getStepSize</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns step size </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_double_meta_1a3dbb8cb6b98b401294ff49a818555edb"></span><div class="line-block">
+<div class="line">void <strong>setMin</strong>(double val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the minimum value </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -396,12 +387,13 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1a4e3d450472f22ad3fcb745ab208e2e84"></span>void <tt class="descname">setMax</tt><big>(</big>double <em>val</em><big>)</big></dt>
-<dd><p>sets the maximum value </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_double_meta_1a4e3d450472f22ad3fcb745ab208e2e84"></span><div class="line-block">
+<div class="line">void <strong>setMax</strong>(double val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the maximum value </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -411,12 +403,13 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1a95a03794886f364c6cb1ff869efa999c"></span>void <tt class="descname">setStepSize</tt><big>(</big>double <em>val</em><big>)</big></dt>
-<dd><p>sets the step size </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_double_meta_1a95a03794886f364c6cb1ff869efa999c"></span><div class="line-block">
+<div class="line">void <strong>setStepSize</strong>(double val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>sets the step size </p>
 <p><dl class="docutils">
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
@@ -426,20 +419,19 @@ contain pointers of that class, which then must be cast to the final implementat
 </dd>
 </dl>
 </p>
-</dd></dl>
-
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functons</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_double_meta_1ae69b60bd40fc7e667c84e2d641f7168c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_double_meta"><em>DoubleMeta</em></a>  * <strong>all</strong>()</div>
 </div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_meta_1a31c0a28e6fe8b726687c2602a54707c3"></span><a class="reference internal" href="#itomclassito_1_1_double_meta"><em>DoubleMeta</em></a> * <tt class="descname">all</tt><big>(</big><big>)</big></dt>
-<dd><p>returns a new instance of <a class="reference internal" href="#itomclassito_1_1_double_meta"><em>DoubleMeta</em></a>, where the min and max are set to the full range available for double. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p>returns a new instance of <a class="reference internal" href="#itomclassito_1_1_double_meta"><em>DoubleMeta</em></a>, where the min and max are set to the full range available for double. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="class-chararraymeta-intarraymeta-and-doublearraymeta">
 <h2>Class CharArrayMeta, IntArrayMeta and DoubleArrayMeta<a class="headerlink" href="#class-chararraymeta-intarraymeta-and-doublearraymeta" title="Permalink to this headline">¶</a></h2>
@@ -447,240 +439,18 @@ contain pointers of that class, which then must be cast to the final implementat
 These classes are derived from <strong>CharArray</strong>, <strong>IntArray</strong> or <strong>DoubleArray</strong>, such that the minimum and maximum value as well as the step size
 for each single value is given by the features of their base class. Additionally, it is possible to set a min, max and stepSize constraint concerning
 the number of elements of the arrays.</p>
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta"></span><em>class</em> <tt class="descname">ito::CharArrayMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type <a class="reference internal" href="#itomclassito_1_1_char_array_meta"><em>CharArrayMeta</em></a>. </p>
-<p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type <a class="reference internal" href="#itomclassito_1_1_int_array_meta"><em>IntArrayMeta</em></a>.</p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::CharArray. Since this meta information class is derived from <a class="reference internal" href="#itomclassito_1_1_char_meta"><em>ito::CharMeta</em></a>, it is possible to restrict each value to the single value contraints of <a class="reference internal" href="#itomclassito_1_1_char_meta"><em>ito::CharMeta</em></a>. Furthermore, this class allows restricting the minimum and maximum length of the array as well as the optional step size of the array&#8217;s length.</p>
-<p>
-An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::IntArray. Since this meta information class is derived from <a class="reference internal" href="#itomclassito_1_1_int_meta"><em>ito::IntMeta</em></a>, it is possible to restrict each value to the single value contraints of <a class="reference internal" href="#itomclassito_1_1_int_meta"><em>ito::IntMeta</em></a>. Furthermore, this class allows restricting the minimum and maximum length of the array as well as the optional step size of the array&#8217;s length.<dl class="docutils">
-<dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_char_meta"><em>ito::CharMeta</em></a></dd>
-</dl>
-</p>
-<p><dl class="docutils">
-<dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a>, ito::IntArray </dd>
-</dl>
-</p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta_1a7f5fbebfcd4defab007bc1aac6acbc88"></span>size_t <tt class="descname">getNumMin</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta_1aeb82d6febb2d9bb5b043f92ea5f3dcd1"></span>size_t <tt class="descname">getNumMax</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta_1a7e22fd5908ebcde27515b0bbb627ac84"></span>size_t <tt class="descname">getNumStepSize</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns step size of number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta_1aba394f9821116f3f8908aad1120f3aba"></span>void <tt class="descname">setNumMin</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the minimum number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta_1a7cc7bfb046b1c498f21d96309ce64be5"></span>void <tt class="descname">setNumMax</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the maximum number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_char_array_meta_1ad233ac846648440087ee26bd561281bf"></span>void <tt class="descname">setNumStepSize</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the step size of the number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize...,maxVal] are allowed </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenclass: Cannot find class &#8220;ito::CharArrayMeta&#8221; in doxygen xml output for project &#8220;itom&#8221; from directory: D:/itom-git/build/itom/docs/doxygen/xml</p>
 </div>
-</dd></dl>
-
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta"></span><em>class</em> <tt class="descname">ito::IntArrayMeta</tt></dt>
-<dd><div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta_1abf8e8a817a4e5b506f3f2c97446b0de3"></span>size_t <tt class="descname">getNumMin</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta_1aee2365b84195eb78207dee46357657f1"></span>size_t <tt class="descname">getNumMax</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta_1add8aab7a4e33667a273cbe9878d301b7"></span>size_t <tt class="descname">getNumStepSize</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns step size of number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta_1a344ae2c9ff44cf4b4b720c345f2c30b8"></span>void <tt class="descname">setNumMin</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the minimum number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta_1a5dc5e473915fe92a0d3f22902f4e4e39"></span>void <tt class="descname">setNumMax</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the maximum number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_int_array_meta_1a48162698e4aed19cfbbc531a93b68adc"></span>void <tt class="descname">setNumStepSize</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the step size of the number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize...,maxVal] are allowed </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenclass: Cannot find class &#8220;ito::IntArrayMeta&#8221; in doxygen xml output for project &#8220;itom&#8221; from directory: D:/itom-git/build/itom/docs/doxygen/xml</p>
 </div>
-</dd></dl>
-
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta"></span><em>class</em> <tt class="descname">ito::DoubleArrayMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type <a class="reference internal" href="#itomclassito_1_1_double_array_meta"><em>DoubleArrayMeta</em></a>. </p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::DoubleArray. Since this meta information class is derived from ito::DoubleArray, it is possible to restrict each value to the single value contraints of ito::DoubleArray. Furthermore, this class allows restricting the minimum and maximum length of the array as well as the optional step size of the array&#8217;s length.</p>
-<p><dl class="docutils">
-<dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a>, <a class="reference internal" href="#itomclassito_1_1_double_meta"><em>ito::DoubleMeta</em></a> </dd>
-</dl>
-</p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta_1acd31a30716b3fe74454865337cece1a6"></span>size_t <tt class="descname">getNumMin</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta_1a941fa4b3740f138c9bd8f4f131bbe53f"></span>size_t <tt class="descname">getNumMax</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta_1a90f353644dff168b03bfd556adfc4fc3"></span>size_t <tt class="descname">getNumStepSize</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns step size of number of values </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta_1a79c25c8a33c0bf4b4b277acb1182e332"></span>void <tt class="descname">setNumMin</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the minimum number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta_1a5a119801be44adeb49b7e8070cab9d15"></span>void <tt class="descname">setNumMax</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the maximum number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_double_array_meta_1a2a7123157dc634a9b5b1c00863d87fb3"></span>void <tt class="descname">setNumStepSize</tt><big>(</big>size_t <em>val</em><big>)</big></dt>
-<dd><p>sets the step size of the number of values </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize...,maxVal] are allowed </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenclass: Cannot find class &#8220;ito::DoubleArrayMeta&#8221; in doxygen xml output for project &#8220;itom&#8221; from directory: D:/itom-git/build/itom/docs/doxygen/xml</p>
 </div>
-</dd></dl>
-
 </div>
 <div class="section" id="class-stringmeta">
 <h2>Class StringMeta<a class="headerlink" href="#class-stringmeta" title="Permalink to this headline">¶</a></h2>
@@ -688,25 +458,42 @@ An object of this class can be used to parametrize a parameter whose type is ito
 strings, as wildcard-expressions or regular expressions. The corresponding checks must be defined manually. If a string-parameter has an enumeration defined,
 where the strings are interpreted as strings, and if this parameter will automatically be parsed by any input mask in the GUI, the corresponding input text
 box becomes a drop-down menu with the given enumeration elements.</p>
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta"></span><em>class</em> <tt class="descname">ito::StringMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type String. </p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::String. If set, it is possible to restrict the a given string to fit to a given list of strings. This list of strings might be interpreted in an exact way (tType::String), as wildcard expressions (tType::Wildcard) or as regular expressions (tType::RegExp).</p>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::StringMeta</strong></div>
+</div>
+<blockquote>
+<div><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type String. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a> </dd>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1a5913aadb97aaf5bc41b17b5fba343411"></span><tt class="descname">StringMeta</tt><big>(</big>tType <em>type</em><big>)</big></dt>
-<dd><p>constructor </p>
+<em>Public Type</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"></span><strong>tType enum</strong></p>
+<blockquote>
+<div><p></p>
+<p></p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">String</span></tt> - <p>string elements should be considered as strings (exact match) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">Wildcard</span></tt> - <p>string elements should be considered as wildcard-expressions (e.g. *.doc) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">RegExp</span></tt> - <p>string elements should be considered as regular expressions (e.g. ^(.*)[abc]{1,5}$) </p>
+</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_string_meta_1a5913aadb97aaf5bc41b17b5fba343411"></span><div class="line-block">
+<div class="line"> <strong>StringMeta</strong>(<a class="reference internal" href="#itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"><em>tType</em></a> type)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor </p>
 <p>Returns a meta information class for string-types. <dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd>tType </dd>
+<dd><a class="reference internal" href="#itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"><em>tType</em></a> </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>indicates how the string elements should be considered </p>
@@ -715,15 +502,16 @@ box becomes a drop-down menu with the given enumeration elements.</p>
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1a5dddc9ec40b620f03b7d4a19b6583821"></span><tt class="descname">StringMeta</tt><big>(</big>tType <em>type</em>, const char * <em>val</em><big>)</big></dt>
-<dd><p>constructor </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a5dddc9ec40b620f03b7d4a19b6583821"></span><div class="line-block">
+<div class="line"> <strong>StringMeta</strong>(<a class="reference internal" href="#itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"><em>tType</em></a> type, const char * val)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor </p>
 <p>Returns a meta information class for string-types. <dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd>tType </dd>
+<dd><a class="reference internal" href="#itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"><em>tType</em></a> </dd>
 <dt><strong>Parameters</strong></dt>
 <dd><ul class="breatheparameterlist first last">
 <li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>indicates how the string elements should be considered </p>
@@ -734,149 +522,205 @@ box becomes a drop-down menu with the given enumeration elements.</p>
 </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1afc91bd151bde1d848c90586c80a835e8"></span><tt class="descname">StringMeta</tt><big>(</big>const <a class="reference internal" href="#itomclassito_1_1_string_meta"><em>StringMeta</em></a> &amp; <em>cpy</em><big>)</big></dt>
-<dd><p>copy constructor </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1a50b47912b2ee1072fc7401fcbed7a127"></span>virtual <tt class="descname">~StringMeta</tt><big>(</big><big>)</big></dt>
-<dd><p>destructor </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1a9637137e270d83d7def4e2a371b592e1"></span>tType <tt class="descname">getStringType</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns the type how strings in list should be considered. </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1afc91bd151bde1d848c90586c80a835e8"></span><div class="line-block">
+<div class="line"> <strong>StringMeta</strong>(const  <a class="reference internal" href="#itomclassito_1_1_string_meta"><em>StringMeta</em></a>  &amp; cpy)</div>
+</div>
+</p>
+<blockquote>
+<div><p>copy constructor </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a50b47912b2ee1072fc7401fcbed7a127"></span><div class="line-block">
+<div class="line"> <strong>~StringMeta</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>destructor </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a9637137e270d83d7def4e2a371b592e1"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"><em>tType</em></a> <strong>getStringType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns the type how strings in list should be considered. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd>tType </dd>
+<dd><a class="reference internal" href="#itomclassito_1_1_string_meta_1a012fb711b11bea4cbbc696a357335ece"><em>tType</em></a> </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1a8fed2e9214ac7703bee9451f7b4d1d63"></span>int <tt class="descname">getLen</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns the number of string elements in meta information class. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1aa05c1aac0cda7f61618a5368a2f25db6"></span>const char * <tt class="descname">getString</tt><big>(</big>int <em>idx</em> = 0<big>)</big> const</dt>
-<dd><p>returns string from list at index position or NULL, if index is out of range. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1a8f47569a605543736531e39f268d3490"></span>bool <tt class="descname">addItem</tt><big>(</big>const char * <em>val</em><big>)</big></dt>
-<dd><p>adds another element to the list of patterns. </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_string_meta_1aaa317ff61d3dc11c3da555ff3e192950"></span><a class="reference internal" href="#itomclassito_1_1_string_meta"><em>StringMeta</em></a> &amp; <tt class="descname">operator+=</tt><big>(</big>const char * <em>val</em><big>)</big></dt>
-<dd><p>add another pattern string to the list of patterns. </p>
-</dd></dl>
-
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a8fed2e9214ac7703bee9451f7b4d1d63"></span><div class="line-block">
+<div class="line">int <strong>getLen</strong>()</div>
 </div>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p>returns the number of string elements in meta information class. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a3d5cc001e981c65793bbc088850b3e20"></span><div class="line-block">
+<div class="line">const char * <strong>getString</strong>(int idx = 0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns string from list at index position or NULL, if index is out of range. </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a8f47569a605543736531e39f268d3490"></span><div class="line-block">
+<div class="line">bool <strong>addItem</strong>(const char * val)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">val</span></tt> - <p>adds another element to the string list. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_string_meta_1a47762b8ef60bf6b4a07010e8418e3571"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#itomclassito_1_1_string_meta"><em>StringMeta</em></a>  &amp; <strong>operator+=</strong>(const char * val)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="class-dobjmeta">
 <h2>Class DObjMeta<a class="headerlink" href="#class-dobjmeta" title="Permalink to this headline">¶</a></h2>
 <p>This meta information class provides further information about allowed types and boundaries concerning the dimension of a data object.</p>
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_d_obj_meta"></span><em>class</em> <tt class="descname">ito::DObjMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type DObjPtr. </p>
-<p>(not used yet)</p>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::DObjMeta</strong></div>
+</div>
+<blockquote>
+<div><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type DObjPtr. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a> </dd>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_d_obj_meta_1abcbc447b8cd9ac45a6cf3260b8ad8e45"></span>int <tt class="descname">getMinDim</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns maximum allowed dimensions of data object </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_d_obj_meta_1a1c33266b4811e4e653c4e17f6f210a02"></span>int <tt class="descname">getMaxDim</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns minimum number of dimensions of data object </p>
-</dd></dl>
-
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_d_obj_meta_1a03636b729412efb52d079ec3ba48abb9"></span><div class="line-block">
+<div class="line"> <strong>DObjMeta</strong>(uint32 allowedTypes = 0xFFFF, int minDim = 0, int maxDim = std::numeric_limits&lt; int &gt;::max())</div>
 </div>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_d_obj_meta_1abf13f7c7f1050dfb771d53add02d20d1"></span><div class="line-block">
+<div class="line">int <strong>getAllowedTypes</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_d_obj_meta_1abcbc447b8cd9ac45a6cf3260b8ad8e45"></span><div class="line-block">
+<div class="line">int <strong>getMinDim</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns maximum allowed dimensions of data object </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_d_obj_meta_1a1c33266b4811e4e653c4e17f6f210a02"></span><div class="line-block">
+<div class="line">int <strong>getMaxDim</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns minimum number of dimensions of data object </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="class-hwmeta">
 <h2>Class HWMeta<a class="headerlink" href="#class-hwmeta" title="Permalink to this headline">¶</a></h2>
 <p>By that implementation of a meta information class you can provide information about references to other instantiated plugins.
 Every plugin is defined by a bitmask of enumeration <strong>ito::tPluginType</strong> (defined in <strong>addInActuator.h</strong>). You can either add a minimum bitmask, that is required,
 to the <strong>HWMeta</strong>-instance or you can define an exact name of a plugin, which must be met.</p>
-<dl class="class">
-<dt>
-<span class="target" id="itomclassito_1_1_h_w_meta"></span><em>class</em> <tt class="descname">ito::HWMeta</tt></dt>
-<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type HWPtr. </p>
-<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::HWPtr, that is an instance of another hardware plugin. If set, it is possible to restrict the given hardware plugin to a specific type (e.g. dataIO, dataIO + grabber, actuator...) and/or to limit it to a specific name of the plugin (e.g. SerialIO).</p>
+<div class="line-block">
+<div class="line"><em>class</em> <strong>ito::HWMeta</strong></div>
+</div>
+<blockquote>
+<div><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> of type HWPtr. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
-<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a>, <a class="reference internal" href="#itomclassito_1_1_param_meta"><em>ito::ParamMeta</em></a> </dd>
+<dd><a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>ito::Param</em></a> </dd>
 </dl>
 </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Functions</p>
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_h_w_meta_1a7398d8f65264c1af4f9356f1745fdd67"></span><tt class="descname">HWMeta</tt><big>(</big>uint32 <em>minType</em><big>)</big></dt>
-<dd><p>constructor </p>
+<em>Public Functions</em><blockquote>
+<div><p id=""><span id="itomclassito_1_1_h_w_meta_1a7398d8f65264c1af4f9356f1745fdd67"></span><div class="line-block">
+<div class="line"> <strong>HWMeta</strong>(uint32 minType)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor </p>
 <p>creates HWMeta-information struct where you can pass a bitmask which consists of values of the enumeration ito::tPluginType. The plugin reference of the corresponding <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><em>Param</em></a> should then only accept plugins, where all bits are set, too. <dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>ito::Plugin, ito::tPluginType </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_h_w_meta_1aea10c28ce9633e4cbc67a764bc20480f"></span><tt class="descname">HWMeta</tt><big>(</big>const char * <em>HWAddInName</em><big>)</big></dt>
-<dd><p>constructor </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_h_w_meta_1aea10c28ce9633e4cbc67a764bc20480f"></span><div class="line-block">
+<div class="line"> <strong>HWMeta</strong>(const char * HWAddInName)</div>
+</div>
+</p>
+<blockquote>
+<div><p>constructor </p>
 <p>creates HWMeta-information struct where you can pass a specific name of a plugin, which only is allowed by the corresponding plugin-instance. <dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>ito::Plugin </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_h_w_meta_1ae6bc4771f9f7599d4c4833a57d126e8b"></span>uint32 <tt class="descname">getMinType</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns type-bitmask which is minimally required by plugin-reference. Default 0. </p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_h_w_meta_1a7db689cb1104b4c9530085cea8f633ba"></span><div class="line-block">
+<div class="line"> <strong>HWMeta</strong>(const  <a class="reference internal" href="#itomclassito_1_1_h_w_meta"><em>HWMeta</em></a>  &amp; cpy)</div>
+</div>
+</p>
+<blockquote>
+<div><p></p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_h_w_meta_1a040822a0570b1c2c3bb955b12dcbfde0"></span><div class="line-block">
+<div class="line"> <strong>~HWMeta</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>destructor </p>
+<p></p>
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_h_w_meta_1ae6bc4771f9f7599d4c4833a57d126e8b"></span><div class="line-block">
+<div class="line">uint32 <strong>getMinType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>returns type-bitmask which is minimally required by plugin-reference. Default 0. </p>
 <p><dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd>ito::tPluginType </dd>
 </dl>
 </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<span class="target" id="itomclassito_1_1_h_w_meta_1a6600b1dc86948501427546292115c1ac"></span>ito::ByteArray <tt class="descname">getHWAddInName</tt><big>(</big><big>)</big> const</dt>
-<dd><p>returns name of specific hardware plugin </p>
-</dd></dl>
-
+</div></blockquote>
+<p id=""><span id="itomclassito_1_1_h_w_meta_1a5c64ba24b1ddeef836375a2113d25383"></span><div class="line-block">
+<div class="line">char * <strong>getHWAddInName</strong>()</div>
 </div>
-</dd></dl>
-
+</p>
+<blockquote>
+<div><p>returns zero-terminated name of specific plugin-name or NULL if not specified. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
 </div>
 </div>
 
@@ -950,8 +794,8 @@ to the <strong>HWMeta</strong>-instance or you can define an exact name of a plu
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Nov 20, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Last updated on Jan 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2895a9c',
+        VERSION:     '2431b2c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -70,8 +68,10 @@ execute arbitrary python code or methods. The creation of the toolbars, buttons 
 does not already exist, a new toolbar with this name is created and the button is added to this toolbar. Every toolbar can be arbitrarily
 positioned in <strong>itom</strong> or undocked to any floating position on your screen.</p>
 <p>A single button in a toolbar is created using the command <a class="reference internal" href="../09_reference/itom_general.html#itom.addButton" title="itom.addButton"><tt class="xref py py-func docutils literal"><span class="pre">addButton()</span></tt></a>, vice-versa the button is removed with <a class="reference internal" href="../09_reference/itom_general.html#itom.removeButton" title="itom.removeButton"><tt class="xref py py-func docutils literal"><span class="pre">removeButton()</span></tt></a>. The syntax for both is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">addButton</span><span class="p">(</span><span class="n">toolbarName</span><span class="p">,</span> <span class="n">buttonName</span><span class="p">,</span> <span class="n">code</span> <span class="p">[,</span> <span class="n">icon</span><span class="p">,</span> <span class="n">argtuple</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">buttonHandle</span> <span class="o">=</span> <span class="n">addButton</span><span class="p">(</span><span class="n">toolbarName</span><span class="p">,</span> <span class="n">buttonName</span><span class="p">,</span> <span class="n">code</span> <span class="p">[,</span> <span class="n">icon</span><span class="p">,</span> <span class="n">argtuple</span><span class="p">])</span>
 <span class="n">removeButton</span><span class="p">(</span><span class="n">toolbarName</span><span class="p">,</span> <span class="n">buttonName</span><span class="p">)</span>
+<span class="c">#or</span>
+<span class="n">removeButton</span><span class="p">(</span><span class="n">buttonHandle</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Your button is accessed by its name <strong>buttonName</strong>, which also is printed on the button if no icon is defined. The toolbar, where the button
@@ -109,6 +109,18 @@ the code-snippet is different to the quotation marks within the code snippet or 
 <div class="highlight-python"><div class="highlight"><pre><span class="n">removeButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;HelloWorld&quot;</span><span class="p">)</span>
 <span class="n">removeButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;BtnTest1&quot;</span><span class="p">)</span>
 <span class="n">removeButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;BtnTest2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As an alternative approach to delete a button, use its handle, returned by the <em class="xref py py-obj">addButton</em> method and pass it to <em class="xref py py-obj">removeButton</em>.
+Its advantage is, that exactly the button, that has been created is deleted and not a button with the same name that has been created
+by another instance and is for instance connected with another code snippet.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">handle</span> <span class="o">=</span> <span class="n">addButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span> <span class="s">&quot;HelloWorld&quot;</span><span class="p">,</span> <span class="s">&quot;print(&#39;Hello World&#39;)&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">removeButton</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+    <span class="c">#button did not exist any more (e.g. has been overwritten</span>
+    <span class="c">#by another addButton command with the same button and toolbar name)</span>
+    <span class="k">pass</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -157,7 +169,7 @@ a button to the toolbar (<a class="reference internal" href="#toolbar-addtoolbar
 is added as subitem of <em>Menu1</em>. Hence, it is appended to <em>Button1</em>. Afterwards two sub-nodes <em>Menu1_1</em> and <em>Menu1_2</em> are added which both have
 a children respectively, called <em>Button2</em> and <em>Button3</em>.</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/menu.png"><img alt="../_images/menu.png" src="../_images/menu.png" style="width: 258.3px; height: 79.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/menu.png"><img alt="../_images/menu.png" src="../_images/menu.png" /></a>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -184,7 +196,7 @@ from the <strong>Python</strong>-module <a class="reference external" href="http
 <p>Besides assigning an external icon-file to the <strong>icon</strong> parameter, <strong>itom</strong> also gives you access to any icons that are compiled as resources within
 the <strong>itom</strong> application. All icons, that are included in these resources are listed in the <strong>icon browser</strong>:</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/iconBrowser.png"><img alt="../_images/iconBrowser.png" src="../_images/iconBrowser.png" style="width: 256.9px; height: 287.7px;" /></a>
+<a class="reference internal image-reference" href="../_images/iconBrowser.png"><img alt="../_images/iconBrowser.png" src="../_images/iconBrowser.png" /></a>
 </div>
 <p>The icon browser is accessible in any script window by its menu <strong>edit &gt;&gt; icon browser</strong> (or Ctrl+B). If you found your desired icon, double click
 on the entry in order to copy the appropriate string to the clipboard and paste it afterwards into your script. Resource locations always start witha colon (:) sign.</p>
@@ -257,8 +269,8 @@ on the entry in order to copy the appropriate string to the clipboard and paste 
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Nov 20, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Last updated on Jan 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

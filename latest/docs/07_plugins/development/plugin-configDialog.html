@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2895a9c',
+        VERSION:     '2431b2c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -88,7 +86,7 @@
 <h2>User Interface Design<a class="headerlink" href="#user-interface-design" title="Permalink to this headline">¶</a></h2>
 <p>The base design of the config dialog is done in <strong>Qt Designer</strong>. The user is referred to the documentation about creating <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><em>toolboxes</em></a> in order to learn how to create the user interface. The dialog is not created as widget but as dialog. As you see in the following screenshot</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../../_images/configDialogQtDesigner.png"><img alt="../../_images/configDialogQtDesigner.png" src="../../_images/configDialogQtDesigner.png" style="width: 661.6px; height: 451.20000000000005px;" /></a>
+<a class="reference internal image-reference" href="../../_images/configDialogQtDesigner.png"><img alt="../../_images/configDialogQtDesigner.png" src="../../_images/configDialogQtDesigner.png" /></a>
 </div>
 <p>it is convenient to realize the OK, Cancel and Apply buttons as widget <strong>QDialogButtonBox</strong>. Click the Ok, Cancel and Apply items of the <strong>standardButtons</strong> property in order to show the desired buttons. It is also allowed to use single buttons for the same behaviour. However, in the following, the dialog button box is used.</p>
 </div>
@@ -159,7 +157,7 @@ are clicked. Some words about this header file:</p>
 <p>Now, some hints about the implementation of the different methods in the source file.</p>
 <p>The constructor passes the pluginInstance pointer to the constructor of the super class <strong>AbstractAddInDockWidget</strong> and initializes the ui-file:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">DialogYourPlugin</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">*</span><span class="n">pluginInstance</span><span class="p">)</span> <span class="o">:</span>
-    <span class="n">AbstractAddInConfigDialog</span><span class="p">(</span><span class="n">grabber</span><span class="p">),</span>
+    <span class="n">AbstractAddInConfigDialog</span><span class="p">(</span><span class="n">pluginInstance</span><span class="p">),</span>
     <span class="n">m_firstRun</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">ui</span><span class="p">.</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
@@ -167,31 +165,19 @@ are clicked. Some words about this header file:</p>
 </pre></div>
 </div>
 <p>Initialize the widgets depending on the parameters of the plugin and change their current value if the parameters of the plugin changed (e.g. by a python script):</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="n">DockWidgetYourPlugin</span><span class="o">::</span><span class="n">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">)</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">m_firstRun</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//use params (identical to m_params of the plugin)</span>
-        <span class="c1">//and initialize all widgets (e.g. min, max values, labels, enable some,...)</span>
+    <span class="c1">//use params (identical to m_params of the plugin)</span>
+    <span class="c1">//and initialize all widgets (e.g. min, max values, labels, enable some,...)</span>
 
-        <span class="c1">//if you use two range widgets (class RangeWidget from itomWidgets) for visualizing the ROI,</span>
-        <span class="c1">//you can directly pass the contraints of the width and height in terms of a ito::RectMeta structure, assigned</span>
-        <span class="c1">//to the plugin parameter &#39;roi&#39; to the RangeWidgets:</span>
-        <span class="cm">/*ito::RectMeta *rm = static_cast&lt;ito::RectMeta*&gt;(params[&quot;roi&quot;].getMeta());</span>
-<span class="cm">        ui.rangeX01-&gt;setLimitsFromIntervalMeta(rm-&gt;getWidthRangeMeta());</span>
-<span class="cm">        ui.rangeY01-&gt;setLimitsFromIntervalMeta(rm-&gt;getHeightRangeMeta());*/</span>
+    <span class="c1">//if you use two range widgets (class RangeWidget from itomWidgets) for visualizing the ROI,</span>
+    <span class="c1">//you can directly pass the contraints of the width and height in terms of a ito::RectMeta structure, assigned</span>
+    <span class="c1">//to the plugin parameter &#39;roi&#39; to the RangeWidgets:</span>
+    <span class="cm">/*ito::RectMeta *rm = static_cast&lt;ito::RectMeta*&gt;(params[&quot;roi&quot;].getMeta());</span>
+<span class="cm">    ui.rangeX01-&gt;setLimitsFromIntervalMeta(rm-&gt;getWidthRangeMeta());</span>
+<span class="cm">    ui.rangeY01-&gt;setLimitsFromIntervalMeta(rm-&gt;getHeightRangeMeta());*/</span>
 
-        <span class="n">m_firstRun</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m_inEditing</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">m_inEditing</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-
-        <span class="c1">//change the current value of all widgets to the value given in the params map</span>
-
-        <span class="n">m_inEditing</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class="c1">//change the current value of all widgets to the value given in the params map</span>
 
     <span class="n">m_currentParameters</span> <span class="o">=</span> <span class="n">params</span><span class="p">;</span>
 <span class="p">}</span>
@@ -202,7 +188,7 @@ are clicked. Some words about this header file:</p>
 <p class="last">In difference to the <strong>parametersChanged</strong> method of the toolboxes, the current set of parameters is saved in the member <strong>m_currentParameters</strong>, defined in <strong>ito::AbstractAddInConfigDialog</strong>. This can then be used to check if a parameter has been changed or not. Only changed parameters should be sent back to the plugin in the <strong>applyParameters</strong> method.</p>
 </div>
 <p>Here is the code for a click on any button of the button box (the objectName of the button box in Qt Designer is <strong>buttonBox</strong>:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="n">DockWidgetYourPlugin</span><span class="o">::</span><span class="n">on_buttonBox_clicked</span><span class="p">(</span><span class="n">QAbstractButton</span><span class="o">*</span> <span class="n">btn</span><span class="p">)</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">void</span> <span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">on_buttonBox_clicked</span><span class="p">(</span><span class="n">QAbstractButton</span><span class="o">*</span> <span class="n">btn</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">);</span>
 
@@ -232,7 +218,7 @@ are clicked. Some words about this header file:</p>
 <li>The vector is sent to the plugins instance using the method <strong>setPluginParameters</strong>, defined in <strong>ito::AbstractAddInConfigDialog</strong>.</li>
 <li>The method usually shows a message box if an error or warning occurs during the <em>setParam</em> process (see value <em>msgLevelWarningAndError</em>).</li>
 </ul>
-<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">DockWidgetYourPlugin</span><span class="o">::</span><span class="n">applyParameters</span><span class="p">()</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">applyParameters</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">);</span>
     <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">values</span><span class="p">;</span>
@@ -356,8 +342,8 @@ are clicked. Some words about this header file:</p>
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Nov 20, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Last updated on Jan 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

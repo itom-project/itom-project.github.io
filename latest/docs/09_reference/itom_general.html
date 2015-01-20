@@ -12,13 +12,11 @@
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2895a9c',
+        VERSION:     '2431b2c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -341,8 +339,20 @@ any allowed icon file (the preferred file format is png).</p>
 <div><p>The filename of an icon-file. This can also be relative to the application directory of &#8216;itom&#8217;.</p>
 </div></blockquote>
 <p><strong>argtuple</strong> : {tuple}, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Arguments, which will be passed to the method (in order to avoid cyclic references try to only use basic element types).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>handle</strong> : {int}</p>
+<blockquote>
+<div><p>handle to the newly created button (pass it to removeButton to delete exactly this button)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>Runtime error :</strong> :</p>
+<blockquote class="last">
+<div><p>if the main window is not available</p>
 </div></blockquote>
 </td>
 </tr>
@@ -356,20 +366,33 @@ any allowed icon file (the preferred file format is png).</p>
 
 <dl class="function">
 <dt id="itom.removeButton">
-<tt class="descclassname">itom.</tt><tt class="descname">removeButton</tt><big>(</big><em>toolbarName</em>, <em>buttonName</em><big>)</big> &rarr; removes a button from a given toolbar.<a class="headerlink" href="#itom.removeButton" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">itom.</tt><tt class="descname">removeButton</tt><big>(</big><em>handle | toolbarName</em><span class="optional">[</span>, <em>buttonName</em><span class="optional">]</span><big>)</big> &rarr; removes a button from a given toolbar.<a class="headerlink" href="#itom.removeButton" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method removes an existing button from a toolbar in the main window of &#8216;itom&#8217;. This button must have been 
 created using <a class="reference internal" href="#itom.addButton" title="itom.addButton"><tt class="xref py py-obj docutils literal"><span class="pre">addButton</span></tt></a>. If the toolbar is empty after the removal, it is finally deleted.</p>
+<p>Pass either the &#8216;handle&#8217; parameter of both &#8216;toolbarName&#8217; and &#8216;buttonName&#8217;. It is more precise to use the handle in order to exactly 
+delete the button that has been created by a call to <a class="reference internal" href="#itom.addButton" title="itom.addButton"><tt class="xref py py-obj docutils literal"><span class="pre">addButton</span></tt></a>. Using the names of the toolbar and the button always delete any 
+button that has been created using this data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>toolbarName</strong> : {str}</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>handle</strong> : {int}</p>
+<blockquote>
+<div><p>The handle returned by addButton().</p>
+</div></blockquote>
+<p><strong>toolbarName</strong> : {str}</p>
 <blockquote>
 <div><p>The name of the toolbar.</p>
 </div></blockquote>
 <p><strong>buttonName</strong> : {str}</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The name (str, identifier) of the button to remove.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>Runtime error :</strong> :</p>
+<blockquote class="last">
+<div><p>if the main window is not available or the given button could not be found.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -420,8 +443,20 @@ any allowed icon file (the preferred file format is png).</p>
 <div><p>The filename of an icon-file. This can also be relative to the application directory of &#8216;itom&#8217;.</p>
 </div></blockquote>
 <p><strong>argtuple</strong> : {tuple}, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Arguments, which will be passed to method (in order to avoid cyclic references try to only use basic element types).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>handle</strong> : {int}</p>
+<blockquote>
+<div><p>Handle to the recently added leaf node (action, separator or menu item). Use this handle to delete the item including its child items (for type &#8216;menu&#8217;).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>Runtime error :</strong> :</p>
+<blockquote class="last">
+<div><p>if the main window is not available or the given button could not be found.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -435,17 +470,28 @@ any allowed icon file (the preferred file format is png).</p>
 
 <dl class="function">
 <dt id="itom.removeMenu">
-<tt class="descclassname">itom.</tt><tt class="descname">removeMenu</tt><big>(</big><em>key</em><big>)</big> &rarr; remove a menu element with the given key.<a class="headerlink" href="#itom.removeMenu" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function remove a menu element with the given key. 
+<tt class="descclassname">itom.</tt><tt class="descname">removeMenu</tt><big>(</big><em>key | menuHandle</em><big>)</big> &rarr; remove a menu element with the given key or handle.<a class="headerlink" href="#itom.removeMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function remove a menu element with the given key or menuHandle. 
 key is a slash separated list. The sub-components then 
 lead the way to the final element, which should be removed.</p>
+<p>Alternatively, it is possible to pass the handle obtained by <a class="reference internal" href="#itom.addMenu" title="itom.addMenu"><tt class="xref py py-obj docutils literal"><span class="pre">addMenu</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> : {str}</p>
-<blockquote class="last">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> : {str}, optional</p>
+<blockquote>
 <div><p>The name (str, identifier) of the menu entry to remove.</p>
+</div></blockquote>
+<p><strong>handle</strong> : {int}, optional</p>
+<blockquote>
+<div><p>The handle of the menu entry that should be removed (including its possible child items).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>Runtime error :</strong> :</p>
+<blockquote class="last">
+<div><p>if the main window is not available or the given button could not be found.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -963,8 +1009,8 @@ small pages will be automatically created for each method in the following list 
     </div>
     <div class="footer">
         &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Nov 20, 2014.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Last updated on Jan 20, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
