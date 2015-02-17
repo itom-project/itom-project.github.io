@@ -2,6 +2,8 @@
 
 # -*- coding: utf-8 -*-
 
+#this file requires the python package: sphinxcontrib-fulltoc (obtain via pip)
+
 import os
 import sys
 from os import path

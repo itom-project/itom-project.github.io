@@ -73,6 +73,7 @@ Further hardware devices
    plugins/generalDataIO/glDisplay.rst
    plugins/generalDataIO/LibModBus.rst
    plugins/generalDataIO/SuperlumBS.rst
+   plugins/generalDataIO/NI-DAQmx.rst
 
 Algorithms
 ~~~~~~~~~~~
@@ -85,6 +86,7 @@ Algorithms
    plugins/algorithms/dataObjectIO.rst
    plugins/algorithms/fittingFilters.rst
    plugins/algorithms/openCVFilters.rst
+   plugins/algorithms/openCVFiltersNonFree.rst
    plugins/algorithms/pclTools.rst
    plugins/algorithms/x3p.rst
     

@@ -24,6 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="GLDisplay" href="glDisplay.html" />
@@ -77,6 +78,7 @@
 <li class="toctree-l4"><a class="reference internal" href="glDisplay.html">GLDisplay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="LibModBus.html">LibModBus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="SuperlumBS.html">SuperlumBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NI-DAQmx.html">NI-DAQmx</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#algorithms">Algorithms</a></li>
@@ -176,7 +178,7 @@ Windows and linux based operating systems.</p>
 <tbody valign="top">
 <tr class="row-odd"><td>port</td>
 <td>int</td>
-<td>COM-port number (e.g. 1)</td>
+<td>Windows: COM-port number (e.g. 1), Linux: ttySx, ttyUSBx or ttyACMx (x is port, see infos below)</td>
 </tr>
 <tr class="row-even"><td>baud</td>
 <td>int</td>
@@ -222,6 +224,10 @@ Windows and linux based operating systems.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9600</span><span class="p">,</span> <span class="n">endline</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>For linux, the port number may start with zero. If port numbers &lt; 1000 are given, at first the serial port <strong>ttySx</strong> is checked, where
+x is the given port number. If <strong>ttySx</strong> does not exist, <strong>ttyUSBx</strong> is searched. If a port number in the range [1000,1999] is given,
+the device <strong>ttyUSBx</strong> is used, where <em>x</em> is (port - 1000). Finally, if port is in the range [2000,2999], the device <strong>ttyACMx</strong> is
+searched, where <em>x</em> is (port - 2000).</p>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
@@ -355,7 +361,7 @@ your user to the <strong>dialout</strong> group, logout once and login again.</p
 
     <div class="footer">
         &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PI GCS2 &mdash; itom</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="itom" href="../../index.html" />
+ 
+
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/itomlogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media.html">Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../screenshots.html">Screenshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collaboration.html">Collaboration</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pi-gcs2">
+<h1>PI GCS2<a class="headerlink" href="#pi-gcs2" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>PI actuators following the GCS2 command set (e.g. E753)</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>Actuator</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>licensed under LGPL</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows, Linux</td>
+</tr>
+<tr class="row-odd"><td><strong>Devices</strong>:</td>
+<td>Piezo controllers from Physik Instrumente that can be controlled using the GCS2 command set (e.g. E753)</td>
+</tr>
+<tr class="row-even"><td><strong>Author</strong>:</td>
+<td><span>M. Gronle, ITO, University Stuttgart</span></td>
+</tr>
+<tr class="row-odd"><td><strong>Requires</strong>:</td>
+<td>Plugin SerialIO</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>PI actuators following the GCS2 command set (e.g. E753)
+This plugin is developped for single axis controllers following the GCS2 commandset.</p>
+<p>Tested with E753, don&#8217;t work with E-662 and E-665!</p>
+<p>For the initialization you can connect to the device (if possible) via a USB port, a serial port
+or a TCP/IP connection. Depending on the connection you should use the initialization parameters
+in the following way:
+* RS232: give the COM-port number (number only in Windows, COM-port name in Linux) as deviceName and indicate a valid baudrate as optional parameter.
+* TCP/IP: give the full name of the device as deviceName or let deviceName empty in order to print out a list of all detected devices (the device name is one full line of the output!
+* USB: similar to TCP/IP</p>
+<p>Please note that you only need to indicate a baudrate for RS232 connections, in the other cases,
+the default baudrate 0 forces the controller to connect with a default baudrate which is recommended for TCP/IP or USB connections.</p>
+</div>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>connection</strong>: {str (char*)} default: RS232</dt>
+<dd><p class="first last">type of the connection (&#8216;RS232&#8217;, &#8216;USB&#8217;, &#8216;TCPIP&#8217;)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>deviceName</strong>: {str (char*)} default:</dt>
+<dd><p class="first last">name of the device to connect or in case of a RS232 connection the number of the com port or the name of the com device (linux)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>baudRate</strong>: {int (int), optional} [0,512000], default: 0, step: 1</dt>
+<dd><p class="first last">baudrate to use for a RS232 or USB connection. If 0 is given, a default baudrate is used</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+<div class="footer">This page uses <a href="http://analytics.google.com/">
+Google Analytics</a> to collect statistics. You can disable it by blocking
+the JavaScript coming from www.google-analytics.com.
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51395951-1', 'bitbucket.org');
+  ga('send', 'pageview');
+
+</script>
+</div>
+
+  </body>
+</html>

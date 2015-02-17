@@ -26,12 +26,13 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2015-02-17: Today **itom 1.4.0** has been released. The Windows setups and the sources (tag v1.4.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **NI-DAQmx**, **SuperlumBS**, **PI_GCS2**, **libmodbus**, **NewportSMC100**, **AndorSDK3** and **AVTVimba**. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html. The setup version is the last version that is compiled using Qt4.8. We will now officially start to migrate the setup system to Qt5.
 * 2015-01-15: A cheatsheet about using itom with Python is available in the :ref:`media section <sec-media>`.
 * 2014-12-09: The plugin **SuperlumBS** for broadsweepers from Superlum is online now.
 * 2014-11-20: The sources for the plugins **NewportSMC100** (Newport Stepper Motion Controller) and **LibModBus** (data transfer via ModBus - recently TCP only) are online. For more information see :ref:`plugins <sec-plugins>`.
 * 2014-11-10: The sources for the plugins **PI_GCS2** (Physik Instrumente General Command Set 2), **AndorSDK3** (Andor cameras with SDK3 support) and **AVTVimba** (Allied Vision cameras, Vimba interface) are now online (https://bitbucket.org/itom/plugins)
 * 2014-11-06: **itom** is used by many people around the world. The new page :ref:`collaboration <sec-collaboration>` has been added to see who helped to improve **itom**, to fix bugs or to add plugins.
-* 2014-10-08: Today **itom 1.3.0** has been released. The Windows setups and the sources (tag v1.3.0) are ready for download. It comes with a lot of bugfixes, improvements and the new hardware plugins *IDSuEye*, **ThorlabsCCS** and **GLDisplay**. Additionally the 3D plot widget **TwipOGLFigure** has been added to the Windows installers, that is created by `twip optical solutions GmbH <http://www.twip-os.com/>`_. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html
+* 2014-10-08: Today **itom 1.3.0** has been released. The Windows setups and the sources (tag v1.3.0) are ready for download. It comes with a lot of bugfixes, improvements and the new hardware plugins **IDSuEye**, **ThorlabsCCS** and **GLDisplay**. Additionally the 3D plot widget **TwipOGLFigure** has been added to the Windows installers, that is created by `twip optical solutions GmbH <http://www.twip-os.com/>`_. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html
 * 2014-09-30: The plugin **IDSuEye** for cameras of the uEye family of company IDS (driver 4.41) imaging is online now (https://bitbucket.org/itom/plugins)
 * 2014-08-01: The plugin **ThorlabsCCS** for the thorlabs spectrometer (CCS - Compact Spectrometer) is online now (https://bitbucket.org/itom/plugins)
 * 2014-05-27: Today **itom 1.2.0** has been released. The Windows setups and the sources (tag v1.2.0) are ready for download. It consists now of all plugins that are released under an open source license. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html
@@ -72,6 +73,8 @@ For specific bug reports or feature requests, please use the issue tracking syst
 * `plugins <https://bitbucket.org/itom/plugins/issues>`_
 * `designer plugins <https://bitbucket.org/itom/designerplugins/issues>`_
 
+If you have individual questions about **itom**, plugins or if you miss support for your specific hardware device, please contact us using the indicated contact information below.
+
 Licensing and Copyright
 ------------------------
 
@@ -85,16 +88,8 @@ The core components and the main application of **itom** are covered by the **GN
 |                    | | Pfaffenwaldring 9                  |
 |                    | | 70569 Stuttgart                    |
 |                    | | http://www.uni-stuttgart.de/ito    |
+|                    | | itom @ ito.uni-stuttgart.de        |
 +--------------------+--------------------------------------+
 
 .. |itologo| image:: _static\\ITO_Logo_standard.png
                          :width: 150px
-
-.. |ito| replace:: Institut für Technische Optik
-                   Universität Stuttgart
-                   Pfaffenwaldring 9
-                   70569 Stuttgart
-                   Germany
-                   http://www.uni-stuttgart.de/ito
-
-
