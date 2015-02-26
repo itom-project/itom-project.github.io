@@ -24,7 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="Fitting Filters" href="fittingFilters.html" />
@@ -143,29 +142,33 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This filter contains two different export- / import-functionalities for dataObjects, image or raw.</p>
-<p>Image-export functions converts dataObjects to image data and saves them as common image-formats.
-uint8 or uint16 are saved as gray-values (8bit or if suppored as 16bit) or if the image format allows color are saved according to the defined color palette.
-float32 or float64 are saved as gray-values (8bit or if suppored as 16bit) or according to the defined color palette. Therefore the values must be between 0.0 and 1.0.
-Values outside these borders are clipped. If the image format supports RGBA, invalid values are saved as 00 00 00 FF else as 00 00 00.</p>
-<p>Basic export-filter definition: source-obj, filename, palette, ...
-Basic import-filter definition: dst-obj, filename, chanel-specification, ...</p>
+<p>Image-export functions converts dataObjects to image data and saves them as common image-formats.</p>
+<ul class="simple">
+<li>uint8 or uint16 are saved as gray-values (8bit or if supported as 16bit) or if the image format allows color are saved according to the defined color palette.</li>
+<li>float32 or float64 are saved as gray-values (8bit or if suppored as 16bit) or according to the defined color palette. Therefore the values must be between 0.0 and 1.0.
+Values outside these borders are clipped. If the image format supports RGBA, invalid values are saved as transparent values (alpha=zero) else as black values.</li>
+<li>rgba32 can be saved as &#8216;rgb&#8217; (full opacity), &#8216;rgba&#8217; (alpha channel is considered, not supported by all formats) or gray formats, where the color image is transformed to gray.
+if a format from a color palette is indicated, the color image is transformed to gray first and then interpreted using the indicated color palette.</li>
+</ul>
+<p>Basic export-filter definition: source object, filename, palette, ...
+Basic import-filter definition: destination object, filename, channel-specification, ...</p>
 <p>Raw-export functions write/read the data to/from txt-based or binary file formats.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
-<li>loadAnyImage</li>
-<li>saveBMP</li>
-<li>loadSDF</li>
-<li>savePPM</li>
-<li>saveDataObject</li>
-<li>loadIDO</li>
-<li>saveJPG</li>
-<li>saveRAS</li>
-<li>savePGM</li>
-<li>saveIDO</li>
-<li>loadDataObject</li>
-<li>loadTXT</li>
 <li>savePNG</li>
+<li>loadIDO</li>
+<li>saveBMP</li>
+<li>loadDataObject</li>
+<li>loadAnyImage</li>
+<li>loadSDF</li>
+<li>saveRAS</li>
+<li>saveIDO</li>
+<li>loadTXT</li>
+<li>saveDataObject</li>
 <li>saveTiff</li>
+<li>savePPM</li>
+<li>saveJPG</li>
+<li>savePGM</li>
 <li>saveSDF</li>
 </ol>
 </div>
@@ -173,32 +176,8 @@ Basic import-filter definition: dst-obj, filename, chanel-specification, ...</p>
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
 <dl class="function">
-<dt id="loadAnyImage">
-<tt class="descname">loadAnyImage</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#loadAnyImage" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveBMP">
-<tt class="descname">saveBMP</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveBMP" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="loadSDF">
-<tt class="descname">loadSDF</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#loadSDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="savePPM">
-<tt class="descname">savePPM</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#savePPM" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveDataObject">
-<tt class="descname">saveDataObject</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveDataObject" title="Permalink to this definition">¶</a></dt>
+<dt id="savePNG">
+<tt class="descname">savePNG</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#savePNG" title="Permalink to this definition">¶</a></dt>
 <dd><p>...</p>
 </dd></dl>
 
@@ -209,26 +188,8 @@ Basic import-filter definition: dst-obj, filename, chanel-specification, ...</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="saveJPG">
-<tt class="descname">saveJPG</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveJPG" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveRAS">
-<tt class="descname">saveRAS</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveRAS" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="savePGM">
-<tt class="descname">savePGM</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#savePGM" title="Permalink to this definition">¶</a></dt>
-<dd><p>...</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveIDO">
-<tt class="descname">saveIDO</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveIDO" title="Permalink to this definition">¶</a></dt>
+<dt id="saveBMP">
+<tt class="descname">saveBMP</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveBMP" title="Permalink to this definition">¶</a></dt>
 <dd><p>...</p>
 </dd></dl>
 
@@ -239,20 +200,62 @@ Basic import-filter definition: dst-obj, filename, chanel-specification, ...</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="loadAnyImage">
+<tt class="descname">loadAnyImage</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#loadAnyImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadSDF">
+<tt class="descname">loadSDF</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#loadSDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveRAS">
+<tt class="descname">saveRAS</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveRAS" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveIDO">
+<tt class="descname">saveIDO</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveIDO" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="loadTXT">
 <tt class="descname">loadTXT</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#loadTXT" title="Permalink to this definition">¶</a></dt>
 <dd><p>...</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="savePNG">
-<tt class="descname">savePNG</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#savePNG" title="Permalink to this definition">¶</a></dt>
+<dt id="saveDataObject">
+<tt class="descname">saveDataObject</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveDataObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>...</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="saveTiff">
 <tt class="descname">saveTiff</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveTiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="savePPM">
+<tt class="descname">savePPM</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#savePPM" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveJPG">
+<tt class="descname">saveJPG</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#saveJPG" title="Permalink to this definition">¶</a></dt>
+<dd><p>...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="savePGM">
+<tt class="descname">savePGM</tt><big>(</big><em>...</em><big>)</big><a class="headerlink" href="#savePGM" title="Permalink to this definition">¶</a></dt>
 <dd><p>...</p>
 </dd></dl>
 
