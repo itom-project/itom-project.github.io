@@ -38,6 +38,7 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/openCVGrabber.rst
    plugins/grabber/pcoCamera.rst
    plugins/grabber/pcoPixelFly.rst
+   plugins/grabber/pcoSensicam.rst
    plugins/grabber/pgrFlyCapture.rst
    plugins/grabber/qCam.rst
    plugins/grabber/thorlabsCCS.rst
