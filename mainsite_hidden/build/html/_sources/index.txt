@@ -26,7 +26,8 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
-* 2014-12-09: The plugin **PCOSensicam** for sensicam cameras from PCO Imaging is online now (no support for DICAM yet).
+* 2015-03-09: There is a known issue when trying to open the external Qt designer via the toolbox of itom. See the :ref:`downloads section <sec-downloads>` for a workaround.
+* 2015-02-23: The plugin **PCOSensicam** for sensicam cameras from PCO Imaging is online now (no support for DICAM yet).
 * 2015-02-17: Today **itom 1.4.0** has been released. The Windows setups and the sources (tag v1.4.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **NI-DAQmx**, **SuperlumBS**, **PI_GCS2**, **libmodbus**, **NewportSMC100**, **AndorSDK3** and **AVTVimba**. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html. The setup version is the last version that is compiled using Qt4.8. We will now officially start to migrate the setup system to Qt5.
 * 2015-01-15: A cheatsheet about using itom with Python is available in the :ref:`media section <sec-media>`.
 * 2014-12-09: The plugin **SuperlumBS** for broadsweepers from Superlum is online now.

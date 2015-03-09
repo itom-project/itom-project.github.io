@@ -1,3 +1,5 @@
+.. _sec-downloads:
+
 Downloads
 =========
 
@@ -22,6 +24,13 @@ The current version 1.4.0 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
 * `<http://sourceforge.net/projects/itom/files/v1.4.0/>`_
+
+.. note::
+    
+    There is a known issue in the setup 1.4.0 concerning a unsuccessful startup of the external Qt designer. If you want to open
+    the designer using the button in the toolbox of the itom main window, the startup may fail. This bug is known and will be fixed
+    in future releases. Until then, please open the designer either by starting the designer.exe in the application folder of itom
+    or open an existing ui-file (e.g. in the demo folder of itom).
 
 Older versions are only hosted at sourceforge.net:
 
