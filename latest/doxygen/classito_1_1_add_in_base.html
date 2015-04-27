@@ -136,11 +136,13 @@ virtual <a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a>&#160;</td
 virtual <a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classito_1_1_add_in_base.html#a1e67fc233437b2ba2620951db31ae259">setParam</a> (QSharedPointer&lt; <a class="el" href="classito_1_1_param_base.html">ito::ParamBase</a> &gt; val, <a class="el" href="class_itom_shared_semaphore.html">ItomSharedSemaphore</a> *waitCond=NULL)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">method to set a parameter. The actual value is always passed as <a class="el" href="classito_1_1_param_base.html">ito::ParamBase</a> (must be overwritten). See also <a class="el" href="classito_1_1_add_in_base.html#a3a06b82223199f6f6946f15e38837385">getParam</a> <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classito_1_1_add_in_base.html#af04488b5335388fb5575ecfe25b5868a">setParamVector</a> (const QVector&lt; QSharedPointer&lt; <a class="el" href="classito_1_1_param_base.html">ito::ParamBase</a> &gt; &gt; values, <a class="el" href="class_itom_shared_semaphore.html">ItomSharedSemaphore</a> *waitCond=NULL)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">method for setting various parameters in a sequence  <a href="#af04488b5335388fb5575ecfe25b5868a"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">method for setting various parameters (can be used instead of multiple calls to setParam, this can safe multiple invocations)  <a href="#af04488b5335388fb5575ecfe25b5868a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classito_1_1_add_in_base.html#a10cbf8003be1fbab21a3ffb16bf167c1">getParamVector</a> (const QVector&lt; QSharedPointer&lt; <a class="el" href="classito_1_1_param.html">ito::Param</a> &gt; &gt; values, <a class="el" href="class_itom_shared_semaphore.html">ItomSharedSemaphore</a> *waitCond=NULL)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">method for setting various parameters in a sequence  <a href="#a10cbf8003be1fbab21a3ffb16bf167c1"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">method for getting various parameters (can be used instead of multiple calls to getParam, this can safe multiple invocations)  <a href="#a10cbf8003be1fbab21a3ffb16bf167c1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classito_1_1_add_in_base.html#a1502253de4d944b65a8dc33da85d7edc">execFunc</a> (const QString funcName, QSharedPointer&lt; QVector&lt; <a class="el" href="classito_1_1_param_base.html">ito::ParamBase</a> &gt; &gt; paramsMand, QSharedPointer&lt; QVector&lt; <a class="el" href="classito_1_1_param_base.html">ito::ParamBase</a> &gt; &gt; paramsOpt, QSharedPointer&lt; QVector&lt; <a class="el" href="classito_1_1_param_base.html">ito::ParamBase</a> &gt; &gt; paramsOut, <a class="el" href="class_itom_shared_semaphore.html">ItomSharedSemaphore</a> *waitCond=NULL)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">this method can handle additional functions of your plugin.  <a href="#a1502253de4d944b65a8dc33da85d7edc"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">overwrite this function if you registered exec funcs. Once the exec function is called, this method is executed.  <a href="#a1502253de4d944b65a8dc33da85d7edc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classito_1_1_add_in_base.html#a953be39594f63e78177a7dcee256fb52">moveBackToApplicationThread</a> (<a class="el" href="class_itom_shared_semaphore.html">ItomSharedSemaphore</a> *waitCond=NULL)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">method invoked by <a class="el" href="classito_1_1_add_in_manager.html" title="class for AddIn management">AddInManager</a> if the plugin should be pulled back to the main thread of itom. (not for direct use in plugins)  <a href="#a953be39594f63e78177a7dcee256fb52"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classito_1_1_add_in_base.html#a4618271c69595312c79a12ef1529eeb8">parametersChanged</a> (QMap&lt; QString, <a class="el" href="classito_1_1_param.html">ito::Param</a> &gt; params)</td></tr>
@@ -433,7 +435,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </div>
 <div class="memdoc">
 
-<p>this method can handle additional functions of your plugin. </p>
+<p>overwrite this function if you registered exec funcs. Once the exec function is called, this method is executed. </p>
+<p>this method can handle additional functions of your plugin.</p>
 <p>Use registerExecFunc to register a specific function name and a set of mandatory and optional default parameters. It one on those functions is called (for instance by a python-call), this method is executed. Implement a switch case for the function name and start the execution. The mandatory and optional parameters are handled like it is the case for the creation (init-method) of a plugin. Additionally define an optional vector of output parameters, that are finally filled with a valid input during the execution of the function.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -540,7 +543,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </div>
 <div class="memdoc">
 
-<p>method for setting various parameters in a sequence </p>
+<p>method for getting various parameters (can be used instead of multiple calls to getParam, this can safe multiple invocations) </p>
+<p>method for setting various parameters in a sequence</p>
 <p>Using this method, only one over-thread call needs to be executed in order to set various parameters by calling setParam for each parameter.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -572,6 +576,28 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <p>method indicates whether this plugin instance has a configuration dialog.</p>
 <p>Overwrite this method if your plugin provides such a configuration dialog by simply returning 1 instead of 0.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>0 since the base implementation of a plugin does not have a configuration dialog. If there is a configuration dialog overwrite this method and return 1. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a953be39594f63e78177a7dcee256fb52"></a><!-- doxytag: member="ito::AddInBase::moveBackToApplicationThread" ref="a953be39594f63e78177a7dcee256fb52" args="(ItomSharedSemaphore *waitCond=NULL)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classito_1_1_ret_val.html">ito::RetVal</a> ito::AddInBase::moveBackToApplicationThread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_itom_shared_semaphore.html">ItomSharedSemaphore</a> *&#160;</td>
+          <td class="paramname"><em>waitCond</em> = <code>NULL</code></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>method invoked by <a class="el" href="classito_1_1_add_in_manager.html" title="class for AddIn management">AddInManager</a> if the plugin should be pulled back to the main thread of itom. (not for direct use in plugins) </p>
+<p>method invoked by <a class="el" href="classito_1_1_add_in_manager.html" title="class for AddIn management">AddInManager</a> if the plugin should be pulled back to the main thread of itom.</p>
+<p>Do not invoke this method in any other case. It should only be invoked by <a class="el" href="classito_1_1_add_in_manager.html" title="class for AddIn management">AddInManager</a> of the itom core. After having moved the thread to the main thread of itom, the plugin's thread m_pThread can be closed and deleted. However this cannot be done in this method, since a thread can only be killed and closed by another thread. Therefore, this is done in the destructor of the AddIn.</p>
+<p>Qt does not allow pushing an object from the object's thread to the caller's thread. Only the object itself can move its thread to another thread. </p>
 
 </div>
 </div>
@@ -667,7 +693,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </div>
 <div class="memdoc">
 
-<p>method for setting various parameters in a sequence </p>
+<p>method for setting various parameters (can be used instead of multiple calls to setParam, this can safe multiple invocations) </p>
+<p>method for setting various parameters in a sequence</p>
 <p>Using this method, only one over-thread call needs to be executed in order to set various parameters by calling setParam for each parameter.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -712,7 +739,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
     <ul>
       <li class="navelem"><a class="el" href="namespaceito.html">ito</a>      </li>
       <li class="navelem"><a class="el" href="classito_1_1_add_in_base.html">AddInBase</a>      </li>
-      <li class="footer">Generated on Tue Feb 17 2015 15:45:22 for itom by&#160;
+      <li class="footer">Generated on Mon Apr 27 2015 09:35:33 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

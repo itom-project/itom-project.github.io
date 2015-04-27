@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'a273a22',
+        VERSION:     '5c50828',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,15 +26,13 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom Documentation" href="../index.html" />
     <link rel="up" title="Plots and Figures" href="plots.html" />
     <link rel="next" title="Matplotlib" href="matplotlib.html" />
     <link rel="prev" title="isometric Plot" href="isometricPlot.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,46 +47,46 @@
         <li class="right" >
           <a href="isometricPlot.html" title="isometric Plot"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">itom</a> &raquo;</li>
-          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="plots.html" accesskey="U">Plots and Figures</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="plots.html" accesskey="U">Plots and Figures</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="primitives-marking-and-measuring">
 <span id="primitives"></span><h1><strong>Primitives</strong> - Marking and Measuring<a class="headerlink" href="#primitives-marking-and-measuring" title="Permalink to this headline">¶</a></h1>
 <p>The plot-widgets itom1DQwtPlot and itom2DQwtPlot supports plotting of geometric primitives by user interaction and script language.
-This section will give a short introduction about ploting, read- /write-functions and the correspondig plots and the internal geometric element structure.</p>
+This section will give a short introduction about plotting, read- /write-functions and the corresponding plots and the internal geometric element structure.</p>
 <p>At last the evaluateGeomtrics-plugin for direct evaluation of geometric elements is introduced.</p>
 <div class="section" id="drawing-items-into-a-qwt-plot">
 <h2>Drawing items into a QWT-Plot<a class="headerlink" href="#drawing-items-into-a-qwt-plot" title="Permalink to this headline">¶</a></h2>
 <p>The plot functionality can be accessed by three different ways. The first way is the GUI based approach by which the user presses the
 &#8220;switch draw mode&#8221;-button in the button-bar of the plot. The button represents the current item to be plotted.
 The red X (&#8220;clear button&#8221;) will delete all geometric elements within the plot either drawn by hand or by script.</p>
-<div class="figure">
+<div class="figure align-left">
 <a class="reference internal image-reference" href="../_images/drawInto2DToolbarIcons.png"><img alt="../_images/drawInto2DToolbarIcons.png" src="../_images/drawInto2DToolbarIcons.png" /></a>
 </div>
-<p>At the moment &#8220;itom&#8221; only supports &#8220;point&#8221;, &#8220;line&#8221;, &#8220;rectanlge&#8221; and &#8220;ellipse&#8221; but further items, e.g. &#8220;circle&#8221; and &#8220;polygons&#8221;, are in preparation.
+<p>At the moment &#8220;itom&#8221; only supports &#8220;point&#8221;, &#8220;line&#8221;, &#8220;rectangle&#8221; and &#8220;ellipse&#8221; but further items, e.g. &#8220;circle&#8221; and &#8220;polygons&#8221;, are in preparation.
 To draw an item simply click into the image space and left-click the mouse.
 In case of elements with at least more than a marker, you can now set the size of the element by setting the second point by left-clicking again.
 During plotting a green lined geometric element appears. After finishing the element color turns to the first inverse
-color of the current color palette with handles (diamonds or sqares) colored with the second inverse color of the current palette.</p>
-<div class="figure">
+color of the current color palette with handles (diamonds or squares) colored with the second inverse color of the current palette.</p>
+<div class="figure align-left">
 <a class="reference internal image-reference" href="../_images/drawInto2D.png"><img alt="../_images/drawInto2D.png" src="../_images/drawInto2D.png" /></a>
 </div>
-<p>After creation the geometric elements can be editied by left-clicking one of the element handles  which becomes high-lighted (squares) and moving the mouse.
-By pressing the &#8220;ctrl&#8221;-button during mouse-movement the element resize behavior will be changed depending on the element type.
+<p>After creation the geometric elements can be edited by left-clicking one of the element handles  which becomes high-lighted (squares) and moving the mouse.
+By pressing the &#8220;ctrl&#8221;-button during mouse-movement the element resize behaviour will be changed depending on the element type.
 Lines will be changed to horizontal or vertical alignment.
 Rectangles and ellipses will be become squares or circles according to plot coordinates (x/y-space) and not pixel coordinates.
 To avoid confusion with plot aspect, a button for fixed axis aspect ratio (&#8220;1:1&#8221;) was added to the plot bar.</p>
 </div>
-<div class="section" id="scipt-based-pick-and-plot-from-to-a-qwt-widget">
-<h2>Scipt based pick and plot from / to a QWT-widget<a class="headerlink" href="#scipt-based-pick-and-plot-from-to-a-qwt-widget" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="script-based-pick-and-plot-from-to-a-qwt-widget">
+<h2>Script based pick and plot from / to a Qwt-widget<a class="headerlink" href="#script-based-pick-and-plot-from-to-a-qwt-widget" title="Permalink to this headline">¶</a></h2>
 <p>To allow more complex user interaction with scripts, e.g. script based element picking, the plot functionality can be started by script either blocking or non-blocking.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">myImage</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s">&#39;float32&#39;</span><span class="p">)</span>
 <span class="p">[</span><span class="n">number</span><span class="p">,</span> <span class="n">handle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">myImage</span><span class="p">,</span> <span class="s">&quot;itom2dQwtPlot&quot;</span><span class="p">)</span>
@@ -135,7 +134,7 @@ For the differernt definitions of the geometric elements see section &#8220;Inde
 </div>
 <div class="section" id="implemented-functions-signals-and-slots">
 <h2>Implemented Functions, Signals and Slots<a class="headerlink" href="#implemented-functions-signals-and-slots" title="Permalink to this headline">¶</a></h2>
-<p>The Qwt-plot widgets functions had to be updated. The Qwt-Widgets got the folling properties, respectivly setter- / getter-functions related to plotting:</p>
+<p>The Qwt-plot widgets functions had to be updated. The Qwt-Widgets got the following properties, respectively setter- / getter-functions related to plotting:</p>
 <ul class="simple">
 <li>&#8220;geometricElementsCount&#8221;,    get the number of geometric elements in this plot, READONLY</li>
 <li>&#8220;keepAspectRatio&#8221;,           enable or disable a fixed aspect ratio of 1:1 for the plot canvas.</li>
@@ -145,7 +144,7 @@ For the differernt definitions of the geometric elements see section &#8220;Inde
 <p>In complete theses the functionality of the drawing interface, the following slots have been added to the widgets:</p>
 <ul class="simple">
 <li>&#8220;plotMarkers&#8221;                Add markers and geometric elements to plot according to dataObject and style type. For geometric &#8220;style is not used&#8221;, type in &#8220;b&#8221;.</li>
-<li>&#8220;userInteractionStart&#8221;       Start a non-blocking user interaction for &#8220;multipointpick&#8221; ord geometric elements with element count.</li>
+<li>&#8220;userInteractionStart&#8221;       Start a non-blocking user interaction for &#8220;multipointpick&#8221; or geometric elements with element count.</li>
 <li>&#8220;clearGeometricElements&#8221;     Delete all existing geometric elements within the plot</li>
 </ul>
 <p>To register changes in the plot elements and finished user interactions, the following signals where implemented:</p>
@@ -154,19 +153,19 @@ For the differernt definitions of the geometric elements see section &#8220;Inde
 <li>&#8220;plotItemChanged&#8221;,           Emitted, when a geometric element was changed and changing is finished. Not fully Python-Compatible.</li>
 <li>&#8220;plotItemDeleted&#8221;,           Emitted, when a specific plot item is deleted</li>
 <li>&#8220;plotItemsDeleted&#8221;,          Emitted, when all plot items are deleted</li>
-<li>&#8220;plotItemsFinished&#8221;,         Emmited, when the plotting function is finished, similar to userInteractionDone</li>
+<li>&#8220;plotItemsFinished&#8221;,         Emitted, when the plotting function is finished, similar to userInteractionDone</li>
 </ul>
-<p>For the blocking connection the plotItem-class got the additional function drawAndPickElements(type, dataObject, count), see py:class:<a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><tt class="xref py py-obj docutils literal"><span class="pre">plotItem</span></tt></a>.</p>
+<p>For the blocking connection the plotItem-class got the additional function drawAndPickElements(type, dataObject, count), see py:class:<a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><code class="xref py py-obj docutils literal"><span class="pre">plotItem</span></code></a>.</p>
 </div>
 <div class="section" id="indexing-for-geometric-elements">
 <h2>Indexing for Geometric Elements<a class="headerlink" href="#indexing-for-geometric-elements" title="Permalink to this headline">¶</a></h2>
 <p>The definition of the geometric elements depends on the implementation. The &#8220;plotMarker&#8221; and its corresponding getter- / setter-function uses a Matlab orientated structure.
 The structure a dataObject with 8 rows and n columns where n depends on the number of elements.
 Points are defined by their location, while ellipses and rectangles are defined by their diagonal edges.</p>
-<p>The &#8220;geometricElements&#8221;-property uses geometric elements in a more mathematical oriantated description. The dataObject stucture is defined as &#8220;float32&#8221; with n by 11 elements.
+<p>The &#8220;geometricElements&#8221;-property uses geometric elements in a more mathematical orientated description. The dataObject structure is defined as &#8220;float32&#8221; with n by 11 elements.
 Most setter functions also support &#8220;float32&#8221; elements. Each of the n rows corresponds to an elements (except polygon-shapes). The indexing follows the geometricPrimitive-struct in c++.</p>
-<p>The geometricPrimitive is a struct within the c-Stuctur of the programm designed for exchanging the geometric elements from plots to other elements.
-The structur can be used rowise as dataObject or float32-lists</p>
+<p>The geometricPrimitive is a struct within the c-Stuctur of the program designed for exchanging the geometric elements from plots to other elements.
+The structure can be used row-wise as dataObject or float32-lists</p>
 <p>At the moment only tPoint, tLine, tEllipse and tRectangle are supported.</p>
 <p>The cells contain:</p>
 <ol class="arabic simple">
@@ -176,7 +175,7 @@ The structur can be used rowise as dataObject or float32-lists</p>
 <li>First coordinate with y value</li>
 <li>First coordinate with z value</li>
 </ol>
-<p>All other values depends on the primitiv type and may change between each type.</p>
+<p>All other values depends on the primitive type and may change between each type.</p>
 <ul class="simple">
 <li>A point is defined as idx, flags, centerX0, centerY0, centerZ0</li>
 <li>A line is defined as idx, flags, x0, y0, z0, x1, y1, z1</li>
@@ -190,7 +189,7 @@ The structur can be used rowise as dataObject or float32-lists</p>
 </div>
 <dl class="class">
 <dt>
-<span class="target" id="itomclassito_1_1_primitive_container"></span><em>class</em> <tt class="descname">ito::PrimitiveContainer</tt></dt>
+<span class="target" id="itomclassito_1_1_primitive_container"></span><em>class</em> <code class="descname">ito::PrimitiveContainer</code></dt>
 <dd><p>This is a container to store geometric primitives. The enum tPrimitive of this file defines the geometric primitives for all plots. <dl class="docutils">
 <dt><strong>Author</strong></dt>
 <dd>Wolfram Lyda, twip optical solutions GmbH, Stuttgart </dd>
@@ -210,32 +209,32 @@ The structur can be used rowise as dataObject or float32-lists</p>
 </p>
 <p><em>Values:</em></p>
 <ul class="breatheenumvalues">
-<li><tt class="first docutils literal"><span class="pre">tNoType</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0</span></tt> - </li>
-<li><tt class="first docutils literal"><span class="pre">tMultiPointPick</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">6</span></tt> - <p>! NoType for pick </p>
+<li><code class="first docutils literal"><span class="pre">tNoType</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0</span></code> - </li>
+<li><code class="first docutils literal"><span class="pre">tMultiPointPick</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">6</span></code> - <p>! NoType for pick </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tPoint</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">101</span></tt> - <p>! Multi point pick </p>
+<li><code class="first docutils literal"><span class="pre">tPoint</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">101</span></code> - <p>! Multi point pick </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tLine</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">102</span></tt> - <p>! Element is tPoint or order to pick points </p>
+<li><code class="first docutils literal"><span class="pre">tLine</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">102</span></code> - <p>! Element is tPoint or order to pick points </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tRectangle</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">103</span></tt> - <p>! Element is tLine or order to pick lines </p>
+<li><code class="first docutils literal"><span class="pre">tRectangle</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">103</span></code> - <p>! Element is tLine or order to pick lines </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tSquare</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">104</span></tt> - <p>! Element is tRectangle or order to pick rectangles </p>
+<li><code class="first docutils literal"><span class="pre">tSquare</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">104</span></code> - <p>! Element is tRectangle or order to pick rectangles </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tEllipse</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">105</span></tt> - <p>! Element is tSquare or order to pick squares </p>
+<li><code class="first docutils literal"><span class="pre">tEllipse</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">105</span></code> - <p>! Element is tSquare or order to pick squares </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tCircle</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">106</span></tt> - <p>! Element is tEllipse or order to pick ellipses </p>
+<li><code class="first docutils literal"><span class="pre">tCircle</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">106</span></code> - <p>! Element is tEllipse or order to pick ellipses </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tPolygon</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">110</span></tt> - <p>! Element is tCircle or order to pick circles </p>
+<li><code class="first docutils literal"><span class="pre">tPolygon</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">110</span></code> - <p>! Element is tCircle or order to pick circles </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tMoveLock</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x00010000</span></tt> - <p>! Element is tPolygon or order to pick polygon </p>
+<li><code class="first docutils literal"><span class="pre">tMoveLock</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x00010000</span></code> - <p>! Element is tPolygon or order to pick polygon </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tRotateLock</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x00020000</span></tt> - <p>! Element is readOnly </p>
+<li><code class="first docutils literal"><span class="pre">tRotateLock</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x00020000</span></code> - <p>! Element is readOnly </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tResizeLock</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x00040000</span></tt> - <p>! Element can not be moved </p>
+<li><code class="first docutils literal"><span class="pre">tResizeLock</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x00040000</span></code> - <p>! Element can not be moved </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tTypeMask</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x0000FFFF</span></tt> - <p>! Element can not be moved </p>
+<li><code class="first docutils literal"><span class="pre">tTypeMask</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0x0000FFFF</span></code> - <p>! Element can not be moved </p>
 </li>
-<li><tt class="first docutils literal"><span class="pre">tFlagMask</span></tt><tt class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0xFFFF0000</span></tt> - <p>! Mask for the type space </p>
+<li><code class="first docutils literal"><span class="pre">tFlagMask</span></code><code class="docutils literal"> <span class="pre">=</span> &nbsp;&nbsp; <span class="pre">0xFFFF0000</span></code> - <p>! Mask for the type space </p>
 </li>
 </ul>
 </dd></dl>
@@ -246,8 +245,8 @@ The structur can be used rowise as dataObject or float32-lists</p>
 </div>
 <div class="section" id="evaluation-of-geometric-elements">
 <h2>Evaluation of Geometric Elements<a class="headerlink" href="#evaluation-of-geometric-elements" title="Permalink to this headline">¶</a></h2>
-<p>The evaluateGeomtrics-widget is designed to load geometric definition stored in a float32 dataObject with a column-size of &gt;10 elments and a row for each geometric element to display.
-Further more it allows the evaluation of geometric relations between the geometric primitives. See section <a class="reference internal" href="../06_extended_gui/list_custom_widgets.html#listcustomdesignerwidgets"><em>Custom Designer Widgets</em></a> for the widget description.</p>
+<p>The evaluateGeomtrics-widget is designed to load geometric definition stored in a float32 dataObject with a column-size of &gt;10 elements and a row for each geometric element to display.
+Further more it allows the evaluation of geometric relations between the geometric primitives. See section <a class="reference internal" href="../06_extended_gui/list_custom_widgets.html#listcustomdesignerwidgets"><span>Custom Designer Widgets</span></a> for the widget description.</p>
 </div>
 <div class="section" id="demo-scripts-and-examples">
 <h2>Demo Scripts and Examples<a class="headerlink" href="#demo-scripts-and-examples" title="Permalink to this headline">¶</a></h2>
@@ -270,13 +269,13 @@ Further more it allows the evaluation of geometric relations between the geometr
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#"><strong>Primitives</strong> - Marking and Measuring</a><ul>
 <li><a class="reference internal" href="#drawing-items-into-a-qwt-plot">Drawing items into a QWT-Plot</a></li>
-<li><a class="reference internal" href="#scipt-based-pick-and-plot-from-to-a-qwt-widget">Scipt based pick and plot from / to a QWT-widget</a></li>
+<li><a class="reference internal" href="#script-based-pick-and-plot-from-to-a-qwt-widget">Script based pick and plot from / to a Qwt-widget</a></li>
 <li><a class="reference internal" href="#implemented-functions-signals-and-slots">Implemented Functions, Signals and Slots</a></li>
 <li><a class="reference internal" href="#indexing-for-geometric-elements">Indexing for Geometric Elements</a></li>
 <li><a class="reference internal" href="#evaluation-of-geometric-elements">Evaluation of Geometric Elements</a></li>
@@ -291,12 +290,14 @@ Further more it allows the evaluation of geometric relations between the geometr
   <h4>Next topic</h4>
   <p class="topless"><a href="matplotlib.html"
                         title="next chapter">Matplotlib</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/05_plots/primitives.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/05_plots/primitives.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -313,7 +314,7 @@ Further more it allows the evaluation of geometric relations between the geometr
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -328,15 +329,15 @@ Further more it allows the evaluation of geometric relations between the geometr
         <li class="right" >
           <a href="isometricPlot.html" title="isometric Plot"
              >previous</a> |</li>
-        <li><a href="../index.html">itom</a> &raquo;</li>
-          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="plots.html" >Plots and Figures</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="plots.html" >Plots and Figures</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 09, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Last updated on Apr 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

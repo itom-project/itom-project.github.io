@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'a273a22',
+        VERSION:     '5c50828',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,15 +26,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom Documentation" href="../../index.html" />
     <link rel="up" title="Development under C++" href="plugin-development.html" />
     <link rel="next" title="itom API" href="plugin-itomAPI.html" />
     <link rel="prev" title="Create a new plugin via CMake" href="pluginCreateCMake.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,30 +47,30 @@
         <li class="right" >
           <a href="pluginCreateCMake.html" title="Create a new plugin via CMake"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="automatic-loading-and-saving-of-plugin-parameters">
 <span id="plugin-autoloadsave-policy"></span><h1>Automatic loading and saving of plugin parameters<a class="headerlink" href="#automatic-loading-and-saving-of-plugin-parameters" title="Permalink to this headline">¶</a></h1>
 <p><strong>itom</strong> has the optional ability, that all plugin parameters (type <em>Param</em>), which are part of the <strong>m_params</strong> map of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.
 <strong>itom</strong> has the optional ability, that all plugin parameters (of type <strong>Param</strong> or <strong>ParamBase</strong>), which are part of the <strong>m_params</strong> map of the plugin-class and do not have the <em>typeNoAutoSave</em>-flag defined, can be stored in a plugin-specific xml-file when the plugin instance is closed. This saving is not only dependent on the plugin but also on its unique identifier.</p>
-<p>Additionally, the decision whether these parameters should be saved or not, is set by the member variable <strong>m_autoSavePolicy</strong> of the interface class of the plugin (see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><em>Plugin interface class</em></a>). This variable can have the following values:</p>
+<p>Additionally, the decision whether these parameters should be saved or not, is set by the member variable <strong>m_autoSavePolicy</strong> of the interface class of the plugin (see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><span>Plugin interface class</span></a>). This variable can have the following values:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoSavePolicy</span> <span class="p">{</span>
     <span class="n">autoSaveAlways</span>          <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always saves parameters to xml-file at shutdown */</span>
     <span class="n">autoSaveNever</span>           <span class="o">=</span> <span class="mh">0x2</span>  <span class="cm">/*!&lt; never saves parameters to xml-file at shutdown (default) */</span>
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>If the member has the value <em>autoSaveAlways</em>, all parameters contained in the map <em>m_params</em> of the plugin instance are saved in a xml-subtree. This subtree is dependent on the unique identifier of the plugin. Remember, that only plugins which do not have the flag <em>typeNoAutoSave</em> will be saved (see <a class="reference internal" href="plugin-params.html#plugin-params"><em>Parameter-Container class of itom</em></a>).</p>
+<p>If the member has the value <em>autoSaveAlways</em>, all parameters contained in the map <em>m_params</em> of the plugin instance are saved in a xml-subtree. This subtree is dependent on the unique identifier of the plugin. Remember, that only plugins which do not have the flag <em>typeNoAutoSave</em> will be saved (see <a class="reference internal" href="plugin-params.html#plugin-params"><span>Parameter-Container class of itom</span></a>).</p>
 <p>Inversely, saved parameters in a plugin specific xml-file can also be set after that the plugin instance has been created and initialized (with the mandatory and optional parameters given by the constructor in python). The loading of these xml-parameters is dependent on the value of the member variable <strong>m_autoLoadPolicy</strong> of the plugin&#8217;s interface class. This variable can have the following values:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">enum</span> <span class="n">tAutoLoadPolicy</span> <span class="p">{</span>
     <span class="n">autoLoadAlways</span>           <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span> <span class="cm">/*!&lt; always loads xml file by addInManager */</span>
@@ -93,7 +92,7 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="pluginCreateCMake.html"
@@ -101,12 +100,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="plugin-itomAPI.html"
                         title="next chapter">itom API</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/07_plugins/development/pluginAutoLoadSavePolicy.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/07_plugins/development/pluginAutoLoadSavePolicy.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -123,7 +124,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -138,16 +139,16 @@
         <li class="right" >
           <a href="pluginCreateCMake.html" title="Create a new plugin via CMake"
              >previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 09, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Last updated on Apr 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

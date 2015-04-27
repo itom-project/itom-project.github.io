@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'a273a22',
+        VERSION:     '5c50828',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,15 +26,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom Documentation" href="../../index.html" />
     <link rel="up" title="Development under C++" href="plugin-development.html" />
     <link rel="next" title="DataObject - Reference" href="plugin-DataObject-Ref.html" />
     <link rel="prev" title="ItomSharedSemaphore - Reference" href="plugin-sharedSemaphore-Ref.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,17 +47,17 @@
         <li class="right" >
           <a href="plugin-sharedSemaphore-Ref.html" title="ItomSharedSemaphore - Reference"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="dataobject">
 <span id="plugin-dataobject"></span><h1>DataObject<a class="headerlink" href="#dataobject" title="Permalink to this headline">¶</a></h1>
@@ -128,7 +127,7 @@ or higher). This kind of DataObject and its way of allocating memory is called <
 make any <em>DataObject</em> continuous. Then, a huge data block is allocated, such that all planes lie consecutively in memory. This reallocation is implicitly done, when creating a Numpy-array from a non-continuous DataObject.</p>
 <p>DataObject can be declared in different possible ways with different dimensions and different data types.</p>
 <p>Let&#8217;s take an example of a 3x2x5 data object. It can be imagined as shown in the figure below.</p>
-<a class="reference internal image-reference" href="../../_images/DataObject.png"><img alt="../../_images/DataObject.png" src="../../_images/DataObject.png" style="width: 812.0px; height: 369.0px;" /></a>
+<a class="reference internal image-reference" href="../../_images/DataObject.png"><img alt="../../_images/DataObject.png" class="align-left" src="../../_images/DataObject.png" style="width: 812.0px; height: 369.0px;" /></a>
 <p>As we can see in this figure, each plane is of a type <strong>cv::Mat</strong> class from <strong>OpenCV</strong> library which we know. The internal index of a specific plane can safely be retrieved using the method <strong>seekMat()</strong>. Usually the i-th plane has got the index <em>i</em>, however in case of data objects representing a subpart or region of interest of another data object, the i-th plane with respect to the current region of interest can in reality have a bigger index than <em>i</em>. The pointers to all planes are stored in one linear vector, represented by the array member <strong>m_data</strong>. It is accessible via <strong>get_mdata()</strong> and is of type <strong>int*</strong>. However, it can directly and safely be type-casted to <strong>cv:Mat*</strong> or <strong>cv::Mat_&lt;Type&gt;</strong>.
 Please read the section <a class="reference internal" href="#direct-access-to-the-underlying-cv-mat">Direct Access to the underlying cv::Mat</a> to understand this concept in detail with a working example.</p>
 <p>The following code creates an empty data object with no dimensions (0) and no type (0).</p>
@@ -448,7 +447,7 @@ Following code snippet shows the example of this method.</p>
 </pre></div>
 </td></tr></table></div>
 <p>As can be seen in the code above, line #2 declares a 21x31 data object d6 of type int16. Line #3 declares an iterator object <strong>it</strong> of class <strong>DObjIterator</strong>.
-DataObject class contains <strong>being()</strong> and <strong>end()</strong> methods to work with iterators. A brief description to this methods can be found under <a class="reference internal" href="plugin-DataObject-Ref.html#plugin-dataobject-ref"><em>DataObject - Reference</em></a> document.
+DataObject class contains <strong>being()</strong> and <strong>end()</strong> methods to work with iterators. A brief description to this methods can be found under <a class="reference internal" href="plugin-DataObject-Ref.html#plugin-dataobject-ref"><span>DataObject - Reference</span></a> document.
 These methods contains pointers to the first and last elements of any data objects respectively.
 Line #4 makes a meaningful use of these methods in for loop to iterate through the data object <strong>d6</strong>. We first initiate the iterator <strong>it</strong> with the pointer returned by
 <strong>d6.begin()</strong>, iterate through the whole data object increasing the iterator value by one in each iteration till the pointer value in iterator <strong>it</strong> reaches the pointer value of the
@@ -526,7 +525,7 @@ Syntax for the function <strong>zeros()</strong> is shown below.</p>
 <p>As zeros() function is overloaded, there are more than one syntax shown above.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <strong>RetVal</strong> class is used for handling error management and return relative codes. More description on this class can be seen in <a class="reference internal" href="plugin-RetVal-Ref.html#plugin-retval-ref"><em>RetVal - Reference</em></a>.</p>
+<p class="last">The <strong>RetVal</strong> class is used for handling error management and return relative codes. More description on this class can be seen in <a class="reference internal" href="plugin-RetVal-Ref.html#plugin-retval-ref"><span>RetVal - Reference</span></a>.</p>
 </div>
 <p>Following code explains the usage of <strong>zeros()</strong> function.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -567,7 +566,7 @@ Syntax for the function <strong>zeros()</strong> is shown below.</p>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, line #4 shows the use of adjustROI() function where negative parameters indicate that the ROI is shrinking in particular dimension. More detailed description of adjustROI() and locateROI() methods can be seen under <a class="reference internal" href="plugin-DataObject-Ref.html#plugin-dataobject-ref"><em>DataObject - Reference</em></a> document.</p>
+<p>Here, line #4 shows the use of adjustROI() function where negative parameters indicate that the ROI is shrinking in particular dimension. More detailed description of adjustROI() and locateROI() methods can be seen under <a class="reference internal" href="plugin-DataObject-Ref.html#plugin-dataobject-ref"><span>DataObject - Reference</span></a> document.</p>
 <p>One can also pass an array as a parameter to this adjustROI() function describing the offset details as shown in the following code.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -943,7 +942,7 @@ Examples are:</p>
 <p>With the close observation of the example statements above, one can get an idea on how to use these operators in different combinations to get the desired operation done.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For a full reference of the class <strong>DataObject</strong> see <a class="reference internal" href="plugin-DataObject-Ref.html#plugin-dataobject-ref"><em>DataObject - Reference</em></a>.</p>
+<p class="last">For a full reference of the class <strong>DataObject</strong> see <a class="reference internal" href="plugin-DataObject-Ref.html#plugin-dataobject-ref"><span>DataObject - Reference</span></a>.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -956,7 +955,7 @@ Examples are:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -1004,12 +1003,14 @@ Examples are:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="plugin-DataObject-Ref.html"
                         title="next chapter">DataObject - Reference</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/07_plugins/development/plugin-dataObject.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/07_plugins/development/plugin-dataObject.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -1026,7 +1027,7 @@ Examples are:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1041,16 +1042,16 @@ Examples are:</p>
         <li class="right" >
           <a href="plugin-sharedSemaphore-Ref.html" title="ItomSharedSemaphore - Reference"
              >previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 09, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Last updated on Apr 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

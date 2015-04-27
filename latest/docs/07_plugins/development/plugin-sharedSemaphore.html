@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'a273a22',
+        VERSION:     '5c50828',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,15 +26,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom Documentation" href="../../index.html" />
     <link rel="up" title="Development under C++" href="plugin-development.html" />
     <link rel="next" title="ItomSharedSemaphore - Reference" href="plugin-sharedSemaphore-Ref.html" />
     <link rel="prev" title="RetVal - Reference" href="plugin-RetVal-Ref.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,17 +47,17 @@
         <li class="right" >
           <a href="plugin-RetVal-Ref.html" title="RetVal - Reference"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="itomsharedsemaphore">
 <span id="plugin-sharedsemaphore"></span><h1>ItomSharedSemaphore<a class="headerlink" href="#itomsharedsemaphore" title="Permalink to this headline">¶</a></h1>
@@ -76,39 +75,39 @@
 <li>Python scripting engine. All python scripts are executed in a second thread. Therefore you should not directly use any 3rd-party python modules which open any graphical user interface (like <em>PyQt</em>, <em>tkInter</em> ...).</li>
 <li>Every <em>DataIO</em> or <em>Actuator</em>-plugin is executed in its own thread. Every algorithm is executed in the thread of the calling instance (e.g. main thread or python thread). All widgets provided by any <em>Algo</em>-plugin are always executed in the <em>main thread</em> (see restricting of point 1).</li>
 </ol>
-<div class="figure" id="plugin-sharedsemaphore-scheme">
-<img alt="../../_images/itomSharedSemaphore750.png" src="../../_images/itomSharedSemaphore750.png" />
-<p class="caption">Figure: Scheme of a communication between <strong>itom</strong> (main thread) and any plugin-method (plugin is running in another thread)</p>
+<div class="figure align-left" id="id1">
+<span id="plugin-sharedsemaphore-scheme"></span><img alt="../../_images/itomSharedSemaphore750.png" src="../../_images/itomSharedSemaphore750.png" />
+<p class="caption"><span class="caption-text">Figure: Scheme of a communication between <strong>itom</strong> (main thread) and any plugin-method (plugin is running in another thread)</span></p>
 </div>
-<p>In figure <a class="reference internal" href="#plugin-sharedsemaphore-scheme"><em>Figure: Scheme of a communication between itom (main thread) and any plugin-method (plugin is running in another thread)</em></a>, a common communcation between a method <strong>mainfunc</strong> which is executed in <strong>itom</strong>&#8216;s main thread (e.g. in <em>AddInManager</em> and another method <strong>func1</strong> of a plugin is depicted. The plugin is of type <em>actuator</em> or <em>dataIO</em> and therefore runs in its own thread. <strong>mainfunc</strong> is calling the method <strong>func1</strong>. Usually the calling method has to wait until the called method (<strong>func1</strong>) has been finished (or until the most important parts of <strong>func1</strong> have been executed). In order to consider cases where the plugin-method is not answering within a certain timeout, <strong>itom</strong> has integrated a mechanism such that the waiting-process in the main-function can be stopped after that the timeout time expired. This mechanism is realized by the class <strong>ItomSharedSemaphore</strong>, which is definined in the file <em>sharedStructuresQt.h</em> (folder <em>common</em>).</p>
+<p>In figure <a class="reference internal" href="#plugin-sharedsemaphore-scheme"><span>Figure: Scheme of a communication between itom (main thread) and any plugin-method (plugin is running in another thread)</span></a>, a common communcation between a method <strong>mainfunc</strong> which is executed in <strong>itom</strong>&#8216;s main thread (e.g. in <em>AddInManager</em> and another method <strong>func1</strong> of a plugin is depicted. The plugin is of type <em>actuator</em> or <em>dataIO</em> and therefore runs in its own thread. <strong>mainfunc</strong> is calling the method <strong>func1</strong>. Usually the calling method has to wait until the called method (<strong>func1</strong>) has been finished (or until the most important parts of <strong>func1</strong> have been executed). In order to consider cases where the plugin-method is not answering within a certain timeout, <strong>itom</strong> has integrated a mechanism such that the waiting-process in the main-function can be stopped after that the timeout time expired. This mechanism is realized by the class <strong>ItomSharedSemaphore</strong>, which is definined in the file <em>sharedStructuresQt.h</em> (folder <em>common</em>).</p>
 <p><strong>ItomSharedSemaphore</strong> consists of the following elements:</p>
 <dl class="member">
 <dt id="c.m_pSemaphore">
-QSemaphore *<tt class="descname">m_pSemaphore</tt><a class="headerlink" href="#c.m_pSemaphore" title="Permalink to this definition">¶</a></dt>
+QSemaphore *<code class="descname">m_pSemaphore</code><a class="headerlink" href="#c.m_pSemaphore" title="Permalink to this definition">¶</a></dt>
 <dd><p>ItomSharedSemaphore internally contains an instance of <em>QSemaphore</em>, the platform independent semaphore provided by <strong>Qt</strong>. A semaphore can been considered as set of <em>gaming piece</em>. Any method executed within different threads can take one or more <em>gaming pieces</em> from the common semaphore. If there are not enough <em>gaming piece</em> in the storage, the method has to wait until the necessary number of <em>gaming pieces</em> become available. Any method which exits some &#8220;critical sections&#8221; in the code release their previously picked <em>gaming pieces</em>, such that other instances can repick them. In most cases in the communcation between <strong>itom</strong> and a plugin-method, the semaphore contains one <em>gaming piece</em>, since only two partners are participating in the communication: the method in the main thread and the called method in the plugin-thread. The method in the plugin-thread is picking the <em>gaming piece</em> and the calling method has to wait until the <em>gaming piece</em> gets back to the storage of the semaphore. This is achieved by <em>releasing</em> the <em>gaming piece</em> in the called method.</p>
 </dd></dl>
 
 <dl class="member">
 <dt id="c.m_numOfListeners">
-int <tt class="descname">m_numOfListeners</tt><a class="headerlink" href="#c.m_numOfListeners" title="Permalink to this definition">¶</a></dt>
+int <code class="descname">m_numOfListeners</code><a class="headerlink" href="#c.m_numOfListeners" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the number of participants at a communcation process (without the calling method). Usually only one method is called, therefore this value is usually equal to 1. This value usually is automatically set.</p>
 </dd></dl>
 
 <dl class="member">
 <dt id="c.m_instCounter">
-int <tt class="descname">m_instCounter</tt><a class="headerlink" href="#c.m_instCounter" title="Permalink to this definition">¶</a></dt>
+int <code class="descname">m_instCounter</code><a class="headerlink" href="#c.m_instCounter" title="Permalink to this definition">¶</a></dt>
 <dd><p>This value indicates how many <em>gaming pieces</em> are out of the storage. If the called method is still executing, this value is equal to one. If the called method already release the semaphore, hence <em>gaming piece</em>, the value drops to zero.</p>
 </dd></dl>
 
 <dl class="member">
 <dt id="c.isCallerStillWaiting">
-bool <tt class="descname">isCallerStillWaiting</tt><a class="headerlink" href="#c.isCallerStillWaiting" title="Permalink to this definition">¶</a></dt>
+bool <code class="descname">isCallerStillWaiting</code><a class="headerlink" href="#c.isCallerStillWaiting" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method returns true if the calling method (<em>here</em>: the method in main thread) is still waiting that the called method has released the semaphore, else the method returns false.</p>
 </dd></dl>
 
 <dl class="member">
 <dt id="c.returnValue">
-ito::RetVal <tt class="descname">returnValue</tt><a class="headerlink" href="#c.returnValue" title="Permalink to this definition">¶</a></dt>
+ito::RetVal <code class="descname">returnValue</code><a class="headerlink" href="#c.returnValue" title="Permalink to this definition">¶</a></dt>
 <dd><p>The called method in the plugin-thread can set that globally accessible return value and the calling method can read its value. That return value is the single way to return the success or error message to the calling method, since no return value of the called method (slot) can directly be returned.</p>
 </dd></dl>
 
@@ -199,7 +198,7 @@ ito::RetVal <tt class="descname">returnValue</tt><a class="headerlink" href="#c.
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For more information about the implementation of class <strong>ItomSharedSemaphore</strong> see <a class="reference internal" href="plugin-sharedSemaphore-Ref.html#plugin-itomsharedsemaphore-ref"><em>ItomSharedSemaphore - Reference</em></a> or the doxygen documentation for <strong>itom</strong>.</p>
+<p class="last">For more information about the implementation of class <strong>ItomSharedSemaphore</strong> see <a class="reference internal" href="plugin-sharedSemaphore-Ref.html#plugin-itomsharedsemaphore-ref"><span>ItomSharedSemaphore - Reference</span></a> or the doxygen documentation for <strong>itom</strong>.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -210,7 +209,7 @@ ito::RetVal <tt class="descname">returnValue</tt><a class="headerlink" href="#c.
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -226,12 +225,14 @@ ito::RetVal <tt class="descname">returnValue</tt><a class="headerlink" href="#c.
   <h4>Next topic</h4>
   <p class="topless"><a href="plugin-sharedSemaphore-Ref.html"
                         title="next chapter">ItomSharedSemaphore - Reference</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/07_plugins/development/plugin-sharedSemaphore.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/07_plugins/development/plugin-sharedSemaphore.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -248,7 +249,7 @@ ito::RetVal <tt class="descname">returnValue</tt><a class="headerlink" href="#c.
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -263,16 +264,16 @@ ito::RetVal <tt class="descname">returnValue</tt><a class="headerlink" href="#c.
         <li class="right" >
           <a href="plugin-RetVal-Ref.html" title="RetVal - Reference"
              >previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 09, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Last updated on Apr 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

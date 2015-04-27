@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'a273a22',
+        VERSION:     '5c50828',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,15 +26,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom Documentation" href="../../index.html" />
     <link rel="up" title="Development under C++" href="plugin-development.html" />
     <link rel="next" title="AddInBase" href="plugin-AddInBase-Ref.html" />
     <link rel="prev" title="Plugin interface class" href="pluginInterfaceClass.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -48,17 +47,17 @@
         <li class="right" >
           <a href="pluginInterfaceClass.html" title="Plugin interface class"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="toctree-wrapper compound">
 </div>
@@ -81,7 +80,7 @@ it remains worth to read this document first.</p>
 <li>The plugin&#8217;s <strong>init</strong> method is called with the mandatory and optional parameters, those default is set the in the plugin&#8217;s interface and which are updated by the user input.</li>
 </ol>
 <p>The basic scheme of the live-cycle of any plugin is depicted in the following figure:</p>
-<div class="figure" id="plugin-plugincall-scheme1">
+<div class="figure align-left" id="plugin-plugincall-scheme1">
 <img alt="../../_images/pluginBase1_824.png" src="../../_images/pluginBase1_824.png" />
 </div>
 <p>At startup of <strong>itom</strong>, one single instance (singleton) of each plugin interface class is created and managed by the <strong>AddInManager</strong>. Later, an instance of the real plugin can be requested, for instance in a python-script or by
@@ -94,14 +93,14 @@ optional initialization parameters are passed as arguments.</p>
 <p>Next, the plugin can be used. Whenever a method of the plugin is called, either by python or any C-method, this call has to be executed again by an &#8220;over-thread&#8221; communcation technique (<strong>invokeMethod</strong> or signal-slot).
 The last argument of such a call always is a locked instance of <strong>ItomSharedSemaphore</strong>. The caller then waits until the semaphore will be released in the plugin&#8217;s method or a timeout occurred. Please make sure, that
 you release the semaphore in your plugin&#8217;s method only at the point, when you don&#8217;t need any parameters given by the caller any more. Usually it is released at the bottom of your method. Only in special cases (like
-method <strong>waitForDone</strong> (for actuators) it makes sense to release it earlier. For more information about the semaphore see <a class="reference internal" href="plugin-sharedSemaphore.html#plugin-sharedsemaphore"><em>ItomSharedSemaphore</em></a>.</p>
+method <strong>waitForDone</strong> (for actuators) it makes sense to release it earlier. For more information about the semaphore see <a class="reference internal" href="plugin-sharedSemaphore.html#plugin-sharedsemaphore"><span>ItomSharedSemaphore</span></a>.</p>
 <p>Finally, if the plugin should be closed, the inverse function calls with respect to the initialization are executed. That means, the <strong>AddInManager</strong> is at first invoking the method <strong>call</strong> of the plugin (still in its own thread). Then the plugin is moved back to the main thread and then <strong>AddInManager</strong> forces the deletion of the plugin by the method <strong>closeThisInst</strong> of the corresponding interface class.</p>
 <div class="admonition note" id="plugin-class-callinitthread">
 <p class="first admonition-title">Note</p>
 <p class="last">In some cases, it is not possible to initialize the hardware (some cameras) in another thread than the main thread. Since this initialization should be done in the <strong>init</strong> method of the plugin, <strong>itom</strong> provides a
-possibility to call <strong>init</strong> before moving the plugin to the new thread. Hence, those both steps in <a class="reference internal" href="#plugin-plugincall-scheme1"><em>this scheme</em></a> are switched. This can be done by setting the member <strong>m_callInitInNewThread</strong>
+possibility to call <strong>init</strong> before moving the plugin to the new thread. Hence, those both steps in <a class="reference internal" href="#plugin-plugincall-scheme1"><span>this scheme</span></a> are switched. This can be done by setting the member <strong>m_callInitInNewThread</strong>
 of the plugin interface class from its default value <strong>true</strong> to <strong>false</strong>. However, only use this possibility if there is no other chance, since the GUI is completely blocked during an initialization executed in the
-main thread (see also <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><em>Plugin interface class</em></a>).</p>
+main thread (see also <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><span>Plugin interface class</span></a>).</p>
 </div>
 </div>
 <div class="section" id="plugin-framework">
@@ -186,7 +185,7 @@ executed by the general method <strong>execFunc</strong>, those first argument i
 plugins.</p>
 <p>Before the details about the implementation for these methods are explained, let us also take a look at the definition of the class <strong>AddInBase</strong> itself. Only few public or protected member functions of this class must be
 overwritten by the plugin (those, that have been described above). However, there are still a lot of further member methods which can be overwritten or useful for the functionality of your plugin. The description of the accessible
-member functions and attributes (public, protected, signals, public slots) is described in <a class="reference internal" href="plugin-AddInBase-Ref.html#plugin-addinbase-ref"><em>AddInBase</em></a>.</p>
+member functions and attributes (public, protected, signals, public slots) is described in <a class="reference internal" href="plugin-AddInBase-Ref.html#plugin-addinbase-ref"><span>AddInBase</span></a>.</p>
 <p>Now, let us give some hints about the implementation of the methods, that have to be overwritten:</p>
 <div class="section" id="constructor">
 <h3>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h3>
@@ -316,7 +315,7 @@ member functions and attributes (public, protected, signals, public slots) is de
 </td></tr></table></div>
 <p>Consider the following hints for the implementation of the <strong>init</strong>-method:</p>
 <ol class="arabic simple">
-<li>Usually it is executed in a new thread (see <a class="reference internal" href="#plugin-class-callinitthread"><em>here</em></a>)</li>
+<li>Usually it is executed in a new thread (see <a class="reference internal" href="#plugin-class-callinitthread"><span>here</span></a>)</li>
 <li>The parameters are the filled mandatory and optional parameter vectors, those default implementation has been given in the constructor of the interface class.</li>
 <li>You can be sure, that both the order and type of those plugins remains invariant.</li>
 <li>Initialize the plugin with respect to these parameters.</li>
@@ -462,7 +461,7 @@ method (like in others, too) methods provided by the <strong>itom</strong> API a
 value of class <strong>ito::Param</strong>. In case of success, the requested value must be saved into this given parameter. The second argument
 is a string containing the parameter name.</p>
 <p>It is possible to pass a single parameter name or to follow a given string-syntax in order to
-also give a certain array index as well as an additional suffix string. Rules for this syntax are given in the section <a class="reference internal" href="#plugin-class-paramname"><em>Possible parameter names for parameter-map m_params</em></a>.
+also give a certain array index as well as an additional suffix string. Rules for this syntax are given in the section <a class="reference internal" href="#plugin-class-paramname"><span>Possible parameter names for parameter-map m_params</span></a>.
 In order to split the given raw name into its possible components <strong>name</strong>, <strong>index</strong> and <strong>suffix</strong>, the method <strong>parseParamName</strong> defined in <strong>helperCommon.h</strong>
 can be used. In the exemplary implementation above, the parameter-name is finally searched in the map <strong>m_params</strong> and if found, the value of this parameter
 is copied to the given argument <strong>val</strong>. However, this implementation is the most basic one and you can also implement further lines of code.</p>
@@ -631,7 +630,7 @@ numeric type to another one. If these pre-requisites are met, you should then ch
 the internal parameter can be filled with the content of the given, new value. Else, appropriate error messages should be returned and the semaphore <strong>waitCond</strong>
 must finally be released.</p>
 <p>If you want to set multiple parameters in an uninterrupted sequence, you can also call or invoke the method <strong>setParamVector</strong> defined in <strong>AddInBase</strong>. You don&#8217;t have to
-implement this method, since this is already done. For more infos about this method, see the definition of <strong>AddInBase</strong> (<a class="reference internal" href="plugin-AddInBase-Ref.html#plugin-addinbase-ref"><em>AddInBase</em></a>).</p>
+implement this method, since this is already done. For more infos about this method, see the definition of <strong>AddInBase</strong> (<a class="reference internal" href="plugin-AddInBase-Ref.html#plugin-addinbase-ref"><span>AddInBase</span></a>).</p>
 </div>
 </div>
 <div class="section" id="extend-your-plugin-by-registering-further-functions">
@@ -803,7 +802,7 @@ output parameter. The corresponding registration of this method is integrated in
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -830,12 +829,14 @@ output parameter. The corresponding registration of this method is integrated in
   <h4>Next topic</h4>
   <p class="topless"><a href="plugin-AddInBase-Ref.html"
                         title="next chapter">AddInBase</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../../_sources/07_plugins/development/pluginClass.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/07_plugins/development/pluginClass.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -852,7 +853,7 @@ output parameter. The corresponding registration of this method is integrated in
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -867,16 +868,16 @@ output parameter. The corresponding registration of this method is integrated in
         <li class="right" >
           <a href="pluginInterfaceClass.html" title="Plugin interface class"
              >previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 09, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Last updated on Apr 27, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

@@ -47,6 +47,7 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/ximea.rst
    plugins/grabber/avtVimba.rst
    plugins/grabber/AndorSDK3.rst
+   plugins/grabber/avantesAvaSpec.rst
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
@@ -75,6 +76,7 @@ Further hardware devices
    plugins/generalDataIO/LibModBus.rst
    plugins/generalDataIO/SuperlumBS.rst
    plugins/generalDataIO/NI-DAQmx.rst
+   plugins/generalDataIO/libUSB.rst
 
 Algorithms
 ~~~~~~~~~~~
