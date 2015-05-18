@@ -12,12 +12,11 @@
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '5c50828',
+        VERSION:     'e21f9de',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -31,8 +30,8 @@
     <link rel="next" title="Python scripting language" href="../../08_scriptLanguage/script-language.html" />
     <link rel="prev" title="Optional dock widget (toolbox) for hardware plugins" href="plugin-dockWidget.html" /> 
   </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
+  <body>
+    <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -47,17 +46,17 @@
         <li class="right" >
           <a href="plugin-dockWidget.html" title="Optional dock widget (toolbox) for hardware plugins"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li class="nav-item nav-item-3"><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body" role="main">
+          <div class="body">
             
   <div class="section" id="optional-configuration-dialog-for-hardware-plugins">
 <span id="plugin-class-configdialog"></span><h1>Optional configuration dialog for hardware plugins<a class="headerlink" href="#optional-configuration-dialog-for-hardware-plugins" title="Permalink to this headline">¶</a></h1>
@@ -65,7 +64,7 @@
 <div class="figure align-left">
 <img alt="../../_images/configurationDialog.png" src="../../_images/configurationDialog.png" />
 </div>
-<p>In difference to the optional <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span>toolboxes</span></a>, the parameter is not directly changed once the user changes the value of any widget, but the configuration dialog should provide an OK, cancel and optional apply button. By clicking OK, all currently changed values are applied and sent to the plugin via multiple calls to <strong>setParam</strong>. Apply has the same behaviour but the dialog is not closed. By clicking cancel or closing the dialog, no changes are applied.</p>
+<p>In difference to the optional <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><em>toolboxes</em></a>, the parameter is not directly changed once the user changes the value of any widget, but the configuration dialog should provide an OK, cancel and optional apply button. By clicking OK, all currently changed values are applied and sent to the plugin via multiple calls to <strong>setParam</strong>. Apply has the same behaviour but the dialog is not closed. By clicking cancel or closing the dialog, no changes are applied.</p>
 <p>Usually, the configuration dialog can be opened by the menu or context menu of the plugin toolbox of <strong>itom</strong>. Alternatively, the plugin classes in Python provide the methods:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">cam</span><span class="o">.</span><span class="n">showConfiguration</span><span class="p">()</span>
 </pre></div>
@@ -73,19 +72,19 @@
 <p>This section describes a possibility to generate such a toolbox.</p>
 <div class="section" id="base-idea-behind-the-config-dialog">
 <h2>Base idea behind the config dialog<a class="headerlink" href="#base-idea-behind-the-config-dialog" title="Permalink to this headline">¶</a></h2>
-<p>Before you start programming the dialog, read the documentation about how to program a <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span>toolbox</span></a> and consider the following specific hints:</p>
+<p>Before you start programming the dialog, read the documentation about how to program a <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><em>toolbox</em></a> and consider the following specific hints:</p>
 <ul class="simple">
 <li>Although the plugin is always executed in its own thread, the configuration dialog always runs in the main thread of <strong>itom</strong>. Qt has a general restriction that GUI related things must always be executed in the main thread.</li>
 <li>Therefore the communication between config dialog and plugin must be implemented via a thread-safe signal/slot mechanism.</li>
 <li><strong>itom</strong> provides the base class <strong>ito::AbstractAddInConfigDialog</strong> in order to unify and simplify this process. This base class is contained in the SDK.</li>
 <li>Usually you will design the config dialog with the <strong>Qt Designer</strong> and implement the specific code within a class that is inherited from <strong>ito::AbstractAddInConfigDialog</strong>.</li>
 <li>As last step, you need to add some lines of code in the plugin class such that the plugin and itom know about the existence of the config dialog.</li>
-<li>Since the configuration dialog usually does not provide functionalities to move any actuator axes, the programming for dataIO and actuator devices is the same (in difference to the <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span>toolboxes</span></a>).</li>
+<li>Since the configuration dialog usually does not provide functionalities to move any actuator axes, the programming for dataIO and actuator devices is the same (in difference to the <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><em>toolboxes</em></a>).</li>
 </ul>
 </div>
 <div class="section" id="user-interface-design">
 <h2>User Interface Design<a class="headerlink" href="#user-interface-design" title="Permalink to this headline">¶</a></h2>
-<p>The base design of the config dialog is done in <strong>Qt Designer</strong>. The user is referred to the documentation about creating <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span>toolboxes</span></a> in order to learn how to create the user interface. The dialog is not created as widget but as dialog. As you see in the following screenshot</p>
+<p>The base design of the config dialog is done in <strong>Qt Designer</strong>. The user is referred to the documentation about creating <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><em>toolboxes</em></a> in order to learn how to create the user interface. The dialog is not created as widget but as dialog. As you see in the following screenshot</p>
 <div class="figure align-left">
 <a class="reference internal image-reference" href="../../_images/configDialogQtDesigner.png"><img alt="../../_images/configDialogQtDesigner.png" src="../../_images/configDialogQtDesigner.png" /></a>
 </div>
@@ -117,20 +116,20 @@
 <span class="p">{</span>
     <span class="n">Q_OBJECT</span>
 
-    <span class="k">public</span><span class="o">:</span>
+    <span class="nl">public:</span>
         <span class="n">DialogYourPlugin</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">*</span><span class="n">pluginInstance</span><span class="p">);</span>
         <span class="o">~</span><span class="n">DialogYourPlugin</span><span class="p">()</span> <span class="p">{};</span>
 
         <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">applyParameters</span><span class="p">();</span>
 
-    <span class="k">private</span><span class="o">:</span>
+    <span class="nl">private:</span>
         <span class="kt">bool</span> <span class="n">m_firstRun</span><span class="p">;</span>
         <span class="n">Ui</span><span class="o">::</span><span class="n">ObjectNameOfTheUIDialog</span> <span class="n">ui</span><span class="p">;</span> <span class="c1">//TODO</span>
 
-    <span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+    <span class="k">public</span> <span class="n">slots</span><span class="o">:</span>
         <span class="kt">void</span> <span class="n">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">);</span>
 
-    <span class="k">private</span> <span class="nl">slots</span><span class="p">:</span>
+    <span class="k">private</span> <span class="n">slots</span><span class="o">:</span>
         <span class="c1">//auto-connected slot called if ok, apply or cancel is clicked</span>
         <span class="kt">void</span> <span class="n">on_buttonBox_clicked</span><span class="p">(</span><span class="n">QAbstractButton</span><span class="o">*</span> <span class="n">btn</span><span class="p">);</span>
 
@@ -252,7 +251,7 @@ are clicked. Some words about this header file:</p>
 <div><div class="highlight-c++"><div class="highlight"><pre><span class="k">class</span> <span class="nc">YourPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="p">...</span>
 <span class="p">{</span>
     <span class="p">...</span>
-    <span class="k">public</span><span class="o">:</span>
+    <span class="nl">public:</span>
         <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
         <span class="kt">int</span> <span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">...</span>
@@ -279,7 +278,7 @@ are clicked. Some words about this header file:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
@@ -298,14 +297,12 @@ are clicked. Some words about this header file:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../../08_scriptLanguage/script-language.html"
                         title="next chapter">Python scripting language</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../_sources/07_plugins/development/plugin-configDialog.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-configDialog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -322,7 +319,7 @@ are clicked. Some words about this header file:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -337,16 +334,16 @@ are clicked. Some words about this header file:</p>
         <li class="right" >
           <a href="plugin-dockWidget.html" title="Optional dock widget (toolbox) for hardware plugins"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
-          <li class="nav-item nav-item-2"><a href="../plugins.html" >Plugins</a> &raquo;</li>
-          <li class="nav-item nav-item-3"><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer" role="contentinfo">
+    <div class="footer">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Apr 27, 2015.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Last updated on May 19, 2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
