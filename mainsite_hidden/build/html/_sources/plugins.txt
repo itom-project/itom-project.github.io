@@ -48,6 +48,7 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/avtVimba.rst
    plugins/grabber/AndorSDK3.rst
    plugins/grabber/avantesAvaSpec.rst
+   plugins/grabber/commonVisionBlox.rst
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~

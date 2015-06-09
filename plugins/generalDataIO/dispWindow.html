@@ -10,8 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="GWInstekPSP" href="gwInstekPSP.html" />
@@ -34,8 +32,8 @@
 
 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -44,11 +42,11 @@
         <li class="right" >
           <a href="../actuators/SMC100.html" title="NewportSMC100"
              accesskey="P">previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../plugins.html" accesskey="U">Plugins</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../plugins.html" accesskey="U">Plugins</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/itomlogo.png" alt="Logo"/>
@@ -68,6 +66,8 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">DispWindow</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gamma-correction">Gamma correction</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#save-current-view-to-image-file">Save current view to image file</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="gwInstekPSP.html">GWInstekPSP</a></li>
@@ -95,7 +95,7 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="gwInstekPSP.html"
                         title="next chapter">GWInstekPSP</a></p>
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -114,7 +114,7 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="dispwindow">
 <h1>DispWindow<a class="headerlink" href="#dispwindow" title="Permalink to this headline">¶</a></h1>
@@ -199,6 +199,52 @@
 </ul>
 </div></blockquote>
 </div>
+<div class="section" id="gamma-correction">
+<h2>Gamma correction<a class="headerlink" href="#gamma-correction" title="Permalink to this headline">¶</a></h2>
+<p>If the parameter <em>gamma</em> is set to 0, no further gamma correction is enabled. This means, that the gray values of the cosine fringes are
+directly displayed as they are using a 8bit resolution:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">screen_pixel</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">255</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>However, if your camera and projector has a non-linear behaviour between displayed and detected gray value, a gamma correction can and should
+be enabled. Then, the displayed gray value is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">screen_pixel</span> <span class="o">=</span> <span class="n">lut</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="mi">255</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])]</span>
+</pre></div>
+</div>
+<p>The lookup table (lut) consists of 256 values. In order to register the lookup table, you can project a uniform background with uniformly distributed
+gray-values (at least 64 different values) between 0 and full resolution (e.g. 255). The values should be sorted beginning with the darkest one until &#8216;white&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">projector</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;projectGrayValue&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">displaying any other image (graycode or cosine fringe) will clear the gray valued image</p>
+</div>
+<p>Then, record every uniform projection with the camera and determine the mean gray value. You then get a list of gray values, like the following one:</p>
+<div class="highlight-python"><div class="highlight"><pre>g = [25, 28, 32, 38, 50, 90, 92, 96, ... 198]
+</pre></div>
+</div>
+<p>Call the <strong>exec</strong> function <strong>calcLut</strong> and pass <em>g</em> in order to let the plugin calculate the <em>lut</em> (based on a linear interpolation if <em>g</em> contains less values
+than 256):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">projector</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;calcLut&quot;</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, you need to enable the gamma correction:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">projector</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;gamma&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, the <em>lut</em> (parameter <em>lut</em>) contains values, such that the recorded gray values applying the same uniformly distributed background images are linearly distributed.</p>
+</div>
+<div class="section" id="save-current-view-to-image-file">
+<h2>Save current view to image file<a class="headerlink" href="#save-current-view-to-image-file" title="Permalink to this headline">¶</a></h2>
+<p>Use the exec function <strong>grabFramebuffer</strong> to save the currently displayed view in the same size to an image file (the file type is determined by the file&#8217;s ending (file type must be
+supported by Qt&#8217;s QImage):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">projector</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;grabFramebuffer&quot;</span><span class="p">,</span> <span class="s">&quot;D:/test.pgm&quot;</span><span class="p">)</span> <span class="c">#or</span>
+<span class="n">projector</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s">&quot;grabFramebuffer&quot;</span><span class="p">,</span> <span class="s">&quot;D:/test.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -207,7 +253,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -216,14 +262,14 @@
         <li class="right" >
           <a href="../actuators/SMC100.html" title="NewportSMC100"
              >previous</a> |</li>
-        <li><a href="../../index.html">itom</a> &raquo;</li>
-          <li><a href="../../plugins.html" >Plugins</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../plugins.html" >Plugins</a> &raquo;</li> 
       </ul>
     </div>
 
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
