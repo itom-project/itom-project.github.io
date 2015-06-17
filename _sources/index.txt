@@ -26,6 +26,9 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2015-06-17: The plugin **Standa 8SMC4-USB** for stepper motor controllers from stand has been added to the plugin repository.
+* 2015-06-01: The plugin **CommonVisionBlox** to control cameras via CommonVisionBlox from company Stemmer has been added to the plugin repository.
+* 2015-06-01: The plugin **AvantesAvaSpec** for spectrometers from company Avantes has been added to the plugin repository. It uses the plugin LibUSB to control the spectrometer and does not require the specific Avantes libraries.
 * 2015-03-09: There is a known issue when trying to open the external Qt designer via the toolbox of itom. See the :ref:`downloads section <sec-downloads>` for a workaround.
 * 2015-02-23: The plugin **PCOSensicam** for sensicam cameras from PCO Imaging is online now (no support for DICAM yet).
 * 2015-02-17: Today **itom 1.4.0** has been released. The Windows setups and the sources (tag v1.4.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **NI-DAQmx**, **SuperlumBS**, **PI_GCS2**, **libmodbus**, **NewportSMC100**, **AndorSDK3** and **AVTVimba**. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html. The setup version is the last version that is compiled using Qt4.8. We will now officially start to migrate the setup system to Qt5.

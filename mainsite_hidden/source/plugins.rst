@@ -63,6 +63,7 @@ Motors / Actuators
    plugins/actuators/piGCS2.rst
    plugins/actuators/usbMotion3XIII.rst
    plugins/actuators/SMC100.rst
+   plugins/actuators/ST8SMC4USB.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~
