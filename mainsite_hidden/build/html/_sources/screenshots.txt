@@ -3,8 +3,7 @@
 Screenshots
 =============
 
-The following screenshots give you an overview about **itom** (mainly versions **1.1.0** and **1.0.14** are
-displayed).
+The following screenshots give you an overview about **itom**.
 
 **Windows 7 Screenshots**
 
