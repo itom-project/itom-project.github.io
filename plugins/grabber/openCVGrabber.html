@@ -85,7 +85,6 @@
 <li class="toctree-l4"><a class="reference internal" href="avtVimba.html">AVT Vimba</a></li>
 <li class="toctree-l4"><a class="reference internal" href="AndorSDK3.html">Andor SDK3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="avantesAvaSpec.html">Avantes AvaSpec Spectrometer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="commonVisionBlox.html">GenICam cameras via Common Vision Blox</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
@@ -160,6 +159,8 @@
 <p>This plugin wraps the video capture framework of OpenCV. Therefore it requires further libraries of OpenCV (core, highgui, improc and partially tbb).</p>
 <p>Usually all ordinary USB cameras are supported. If you compiled OpenCV with the CMU1384 flag, these firewire cameras are supported as well. Currently, a queuing problem in the Windows version for USB cameras exists. Therefore the plugin requests multiple images per frame in order to finally get the newest one. Therefore this implementation is not the fastest connection to any USB cameras.</p>
 <p>Some supported cameras are only available if OpenCV is compiled with their support, e.g. CMU1394 (not included per default in pre-compiled binaries of OpenCV.</p>
+<p>The parameters of this plugin are double values that are directly redirected to the OpenCV drivers and might have different units / interpretations for various device types. Especially for DirectShow cameras, also use the native settings dialog (accessible via the configuration dialog) to further parameterize the plugin, especially set the manual / auto flag of parameters (not directly available via source code of OpenCV).</p>
+<p>For some devices, an acquisition might deliver an older image. In order to get an actual image, use the parameter &#8216;dump_grabs&#8217; to set a number of images that is obtained before the real image is delivered to the getVal / copyVal command (default: 0, DirectShow: recommended: 5).</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
@@ -167,13 +168,13 @@
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
-<dt><strong>cameraNumber</strong>: {int (int), optional} [0,999], default: 0, step: 1</dt>
+<dt><strong>cameraNumber</strong>: {int, optional} [0,999], default: 0, step: 1</dt>
 <dd><p class="first last">consecutive number of the connected camera (starting with 0, default)</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>colorMode</strong>: {str (char*), optional} default: auto</dt>
+<dt><strong>colorMode</strong>: {str, optional} default: auto</dt>
 <dd><p class="first last">color mode of camera (auto|color|red|green|blue|gray, default: auto -&gt; color or gray)</p>
 </dd>
 </dl>

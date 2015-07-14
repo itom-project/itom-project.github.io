@@ -65,6 +65,27 @@ displayed).
    :alt: integrated plot
    
    plots and other designer widgets that come with *itom* can be integrated in user defined windows and dialogs
+   
+.. figure:: _static/screenshots/win7/pipManager.png
+   :width: 600px
+   :align: center
+   :alt: pip manager
+   
+   The Python Package Manager helps to install and upgrade Python packages from remote servers or whl-files.
+   
+.. figure:: _static/screenshots/win7/userManagement.png
+   :width: 800px
+   :align: center
+   :alt: user management
+   
+   A user management allows starting itom with different settings and  configurations.
+   
+.. figure:: _static/screenshots/win7/scriptHelpWindow.png
+   :width: 800px
+   :align: center
+   :alt: script help window
+   
+   The script documentation window informs about descriptions and parameters of algorithms and plugins and can optionally display a syntax help for different python modules (e.g. itom module)
 
 **Windows 8 Screenshots**
 
@@ -111,7 +132,8 @@ displayed).
    :alt: 2D plot
    
    2D plot with chosen color map and color bar.
-
+   
+   
 **Debian (KDE) Screenshots**
 
 .. figure:: _static/screenshots/debian/itom.png
