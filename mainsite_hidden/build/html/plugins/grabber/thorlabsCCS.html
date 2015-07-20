@@ -24,9 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="V4L2" href="v4l2.html" />
@@ -79,6 +76,7 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">Thorlabs CCS</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="v4l2.html">V4L2</a></li>
@@ -87,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="avtVimba.html">AVT Vimba</a></li>
 <li class="toctree-l4"><a class="reference internal" href="AndorSDK3.html">Andor SDK3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="avantesAvaSpec.html">Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commonVisionBlox.html">GenICam cameras via Common Vision Blox</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
@@ -137,13 +136,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`ThorlabsCCS`</span></a></td>
+<td><span>Thorlabs CCS Series Spectrometer</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`ThorlabsCCS`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`ThorlabsCCS`</span></a></td>
+<td><span>LPGL, uses Thorlabs CCS VISA Instrument Driver (LGPL licensed)</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Some words about supported operating systems</td>
@@ -152,18 +151,64 @@
 <td>Some words about supported devices</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`ThorlabsCCS`</span></a></td>
+<td><span>M. Gronle, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin can operate spectrometers from the Thorlabs CCS Series.</p>
+<p>If you start the plugin without further parameters (device=&#8217;&#8216;), the first connected device is opened.
+Set device = &#8216;&lt;scan&gt;&#8217; in order to get a printed list of detected devices. Use the device string or the desired
+device in order to open this specific one.</p>
+<p>This plugin has been tested with CCS175.</p>
+<p>For compiling this plugin, you need to install the Thorlabs OSASW Instrumentation software, shipped with the spectrometer.
+Then set the CMake variable THORLABS_IVI_VISA_SDK to the 32/64 IVI_VISA directory (e.g. C:/Program Files/IVI Foundation/...) where
+subdirectories like include or bin are contained.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>device</strong>: {str} default:</dt>
+<dd><p class="first last">device name that should be opened, an empty string opens the first device that is found. Pass &#8216;&lt;scan&gt;&#8217; for displaying all devices</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>ThorlabsCCS</dd>
+<dt><strong>roi</strong>: {int seq.}</dt>
+<dd>ROI (x,y,width,height)</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt>
+<dd>width of ROI (x-direction)</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt>
+<dd>height of ROI (y-direction)</dd>
+<dt><strong>bpp</strong>: {int}</dt>
+<dd>bpp</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>integration time of ccd in sec</dd>
+<dt><strong>manufacturer_name</strong>: {str}, read-only</dt>
+<dd>manufacturer name</dd>
+<dt><strong>device_name</strong>: {str}, read-only</dt>
+<dd>device name</dd>
+<dt><strong>serial_number</strong>: {str}, read-only</dt>
+<dd>serial number</dd>
+<dt><strong>firmware_revision</strong>: {str}, read-only</dt>
+<dd>firmware revision</dd>
+<dt><strong>instrument_driver_revision</strong>: {str}, read-only</dt>
+<dd>instrument driver revision</dd>
+<dt><strong>wavelength_data</strong>: {float seq.}, read-only</dt>
+<dd>wavelength in nm (air) for each pixel</dd>
+</dl>
 </div>
 </div>
 

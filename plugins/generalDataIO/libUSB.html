@@ -24,9 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="Basic Filters" href="../algorithms/basicFilters.html" />
@@ -76,6 +73,8 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">LibUSB</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#compilation">Compilation</a></li>
 </ul>
 </li>
@@ -127,33 +126,118 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`LibUSB`</span></a></td>
+<td><span>itom-plugin for a usb port communication</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`LibUSB`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`LibUSB`</span></a></td>
+<td><span>licensed under LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows (Vista, 7, 8)</td>
 </tr>
 <tr class="row-odd"><td><strong>Devices</strong>:</td>
-<td>&nbsp;</td>
+<td>Any generic USB devices</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`LibUSB`</span></a></td>
+<td><span>W. Lyda, twip optical solutions GmbH Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>LibUSB is a itom-Plugin which gives direct/raw access to a device connected to the serial port.
+It can be used by plugins for communication analog to the serial port.
+The plugin is implemented for Windows, but Linux should be possible due to libUSB is also availble on Linux.</p>
+<p>To connect to a device you need the vendor id and the product id.</p>
+<p>The setVal and getVal functions will write and read on the specified endpoint.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>VendorID</strong>: {int} [0,65535], default: 7358, step: 1</dt>
+<dd><p class="first last">The vendor id of the device to connect to</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>ProductID</strong>: {int} [0,65535], default: 3, step: 1</dt>
+<dd><p class="first last">The product id of the device to connect to</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>endpoint</strong>: {int} [0,127], default: 1, step: 1</dt>
+<dd><p class="first last">The endpoint to communicate with.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>timeout</strong>: {float, optional} [0.0,65.0], default: 4.0</dt>
+<dd><p class="first last">Timeout for reading commands in [s]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>debugLevel</strong>: {int, optional} [0,5], default: 0, step: 1</dt>
+<dd><p class="first last">Debug level: 0 (LIBUSB_LOG_LEVEL_NONE): no messages ever printed by the library. 1 (ERROR): error messages are printed to stderr, 2 (WARNING): warning and error messages are printed to stderr, 3 (INFO): informational messages are printed to stdout, warning and error messages are printed to stderr, 4 (DEBUG): like 3 but debug messages are also printed to stdout.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>printInfoAboutAllDevices</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd><p class="first last">If true, all information about connected devices is print to the console.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>debug</strong>: {int}</dt>
+<dd>If true, all out and inputs are written to dockingWidget</dd>
+<dt><strong>endpoint_read</strong>: {int}</dt>
+<dd>Endpoint index for reading operations. The used index is LIBUSB_ENDPOINT_IN + endpoint_read, with LIBUSB_ENDPOINT_IN = 128 (default: initialization parameter &#8216;endpoint&#8217;)</dd>
+<dt><strong>endpoint_write</strong>: {int}</dt>
+<dd>Endpoint index for writing operations. The used index is LIBUSB_ENDPOINT_OUT + endpoint_write, with LIBUSB_ENDPOINT_OUT = 0  (default: initialization parameter &#8216;endpoint&#8217;)</dd>
+<dt><strong>name</strong>: {str}</dt>
+<dd>name of the device</dd>
+<dt><strong>timeout</strong>: {float}</dt>
+<dd>Timeout for reading commands in [s]</dd>
+</dl>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Any USB device is defined by its vendor and product ID. Both are usually hex-values. If the connection is established via the GUI dialog, the corresponding integer
+values need to be given. If you have no idea about the vendor and product ID, set the optional initialization parameter <em>printInfoAboutAllDevices</em> to 1 (True). Then,
+information about all connected USB devices including its name and vendor / product ID is printed to the console.</p>
+<p>Once the device is identified, you need to indicate a so called endpoint ID. The read- and write-communication with the device is done via several endpoints. All reading endpoints
+are in the range 128..255 while the writing endpoints are between 0..127. For many devices the corresponding read/write endpoints have the same offset between its limit 0 and 128.
+Therefore, the initialization only contains the parameter &#8216;endpoint&#8217;, such that <em>endpoint_read</em> is set to 128+endpoint and <em>endpoint_write</em> to &#8216;endpoint&#8217;. You can always change
+the endpoints using the specific parameters.</p>
+<p>Again, if you set <em>printInfoAboutAllDevices</em> to 1 at initialization, the available endpoints are also print to the console for the selected device. If the list can not resolve further
+information for your selected device, this device can not be used by this generic plugin. This can also be the case for devices that support the VISA-standard. If you want to use
+such devices consider to use the Python package <em>PyVISA</em>.</p>
+<p>Once the USB-device is opened and the endpoints are configured, you can send and read data in the same way than via a serial connection (see help for plugin <strong>SerialIO</strong>).:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#send values:</span>
+<span class="n">usbDevice</span><span class="o">.</span><span class="n">setVal</span><span class="p">(</span><span class="s">&quot;myCommand&quot;</span><span class="p">)</span>
+
+<span class="c">#read values:</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c">#buffer</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">usbDevice</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c">#number of characters read</span>
+</pre></div>
+</div>
+<p>The command <strong>getVal</strong> only reads the number of characters that arrived at the current endpoint at the moment of its call. Analyze the return value and probably call <strong>getVal</strong>
+again if you expect more characters to arrive. This is also the same behaviour than for serial connections.</p>
+<p>This plugin is also used by other hardware plugins to communicate with further devices.</p>
 </div>
 <div class="section" id="compilation">
 <h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>

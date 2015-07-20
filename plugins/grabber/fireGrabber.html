@@ -24,9 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="MSMediaFoundation" href="msMediaFoundation.html" />
@@ -71,6 +68,7 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">FireGrabber</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="msMediaFoundation.html">MSMediaFoundation</a></li>
@@ -87,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="avtVimba.html">AVT Vimba</a></li>
 <li class="toctree-l4"><a class="reference internal" href="AndorSDK3.html">Andor SDK3</a></li>
 <li class="toctree-l4"><a class="reference internal" href="avantesAvaSpec.html">Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commonVisionBlox.html">GenICam cameras via Common Vision Blox</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
@@ -137,13 +136,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>Firewire - Fire Package Capture (Windows) / FireForLinux (Linux)</span></td>
+<td><span>Fire Package Capture (Firewire)</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
 <td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><span>licensed under LGPL</span></td>
+<td><span>LGPL; you need an installed AVT FirePackage driver, which requires further licenses if you are not using any AVT camera (see AVT FirePackage documentation).</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -152,7 +151,7 @@
 <td>Cameras supported by FirePackage from Allied Vision</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><span>G. Baer, A. Bielke, M. Gronle, ITO, University Stuttgart</span></td>
+<td><span>A. Bielke, M. Gronle, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
@@ -164,6 +163,72 @@
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>cameraID</strong>: {int, optional} [0,2147483647], default: 0, step: 1</dt>
+<dd><p class="first last">specific number of the camera, don&#8217;t use with cameraNumber (0 = unused)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>vendorID</strong>: {int, optional} [0,2147483647], default: 0, step: 1</dt>
+<dd><p class="first last">number of the vendor (e.g. Allied: vendorID=673537), don&#8217;t use with cameraNumber (0 = unused)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>cameraNumber</strong>: {int, optional} [0,25], default: 0, step: 1</dt>
+<dd><p class="first last">number of order of plugging the cameras (0 = parameter not used)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of plugin</dd>
+<dt><strong>vendor</strong>: {int}, read-only</dt>
+<dd>vendor ID of the camera</dd>
+<dt><strong>cameraID</strong>: {int}, read-only</dt>
+<dd>camera ID of the camera</dd>
+<dt><strong>vendorName</strong>: {str}, read-only</dt>
+<dd>vendor name of the camera [if connected]</dd>
+<dt><strong>modelName</strong>: {str}, read-only</dt>
+<dd>model name of the camera [if connected]</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>Integrationtime of CCD programmed in s</dd>
+<dt><strong>frame_time</strong>: {float}, read-only</dt>
+<dd>Transmission time per frame in s</dd>
+<dt><strong>bpp</strong>: {int}</dt>
+<dd>bit depth of camera</dd>
+<dt><strong>brightness</strong>: {float}</dt>
+<dd>Brightness value (if supported)</dd>
+<dt><strong>sharpness</strong>: {float}</dt>
+<dd>Sharpness value (if supported)</dd>
+<dt><strong>gamma</strong>: {int}</dt>
+<dd>Gamma correction (0: off, 1: on, default: off)</dd>
+<dt><strong>gain</strong>: {float}</dt>
+<dd>Virtual gain</dd>
+<dt><strong>offset</strong>: {float}, read-only</dt>
+<dd>Offset not used here</dd>
+<dt><strong>x0</strong>: {int}</dt>
+<dd>Startvalue for ROI</dd>
+<dt><strong>y0</strong>: {int}</dt>
+<dd>Startvalue for ROI</dd>
+<dt><strong>x1</strong>: {int}</dt>
+<dd>Stopvalue for ROI</dd>
+<dt><strong>y1</strong>: {int}</dt>
+<dd>Stopvalue for ROI</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt>
+<dd>Pixelsize in x (cols)</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt>
+<dd>Pixelsize in y (rows)</dd>
+</dl>
 </div>
 </div>
 

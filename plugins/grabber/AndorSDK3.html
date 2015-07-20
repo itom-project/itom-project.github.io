@@ -24,9 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="Avantes AvaSpec Spectrometer" href="avantesAvaSpec.html" />
@@ -84,9 +81,11 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">Andor SDK3</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="avantesAvaSpec.html">Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commonVisionBlox.html">GenICam cameras via Common Vision Blox</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
@@ -137,13 +136,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`AndorSDK3`</span></a></td>
+<td><span>Andor cameras via its SDK3 (Neo, Zyla).</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`AndorSDK3`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`AndorSDK3`</span></a></td>
+<td><span>Licensed under LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux ready but not tested</td>
@@ -152,18 +151,87 @@
 <td>Andor cameras supported by their SDK3 (Zyla, Neo)</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`AndorSDK3`</span></a></td>
+<td><span>M. Gronle (ITO Uni Stuttgart)</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin supports Andor cameras that can be run using the SDK3 from Andor (e.g. Neo and Zyla series). It has been tested with the following models:</p>
+<ul class="simple">
+<li>Zyla 5.5 (Dual Camera Link)</li>
+</ul>
+<p>The plugin has been compiled using the Andor SDK 3.8</p>
+<p>In order to run your camera, please purchase and install the Andor SDK 3.8 or higher and make sure that the necessary libraries are accessible
+by the Windows path environment variable (e.g. append &#8220;C:/Program Files/Andor SDK3&#8221; to the path variable).</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>camera_idx</strong>: {int} [0,31], default: 0, step: 1</dt>
+<dd><p class="first last">camera index that should be opened. The first camera is 0, the second 1...</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>AVTVimba</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>Exposure time of chip (in seconds)</dd>
+<dt><strong>binning</strong>: {int}</dt>
+<dd>Horizontal and vertical binning, depending on camera ability. 104 means a 1x binning in horizontal and 4x binning in vertical direction. (only symmetric binning is allowed; if read only binning is not supported)</dd>
+<dt><strong>gain</strong>: {float}, read-only</dt>
+<dd>Gain (normalized value 0..1)</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt>
+<dd>Pixelsize in x (cols)</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt>
+<dd>Pixelsize in y (rows)</dd>
+<dt><strong>roi</strong>: {int seq.}</dt>
+<dd>ROI (x,y,width,height) [this replaces the values x0,x1,y0,y1]</dd>
+<dt><strong>bpp</strong>: {int}</dt>
+<dd>Bitdepth of each pixel</dd>
+<dt><strong>timeout</strong>: {float}</dt>
+<dd>acquisition timeout in secs</dd>
+<dt><strong>frame_rate</strong>: {float}</dt>
+<dd>frame rate in Hz</dd>
+<dt><strong>interface</strong>: {str}, read-only</dt>
+<dd>camera interface type</dd>
+<dt><strong>firmware_version</strong>: {str}, read-only</dt>
+<dd>firmware version</dd>
+<dt><strong>camera_model</strong>: {str}, read-only</dt>
+<dd>model name of camera</dd>
+<dt><strong>camera_name</strong>: {str}, read-only</dt>
+<dd>name of camera</dd>
+<dt><strong>serial_number</strong>: {str}, read-only</dt>
+<dd>serial number of camera</dd>
+<dt><strong>sdk_version</strong>: {str}, read-only</dt>
+<dd>Andor SDK3 version</dd>
+<dt><strong>trigger_mode</strong>: {str}</dt>
+<dd>camera trigger (Internal, Software, External, External Start, External Exposure)</dd>
+<dt><strong>fan_speed</strong>: {str}</dt>
+<dd>fan speed (Off, Low, On - not all values are available for every camera)</dd>
+<dt><strong>pixel_readout_rate</strong>: {str}</dt>
+<dd>pixel readout rate in MHz (&#8216;100 MHz&#8217;, &#8216;200 MHz&#8217;, &#8216;280 MHz&#8217;, &#8216;550 MHz&#8217;; not all options are available for all cameras)</dd>
+<dt><strong>electronic_shuttering_mode</strong>: {int}</dt>
+<dd>0: rolling shutter (for highest frame rate, best noise performance, default), 1: global shutter (for pulsed, fast moving images)</dd>
+<dt><strong>full_aoi_control</strong>: {int}, read-only</dt>
+<dd>indicates if full AOI control is available (usually yes, for some Neo cameras it isn&#8217;t and you can only apply certain ROI sizes (see camera manual))</dd>
+<dt><strong>readout_time</strong>: {float}, read-only</dt>
+<dd>time to readout data from the sensor in the current configuration (0.0 if not implemented)</dd>
+<dt><strong>sensor_temperature</strong>: {float}, read-only</dt>
+<dd>current temperature of sensor in Â°C (inf if not implemented)</dd>
+<dt><strong>sensor_cooling</strong>: {int}</dt>
+<dd>state of the sensor cooling. Cooling is disabled (0) by default at power up and must be enabled (1) for the camera to achieve its target temperature</dd>
+</dl>
 </div>
 </div>
 

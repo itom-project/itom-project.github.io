@@ -24,9 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="USBMotion3XIII" href="usbMotion3XIII.html" />
@@ -72,6 +69,7 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">PI GCS2</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="usbMotion3XIII.html">USBMotion3XIII</a></li>
@@ -187,6 +185,48 @@ the default baudrate 0 forces the controller to connect with a default baudrate 
 </li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>PI GCS2</dd>
+<dt><strong>ctrlType</strong>: {str}, read-only</dt>
+<dd>Current type of controller, e.g. E-662, E-665, ...</dd>
+<dt><strong>ctrlName</strong>: {str}, read-only</dt>
+<dd>device information string</dd>
+<dt><strong>piezoName</strong>: {str}, read-only</dt>
+<dd>piezo information string</dd>
+<dt><strong>comPort</strong>: {int}, read-only</dt>
+<dd>port number of used COM port.</dd>
+<dt><strong>numaxis</strong>: {int}, read-only</dt>
+<dd>return the number of axes, here always 1</dd>
+<dt><strong>posLimitLow</strong>, <strong>posLimitHigh</strong>: {double}</dt>
+<dd>lower and upper position limit [mm] of the piezo. Movements out of this range is blocked either by the plugin or by controllers that internally support
+this feature. If the feature is available in the controller, the real ranges are set to these parameters at startup.</dd>
+<dt><strong>delayProp</strong>, <strong>delayOffset</strong>: {double}</dt>
+<dd>If the controller has no possibility to check whether the stage already is on target (param &#8216;hasOnTargetFlag&#8217;) or if these checks are disabled (param &#8216;checkFlags&#8217;), a virtual
+sleep is inserted after each movement in synchronous mode. The positioning command will then only return after this delay time. The virtual delay is
+calculated by &#8216;delayOffset&#8217; (in sec) + &#8216;delayProp&#8217; (in sec/mm) * distance to drive (in mm).</dd>
+<dt><strong>hasOnTargetFlag</strong>: {int} [0,1]</dt>
+<dd>defines whether the device has the ability to check the &#8216;on-target&#8217;-status (1), else (0)</dd>
+<dt><strong>local</strong>: {int} [0,1]</dt>
+<dd>defines if the system is in local mode (1) or in remote mode (0). It can only be controlled by this plugin in remote mode.</dd>
+<dt><strong>hasLocalRemote</strong>: {int} [0,1]</dt>
+<dd>returns if the piezo can switch between a local (0) and remote control (1).</dd>
+<dt><strong>async</strong>: {int} [0,1]</dt>
+<dd>defines if the piezo should be moved in a synchronous or asynchronous mode (default: synchronous (0)). In asynchronous mode, the positioning commands will immediately
+return after starting the movement without waiting for the end of the movement.</dd>
+<dt><strong>checkFlags</strong>: {int}, [0,7]</dt>
+<dd>Bitmask that is used to set if more of less checks should be executed during the positioning. More checks result in more information but need a little bit more
+time during the positioning. These possible values can be combined using an or-combination: 0x0001: check position boundaries before positioning and actualize current
+position after positioning (default: on), 0x0010: check for errors when positioning (default: off), 0x1000: if device has a on-target flag, it is used for checking if
+the device is on target (default: on), else a simple time gap is used that lets the driver sleep after positioning</dd>
+<dt><strong>PI_CMD</strong>: {str}</dt>
+<dd>Special parameter that can be used to directly set or read parameters from the PI device. Use this parameter followed by :YourCommand in order to read/write value
+from/to device (e.g. PI_CMD:ERR?)</dd>
+</dl>
 </div>
 </div>
 

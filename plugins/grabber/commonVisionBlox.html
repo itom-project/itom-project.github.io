@@ -24,7 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="AerotechEnsemble" href="../actuators/aerotechEnsemble.html" />
@@ -84,6 +83,7 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="">GenICam cameras via Common Vision Blox</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#acquisition">Acquisition</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#hints">Hints</a></li>
@@ -176,19 +176,49 @@ from Stemmer GenICam and don&#8217;t set the pixelFormat property to auto but Mo
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
-<dt><strong>scanForCameras</strong>: {int (int), optional} [0,1], default: 0, step: 1</dt>
-<dd><p class="first last">If 1 scan for new cameras, else take the last opened camera (default)</p>
+<dt><strong>scanForCameras</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd><p class="first last">If 1 scan for new cameras, else take the last opened camera (default). If you scan for new cameras, the configuration file (ini) created in CommonVisionBlox for GenICam or other cameras will be reset to the default values.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>bpp</strong>: {int (int), optional} [8,16], default: 16, step: 2</dt>
+<dt><strong>bpp</strong>: {int, optional} [8,16], default: 16, step: 2</dt>
 <dd><p class="first last">desired monochromatic bitdepth. Dependent on this parameter PixelFormat is set to mono8, mono10, mono12, mono14 or mono16. Make sure the bitdepth is supported by your camera</p>
 </dd>
 </dl>
 </li>
 </ul>
 </div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of plugin</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>Exposure time of chip (in seconds)</dd>
+<dt><strong>heartbeat_timeout</strong>: {int}</dt>
+<dd>Heartbeat timeout of GigE Vision Transport Layer</dd>
+<dt><strong>acquisition_mode</strong>: {str}</dt>
+<dd>&#8216;snap&#8217; is a single image acquisition (only possible in trigger_mode &#8216;off&#8217;), &#8216;grab&#8217; is a continuous acquisition</dd>
+<dt><strong>trigger_mode</strong>: {str}</dt>
+<dd>&#8216;off&#8217;: camera is not explicitly triggered but operated in freerun mode. The next acquired image is provided upon acquire, &#8216;software&#8217; sets trigger mode to On and fires a software trigger at acquire (only possible in acquisition_mode &#8216;grab&#8217;)</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt>
+<dd>Pixelsize in x (cols)</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt>
+<dd>Pixelsize in y (rows)</dd>
+<dt><strong>bpp</strong>: {int}, read-only</dt>
+<dd>bit depth</dd>
+<dt><strong>raw</strong>: {str}</dt>
+<dd>use raw:paramname to set internal paramname of camera to value. paramname is the original GenICam parameter name.</dd>
+<dt><strong>vendor_name</strong>: {str}, read-only</dt>
+<dd>vendor name</dd>
+<dt><strong>model_name</strong>: {str}, read-only</dt>
+<dd>model name</dd>
+<dt><strong>roi</strong>: {int seq.}</dt>
+<dd>ROI (x,y,width,height) [this replaces the values x0,x1,y0,y1]</dd>
+</dl>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
@@ -212,6 +242,15 @@ case, acquire decards all old images and obtains the next acquired image.</p>
 <p>Try to enable jumbo frames in your network adapter and set the packet size in Common Vision Blox to the highest rate. Save the configuration before
 loading the camera in itom. If you want to operate the camera with more than 8bit, make sure to set the CVB Color Format to Mono16 in Common Vision Blox (not auto)
 and save the configuration as well.</p>
+<p>Usually you need to configure the camera and its communication first in CommonVisionBlox before using the camera in itom. Open CommonVisionBlox and configure the camera.
+Then safe the configuration (stored in %CVBDATA%/Drivers/GenICam.ini where %CVBDATA% is an environment variable created by CommonVisionBlox) by clicking the corresponding button.</p>
+<p>If the camera is loaded in itom, the specific camera and configuration is obtained by this file (if <strong>scanForCameras</strong> is set to False). If you set <strong>scanForCameras</strong> to True,
+CommonVisionBlox will be forced to scan for newly connected cameras and the configuration file is automatically reset to its default.</p>
+<p>Things to configure are for example:</p>
+<ul class="simple">
+<li>color format (bit depth...)</li>
+<li>packet size</li>
+</ul>
 </div>
 </div>
 
