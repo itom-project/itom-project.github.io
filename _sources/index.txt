@@ -26,6 +26,7 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2015-07-20: Today **itom 2.0.0** has been released. The Windows setups and the sources (tag v2.0.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **Standa 8SMC4-USB**, **CommonVisionBlox**, **AvantesAvaSpec**, **PCOSensicam**, **LibUSB**... For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html. The setup version is the first version that is released using Qt5 (Qt5.3) and comes with the current Python 3.4.
 * 2015-06-17: The plugin **Standa 8SMC4-USB** for stepper motor controllers from stand has been added to the plugin repository.
 * 2015-06-01: The plugin **CommonVisionBlox** to control cameras via CommonVisionBlox from company Stemmer has been added to the plugin repository.
 * 2015-06-01: The plugin **AvantesAvaSpec** for spectrometers from company Avantes has been added to the plugin repository. It uses the plugin LibUSB to control the spectrometer and does not require the specific Avantes libraries.

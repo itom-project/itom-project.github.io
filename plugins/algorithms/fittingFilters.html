@@ -10,6 +10,12 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -145,41 +151,21 @@
 <p>Furthermore this plugin also contains methods to finally subtract or reconstruct the fitted surfaces.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
-<li>subtractRegressionPlane</li>
 <li>fitPolynom2D</li>
-<li>fitPolynom1D_Z</li>
-<li>getInterpolatedValues</li>
 <li>polyval2D</li>
-<li>polyfitWeighted2DSinglePoints</li>
+<li>fitPolynom1D_Z</li>
 <li>polyval2DSinglePoints</li>
-<li>fitPlane</li>
 <li>polyfitWeighted2D</li>
 <li>subtractPlane</li>
+<li>getInterpolatedValues</li>
+<li>subtractRegressionPlane</li>
+<li>fitPlane</li>
+<li>polyfitWeighted2DSinglePoints</li>
 </ol>
 </div>
 <div class="section" id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
-<dl class="function">
-<dt id="subtractRegressionPlane">
-<code class="descname">subtractRegressionPlane</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>method</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#subtractRegressionPlane" title="Permalink to this definition">¶</a></dt>
-<dd><p>subtracts a fitted regression plane from the given 2D input dataObject .</p>
-<p>This method firstly executes the filter <em>fitPlane</em> followed by <em>subtractPlane</em>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
-<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image data object</li>
-<li><strong>method</strong> (<em>str - optional</em>) &#8211; fitting method (leastSquareFit [default], leastSquareFitSVD)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="function">
 <dt id="fitPolynom2D">
 <code class="descname">fitPolynom2D</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>fittedImage</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom2D" title="Permalink to this definition">¶</a></dt>
@@ -203,70 +189,6 @@ return the coefficients for the polynomial. Use polyfitWeighted2d if you want to
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fitPolynom1D_Z">
-<code class="descname">fitPolynom1D_Z</code><span class="sig-paren">(</span><em>data</em>, <em>polynoms</em>, <em>order</em><span class="optional">[</span>, <em>weights</em>, <em>xVals</em>, <em>numThreads</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom1D_Z" title="Permalink to this definition">¶</a></dt>
-<dd><p>One-dimensional polynomial fit in z-direction for a 3D - data object.</p>
-<p>The input data object must be three-dimensional and is internally casted to float64 (if not yet done). The resulting polynomial parameters per pixel are stored in the output data object &#8216;polynoms&#8217; whose z-dimension is equal to (order+2). The first (order+1) planes contain the coefficients p0...pn and the last plane contain the pixel wise residual error.</p>
-<p>The polynomial is y(x) = p0 + x*p1 ... + x^n*pn
-The residual is the sum of the quadratical errors from each valid pixel to the fitted polynomial.</p>
-<p>If no &#8216;xVals&#8217; are assigned, the x-values for each plane are calculated using the offset and scale of the data-object in z-direction, such that an equally spaced vector of (0,1,2,3...) is the default.</p>
-<p>You can additionally give a weight data object (same dimension than &#8216;data&#8217;) for weighting the values. NaN values in &#8216;data&#8217; and weights &lt;= 0 are ignored. If a fit cannot be done due to too less or degenerated values, NaN is returned in &#8216;polynoms&#8217; at this pixel.</p>
-<p>For a first order fit, a direct least squares solution is used which is very fast, for the other orders a system of linear equations is solved (using a SVD decomposition) which can be slower. On a multi-core processor you can assign a number of threads that are used to parallely compute the approximations for each pixel.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>dataObject</em>) &#8211; input data object (3 dimensions).</li>
-<li><strong>polynoms</strong> (<em>dataObject</em>) &#8211; </li>
-<li><strong>order</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order</li>
-<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights (same dimensions than data)</li>
-<li><strong>xVals</strong> (<em>seq. of float - optional</em>) &#8211; x-value vector (length must be the same than z-size of data) [default: equally spaced values are assumed using scale and offset of the data object in z-direction]</li>
-<li><strong>numThreads</strong> (<em>int - optional</em>) &#8211; weights (same dimensions than data)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="getInterpolatedValues">
-<code class="descname">getInterpolatedValues</code><span class="sig-paren">(</span><em>dataObj</em>, <em>coordsSubPix</em><span class="optional">[</span>, <em>searchRect</em>, <em>method</em>, <em>validPointProbability</em>, <em>allowedErrorProbability</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getInterpolatedValues" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the linearly interpolated values of a given input dataObject at specific 2D point coordinates.</p>
-<p>The given input data object must be a real valued object with two dimensions or a region of interest that only contains one plane (e.g. 1xMxN).
-The point coordinates (coordsSubPix) is a Nx2 floating point data object where each row is the row and column coordinate (sub-pixel) of the desired value. The values must be given
-in the coordinates of the data object (scale values).
-The resulting interpolated values are returned as &#8216;values&#8217; list. The input data object is allowed to contain non-finite values.</p>
-<p>For the interpolation a search rectangle whose height and width is given by &#8216;searchRect&#8217; is centered at the rounded coordinate and a plane is robustly fitted into the valid
-values that lie within the rectangle. The value is then determined using the coefficients of the fitted plane. Infinite values are ignored for the determination of the plane.
-The plane is calculated by least-squares fit. If the rectangle exceeds the boundaries of the given matrix, it moved inside of the matrix such that the searched coordinate still lies within
-the rectangle. If this is not possible, NaN is returned as value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>dataObj</strong> (<em>dataObject</em>) &#8211; input real-valued data object (2D or ROI containing only one plane).</li>
-<li><strong>coordsSubPix</strong> (<em>dataObject</em>) &#8211; input Nx2 data object containing the sub-pixel (column,row) coordinates of each point (given in scale value of dataObj).</li>
-<li><strong>searchRect</strong> (<em>seq. of int - optional</em>) &#8211; [height, width] of the search rectangle for the linear interpolation. A plane fit is executed for all finite values within the rectangle and the output value is determined based on the plane coefficients. If the size if even, its size drifts towards the trend direction given by the coordinate value.</li>
-<li><strong>method</strong> (<em>str - optional</em>) &#8211; LeastSquares (default), LMedS (Least median of squares)</li>
-<li><strong>validPointProbability</strong> (<em>float - optional</em>) &#8211; probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</li>
-<li><strong>allowedErrorProbability</strong> (<em>float - optional</em>) &#8211; allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">values - output vector of type ito::float64 containing the interpolated values (NaN if no value could be found)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
 </td>
 </tr>
 </tbody>
@@ -306,40 +228,27 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="polyfitWeighted2DSinglePoints">
-<code class="descname">polyfitWeighted2DSinglePoints</code><span class="sig-paren">(</span><em>xData</em>, <em>yData</em>, <em>zData</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>weights</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#polyfitWeighted2DSinglePoints" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method fits a two-dimensional polynomial of given order in x- and y-direction to the points whose x, y and z coordinates are given in &#8216;xData&#8217;, &#8216;yData&#8217; and &#8216;zData&#8217;.</p>
-<p>The fit is executed in double precision, such that the input is converted to float64 (if not yet done). NaN values in the x, y or z data objects are ignored. Optionally, you can give a weighting data object (needs to have the same dimension and size than inputData) such that the values are weighted with the values of the data object &#8216;weights&#8217;. Values with corresponding weights &lt;= 0 are ignored as well.</p>
-<p>All input data objects must have the same size.</p>
-<p>Depending on the orders, the fitted polynomial, whose coefficients are returned by this filter, has the following form:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>if (orderX &lt;= orderY):</dt>
-<dd>z = f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</dd>
-<dt>else:</dt>
-<dd>z = f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</dd>
-</dl>
-</div></blockquote>
-<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
-<p>The solver uses a Vandermonde matrix V as solving strategy and tries to solve V*p=Z, where Z are the valid values of the input data object. The overdetermined system of linear equations is finally solved using a QR factorization of V. If this module is compiled with LAPACK, its solvers are used, else the solve-command of OpenCV (slower) is called.</p>
+<dt id="fitPolynom1D_Z">
+<code class="descname">fitPolynom1D_Z</code><span class="sig-paren">(</span><em>data</em>, <em>polynoms</em>, <em>order</em><span class="optional">[</span>, <em>weights</em>, <em>xVals</em>, <em>numThreads</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom1D_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>One-dimensional polynomial fit in z-direction for a 3D - data object.</p>
+<p>The input data object must be three-dimensional and is internally casted to float64 (if not yet done). The resulting polynomial parameters per pixel are stored in the output data object &#8216;polynoms&#8217; whose z-dimension is equal to (order+2). The first (order+1) planes contain the coefficients p0...pn and the last plane contain the pixel wise residual error.</p>
+<p>The polynomial is y(x) = p0 + x*p1 ... + x^n*pn
+The residual is the sum of the quadratical errors from each valid pixel to the fitted polynomial.</p>
+<p>If no &#8216;xVals&#8217; are assigned, the x-values for each plane are calculated using the offset and scale of the data-object in z-direction, such that an equally spaced vector of (0,1,2,3...) is the default.</p>
+<p>You can additionally give a weight data object (same dimension than &#8216;data&#8217;) for weighting the values. NaN values in &#8216;data&#8217; and weights &lt;= 0 are ignored. If a fit cannot be done due to too less or degenerated values, NaN is returned in &#8216;polynoms&#8217; at this pixel.</p>
+<p>For a first order fit, a direct least squares solution is used which is very fast, for the other orders a system of linear equations is solved (using a SVD decomposition) which can be slower. On a multi-core processor you can assign a number of threads that are used to parallely compute the approximations for each pixel.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>xData</strong> (<em>dataObject</em>) &#8211; input data object with x-coordinates of points</li>
-<li><strong>yData</strong> (<em>dataObject</em>) &#8211; input data object with y-coordinates of points</li>
-<li><strong>zData</strong> (<em>dataObject</em>) &#8211; input data object with z-coordinates of points</li>
-<li><strong>orderX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
-<li><strong>orderY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
-<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights, if not given all values are equally weighted</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>dataObject</em>) &#8211; input data object (3 dimensions).</li>
+<li><strong>polynoms</strong> (<em>dataObject</em>) &#8211; </li>
+<li><strong>order</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order</li>
+<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights (same dimensions than data)</li>
+<li><strong>xVals</strong> (<em>seq. of float - optional</em>) &#8211; x-value vector (length must be the same than z-size of data) [default: equally spaced values are assumed using scale and offset of the data object in z-direction]</li>
+<li><strong>numThreads</strong> (<em>int - optional</em>) &#8211; weights (same dimensions than data)</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coefficients - fitted polynomial coefficients</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
 </td>
 </tr>
 </tbody>
@@ -373,51 +282,6 @@ The polynomial coefficients (p0, p1, ...) are those returned by the filter &#821
 <li><strong>orderX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
 <li><strong>orderY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fitPlane">
-<code class="descname">fitPlane</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>method</em>, <em>validPointProbability</em>, <em>allowedErrorProbability</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPlane" title="Permalink to this definition">¶</a></dt>
-<dd><p>fits plane in 2D-dataObject and returns plane-parameters A,B,C (z=A+Bx+Cy)</p>
-<p>This fit can be executed by different fit strategies:
-- leastSquareFit minimizes the sum of  the squared distances of all valid points to the plane (direct solution)
-- leastSquareFitSVD does the same using a svd algorithm
-- leastMedianFit minimizes the median of the absolute distances of all valid points to the plane</p>
-<p>The probability values are only important for the least median fit and determine the number of iterations for the
-a random search using the equation</p>
-<p>iterations &gt;= ceil(log(allowedErrorProbability)/log(1-validPointProbability)))</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
-<li><strong>method</strong> (<em>str - optional</em>) &#8211; fitting method (leastSquareFit [default], leastSquareFitSVD, leastMedianFit)</li>
-<li><strong>validPointProbability</strong> (<em>float - optional</em>) &#8211; probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</li>
-<li><strong>allowedErrorProbability</strong> (<em>float - optional</em>) &#8211; allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A - Parameter A of regression plane z = A + Bx + Cy</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">B - Parameter B of regression plane z = A + Bx + Cy</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">C - Parameter C of regression plane z = A + Bx + Cy</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -480,6 +344,148 @@ a random search using the equation</p>
 <li><strong>B</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter B of regression plane z = A + Bx + Cy, which is subtracted</li>
 <li><strong>C</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter C of regression plane z = A + Bx + Cy, which is subtracted</li>
 </ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="getInterpolatedValues">
+<code class="descname">getInterpolatedValues</code><span class="sig-paren">(</span><em>dataObj</em>, <em>coordsSubPix</em><span class="optional">[</span>, <em>searchRect</em>, <em>method</em>, <em>validPointProbability</em>, <em>allowedErrorProbability</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getInterpolatedValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the linearly interpolated values of a given input dataObject at specific 2D point coordinates.</p>
+<p>The given input data object must be a real valued object with two dimensions or a region of interest that only contains one plane (e.g. 1xMxN).
+The point coordinates (coordsSubPix) is a Nx2 floating point data object where each row is the row and column coordinate (sub-pixel) of the desired value. The values must be given
+in the coordinates of the data object (scale values).
+The resulting interpolated values are returned as &#8216;values&#8217; list. The input data object is allowed to contain non-finite values.</p>
+<p>For the interpolation a search rectangle whose height and width is given by &#8216;searchRect&#8217; is centered at the rounded coordinate and a plane is robustly fitted into the valid
+values that lie within the rectangle. The value is then determined using the coefficients of the fitted plane. Infinite values are ignored for the determination of the plane.
+The plane is calculated by least-squares fit. If the rectangle exceeds the boundaries of the given matrix, it moved inside of the matrix such that the searched coordinate still lies within
+the rectangle. If this is not possible, NaN is returned as value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dataObj</strong> (<em>dataObject</em>) &#8211; input real-valued data object (2D or ROI containing only one plane).</li>
+<li><strong>coordsSubPix</strong> (<em>dataObject</em>) &#8211; input Nx2 data object containing the sub-pixel (column,row) coordinates of each point (given in scale value of dataObj).</li>
+<li><strong>searchRect</strong> (<em>seq. of int - optional</em>) &#8211; [height, width] of the search rectangle for the linear interpolation. A plane fit is executed for all finite values within the rectangle and the output value is determined based on the plane coefficients. If the size if even, its size drifts towards the trend direction given by the coordinate value.</li>
+<li><strong>method</strong> (<em>str - optional</em>) &#8211; LeastSquares (default), LMedS (Least median of squares)</li>
+<li><strong>validPointProbability</strong> (<em>float - optional</em>) &#8211; probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</li>
+<li><strong>allowedErrorProbability</strong> (<em>float - optional</em>) &#8211; allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">values - output vector of type ito::float64 containing the interpolated values (NaN if no value could be found)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="subtractRegressionPlane">
+<code class="descname">subtractRegressionPlane</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>method</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#subtractRegressionPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>subtracts a fitted regression plane from the given 2D input dataObject .</p>
+<p>This method firstly executes the filter <em>fitPlane</em> followed by <em>subtractPlane</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image data object</li>
+<li><strong>method</strong> (<em>str - optional</em>) &#8211; fitting method (leastSquareFit [default], leastSquareFitSVD)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fitPlane">
+<code class="descname">fitPlane</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>method</em>, <em>validPointProbability</em>, <em>allowedErrorProbability</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>fits plane in 2D-dataObject and returns plane-parameters A,B,C (z=A+Bx+Cy)</p>
+<p>This fit can be executed by different fit strategies:
+- leastSquareFit minimizes the sum of  the squared distances of all valid points to the plane (direct solution)
+- leastSquareFitSVD does the same using a svd algorithm
+- leastMedianFit minimizes the median of the absolute distances of all valid points to the plane</p>
+<p>The probability values are only important for the least median fit and determine the number of iterations for the
+a random search using the equation</p>
+<p>iterations &gt;= ceil(log(allowedErrorProbability)/log(1-validPointProbability)))</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
+<li><strong>method</strong> (<em>str - optional</em>) &#8211; fitting method (leastSquareFit [default], leastSquareFitSVD, leastMedianFit)</li>
+<li><strong>validPointProbability</strong> (<em>float - optional</em>) &#8211; probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</li>
+<li><strong>allowedErrorProbability</strong> (<em>float - optional</em>) &#8211; allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A - Parameter A of regression plane z = A + Bx + Cy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">B - Parameter B of regression plane z = A + Bx + Cy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">C - Parameter C of regression plane z = A + Bx + Cy</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="polyfitWeighted2DSinglePoints">
+<code class="descname">polyfitWeighted2DSinglePoints</code><span class="sig-paren">(</span><em>xData</em>, <em>yData</em>, <em>zData</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>weights</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#polyfitWeighted2DSinglePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method fits a two-dimensional polynomial of given order in x- and y-direction to the points whose x, y and z coordinates are given in &#8216;xData&#8217;, &#8216;yData&#8217; and &#8216;zData&#8217;.</p>
+<p>The fit is executed in double precision, such that the input is converted to float64 (if not yet done). NaN values in the x, y or z data objects are ignored. Optionally, you can give a weighting data object (needs to have the same dimension and size than inputData) such that the values are weighted with the values of the data object &#8216;weights&#8217;. Values with corresponding weights &lt;= 0 are ignored as well.</p>
+<p>All input data objects must have the same size.</p>
+<p>Depending on the orders, the fitted polynomial, whose coefficients are returned by this filter, has the following form:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if (orderX &lt;= orderY):</dt>
+<dd>z = f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</dd>
+<dt>else:</dt>
+<dd>z = f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</dd>
+</dl>
+</div></blockquote>
+<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
+<p>The solver uses a Vandermonde matrix V as solving strategy and tries to solve V*p=Z, where Z are the valid values of the input data object. The overdetermined system of linear equations is finally solved using a QR factorization of V. If this module is compiled with LAPACK, its solvers are used, else the solve-command of OpenCV (slower) is called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xData</strong> (<em>dataObject</em>) &#8211; input data object with x-coordinates of points</li>
+<li><strong>yData</strong> (<em>dataObject</em>) &#8211; input data object with y-coordinates of points</li>
+<li><strong>zData</strong> (<em>dataObject</em>) &#8211; input data object with z-coordinates of points</li>
+<li><strong>orderX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
+<li><strong>orderY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
+<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights, if not given all values are equally weighted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coefficients - fitted polynomial coefficients</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
 </td>
 </tr>
 </tbody>

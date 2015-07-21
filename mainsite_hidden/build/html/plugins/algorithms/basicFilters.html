@@ -10,6 +10,12 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -151,44 +157,43 @@
 <p>This plugin does not have any unusual dependencies.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
-<li>lowValueFilter</li>
-<li>medianFilter</li>
-<li>fillObject</li>
-<li>replaceInfAndNaN</li>
-<li>clipValues</li>
-<li>calcObjSlice</li>
-<li>gaussianFilterEpsilon</li>
-<li>clipAbyB</li>
-<li>calcRadialMean</li>
-<li>spikeMeanFilter</li>
-<li>lowPassFilter</li>
-<li>flatten3Dto2D</li>
-<li>mergeColorPlane</li>
-<li>spikeMedianFilter</li>
-<li>swapByteOrder</li>
-<li>gaussianFilter</li>
 <li>calcMeanZ</li>
-<li>calcHist</li>
+<li>clipValues</li>
+<li>replaceInfAndNaN</li>
+<li>fillObject</li>
+<li>lowValueFilter</li>
+<li>swapByteOrder</li>
+<li>mergeColorPlane</li>
+<li>gaussianFilterEpsilon</li>
+<li>calcObjSlice</li>
 <li>highValueFilter</li>
+<li>calcRadialMean</li>
+<li>spikeMedianFilter</li>
+<li>flatten3Dto2D</li>
+<li>gaussianFilter</li>
+<li>clipAbyB</li>
+<li>calcHist</li>
+<li>medianFilter</li>
+<li>lowPassFilter</li>
+<li>spikeMeanFilter</li>
 </ol>
 </div>
 <div class="section" id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
 <dl class="function">
-<dt id="lowValueFilter">
-<code class="descname">lowValueFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#lowValueFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set each pixel to the lowest value within the kernel (x ,y) using the generic mcpp filter engine</p>
+<dt id="calcMeanZ">
+<code class="descname">calcMeanZ</code><span class="sig-paren">(</span><em>srcImg</em>, <em>destImg</em><span class="optional">[</span>, <em>ignoreInf</em>, <em>calcStd</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcMeanZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate mean value (and optional standard deviation) of a 3D data object in z-direction.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
-<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
-<li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
-<li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
-<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
+<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; 3D input object of dimension [ZxMxN] with Z different planes.</li>
+<li><strong>destImg</strong> (<em>dataObject</em>) &#8211; Output image of same type than input object and dimension [1xMxN] or [2xMxN] depending on parameter &#8216;calcStd&#8217;.</li>
+<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; If 1, Inf or NaN values will not be taken into account when calculating the mean value (default, only important for floating point data types).</li>
+<li><strong>calcStd</strong> (<em>int - optional</em>) &#8211; If 1, the standard deviation is also calculated and put into the second plane of &#8216;destImg&#8217;.</li>
 </ul>
 </td>
 </tr>
@@ -197,42 +202,21 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="medianFilter">
-<code class="descname">medianFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#medianFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs a median filter with kernelsize (x ,y) using the generic mcpp filter engine</p>
+<dt id="clipValues">
+<code class="descname">clipValues</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em>, <em>minValue</em>, <em>maxValue</em><span class="optional">[</span>, <em>newValue</em>, <em>insideFlag</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#clipValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>clip values outside or inside of minValue and maxValue to newValue (default = 0)</p>
+<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values within (1) or outside (0) of the range (minValue, maxValue) to the value given by &#8216;newValue&#8217;. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
-<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
-<li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
-<li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
-<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fillObject">
-<code class="descname">fillObject</code><span class="sig-paren">(</span><em>destinationImage</em>, <em>geometricElement</em><span class="optional">[</span>, <em>insideFlag</em>, <em>edgeFlag</em>, <em>newValueInside</em>, <em>newValueOutside</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fillObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>fills a ROI, which defined by a geometric primitive, of the given dataObject with a defined value</p>
-<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values of the dataObject depending on the geometric primitiv within (1) or outside (2) or both (3) to the value given by &#8216;newValueInside&#8217; and &#8216;newValueOutside&#8217;. The &#8216;edgeFlag&#8217; is currently not used but shall manage the edge handling of primitive.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; Preallocated dataObject to be filled</li>
-<li><strong>geometricElement</strong> (<em>dataObject</em>) &#8211; Geometric primitiv according to definition</li>
-<li><strong>insideFlag</strong> (<em>int - optional</em>) &#8211; Switch between fill inside, outside or both</li>
-<li><strong>edgeFlag</strong> (<em>int - optional</em>) &#8211; Edge-Flag, currently not used</li>
-<li><strong>newValueInside</strong> (<em>float - optional</em>) &#8211; New value for pixels inside the geometric element</li>
-<li><strong>newValueOutside</strong> (<em>float - optional</em>) &#8211; New value for pixels outside the geometric element</li>
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object]</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image (inplace possible)</li>
+<li><strong>minValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; lowest value in range</li>
+<li><strong>maxValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; highest value in range</li>
+<li><strong>newValue</strong> (<em>float - optional</em>) &#8211; value set to clipped values (default: 0.0)</li>
+<li><strong>insideFlag</strong> (<em>int - optional</em>) &#8211; 0: clip values outside of given range (default), 1: clip inside</li>
 </ul>
 </td>
 </tr>
@@ -266,21 +250,21 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="clipValues">
-<code class="descname">clipValues</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em>, <em>minValue</em>, <em>maxValue</em><span class="optional">[</span>, <em>newValue</em>, <em>insideFlag</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#clipValues" title="Permalink to this definition">¶</a></dt>
-<dd><p>clip values outside or inside of minValue and maxValue to newValue (default = 0)</p>
-<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values within (1) or outside (0) of the range (minValue, maxValue) to the value given by &#8216;newValue&#8217;. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
+<dt id="fillObject">
+<code class="descname">fillObject</code><span class="sig-paren">(</span><em>destinationImage</em>, <em>geometricElement</em><span class="optional">[</span>, <em>insideFlag</em>, <em>edgeFlag</em>, <em>newValueInside</em>, <em>newValueOutside</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fillObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>fills a ROI, which defined by a geometric primitive, of the given dataObject with a defined value</p>
+<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values of the dataObject depending on the geometric primitiv within (1) or outside (2) or both (3) to the value given by &#8216;newValueInside&#8217; and &#8216;newValueOutside&#8217;. The &#8216;edgeFlag&#8217; is currently not used but shall manage the edge handling of primitive.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object]</li>
-<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image (inplace possible)</li>
-<li><strong>minValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; lowest value in range</li>
-<li><strong>maxValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; highest value in range</li>
-<li><strong>newValue</strong> (<em>float - optional</em>) &#8211; value set to clipped values (default: 0.0)</li>
-<li><strong>insideFlag</strong> (<em>int - optional</em>) &#8211; 0: clip values outside of given range (default), 1: clip inside</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; Preallocated dataObject to be filled</li>
+<li><strong>geometricElement</strong> (<em>dataObject</em>) &#8211; Geometric primitiv according to definition</li>
+<li><strong>insideFlag</strong> (<em>int - optional</em>) &#8211; Switch between fill inside, outside or both</li>
+<li><strong>edgeFlag</strong> (<em>int - optional</em>) &#8211; Edge-Flag, currently not used</li>
+<li><strong>newValueInside</strong> (<em>float - optional</em>) &#8211; New value for pixels inside the geometric element</li>
+<li><strong>newValueOutside</strong> (<em>float - optional</em>) &#8211; New value for pixels outside the geometric element</li>
 </ul>
 </td>
 </tr>
@@ -289,123 +273,9 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="calcObjSlice">
-<code class="descname">calcObjSlice</code><span class="sig-paren">(</span><em>srcImg</em>, <em>dstSlice</em>, <em>x0</em>, <em>y0</em>, <em>x1</em>, <em>y1</em><span class="optional">[</span>, <em>interpolation mode</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcObjSlice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interpolate 1D-slice from along the defined line from a 2D-Object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; 2D image or single plane n-D object</li>
-<li><strong>dstSlice</strong> (<em>dataObject</em>) &#8211; Slice with output data</li>
-<li><strong>x0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x0-coordinate for slice</li>
-<li><strong>y0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y0-coordinate for slice</li>
-<li><strong>x1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x1-coordinate for slice</li>
-<li><strong>y1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y1-coordinate for slice</li>
-<li><strong>mode</strong> (<em>interpolation</em>) &#8211; 0: Bresenham or Nearest, 1: weighted</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="gaussianFilterEpsilon">
-<code class="descname">gaussianFilterEpsilon</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>sigmaX</em>, <em>epsilonX</em>, <em>sigmaY</em>, <em>epsilonY</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#gaussianFilterEpsilon" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs a gaussian blur filter according to sigma and epsilon using the generic mcpp filter engine. The kernelsize (x ,y) will be estimated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
-<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
-<li><strong>sigmaX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Standard deviation in x direction</li>
-<li><strong>epsilonX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Stop condition in x-direction, kernel values less than epsilon are ignored</li>
-<li><strong>sigmaY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Standard deviation in x direction</li>
-<li><strong>epsilonY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Stop condition in y-direction, kernel values less than epsilon are ignored</li>
-<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="clipAbyB">
-<code class="descname">clipAbyB</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>comparisonImage</em>, <em>destinationImage</em>, <em>minValue</em>, <em>maxValue</em><span class="optional">[</span>, <em>newValue</em>, <em>insideFlag</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#clipAbyB" title="Permalink to this definition">¶</a></dt>
-<dd><p>clip values of image A to newValue (default = 0) outside or inside of minValue and maxValue in image B</p>
-<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values in image A depending on image B within (1) or outside (0) of the range (minValue, maxValue) to the value given by &#8216;newValue&#8217;. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object]</li>
-<li><strong>comparisonImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object] for comparision</li>
-<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image (inplace possible)</li>
-<li><strong>minValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; lowest value in range</li>
-<li><strong>maxValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; highest value in range</li>
-<li><strong>newValue</strong> (<em>float - optional</em>) &#8211; value set to clipped values (default: 0.0)</li>
-<li><strong>insideFlag</strong> (<em>int - optional</em>) &#8211; 0: clip values outside of given range (default), 1: clip inside</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="calcRadialMean">
-<code class="descname">calcRadialMean</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em>, <em>radiusStep</em><span class="optional">[</span>, <em>centerX</em>, <em>centerY</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcRadialMean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the mean value for radial circles with a given center point an a radius step size</p>
-<p>The radiuses are the distances from the given center point to the physical coordinates of each pixel.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>scrImage</strong> (<em>dataObject</em>) &#8211; Input image</li>
-<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; Output image (1xN) of the same type than the input image, where N corresponds to different radiuses.</li>
-<li><strong>radiusStep</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; step size of the radius for the discretization</li>
-<li><strong>centerX</strong> (<em>float - optional</em>) &#8211; x-coordinate of radial center</li>
-<li><strong>centerY</strong> (<em>float - optional</em>) &#8211; y-coordinate of radial center</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="spikeMeanFilter">
-<code class="descname">spikeMeanFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em>, <em>delta</em>, <em>newValue</em><span class="sig-paren">)</span><a class="headerlink" href="#spikeMeanFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs a low pass filter with kernelsize (x ,y) and pixelwise comparison of filtered image and original image to remove spikes according to delta value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
-<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
-<li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
-<li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
-<li><strong>delta</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Delta value for comparison</li>
-<li><strong>newValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; value set to clipped values (default: 0.0)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="lowPassFilter">
-<code class="descname">lowPassFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#lowPassFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs a low-pass filter with kernelsize (x ,y) using the generic mcpp filter engine</p>
+<dt id="lowValueFilter">
+<code class="descname">lowValueFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#lowValueFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set each pixel to the lowest value within the kernel (x ,y) using the generic mcpp filter engine</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -424,9 +294,9 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="flatten3Dto2D">
-<code class="descname">flatten3Dto2D</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#flatten3Dto2D" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flattens a z-Stack of Mx1xN or MxNx1 matrixes to NxM or MxN.</p>
+<dt id="swapByteOrder">
+<code class="descname">swapByteOrder</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#swapByteOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swap byte order for input image.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -462,6 +332,95 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="gaussianFilterEpsilon">
+<code class="descname">gaussianFilterEpsilon</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>sigmaX</em>, <em>epsilonX</em>, <em>sigmaY</em>, <em>epsilonY</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#gaussianFilterEpsilon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a gaussian blur filter according to sigma and epsilon using the generic mcpp filter engine. The kernelsize (x ,y) will be estimated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>sigmaX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Standard deviation in x direction</li>
+<li><strong>epsilonX</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Stop condition in x-direction, kernel values less than epsilon are ignored</li>
+<li><strong>sigmaY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Standard deviation in x direction</li>
+<li><strong>epsilonY</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Stop condition in y-direction, kernel values less than epsilon are ignored</li>
+<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calcObjSlice">
+<code class="descname">calcObjSlice</code><span class="sig-paren">(</span><em>srcImg</em>, <em>dstSlice</em>, <em>x0</em>, <em>y0</em>, <em>x1</em>, <em>y1</em><span class="optional">[</span>, <em>interpolation mode</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcObjSlice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate 1D-slice from along the defined line from a 2D-Object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; 2D image or single plane n-D object</li>
+<li><strong>dstSlice</strong> (<em>dataObject</em>) &#8211; Slice with output data</li>
+<li><strong>x0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x0-coordinate for slice</li>
+<li><strong>y0</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y0-coordinate for slice</li>
+<li><strong>x1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x1-coordinate for slice</li>
+<li><strong>y1</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y1-coordinate for slice</li>
+<li><strong>mode</strong> (<em>interpolation</em>) &#8211; 0: Bresenham or Nearest, 1: weighted</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="highValueFilter">
+<code class="descname">highValueFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#highValueFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set each pixel to the highest value within the kernel (x ,y) using the generic mcpp filter engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
+<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calcRadialMean">
+<code class="descname">calcRadialMean</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em>, <em>radiusStep</em><span class="optional">[</span>, <em>centerX</em>, <em>centerY</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcRadialMean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the mean value for radial circles with a given center point an a radius step size</p>
+<p>The radiuses are the distances from the given center point to the physical coordinates of each pixel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scrImage</strong> (<em>dataObject</em>) &#8211; Input image</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; Output image (1xN) of the same type than the input image, where N corresponds to different radiuses.</li>
+<li><strong>radiusStep</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; step size of the radius for the discretization</li>
+<li><strong>centerX</strong> (<em>float - optional</em>) &#8211; x-coordinate of radial center</li>
+<li><strong>centerY</strong> (<em>float - optional</em>) &#8211; y-coordinate of radial center</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="spikeMedianFilter">
 <code class="descname">spikeMedianFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em>, <em>delta</em>, <em>newValue</em><span class="sig-paren">)</span><a class="headerlink" href="#spikeMedianFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs a median filter with kernelsize (x ,y) and pixelwise comparison of filtered image and original image to remove spikes according to delta value.</p>
@@ -484,9 +443,9 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="swapByteOrder">
-<code class="descname">swapByteOrder</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#swapByteOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Swap byte order for input image.</p>
+<dt id="flatten3Dto2D">
+<code class="descname">flatten3Dto2D</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#flatten3Dto2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens a z-Stack of Mx1xN or MxNx1 matrixes to NxM or MxN.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -525,18 +484,22 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="calcMeanZ">
-<code class="descname">calcMeanZ</code><span class="sig-paren">(</span><em>srcImg</em>, <em>destImg</em><span class="optional">[</span>, <em>ignoreInf</em>, <em>calcStd</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcMeanZ" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate mean value (and optional standard deviation) of a 3D data object in z-direction.</p>
+<dt id="clipAbyB">
+<code class="descname">clipAbyB</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>comparisonImage</em>, <em>destinationImage</em>, <em>minValue</em>, <em>maxValue</em><span class="optional">[</span>, <em>newValue</em>, <em>insideFlag</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#clipAbyB" title="Permalink to this definition">¶</a></dt>
+<dd><p>clip values of image A to newValue (default = 0) outside or inside of minValue and maxValue in image B</p>
+<p>Depending on the parameter &#8216;insideFlag&#8217;, this filter sets all values in image A depending on image B within (1) or outside (0) of the range (minValue, maxValue) to the value given by &#8216;newValue&#8217;. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>srcImg</strong> (<em>dataObject</em>) &#8211; 3D input object of dimension [ZxMxN] with Z different planes.</li>
-<li><strong>destImg</strong> (<em>dataObject</em>) &#8211; Output image of same type than input object and dimension [1xMxN] or [2xMxN] depending on parameter &#8216;calcStd&#8217;.</li>
-<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; If 1, Inf or NaN values will not be taken into account when calculating the mean value (default, only important for floating point data types).</li>
-<li><strong>calcStd</strong> (<em>int - optional</em>) &#8211; If 1, the standard deviation is also calculated and put into the second plane of &#8216;destImg&#8217;.</li>
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object]</li>
+<li><strong>comparisonImage</strong> (<em>dataObject</em>) &#8211; input image [real typed data object] for comparision</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image (inplace possible)</li>
+<li><strong>minValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; lowest value in range</li>
+<li><strong>maxValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; highest value in range</li>
+<li><strong>newValue</strong> (<em>float - optional</em>) &#8211; value set to clipped values (default: 0.0)</li>
+<li><strong>insideFlag</strong> (<em>int - optional</em>) &#8211; 0: clip values outside of given range (default), 1: clip inside</li>
 </ul>
 </td>
 </tr>
@@ -566,9 +529,9 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="highValueFilter">
-<code class="descname">highValueFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#highValueFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set each pixel to the highest value within the kernel (x ,y) using the generic mcpp filter engine</p>
+<dt id="medianFilter">
+<code class="descname">medianFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#medianFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a median filter with kernelsize (x ,y) using the generic mcpp filter engine</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -579,6 +542,49 @@
 <li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
 <li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
 <li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lowPassFilter">
+<code class="descname">lowPassFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#lowPassFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a low-pass filter with kernelsize (x ,y) using the generic mcpp filter engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
+<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 NaN values in input image will be copied to output image (default)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="spikeMeanFilter">
+<code class="descname">spikeMeanFilter</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destImage</em>, <em>kernelx</em>, <em>kernely</em>, <em>delta</em>, <em>newValue</em><span class="sig-paren">)</span><a class="headerlink" href="#spikeMeanFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a low pass filter with kernelsize (x ,y) and pixelwise comparison of filtered image and original image to remove spikes according to delta value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject</li>
+<li><strong>destImage</strong> (<em>dataObject</em>) &#8211; n-dim DataObject of type sourceImage</li>
+<li><strong>kernelx</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in x</li>
+<li><strong>kernely</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Odd kernelsize in y</li>
+<li><strong>delta</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Delta value for comparison</li>
+<li><strong>newValue</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; value set to clipped values (default: 0.0)</li>
 </ul>
 </td>
 </tr>
