@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'c382869',
+        VERSION:     'f637724',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -676,7 +676,8 @@ possible to convert the resulting data object to another type (given by the para
 <dd><p>This method transforms a physical axis coordinate into its corresponding pixel coordinate. The transformation is influenced 
 by the offset and scaling of each axis:</p>
 <p>phys = (pix - offset) * scaling</p>
-<p>If no axes parameter is given, the values are assumed to belong the the ascending axis list (0,1,2,3...).</p>
+<p>If no axes parameter is given, the values are assumed to belong the the ascending axis list (0,1,2,3...). 
+The returned pixel value is clipped by the real size of the data object in the requested dimension [0, shape[axis]-1].</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -695,8 +696,12 @@ by the offset and scaling of each axis:</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>Value error :</strong> :</p>
-<blockquote class="last">
+<blockquote>
 <div><p>if the given axes is invalid (out of range)</p>
+</div></blockquote>
+<p><strong>Runtime warning :</strong> :</p>
+<blockquote class="last">
+<div><p>if requested physical unit is outside of the range of the requested axis. The returned pixel value is clipped to the closest boundary value.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1171,6 +1176,7 @@ destinationType : {str}</p>
 <p>This attribute gives access to the internal axis descriptions expressed as 
 a tuple of strings. The tuple has the same length than the number of dimensions of this data object.</p>
 <p>You can either assign a new tuple with the same length or change single values using tuple indexing.</p>
+<p>The axis descriptions are considered if the data object is plotted.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
@@ -1191,6 +1197,7 @@ a tuple of double values. The i-th value in the tuple corresponds to the pixel-o
 axis. Either assign a new tuple with the same length than the number of dimensions or change single values 
 using tuple indexing.</p>
 <p>Definition: Physical unit = (px-Coordinate - offset)* scale</p>
+<p>If the data object is plot with offsets != 0, the scaled (physical) units are displayed in the plot.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#itom.dataObject.setAxisOffset" title="itom.dataObject.setAxisOffset"><code class="xref py py-obj docutils literal"><span class="pre">setAxisOffset</span></code></a></p>
@@ -1208,6 +1215,7 @@ a tuple of double values. The i-th value in the tuple corresponds to the scaling
 axis. Either assign a new tuple with the same length than the number of dimensions or change single values 
 using tuple indexing.</p>
 <p>Definition: Physical unit = (px-Coordinate - offset)* scale</p>
+<p>If the data object is plot with scalings != 1, the scaled (physical) units are displayed in the plot.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#itom.dataObject.setAxisScale" title="itom.dataObject.setAxisScale"><code class="xref py py-obj docutils literal"><span class="pre">setAxisScale</span></code></a></p>
@@ -1223,6 +1231,7 @@ using tuple indexing.</p>
 <p>This attribute gives access to the internal axis units expressed as 
 a tuple of strings. The tuple has the same length than the number of dimensions of this data object.</p>
 <p>You can either assign a new tuple with the same length or change single values using tuple indexing.</p>
+<p>The axis units are considered if the data object is plotted.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <dl class="last docutils">
@@ -1245,7 +1254,7 @@ a tuple of strings. The tuple has the same length than the number of dimensions 
 <code class="descname">continuous</code><a class="headerlink" href="#itom.dataObject.continuous" title="Permalink to this definition">¶</a></dt>
 <dd><p>true if matrix is continuously organized, else false.</p>
 <p>If true, the whole matrix is allocated in one huge block in memory, hence, 
-this data object can be transformed into a numpy representation (npDataObject) 
+this data object can be transformed into a numpy representation 
 without reallocating memory.</p>
 <p class="rubric">Notes</p>
 <p>read-only</p>
@@ -1346,6 +1355,7 @@ or its ROI, respectively.</p>
 <code class="descname">valueDescription</code><a class="headerlink" href="#itom.dataObject.valueDescription" title="Permalink to this definition">¶</a></dt>
 <dd><p>value unit description.</p>
 <p>Attribute to read or write the unit description string of the values in this data object.</p>
+<p>The value description is considered if the data object is plotted.</p>
 <p class="rubric">Notes</p>
 <p>read / write</p>
 </dd></dl>
@@ -1353,7 +1363,7 @@ or its ROI, respectively.</p>
 <dl class="attribute">
 <dt id="itom.dataObject.valueOffset">
 <code class="descname">valueOffset</code><a class="headerlink" href="#itom.dataObject.valueOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>value offset [default: 0.0].</p>
+<dd><p>value offset.</p>
 <p>This attribute gives the offset of each value in the data object. This value is always 0.0.</p>
 <p class="rubric">Notes</p>
 <p>This attribute is read only</p>
@@ -1362,7 +1372,7 @@ or its ROI, respectively.</p>
 <dl class="attribute">
 <dt id="itom.dataObject.valueScale">
 <code class="descname">valueScale</code><a class="headerlink" href="#itom.dataObject.valueScale" title="Permalink to this definition">¶</a></dt>
-<dd><p>value scale [default: 0.0].</p>
+<dd><p>value scale.</p>
 <p>This attribute gives the scaling factor of each value in the data object. This value is always 1.0.</p>
 <p class="rubric">Notes</p>
 <p>This attribute is read only</p>
@@ -1373,6 +1383,7 @@ or its ROI, respectively.</p>
 <code class="descname">valueUnit</code><a class="headerlink" href="#itom.dataObject.valueUnit" title="Permalink to this definition">¶</a></dt>
 <dd><p>value unit.</p>
 <p>Attribute to read or write the unit string of the values in this data object.</p>
+<p>The value unit is considered if the data object is plotted.</p>
 <p class="rubric">Notes</p>
 <p>read / write</p>
 </dd></dl>
@@ -1450,7 +1461,7 @@ Implemented to offer compability to x3p format.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Oct 06, 2015.
+      Last updated on Nov 13, 2015.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>

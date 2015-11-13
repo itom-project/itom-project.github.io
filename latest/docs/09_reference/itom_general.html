@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'c382869',
+        VERSION:     'f637724',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -63,9 +63,18 @@
 <span id="plotting-and-camera"></span><h2>Plotting and camera<a class="headerlink" href="#module-itom" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="itom.liveImage">
-<code class="descclassname">itom.</code><code class="descname">liveImage</code><span class="sig-paren">(</span><em>cam</em><span class="optional">[</span>, <em>className</em>, <em>properties</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; show a camera live image in a newly created figure<a class="headerlink" href="#itom.liveImage" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">itom.</code><code class="descname">liveImage</code><span class="sig-paren">(</span><em>cam</em><span class="optional">[</span>, <em>className</em>, <em>properties</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; show a camera live image in a new figure<a class="headerlink" href="#itom.liveImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a plot-image (2D) and automatically grabs images into this window.
 This function is not blocking.</p>
+<p>If no &#8216;className&#8217; is given, the type of the plot is chosen depending on the type and the size 
+of the object. The defaults for several plot classes can be adjusted in the property dialog of itom.</p>
+<p>You can also set a class name of your preferred plot plugin (see also property dialog of itom). 
+If your preferred plot is not able to display the given object, a warning is returned and the default 
+plot type is used again. For dataObjects, it is also possible to simply set &#8216;className&#8217; to &#8216;1D&#8217; or &#8216;2D&#8217; 
+in order to choose the default plot type depending on these aliases.</p>
+<p>Every plot has several properties that can be configured in the Qt Designer (if the plot is embedded in a GUI), 
+or by the property toolbox in the plot itself or by using the info() method of the corresponding itom.uiItem instance.</p>
+<p>Use the &#8216;properties&#8217; argument to pass a dictionary with properties you want to set to a certain value.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -90,21 +99,35 @@ This function is not blocking.</p>
 
 <dl class="function">
 <dt id="itom.plot">
-<code class="descclassname">itom.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>data</em><span class="optional">[</span>, <em>className</em>, <em>properties</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; plots a dataObject in a newly created figure<a class="headerlink" href="#itom.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot an existing dataObject in dockable, not blocking window. 
-The style of the plot depends on the object dimensions.
-If x-dim or y-dim are equal to 1, plot will be a line-plot, else a 2D-plot.</p>
+<code class="descclassname">itom.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>data</em><span class="optional">[</span>, <em>className</em>, <em>properties</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; plots a dataObject, pointCloud or polygonMesh in a new figure<a class="headerlink" href="#itom.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots an existing dataObject, pointCloud or polygonMesh in a dockable, not blocking window. 
+The style of the plot depends on the object dimensions.</p>
+<p>If no &#8216;className&#8217; is given, the type of the plot is chosen depending on the type and the size 
+of the object. The defaults for several plot classes can be adjusted in the property dialog of itom.</p>
+<p>You can also set a class name of your preferred plot plugin (see also property dialog of itom). 
+If your preffered plot is not able to display the given object, a warning is returned and the default 
+plot type is used again. For dataObjects, it is also possible to simply set &#8216;className&#8217; to &#8216;1D&#8217;, &#8216;2D&#8217; 
+or &#8216;2.5D&#8217; in order to choose the default plot type depending on these aliases. For pointCloud and 
+polygonMesh only the alias &#8216;2.5D&#8217; is valid.</p>
+<p>Every plot has several properties that can be configured in the Qt Designer (if the plot is embedded in a GUI), 
+or by the property toolbox in the plot itself or by using the info() method of the corresponding itom.uiItem instance.</p>
+<p>Use the &#8216;properties&#8217; argument to pass a dictionary with properties you want to set to a certain value.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : {DataObject}</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : {DataObject, PointCloud, PolygonMesh}</p>
 <blockquote>
 <div><p>Is the data object whose region of interest will be plotted.</p>
 </div></blockquote>
 <p><strong>className</strong> : {str}, optional</p>
 <blockquote>
-<div><p>class name of desired plot (if not indicated or if the className can not be found, the default plot will be used (see application settings)</p>
+<div><dl class="docutils">
+<dt>class name of desired plot (if not indicated or if the className can not be found, the default plot will be used (see application settings)) </dt>
+<dd><p class="first last">Depending on the object, you can also use &#8216;1D&#8217;, &#8216;2D&#8217; or &#8216;2.5D&#8217; for displaying the object in the default plot of 
+the indicated categories.</p>
+</dd>
+</dl>
 </div></blockquote>
 <p><strong>properties</strong> : {dict}, optional</p>
 <blockquote class="last">
@@ -602,7 +625,7 @@ All string-tags of the dataObject are encoded in order to avoid xml-errors, the 
 <dl class="function">
 <dt id="itom.saveMatlabMat">
 <code class="descclassname">itom.</code><code class="descname">saveMatlabMat</code><span class="sig-paren">(</span><em>filename</em>, <em>values</em><span class="optional">[</span>, <em>matrixName = 'matrix'</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; save strings, numbers, arrays or combinations into a Matlab mat file.<a class="headerlink" href="#itom.saveMatlabMat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save one or multiple objects (strings, numbers, arrays, <a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal"><span class="pre">dataObject</span></code></a>, <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a>, <em class="xref py py-obj">npDataObject</em>...) to a Matlab <em>mat</em> file. 
+<dd><p>Save one or multiple objects (strings, numbers, arrays, <a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal"><span class="pre">dataObject</span></code></a>, <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray</span></code></a>...) to a Matlab <em>mat</em> file. 
 There are the following possibilites for saving:</p>
 <ul class="simple">
 <li>One given value is saved under one given &#8216;matrixName&#8217; or &#8216;matrix&#8217; if &#8216;matrixName&#8217; is not given.</li>
@@ -619,7 +642,7 @@ There are the following possibilites for saving:</p>
 </div></blockquote>
 <p><strong>values</strong> : {dictionary, list, tuple, variant}</p>
 <blockquote>
-<div><p>single value, dictionary, list or tuple with elements of type number, string, array (dataObject, numpy.ndarray, npDataObject...)</p>
+<div><p>single value, dictionary, list or tuple with elements of type number, string, array (dataObject, numpy.ndarray...)</p>
 </div></blockquote>
 <p><strong>matrix-name</strong> : {str, list, tuple}, optional</p>
 <blockquote class="last">
@@ -974,7 +997,7 @@ small pages will be automatically created for each method in the following list 
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Oct 06, 2015.
+      Last updated on Nov 13, 2015.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>

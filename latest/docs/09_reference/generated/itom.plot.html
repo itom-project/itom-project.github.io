@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     'c382869',
+        VERSION:     'f637724',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -50,21 +50,35 @@
 <h1>itom.plot<a class="headerlink" href="#itom-plot" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="itom.plot">
-<code class="descclassname">itom.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>data</em><span class="optional">[</span>, <em>className</em>, <em>properties</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; plots a dataObject in a newly created figure<a class="headerlink" href="#itom.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot an existing dataObject in dockable, not blocking window. 
-The style of the plot depends on the object dimensions.
-If x-dim or y-dim are equal to 1, plot will be a line-plot, else a 2D-plot.</p>
+<code class="descclassname">itom.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>data</em><span class="optional">[</span>, <em>className</em>, <em>properties</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; plots a dataObject, pointCloud or polygonMesh in a new figure<a class="headerlink" href="#itom.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots an existing dataObject, pointCloud or polygonMesh in a dockable, not blocking window. 
+The style of the plot depends on the object dimensions.</p>
+<p>If no &#8216;className&#8217; is given, the type of the plot is chosen depending on the type and the size 
+of the object. The defaults for several plot classes can be adjusted in the property dialog of itom.</p>
+<p>You can also set a class name of your preferred plot plugin (see also property dialog of itom). 
+If your preffered plot is not able to display the given object, a warning is returned and the default 
+plot type is used again. For dataObjects, it is also possible to simply set &#8216;className&#8217; to &#8216;1D&#8217;, &#8216;2D&#8217; 
+or &#8216;2.5D&#8217; in order to choose the default plot type depending on these aliases. For pointCloud and 
+polygonMesh only the alias &#8216;2.5D&#8217; is valid.</p>
+<p>Every plot has several properties that can be configured in the Qt Designer (if the plot is embedded in a GUI), 
+or by the property toolbox in the plot itself or by using the info() method of the corresponding itom.uiItem instance.</p>
+<p>Use the &#8216;properties&#8217; argument to pass a dictionary with properties you want to set to a certain value.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : {DataObject}</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : {DataObject, PointCloud, PolygonMesh}</p>
 <blockquote>
 <div><p>Is the data object whose region of interest will be plotted.</p>
 </div></blockquote>
 <p><strong>className</strong> : {str}, optional</p>
 <blockquote>
-<div><p>class name of desired plot (if not indicated or if the className can not be found, the default plot will be used (see application settings)</p>
+<div><dl class="docutils">
+<dt>class name of desired plot (if not indicated or if the className can not be found, the default plot will be used (see application settings)) </dt>
+<dd><p class="first last">Depending on the object, you can also use &#8216;1D&#8217;, &#8216;2D&#8217; or &#8216;2.5D&#8217; for displaying the object in the default plot of 
+the indicated categories.</p>
+</dd>
+</dl>
 </div></blockquote>
 <p><strong>properties</strong> : {dict}, optional</p>
 <blockquote class="last">
@@ -122,7 +136,7 @@ If x-dim or y-dim are equal to 1, plot will be a line-plot, else a 2D-plot.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2011-2015, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Oct 06, 2015.
+      Last updated on Nov 13, 2015.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
