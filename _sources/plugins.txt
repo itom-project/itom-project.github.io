@@ -49,6 +49,7 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/AndorSDK3.rst
    plugins/grabber/avantesAvaSpec.rst
    plugins/grabber/commonVisionBlox.rst
+   plugins/grabber/VRMagic.rst
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
@@ -77,8 +78,16 @@ Further hardware devices
    plugins/generalDataIO/glDisplay.rst
    plugins/generalDataIO/LibModBus.rst
    plugins/generalDataIO/SuperlumBS.rst
-   plugins/generalDataIO/NI-DAQmx.rst
    plugins/generalDataIO/libUSB.rst
+   
+AD-Converters
+~~~~~~~~~~~~~~
+
+.. toctree::
+    :maxdepth: 1
+    
+    plugins/ad-converters/NI-DAQmx.rst
+    plugins/ad-converters/MeasurementComputing.rst
 
 Algorithms
 ~~~~~~~~~~~

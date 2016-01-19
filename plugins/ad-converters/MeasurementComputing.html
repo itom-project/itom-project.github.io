@@ -1,0 +1,704 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MeasurementComputing &mdash; itom</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="itom" href="../../index.html" />
+    <link rel="up" title="Plugins" href="../../plugins.html" />
+    <link rel="next" title="Basic Filters" href="../algorithms/basicFilters.html" />
+    <link rel="prev" title="NI-DAQmx" href="NI-DAQmx.html" />
+ 
+
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../algorithms/basicFilters.html" title="Basic Filters"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="NI-DAQmx.html" title="NI-DAQmx"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../plugins.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/itomlogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../media.html">Media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../plugins.html">Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html#add-a-plugin-to-itom">Add a plugin to itom</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../plugins.html#available-plugins">Available plugins</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#cameras-grabbers-ad-converter">Cameras / Grabbers / AD-Converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#further-hardware-devices">Further hardware devices</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../plugins.html#ad-converters">AD-Converters</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="NI-DAQmx.html">NI-DAQmx</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="">MeasurementComputing</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#range-codes">Range codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#additional-functions-exec-functions">Additional functions (exec functions)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#changelog">Changelog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../plugins.html#algorithms">Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins.html#plugin-development">Plugin Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../screenshots.html">Screenshots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../collaboration.html">Collaboration</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="NI-DAQmx.html"
+                        title="previous chapter">NI-DAQmx</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../algorithms/basicFilters.html"
+                        title="next chapter">Basic Filters</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="measurementcomputing">
+<h1>MeasurementComputing<a class="headerlink" href="#measurementcomputing" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>MeasurementComputing Digital-Analog Converter Plugin.</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>DataIO</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>LGPL</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows</td>
+</tr>
+<tr class="row-odd"><td><strong>Devices</strong>:</td>
+<td><em>MeasurementComputing</em></td>
+</tr>
+<tr class="row-even"><td><strong>Author</strong>:</td>
+<td><span>J. Krauter, ITO, University Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The MeasurementComputing is a itom-Plugin to give a direct access to the MeasurementComputing USB digital to analog converter (e. g. USB-1208LS).</p>
+<p>Measurement Computing devices are available with analog input and output, digital I/O, counter and temperature ports. Before you can use this itom-Plugin, you must configure the D/A board using the software &#8216;InstaCal&#8217;.
+First define a board number in the software &#8216;InstaCal&#8217; (e.g. 0).
+This board number is a mandatory itom plugin initiation parameter.</p>
+<p>The analog input channels are acquire by using the <strong>acquire</strong>-function, then the data are returned to python by the <strong>getVal</strong>- or <strong>copyVal</strong>-function. Returned data are a dataobject of the size m x n, where m are the number of channels and n the number of acquired samples. The analog output values are set by the <strong>setVal</strong>-function. Digital I/O, counter and temperature ports can be used by the <strong>exec</strong>-functions, see in the description below.
+Refer to <a class="reference external" href="http://www.mccdaq.com/execteam.html">http://www.mccdaq.com/execteam.html</a> for the names, titles, and contact information of each key executive at Measurement Computing.</p>
+</div>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt><strong>board_number</strong>: {int} [0,254], default: 0, step: 1</dt>
+<dd><p class="first last">board number of the connected device. This number must be defined by the software &#8216;InstaCal&#8217;</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>To create a new instance using the following python code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">instance</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;MeasurementComputing&quot;</span><span class="p">,</span> <span class="n">board_number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>These parameters are available and can be used to configure the <strong>MeasurementComputing</strong> instance. Many of them are directly initialized by the parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable parameters can be changed using <em>setParam</em>.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><strong>analog_high_input_channel</strong>: {int}</dt>
+<dd>last analog input channel (See pin description of your device).</dd>
+<dt><strong>analog_high_output_channel</strong>: {int}</dt>
+<dd>last analog output channel (See pin descirption of your device).</dd>
+<dt><strong>analog_input_bpp</strong>: {int}, read-only</dt>
+<dd>bit resolution of the analog input.</dd>
+<dt><strong>analog_low_input_channel</strong>: {int}</dt>
+<dd>first analog input channel (See pin description of your device).</dd>
+<dt><strong>analog_low_output_channel</strong>: {int}</dt>
+<dd>first analog output channel (See pin descirption of your device).</dd>
+<dt><strong>analog_number_inputs</strong>: {int}, read-only</dt>
+<dd>number of input channels of this device.</dd>
+<dt><strong>analog_number_outputs</strong>: {int}, read-only</dt>
+<dd>number of output channels of this device.</dd>
+<dt><strong>analog_output_bpp</strong>: {int}, read-only</dt>
+<dd>bit resolution of the analog output.</dd>
+<dt><strong>analog_voltage_input</strong>: {int}</dt>
+<dd>if parameter is set to 1, the A/D value is returned as a voltage value.</dd>
+<dt><strong>analog_voltage_output</strong>: {int}</dt>
+<dd>if parameter is set to 1, the D/A value is set as a voltage value.</dd>
+<dt><strong>clock_frequency</strong>: {int}</dt>
+<dd>clock frequency in megahertz (MHz) (40, 10, 8, 6, 5, 4, 3, 2, 1) or 0 for not supported.</dd>
+<dt><strong>device_name</strong>: {str}, read-only</dt>
+<dd>name of connected device.</dd>
+<dt><strong>digital_number_ports</strong>: {int}, read-only</dt>
+<dd>number of digital I/O ports of this device.</dd>
+<dt><strong>digital_port_mode</strong>: {int}</dt>
+<dd>sets the digital port defined by the parameter digtal_devices_type as input (2) or output(1).</dd>
+<dt><strong>digital_port_name</strong>: {str}</dt>
+<dd>digital devices type.</dd>
+<dt><strong>input_range_code</strong>: {str}</dt>
+<dd>A/D range code, if board has a programmable gain. Refer to board specific information for a list of the supported A/D ranges.</dd>
+<dt><strong>input_samples_per_second</strong>: {int}</dt>
+<dd>analog input samples per second. The samples are distributed over all channels. The effective rate per channel is this parameter divided by the number of channels. USB1208LS: 100 Hz - 1200 Hz, for higher rates a fast acquisition with 8000 Hz is executed where only 4096 samples can be acquired in one run.</dd>
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of itom plugin.</dd>
+<dt><strong>number_counter_channel</strong>: {int}, read-only</dt>
+<dd>number of counter channels of this device.</dd>
+<dt><strong>number_temperature_channel</strong>: {int}, read-only</dt>
+<dd>number of temperature channels of this device.</dd>
+<dt><strong>output_range_code</strong>: {str}</dt>
+<dd>D/A range code, if board has a programmable gain. Refer to board specific information for a list of the supported D/A ranges.</dd>
+<dt><strong>samples_per_input_channel</strong>: {int}</dt>
+<dd>number of samples that are acquired per channel after each acquisition.</dd>
+<dt><strong>serial_number</strong>: {str}, read-only</dt>
+<dd>serial number of connected device.</dd>
+<dt><strong>temperature_scale</strong>: {str}</dt>
+<dd>scale value of the temperature input. Coises are CELSIUS, FAHRENHEIT, KELVIN, VOLTS and NOSCALE. default = CELSIUS.</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="range-codes">
+<h2>Range codes<a class="headerlink" href="#range-codes" title="Permalink to this headline">¶</a></h2>
+<p>The table below shows the range codes for the <strong>input_range_code</strong> and <strong>output_range_code</strong> parameters and the voltage range, which can be detected. Valid range for your hardware are listed in the Universal Library User&#8217;s Guide.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="28%" />
+<col width="24%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">BIPOLAR</th>
+<th class="head" colspan="2">UNIPOLAR</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>range code</td>
+<td>range [Volts]</td>
+<td>range code</td>
+<td>range [Volts]</td>
+</tr>
+<tr class="row-odd"><td>BIT60VOLTS</td>
+<td>-60 to 60</td>
+<td>UNI10VOLTS</td>
+<td>0 to 10</td>
+</tr>
+<tr class="row-even"><td>BIP30VOLTS</td>
+<td>-30 to +30</td>
+<td>UNI5VOLTS</td>
+<td>0 to 5</td>
+</tr>
+<tr class="row-odd"><td>BIP20VOLTS</td>
+<td>-20 to +20</td>
+<td>UNI4VOLTS</td>
+<td>0 to 4</td>
+</tr>
+<tr class="row-even"><td>BIP15VOLTS</td>
+<td>-15 to +15</td>
+<td>UNI2PT5VOLTS</td>
+<td>0 to 2.5</td>
+</tr>
+<tr class="row-odd"><td>BIP10VOLTS</td>
+<td>-10 to +10</td>
+<td>UNI2VOLTS</td>
+<td>0 to 2</td>
+</tr>
+<tr class="row-even"><td>BIP5VOLTS</td>
+<td>-5 to +5</td>
+<td>UNI1PT67VOLTS</td>
+<td>0 to 1.67</td>
+</tr>
+<tr class="row-odd"><td>BIP4VOLTS</td>
+<td>-4 to +4</td>
+<td>UNI1PT25VOLTS</td>
+<td>0 to 1.25</td>
+</tr>
+<tr class="row-even"><td>BIP2PT5VOLTS</td>
+<td>-2.5 to +2.5</td>
+<td>UNI1VOLTS</td>
+<td>0 to 1</td>
+</tr>
+<tr class="row-odd"><td>BIP2VOLTS</td>
+<td>-2.0 to +2.0</td>
+<td>UNIPT5VOLTS</td>
+<td>0 to 0.5</td>
+</tr>
+<tr class="row-even"><td>BIP1PT25VOLTS</td>
+<td>-1.25 to +1.25</td>
+<td>UNIPT25VOLTS</td>
+<td>0 to 0.25</td>
+</tr>
+<tr class="row-odd"><td>BIP1VOLTS</td>
+<td>-1 to +1</td>
+<td>UNIPT2VOLTS</td>
+<td>0 to 0.2</td>
+</tr>
+<tr class="row-even"><td>BIPPT625VOLTS</td>
+<td>-0.625 to +0.625</td>
+<td>UNIPT1VOLTS</td>
+<td>0 to 0.1</td>
+</tr>
+<tr class="row-odd"><td>BIPPT5VOLTS</td>
+<td>-0.5 to +0.5</td>
+<td>UNIPT05VOLTS</td>
+<td>0 to 0.05</td>
+</tr>
+<tr class="row-even"><td>BIPPT25VOLTS</td>
+<td>-0.25 to +0.25</td>
+<td>UNIPT02VOLTS</td>
+<td>0 to 0.02</td>
+</tr>
+<tr class="row-odd"><td>BIPPT2VOLTS</td>
+<td>-0.2 to +0.2</td>
+<td>UNIPT01VOLTS</td>
+<td>0 to 0.01</td>
+</tr>
+<tr class="row-even"><td>BIPPT1VOLTS</td>
+<td>-0.1 to +0.1</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>BIPPT05VOLTS</td>
+<td>-0.05 to +0.05</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-even"><td>BIPPT01VOLTS</td>
+<td>-0.01 to +0.01</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>BIPPT005VOLTS</td>
+<td>-0.005 to +0.005</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-even"><td>BIP1PT67VOLTS</td>
+<td>-1.67 to +1.67</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>BIPPT312VOLTS</td>
+<td>-0.312 to +0.312</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-even"><td>BIPPT156VOLTS</td>
+<td>-0.156 to +0.156</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>BIPPT125VOLTS</td>
+<td>-0.125 to +0.125</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+<tr class="row-even"><td>BIPPT078VOLTS</td>
+<td>-0.078 to +0.078</td>
+<td colspan="2">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="additional-functions-exec-functions">
+<h2>Additional functions (exec functions)<a class="headerlink" href="#additional-functions-exec-functions" title="Permalink to this headline">¶</a></h2>
+<p>The plugin execFunctions are:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Descirption</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>getBitIn</strong></td>
+<td>reads a single bit of the specified I/O port. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a input port.</td>
+</tr>
+<tr class="row-odd"><td><strong>getCIn</strong></td>
+<td>reads and returns the current count of the specified counter input channel. Use the parameter counter_set_value to reset the counter.</td>
+</tr>
+<tr class="row-even"><td><strong>getDIn</strong></td>
+<td>reads the digital I/O port value. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a input port.</td>
+</tr>
+<tr class="row-odd"><td><strong>getTIn</strong></td>
+<td>reads and returns the temperature value of the specific input channel defined by the temperature_input_channel. Use the parameter temperature_scale the define the temperature scaling value.</td>
+</tr>
+<tr class="row-even"><td><strong>getVIn</strong></td>
+<td>reads and returns the voltage value of the specified input channel in the parameter voltage_input_channel.</td>
+</tr>
+<tr class="row-odd"><td><strong>setBitOut</strong></td>
+<td>sets a single bit of the specified I/O port. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a output port.</td>
+</tr>
+<tr class="row-even"><td><strong>setDOut</strong></td>
+<td>sets the digital I/O port value. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a output port.</td>
+</tr>
+<tr class="row-odd"><td><strong>setVOut</strong></td>
+<td>set the voltage value at the specific analog output channel defined by the parameter voltage_output_channel.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="function">
+<dt id="instance.exec">
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'getVIn'</em>, <em>voltage_input_channel</em><span class="sig-paren">)</span><a class="headerlink" href="#instance.exec" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads and returns the voltage value of the specified input channel in the parameter voltage_input_channel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>voltage_input_channel</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; voltage input channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">voltage_input - voltage value of defined input channel</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'setVOut'</em>, <em>voltage_output_channel</em>, <em>voltage_output</em><span class="sig-paren">)</span></dt>
+<dd><p>set the voltage value at the specific analog output channel defined by the parameter voltage_output_channel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>voltage_output_channel</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; voltage output channel</li>
+<li><strong>voltage_output</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; voltage value to set at the output channel</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'getTIn'</em>, <em>temperature_input_channel</em><span class="sig-paren">)</span></dt>
+<dd><p>reads and returns the temperature value of the specific input channel defined by the temperature_input_channel. Use the parameter temperature_scale the define the temperature scaling value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>temperature_input_channel</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; temperature input channel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">temperature_input - temperature value of defined input channel</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'getBitIn'</em>, <em>digital_port_number</em>, <em>digital_port_bit_number</em><span class="sig-paren">)</span></dt>
+<dd><p>reads a single bit of the specified I/O port. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a input port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>digital_port_number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; digital I/O port to read</li>
+<li><strong>digital_port_bit_number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; digital port bit number of the specific I/O port</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">digital_port_value - digital input value of the specific I/O port-bit</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'setDOut'</em>, <em>digital_port_number</em>, <em>digital_port_value</em><span class="sig-paren">)</span></dt>
+<dd><p>sets the digital I/O port value. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a output port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>digital_port_number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; digital I/O port to read</li>
+<li><strong>digital_port_value</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; digital output value of the specific I/O port</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'setBitOut'</em>, <em>digital_port_number</em>, <em>digital_port_bit_number</em>, <em>digital_port_value</em><span class="sig-paren">)</span></dt>
+<dd><p>sets a single bit of the specified I/O port. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a output port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>digital_port_number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; digital I/O port to read</li>
+<li><strong>digital_port_bit_number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; digital port bit number of the specific I/O port</li>
+<li><strong>digital_port_value</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; digital output value of the specific I/O port-bit</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'getCIn'</em>, <em>counter_input_channel</em><span class="optional">[</span>, <em>counter_set_value</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><p>reads and returns the current count of the specified counter input channel. Use the parameter counter_set_value to reset the counter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>counter_input_channel</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; counter input channel</li>
+<li><strong>counter_set_value</strong> (<em>int - optional</em>) &#8211; counter value to load into the counter&#8217;s register. To reset the counter, load the value zero</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">counter_input - counter value of defined input channel</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">instance.</code><code class="descname">exec</code><span class="sig-paren">(</span><em>'getDIn'</em>, <em>digital_port_number</em><span class="sig-paren">)</span></dt>
+<dd><p>reads the digital I/O port value. Use the parameters digital_port_name to define the port you want to use. Use the parameter digital_port_mode to define the port as a input port.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>digital_port_number</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; digital I/O port to read</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">digital_port_value - digital input value of the specific I/O port</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Then create a new instance of the analog-digital converter plugin <strong>MeasurementComputing</strong>. A Mandatory parameter is the board number, defined by the software &#8216;InstaCal&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">instance</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;MeasurementComputing&quot;</span><span class="p">,</span> <span class="n">board_number</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plugin parameter can be canged by using the function <strong>setParam</strong>. This examples shows how the analog input channels are configured. The devices will acquire the data from the <strong>analog_low_input_channel</strong> to the <strong>analog_high_input_channel</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">high_channel</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">low_channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;analog_high_input_channel&quot;</span><span class="p">,</span> <span class="n">high_channel</span><span class="p">)</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;analog_low_input_channel&quot;</span><span class="p">,</span> <span class="n">low_channel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This examples shows how the range code is defined (see the available ranges in the table above):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">range_code</span> <span class="o">=</span> <span class="s2">&quot;BIP5VOLTS&quot;</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;input_range_code&quot;</span><span class="p">,</span> <span class="n">range_code</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The analog input signals can be acquired by using following example code. The data are saved in the dataobject of size [m x n], where <strong>m</strong> is the number of input channels (the number of channels is equal to (<strong>analog_high_input_channel</strong> - <strong>analog_low_input_channel</strong> + <strong>1</strong>)) and <strong>n</strong> is the number of acquired input samples (definded by the parameter <strong>samples_per_input_channel</strong>).
+<strong>analog_voltage_input</strong> parameter can be used to save the data in voltage values.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">instance</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output values of the analog output ports are used by the following example. First you must define a dataObject with the output values you want to set by the analog output channel. Use the parameter <strong>analog_voltage_output</strong> to define, if you want to used voltage values, otherwise your maximum digital value is definded by the <strong>analog_output_bpp</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># set the analog output by digital values</span>
+<span class="n">numberChannels</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">numberSamples</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">range_code</span> <span class="o">=</span> <span class="s2">&quot;UNI5VOLTS&quot;</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;analog_voltage_output&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;output_range_code&quot;</span><span class="p">,</span> <span class="n">range_code</span><span class="p">)</span>
+<span class="n">outValues</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="n">numberChannels</span><span class="p">,</span> <span class="n">numberSamples</span><span class="p">],</span> <span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+<span class="n">outValues</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="mi">1023</span> <span class="c1"># 5V analog output in case of 10bit output channel resolution</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setVal</span><span class="p">(</span><span class="n">outValues</span><span class="p">)</span>
+
+<span class="c1">#set the analog output by voltage values</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;analog_voltage_output&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">outValues</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="n">numberChannels</span><span class="p">,</span> <span class="n">numberSamples</span><span class="p">],</span> <span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">outValues</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setVal</span><span class="p">(</span><span class="n">outValues</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The digital port can be used like in the following example.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># set the digital port as input to use it as a input channel</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;digital_port_mode&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;getDIn&quot;</span><span class="p">,</span> <span class="s2">&quot;FIRSTPORTA&quot;</span><span class="p">)</span>
+
+<span class="c1"># set the digital port as output to use it for output reasons</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;digital_port_mode&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">outValues</span> <span class="o">=</span> <span class="mi">255</span>         <span class="c1"># all port pin connections to high</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;setDOut&quot;</span><span class="p">,</span> <span class="s2">&quot;FIRSTPORTA&quot;</span><span class="p">,</span> <span class="n">outValues</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>One single bit of the digital port is read by using the execFunction <strong>getBitIn</strong>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># set the digital port as input</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;digital_port_mode&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;getBitIn&quot;</span><span class="p">,</span> <span class="s2">&quot;FIRSTPORTA&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># set the digital port as output</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;digital_port_mode&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">outValues</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="n">bitNumber</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;setBitOut&quot;</span><span class="p">,</span> <span class="s2">&quot;FIRSTPORTA&quot;</span><span class="p">,</span> <span class="n">bitNumber</span><span class="p">,</span> <span class="n">outValues</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The temperature channel can be read by the execFunction <strong>getTIn</strong>. Use the temperature_scale parameter to define the value unit you want to get the data.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">instance</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;temperature_scale&quot;</span><span class="p">,</span> <span class="s2">&quot;CELSIUS&quot;</span><span class="p">)</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;getTIn&quot;</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The counter input is used by the execFunction <strong>getCIn</strong>. With the optional parameter <strong>counter_set_value</strong> the counter can be reset.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">channel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;getCIn&quot;</span><span class="p">,</span> <span class="n">channel</span><span class="p">)</span>
+<span class="c1"># reset the counter</span>
+<span class="n">resetvalue</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">instance</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;getCIn&quot;</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">resetvalue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You have to install the MCC Daq Software, namely the tool &#8220;InstaCal and Universal Library for Windows&#8221;. Then, indicate the following variables in CMake to
+properly configure the build of this plugin:</p>
+<ul class="simple">
+<li>MeasurementComputing_DAQ_BINARY: e.g. C:/Program Files (x86)/Measurement Computing/DAQ/cbw64.dll (or cbw32.dll for 32bit itom)</li>
+<li>MeasurementComputing_DAQ_SDK_DIR: e.g. C:/Users/Public/Documents/Measurement Computing/DAQ/C</li>
+</ul>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>2016-01-18: This plugin was added to the public repository and will be part of setups &gt; itom 2.0.0</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../algorithms/basicFilters.html" title="Basic Filters"
+             >next</a></li>
+        <li class="right" >
+          <a href="NI-DAQmx.html" title="NI-DAQmx"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">itom</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../plugins.html" >Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.4.
+    </div>
+<div class="footer">This page uses <a href="http://analytics.google.com/">
+Google Analytics</a> to collect statistics. You can disable it by blocking
+the JavaScript coming from www.google-analytics.com.
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51395951-1', 'bitbucket.org');
+  ga('send', 'pageview');
+
+</script>
+</div>
+
+  </body>
+</html>
