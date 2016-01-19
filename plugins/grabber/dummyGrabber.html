@@ -10,12 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -29,6 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
@@ -164,8 +159,9 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The DummyGrabber is a virtual camera which emulates a camera with white noise.</p>
-<p>The camera is initialized with a maximum width and height of the simulated camera chip (both need to be a multiple of 4). The noise is always scaled in the range between 0 and the current bitdepth (bpp - bit per pixel). The real size of the camera image is controlled using the parameters x0, y0, x1 and y1 if the sizes stay within the limits given by the size of the camera chip.</p>
-<p>This plugin can also be used as template for other grabber. For the simulation of real measurement systems, please also check the plugin &#8216;emulationGrabber&#8217;</p>
+<p>The camera is initialized with a maximum width and height of the simulated camera chip (both need to be a multiple of 4). The noise is always scaled in the range between 0 and the current bitdepth (bpp - bit per pixel). The real size of the camera image is controlled using the parameter &#8216;roi&#8217; if the sizes stay within the limits given by the size of the camera chip.</p>
+<p>You can initialize this camera either as a 2D sensor with a width and height &gt;= 4 or as line camera whose height is equal to 1.</p>
+<p>This plugin can also be used as template for other grabber.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
@@ -179,8 +175,8 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>maxYSize</strong>: {int, optional} [4,4096], default: 480, step: 4</dt>
-<dd><p class="first last">Height of virtual sensor chip</p>
+<dt><strong>maxYSize</strong>: {int, optional} [1,4096], default: 480, step: 1</dt>
+<dd><p class="first last">Height of virtual sensor chip, please set this value to 1 (line camera) or a value dividable by 4 for a 2D camera.</p>
 </dd>
 </dl>
 </li>
@@ -199,7 +195,7 @@
 <p>Plugin parameters are:
 <strong>binning</strong>: {int}</p>
 <blockquote>
-<div>Binning of different pixel, binning = x-factor * 100 + y-factor</div></blockquote>
+<div>Binning of different pixel, binning = x-factor * 100 + y-factor (binning in y only possible if height of sensor &gt;= 4.</div></blockquote>
 <dl class="docutils">
 <dt><strong>bpp</strong>: {int}</dt>
 <dd>bitdepth of images</dd>
@@ -214,7 +210,7 @@
 <dt><strong>offset</strong>: {float}</dt>
 <dd>Virtual offset</dd>
 <dt><strong>roi</strong>: {int rect [x0,y0,width,height]}</dt>
-<dd>ROI (x,y,width,height) [this replaces the values x0,x1,y0,y1]</dd>
+<dd>ROI (x,y,width,height)</dd>
 <dt><strong>sizex</strong>: {int}, read-only</dt>
 <dd>size in x (cols) [px]</dd>
 <dt><strong>sizey</strong>: {int}, read-only</dt>
@@ -245,7 +241,7 @@
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2014, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.4.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
