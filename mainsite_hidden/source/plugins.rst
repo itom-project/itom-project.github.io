@@ -102,6 +102,8 @@ Algorithms
    plugins/algorithms/openCVFilters.rst
    plugins/algorithms/openCVFiltersNonFree.rst
    plugins/algorithms/pclTools.rst
+   plugins/algorithms/rawImport.rst
+   plugins/algorithms/roughness.rst
    plugins/algorithms/x3p.rst
     
     
