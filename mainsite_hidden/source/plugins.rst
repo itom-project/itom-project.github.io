@@ -104,7 +104,7 @@ Algorithms
    plugins/algorithms/pclTools.rst
    plugins/algorithms/rawImport.rst
    plugins/algorithms/roughness.rst
-   plugins/algorithms/x3p.rst
+   plugins/algorithms/x3pio.rst
     
     
 Plugin Development

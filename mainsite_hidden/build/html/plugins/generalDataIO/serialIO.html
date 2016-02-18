@@ -24,6 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="GLDisplay" href="glDisplay.html" />
@@ -70,8 +71,10 @@
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#configure-the-serialio-plugin-to-wait-for-full-answers">Configure the serialIO plugin to wait for full answers</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#clear-input-or-output-buffer">Clear input or output buffer</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#changelog">Changelog</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="glDisplay.html">GLDisplay</a></li>
@@ -277,6 +280,17 @@ Typical values are:</p>
 </div>
 <p class="last">Use the empty endline character string (&#8220;&#8221;) if you want to have full control.</p>
 </dd>
+<dt><strong>endlineRead</strong>: {str}</dt>
+<dd>Same behaviour like <strong>endline</strong>, however it determines the delimiter for incoming strings and is only
+used or evaluated in <strong>readline</strong> is 1. The user is referred to <strong>readline</strong>.</dd>
+<dt><strong>readline</strong>: {int}</dt>
+<dd>Per default, <em>readline</em> is set to 0. This means that the <em>getVal</em> command returns the values that are currently
+available at the input buffer of the computer. If you call <em>getVal</em> too fast, it might be, that the full answer
+is not available yet. Then you need to recall <em>getVal</em> again. If you set <em>readline</em> to 1, <em>getVal</em> repeatedly
+collects values from the input buffer and checks if <em>endlineRead</em> is contained in the string. If so, <em>getVal</em> returns
+all characters until the first appearance of <em>endlineRead</em> (without the endline character itself). Remaining characters
+are recognized at the next call to <em>getVal</em>. If no endline characters is detected within <em>timeout</em> seconds, a timeout (error code: 256)
+is raised.</dd>
 <dt><strong>sendDelay</strong>: {str}</dt>
 <dd>This value represents a delay (in ms) after each character that is send and received</dd>
 <dt><strong>timeout</strong>: {double}</dt>
@@ -315,6 +329,27 @@ the size of the allocated buffer <em>ba</em>. If the serial port does not respon
 <em>getVal</em> does not wait until the entire buffer is filled or the timeout occurs but returns immediately with the content of the buffer that
 has been filled until this time. In order to get the full answer, it is also possible to repeatedly call <em>getVal</em>.</p>
 </div>
+<div class="section" id="configure-the-serialio-plugin-to-wait-for-full-answers">
+<h2>Configure the serialIO plugin to wait for full answers<a class="headerlink" href="#configure-the-serialio-plugin-to-wait-for-full-answers" title="Permalink to this headline">¶</a></h2>
+<p>Per default, the user will send a request to a device. The device will then probably answer to this request using a specified string pattern.
+If the parameter <strong>readline</strong> is set to 0 (default), a call to <em>getVal</em> (see usage above), will only return all characters that fit into the
+buffer size and are currently available at the input buffer of the serial port. If the device need more time for the entire answer, the remaining
+part of the answer can only be obtained by continuously calling <em>getVal</em> until the entire answer is obtained.</p>
+<p>Usually, an answer always ends by a certain endline character sequence. If this sequence contains 1 or 2 characters, you can also configure
+the serialIO plugin such that <em>getVal</em> will continuously check the input buffer of the serial port and collect all characters until the endline
+sequence (parameter <strong>endlineRead</strong>) is detected or a timeout occurred. If the endline sequence was found, the characters until but without the
+first endline sequence are returned by the passed buffer. Remaining characters are put onto an internal buffer and considered at the next call
+to <em>getVal</em>. By this configuration you will automatically wait for the full answer without further programming work and without idle delay times.</p>
+<p>An example for this alternative approach is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">serial</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;readline&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">serial</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;endlineRead&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">serial</span><span class="o">.</span><span class="n">setVal</span><span class="p">(</span><span class="s2">&quot;POS?&quot;</span><span class="p">)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="nb">buffer</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;full answer from device&quot;</span><span class="p">,</span> <span class="nb">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="clear-input-or-output-buffer">
 <h2>Clear input or output buffer<a class="headerlink" href="#clear-input-or-output-buffer" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes, it is necessary to immediately clear all characters inside of the input buffer (obtained by <em>getVal</em>) and/or output buffer (send by <em>setVal</em>). This can be done using specific <strong>exec</strong>-functions:</p>
@@ -336,6 +371,13 @@ your user to the <strong>dialout</strong> group, logout once and login again.</p
 </pre></div>
 </div>
 <p>where USERNAME ist the username under which you are running <strong>itom</strong></p>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>itom 1.2.0 is shipped with version 0.0.2 of serialIO</li>
+<li>parameters &#8216;readline&#8217; and &#8216;endlineRead&#8217; are available in serialIO version &gt;= 1.0.0</li>
+</ul>
 </div>
 </div>
 

@@ -24,6 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="MSMediaFoundation" href="msMediaFoundation.html" />
@@ -161,6 +162,8 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Camera plugin that uses the FireGrab driver from the AVT FirePackage in order to communicate with corresponding cameras. The cameras are connected to the computer via firewire.</p>
 <p>This plugin can only be loaded and used once the AVT FirePackage driver has been correctly installed on your computer. For more information about AVT FirePackage and their license browse to <a class="reference external" href="http://www.alliedvisiontec.com">http://www.alliedvisiontec.com</a>. This plugin was mainly tested with the cameras AVT Malin, Guppy and Pike. Not all parameters are supported by this plugin.</p>
+<p>For cameras from Allied Vision it is recommended to use the new Vimba interface and the itom plugin AVTVimba. This
+supports more types of cameras and features than the deprecated FirePackage driver from Allied Vision.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
@@ -169,19 +172,25 @@
 <div><ul>
 <li><dl class="first docutils">
 <dt><strong>cameraID</strong>: {int, optional} [0,2147483647], default: 0, step: 1</dt>
-<dd><p class="first last">specific number of the camera, don&#8217;t use with cameraNumber (0 = unused)</p>
+<dd><p class="first last">specific number of the camera, don&#8217;t use with cameraNumber (0 = unused) - this parameter does not exist in linux version.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>vendorID</strong>: {int, optional} [0,2147483647], default: 0, step: 1</dt>
-<dd><p class="first last">number of the vendor (e.g. Allied: vendorID=673537), don&#8217;t use with cameraNumber (0 = unused)</p>
+<dd><p class="first last">number of the vendor (e.g. Allied: vendorID=673537), don&#8217;t use with cameraNumber (0 = unused) - this parameter does not exist in linux version.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>cameraNumber</strong>: {int, optional} [0,25], default: 0, step: 1</dt>
 <dd><p class="first last">number of order of plugging the cameras (0 = parameter not used)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>timebase</strong>: {int, optional} [1,1000], default: 20, step: 1</dt>
+<dd><p class="first last">timebase [in µs] as step width of integration time. This mainly influences the allowed range of the integration time (only AVT cameras). Values: 1, 2, 5, 10, 20 [default], 50, 100, 200, 500, 1000</p>
 </dd>
 </dl>
 </li>
@@ -192,44 +201,44 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <p>An instance of this plugin has the following internal parameters:</p>
 <dl class="docutils">
-<dt><strong>name</strong>: {str}, read-only</dt>
-<dd>name of plugin</dd>
-<dt><strong>vendor</strong>: {int}, read-only</dt>
-<dd>vendor ID of the camera</dd>
-<dt><strong>cameraID</strong>: {int}, read-only</dt>
-<dd>camera ID of the camera</dd>
-<dt><strong>vendorName</strong>: {str}, read-only</dt>
-<dd>vendor name of the camera [if connected]</dd>
-<dt><strong>modelName</strong>: {str}, read-only</dt>
-<dd>model name of the camera [if connected]</dd>
-<dt><strong>integration_time</strong>: {float}</dt>
-<dd>Integrationtime of CCD programmed in s</dd>
-<dt><strong>frame_time</strong>: {float}, read-only</dt>
-<dd>Transmission time per frame in s</dd>
 <dt><strong>bpp</strong>: {int}</dt>
 <dd>bit depth of camera</dd>
 <dt><strong>brightness</strong>: {float}</dt>
 <dd>Brightness value (if supported)</dd>
-<dt><strong>sharpness</strong>: {float}</dt>
-<dd>Sharpness value (if supported)</dd>
-<dt><strong>gamma</strong>: {int}</dt>
-<dd>Gamma correction (0: off, 1: on, default: off)</dd>
+<dt><strong>cameraID</strong>: {int}, read-only</dt>
+<dd>camera ID of the camera</dd>
+<dt><strong>frame_time</strong>: {float}, read-only</dt>
+<dd>Transmission time per frame in s</dd>
 <dt><strong>gain</strong>: {float}</dt>
 <dd>Virtual gain</dd>
+<dt><strong>gamma</strong>: {int}</dt>
+<dd>Gamma correction (0: off, 1: on, default: off)</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>Integrationtime of CCD programmed in s</dd>
+<dt><strong>modelName</strong>: {str}, read-only</dt>
+<dd>model name of the camera [if connected]</dd>
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of plugin</dd>
 <dt><strong>offset</strong>: {float}, read-only</dt>
-<dd>Offset not used here</dd>
-<dt><strong>x0</strong>: {int}</dt>
-<dd>Startvalue for ROI</dd>
-<dt><strong>y0</strong>: {int}</dt>
-<dd>Startvalue for ROI</dd>
-<dt><strong>x1</strong>: {int}</dt>
-<dd>Stopvalue for ROI</dd>
-<dt><strong>y1</strong>: {int}</dt>
-<dd>Stopvalue for ROI</dd>
+<dd>Offset not used here.</dd>
 <dt><strong>sizex</strong>: {int}, read-only</dt>
 <dd>Pixelsize in x (cols)</dd>
 <dt><strong>sizey</strong>: {int}, read-only</dt>
 <dd>Pixelsize in y (rows)</dd>
+<dt><strong>timebase</strong>: {int}, read-only</dt>
+<dd>timebase (step width of integration_time) in Âµs</dd>
+<dt><strong>vendorID</strong>: {int}, read-only</dt>
+<dd>vendor ID of the camera</dd>
+<dt><strong>vendorName</strong>: {str}, read-only</dt>
+<dd>vendor name of the camera [if connected]</dd>
+<dt><strong>x0</strong>: {int}</dt>
+<dd>Startvalue for ROI</dd>
+<dt><strong>x1</strong>: {int}</dt>
+<dd>Stopvalue for ROI</dd>
+<dt><strong>y0</strong>: {int}</dt>
+<dd>Startvalue for ROI</dd>
+<dt><strong>y1</strong>: {int}</dt>
+<dd>Stopvalue for ROI</dd>
 </dl>
 </div>
 </div>

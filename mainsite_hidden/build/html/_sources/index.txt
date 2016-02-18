@@ -26,6 +26,8 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2016-02-17: The plugin **Roughness** for a one dimensional roughness evaluation has been added to the plugin repository. A demo gui for the roughness evaluation has been added to the *itom-packages/apps* subdirectory of itom.
+* 2016-02-17: The plugin **RawImport** for loading raw image formats from consumer cameras has been added to the plugin repository.
 * 2016-01-19: The plugin **MeasurementComputing** for the control of AD-converters (e.g. USB-1208LS) has been added to the plugin repository.
 * 2015-01-04: The plugin **VRMagic** for the control of cameras or framegrabbers from VRMagic (currently only monochrome cameras with 8, 10 or 16 bit are supported) has been added to the plugin repository.
 * 2015-07-20: Today **itom 2.0.0** has been released. The Windows setups and the sources (tag v2.0.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **Standa 8SMC4-USB**, **CommonVisionBlox**, **AvantesAvaSpec**, **PCOSensicam**, **LibUSB**... For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html. The setup version is the first version that is released using Qt5 (Qt5.3) and comes with the current Python 3.4.
