@@ -24,7 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
     <link rel="next" title="DataObjectIO" href="dataObjectIO.html" />
@@ -152,17 +151,17 @@
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
 <li>centroidXY</li>
-<li>getPercentageThreshold</li>
-<li>minMaxValue</li>
-<li>minValue</li>
+<li>deviationValue</li>
 <li>boundingBox</li>
 <li>maxValue</li>
-<li>meanValue</li>
-<li>deviationValue</li>
-<li>autofocusEstimate</li>
 <li>localCentroidXY</li>
-<li>areEqual</li>
+<li>minValue</li>
 <li>centroid1D</li>
+<li>meanValue</li>
+<li>autofocusEstimate</li>
+<li>getPercentageThreshold</li>
+<li>areEqual</li>
+<li>minMaxValue</li>
 </ol>
 </div>
 <div class="section" id="filters">
@@ -219,103 +218,11 @@ cYI = frac{sum{idx_y * (I - lowThreshold)}}{sum{(I - lowThreshold)}</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="getPercentageThreshold">
-<code class="descname">getPercentageThreshold</code><span class="sig-paren">(</span><em>data</em>, <em>percentage</em><span class="sig-paren">)</span><a class="headerlink" href="#getPercentageThreshold" title="Permalink to this definition">¶</a></dt>
-<dd><p>analyzes all values in the given data object and returns the value, which is at a given percentage in the sorted value list.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data</strong> (<em>dataObject</em>) &#8211; valid non-complex data object</li>
-<li><strong>percentage</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; percentage value [0.0, 100.0]</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">threshold - threshold value (NaN if data object was empty or only contained invalid values)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="minMaxValue">
-<code class="descname">minMaxValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>ignoreInf</em>, <em>complexHandling</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#minMaxValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>This filter calculated the minimal and maximal value and its first location within the dataObject.</p>
-<p>The result value will be Integer vor all integer types or Double for all floating point types</p>
-<p>The filter do not work with RGBA32 but with all other data-types</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
-<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; Ignore invalid-Values for floating point</li>
-<li><strong>complexHandling</strong> (<em>int - optional</em>) &#8211; Switch complex handling, 0:abs-Value, 1:imaginary-Value, 2:real-Value, 3: argument-Value</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">minimum - Minimal value, this parameter be int or double</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">planeMin - Index of the plane, which contains the result.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">yMin - Pixelindex in y-direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xMin - Pixelindex in x-direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">maximum - Maximum value, this parameter. This param can be int or double</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">planeMax - Index of the plane, which contains the result.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">yMax - Pixelindex in y-direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xMax - Pixelindex in x-direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="minValue">
-<code class="descname">minValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>ignoreInf</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#minValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>This filter calculated the minimal value and its first location within the dataObject.</p>
-<p>The result value will be Integer vor all integer types or Double for all floating point types</p>
+<dt id="deviationValue">
+<code class="descname">deviationValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>flag</em>, <em>ignoreInf</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#deviationValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filter returns the arithmetic mean and the standard deviation of the given dataObject within its ROI.
+The optinal flag to toggles if (flag==0) the deviation is calculated by 1/(n-1)*sqrt(sum(x-xm)^2)
+or (flag ==1) by 1/(n)*sqrt(sum(x-xm)^2)</p>
 <p>The filter do not work with RGBA32, Complex64 and Complex128, but with all other data-types</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -323,32 +230,21 @@ cYI = frac{sum{idx_y * (I - lowThreshold)}}{sum{(I - lowThreshold)}</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
+<li><strong>flag</strong> (<em>int - optional</em>) &#8211; Toggles the calculation mode of standard deviation over N or N-1 elements</li>
 <li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; Ignore invalid-Values for floating point</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - result of calculation. This param can be int or double</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">mean - mean result</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">plane - Index of the plane, which contains the result.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dev - deviation result</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">y - Pixelindex in y-direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">x - Pixelindex in x-direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
 </td>
 </tr>
 </tbody>
@@ -430,95 +326,6 @@ implementation for fixed-point data types without an higher threshold (since ver
 </dd></dl>
 
 <dl class="function">
-<dt id="meanValue">
-<code class="descname">meanValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>ignoreInf</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#meanValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>This filter calculated the mean value within the dataObject.</p>
-<p>The return value containing the mean value of the dataObject.</p>
-<p>The filter do not work with RGBA32, Complex64 and Complex128, but with all other data-types</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
-<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; source image data object for operation</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - result of calculation. This param can be int or double</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="deviationValue">
-<code class="descname">deviationValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>flag</em>, <em>ignoreInf</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#deviationValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>The filter returns the arithmetic mean and the standard deviation of the given dataObject within its ROI.
-The optinal flag to toggles if (flag==0) the deviation is calculated by 1/(n-1)*sqrt(sum(x-xm)^2)
-or (flag ==1) by 1/(n)*sqrt(sum(x-xm)^2)</p>
-<p>The filter do not work with RGBA32, Complex64 and Complex128, but with all other data-types</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
-<li><strong>flag</strong> (<em>int - optional</em>) &#8211; Toggles the calculation mode of standard deviation over N or N-1 elements</li>
-<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; Ignore invalid-Values for floating point</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">mean - mean result</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dev - deviation result</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="autofocusEstimate">
-<code class="descname">autofocusEstimate</code><span class="sig-paren">(</span><em>source</em>, <em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#autofocusEstimate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines an auto focus estimate for every plane in a given 2D or 3D dataObject.</p>
-<p>The estimate is returned in terms of a tuple of double values for each plane. The higher the estimate, the &#8216;sharper&#8217; the image.
-There are different methods implemented how the auto focus estimate is calculated.</p>
-<p>The methods are partially taken from H. Mir, P. Xu, P. van Beek, &#8216;An extensive empirical evaluation of focus measures for digital photography&#8217;, Proc. SPIE 9023 (2014).
-Many methods are based on linear filters. If so, their horizontal and vertical version is applied and the result is determined by:</p>
-<p>result = sum(sqrt(H*H + V*V)) / numPixelsPerPlane</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>source</strong> (<em>dataObject</em>) &#8211; 2D or 3D source image data object (u)int8, (u)int16, int32 only.</li>
-<li><strong>method</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; method used to determine the autofocus.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - auto focus measure values for every plane in the source image.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="localCentroidXY">
 <code class="descname">localCentroidXY</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>coarseSpots</em>, <em>centroids</em><span class="optional">[</span>, <em>lowThreshold</em>, <em>highThreshold</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#localCentroidXY" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter determines the sub-pixel
@@ -552,28 +359,40 @@ Please consider, that all input and output coordinates are assumed to be pixel v
 </dd></dl>
 
 <dl class="function">
-<dt id="areEqual">
-<code class="descname">areEqual</code><span class="sig-paren">(</span><em>sourceImage1</em>, <em>sourceImage2</em><span class="sig-paren">)</span><a class="headerlink" href="#areEqual" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check pixel-wise wether two dataObjects are equal.
-The filter returns 1 if both objects are pixel-wise equal, else returns 0.</p>
+<dt id="minValue">
+<code class="descname">minValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>ignoreInf</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#minValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter calculated the minimal value and its first location within the dataObject.</p>
+<p>The result value will be Integer vor all integer types or Double for all floating point types</p>
 <p>The filter do not work with RGBA32, Complex64 and Complex128, but with all other data-types</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sourceImage1</strong> (<em>dataObject</em>) &#8211; <ol class="arabic">
-<li>source image data object for operation</li>
-</ol>
-</li>
-<li><strong>sourceImage2</strong> (<em>dataObject</em>) &#8211; <ol class="arabic" start="2">
-<li>source image data object for operation</li>
-</ol>
-</li>
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
+<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; Ignore invalid-Values for floating point</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - 0 if both data objects are not equal, else 1</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - result of calculation. This param can be int or double</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">plane - Index of the plane, which contains the result.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">y - Pixelindex in y-direction.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">x - Pixelindex in x-direction.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
@@ -618,6 +437,186 @@ if this is not the case consider to set an appropriate value &#8216;lowerThresho
 <li><strong>lowerThreshold</strong> (<em>float - optional</em>) &#8211; values &lt;= lowerThreshold will not be considered for the cog calculation (default: this threshold is not considered).</li>
 <li><strong>columnWise</strong> (<em>int - optional</em>) &#8211; The search direction is along each column if 1, else along each row (default, 0)</li>
 </ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="meanValue">
+<code class="descname">meanValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>ignoreInf</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#meanValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter calculated the mean value within the dataObject.</p>
+<p>The return value containing the mean value of the dataObject.</p>
+<p>The filter do not work with RGBA32, Complex64 and Complex128, but with all other data-types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
+<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; source image data object for operation</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - result of calculation. This param can be int or double</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="autofocusEstimate">
+<code class="descname">autofocusEstimate</code><span class="sig-paren">(</span><em>source</em>, <em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#autofocusEstimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines an auto focus estimate for every plane in a given 2D or 3D dataObject.</p>
+<p>The estimate is returned in terms of a tuple of double values for each plane. The higher the estimate, the &#8216;sharper&#8217; the image.
+There are different methods implemented how the auto focus estimate is calculated.</p>
+<p>The methods are partially taken from H. Mir, P. Xu, P. van Beek, &#8216;An extensive empirical evaluation of focus measures for digital photography&#8217;, Proc. SPIE 9023 (2014).
+Many methods are based on linear filters. If so, their horizontal and vertical version is applied and the result is determined by:</p>
+<p>result = sum(sqrt(H*H + V*V)) / numPixelsPerPlane</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source</strong> (<em>dataObject</em>) &#8211; 2D or 3D source image data object (u)int8, (u)int16, int32 only.</li>
+<li><strong>method</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; method used to determine the autofocus.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - auto focus measure values for every plane in the source image.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="getPercentageThreshold">
+<code class="descname">getPercentageThreshold</code><span class="sig-paren">(</span><em>data</em>, <em>percentage</em><span class="sig-paren">)</span><a class="headerlink" href="#getPercentageThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>analyzes all values in the given data object and returns the value, which is at a given percentage in the sorted value list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dataObject</em>) &#8211; valid non-complex data object</li>
+<li><strong>percentage</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; percentage value [0.0, 100.0]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">threshold - threshold value (NaN if data object was empty or only contained invalid values)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="areEqual">
+<code class="descname">areEqual</code><span class="sig-paren">(</span><em>sourceImage1</em>, <em>sourceImage2</em><span class="sig-paren">)</span><a class="headerlink" href="#areEqual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check pixel-wise wether two dataObjects are equal.
+The filter returns 1 if both objects are pixel-wise equal, else returns 0.</p>
+<p>The filter do not work with RGBA32, Complex64 and Complex128, but with all other data-types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage1</strong> (<em>dataObject</em>) &#8211; <ol class="arabic">
+<li>source image data object for operation</li>
+</ol>
+</li>
+<li><strong>sourceImage2</strong> (<em>dataObject</em>) &#8211; <ol class="arabic" start="2">
+<li>source image data object for operation</li>
+</ol>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - 0 if both data objects are not equal, else 1</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="minMaxValue">
+<code class="descname">minMaxValue</code><span class="sig-paren">(</span><em>sourceImage</em><span class="optional">[</span>, <em>ignoreInf</em>, <em>complexHandling</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#minMaxValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter calculated the minimal and maximal value and its first location within the dataObject.</p>
+<p>The result value will be Integer vor all integer types or Double for all floating point types</p>
+<p>The filter do not work with RGBA32 but with all other data-types</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object for operation</li>
+<li><strong>ignoreInf</strong> (<em>int - optional</em>) &#8211; Ignore invalid-Values for floating point</li>
+<li><strong>complexHandling</strong> (<em>int - optional</em>) &#8211; Switch complex handling, 0:abs-Value, 1:imaginary-Value, 2:real-Value, 3: argument-Value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">minimum - Minimal value, this parameter be int or double</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">planeMin - Index of the plane, which contains the result.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">yMin - Pixelindex in y-direction.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xMin - Pixelindex in x-direction.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">maximum - Maximum value, this parameter. This param can be int or double</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">planeMax - Index of the plane, which contains the result.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">yMax - Pixelindex in y-direction.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xMax - Pixelindex in x-direction.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
 </td>
 </tr>
 </tbody>

@@ -79,6 +79,7 @@ Further hardware devices
    plugins/generalDataIO/LibModBus.rst
    plugins/generalDataIO/SuperlumBS.rst
    plugins/generalDataIO/libUSB.rst
+   plugins/generalDataIO/hidApi.rst
    
 AD-Converters
 ~~~~~~~~~~~~~~
