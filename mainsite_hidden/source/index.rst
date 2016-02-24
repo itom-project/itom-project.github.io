@@ -26,6 +26,7 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2016-02-24: The plugin **hidApi** for communicating with HID (human interface device) devices has been added to the plugin repository. This plugin can for instance be used to control DLPs from Texas Instruments.
 * 2016-02-17: The plugin **Roughness** for a one dimensional roughness evaluation has been added to the plugin repository. A demo gui for the roughness evaluation has been added to the *itom-packages/apps* subdirectory of itom.
 * 2016-02-17: The plugin **RawImport** for loading raw image formats from consumer cameras has been added to the plugin repository.
 * 2016-01-19: The plugin **MeasurementComputing** for the control of AD-converters (e.g. USB-1208LS) has been added to the plugin repository.

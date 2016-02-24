@@ -155,10 +155,10 @@
 <p>Some algorithms the plugin &#8216;fittingFilters&#8217; for a valid execution.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
-<li>getGaussianFilterKernel</li>
-<li>evalRoughnessProfile</li>
-<li>calcRoughnessProfile</li>
 <li>calcAbbottCurve</li>
+<li>calcRoughnessProfile</li>
+<li>evalRoughnessProfile</li>
+<li>getGaussianFilterKernel</li>
 <li>roughnessProfile</li>
 </ol>
 </div>
@@ -166,19 +166,64 @@
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
 <dl class="function">
-<dt id="getGaussianFilterKernel">
-<code class="descname">getGaussianFilterKernel</code><span class="sig-paren">(</span><em>kernel</em>, <em>cutoff_wavelength</em>, <em>spacing</em><span class="optional">[</span>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getGaussianFilterKernel" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the gaussian filter kernel as used by calcRoughnessProfile, based on EN ISO 11562</p>
+<dt id="calcAbbottCurve">
+<code class="descname">calcAbbottCurve</code><span class="sig-paren">(</span><em>roughness</em>, <em>abbott</em><span class="optional">[</span>, <em>nr_of_endeffect_pixels</em>, <em>histogram</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcAbbottCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>This filter calculates the Abbott firestone curve (as well as an optional histogram) of
+a roughness or waviness profile, e.g. obtained from the filter &#8216;calcRoughnessProfile&#8217;.</p>
+<p>The evaluation is done based on DIN EN ISO 4287:2010.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>kernel</strong> (<em>dataObject</em>) &#8211; kernel data object that contains the kernel after the call.</li>
-<li><strong>cutoff_wavelength</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm</li>
-<li><strong>spacing</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; spacing in µm between two adjacent pixels</li>
-<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the length of the filter kernel. The kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
+<li><strong>roughness</strong> (<em>dataObject</em>) &#8211; real input object (1D or 2D, no unsigned data types) - must be either the output argument &#8216;roughness&#8217; or &#8216;waviness&#8217; from filter &#8216;calcRoughnessProfile&#8217;. The roughness is determined row-by-row. The axis units must be set to &#8216;mm&#8217;, &#8216;µm&#8217; or &#8216;nm&#8217;.</li>
+<li><strong>abbott</strong> (<em>dataObject</em>) &#8211; abbott firestone curve with a horizontal step width of 1% (float64, size: Mx100 for M rows in the input object.</li>
+<li><strong>nr_of_endeffect_pixels</strong> (<em>int - optional</em>) &#8211; nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</li>
+<li><strong>histogram</strong> (<em>dataObject - optional</em>) &#8211; optional histogram with 100 buckets (int32, 1x100). Only the first line is evaluated.</li>
 </ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calcRoughnessProfile">
+<code class="descname">calcRoughnessProfile</code><span class="sig-paren">(</span><em>input</em>, <em>roughness</em>, <em>waviness</em>, <em>Lc</em>, <em>Ls</em><span class="optional">[</span>, <em>mode</em>, <em>periodicity</em>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcRoughnessProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate the roughness and waviness profile based in a given real input data object.</p>
+<p>The roughness and waviness profile is determined row-by-row from the given input object that is filtered using
+one or two gaussian convolution operations. The gaussian filters are choosen such that a transmission of 50% is
+obtained at the given cut-off wavelength levels.</p>
+<p>The waviness is a lowpass of the input data cut at the cut-off wavelength Lc.
+The roughness is the obtained by the difference between input and waviness. Additionally a lowpass is applied
+at the cut-off wavelength Ls (if Ls &gt; 0.0).</p>
+<p>You need to define if your profile is an open, non-periodic profiel or a closed, periodic profile. In the latter case
+the evaluation is only implemented by a convolution based algorithm, in the first case one can choose between the fast
+dft-implementation or the convolution-based implementation. If &#8216;mode&#8217; is set to &#8216;auto&#8217;, lowpass filter operations with
+big wavelengths are evaluated using the dft-approach (Lc) while the high-frequency cut-off Ls is done using the convolution operation.</p>
+<p>In order to guarantee an efficient algorithm, the gaussian filter kernel will be cut after a certain length. This length can be
+controlled using the parameter &#8216;cutoff_factor&#8217;.</p>
+<p>This filter is implemented based on DIN EN ISO 16610-21:2013.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> (<em>dataObject</em>) &#8211; real input object (1D or 2D). The roughness is determined row-by-row. The axis units must be set to &#8216;mm&#8217;, &#8216;µm&#8217; or &#8216;nm&#8217;.</li>
+<li><strong>roughness</strong> (<em>dataObject</em>) &#8211; roughness output object of the same size than the input object. Type is float64.</li>
+<li><strong>waviness</strong> (<em>dataObject</em>) &#8211; waviness output object of the same size than the input object. Type is float64.</li>
+<li><strong>Lc</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm for the separation between the waviness and roughness</li>
+<li><strong>Ls</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; short cut-off wavelength in µm for the separation between roughness and further high-frequency components (set 0.0 to omit this filtering)</li>
+<li><strong>mode</strong> (<em>str - optional</em>) &#8211; mode of determination: convolution, dft or auto (auto-selection of both methods)</li>
+<li><strong>periodicity</strong> (<em>int - optional</em>) &#8211; 0: non periodic profile (default), 1: periodic profile (not implemented yet)</li>
+<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the convolution based calculation. The convolution kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nr_of_endeffect_pixels - nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
 </td>
 </tr>
 </tbody>
@@ -230,63 +275,18 @@ the parameters are then Wv, Wz, Wt, Wa, Wq, Wsk, Wku, Wdq, Wda, Wdc.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="calcRoughnessProfile">
-<code class="descname">calcRoughnessProfile</code><span class="sig-paren">(</span><em>input</em>, <em>roughness</em>, <em>waviness</em>, <em>Lc</em>, <em>Ls</em><span class="optional">[</span>, <em>mode</em>, <em>periodicity</em>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcRoughnessProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>calculate the roughness and waviness profile based in a given real input data object.</p>
-<p>The roughness and waviness profile is determined row-by-row from the given input object that is filtered using
-one or two gaussian convolution operations. The gaussian filters are choosen such that a transmission of 50% is
-obtained at the given cut-off wavelength levels.</p>
-<p>The waviness is a lowpass of the input data cut at the cut-off wavelength Lc.
-The roughness is the obtained by the difference between input and waviness. Additionally a lowpass is applied
-at the cut-off wavelength Ls (if Ls &gt; 0.0).</p>
-<p>You need to define if your profile is an open, non-periodic profiel or a closed, periodic profile. In the latter case
-the evaluation is only implemented by a convolution based algorithm, in the first case one can choose between the fast
-dft-implementation or the convolution-based implementation. If &#8216;mode&#8217; is set to &#8216;auto&#8217;, lowpass filter operations with
-big wavelengths are evaluated using the dft-approach (Lc) while the high-frequency cut-off Ls is done using the convolution operation.</p>
-<p>In order to guarantee an efficient algorithm, the gaussian filter kernel will be cut after a certain length. This length can be
-controlled using the parameter &#8216;cutoff_factor&#8217;.</p>
-<p>This filter is implemented based on DIN EN ISO 16610-21:2013.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>input</strong> (<em>dataObject</em>) &#8211; real input object (1D or 2D). The roughness is determined row-by-row. The axis units must be set to &#8216;mm&#8217;, &#8216;µm&#8217; or &#8216;nm&#8217;.</li>
-<li><strong>roughness</strong> (<em>dataObject</em>) &#8211; roughness output object of the same size than the input object. Type is float64.</li>
-<li><strong>waviness</strong> (<em>dataObject</em>) &#8211; waviness output object of the same size than the input object. Type is float64.</li>
-<li><strong>Lc</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm for the separation between the waviness and roughness</li>
-<li><strong>Ls</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; short cut-off wavelength in µm for the separation between roughness and further high-frequency components (set 0.0 to omit this filtering)</li>
-<li><strong>mode</strong> (<em>str - optional</em>) &#8211; mode of determination: convolution, dft or auto (auto-selection of both methods)</li>
-<li><strong>periodicity</strong> (<em>int - optional</em>) &#8211; 0: non periodic profile (default), 1: periodic profile (not implemented yet)</li>
-<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the convolution based calculation. The convolution kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nr_of_endeffect_pixels - nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="calcAbbottCurve">
-<code class="descname">calcAbbottCurve</code><span class="sig-paren">(</span><em>roughness</em>, <em>abbott</em><span class="optional">[</span>, <em>nr_of_endeffect_pixels</em>, <em>histogram</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcAbbottCurve" title="Permalink to this definition">¶</a></dt>
-<dd><p>This filter calculates the Abbott firestone curve (as well as an optional histogram) of
-a roughness or waviness profile, e.g. obtained from the filter &#8216;calcRoughnessProfile&#8217;.</p>
-<p>The evaluation is done based on DIN EN ISO 4287:2010.</p>
+<dt id="getGaussianFilterKernel">
+<code class="descname">getGaussianFilterKernel</code><span class="sig-paren">(</span><em>kernel</em>, <em>cutoff_wavelength</em>, <em>spacing</em><span class="optional">[</span>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getGaussianFilterKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the gaussian filter kernel as used by calcRoughnessProfile, based on EN ISO 11562</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>roughness</strong> (<em>dataObject</em>) &#8211; real input object (1D or 2D, no unsigned data types) - must be either the output argument &#8216;roughness&#8217; or &#8216;waviness&#8217; from filter &#8216;calcRoughnessProfile&#8217;. The roughness is determined row-by-row. The axis units must be set to &#8216;mm&#8217;, &#8216;µm&#8217; or &#8216;nm&#8217;.</li>
-<li><strong>abbott</strong> (<em>dataObject</em>) &#8211; abbott firestone curve with a horizontal step width of 1% (float64, size: Mx100 for M rows in the input object.</li>
-<li><strong>nr_of_endeffect_pixels</strong> (<em>int - optional</em>) &#8211; nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</li>
-<li><strong>histogram</strong> (<em>dataObject - optional</em>) &#8211; optional histogram with 100 buckets (int32, 1x100). Only the first line is evaluated.</li>
+<li><strong>kernel</strong> (<em>dataObject</em>) &#8211; kernel data object that contains the kernel after the call.</li>
+<li><strong>cutoff_wavelength</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm</li>
+<li><strong>spacing</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; spacing in µm between two adjacent pixels</li>
+<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the length of the filter kernel. The kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
 </ul>
 </td>
 </tr>
