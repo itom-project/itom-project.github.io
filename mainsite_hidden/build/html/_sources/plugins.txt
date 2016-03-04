@@ -65,6 +65,8 @@ Motors / Actuators
    plugins/actuators/usbMotion3XIII.rst
    plugins/actuators/SMC100.rst
    plugins/actuators/ST8SMC4USB.rst
+   plugins/actuators/uhlRegister.rst
+   plugins/actuators/uhlText.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~

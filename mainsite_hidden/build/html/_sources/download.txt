@@ -11,28 +11,37 @@ The installers are available in a default version and an All-In-One version. The
 the necessary runtime libraries while the all-in-one solution also contains 3rd party dependencies that can be installed as optional
 component. These components are:
 
-**Version 2.0.0**
+**Version 2.1.0**
 
-* compiled using Qt5
-* Python 3.4.2
-* Numpy 1.9.2 + MKL 
-* Scipy 0.15.1
-* Matplotlib 1.4.3
+* compiled using Qt5.3.2
+* Python 3.5.1
+* Pip 8.0.3
+* Numpy 1.10.4 + MKL 
+* Scipy 0.17.0
+* six 1.10.0
+* pytz 2015.7
+* Matplotlib 1.5.1
 * Frosted 1.4.1
 * PyParsing 2.0.3
 * six 1.9.0
 * dateutil 2.4.0
-* Pies 2.6.3
+* Pies 2.6.7
+* cycler 0.9.0
+* scikit-image 0.11.3
+* decorator 4.0.8
+* networkx 1.11
+* Pillow 3.1.1
 
 Other packages can easily be downloaded and installed using the integration Python package manager.
 
-The current version 2.0.0 is available from
+The current version 2.1.0 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v2.0.0/>`_
+* `<http://sourceforge.net/projects/itom/files/v2.1.0/>`_
 
 Older versions are only hosted at sourceforge.net:
 
+* `itom 2.0.0 <http://sourceforge.net/projects/itom/files/v2.0.0/>`_
 * `itom 1.4.0 <http://sourceforge.net/projects/itom/files/v1.4.0/>`_
 * `itom 1.3.0 <http://sourceforge.net/projects/itom/files/v1.3.0>`_
 * `itom 1.2.0 <http://sourceforge.net/projects/itom/files/v1.2.0>`_
@@ -50,6 +59,19 @@ Older versions are only hosted at sourceforge.net:
     
 History of components of older versions
 -----------------------------------------
+
+**Version 2.0.0**
+
+* compiled using Qt5.3.2
+* Python 3.4.2
+* Numpy 1.9.2 + MKL 
+* Scipy 0.15.1
+* Matplotlib 1.4.3
+* Frosted 1.4.1
+* PyParsing 2.0.3
+* six 1.9.0
+* dateutil 2.4.0
+* Pies 2.6.3
 
 **Version 1.4.0**
 

@@ -85,11 +85,6 @@ The following parameters are mandatory or optional for initializing an instance 
     .. plugininitparams::
         :plugin: IDSuEye
         
-Changelog
-==========
-
-* itom setup 2.0.0: This plugin has been compiled using the uEye SDK 4.61
-        
 Compilation
 ===========
 
@@ -100,3 +95,16 @@ please delete IDS_HEADER_FILE and IDS_LIBRARY in CMake and press configure again
 
 Please install the 32bit/64bit version of IDS uEye SDK that corresponds to your operating system, not to the type of itom. If you decide to configure the SDK installer, you don't
 need to install any DirectShow or ActiveX components as well as additional drivers if you only want to use the camera with itom.
+
+Known problems
+===============
+
+Sometimes, the camera raises an acquisition error right after a change of the trigger mode. In this case, make an idle-grab (with a possible try-except) before starting
+with the right acquisition parameters.
+
+Changelog
+==========
+
+* itom setup 2.0.0: This plugin has been compiled using the uEye SDK 4.61
+* itom setup 2.1.0: This plugin has been compiled using the uEye SDK 4.61
+
