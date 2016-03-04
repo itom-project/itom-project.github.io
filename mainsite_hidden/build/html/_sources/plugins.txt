@@ -67,6 +67,7 @@ Motors / Actuators
    plugins/actuators/ST8SMC4USB.rst
    plugins/actuators/uhlRegister.rst
    plugins/actuators/uhlText.rst
+   plugins/actuators/NanotecStepMotor.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~

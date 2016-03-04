@@ -10,11 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -42,11 +37,8 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a></li>
-        <li class="right" >
           <a href="fittingFilters.html" title="Fitting Filters"
-             accesskey="N">next</a> |</li>
+             accesskey="N">next</a></li>
         <li class="right" >
           <a href="dataObjectArithmetic.html" title="DataObject Arithmetic"
              accesskey="P">previous</a> |</li>
@@ -166,140 +158,29 @@ Basic import-filter definition: destination object, filename, channel-specificat
 <p>Raw-export functions write/read the data to/from txt-based or binary file formats.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
-<li>saveDataObject</li>
-<li>savePtbPR</li>
-<li>saveTiff</li>
-<li>loadDataObject</li>
 <li>saveIDO</li>
-<li>saveRAS</li>
-<li>savePGM</li>
-<li>saveJPG</li>
 <li>saveXPM</li>
-<li>loadFRT</li>
-<li>loadTXT</li>
-<li>savePPM</li>
 <li>savePNG</li>
+<li>loadDataObject</li>
+<li>savePGM</li>
 <li>saveSDF</li>
+<li>saveJPG</li>
+<li>loadTXT</li>
+<li>loadFRT</li>
 <li>loadSDF</li>
+<li>saveTiff</li>
+<li>saveBMP</li>
+<li>saveDataObject</li>
+<li>saveRAS</li>
+<li>savePtbPR</li>
+<li>savePPM</li>
 <li>loadAnyImage</li>
 <li>loadIDO</li>
-<li>saveBMP</li>
 </ol>
 </div>
 <div class="section" id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
-<dl class="function">
-<dt id="saveDataObject">
-<code class="descname">saveDataObject</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>format</em>, <em>bitscaling</em><span class="optional">[</span>, <em>lowLimit</em>, <em>highLimit</em>, <em>colorFormat</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveDataObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>saves 1D and 2D dataObject to image formats via QImage (for saving images it is recommended to use the specific saveABC (savePNG, saveGIF, saveBMP...) commands).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; 2D-DataObject of anytype or 3-planes DataObject of uint8</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>format</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Format of the Image according to QImage: [&#8216;QImage::Format_Mono&#8217;, &#8216;QImage::Format_MonoLSB&#8217;, &#8216;QImage::Format_Indexed8&#8217;, &#8216;QImage::Format_RGB32&#8217;, &#8216;QImage::Format_ARGB32&#8217;</li>
-<li><strong>bitscaling</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Toggle bit-scaling, 0 = off, 1 = autoscale (default), 2 = userdefined ranges</li>
-<li><strong>lowLimit</strong> (<em>float - optional</em>) &#8211; Lowest limit. Will become 0</li>
-<li><strong>highLimit</strong> (<em>float - optional</em>) &#8211; Lowest limit. Will become max&lt;bitdepth&gt;</li>
-<li><strong>colorFormat</strong> (<em>str - optional</em>) &#8211; When DataObject of type float32, their format should be &#8211;&gt;Gray&lt;&#8211; or &#8211;&gt;RGB&lt;&#8211;</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="savePtbPR">
-<code class="descname">savePtbPR</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>decimalSigns</em>, <em>ordinateUnit</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePtbPR" title="Permalink to this definition">¶</a></dt>
-<dd><p>saves a 1D data object to the PR format used for the reference software for roughness metrology (<a class="reference external" href="https://www.ptb.de/rptb">https://www.ptb.de/rptb</a>) of PTB (Physikalisch Technische Bundesanstalt).</p>
-<p>The .pr format requires the lateral scaling values in mm. If another metric unit (m, cm, mm, µm, nm) is given in the axis unit tag, an automatic conversion is applied. Else a
-warning is returned. The same holds for the values (ordinate). You can choose if the .pr format should contain the ordinate values in nm or µm. An auto-conversion is implemented, too.</p>
-<p>This filter uses the hex-code DF for the german Umlaut &#8216;oe&#8217; and F6 for &#8216;sz&#8217; like required by the input file format description of the RPTB tool (since RPTB Version 2.01).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; 1D data object of any real data type. No invalid values are allowed.</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>decimalSigns</strong> (<em>int - optional</em>) &#8211; Number of decimal signs (default: 6).</li>
-<li><strong>ordinateUnit</strong> (<em>int - optional</em>) &#8211; unit of ordinate (0: nm [default], 1: µm)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveTiff">
-<code class="descname">saveTiff</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="sig-paren">)</span><a class="headerlink" href="#saveTiff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a real, 2D dataObject as tiff-file (tagged image format, 8bit and 16bit supported).</p>
-<p>The following conventions hold for saving the image:</p>
-<ul class="simple">
-<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
-supported 8bit range [0,255] or 16bit range [0, 65535] and saved using the given color palette</li>
-<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255] or 16bit range [0, 65535]
-and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
-value. Invalid values are saved as transparent values (alpha = 0).</li>
-<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
-without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
-color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
-as uint8 or uint16 data type.</li>
-</ul>
-<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
-<ul class="simple">
-<li>gray: [0,255] gray-values, 8bit</li>
-<li>gray16: [0,65535] gray-values, 16bit</li>
-<li>rgba: color with transparency, 8bit (rgba32 input only)</li>
-<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
-<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
-<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
-<li>hotIron: [0,255], hot iron map, 8bit</li>
-<li>red: [0,255], from black to red, 8bit</li>
-<li>green: [0,255], from black to green, 8bit</li>
-<li>blue: [0,255], from black to blue, 8bit</li>
-</ul>
-<p>This filters uses OpenCV to save the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16, ...]</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="loadDataObject">
-<code class="descname">loadDataObject</code><span class="sig-paren">(</span><em>destinationImage</em>, <em>filename</em><span class="optional">[</span>, <em>colorElement</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadDataObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>loads a 2D data object from image formats via QImage (<a href="#id1"><span class="problematic" id="id2">*</span></a>.gif <a href="#id3"><span class="problematic" id="id4">*</span></a>.xbm <a href="#id5"><span class="problematic" id="id6">*</span></a>.xpm).
-This filter is deprecated and can also be directly used via the filter &#8216;loadAnyImage&#8217;</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Empty dataObjet</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
-<li><strong>colorElement</strong> (<em>str - optional</em>) &#8211; Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; &#8216;asIs&#8217; ignores alpha channel from supported file types (use rgba instead).</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="function">
 <dt id="saveIDO">
 <code class="descname">saveIDO</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>headerOnly</em>, <em>tags2Binary</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveIDO" title="Permalink to this definition">¶</a></dt>
@@ -313,135 +194,10 @@ can be reload using <cite>loadIDO</cite>.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Any type of dataObject</li>
+<li><strong>sourceObject</strong> (<em>dataObject</em>) &#8211; Any type of dataObject</li>
 <li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
 <li><strong>headerOnly</strong> (<em>int - optional</em>) &#8211; If 0 the complete dataObject is saved (data + metadata) [default], else the filter saves only metadata</li>
 <li><strong>tags2Binary</strong> (<em>int - optional</em>) &#8211; If 0 meta information are saved as clear text, else double tags are saved as binary</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveRAS">
-<code class="descname">saveRAS</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="sig-paren">)</span><a class="headerlink" href="#saveRAS" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a real, 2D dataObject as sr-file or ras-file (Sun Raster, 8bit only).</p>
-<p>The following conventions hold for saving the image:</p>
-<ul class="simple">
-<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
-supported 8bit range [0,255] and saved using the given color palette</li>
-<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255]
-and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
-value. Invalid values are saved as transparent values (alpha = 0).</li>
-<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
-without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
-color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
-as uint8 or uint16 data type.</li>
-</ul>
-<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
-<ul class="simple">
-<li>gray: [0,255] gray-values, 8bit</li>
-<li>rgba: color with transparency (converted to gray-levels however), 8bit (rgba32 input only)</li>
-<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
-<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
-<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
-<li>hotIron: [0,255], hot iron map, 8bit</li>
-<li>red: [0,255], from black to red, 8bit</li>
-<li>green: [0,255], from black to green, 8bit</li>
-<li>blue: [0,255], from black to blue, 8bit</li>
-</ul>
-<p>This filters uses OpenCV to save the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; 2D-DataObject of anytype</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, ...]</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="savePGM">
-<code class="descname">savePGM</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>binaryOut</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePGM" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a real, 2D dataObject as pgm-file or pbm-file (portable gray map or portable bit map, 16bit only for pgm-format).</p>
-<p>The following conventions hold for saving the image:</p>
-<ul class="simple">
-<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
-supported 8bit range [0,255] or 16bit range [0, 65535] and saved using the given color palette (only gray-valued maps are allowed)</li>
-<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255] or 16bit range [0, 65535]
-and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
-value. Invalid values are saved as transparent values (alpha = 0).</li>
-<li>rgba32 data type are saved depending on the given color palette. The object is at first transformed to gray and than handled
-as uint8 or uint16 data type. Coloured images are not supported by this format.</li>
-</ul>
-<p>The following base color palettes are supported:</p>
-<ul class="simple">
-<li>gray: [0,255] gray-values, 8bit</li>
-<li>gray16: [0,65535] gray-values, 16bit</li>
-</ul>
-<p>This filters uses OpenCV to save the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16]</li>
-<li><strong>binaryOut</strong> (<em>int - optional</em>) &#8211; Enable binary coding</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveJPG">
-<code class="descname">saveJPG</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>compression</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveJPG" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a real, 2D dataObject as jpg-file or jp2-file (only jp2 supports 16bit but is not much known).</p>
-<p>The following conventions hold for saving the image:</p>
-<ul class="simple">
-<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
-supported 8bit range [0,255] and saved using the given color palette</li>
-<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255]
-and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
-value. Invalid values are saved as transparent values (alpha = 0).</li>
-<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
-without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
-color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
-as uint8 or uint16 data type.</li>
-</ul>
-<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
-<ul class="simple">
-<li>gray: [0,255] gray-values, 8bit</li>
-<li>rgba: color with transparency (converted to gray-levels however), 8bit (rgba32 input only)</li>
-<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
-<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
-<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
-<li>hotIron: [0,255], hot iron map, 8bit</li>
-<li>red: [0,255], from black to red, 8bit</li>
-<li>green: [0,255], from black to green, 8bit</li>
-<li>blue: [0,255], from black to blue, 8bit</li>
-</ul>
-<p>This filters uses OpenCV to save the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16, rgb, rgba, &lt;any-name-of-a-color-palette&gt;]. &#8216;gray16&#8217; supported for &#8216;.jp2&#8217; only</li>
-<li><strong>compression</strong> (<em>int - optional</em>) &#8211; Compression rate, 0: high, 100: low</li>
 </ul>
 </td>
 </tr>
@@ -483,9 +239,208 @@ as uint8 or uint16 data type.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
 <li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
 <li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="savePNG">
+<code class="descname">savePNG</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>compression</em>, <em>addAlphaChannel</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a real, 2D dataObject as png-file (portable network graphic).</p>
+<p>The following conventions hold for saving the image:</p>
+<ul class="simple">
+<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
+supported 8bit range [0,255] or 16bit range [0, 65535] and saved using the given color palette</li>
+<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255] or 16bit range [0, 65535]
+and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
+value. Invalid values are saved as transparent values (alpha = 0).</li>
+<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
+without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
+color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
+as uint8 or uint16 data type.</li>
+</ul>
+<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
+<ul class="simple">
+<li>gray: [0,255] gray-values, 8bit</li>
+<li>gray16: [0,65535] gray-values, 16bit</li>
+<li>rgba: color with transparency, 8bit (rgba32 input only)</li>
+<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
+<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
+<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
+<li>hotIron: [0,255], hot iron map, 8bit</li>
+<li>red: [0,255], from black to red, 8bit</li>
+<li>green: [0,255], from black to green, 8bit</li>
+<li>blue: [0,255], from black to blue, 8bit</li>
+</ul>
+<p>This filters uses OpenCV to save the image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</li>
+<li><strong>compression</strong> (<em>int - optional</em>) &#8211; Compression rate, 0: high, 9: low</li>
+<li><strong>addAlphaChannel</strong> (<em>int - optional</em>) &#8211; If enabled and in case of floating point values, invalid values will we transparent (alpha=0), else full opacity.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadDataObject">
+<code class="descname">loadDataObject</code><span class="sig-paren">(</span><em>destinationImage</em>, <em>filename</em><span class="optional">[</span>, <em>colorElement</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadDataObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads a 2D data object from image formats via QImage (<a href="#id1"><span class="problematic" id="id2">*</span></a>.gif <a href="#id3"><span class="problematic" id="id4">*</span></a>.xbm <a href="#id5"><span class="problematic" id="id6">*</span></a>.xpm).
+This filter is deprecated and can also be directly used via the filter &#8216;loadAnyImage&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; Empty dataObjet</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
+<li><strong>colorElement</strong> (<em>str - optional</em>) &#8211; Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; &#8216;asIs&#8217; ignores alpha channel from supported file types (use rgba instead).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="savePGM">
+<code class="descname">savePGM</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>binaryOut</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePGM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a real, 2D dataObject as pgm-file or pbm-file (portable gray map or portable bit map, 16bit only for pgm-format).</p>
+<p>The following conventions hold for saving the image:</p>
+<ul class="simple">
+<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
+supported 8bit range [0,255] or 16bit range [0, 65535] and saved using the given color palette (only gray-valued maps are allowed)</li>
+<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255] or 16bit range [0, 65535]
+and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
+value. Invalid values are saved as transparent values (alpha = 0).</li>
+<li>rgba32 data type are saved depending on the given color palette. The object is at first transformed to gray and than handled
+as uint8 or uint16 data type. Coloured images are not supported by this format.</li>
+</ul>
+<p>The following base color palettes are supported:</p>
+<ul class="simple">
+<li>gray: [0,255] gray-values, 8bit</li>
+<li>gray16: [0,65535] gray-values, 16bit</li>
+</ul>
+<p>This filters uses OpenCV to save the image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16]</li>
+<li><strong>binaryOut</strong> (<em>int - optional</em>) &#8211; Enable binary coding</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveSDF">
+<code class="descname">saveSDF</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>decimalSigns</em>, <em>verticalScale</em>, <em>invalidHandling</em>, <em>invalidValue</em>, <em>version</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveSDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves 1D and 2D dataObject to the ascii surface data file format (sdf), version aNIST-1.0 (no official standard) or aISO-1.0 (in compliance with ISO 25178-71).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceObject</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype or 3-planes DataObject of uint8</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>decimalSigns</strong> (<em>int - optional</em>) &#8211; Number of decimal signs (default: 3). For MountainsMaps reduce total number of digits to 5</li>
+<li><strong>verticalScale</strong> (<em>int - optional</em>) &#8211; Power of 10 for the zValue (Default: -3, micrometer), only for floating point objects.</li>
+<li><strong>invalidHandling</strong> (<em>int - optional</em>) &#8211; Toggles NaN handling if dataObject is floating-type. 0: Write NaN (Default); 1: Skip Value, 2: Substitute by InvalidValue, 3: Substitute by BAD for MountainsMaps.</li>
+<li><strong>invalidValue</strong> (<em>float - optional</em>) &#8211; New value for invalid substitution. Default is 0.0</li>
+<li><strong>version</strong> (<em>str - optional</em>) &#8211; File format version: &#8216;aNIST-1.0&#8217; or &#8216;aISO-1.0&#8217; for DIN EN ISO 25178-71</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveJPG">
+<code class="descname">saveJPG</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>compression</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveJPG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a real, 2D dataObject as jpg-file or jp2-file (only jp2 supports 16bit but is not much known).</p>
+<p>The following conventions hold for saving the image:</p>
+<ul class="simple">
+<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
+supported 8bit range [0,255] and saved using the given color palette</li>
+<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255]
+and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
+value. Invalid values are saved as transparent values (alpha = 0).</li>
+<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
+without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
+color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
+as uint8 or uint16 data type.</li>
+</ul>
+<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
+<ul class="simple">
+<li>gray: [0,255] gray-values, 8bit</li>
+<li>rgba: color with transparency (converted to gray-levels however), 8bit (rgba32 input only)</li>
+<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
+<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
+<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
+<li>hotIron: [0,255], hot iron map, 8bit</li>
+<li>red: [0,255], from black to red, 8bit</li>
+<li>green: [0,255], from black to green, 8bit</li>
+<li>blue: [0,255], from black to blue, 8bit</li>
+</ul>
+<p>This filters uses OpenCV to save the image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16, rgb, rgba, &lt;any-name-of-a-color-palette&gt;]. &#8216;gray16&#8217; supported for &#8216;.jp2&#8217; only</li>
+<li><strong>compression</strong> (<em>int - optional</em>) &#8211; Compression rate, 0: high, 100: low</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadTXT">
+<code class="descname">loadTXT</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="optional">[</span>, <em>ignoreLines</em>, <em>asMatrix</em>, <em>separatorSign</em>, <em>decimalSign</em>, <em>wrapSign</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadTXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads an ascii-based data file like txt, csv, tsv or space separated values.</p>
+<p>The text file is loaded line by line and tried to be interpreted as an array. It is possible to ignore the first n lines (optional parameter ignoreLines).
+The full content of these ignored lines is then saved in the tag &#8216;ignoredLines&#8217; of the destinationObject.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>destinationObject</strong> (<em>dataObject</em>) &#8211; Empty dataObject</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
+<li><strong>ignoreLines</strong> (<em>int - optional</em>) &#8211; Ignore the first n-lines.</li>
+<li><strong>asMatrix</strong> (<em>int - optional</em>) &#8211; <ol class="arabic">
+<li>Try to interprete list elements with 3 elements per row as a matrix or (0) load as written.</li>
+</ol>
+</li>
+<li><strong>separatorSign</strong> (<em>str - optional</em>) &#8211; Uses this as the separator between elements. If NULL, try to guess.</li>
+<li><strong>decimalSign</strong> (<em>str - optional</em>) &#8211; Uses this as the sign for decimal numbers. If &lt;guess&gt;, try to guess if the decimal sign is a dot (.) or comma (,).</li>
+<li><strong>wrapSign</strong> (<em>str - optional</em>) &#8211; Sometimes numbers are wrapped by a sign (.e.g &#8216;2.3&#8217; or &#8220;4.5&#8221;). If so, indicate the character(s) that wrap the numbers.</li>
 </ul>
 </td>
 </tr>
@@ -548,7 +503,7 @@ loaded to a 3D data object instead of a 2D one, the user can select the type and
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Destination dataObject</li>
+<li><strong>destinationObject</strong> (<em>dataObject</em>) &#8211; Destination dataObject</li>
 <li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source filename</li>
 <li><strong>xyUnit</strong> (<em>str - optional</em>) &#8211; Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than &#8216;m&#8217; lead to a multiplication of all values that might exceed the data type limit.)</li>
 <li><strong>valueUnit</strong> (<em>str - optional</em>) &#8211; Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than &#8216;m&#8217; lead to a multiplication of all values that might exceed the data type limit.)</li>
@@ -563,26 +518,19 @@ loaded to a 3D data object instead of a 2D one, the user can select the type and
 </dd></dl>
 
 <dl class="function">
-<dt id="loadTXT">
-<code class="descname">loadTXT</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="optional">[</span>, <em>ignoreLines</em>, <em>asMatrix</em>, <em>separatorSign</em>, <em>decimalSign</em>, <em>wrapSign</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadTXT" title="Permalink to this definition">¶</a></dt>
-<dd><p>loads an ascii-based data file like txt, csv, tsv or space separated values.</p>
-<p>The text file is loaded line by line and tried to be interpreted as an array. It is possible to ignore the first n lines (optional parameter ignoreLines).
-The full content of these ignored lines is then saved in the tag &#8216;ignoredLines&#8217; of the destinationObject.</p>
+<dt id="loadSDF">
+<code class="descname">loadSDF</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="optional">[</span>, <em>xyUnit</em>, <em>valueUnit</em>, <em>nanValue</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadSDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads an ascii-based surface data file to a 1D or 2D data object (sdf), versions aNIST-1.0, aISO-1.0 (ISO 25178-71) or aBCR-1.0 (e.g. Zygo export format) are supported.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Empty dataObject</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
-<li><strong>ignoreLines</strong> (<em>int - optional</em>) &#8211; Ignore the first n-lines.</li>
-<li><strong>asMatrix</strong> (<em>int - optional</em>) &#8211; <ol class="arabic">
-<li>Try to interprete list elements with 3 elements per row as a matrix or (0) load as written.</li>
-</ol>
-</li>
-<li><strong>separatorSign</strong> (<em>str - optional</em>) &#8211; Uses this as the separator between elements. If NULL, try to guess.</li>
-<li><strong>decimalSign</strong> (<em>str - optional</em>) &#8211; Uses this as the sign for decimal numbers. If &lt;guess&gt;, try to guess if the decimal sign is a dot (.) or comma (,).</li>
-<li><strong>wrapSign</strong> (<em>str - optional</em>) &#8211; Sometimes numbers are wrapped by a sign (.e.g &#8216;2.3&#8217; or &#8220;4.5&#8221;). If so, indicate the character(s) that wrap the numbers.</li>
+<li><strong>destinationObject</strong> (<em>dataObject</em>) &#8211; data object where the file data is loaded to. The type of destinationObject corresponds to the type of the data block in the sdf file (uint8, uint16, uint32, int8, int16, int32, float32, float64) or always float64 if the header value Zscale is != 1.0 or the valueUnit is != &#8216;m&#8217;</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the sdf file (aNIST-1.0 or aBCR-1.0 format)</li>
+<li><strong>xyUnit</strong> (<em>str - optional</em>) &#8211; Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than &#8216;m&#8217; lead to a multiplication of all values that might exceed the data type limit.)</li>
+<li><strong>valueUnit</strong> (<em>str - optional</em>) &#8211; Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than &#8216;m&#8217; lead to a multiplication of all values that might exceed the data type limit.)</li>
+<li><strong>nanValue</strong> (<em>str - optional</em>) &#8211; If this string occurs in the data block, the value will be replaced by NaN if float32 or float64 as output format. If &#8216;&lt;minrange&gt;&#8217; or &lt;maxrange&gt; the minimum or maximum value of the data type in the data block is assumed (e.g. &lt;maxrange&gt; is used by Zygo to describe NaN values). MountainsMap writes &#8216;BAD&#8217; as invalid value (following ISO25178-71).</li>
 </ul>
 </td>
 </tr>
@@ -591,54 +539,9 @@ The full content of these ignored lines is then saved in the tag &#8216;ignoredL
 </dd></dl>
 
 <dl class="function">
-<dt id="savePPM">
-<code class="descname">savePPM</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>binaryOut</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePPM" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a real, 2D dataObject as ppm-file (portable pixel map, 8bit only).</p>
-<p>The following conventions hold for saving the image:</p>
-<ul class="simple">
-<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
-supported 8bit range [0,255] and saved using the given color palette</li>
-<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255]
-and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
-value. Invalid values are saved as transparent values (alpha = 0).</li>
-<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
-without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
-color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
-as uint8 or uint16 data type.</li>
-</ul>
-<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
-<ul class="simple">
-<li>gray: [0,255] gray-values, 8bit</li>
-<li>rgba: color with transparency (converted to gray-levels however), 8bit (rgba32 input only)</li>
-<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
-<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
-<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
-<li>hotIron: [0,255], hot iron map, 8bit</li>
-<li>red: [0,255], from black to red, 8bit</li>
-<li>green: [0,255], from black to green, 8bit</li>
-<li>blue: [0,255], from black to blue, 8bit</li>
-</ul>
-<p>This filters uses OpenCV to save the image.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, &lt;any-name-of-a-color-palette&gt;, ...]</li>
-<li><strong>binaryOut</strong> (<em>int - optional</em>) &#8211; Enable binary coding</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="savePNG">
-<code class="descname">savePNG</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>compression</em>, <em>addAlphaChannel</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePNG" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves a real, 2D dataObject as png-file (portable network graphic).</p>
+<dt id="saveTiff">
+<code class="descname">saveTiff</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="sig-paren">)</span><a class="headerlink" href="#saveTiff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a real, 2D dataObject as tiff-file (tagged image format, 8bit and 16bit supported).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
 <li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
@@ -670,116 +573,9 @@ as uint8 or uint16 data type.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
 <li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</li>
-<li><strong>compression</strong> (<em>int - optional</em>) &#8211; Compression rate, 0: high, 9: low</li>
-<li><strong>addAlphaChannel</strong> (<em>int - optional</em>) &#8211; If enabled and in case of floating point values, invalid values will we transparent (alpha=0), else full opacity.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="saveSDF">
-<code class="descname">saveSDF</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>decimalSigns</em>, <em>verticalScale</em>, <em>invalidHandling</em>, <em>invalidValue</em>, <em>version</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveSDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>saves 1D and 2D dataObject to the ascii surface data file format (sdf), version aNIST-1.0 (no official standard) or aISO-1.0 (in compliance with ISO 25178-71).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; 2D-DataObject of anytype or 3-planes DataObject of uint8</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
-<li><strong>decimalSigns</strong> (<em>int - optional</em>) &#8211; Number of decimal signs (default: 3). For MountainsMaps reduce total number of digits to 5</li>
-<li><strong>verticalScale</strong> (<em>int - optional</em>) &#8211; Power of 10 for the zValue (Default: -3, micrometer), only for floating point objects.</li>
-<li><strong>invalidHandling</strong> (<em>int - optional</em>) &#8211; Toggles NaN handling if dataObject is floating-type. 0: Write NaN (Default); 1: Skip Value, 2: Substitute by InvalidValue, 3: Substitute by BAD for MountainsMaps.</li>
-<li><strong>invalidValue</strong> (<em>float - optional</em>) &#8211; New value for invalid substitution. Default is 0.0</li>
-<li><strong>version</strong> (<em>str - optional</em>) &#8211; File format version: &#8216;aNIST-1.0&#8217; or &#8216;aISO-1.0&#8217; for DIN EN ISO 25178-71</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="loadSDF">
-<code class="descname">loadSDF</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="optional">[</span>, <em>xyUnit</em>, <em>valueUnit</em>, <em>nanValue</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadSDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>loads an ascii-based surface data file to a 1D or 2D data object (sdf), versions aNIST-1.0, aISO-1.0 (ISO 25178-71) or aBCR-1.0 (e.g. Zygo export format) are supported.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; data object where the file data is loaded to. The type of destinationObject corresponds to the type of the data block in the sdf file (uint8, uint16, uint32, int8, int16, int32, float32, float64) or always float64 if the header value Zscale is != 1.0 or the valueUnit is != &#8216;m&#8217;</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the sdf file (aNIST-1.0 or aBCR-1.0 format)</li>
-<li><strong>xyUnit</strong> (<em>str - optional</em>) &#8211; Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than &#8216;m&#8217; lead to a multiplication of all values that might exceed the data type limit.)</li>
-<li><strong>valueUnit</strong> (<em>str - optional</em>) &#8211; Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than &#8216;m&#8217; lead to a multiplication of all values that might exceed the data type limit.)</li>
-<li><strong>nanValue</strong> (<em>str - optional</em>) &#8211; If this string occurs in the data block, the value will be replaced by NaN if float32 or float64 as output format. If &#8216;&lt;minrange&gt;&#8217; or &lt;maxrange&gt; the minimum or maximum value of the data type in the data block is assumed (e.g. &lt;maxrange&gt; is used by Zygo to describe NaN values). MountainsMap writes &#8216;BAD&#8217; as invalid value (following ISO25178-71).</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="loadAnyImage">
-<code class="descname">loadAnyImage</code><span class="sig-paren">(</span><em>destinationImage</em>, <em>filename</em><span class="optional">[</span>, <em>colorElement</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadAnyImage" title="Permalink to this definition">¶</a></dt>
-<dd><p>load the following image formats from a file to a 2D data object:</p>
-<ul class="simple">
-<li>png: 8bit/16bit, color available, transparency available</li>
-<li>tiff/tif: 8bit/16bit, color available</li>
-<li>jpg: 8bit, color available</li>
-<li>jp2: 8bit/16bit, color available</li>
-<li>ras/sr: 8bit, color available</li>
-<li>ppm: 8bit, color available</li>
-<li>pgm: 8bit/16bit</li>
-<li>pbm: 8bit, color available</li>
-<li>bmp/dip: 8bit, color available</li>
-<li>gif: 8bit, color available, transparency available</li>
-<li>xbm: 8bit, color available, transparency available (X BitMap)</li>
-<li>xpm: 8bit, color available, transparency available (X PixMap)</li>
-</ul>
-<p>The file format only provides color or transparency data if indicated above.</p>
-<p>You can choose which channel (colorElement) of the loaded file should be used for the data object.
-<cite>asIs</cite> loads the file as it is: monochrome formats are loaded as uint8 or uint16 data object, while
-colored file formats are loaded as rgba32 data object. The color elements <cite>alpha</cite>, <cite>R</cite>, <cite>G</cite>, <cite>B</cite>, <cite>RGB</cite>,
-<cite>RGBA</cite> are only available for colored file formats are only load the selected channels to either a uint8/uint16 data object
-or a rgba32 data object (rgb and rgba only). <cite>GRAY</cite> converts a colored file format to grayscale before loading it
-to an uint8 or uint16 data object.</p>
-<p>All file formats are loaded using OpenCV, besides gif, xbm, xpm which are loaded via Qt.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; DataObject that will be filled with the loaded file content</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
-<li><strong>colorElement</strong> (<em>str - optional</em>) &#8211; Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; &#8216;asIs&#8217; ignores alpha channel from supported file types (use rgba instead).</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="loadIDO">
-<code class="descname">loadIDO</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#loadIDO" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tries to load the given ido or idh-file as itom dataObject. Data in the given file
-must have been saved using <cite>saveIDO</cite> in a xml-compatible file format, whereas <a href="#id7"><span class="problematic" id="id8">*</span></a>.idh only
-contains meta information of a data object and <a href="#id9"><span class="problematic" id="id10">*</span></a>.ido contains the full object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>destinationObject</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; DataObject that will be filled with the loaded file content</li>
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
+<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, gray16, ...]</li>
 </ul>
 </td>
 </tr>
@@ -821,9 +617,205 @@ as uint8 or uint16 data type.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<a class="reference internal" href="../../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) &#8211; Real, 2D data object</li>
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
 <li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
 <li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, rgb, &lt;any-name-of-a-color-palette&gt;, ...]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveDataObject">
+<code class="descname">saveDataObject</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>format</em>, <em>bitscaling</em><span class="optional">[</span>, <em>lowLimit</em>, <em>highLimit</em>, <em>colorFormat</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveDataObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves 1D and 2D dataObject to image formats via QImage (for saving images it is recommended to use the specific saveABC (savePNG, saveGIF, saveBMP...) commands).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype or 3-planes DataObject of uint8</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>format</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Format of the Image according to QImage: [&#8216;QImage::Format_Mono&#8217;, &#8216;QImage::Format_MonoLSB&#8217;, &#8216;QImage::Format_Indexed8&#8217;, &#8216;QImage::Format_RGB32&#8217;, &#8216;QImage::Format_ARGB32&#8217;</li>
+<li><strong>bitscaling</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Toggle bit-scaling, 0 = off, 1 = autoscale (default), 2 = userdefined ranges</li>
+<li><strong>lowLimit</strong> (<em>float - optional</em>) &#8211; Lowest limit. Will become 0</li>
+<li><strong>highLimit</strong> (<em>float - optional</em>) &#8211; Lowest limit. Will become max&lt;bitdepth&gt;</li>
+<li><strong>colorFormat</strong> (<em>str - optional</em>) &#8211; When DataObject of type float32, their format should be &#8211;&gt;Gray&lt;&#8211; or &#8211;&gt;RGB&lt;&#8211;</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveRAS">
+<code class="descname">saveRAS</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="sig-paren">)</span><a class="headerlink" href="#saveRAS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a real, 2D dataObject as sr-file or ras-file (Sun Raster, 8bit only).</p>
+<p>The following conventions hold for saving the image:</p>
+<ul class="simple">
+<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
+supported 8bit range [0,255] and saved using the given color palette</li>
+<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255]
+and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
+value. Invalid values are saved as transparent values (alpha = 0).</li>
+<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
+without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
+color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
+as uint8 or uint16 data type.</li>
+</ul>
+<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
+<ul class="simple">
+<li>gray: [0,255] gray-values, 8bit</li>
+<li>rgba: color with transparency (converted to gray-levels however), 8bit (rgba32 input only)</li>
+<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
+<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
+<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
+<li>hotIron: [0,255], hot iron map, 8bit</li>
+<li>red: [0,255], from black to red, 8bit</li>
+<li>green: [0,255], from black to green, 8bit</li>
+<li>blue: [0,255], from black to blue, 8bit</li>
+</ul>
+<p>This filters uses OpenCV to save the image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; 2D-DataObject of anytype</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, ...]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="savePtbPR">
+<code class="descname">savePtbPR</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>decimalSigns</em>, <em>ordinateUnit</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePtbPR" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves a 1D data object to the PR format used for the reference software for roughness metrology (<a class="reference external" href="https://www.ptb.de/rptb">https://www.ptb.de/rptb</a>) of PTB (Physikalisch Technische Bundesanstalt).</p>
+<p>The .pr format requires the lateral scaling values in mm. If another metric unit (m, cm, mm, µm, nm) is given in the axis unit tag, an automatic conversion is applied. Else a
+warning is returned. The same holds for the values (ordinate). You can choose if the .pr format should contain the ordinate values in nm or µm. An auto-conversion is implemented, too.</p>
+<p>This filter uses the hex-code DF for the german Umlaut &#8216;oe&#8217; and F6 for &#8216;sz&#8217; like required by the input file format description of the RPTB tool (since RPTB Version 2.01).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceObject</strong> (<em>dataObject</em>) &#8211; 1D data object of any real data type. No invalid values are allowed.</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>decimalSigns</strong> (<em>int - optional</em>) &#8211; Number of decimal signs (default: 6).</li>
+<li><strong>ordinateUnit</strong> (<em>int - optional</em>) &#8211; unit of ordinate (0: nm [default], 1: µm)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="savePPM">
+<code class="descname">savePPM</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>filename</em>, <em>palette</em><span class="optional">[</span>, <em>binaryOut</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#savePPM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a real, 2D dataObject as ppm-file (portable pixel map, 8bit only).</p>
+<p>The following conventions hold for saving the image:</p>
+<ul class="simple">
+<li>fixed-point data types (uint8, uint16, uint32, int8, int16, int32) will be scaled to the
+supported 8bit range [0,255] and saved using the given color palette</li>
+<li>float32 or float64 data types are scaled from [0.0, 1.0] to the supported 8bit range [0,255]
+and saved using the given color palette. Values outside of [0.0, 1.0] are clipped to the boundary
+value. Invalid values are saved as transparent values (alpha = 0).</li>
+<li>rgba32 data type are saved depending on the given color palette. They can be saved as colored image
+without transparency (&#8216;rgb&#8217;) or with considering the alpha channel as transparent values (&#8216;rgba&#8217;). If another
+color palette than &#8216;rgb&#8217; or &#8216;rgba&#8217; is indicated, the object is at first transformed to gray and than handled
+as uint8 or uint16 data type.</li>
+</ul>
+<p>The following base color palettes exist (further, user-defined palettes can be used, too):</p>
+<ul class="simple">
+<li>gray: [0,255] gray-values, 8bit</li>
+<li>rgba: color with transparency (converted to gray-levels however), 8bit (rgba32 input only)</li>
+<li>rgb: color without transparency, 8bit (rgba32 input only)</li>
+<li>grayMarked: [0,255], gray-values, 0: violet, 255: red, 8bit</li>
+<li>falseColor, falseColorIR: [0,255], (inverse) false colors, 8bit</li>
+<li>hotIron: [0,255], hot iron map, 8bit</li>
+<li>red: [0,255], from black to red, 8bit</li>
+<li>green: [0,255], from black to green, 8bit</li>
+<li>blue: [0,255], from black to blue, 8bit</li>
+</ul>
+<p>This filters uses OpenCV to save the image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; Real, 2D data object</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Destination filename</li>
+<li><strong>palette</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Color palette name [gray, &lt;any-name-of-a-color-palette&gt;, ...]</li>
+<li><strong>binaryOut</strong> (<em>int - optional</em>) &#8211; Enable binary coding</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadAnyImage">
+<code class="descname">loadAnyImage</code><span class="sig-paren">(</span><em>destinationImage</em>, <em>filename</em><span class="optional">[</span>, <em>colorElement</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadAnyImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>load the following image formats from a file to a 2D data object:</p>
+<ul class="simple">
+<li>png: 8bit/16bit, color available, transparency available</li>
+<li>tiff/tif: 8bit/16bit, color available</li>
+<li>jpg: 8bit, color available</li>
+<li>jp2: 8bit/16bit, color available</li>
+<li>ras/sr: 8bit, color available</li>
+<li>ppm: 8bit, color available</li>
+<li>pgm: 8bit/16bit</li>
+<li>pbm: 8bit, color available</li>
+<li>bmp/dip: 8bit, color available</li>
+<li>gif: 8bit, color available, transparency available</li>
+<li>xbm: 8bit, color available, transparency available (X BitMap)</li>
+<li>xpm: 8bit, color available, transparency available (X PixMap)</li>
+</ul>
+<p>The file format only provides color or transparency data if indicated above.</p>
+<p>You can choose which channel (colorElement) of the loaded file should be used for the data object.
+<cite>asIs</cite> loads the file as it is: monochrome formats are loaded as uint8 or uint16 data object, while
+colored file formats are loaded as rgba32 data object. The color elements <cite>alpha</cite>, <cite>R</cite>, <cite>G</cite>, <cite>B</cite>, <cite>RGB</cite>,
+<cite>RGBA</cite> are only available for colored file formats are only load the selected channels to either a uint8/uint16 data object
+or a rgba32 data object (rgb and rgba only). <cite>GRAY</cite> converts a colored file format to grayscale before loading it
+to an uint8 or uint16 data object.</p>
+<p>All file formats are loaded using OpenCV, besides gif, xbm, xpm which are loaded via Qt.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; DataObject that will be filled with the loaded file content</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
+<li><strong>colorElement</strong> (<em>str - optional</em>) &#8211; Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; &#8216;asIs&#8217; ignores alpha channel from supported file types (use rgba instead).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="loadIDO">
+<code class="descname">loadIDO</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#loadIDO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to load the given ido or idh-file as itom dataObject. Data in the given file
+must have been saved using <cite>saveIDO</cite> in a xml-compatible file format, whereas <a href="#id7"><span class="problematic" id="id8">*</span></a>.idh only
+contains meta information of a data object and <a href="#id9"><span class="problematic" id="id10">*</span></a>.ido contains the full object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>destinationObject</strong> (<em>dataObject</em>) &#8211; DataObject that will be filled with the loaded file content</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Source file name</li>
 </ul>
 </td>
 </tr>
@@ -844,11 +836,8 @@ as uint8 or uint16 data type.</li>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a></li>
-        <li class="right" >
           <a href="fittingFilters.html" title="Fitting Filters"
-             >next</a> |</li>
+             >next</a></li>
         <li class="right" >
           <a href="dataObjectArithmetic.html" title="DataObject Arithmetic"
              >previous</a> |</li>
