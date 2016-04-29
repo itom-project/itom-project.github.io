@@ -30,8 +30,6 @@
   
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
   
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
 
   
     <link rel="top" title="itom Documentation" href="../index.html"/>
@@ -107,7 +105,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="install_plugins_designer-plugins.html">3.4. Plugins, Designer-Plugins</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install_all-in-one_development_setup.html">3.5. All-In-One development setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install_get_this_help.html">3.6. Get this help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_all-in-one_development_setup_creation.html">3.6. All-In-One development creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install_get_this_help.html">3.7. Get this help</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
@@ -318,12 +317,11 @@ where the executable program <em>gacutil.exe</em> is located, then type:</p>
 </pre></div>
 </div>
 </div>
-<p>** note:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>**Visual Studio Express**
-
-You can also use the Express Versions of Visual Studio (e.g. Visual Studo 2013 Express) to compile itom. In order to easily debug the special data structures from Qt (QString,
-QVector...) you need to do the following steps, since the AddIn is not available in the Express editions: Get the file **qt5.natvis** from https://github.com/qtproject/qt-labs-vstools/blob/master/tools/Qt4EEAddin/qt5.natvis . Copy the file into a folder similar to this one: C:\Users\YourUserName\Documents\Visual Studio 2013\Visualizers, hence the documents folder of the respective user. Restart Visual Studio Express and try debugging itom.
-</pre></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Visual Studio Express</p>
+<p class="last">You can also use the Express Versions of Visual Studio (e.g. Visual Studo 2013 Express) to compile itom. In order to easily debug the special data structures from Qt (QString,
+QVector...) you need to do the following steps, since the AddIn is not available in the Express editions: Get the file <strong>qt5.natvis</strong> from <a class="reference external" href="https://github.com/qtproject/qt-labs-vstools/blob/master/tools/Qt4EEAddin/qt5.natvis">https://github.com/qtproject/qt-labs-vstools/blob/master/tools/Qt4EEAddin/qt5.natvis</a> . Copy the file into a folder similar to this one: C:UsersYourUserNameDocumentsVisual Studio 2013Visualizers, hence the documents folder of the respective user. Restart Visual Studio Express and try debugging itom.</p>
 </div>
 <p><strong>QScintilla2</strong> (mandatory)</p>
 <p>Download <strong>QScintilla</strong> (2.6 or higher) from <a class="reference external" href="http://www.riverbankcomputing.com/software/qscintilla/download">http://www.riverbankcomputing.com/software/qscintilla/download</a> and build the debug and release version. The original
@@ -339,6 +337,11 @@ project settings are not ready for a multi-configuration build in <strong>Visual
 <div class="highlight-python"><div class="highlight"><pre><span></span>CONFIG += qt warn_off debug_and_release build_all dll thread
 </pre></div>
 </div>
+<p>Or</p>
+<blockquote>
+<div><p>CONFIG += qt warn_off debug_and_release build_all dll thread exceptions</p>
+</div></blockquote>
+<p>for QScintilla &gt;= 2.9.0</p>
 </li>
 </ul>
 <p>and add the lines:</p>
@@ -349,8 +352,8 @@ project settings are not ready for a multi-configuration build in <strong>Visual
 <ul>
 <li><p class="first">If you had a previous installation of QScintilla, delete the directory <strong>%QTDIR%\include\Qsci</strong> as well as the files called <strong>qscintilla2.dll</strong> and <strong>qscintilla2d.dll</strong> in the directory <strong>%QTDIR%\bin</strong></p>
 </li>
-<li><p class="first">Execute the following commands from the command-line:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>- cd C:\\QScintilla2\\Qt4
+<li><p class="first">Execute the following commands from the command-line, whereas <strong>win32-msvc2010</strong> should be replaced by the makespec corresponding to your desired IDE (e.g. win32-msvc2013 for Visual Studio 2013)</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>- cd C:\\QScintilla2\\Qt4Qt5
 - nmake distclean
 - %QTDIR%\\bin\\qmake qscintilla.pro spec=win32-msvc2010
 - nmake
@@ -456,7 +459,7 @@ some methods can not be executed and a python error message is raised, saying th
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 04, 2016.
+      Last updated on Apr 29, 2016.
 
     </p>
   </div>
@@ -478,7 +481,7 @@ some methods can not be executed and a python error message is raised, saying th
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'6bd7a70',
+            VERSION:'202dcff',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

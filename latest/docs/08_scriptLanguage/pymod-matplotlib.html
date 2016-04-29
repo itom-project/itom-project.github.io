@@ -30,8 +30,6 @@
   
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
   
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
 
   
     <link rel="top" title="itom Documentation" href="../index.html"/>
@@ -105,6 +103,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#set-matplotlib-backend-to-itom">9.5.1. Set Matplotlib backend to itom</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#simple-matplotlib-example">9.5.2. Simple Matplotlib example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#embedding-a-matplotlib-figure-in-your-own-user-interface">9.5.3. Embedding a matplotlib figure in your own user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#size-control-over-matplotlib-canvas">9.5.4. Size control over Matplotlib canvas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-animation-via-matplotlib">9.5.5. Creating an animation via Matplotlib</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pymod-reload-modules.html">9.6. Reload modified modules</a></li>
@@ -258,7 +258,7 @@ on <a class="reference external" href="http://matplotlib.org">http://matplotlib.
 </div>
 <p>Please consider that the original source code has been changed such that the first two lines are prepended. After executing this script, the following figure is displayed in <strong>itom</strong>:</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/matplotlib_ellipseCollection.png"><img alt="../_images/matplotlib_ellipseCollection.png" src="../_images/matplotlib_ellipseCollection.png" style="width: 387.20000000000005px; height: 324.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/matplotlib_ellipseCollection.png"><img alt="../_images/matplotlib_ellipseCollection.png" src="../_images/matplotlib_ellipseCollection.png" style="width: 484.0px; height: 405.0px;" /></a>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -269,7 +269,7 @@ on <a class="reference external" href="http://matplotlib.org">http://matplotlib.
 <div class="section" id="embedding-a-matplotlib-figure-in-your-own-user-interface">
 <h2>9.5.3. Embedding a matplotlib figure in your own user interface<a class="headerlink" href="#embedding-a-matplotlib-figure-in-your-own-user-interface" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/matplotlib_gui.png"><img alt="../_images/matplotlib_gui.png" src="../_images/matplotlib_gui.png" style="width: 722.4000000000001px; height: 339.20000000000005px;" /></a>
+<a class="reference internal image-reference" href="../_images/matplotlib_gui.png"><img alt="../_images/matplotlib_gui.png" src="../_images/matplotlib_gui.png" style="width: 903.0px; height: 424.0px;" /></a>
 </div>
 <p><strong>itom</strong> not only provides stand-alone windows for showing the result of the <em>matplotlib</em>, but it is also possible to integrate a <em>matplotlib</em> canvas into own user interfaces created by the
 QtDesigner and scripted with <strong>Python</strong>. For more information how to do this, see <a class="reference internal" href="../06_extended_gui/qtdesigner.html#qtdesigner"><span>Creating advanced dialogs and windows</span></a>.</p>
@@ -336,7 +336,7 @@ QtDesigner and scripted with <strong>Python</strong>. For more information how t
 </div>
 <p>The result is:</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/matplotlib_gui_result.png"><img alt="../_images/matplotlib_gui_result.png" src="../_images/matplotlib_gui_result.png" style="width: 915.2px; height: 348.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/matplotlib_gui_result.png"><img alt="../_images/matplotlib_gui_result.png" src="../_images/matplotlib_gui_result.png" style="width: 1144.0px; height: 436.0px;" /></a>
 </div>
 <p><strong>What happens here?</strong></p>
 <ul class="simple">
@@ -378,6 +378,73 @@ the property <strong>forceWindowResize</strong> to <strong>False</strong>. In th
 </div>
 <p>This example is contained in the <strong>demo/ui/embeddedMatplotlib</strong> folder.</p>
 </div>
+<div class="section" id="size-control-over-matplotlib-canvas">
+<h2>9.5.4. Size control over Matplotlib canvas<a class="headerlink" href="#size-control-over-matplotlib-canvas" title="Permalink to this headline">¶</a></h2>
+<p>Usually, it is possible to control the size and dpi of the matplotlib canvas using the commands</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">myfig</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+<span class="n">myfig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">forward</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, if the matplotlib canvas is embedded in an itom user interface or in general in the itom backend (hence window management of itom),
+the size of the canvas is usually given by the outer size of the parent window and the layout of the user interface. Only, if the size
+of the canvas is increased, the size of the window may also increase. In order to provide a better size control of the canvas, the matplotlib
+widget has the property <strong>keepSizeFixed</strong>. If this property is true (default: false), the canvas will always have the indicated size. If one
+enlarges the outer window, the canvas will be unchanged in size and still be centered in the available area. Vice-versa, it is not possible to make
+the window smaller than the allowed canvas area.</p>
+<p>In order to axes the property <strong>keepSizeFixed</strong> it is necessary, to obtain the corresponding instance of class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem" title="itom.uiItem"><code class="xref py py-class docutils literal"><span class="pre">uiItem</span></code></a> from the given
+matplotlib figure handle. If the figure handle can be obtained by the current figure, the access might look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#get current figure</span>
+<span class="n">current_figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+<span class="c1">#set the keepSizeFixed property of the plot to true:</span>
+<span class="n">current_figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">itomUI</span><span class="p">[</span><span class="s2">&quot;keepSizeFixed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1">#alternative:</span>
+<span class="c1">#plt.get_current_fig_manager().itomUI[&quot;keepSizeFixed&quot;]</span>
+</pre></div>
+</div>
+<p>As an example see the script <strong>hist2d_size_control.py</strong> in the <strong>demo/matplotlib</strong> folder.</p>
+</div>
+<div class="section" id="creating-an-animation-via-matplotlib">
+<h2>9.5.5. Creating an animation via Matplotlib<a class="headerlink" href="#creating-an-animation-via-matplotlib" title="Permalink to this headline">¶</a></h2>
+<p>Matplotlib can be used to create animation and save it as a <em>mp4</em> file. The <strong>ffmpeg codec</strong> is required for this feature and needs to be installed on your computer. A detailed description for the installation of the ffmpeg codec can be found <a class="reference external" href="http://www.adaptivesamples.com/how-to-install-ffmpeg-on-windows">here</a>. The build version of the ffmpeg codec can be downloaded <a class="reference external" href="http://www.ffmpeg.zeranoe.com/builds">here</a>. Download and unzip the build files to your harddrive.</p>
+<p>Typically the folder is like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>C:\Program files\ffmpeg
+</pre></div>
+</div>
+<p>The bin folder of ffmpeg must be added to the path variables of your system:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>C:\Program files\ffmpeg\bin
+</pre></div>
+</div>
+<p>Finally start the command prompt and run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>C:\Proram files\ffmpeg\bin\ffmpeg.exe -codecs
+</pre></div>
+</div>
+<p>or easier:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span> <span class="o">-</span><span class="n">codecs</span>
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last figure">
+<img alt="../_images/matplotlibAnimation1d.gif" src="../_images/matplotlibAnimation1d.gif" />
+</div>
+</td>
+<td><div class="first last figure">
+<img alt="../_images/matplotlibAnimation2d.gif" src="../_images/matplotlibAnimation2d.gif" />
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>1d animation</td>
+<td>2d animation</td>
+</tr>
+</tbody>
+</table>
+<p>In the <strong>demo/matplotlib</strong> folder are two demo scripts (<strong>matplotlibAnimation1d.py, matplotlibAnimation2d.py</strong>), which show how to create animations.</p>
+</div>
 </div>
 
 
@@ -400,7 +467,7 @@ the property <strong>forceWindowResize</strong> to <strong>False</strong>. In th
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 04, 2016.
+      Last updated on Apr 29, 2016.
 
     </p>
   </div>
@@ -422,7 +489,7 @@ the property <strong>forceWindowResize</strong> to <strong>False</strong>. In th
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'6bd7a70',
+            VERSION:'202dcff',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -30,8 +30,6 @@
   
     <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
   
-    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
-  
 
   
     <link rel="top" title="itom Documentation" href="../index.html"/>
@@ -227,8 +225,9 @@ In order to get the instance of <a class="reference internal" href="../09_refere
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you have an instance to a plotItem only in python and the window is closed, the window is finally deleted and the plotItem becomes invalid. In difference, a handle to a figure
-keeps the figure alive until all references to the figure&#8217;s instance are deleted. Therefore you can always show or hide a figure using its instance and the methods <a class="reference internal" href="../09_reference/figure.html#itom.figure.show" title="itom.figure.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> or <a class="reference internal" href="../09_reference/figure.html#itom.figure.hide" title="itom.figure.hide"><code class="xref py py-meth docutils literal"><span class="pre">hide()</span></code></a>.</p>
+<p class="last">In itom versions &lt;= 2.1.0, a figure is only deleted if all references to it have been deleted in Python. Even if the user closed the figure, it was only hidden if at least
+one reference was still available in Python. In newer versions of itom, the behaviour changed and was adapted to other plots. If the user closes the figure, it is deleted
+and the instance of <a class="reference internal" href="../09_reference/figure.html#itom.figure" title="itom.figure"><code class="xref py py-class docutils literal"><span class="pre">figure</span></code></a> contains an invalid reference.</p>
 </div>
 <p>The <a class="reference internal" href="../09_reference/figure.html#itom.figure" title="itom.figure"><code class="xref py py-class docutils literal"><span class="pre">figure</span></code></a> also provides a static method <a class="reference internal" href="../09_reference/figure.html#itom.figure.close" title="itom.figure.close"><code class="xref py py-meth docutils literal"><span class="pre">close()</span></code></a> to close and delete a figure defined by its specific integer handle or to close all figures using the string &#8216;all&#8217; as parameter. Please note, that only these figures are finally deleted where no other python references exist to them.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#close figure with handle 7</span>
@@ -260,7 +259,7 @@ keeps the figure alive until all references to the figure&#8217;s instance are d
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 04, 2016.
+      Last updated on Apr 29, 2016.
 
     </p>
   </div>
@@ -282,7 +281,7 @@ keeps the figure alive until all references to the figure&#8217;s instance are d
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'6bd7a70',
+            VERSION:'202dcff',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
