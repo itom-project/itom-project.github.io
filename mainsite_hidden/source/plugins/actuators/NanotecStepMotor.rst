@@ -77,7 +77,5 @@ can be either in mm or degree.
 In the following example, the axes 1 and 4 are connected (controllable by the plugin axis numbers 0 and 1 respectively).
 They both run at 10 full steps per mm (1) (hence: linear axes):
 
-.. code-block:: python
-    
-    ser = dataIO("SerialIO",4,115200,"\r",8,1)
-    mot = actuator("NanotecStepMotor",ser,[1,4],[10,10],[1,1])
+ser = dataIO("SerialIO",4,115200,"\r",8,1)
+mot = actuator("NanotecStepMotor",ser,[1,4],[10,10],[1,1])

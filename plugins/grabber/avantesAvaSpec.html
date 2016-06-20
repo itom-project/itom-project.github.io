@@ -10,6 +10,8 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,6 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
@@ -84,6 +87,8 @@
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#timestamp">Timestamp</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#dark-correction">Dark correction</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="commonVisionBlox.html">GenICam cameras via Common Vision Blox</a></li>
@@ -160,7 +165,7 @@
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>This DLL integrates the Avantis AvantesAvaSpec spectrometer series into itoM. It is used for CCM / CCSI with the AvaSpec 3468 USB-Spectrometer.</p>
+<p>This DLL integrates the Avantis AvantesAvaSpec spectrometer series into itom. It uses a low-level libusb connection to communicate with the devices and has been tested with the following spectrometers: * AvaSpec 3468 USB-Spectrometer * AvaSpec 2048 USB-Spectrometer.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
@@ -190,16 +195,14 @@
 <dd>Number of averages for every frame</dd>
 <dt><strong>bpp</strong>: {int}, read-only</dt>
 <dd>Bit depth. 16 (uint16), if single acquisition. 32 (float32), if averaging.</dd>
-<dt><strong>frame_time</strong>: {float}, read-only</dt>
-<dd>Shortest time between two frames of CCD in s</dd>
 <dt><strong>integration_time</strong>: {float}</dt>
-<dd>Integrationtime of CCD programmed in s</dd>
+<dd>Integration time of CCD programmed in s, some devices do not accept the full range of allowed values (see AvaSpec for real minimum value of your device).</dd>
 <dt><strong>lambda_coeffs</strong>: {seq. of float}, read-only</dt>
 <dd>Coefficients for polynom that determines lambda_table (lambda_table[idx] = c[0] + c[1]*idx + c[2]*idx^2 + ... + c[4]*idx^4)</dd>
 <dt><strong>lambda_table</strong>: {seq. of float}, read-only</dt>
 <dd>Vector with the wavelength of all active pixels</dd>
 <dt><strong>name</strong>: {str}, read-only</dt>
-<dd>PlugIn-Name</dd>
+<dd>plugin name</dd>
 <dt><strong>roi</strong>: {int rect [x0,y0,width,height]}</dt>
 <dd>ROI (x,y,width,height)</dd>
 <dt><strong>serial_number</strong>: {str}, read-only</dt>
@@ -208,13 +211,29 @@
 <dd>current width of ROI</dd>
 <dt><strong>sizey</strong>: {int}, read-only</dt>
 <dd>current height</dd>
-<dt><strong>time_out</strong>: {float}</dt>
-<dd>Timeout for grabbing in s</dd>
-<dt><strong>trigger_enable</strong>: {int}, read-only</dt>
-<dd>Enable triggermode</dd>
-<dt><strong>trigger_mode</strong>: {int}</dt>
-<dd>Set Triggermode</dd>
+<dt><strong>detector_name</strong>: {str}, read-only</dt>
+<dd>Name of the detector.</dd>
+<dt><strong>dark_correction</strong>: {int}</dt>
+<dd>Dark correction mode. See section below.</dd>
 </dl>
+</div>
+<div class="section" id="timestamp">
+<h2>Timestamp<a class="headerlink" href="#timestamp" title="Permalink to this headline">¶</a></h2>
+<p>Every acquired image will have a tag &#8216;timestamp&#8217; defined. It contains the timestamp of the acquisition in seconds since the
+startup of the spectrometer.</p>
+</div>
+<div class="section" id="dark-correction">
+<h2>Dark correction<a class="headerlink" href="#dark-correction" title="Permalink to this headline">¶</a></h2>
+<p>Some spectrometers have more pixels on the sensor than are used for the signal generation. These, covered and hence dark pixels, can be used for a dark
+correction. There are three types of dark correction (parameter dark_correction):</p>
+<ul class="simple">
+<li>Off (0): No dark correction is applied, if the sensor is recognized to have such dark pixels, a tag &#8216;dark&#8217; is created that contains the mean value of all dark pixels.
+If no averaging is enabled, the output format of the dataObject is uint16, else float32. Sensors, that don&#8217;t have dark pixels can only be operated in this mode.</li>
+<li>Static (1): The mean value of all dark pixels is subtracted from all pixels. The output format is float32 always (negative values might occur).</li>
+<li>Dynamic (2): Only choose this mode, if the software AvaSpec provides dynamic dark correction for the sensor (see sensor configuration &gt;&gt; checkbox &#8216;dynamic dark correction&#8217;
+must be enabled. In this case, odd and even pixels have different dark correction values (they are probably read by different electronics). Choose this mode to
+subtract different mean values for even and odd pixels. The tag &#8216;dark&#8217; still contains the mean of both mean values (0.5 * (mean_even + mean_odd)).</li>
+</ul>
 </div>
 </div>
 
@@ -240,7 +259,7 @@
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

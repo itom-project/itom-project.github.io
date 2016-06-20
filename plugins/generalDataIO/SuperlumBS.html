@@ -10,6 +10,8 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,6 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="top" title="itom" href="../../index.html" />
     <link rel="up" title="Plugins" href="../../plugins.html" />
@@ -130,7 +133,7 @@
 <td><span>Plugin for Superlum BraodSweeper BS-840-1-HP, BS-840-2-HP, BS-1060-1-HP, BS-1060-2-HP.</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><span>Actuator</span></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
 <td><span>licensed under LGPL</span></td>
@@ -153,7 +156,7 @@ Different BroadSweeper types (BS-840-1-HP, BS-840-2-HP, BS-1060-1-HP, BS-1060-2-
 Only BS-840-1-HP is tested.
 The company website can be found under <a class="reference external" href="http://www.superlumdiodes.com">http://www.superlumdiodes.com</a>
 This system needs a serial port, which differs depending on the controller type. The parameters of the serial port (besides port number) are set automatically during initialization.</p>
-<p>It is initialized by actuator(&#8220;SuperlumBS&#8221;, SerialIO).</p>
+<p>It is initialized by dataIO(&#8220;SuperlumBS&#8221;, SerialIO).</p>
 <p>Applications:</p>
 <ul class="simple">
 <li>biomedical imaging</li>
@@ -240,8 +243,8 @@ request.</p>
 </table>
 </div></blockquote>
 <p>Then create a new instance of the plugin <strong>SuperlumBS</strong> using the instance of the <strong>SerialIO</strong> plugin.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="n">COM</span><span class="o">-</span><span class="n">Port</span><span class="p">,</span> <span class="n">Baudrate</span><span class="p">,</span> <span class="n">endline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">bs</span> <span class="o">=</span> <span class="n">actuator</span><span class="p">(</span><span class="s2">&quot;SuperlumBS&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="n">COM</span><span class="o">-</span><span class="n">Port</span><span class="p">,</span> <span class="n">Baudrate</span><span class="p">,</span> <span class="n">endline</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="n">DataIO</span><span class="p">(</span><span class="s">&quot;SuperlumBS&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>After the initialization of the plugin <strong>SuperlumBS</strong> the remote communication is set. The plugin works only, if the <strong>remote access</strong> is available, <strong>Master-Key</strong> is in position I and the <strong>remote Interlock</strong> is closed.
@@ -300,28 +303,34 @@ parameters can be changed using <em>setParam</em>.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>First open the serial port and assign it to the variable <strong>serial</strong>. For example COM Port 1, Baud rate 57600, endline = &#8220;\r\n&#8221;.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">57600</span><span class="p">,</span> <span class="n">endline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">57600</span><span class="p">,</span> <span class="n">endline</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Then create a new instance of the acuator plugin <strong>SuperlumBS</strong>. A Mandatory parameter is the serialIO instance. Assign it to the variable <strong>bs</strong>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="n">actuator</span><span class="p">(</span><span class="s2">&quot;SuperlumBS&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bs</span> <span class="o">=</span> <span class="n">DataIO</span><span class="p">(</span><span class="s">&quot;SuperlumBS&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>All the parameter can be changed by using the function <strong>setParam</strong>. This example shows how the wavelength in the MANual Mode can be changed.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bs</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;wavelength&quot;</span><span class="p">,</span> <span class="mf">850.00</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bs</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;wavelength&quot;</span><span class="p">,</span> <span class="mf">850.00</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The light of the Broadsweeper is enabled by setting the parameter <strong>optical_output</strong> to 1 or disabled by setting it to 0.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">bs</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;optical_output&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bs</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;optical_output&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The parameters can be queried by using the function <strong>getParam</strong>. This example shows how to get the Operation Mode of the BroadSweeper device.
 The return integer value will be 1 for MANual, 2 for AUTOmatic, 3 for EXTneral and 4 for MODulation Mode.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">bs</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;operation_mode&quot;</span><span class="p">)</span>
-<span class="mi">1</span>
-<span class="o">&gt;&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre>    <span class="o">&gt;&gt;</span><span class="n">bs</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s">&quot;operation_mode&quot;</span><span class="p">)</span>
+    <span class="mi">1</span>
+    <span class="o">&gt;&gt;</span>
+
+<span class="n">Changelog</span>
 </pre></div>
 </div>
+<hr class="docutils" />
+<ul class="simple">
+<li>plugin type changed to dataIO</li>
+</ul>
 </div>
 </div>
 
@@ -347,7 +356,7 @@ The return integer value will be 1 for MANual, 2 for AUTOmatic, 3 for EXTneral a
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
