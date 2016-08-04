@@ -8,6 +8,13 @@ itom - an Open Source Measurement, Automation and Evaluation Software
     :width: 740px
     :align: center
     
+.. slideshow::
+    
+    Goto: http://imageslidermaker.com/v2 and download the slideshow packet.
+    Unpack it and put the ism folder to the main directory of the website.
+    Use the .. raw:: html tag to include the pure html code here. Put the script
+    and css link here, as well.
+    
 One main application of itom is the development and operation of sensor and measurement system for instance in a laboratory environment. Therefore, the software has to be able to communicate with a wide range of different hardware systems, such as cameras or actuators and should provide a diversified and as complete as possible set of evaluation and data processing methods. Additionally, the rapid prototyping of modern measurement and inspection setups requires a system, where parameters or components can easily be changed at runtime, necessitating the availability of an embedded scripting language. Finally, when operating a measurement system, it is also desirable to extend the graphical user interface by system adapted dialogs and windows.
 
 **Contents:**
