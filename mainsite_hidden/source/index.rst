@@ -28,6 +28,7 @@ News
 -----
 
 * 2016-08-04: The actuator plugins **FirgelliLAC**, **ThorlabsBP** and **ThorlabsISM** have been added to the plugin repository.
+* 2016-06-20: *itom* can now also be compiled on the Raspberry Pi. This has been tested for the version 2 and 3 of the Raspi. Check the documentation under http://itom.bitbucket.org/latest/docs/02_installation/build_raspi.html how to compile itom on your Raspberry.
 * 2016-03-17: A new site with :ref:`FAQs, known bugs, workarounds... <sec-known-issues>` has been added to this website. Check this list for instance if the itom setup does not properly work.
 * 2016-03-14: Today **itom 2.1.0** has been released. The Windows setups and the sources (tag v2.1.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **VRMagic**, **MeasurementComputing**, **RawImport**, **Roughness**, **hidApi**, **UhlRegister** and **UhlText**. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html.
 * 2016-03-04: The plugins **UhlRegister** and **UhlText** for communicating with actuators from company Uhl (and Lang) have been added to the plugin repository.
