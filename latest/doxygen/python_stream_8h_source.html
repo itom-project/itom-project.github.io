@@ -124,48 +124,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00039"></a>00039 <span class="preprocessor">    #endif</span>
 <a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
 <a name="l00041"></a>00041 <span class="preprocessor"></span>
-<a name="l00042"></a>00042 
-<a name="l00043"></a><a class="code" href="class_py_stream.html">00043</a> <span class="keyword">class </span><a class="code" href="class_py_stream.html" title="static class which implements a new python type. The members cout and cerr of the python system are s...">PyStream</a>
-<a name="l00044"></a>00044 {
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">public</span>:
+<a name="l00042"></a>00042 <span class="keyword">namespace </span>ito
+<a name="l00043"></a>00043 {
+<a name="l00044"></a>00044 
+<a name="l00045"></a><a class="code" href="classito_1_1_py_stream.html">00045</a>     <span class="keyword">class </span><a class="code" href="classito_1_1_py_stream.html" title="static class which implements a new python type. The members cout and cerr of the python system are s...">PyStream</a>
+<a name="l00046"></a>00046     {
 <a name="l00047"></a>00047 
-<a name="l00049"></a>00049     <span class="comment">/*</span>
-<a name="l00050"></a>00050 <span class="comment">        The struct&#39;s name is PythonStream. This python type consists of the basic elements for every python type,</span>
-<a name="l00051"></a>00051 <span class="comment">        included an integer value type, which indicates whether this stream corresponds to the stream \a cout or \a cerr.</span>
-<a name="l00052"></a>00052 <span class="comment">    */</span>
-<a name="l00053"></a><a class="code" href="struct_py_stream_1_1_python_stream.html">00053</a>     <span class="keyword">typedef</span> <span class="keyword">struct </span>
-<a name="l00054"></a>00054     {
-<a name="l00055"></a>00055         PyObject_HEAD
-<a name="l00056"></a><a class="code" href="struct_py_stream_1_1_python_stream.html#ade4301e1959795ea93f5b88c95280729">00056</a>         <span class="keywordtype">int</span> <a class="code" href="struct_py_stream_1_1_python_stream.html#ade4301e1959795ea93f5b88c95280729">type</a>;   
-<a name="l00057"></a>00057         PyObject *encoding;
-<a name="l00058"></a>00058         <span class="keywordtype">char</span> closed;
-<a name="l00059"></a>00059     } 
-<a name="l00060"></a>00060     <a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>;
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062     <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="class_py_stream.html#a1e656656b377d1e5e2d5ea35b27b6b19" title="static method which is called if variable of type PyStream in python workspace has been deleted in or...">PythonStream_dealloc</a>(<a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>);
-<a name="l00063"></a>00063     <span class="comment">//static PyObject *PythonStream_new(PyTypeObject *type, PyObject *args, PyObject *kwds);</span>
-<a name="l00064"></a>00064     <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="class_py_stream.html#a06b9e3878784ebe24fc7968930b0a3a1" title="static init method, which is called if any variable of type PyStream is initialized. This method extracts type value from args.">PythonStream_init</a>(<a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a> *<span class="keyword">self</span>, PyObject *args, PyObject *kwds);
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066     <span class="keyword">static</span> PyObject *<a class="code" href="class_py_stream.html#addf8784ed2577c03eb711519390381a6" title="static method returning name representation of this type">PythonStream_name</a>(<a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>);
-<a name="l00067"></a>00067     <span class="keyword">static</span> PyObject *PythonStream_fileno(<a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>);
-<a name="l00068"></a>00068     <span class="keyword">static</span> PyObject *<a class="code" href="class_py_stream.html#a84017151075b3b849abf97eee05c9e21" title="static method invoked if string has been written to stream">PythonStream_write</a>(<a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>, PyObject *args);
-<a name="l00069"></a>00069     <span class="keyword">static</span> PyObject *<a class="code" href="class_py_stream.html#ad7001bd3282d9a303dc64f6c10b011ec" title="static method is invoked if stream has been flushed">PythonStream_flush</a>(<a class="code" href="struct_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>, PyObject *args);
-<a name="l00070"></a>00070     
-<a name="l00071"></a><a class="code" href="class_py_stream.html#a27506ed4652589367065c65970735fc5">00071</a>     <span class="keyword">static</span> PyMemberDef <a class="code" href="class_py_stream.html#a27506ed4652589367065c65970735fc5" title="static PyMemberDef table which describes every member of PyStream type">PythonStream_members</a>[];
-<a name="l00072"></a><a class="code" href="class_py_stream.html#a301aea8c828385946f07864fab9e3d09">00072</a>     <span class="keyword">static</span> PyMethodDef <a class="code" href="class_py_stream.html#a301aea8c828385946f07864fab9e3d09" title="static table of type PyMethodDef which contains function pointers and descriptions to all methods...">PythonStream_methods</a>[];
-<a name="l00073"></a><a class="code" href="class_py_stream.html#a0c0eeaabe334be1cb21add509e7af423">00073</a>     <span class="keyword">static</span> PyTypeObject <a class="code" href="class_py_stream.html#a0c0eeaabe334be1cb21add509e7af423" title="static PyTypeObject for type PyStream with function pointers to all required static methods...">PythonStreamType</a>;
-<a name="l00074"></a><a class="code" href="class_py_stream.html#a38292610bd2710fb75e9f7dd4d65ba09">00074</a>     <span class="keyword">static</span> PyModuleDef <a class="code" href="class_py_stream.html#a38292610bd2710fb75e9f7dd4d65ba09" title="PyModuleDef table, containing description for PyStream type.">pythonStreamModule</a>;
-<a name="l00075"></a>00075 };
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078 <span class="preprocessor">#endif</span>
+<a name="l00048"></a>00048     <span class="keyword">public</span>:
+<a name="l00049"></a>00049 
+<a name="l00051"></a>00051         <span class="comment">/*</span>
+<a name="l00052"></a>00052 <span class="comment">            The struct&#39;s name is PythonStream. This python type consists of the basic elements for every python type,</span>
+<a name="l00053"></a>00053 <span class="comment">            included an integer value type, which indicates whether this stream corresponds to the stream \a cout or \a cerr.</span>
+<a name="l00054"></a>00054 <span class="comment">            */</span>
+<a name="l00055"></a><a class="code" href="structito_1_1_py_stream_1_1_python_stream.html">00055</a>         <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00056"></a>00056         {
+<a name="l00057"></a>00057             PyObject_HEAD
+<a name="l00058"></a><a class="code" href="structito_1_1_py_stream_1_1_python_stream.html#a4e1ff1812c780dc481af217127e4aba2">00058</a>                 <span class="keywordtype">int</span> <a class="code" href="structito_1_1_py_stream_1_1_python_stream.html#a4e1ff1812c780dc481af217127e4aba2">type</a>;   
+<a name="l00059"></a>00059             PyObject *encoding;
+<a name="l00060"></a>00060             <span class="keywordtype">char</span> closed;
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062         <a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064         <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classito_1_1_py_stream.html#a15757574a08f725bf0dc65223cc313a8" title="static method which is called if variable of type PyStream in python workspace has been deleted in or...">PythonStream_dealloc</a>(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>);
+<a name="l00065"></a>00065         <span class="comment">//static PyObject *PythonStream_new(PyTypeObject *type, PyObject *args, PyObject *kwds);</span>
+<a name="l00066"></a>00066         <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_py_stream.html#acb76bdc7e692361aff8a4f8cb29ff18a" title="static init method, which is called if any variable of type PyStream is initialized. This method extracts type value from args.">PythonStream_init</a>(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a> *<span class="keyword">self</span>, PyObject *args, PyObject *kwds);
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068         <span class="keyword">static</span> PyObject *<a class="code" href="classito_1_1_py_stream.html#ae7f2037739b376c09149c1e7dedd5516" title="static method returning name representation of this type">PythonStream_name</a>(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>);
+<a name="l00069"></a>00069         <span class="keyword">static</span> PyObject *PythonStream_fileno(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>);
+<a name="l00070"></a>00070         <span class="keyword">static</span> PyObject *<a class="code" href="classito_1_1_py_stream.html#acd1cb0481ebe6b2a38a18f9131011174" title="static method invoked if string has been written to stream">PythonStream_write</a>(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>, PyObject *args);
+<a name="l00071"></a>00071         <span class="keyword">static</span> PyObject *<a class="code" href="classito_1_1_py_stream.html#a9ebc2125ee3f298b5568538dddc9961e" title="static method is invoked if stream has been flushed">PythonStream_flush</a>(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>, PyObject *args);
+<a name="l00072"></a>00072         <span class="keyword">static</span> PyObject *PythonStream_readline(<a class="code" href="structito_1_1_py_stream_1_1_python_stream.html" title="* this struct builds the basic structure of the new python type.">PythonStream</a>* <span class="keyword">self</span>, PyObject *args);
+<a name="l00073"></a>00073 
+<a name="l00074"></a><a class="code" href="classito_1_1_py_stream.html#a222ec978d1a105f31342cef54d4f1ab6">00074</a>         <span class="keyword">static</span> PyMemberDef <a class="code" href="classito_1_1_py_stream.html#a222ec978d1a105f31342cef54d4f1ab6" title="static PyMemberDef table which describes every member of PyStream type">PythonStream_members</a>[];
+<a name="l00075"></a><a class="code" href="classito_1_1_py_stream.html#a6d5640c93565b2f0b8661b335aeb9770">00075</a>         <span class="keyword">static</span> PyMethodDef <a class="code" href="classito_1_1_py_stream.html#a6d5640c93565b2f0b8661b335aeb9770" title="static table of type PyMethodDef which contains function pointers and descriptions to all methods...">PythonStream_methods</a>[];
+<a name="l00076"></a><a class="code" href="classito_1_1_py_stream.html#af32fcc6a08aa4b1eaa51ed822f82e37a">00076</a>         <span class="keyword">static</span> PyTypeObject <a class="code" href="classito_1_1_py_stream.html#af32fcc6a08aa4b1eaa51ed822f82e37a" title="static PyTypeObject for type PyStream with function pointers to all required static methods...">PythonStreamType</a>;
+<a name="l00077"></a><a class="code" href="classito_1_1_py_stream.html#a6c3e9bc67e4ba14fb42eb92032ed878e">00077</a>         <span class="keyword">static</span> PyModuleDef <a class="code" href="classito_1_1_py_stream.html#a6c3e9bc67e4ba14fb42eb92032ed878e" title="PyModuleDef table, containing description for PyStream type.">pythonStreamModule</a>;
+<a name="l00078"></a>00078     };
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 } <span class="comment">//end namespace ito</span>
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>pythonStream.h</b>      </li>
-      <li class="footer">Generated on Fri Mar 4 2016 14:30:57 for itom by&#160;
+      <li class="footer">Generated on Thu Aug 4 2016 08:22:20 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

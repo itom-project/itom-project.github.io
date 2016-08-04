@@ -180,47 +180,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00095"></a>00095 <span class="preprocessor"></span><span class="preprocessor">    #define ITOMCOMMONQT_EXPORT</span>
 <a name="l00096"></a>00096 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
 <a name="l00097"></a>00097 <span class="preprocessor"></span>
-<a name="l00098"></a>00098 
-<a name="l00100"></a>00100 <span class="preprocessor">    #ifdef __GNUC__</span>
-<a name="l00101"></a>00101 <span class="preprocessor"></span>    
-<a name="l00102"></a>00102 <span class="preprocessor">      #if __GNUC__*10 + __GNUC_MINOR__ &gt;= 42</span>
-<a name="l00103"></a>00103 <span class="preprocessor"></span>
-<a name="l00104"></a>00104 <span class="preprocessor">        #if !defined WIN32 &amp;&amp; (defined __i486__ || defined __i586__ || \</span>
-<a name="l00105"></a>00105 <span class="preprocessor">            defined __i686__ || defined __MMX__ || defined __SSE__  || defined __ppc__)</span>
-<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">          #define ITOM_XADD __sync_fetch_and_add</span>
-<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="preprocessor">          #include &lt;ext/atomicity.h&gt;</span>
-<a name="l00109"></a>00109 <span class="preprocessor">          #define ITOM_XADD __gnu_cxx::__exchange_and_add</span>
-<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<a name="l00111"></a>00111 <span class="preprocessor"></span>
-<a name="l00112"></a>00112 <span class="preprocessor">      #else</span>
-<a name="l00113"></a>00113 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;bits/atomicity.h&gt;</span>
-<a name="l00114"></a>00114 <span class="preprocessor">        #if __GNUC__*10 + __GNUC_MINOR__ &gt;= 34</span>
-<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">          #define ITOM_XADD __gnu_cxx::__exchange_and_add</span>
-<a name="l00116"></a>00116 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
-<a name="l00117"></a>00117 <span class="preprocessor"></span><span class="preprocessor">          #define ITOM_XADD __exchange_and_add</span>
-<a name="l00118"></a>00118 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span><span class="preprocessor">      #endif</span>
-<a name="l00120"></a>00120 <span class="preprocessor"></span>    
-<a name="l00121"></a>00121 <span class="preprocessor">    #elif (defined WIN32 || defined _WIN32)</span>
-<a name="l00122"></a>00122 <span class="preprocessor"></span><span class="preprocessor">      #include &lt;intrin.h&gt;</span>
-<a name="l00123"></a>00123 <span class="preprocessor">      #define ITOM_XADD(addr,delta) _InterlockedExchangeAdd((long volatile*)(addr), (delta))</span>
-<a name="l00124"></a>00124 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
-<a name="l00125"></a>00125 <span class="preprocessor"></span>      <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">static</span> <span class="keyword">inline</span> _Tp ITOM_XADD(_Tp* addr, _Tp delta)
-<a name="l00126"></a>00126       { <span class="keywordtype">int</span> tmp = *addr; *addr += delta; <span class="keywordflow">return</span> tmp; } 
-<a name="l00127"></a>00127 <span class="preprocessor">    #endif</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span>
-<a name="l00129"></a>00129 <span class="preprocessor">    #define ITOM_INCREF(intvar) ITOM_XADD(intvar,1)</span>
-<a name="l00130"></a>00130 <span class="preprocessor"></span><span class="preprocessor">    #define ITOM_DECREF(intvar) ITOM_XADD(intvar,-1)</span>
-<a name="l00131"></a>00131 <span class="preprocessor"></span>
-<a name="l00132"></a>00132 <span class="preprocessor">#endif</span>
-<a name="l00133"></a>00133 <span class="preprocessor"></span>
+<a name="l00099"></a>00099 <span class="preprocessor">    #ifdef __GNUC__</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span>    
+<a name="l00101"></a>00101 <span class="preprocessor">      #if __GNUC__*10 + __GNUC_MINOR__ &gt;= 42</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="preprocessor">        #if !defined WIN32 &amp;&amp; (defined __i486__ || defined __i586__ || \</span>
+<a name="l00104"></a>00104 <span class="preprocessor">            defined __i686__ || defined __MMX__ || defined __SSE__  || defined __ppc__)</span>
+<a name="l00105"></a>00105 <span class="preprocessor"></span><span class="preprocessor">          #define ITOM_XADD __sync_fetch_and_add</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span><span class="preprocessor">          #include &lt;ext/atomicity.h&gt;</span>
+<a name="l00108"></a>00108 <span class="preprocessor">          #define ITOM_XADD __gnu_cxx::__exchange_and_add</span>
+<a name="l00109"></a>00109 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span>
+<a name="l00111"></a>00111 <span class="preprocessor">      #else</span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;bits/atomicity.h&gt;</span>
+<a name="l00113"></a>00113 <span class="preprocessor">        #if __GNUC__*10 + __GNUC_MINOR__ &gt;= 34</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span><span class="preprocessor">          #define ITOM_XADD __gnu_cxx::__exchange_and_add</span>
+<a name="l00115"></a>00115 <span class="preprocessor"></span><span class="preprocessor">        #else</span>
+<a name="l00116"></a>00116 <span class="preprocessor"></span><span class="preprocessor">          #define ITOM_XADD __exchange_and_add</span>
+<a name="l00117"></a>00117 <span class="preprocessor"></span><span class="preprocessor">        #endif</span>
+<a name="l00118"></a>00118 <span class="preprocessor"></span><span class="preprocessor">      #endif</span>
+<a name="l00119"></a>00119 <span class="preprocessor"></span>    
+<a name="l00120"></a>00120 <span class="preprocessor">    #elif (defined WIN32 || defined _WIN32)</span>
+<a name="l00121"></a>00121 <span class="preprocessor"></span><span class="preprocessor">      #include &lt;intrin.h&gt;</span>
+<a name="l00122"></a>00122 <span class="preprocessor">      #define ITOM_XADD(addr,delta) _InterlockedExchangeAdd((long volatile*)(addr), (delta))</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span><span class="preprocessor">    #else</span>
+<a name="l00124"></a>00124 <span class="preprocessor"></span>      <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt; <span class="keyword">static</span> <span class="keyword">inline</span> _Tp ITOM_XADD(_Tp* addr, _Tp delta)
+<a name="l00125"></a>00125       { <span class="keywordtype">int</span> tmp = *addr; *addr += delta; <span class="keywordflow">return</span> tmp; } 
+<a name="l00126"></a>00126 <span class="preprocessor">    #endif</span>
+<a name="l00127"></a>00127 <span class="preprocessor"></span>
+<a name="l00128"></a>00128 <span class="preprocessor">    #define ITOM_INCREF(intvar) ITOM_XADD(intvar,1)</span>
+<a name="l00129"></a>00129 <span class="preprocessor"></span><span class="preprocessor">    #define ITOM_DECREF(intvar) ITOM_XADD(intvar,-1)</span>
+<a name="l00130"></a>00130 <span class="preprocessor"></span>
+<a name="l00131"></a>00131 <span class="preprocessor">#endif</span>
+<a name="l00132"></a>00132 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>commonGlobal.h</b>      </li>
-      <li class="footer">Generated on Fri Mar 4 2016 14:30:57 for itom by&#160;
+      <li class="footer">Generated on Thu Aug 4 2016 08:22:19 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

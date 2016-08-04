@@ -10,8 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -68,7 +66,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#further-hardware-devices">Further hardware devices</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../plugins.html#ad-converters">AD-Converters</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="">NI-DAQmx</a><ul>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">NI-DAQmx</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#initialization">Initialization</a></li>
 <li class="toctree-l5"><a class="reference internal" href="#parameters">Parameters</a></li>
@@ -98,14 +96,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -234,26 +229,26 @@ This parameter is only required for writing data. When reading data the type of 
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>Create new Instance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">plugin</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s">&quot;niDAQmx&quot;</span><span class="p">)</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="s">&#39;float64&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">plugin</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;niDAQmx&quot;</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># setup Analog-Input-Task</span>
-<span class="c"># 20000 samples/sec; 100 samples; finite mode</span>
-<span class="n">plugin</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;aiTaskParams&quot;</span><span class="p">,</span> <span class="s">&quot;20000,100,0&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># setup Analog-Input-Task</span>
+<span class="c1"># 20000 samples/sec; 100 samples; finite mode</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;aiTaskParams&quot;</span><span class="p">,</span> <span class="s2">&quot;20000,100,0&quot;</span><span class="p">)</span>
 
-<span class="c"># setup the first two Analog-Input-Channel</span>
-<span class="n">plugin</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;aiChParams&quot;</span><span class="p">,</span> <span class="s">&quot;Dev1/ai0,4,10&quot;</span><span class="p">)</span> <span class="c"># (channel0, PseudoDiff, +-10V)</span>
-<span class="n">plugin</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;aiChParams&quot;</span><span class="p">,</span> <span class="s">&quot;Dev1/ai1,4,42&quot;</span><span class="p">)</span> <span class="c"># (channel1, PseudoDiff, +-42V)</span>
+<span class="c1"># setup the first two Analog-Input-Channel</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;aiChParams&quot;</span><span class="p">,</span> <span class="s2">&quot;Dev1/ai0,4,10&quot;</span><span class="p">)</span> <span class="c1"># (channel0, PseudoDiff, +-10V)</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;aiChParams&quot;</span><span class="p">,</span> <span class="s2">&quot;Dev1/ai1,4,42&quot;</span><span class="p">)</span> <span class="c1"># (channel1, PseudoDiff, +-42V)</span>
 
-<span class="c"># Acquire the Data (start measurement)</span>
-<span class="n">plugin</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c"># 1 = Analog-Input-Task</span>
+<span class="c1"># Acquire the Data (start measurement)</span>
+<span class="n">plugin</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 1 = Analog-Input-Task</span>
 
-<span class="c"># copy Data in DataObject</span>
+<span class="c1"># copy Data in DataObject</span>
 <span class="n">plugin</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 
-<span class="c"># plot dataObject</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s">&quot;itom1dqwtplot&quot;</span><span class="p">)</span> <span class="c"># Pay attention, that the scaling of two different channels with different VoltageRange is not as itÂ´s shown in the diagramm</span>
+<span class="c1"># plot dataObject</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;itom1dqwtplot&quot;</span><span class="p">)</span> <span class="c1"># Pay attention, that the scaling of two different channels with different VoltageRange is not as itÂ´s shown in the diagramm</span>
 </pre></div>
 </div>
 </div>
@@ -288,7 +283,7 @@ This parameter is only required for writing data. When reading data the type of 
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

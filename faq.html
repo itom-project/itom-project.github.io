@@ -10,8 +10,6 @@
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -58,7 +56,12 @@
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="media.html">Publications and Presentations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Known bugs, issues and workarounds</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Known bugs, issues and workarounds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#itom-2-1-0">itom 2.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#itom-1-4-0">itom 1.4.0</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
 <li class="toctree-l1"><a class="reference internal" href="screenshots.html">Screenshots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collaboration.html">Collaboration</a></li>
@@ -73,14 +76,11 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -95,24 +95,47 @@
 <span id="sec-known-issues"></span><h1>Known bugs, issues and workarounds<a class="headerlink" href="#known-bugs-issues-and-workarounds" title="Permalink to this headline">¶</a></h1>
 <p>In the following a list of known bugs and issues in specific setup versions of itom are listed. Some of these bugs
 can be overcome by the listed workarounds or solutions:</p>
-<p><strong>itom 2.1.0</strong></p>
-<ul class="simple">
-<li>The error message <strong>python35.dll could not be found</strong> shows up at startup. Solution: From Python 3.5 on,
-the Windows installer does not copy the corresponding dll file to the Windows system directory. Please make
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-error-message-at-startup-python35-dll-could-not-be-found">Error message at startup: python35.dll could not be found</dt>
+<dd>From Python 3.5 on, the Windows installer does not copy the corresponding dll file to the Windows system directory. Please make
 sure that the Python directory is added to the PATH environment variable of Windows. Usually this is automatically
 done within the Python installer, however it is possible to unselect this option. Re-logon to your Windows session
-in order to let Windows reload this environment variable.</li>
-<li>itom crashes at startup when <em>python</em> should be loaded. Problem: There are two known reasons for this crash. The first is,
-that you probably installed python with another user than the one you are currently logged in. When the python library (see above)
-is loaded at startup of itom, it interally tries to find out, where the entire python installation including the modules and
-packages are located on your harddrive. Usually, this information is contained in the Windows registry. However, if Python has
-been installed under a local or different user, the registry information cannot be properly read. In this case, either reinstall
-Python as adminstrator and for all users or set the environment variable PYTHONHOME to the base directory of Python. Another problem
-might be, that your computer has a default charset that differs from the european or american one (e.g. russian operating system).
-In this case, a known bug is contained in the qitom.exe application of the 32bit and 64bit Windows setup.
-There is a corrected application file for the 64bit setup. Download the archive <strong>qitom_2.1.0_64bit_encoding_fix.zip</strong> from <a class="reference external" href="https://sourceforge.net/projects/itom/files/v2.1.0/">https://sourceforge.net/projects/itom/files/v2.1.0/</a>
-and replace the file <strong>qitom.exe</strong> by the one in the zip-file.</li>
-</ul>
+in order to let Windows reload this environment variable. See <a class="reference external" href="http://www.computerhope.com/issues/ch000549.htm">http://www.computerhope.com/issues/ch000549.htm</a> for
+information how to add a value to the PATH environment variable in Windows.</dd>
+</dl>
+</div>
+<div class="section" id="itom-2-1-0">
+<h2>itom 2.1.0<a class="headerlink" href="#itom-2-1-0" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-itom-crashes-at-startup-when-python-should-be-loaded">itom crashes at startup when <em>python</em> should be loaded.</dt>
+<dd><p class="first">Problem: There are two known reasons for this crash. The first is, that you probably installed python with another
+user than the one you are currently logged in. When the python library (see above) is loaded at startup of itom,
+it interally tries to find out, where the entire python installation including the modules and packages are located
+on your harddrive. Usually, this information is contained in the Windows registry. However, if Python has been installed
+under a local or different user, the registry information cannot be properly read. In this case, either reinstall Python
+as adminstrator and for all users or set the environment variable PYTHONHOME (see <a class="reference external" href="http://www.computerhope.com/issues/ch000549.htm">http://www.computerhope.com/issues/ch000549.htm</a>)
+to the base directory of Python (the directory where the Python executable is located).</p>
+<p>Another problem  might be, that your computer has a default charset that differs from the european or american one
+(e.g. russian operating system). In this case, a known bug is contained in the qitom.exe application of the 32bit
+and 64bit Windows setup. There is a corrected application file for the 64bit setup. Download the archive
+<strong>qitom_2.1.0_64bit_encoding_fix.zip</strong> from <a class="reference external" href="https://sourceforge.net/projects/itom/files/v2.1.0/">https://sourceforge.net/projects/itom/files/v2.1.0/</a> and replace the file
+<strong>qitom.exe</strong> by the one in the zip-file.</p>
+<p class="last">Both issues will be fixed in upcoming itom versions.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="itom-1-4-0">
+<h2>itom 1.4.0<a class="headerlink" href="#itom-1-4-0" title="Permalink to this headline">¶</a></h2>
+<dl class="glossary docutils">
+<dt id="term-qt-designer-does-not-start">Qt Designer does not start</dt>
+<dd>There is a known issue in the former setup 1.4.0 concerning an unsuccessful startup of the external Qt designer. If you want
+to open the designer using the button in the toolbox of the itom main window, the startup may fail. This bug is known and will
+be fixed in future releases. Until then, please open the designer either by starting the designer.exe in the application folder
+of itom or open an existing ui-file (e.g. in the demo folder of itom).</dd>
+</dl>
+</div>
 </div>
 
 
@@ -136,7 +159,7 @@ and replace the file <strong>qitom.exe</strong> by the one in the zip-file.</li>
 
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

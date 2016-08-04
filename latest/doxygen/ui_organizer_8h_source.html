@@ -125,383 +125,407 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 <span class="preprocessor">#include &quot;../global.h&quot;</span>
 <a name="l00041"></a>00041 <span class="preprocessor">#include &quot;../common/sharedStructuresGraphics.h&quot;</span>
 <a name="l00042"></a>00042 <span class="preprocessor">#include &quot;../common/addInInterface.h&quot;</span>
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 <span class="preprocessor">#include &quot;../../plot/AbstractFigure.h&quot;</span>
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="preprocessor">#include &lt;qmap.h&gt;</span>
-<a name="l00047"></a>00047 <span class="preprocessor">#include &lt;qsharedpointer.h&gt;</span>
-<a name="l00048"></a>00048 <span class="preprocessor">#include &lt;qstring.h&gt;</span>
-<a name="l00049"></a>00049 <span class="preprocessor">#include &lt;qvariant.h&gt;</span>
-<a name="l00050"></a>00050 <span class="preprocessor">#include &lt;qhash.h&gt;</span>
-<a name="l00051"></a>00051 <span class="preprocessor">#include &lt;qtimer.h&gt;</span>
-<a name="l00052"></a>00052 <span class="preprocessor">#include &lt;qfiledialog.h&gt;</span>
-<a name="l00053"></a>00053 <span class="preprocessor">#include &lt;qmainwindow.h&gt;</span>
-<a name="l00054"></a>00054 <span class="preprocessor">#include &lt;QtUiTools/quiloader.h&gt;</span>
+<a name="l00043"></a>00043 <span class="preprocessor">#include &quot;../common/shape.h&quot;</span>
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 <span class="preprocessor">#include &quot;../../plot/AbstractFigure.h&quot;</span>
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="preprocessor">#include &lt;qmap.h&gt;</span>
+<a name="l00048"></a>00048 <span class="preprocessor">#include &lt;qsharedpointer.h&gt;</span>
+<a name="l00049"></a>00049 <span class="preprocessor">#include &lt;qstring.h&gt;</span>
+<a name="l00050"></a>00050 <span class="preprocessor">#include &lt;qvariant.h&gt;</span>
+<a name="l00051"></a>00051 <span class="preprocessor">#include &lt;qhash.h&gt;</span>
+<a name="l00052"></a>00052 <span class="preprocessor">#include &lt;qtimer.h&gt;</span>
+<a name="l00053"></a>00053 <span class="preprocessor">#include &lt;qfiledialog.h&gt;</span>
+<a name="l00054"></a>00054 <span class="preprocessor">#include &lt;qmainwindow.h&gt;</span>
 <a name="l00055"></a>00055 <span class="preprocessor">#include &lt;qthread.h&gt;</span>
 <a name="l00056"></a>00056 <span class="preprocessor">#include &lt;qtranslator.h&gt;</span>
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058 <span class="keyword">namespace </span>ito
-<a name="l00059"></a>00059 {
-<a name="l00060"></a>00060 <span class="keyword">class </span>WidgetWrapper; <span class="comment">//forward declaration</span>
-<a name="l00061"></a>00061 
-<a name="l00067"></a><a class="code" href="structito_1_1_ui_container.html">00067</a> <span class="keyword">struct </span><a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a>
-<a name="l00068"></a>00068 {
-<a name="l00069"></a>00069 <span class="keyword">public</span>:
-<a name="l00070"></a><a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">00070</a>     <span class="keyword">enum</span> <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a>     
-<a name="l00071"></a>00071     {
-<a name="l00072"></a>00072         uiTypeUiDialog    = 0x0001,
-<a name="l00073"></a>00073         uiTypeQDialog     = 0x0002,
-<a name="l00074"></a>00074         uiTypeQMainWindow = 0x0003,
-<a name="l00075"></a>00075         uiTypeQDockWidget = 0x0004,
-<a name="l00076"></a>00076         uiTypeFigure      = 0x0005
-<a name="l00077"></a>00077     };
-<a name="l00078"></a>00078 
+<a name="l00058"></a>00058 <span class="keyword">class </span>QUiLoader; <span class="comment">//forward declaration</span>
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 <span class="keyword">namespace </span>ito
+<a name="l00061"></a>00061 {
+<a name="l00062"></a>00062 <span class="keyword">class </span>WidgetWrapper; <span class="comment">//forward declaration</span>
+<a name="l00063"></a>00063 
+<a name="l00069"></a><a class="code" href="structito_1_1_ui_container.html">00069</a> <span class="keyword">struct </span><a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a>
+<a name="l00070"></a>00070 {
+<a name="l00071"></a>00071 <span class="keyword">public</span>:
+<a name="l00072"></a><a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">00072</a>     <span class="keyword">enum</span> <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a>     
+<a name="l00073"></a>00073     {
+<a name="l00074"></a>00074         uiTypeUiDialog    = 0x0001,
+<a name="l00075"></a>00075         uiTypeQDialog     = 0x0002,
+<a name="l00076"></a>00076         uiTypeQMainWindow = 0x0003,
+<a name="l00077"></a>00077         uiTypeQDockWidget = 0x0004,
+<a name="l00078"></a>00078         uiTypeFigure      = 0x0005
+<a name="l00079"></a>00079     };
 <a name="l00080"></a>00080 
-<a name="l00085"></a><a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a">00085</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(<a class="code" href="classito_1_1_user_ui_dialog.html">UserUiDialog</a> *uiDialog) : 
-<a name="l00086"></a>00086         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeUiDialog) 
-<a name="l00087"></a>00087     {
-<a name="l00088"></a>00088         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(uiDialog);
-<a name="l00089"></a>00089     }
-<a name="l00090"></a>00090 
+<a name="l00082"></a>00082 
+<a name="l00087"></a><a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a">00087</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(<a class="code" href="classito_1_1_user_ui_dialog.html">UserUiDialog</a> *uiDialog) : 
+<a name="l00088"></a>00088         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeUiDialog) 
+<a name="l00089"></a>00089     {
+<a name="l00090"></a>00090         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(uiDialog);
+<a name="l00091"></a>00091     }
 <a name="l00092"></a>00092 
-<a name="l00097"></a><a class="code" href="structito_1_1_ui_container.html#afb28e18d6343db065fc3ae8981f98e7a">00097</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QDialog *dialog) : 
-<a name="l00098"></a>00098         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeQDialog) 
-<a name="l00099"></a>00099     {
-<a name="l00100"></a>00100         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QDialog&gt;(dialog);
-<a name="l00101"></a>00101     }
-<a name="l00102"></a>00102     
-<a name="l00104"></a>00104 
-<a name="l00109"></a><a class="code" href="structito_1_1_ui_container.html#a25e1f516cd9fff4ec799e5b1d7d1d067">00109</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QMainWindow *mainWindow) : 
-<a name="l00110"></a>00110         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeQMainWindow) 
-<a name="l00111"></a>00111     {
-<a name="l00112"></a>00112         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(mainWindow);
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 
+<a name="l00094"></a>00094 
+<a name="l00099"></a><a class="code" href="structito_1_1_ui_container.html#afb28e18d6343db065fc3ae8981f98e7a">00099</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QDialog *dialog) : 
+<a name="l00100"></a>00100         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeQDialog) 
+<a name="l00101"></a>00101     {
+<a name="l00102"></a>00102         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QDialog&gt;(dialog);
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104     
+<a name="l00106"></a>00106 
+<a name="l00111"></a><a class="code" href="structito_1_1_ui_container.html#a25e1f516cd9fff4ec799e5b1d7d1d067">00111</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QMainWindow *mainWindow) : 
+<a name="l00112"></a>00112         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeQMainWindow) 
+<a name="l00113"></a>00113     {
+<a name="l00114"></a>00114         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(mainWindow);
+<a name="l00115"></a>00115     }
 <a name="l00116"></a>00116 
-<a name="l00121"></a><a class="code" href="structito_1_1_ui_container.html#a46d82db29212d2c33a3336008f626439">00121</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(<a class="code" href="classito_1_1_figure_widget.html">FigureWidget</a> *figureWidget) : 
-<a name="l00122"></a>00122         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeFigure) 
-<a name="l00123"></a>00123     {
-<a name="l00124"></a>00124         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(figureWidget);
-<a name="l00125"></a>00125     }
-<a name="l00126"></a>00126 
+<a name="l00118"></a>00118 
+<a name="l00123"></a><a class="code" href="structito_1_1_ui_container.html#a46d82db29212d2c33a3336008f626439">00123</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(<a class="code" href="classito_1_1_figure_widget.html">FigureWidget</a> *figureWidget) : 
+<a name="l00124"></a>00124         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeFigure) 
+<a name="l00125"></a>00125     {
+<a name="l00126"></a>00126         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(figureWidget);
+<a name="l00127"></a>00127     }
 <a name="l00128"></a>00128 
-<a name="l00133"></a><a class="code" href="structito_1_1_ui_container.html#afca72cdf1f207279cb538f760922e0a7">00133</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QDockWidget *dockWidget) : 
-<a name="l00134"></a>00134         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeQDockWidget) 
-<a name="l00135"></a>00135     {
-<a name="l00136"></a>00136         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(dockWidget);
-<a name="l00137"></a>00137     }
-<a name="l00138"></a>00138     
-<a name="l00140"></a>00140 
-<a name="l00146"></a><a class="code" href="structito_1_1_ui_container.html#a765ea064d495af3071242f46714cc80c">00146</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QWidget *widget, <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a> type) : 
-<a name="l00147"></a>00147         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(type)
-<a name="l00148"></a>00148     {
-<a name="l00149"></a>00149         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(widget);
-<a name="l00150"></a>00150     }
-<a name="l00151"></a>00151     
-<a name="l00153"></a><a class="code" href="structito_1_1_ui_container.html#ade6b4ec033308c6b5589bf9ffc4ad9ca">00153</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(<span class="keyword">const</span> <a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a> &amp;cpy)
-<a name="l00154"></a>00154     {
-<a name="l00155"></a>00155         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(cpy.<a class="code" href="structito_1_1_ui_container.html#aad3f1719f307f64e7f2839a4eaab7afa" title="returns instance of Widget or NULL, if the widget is not longer available.">getUiWidget</a>());
-<a name="l00156"></a>00156         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a> = cpy.<a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>;
-<a name="l00157"></a>00157     }
-<a name="l00158"></a>00158     
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160     <a class="code" href="structito_1_1_ui_container.html#af7e90123a7d89a2a5b2d8339f35ebdfd" title="destructor">~UiContainer</a>(); <span class="comment">//comment in source file</span>
+<a name="l00130"></a>00130 
+<a name="l00135"></a><a class="code" href="structito_1_1_ui_container.html#afca72cdf1f207279cb538f760922e0a7">00135</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QDockWidget *dockWidget) : 
+<a name="l00136"></a>00136         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(uiTypeQDockWidget) 
+<a name="l00137"></a>00137     {
+<a name="l00138"></a>00138         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(dockWidget);
+<a name="l00139"></a>00139     }
+<a name="l00140"></a>00140     
+<a name="l00142"></a>00142 
+<a name="l00148"></a><a class="code" href="structito_1_1_ui_container.html#a765ea064d495af3071242f46714cc80c">00148</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(QWidget *widget, <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a> type) : 
+<a name="l00149"></a>00149         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>(type)
+<a name="l00150"></a>00150     {
+<a name="l00151"></a>00151         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(widget);
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153     
+<a name="l00155"></a><a class="code" href="structito_1_1_ui_container.html#ade6b4ec033308c6b5589bf9ffc4ad9ca">00155</a>     <a class="code" href="structito_1_1_ui_container.html#aee6357b3bb16d2120a309921b20a7e3a" title="creates new UiContainer from instance of dialog-widget UserUiDialog">UiContainer</a>(<span class="keyword">const</span> <a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a> &amp;cpy)
+<a name="l00156"></a>00156     {
+<a name="l00157"></a>00157         <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a> = QPointer&lt;QWidget&gt;(cpy.<a class="code" href="structito_1_1_ui_container.html#aad3f1719f307f64e7f2839a4eaab7afa" title="returns instance of Widget or NULL, if the widget is not longer available.">getUiWidget</a>());
+<a name="l00158"></a>00158         <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a> = cpy.<a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>;
+<a name="l00159"></a>00159     }
+<a name="l00160"></a>00160     
 <a name="l00161"></a>00161 
-<a name="l00162"></a>00162 
-<a name="l00164"></a><a class="code" href="structito_1_1_ui_container.html#ae079e960a99fee11e732238ffd4d1498">00164</a>     <span class="keyword">inline</span> <a class="code" href="classito_1_1_user_ui_dialog.html">UserUiDialog</a> *<a class="code" href="structito_1_1_ui_container.html#ae079e960a99fee11e732238ffd4d1498" title="returns instance of UiDialog or NULL, if the widget is not longer available of the type is not uiType...">getUiDialog</a>()<span class="keyword"> const </span>
-<a name="l00165"></a>00165 <span class="keyword">    </span>{ 
-<a name="l00166"></a>00166         <span class="keywordflow">if</span>(<a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a> == uiTypeUiDialog)
-<a name="l00167"></a>00167         {
-<a name="l00168"></a>00168             <span class="keywordflow">if</span>(<a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.isNull()) <span class="keywordflow">return</span> NULL;
-<a name="l00169"></a>00169             <span class="keywordflow">return</span> qobject_cast&lt;<a class="code" href="classito_1_1_user_ui_dialog.html">UserUiDialog</a>*&gt;(<a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.data()); 
-<a name="l00170"></a>00170         }
-<a name="l00171"></a>00171         <span class="keywordflow">return</span> NULL;
-<a name="l00172"></a>00172     }
-<a name="l00173"></a>00173 
+<a name="l00162"></a>00162     <a class="code" href="structito_1_1_ui_container.html#af7e90123a7d89a2a5b2d8339f35ebdfd" title="destructor">~UiContainer</a>(); <span class="comment">//comment in source file</span>
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164 
+<a name="l00166"></a><a class="code" href="structito_1_1_ui_container.html#ae079e960a99fee11e732238ffd4d1498">00166</a>     <span class="keyword">inline</span> <a class="code" href="classito_1_1_user_ui_dialog.html">UserUiDialog</a> *<a class="code" href="structito_1_1_ui_container.html#ae079e960a99fee11e732238ffd4d1498" title="returns instance of UiDialog or NULL, if the widget is not longer available of the type is not uiType...">getUiDialog</a>()<span class="keyword"> const </span>
+<a name="l00167"></a>00167 <span class="keyword">    </span>{ 
+<a name="l00168"></a>00168         <span class="keywordflow">if</span>(<a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a> == uiTypeUiDialog)
+<a name="l00169"></a>00169         {
+<a name="l00170"></a>00170             <span class="keywordflow">if</span>(<a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.isNull()) <span class="keywordflow">return</span> NULL;
+<a name="l00171"></a>00171             <span class="keywordflow">return</span> qobject_cast&lt;<a class="code" href="classito_1_1_user_ui_dialog.html">UserUiDialog</a>*&gt;(<a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.data()); 
+<a name="l00172"></a>00172         }
+<a name="l00173"></a>00173         <span class="keywordflow">return</span> NULL;
+<a name="l00174"></a>00174     }
 <a name="l00175"></a>00175 
-<a name="l00179"></a><a class="code" href="structito_1_1_ui_container.html#aad3f1719f307f64e7f2839a4eaab7afa">00179</a>     <span class="keyword">inline</span> QWidget *<a class="code" href="structito_1_1_ui_container.html#aad3f1719f307f64e7f2839a4eaab7afa" title="returns instance of Widget or NULL, if the widget is not longer available.">getUiWidget</a>()<span class="keyword"> const </span>
-<a name="l00180"></a>00180 <span class="keyword">    </span>{ 
-<a name="l00181"></a>00181         <span class="keywordflow">if</span>(<a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.isNull()) <span class="keywordflow">return</span> NULL;
-<a name="l00182"></a>00182         <span class="keywordflow">return</span> <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.data();
-<a name="l00183"></a>00183     }
-<a name="l00184"></a>00184     
-<a name="l00186"></a><a class="code" href="structito_1_1_ui_container.html#adfe560f168cfbee006c71f06d71dd6c7">00186</a>     <span class="keyword">inline</span> <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a> <a class="code" href="structito_1_1_ui_container.html#adfe560f168cfbee006c71f06d71dd6c7" title="returns type of the guarded user interface">getType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>; }
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188 <span class="keyword">private</span>:
-<a name="l00189"></a><a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">00189</a>     QPointer&lt;QWidget&gt; <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>;        
-<a name="l00190"></a><a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">00190</a>     <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a> <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>;                            
-<a name="l00191"></a>00191 };
-<a name="l00192"></a>00192 
-<a name="l00193"></a><a class="code" href="structito_1_1_ui_container_item.html">00193</a> <span class="keyword">struct </span><a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a>
-<a name="l00194"></a>00194 {
-<a name="l00195"></a>00195 <span class="keyword">public</span>:
-<a name="l00196"></a>00196     <a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a>() : container(NULL) {}
-<a name="l00197"></a>00197     
-<a name="l00198"></a>00198     <a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a>(<span class="keyword">const</span> <a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a> &amp;cpy)
-<a name="l00199"></a>00199     {
-<a name="l00200"></a>00200         guardedHandle = cpy.guardedHandle;
-<a name="l00201"></a>00201         container = cpy.container;
-<a name="l00202"></a>00202     }
-<a name="l00203"></a>00203 
-<a name="l00204"></a>00204     QWeakPointer&lt; unsigned int &gt; guardedHandle;
-<a name="l00205"></a>00205     <a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a> *container;
-<a name="l00206"></a>00206 };
-<a name="l00207"></a>00207 
-<a name="l00208"></a><a class="code" href="classito_1_1_ui_data_container.html">00208</a> <span class="keyword">class </span><a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> 
-<a name="l00209"></a>00209 {
-<a name="l00210"></a>00210 <span class="keyword">private</span>:
-<a name="l00211"></a>00211     ito::ParamBase::Type m_dataType;
-<a name="l00212"></a>00212     QSharedPointer&lt;ito::DataObject&gt; m_dObjPtr;
-<a name="l00213"></a>00213 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
-<a name="l00214"></a>00214 <span class="preprocessor"></span>    QSharedPointer&lt;ito::PCLPointCloud&gt; m_dPCPtr;
-<a name="l00215"></a>00215     QSharedPointer&lt;ito::PCLPolygonMesh&gt; m_dPMPtr;
-<a name="l00216"></a>00216 <span class="preprocessor">#endif</span>
-<a name="l00217"></a>00217 <span class="preprocessor"></span>
-<a name="l00218"></a>00218 <span class="keyword">public</span>:
-<a name="l00219"></a>00219     <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>() : m_dataType(ito::ParamBase::DObjPtr) {};
-<a name="l00220"></a>00220     ~<a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>() {};
-<a name="l00221"></a>00221     <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>(<span class="keyword">const</span> QSharedPointer&lt;ito::DataObject&gt; &amp;sharedDataObject) : m_dataType(ito::ParamBase::DObjPtr), m_dObjPtr(sharedDataObject) {}
-<a name="l00222"></a>00222 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
-<a name="l00223"></a>00223 <span class="preprocessor"></span>    <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>(<span class="keyword">const</span> QSharedPointer&lt;ito::PCLPointCloud&gt; &amp;sharedPointCloud) : m_dataType(ito::ParamBase::PointCloudPtr), m_dPCPtr(sharedPointCloud) {}
-<a name="l00224"></a>00224     <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>(<span class="keyword">const</span> QSharedPointer&lt;ito::PCLPolygonMesh&gt; &amp;sharedPolygonMesh) : m_dataType(ito::ParamBase::PolygonMeshPtr), m_dPMPtr(sharedPolygonMesh) {}
-<a name="l00225"></a>00225 
-<a name="l00226"></a>00226     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> &amp; operator = (QSharedPointer&lt;ito::PCLPointCloud&gt; sharedPointCloud)
-<a name="l00227"></a>00227     {
-<a name="l00228"></a>00228         m_dataType = ito::ParamBase::PointCloudPtr;
-<a name="l00229"></a>00229         m_dPCPtr = sharedPointCloud;
-<a name="l00230"></a>00230         m_dObjPtr.clear();
-<a name="l00231"></a>00231         m_dPMPtr.clear();
-<a name="l00232"></a>00232         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00233"></a>00233     }
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> &amp; operator = (QSharedPointer&lt;ito::PCLPolygonMesh&gt; sharedPolygonMesh)
-<a name="l00236"></a>00236     {
-<a name="l00237"></a>00237         m_dataType = ito::ParamBase::PolygonMeshPtr;
-<a name="l00238"></a>00238         m_dPMPtr = sharedPolygonMesh;
-<a name="l00239"></a>00239         m_dObjPtr.clear();
-<a name="l00240"></a>00240         m_dPCPtr.clear();
-<a name="l00241"></a>00241         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00242"></a>00242     }
-<a name="l00243"></a>00243 <span class="preprocessor">#endif</span>
-<a name="l00244"></a>00244 <span class="preprocessor"></span>
-<a name="l00245"></a>00245     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> &amp; operator = (QSharedPointer&lt;ito::DataObject&gt; sharedDataObject)
-<a name="l00246"></a>00246     {
-<a name="l00247"></a>00247         m_dataType = ito::ParamBase::DObjPtr;
-<a name="l00248"></a>00248         m_dObjPtr = sharedDataObject;
-<a name="l00249"></a>00249 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
-<a name="l00250"></a>00250 <span class="preprocessor"></span>        m_dPCPtr.clear();
-<a name="l00251"></a>00251         m_dPMPtr.clear();
-<a name="l00252"></a>00252 <span class="preprocessor">#endif</span>
-<a name="l00253"></a>00253 <span class="preprocessor"></span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;
-<a name="l00254"></a>00254     }
-<a name="l00255"></a>00255 
-<a name="l00256"></a>00256     <span class="keyword">inline</span> ito::ParamBase::Type getType()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dataType; }
-<a name="l00257"></a>00257     <span class="keyword">inline</span> QSharedPointer&lt;ito::DataObject&gt; getDataObject()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dObjPtr; }
-<a name="l00258"></a>00258 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
-<a name="l00259"></a>00259 <span class="preprocessor"></span>    <span class="keyword">inline</span> QSharedPointer&lt;ito::PCLPointCloud&gt; getPointCloud()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dPCPtr; }
-<a name="l00260"></a>00260     <span class="keyword">inline</span> QSharedPointer&lt;ito::PCLPolygonMesh&gt; getPolygonMesh()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dPMPtr; }
-<a name="l00261"></a>00261 <span class="preprocessor">#endif</span>
-<a name="l00262"></a>00262 <span class="preprocessor"></span>};
-<a name="l00263"></a>00263 
-<a name="l00264"></a><a class="code" href="classito_1_1_ui_organizer.html">00264</a> <span class="keyword">class </span><a class="code" href="classito_1_1_ui_organizer.html" title="The UiOrganizer is started as singleton instance within itom and organizes all main windows...">UiOrganizer</a> : <span class="keyword">public</span> QObject
-<a name="l00265"></a>00265 {
-<a name="l00266"></a>00266     Q_OBJECT
-<a name="l00267"></a>00267 <span class="keyword">public</span>:
-<a name="l00268"></a><a class="code" href="classito_1_1_ui_organizer.html#ab8c9cbe47febb1bb5e73c47eb670ec30">00268</a>     <span class="keyword">enum</span> <a class="code" href="classito_1_1_ui_organizer.html#ab8c9cbe47febb1bb5e73c47eb670ec30">tPropertyFlags</a>  
-<a name="l00269"></a>00269     {
-<a name="l00270"></a>00270         propValid      =   0x0001,
-<a name="l00271"></a>00271         propConstant   =   0x0002,
-<a name="l00272"></a>00272         propFinal      =   0x0004,
-<a name="l00273"></a>00273         propReadable   =   0x0008,
-<a name="l00274"></a>00274         propWritable   =   0x0010,
-<a name="l00275"></a>00275         propResettable =   0x0020
-<a name="l00276"></a>00276     };
+<a name="l00177"></a>00177 
+<a name="l00181"></a><a class="code" href="structito_1_1_ui_container.html#aad3f1719f307f64e7f2839a4eaab7afa">00181</a>     <span class="keyword">inline</span> QWidget *<a class="code" href="structito_1_1_ui_container.html#aad3f1719f307f64e7f2839a4eaab7afa" title="returns instance of Widget or NULL, if the widget is not longer available.">getUiWidget</a>()<span class="keyword"> const </span>
+<a name="l00182"></a>00182 <span class="keyword">    </span>{ 
+<a name="l00183"></a>00183         <span class="keywordflow">if</span>(<a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.isNull()) <span class="keywordflow">return</span> NULL;
+<a name="l00184"></a>00184         <span class="keywordflow">return</span> <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>.data();
+<a name="l00185"></a>00185     }
+<a name="l00186"></a>00186     
+<a name="l00188"></a><a class="code" href="structito_1_1_ui_container.html#adfe560f168cfbee006c71f06d71dd6c7">00188</a>     <span class="keyword">inline</span> <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a> <a class="code" href="structito_1_1_ui_container.html#adfe560f168cfbee006c71f06d71dd6c7" title="returns type of the guarded user interface">getType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>; }
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190 <span class="keyword">private</span>:
+<a name="l00191"></a><a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">00191</a>     QPointer&lt;QWidget&gt; <a class="code" href="structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e">m_weakDialog</a>;        
+<a name="l00192"></a><a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">00192</a>     <a class="code" href="structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb">tUiType</a> <a class="code" href="structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced">m_type</a>;                            
+<a name="l00193"></a>00193 };
+<a name="l00194"></a>00194 
+<a name="l00195"></a><a class="code" href="structito_1_1_ui_container_item.html">00195</a> <span class="keyword">struct </span><a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a>
+<a name="l00196"></a>00196 {
+<a name="l00197"></a>00197 <span class="keyword">public</span>:
+<a name="l00198"></a>00198     <a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a>() : container(NULL) {}
+<a name="l00199"></a>00199     
+<a name="l00200"></a>00200     <a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a>(<span class="keyword">const</span> <a class="code" href="structito_1_1_ui_container_item.html">UiContainerItem</a> &amp;cpy)
+<a name="l00201"></a>00201     {
+<a name="l00202"></a>00202         guardedHandle = cpy.guardedHandle;
+<a name="l00203"></a>00203         container = cpy.container;
+<a name="l00204"></a>00204     }
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206     QWeakPointer&lt; unsigned int &gt; guardedHandle;
+<a name="l00207"></a>00207     <a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a> *container;
+<a name="l00208"></a>00208 };
+<a name="l00209"></a>00209 
+<a name="l00210"></a><a class="code" href="classito_1_1_ui_data_container.html">00210</a> <span class="keyword">class </span><a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> 
+<a name="l00211"></a>00211 {
+<a name="l00212"></a>00212 <span class="keyword">private</span>:
+<a name="l00213"></a>00213     ito::ParamBase::Type m_dataType;
+<a name="l00214"></a>00214     QSharedPointer&lt;ito::DataObject&gt; m_dObjPtr;
+<a name="l00215"></a>00215 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
+<a name="l00216"></a>00216 <span class="preprocessor"></span>    QSharedPointer&lt;ito::PCLPointCloud&gt; m_dPCPtr;
+<a name="l00217"></a>00217     QSharedPointer&lt;ito::PCLPolygonMesh&gt; m_dPMPtr;
+<a name="l00218"></a>00218 <span class="preprocessor">#endif</span>
+<a name="l00219"></a>00219 <span class="preprocessor"></span>
+<a name="l00220"></a>00220 <span class="keyword">public</span>:
+<a name="l00221"></a>00221     <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>() : m_dataType(ito::ParamBase::DObjPtr) {};
+<a name="l00222"></a>00222     ~<a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>() {};
+<a name="l00223"></a>00223     <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>(<span class="keyword">const</span> QSharedPointer&lt;ito::DataObject&gt; &amp;sharedDataObject) : m_dataType(ito::ParamBase::DObjPtr), m_dObjPtr(sharedDataObject) {}
+<a name="l00224"></a>00224 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
+<a name="l00225"></a>00225 <span class="preprocessor"></span>    <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>(<span class="keyword">const</span> QSharedPointer&lt;ito::PCLPointCloud&gt; &amp;sharedPointCloud) : m_dataType(ito::ParamBase::PointCloudPtr), m_dPCPtr(sharedPointCloud) {}
+<a name="l00226"></a>00226     <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a>(<span class="keyword">const</span> QSharedPointer&lt;ito::PCLPolygonMesh&gt; &amp;sharedPolygonMesh) : m_dataType(ito::ParamBase::PolygonMeshPtr), m_dPMPtr(sharedPolygonMesh) {}
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> &amp; operator = (QSharedPointer&lt;ito::PCLPointCloud&gt; sharedPointCloud)
+<a name="l00229"></a>00229     {
+<a name="l00230"></a>00230         m_dataType = ito::ParamBase::PointCloudPtr;
+<a name="l00231"></a>00231         m_dPCPtr = sharedPointCloud;
+<a name="l00232"></a>00232         m_dObjPtr.clear();
+<a name="l00233"></a>00233         m_dPMPtr.clear();
+<a name="l00234"></a>00234         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00235"></a>00235     }
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> &amp; operator = (QSharedPointer&lt;ito::PCLPolygonMesh&gt; sharedPolygonMesh)
+<a name="l00238"></a>00238     {
+<a name="l00239"></a>00239         m_dataType = ito::ParamBase::PolygonMeshPtr;
+<a name="l00240"></a>00240         m_dPMPtr = sharedPolygonMesh;
+<a name="l00241"></a>00241         m_dObjPtr.clear();
+<a name="l00242"></a>00242         m_dPCPtr.clear();
+<a name="l00243"></a>00243         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00244"></a>00244     }
+<a name="l00245"></a>00245 <span class="preprocessor">#endif</span>
+<a name="l00246"></a>00246 <span class="preprocessor"></span>
+<a name="l00247"></a>00247     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ui_data_container.html">UiDataContainer</a> &amp; operator = (QSharedPointer&lt;ito::DataObject&gt; sharedDataObject)
+<a name="l00248"></a>00248     {
+<a name="l00249"></a>00249         m_dataType = ito::ParamBase::DObjPtr;
+<a name="l00250"></a>00250         m_dObjPtr = sharedDataObject;
+<a name="l00251"></a>00251 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
+<a name="l00252"></a>00252 <span class="preprocessor"></span>        m_dPCPtr.clear();
+<a name="l00253"></a>00253         m_dPMPtr.clear();
+<a name="l00254"></a>00254 <span class="preprocessor">#endif</span>
+<a name="l00255"></a>00255 <span class="preprocessor"></span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00256"></a>00256     }
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258     <span class="keyword">inline</span> ito::ParamBase::Type getType()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dataType; }
+<a name="l00259"></a>00259     <span class="keyword">inline</span> QSharedPointer&lt;ito::DataObject&gt; getDataObject()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dObjPtr; }
+<a name="l00260"></a>00260 <span class="preprocessor">#if ITOM_POINTCLOUDLIBRARY &gt; 0</span>
+<a name="l00261"></a>00261 <span class="preprocessor"></span>    <span class="keyword">inline</span> QSharedPointer&lt;ito::PCLPointCloud&gt; getPointCloud()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dPCPtr; }
+<a name="l00262"></a>00262     <span class="keyword">inline</span> QSharedPointer&lt;ito::PCLPolygonMesh&gt; getPolygonMesh()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_dPMPtr; }
+<a name="l00263"></a>00263 <span class="preprocessor">#endif</span>
+<a name="l00264"></a>00264 <span class="preprocessor"></span>};
+<a name="l00265"></a>00265 
+<a name="l00266"></a><a class="code" href="structito_1_1_class_info_container.html">00266</a> <span class="keyword">struct </span><a class="code" href="structito_1_1_class_info_container.html">ClassInfoContainer</a>
+<a name="l00267"></a>00267 {
+<a name="l00268"></a>00268     <span class="keyword">enum</span> Type {TypeClassInfo, TypeSlot, TypeSignal, TypeProperty, TypeEnum, TypeFlag, TypeInheritance};
+<a name="l00269"></a>00269     <a class="code" href="structito_1_1_class_info_container.html">ClassInfoContainer</a>(Type type, <span class="keyword">const</span> QString &amp;name, <span class="keyword">const</span> QString &amp;shortDescription = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> QString &amp;description = <span class="stringliteral">&quot;&quot;</span>) :
+<a name="l00270"></a>00270         m_type(type), m_name(name), m_shortDescription(shortDescription), m_description(description)
+<a name="l00271"></a>00271     {
+<a name="l00272"></a>00272         <span class="keywordflow">if</span> (m_description == <span class="stringliteral">&quot;&quot;</span>)
+<a name="l00273"></a>00273         {
+<a name="l00274"></a>00274             m_description = m_shortDescription;
+<a name="l00275"></a>00275         }
+<a name="l00276"></a>00276     }
 <a name="l00277"></a>00277 
-<a name="l00278"></a><a class="code" href="classito_1_1_ui_organizer.html#a3988f40b9f005fdad59730b916fb4c46">00278</a>     <span class="keyword">enum</span> <a class="code" href="classito_1_1_ui_organizer.html#a3988f40b9f005fdad59730b916fb4c46">tErrorCode</a>  
-<a name="l00279"></a>00279     {
-<a name="l00280"></a>00280         errorUiHandleInvalid = 0x1001,
-<a name="l00281"></a>00281         errorObjDoesNotExist = 0x1002,
-<a name="l00282"></a>00282         errorObjPropWrite = 0x1003,
-<a name="l00283"></a>00283         errorObjPropRead = 0x1004,
-<a name="l00284"></a>00284         errorObjPropDoesNotExist = 0x1005,
-<a name="l00285"></a>00285         errorUnregisteredType = 0x1006,
-<a name="l00286"></a>00286         errorSlotDoesNotExist = 0x1007,
-<a name="l00287"></a>00287         errorSignalDoesNotExist = 0x1008,
-<a name="l00288"></a>00288         errorConnectionError = 0x1009
-<a name="l00289"></a>00289     };
-<a name="l00290"></a>00290 
-<a name="l00291"></a><a class="code" href="classito_1_1_ui_organizer.html#a37fe4a6efc28694e57ba10b5285c42d1">00291</a>     <span class="keyword">enum</span> <a class="code" href="classito_1_1_ui_organizer.html#a37fe4a6efc28694e57ba10b5285c42d1">tWinType</a> 
-<a name="l00292"></a>00292     {
-<a name="l00293"></a>00293         typeDialog     = 0x0000,
-<a name="l00294"></a>00294         typeMainWindow = 0x0001,
-<a name="l00295"></a>00295         typeDockWidget = 0x0002
+<a name="l00278"></a>00278     Type m_type;
+<a name="l00279"></a>00279     QString m_name;
+<a name="l00280"></a>00280     QString m_shortDescription;
+<a name="l00281"></a>00281     QString m_description;
+<a name="l00282"></a>00282 };
+<a name="l00283"></a>00283 
+<a name="l00284"></a><a class="code" href="classito_1_1_ui_organizer.html">00284</a> <span class="keyword">class </span><a class="code" href="classito_1_1_ui_organizer.html" title="The UiOrganizer is started as singleton instance within itom and organizes all main windows...">UiOrganizer</a> : <span class="keyword">public</span> QObject
+<a name="l00285"></a>00285 {
+<a name="l00286"></a>00286     Q_OBJECT
+<a name="l00287"></a>00287 <span class="keyword">public</span>:
+<a name="l00288"></a><a class="code" href="classito_1_1_ui_organizer.html#ab8c9cbe47febb1bb5e73c47eb670ec30">00288</a>     <span class="keyword">enum</span> <a class="code" href="classito_1_1_ui_organizer.html#ab8c9cbe47febb1bb5e73c47eb670ec30">tPropertyFlags</a>  
+<a name="l00289"></a>00289     {
+<a name="l00290"></a>00290         propValid      =   0x0001,
+<a name="l00291"></a>00291         propConstant   =   0x0002,
+<a name="l00292"></a>00292         propFinal      =   0x0004,
+<a name="l00293"></a>00293         propReadable   =   0x0008,
+<a name="l00294"></a>00294         propWritable   =   0x0010,
+<a name="l00295"></a>00295         propResettable =   0x0020
 <a name="l00296"></a>00296     };
 <a name="l00297"></a>00297 
-<a name="l00298"></a>00298     <span class="keyword">enum</span> tObjectInfo
+<a name="l00298"></a><a class="code" href="classito_1_1_ui_organizer.html#a3988f40b9f005fdad59730b916fb4c46">00298</a>     <span class="keyword">enum</span> <a class="code" href="classito_1_1_ui_organizer.html#a3988f40b9f005fdad59730b916fb4c46">tErrorCode</a>  
 <a name="l00299"></a>00299     {
-<a name="l00300"></a>00300         infoShowNoInheritance = 0x0001,
-<a name="l00301"></a>00301         infoShowItomInheritance = 0x0002,
-<a name="l00302"></a>00302         infoShowInheritanceUpToWidget = 0x0004,
-<a name="l00303"></a>00303         infoShowAllInheritance =0x0008
-<a name="l00304"></a>00304     };
-<a name="l00305"></a>00305 
-<a name="l00306"></a>00306     <span class="keyword">typedef</span> QMap&lt;QString,QString&gt; tQMapArg;
-<a name="l00307"></a>00307 
-<a name="l00308"></a>00308     <a class="code" href="classito_1_1_ui_organizer.html#a90d2223528affc6854e65796b448d142" title="constructor">UiOrganizer</a>(<a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">ito::RetVal</a> &amp;retval);
-<a name="l00309"></a>00309     <a class="code" href="classito_1_1_ui_organizer.html#aafebfa58b3efb682c2e0d8fabea75227" title="destructor">~UiOrganizer</a>();
+<a name="l00300"></a>00300         errorUiHandleInvalid = 0x1001,
+<a name="l00301"></a>00301         errorObjDoesNotExist = 0x1002,
+<a name="l00302"></a>00302         errorObjPropWrite = 0x1003,
+<a name="l00303"></a>00303         errorObjPropRead = 0x1004,
+<a name="l00304"></a>00304         errorObjPropDoesNotExist = 0x1005,
+<a name="l00305"></a>00305         errorUnregisteredType = 0x1006,
+<a name="l00306"></a>00306         errorSlotDoesNotExist = 0x1007,
+<a name="l00307"></a>00307         errorSignalDoesNotExist = 0x1008,
+<a name="l00308"></a>00308         errorConnectionError = 0x1009
+<a name="l00309"></a>00309     };
 <a name="l00310"></a>00310 
-<a name="l00311"></a>00311     <span class="keywordtype">void</span> showDialog(QWidget *parent);
-<a name="l00312"></a>00312     <span class="keyword">inline</span> QObject *getPluginReference(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID) { <span class="keywordflow">return</span> getWeakObjectReference(objectID); }
-<a name="l00313"></a>00313 
-<a name="l00314"></a>00314     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> parseUiDescription(<span class="keywordtype">int</span> uiDescription, <span class="keywordtype">int</span>* uiType = NULL, <span class="keywordtype">int</span>* buttonBarType = NULL, <span class="keywordtype">bool</span>* childOfMainWindow = NULL, <span class="keywordtype">bool</span>* deleteOnClose = NULL, <span class="keywordtype">int</span>* dockWidgetArea = NULL)
-<a name="l00315"></a>00315     {
-<a name="l00316"></a>00316         <span class="keywordflow">if</span>(uiType) *uiType =                        (uiDescription &amp; 0x000000FF);        <span class="comment">//bits 1-8</span>
-<a name="l00317"></a>00317         <span class="keywordflow">if</span>(buttonBarType) *buttonBarType =         ((uiDescription &amp; 0x0000FF00) &gt;&gt; 8);  <span class="comment">//bits 9-16</span>
-<a name="l00318"></a>00318         <span class="keywordflow">if</span>(childOfMainWindow) *childOfMainWindow = ((uiDescription &amp; 0x000F0000) &gt; 0);   <span class="comment">//bits 17-20</span>
-<a name="l00319"></a>00319         <span class="keywordflow">if</span>(deleteOnClose) *deleteOnClose =         ((uiDescription &amp; 0x00F00000) &gt; 0);   <span class="comment">//bits 21-24 </span>
-<a name="l00320"></a>00320         <span class="keywordflow">if</span>(dockWidgetArea) *dockWidgetArea =       ((uiDescription &amp; 0xFF000000) &gt;&gt; 24); <span class="comment">//bits 25-32</span>
-<a name="l00321"></a>00321     }
-<a name="l00322"></a>00322 
-<a name="l00323"></a>00323     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> createUiDescription(<span class="keywordtype">int</span> uiType, <span class="keywordtype">int</span> buttonBarType, <span class="keywordtype">bool</span> childOfMainWindow, <span class="keywordtype">bool</span> deleteOnClose, <span class="keywordtype">int</span> dockWidgetArea) 
-<a name="l00324"></a>00324     { 
-<a name="l00325"></a>00325         <span class="keywordtype">int</span> v = uiType &amp; 0x000000FF; <span class="comment">//bits 1-8</span>
-<a name="l00326"></a>00326         v += (buttonBarType &lt;&lt; 8); <span class="comment">//bits 9-16</span>
-<a name="l00327"></a>00327         <span class="keywordflow">if</span>(childOfMainWindow) v += (1 &lt;&lt; 16); <span class="comment">//bits 17-24</span>
-<a name="l00328"></a>00328         <span class="keywordflow">if</span>(deleteOnClose) v+= (1 &lt;&lt; 20); <span class="comment">//bits 21-24</span>
-<a name="l00329"></a>00329         v += (dockWidgetArea &lt;&lt; 24); <span class="comment">//bits 25-32</span>
-<a name="l00330"></a>00330         
-<a name="l00331"></a>00331         <span class="keywordflow">return</span> v;
-<a name="l00332"></a>00332     }
+<a name="l00311"></a><a class="code" href="classito_1_1_ui_organizer.html#a37fe4a6efc28694e57ba10b5285c42d1">00311</a>     <span class="keyword">enum</span> <a class="code" href="classito_1_1_ui_organizer.html#a37fe4a6efc28694e57ba10b5285c42d1">tWinType</a> 
+<a name="l00312"></a>00312     {
+<a name="l00313"></a>00313         typeDialog     = 0x0000,
+<a name="l00314"></a>00314         typeMainWindow = 0x0001,
+<a name="l00315"></a>00315         typeDockWidget = 0x0002
+<a name="l00316"></a>00316     };
+<a name="l00317"></a>00317 
+<a name="l00318"></a>00318     <span class="keyword">enum</span> tObjectInfo
+<a name="l00319"></a>00319     {
+<a name="l00320"></a>00320         infoShowNoInheritance = 0x0001,
+<a name="l00321"></a>00321         infoShowItomInheritance = 0x0002,
+<a name="l00322"></a>00322         infoShowInheritanceUpToWidget = 0x0004,
+<a name="l00323"></a>00323         infoShowAllInheritance =0x0008
+<a name="l00324"></a>00324     };
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326     <span class="keyword">typedef</span> QList&lt;ClassInfoContainer&gt; ClassInfoContainerList;
+<a name="l00327"></a>00327 
+<a name="l00328"></a>00328     <a class="code" href="classito_1_1_ui_organizer.html#a90d2223528affc6854e65796b448d142" title="constructor">UiOrganizer</a>(<a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">ito::RetVal</a> &amp;retval);
+<a name="l00329"></a>00329     <a class="code" href="classito_1_1_ui_organizer.html#aafebfa58b3efb682c2e0d8fabea75227" title="destructor">~UiOrganizer</a>();
+<a name="l00330"></a>00330 
+<a name="l00331"></a>00331     <span class="keywordtype">void</span> showDialog(QWidget *parent);
+<a name="l00332"></a>00332     <span class="keyword">inline</span> QObject *getPluginReference(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID) { <span class="keywordflow">return</span> getWeakObjectReference(objectID); }
 <a name="l00333"></a>00333 
-<a name="l00334"></a>00334     RetVal getNewPluginWindow(<span class="keyword">const</span> QString &amp;pluginName, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;objectID, QWidget** newWidget, QWidget *parent = NULL);
-<a name="l00335"></a>00335 
-<a name="l00336"></a>00336     QWidget* loadDesignerPluginWidget(<span class="keyword">const</span> QString &amp;name, RetVal &amp;retValue, AbstractFigure::WindowMode winMode, QWidget *parent = NULL);
-<a name="l00337"></a>00337 
-<a name="l00338"></a>00338 <span class="keyword">protected</span>:
-<a name="l00339"></a>00339 
-<a name="l00340"></a>00340     <span class="keyword">static</span> <span class="keywordtype">void</span> threadSafeDeleteUi(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> *handle);
-<a name="l00341"></a>00341 
-<a name="l00342"></a>00342     <span class="keywordtype">void</span> startGarbageCollectorTimer();
-<a name="l00343"></a>00343 
-<a name="l00344"></a>00344     RetVal addWidgetToOrganizer(QWidget *widget, <span class="keywordtype">int</span> uiDescription, <span class="keyword">const</span> StringMap &amp;dialogButtons, QSharedPointer&lt;unsigned int&gt;dialogHandle, QSharedPointer&lt;unsigned int&gt;initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; className);
-<a name="l00345"></a>00345 
-<a name="l00346"></a>00346 <span class="keyword">private</span>:
-<a name="l00347"></a>00347     <span class="keywordtype">void</span> <a class="code" href="classito_1_1_ui_organizer.html#a6cfab168b9749354be3fdd8ca81940d1" title="executes the garbage collection process">execGarbageCollection</a>();
-<a name="l00348"></a>00348 
-<a name="l00349"></a>00349     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#aa426ac9f72bf6c9b43b791c61a8ce514" title="adds a given QObject* pointer to m_objectList if not yet available.">addObjectToList</a>(QObject* objPtr);
-<a name="l00350"></a>00350     QObject *getWeakObjectReference(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID);
-<a name="l00351"></a>00351 
-<a name="l00352"></a>00352     <span class="keywordtype">void</span> <a class="code" href="classito_1_1_ui_organizer.html#a94fbd04d04f17438fbd48fc76eb0de50" title="method, called by garbage collection timer, in order to regularly start the garbage collection proces...">timerEvent</a>(QTimerEvent *event);
+<a name="l00334"></a>00334     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> parseUiDescription(<span class="keywordtype">int</span> uiDescription, <span class="keywordtype">int</span>* uiType = NULL, <span class="keywordtype">int</span>* buttonBarType = NULL, <span class="keywordtype">bool</span>* childOfMainWindow = NULL, <span class="keywordtype">bool</span>* deleteOnClose = NULL, <span class="keywordtype">int</span>* dockWidgetArea = NULL)
+<a name="l00335"></a>00335     {
+<a name="l00336"></a>00336         <span class="keywordflow">if</span>(uiType) *uiType =                        (uiDescription &amp; 0x000000FF);        <span class="comment">//bits 1-8</span>
+<a name="l00337"></a>00337         <span class="keywordflow">if</span>(buttonBarType) *buttonBarType =         ((uiDescription &amp; 0x0000FF00) &gt;&gt; 8);  <span class="comment">//bits 9-16</span>
+<a name="l00338"></a>00338         <span class="keywordflow">if</span>(childOfMainWindow) *childOfMainWindow = ((uiDescription &amp; 0x000F0000) &gt; 0);   <span class="comment">//bits 17-20</span>
+<a name="l00339"></a>00339         <span class="keywordflow">if</span>(deleteOnClose) *deleteOnClose =         ((uiDescription &amp; 0x00F00000) &gt; 0);   <span class="comment">//bits 21-24 </span>
+<a name="l00340"></a>00340         <span class="keywordflow">if</span>(dockWidgetArea) *dockWidgetArea =       ((uiDescription &amp; 0xFF000000) &gt;&gt; 24); <span class="comment">//bits 25-32</span>
+<a name="l00341"></a>00341     }
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343     <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> createUiDescription(<span class="keywordtype">int</span> uiType, <span class="keywordtype">int</span> buttonBarType, <span class="keywordtype">bool</span> childOfMainWindow, <span class="keywordtype">bool</span> deleteOnClose, <span class="keywordtype">int</span> dockWidgetArea) 
+<a name="l00344"></a>00344     { 
+<a name="l00345"></a>00345         <span class="keywordtype">int</span> v = uiType &amp; 0x000000FF; <span class="comment">//bits 1-8</span>
+<a name="l00346"></a>00346         v += (buttonBarType &lt;&lt; 8); <span class="comment">//bits 9-16</span>
+<a name="l00347"></a>00347         <span class="keywordflow">if</span>(childOfMainWindow) v += (1 &lt;&lt; 16); <span class="comment">//bits 17-24</span>
+<a name="l00348"></a>00348         <span class="keywordflow">if</span>(deleteOnClose) v+= (1 &lt;&lt; 20); <span class="comment">//bits 21-24</span>
+<a name="l00349"></a>00349         v += (dockWidgetArea &lt;&lt; 24); <span class="comment">//bits 25-32</span>
+<a name="l00350"></a>00350         
+<a name="l00351"></a>00351         <span class="keywordflow">return</span> v;
+<a name="l00352"></a>00352     }
 <a name="l00353"></a>00353 
-<a name="l00354"></a><a class="code" href="classito_1_1_ui_organizer.html#a570d2150eb66b4fb5255cf31af876a64">00354</a>     <a class="code" href="classito_1_1_widget_wrapper.html" title="One instance of this class acts as wrapper for several import public methods of classes, derived from QObject, which should be made available by the call-method in python.">WidgetWrapper</a> *<a class="code" href="classito_1_1_ui_organizer.html#a570d2150eb66b4fb5255cf31af876a64">m_widgetWrapper</a>;                    
-<a name="l00356"></a><a class="code" href="classito_1_1_ui_organizer.html#aa40d89cd5d073fef459d4cea4cbabaa7">00356</a>     QHash&lt;unsigned int, UiContainerItem&gt; <a class="code" href="classito_1_1_ui_organizer.html#aa40d89cd5d073fef459d4cea4cbabaa7">m_dialogList</a>; 
-<a name="l00357"></a><a class="code" href="classito_1_1_ui_organizer.html#a34d53af0520e1d6242c14cc9fc416b3b">00357</a>     QHash&lt;unsigned int, QPointer&lt;QObject&gt; &gt; <a class="code" href="classito_1_1_ui_organizer.html#a34d53af0520e1d6242c14cc9fc416b3b">m_objectList</a>;  
-<a name="l00358"></a><a class="code" href="classito_1_1_ui_organizer.html#a62b6704f44e962de60bc49ac2119fe0a">00358</a>     <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#a62b6704f44e962de60bc49ac2119fe0a">m_garbageCollectorTimer</a>;                    
-<a name="l00359"></a><a class="code" href="classito_1_1_ui_organizer.html#a933fbcada42133f3debd6473510a405b">00359</a>     QMap&lt;QObject*, QThread*&gt; <a class="code" href="classito_1_1_ui_organizer.html#a933fbcada42133f3debd6473510a405b">m_watcherThreads</a>;   
-<a name="l00361"></a><a class="code" href="classito_1_1_ui_organizer.html#aa580af425acc37d023c4bbf1e55db961">00361</a>     <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#aa580af425acc37d023c4bbf1e55db961">autoIncUiDialogCounter</a>;        
-<a name="l00362"></a><a class="code" href="classito_1_1_ui_organizer.html#ab8839365761de9900da48a372671f0aa">00362</a>     <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#ab8839365761de9900da48a372671f0aa">autoIncObjectCounter</a>;        
-<a name="l00364"></a>00364     <span class="keywordtype">void</span> setApiPointersToWidgetAndChildren(QWidget *widget);
-<a name="l00365"></a>00365     <span class="comment">//moved the uiLoader object to here from loadDesignerPluginWidget and createNewDialog methods as according</span>
-<a name="l00366"></a>00366     <span class="comment">//to valgrind it causes memory leaks. So better have only one instance created and maintain mem leaks low ;-)</span>
-<a name="l00367"></a>00367     QUiLoader m_uiLoader;
-<a name="l00368"></a>00368     QHash&lt;QString, QTranslator*&gt; m_transFiles;
-<a name="l00369"></a>00369 
-<a name="l00370"></a>00370 signals:
+<a name="l00354"></a>00354     RetVal getNewPluginWindow(<span class="keyword">const</span> QString &amp;pluginName, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;objectID, QWidget** newWidget, QWidget *parent = NULL);
+<a name="l00355"></a>00355 
+<a name="l00356"></a>00356     QWidget* loadDesignerPluginWidget(<span class="keyword">const</span> QString &amp;name, RetVal &amp;retValue, AbstractFigure::WindowMode winMode, QWidget *parent = NULL);
+<a name="l00357"></a>00357 
+<a name="l00358"></a>00358 <span class="keyword">protected</span>:
+<a name="l00359"></a>00359 
+<a name="l00360"></a>00360     <span class="comment">//static void threadSafeDeleteUi(unsigned int *handle);</span>
+<a name="l00361"></a>00361 
+<a name="l00362"></a>00362     <span class="keywordtype">void</span> startGarbageCollectorTimer();
+<a name="l00363"></a>00363 
+<a name="l00364"></a>00364     RetVal addWidgetToOrganizer(QWidget *widget, <span class="keywordtype">int</span> uiDescription, <span class="keyword">const</span> StringMap &amp;dialogButtons, QSharedPointer&lt;unsigned int&gt;dialogHandle, QSharedPointer&lt;unsigned int&gt;initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; className);
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366 <span class="keyword">private</span>:
+<a name="l00367"></a>00367     <span class="keywordtype">void</span> <a class="code" href="classito_1_1_ui_organizer.html#a6cfab168b9749354be3fdd8ca81940d1" title="executes the garbage collection process">execGarbageCollection</a>();
+<a name="l00368"></a>00368 
+<a name="l00369"></a>00369     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#aa426ac9f72bf6c9b43b791c61a8ce514" title="adds a given QObject* pointer to m_objectList if not yet available.">addObjectToList</a>(QObject* objPtr);
+<a name="l00370"></a>00370     QObject *getWeakObjectReference(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID);
 <a name="l00371"></a>00371 
-<a name="l00372"></a>00372 <span class="keyword">public</span> slots:
-<a name="l00373"></a>00373     <span class="keywordtype">void</span> pythonKeyboardInterrupt(<span class="keywordtype">bool</span> checked);
-<a name="l00374"></a>00374 
-<a name="l00375"></a>00375     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> loadPluginWidget(<span class="keywordtype">void</span>* algoWidgetFunc, <span class="keywordtype">int</span> uiDescription, <span class="keyword">const</span> StringMap &amp;dialogButtons, QVector&lt;ito::ParamBase&gt; *paramsMand, QVector&lt;ito::ParamBase&gt; *paramsOpt, QSharedPointer&lt;unsigned int&gt;dialogHandle, QSharedPointer&lt;unsigned int&gt;initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; className, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00376"></a>00376     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> createNewDialog(<span class="keyword">const</span> QString &amp;filename, <span class="keywordtype">int</span> uiDescription, <span class="keyword">const</span> StringMap &amp;dialogButtons, QSharedPointer&lt;unsigned int&gt; dialogHandle, QSharedPointer&lt;unsigned int&gt; initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; className, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00377"></a>00377     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> deleteDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00378"></a>00378     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <span class="keywordtype">int</span> modalLevel, QSharedPointer&lt;int&gt; retCodeIfModal, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00379"></a>00379     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> hideDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00380"></a>00380     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setAttribute(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, Qt::WidgetAttribute attribute, <span class="keywordtype">bool</span> on = <span class="keyword">true</span>, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00381"></a>00381     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> isVisible(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, QSharedPointer&lt;bool&gt; visible, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00382"></a>00382     
-<a name="l00383"></a>00383     <a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a>* getUiDialogByHandle(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle);
-<a name="l00384"></a>00384 
-<a name="l00385"></a>00385     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getDockedStatus(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, QSharedPointer&lt;bool&gt; docked, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00386"></a>00386     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setDockedStatus(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keywordtype">bool</span> docked, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00387"></a>00387 
-<a name="l00388"></a>00388     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetDouble(<span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keywordtype">double</span> defaultValue, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;double&gt; value, <span class="keywordtype">double</span> min = -2147483647, <span class="keywordtype">double</span> max = 2147483647, <span class="keywordtype">int</span> decimals = 1, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
-<a name="l00389"></a>00389     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetInt(<span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keywordtype">int</span> defaultValue, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;int&gt; value, <span class="keywordtype">int</span> min = -2147483647, <span class="keywordtype">int</span> max = 2147483647, <span class="keywordtype">int</span> step = 1, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
-<a name="l00390"></a>00390     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetItem(<span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keyword">const</span> QStringList &amp;stringList, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;QString&gt; value, <span class="keywordtype">int</span> currentIndex = 0, <span class="keywordtype">bool</span> editable = <span class="keyword">false</span>, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
-<a name="l00391"></a>00391     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetText(<span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keyword">const</span> QString &amp;defaultString, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;QString&gt; value, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
-<a name="l00392"></a>00392     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showMessageBox(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keywordtype">int</span> type, <span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;text, <span class="keywordtype">int</span> buttons, <span class="keywordtype">int</span> defaultButton, QSharedPointer&lt;int&gt; retButton, QSharedPointer&lt;QString&gt; retButtonText, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00372"></a>00372     QByteArray getReadableMethodSignature(<span class="keyword">const</span> QMetaMethod &amp;method, <span class="keywordtype">bool</span> pythonNotCStyle, QByteArray *methodName = NULL, <span class="keywordtype">bool</span> *valid = NULL);
+<a name="l00373"></a>00373     QByteArray getReadableParameter(<span class="keyword">const</span> QByteArray &amp;parameter, <span class="keywordtype">bool</span> pythonNotCStyle, <span class="keywordtype">bool</span> *valid = NULL);
+<a name="l00374"></a>00374     ito::UiOrganizer::ClassInfoContainerList::Iterator parseMetaPropertyForEnumerationTypes(<span class="keyword">const</span> QMetaProperty &amp;meth, ClassInfoContainerList &amp;currentPropList);
+<a name="l00375"></a>00375 
+<a name="l00376"></a>00376     <span class="keywordtype">void</span> <a class="code" href="classito_1_1_ui_organizer.html#a94fbd04d04f17438fbd48fc76eb0de50" title="method, called by garbage collection timer, in order to regularly start the garbage collection proces...">timerEvent</a>(QTimerEvent *event);
+<a name="l00377"></a>00377 
+<a name="l00378"></a><a class="code" href="classito_1_1_ui_organizer.html#a570d2150eb66b4fb5255cf31af876a64">00378</a>     <a class="code" href="classito_1_1_widget_wrapper.html" title="One instance of this class acts as wrapper for several import public methods of classes, derived from QObject, which should be made available by the call-method in python.">WidgetWrapper</a> *<a class="code" href="classito_1_1_ui_organizer.html#a570d2150eb66b4fb5255cf31af876a64">m_widgetWrapper</a>;                    
+<a name="l00380"></a><a class="code" href="classito_1_1_ui_organizer.html#aa40d89cd5d073fef459d4cea4cbabaa7">00380</a>     QHash&lt;unsigned int, UiContainerItem&gt; <a class="code" href="classito_1_1_ui_organizer.html#aa40d89cd5d073fef459d4cea4cbabaa7">m_dialogList</a>; 
+<a name="l00381"></a><a class="code" href="classito_1_1_ui_organizer.html#a34d53af0520e1d6242c14cc9fc416b3b">00381</a>     QHash&lt;unsigned int, QPointer&lt;QObject&gt; &gt; <a class="code" href="classito_1_1_ui_organizer.html#a34d53af0520e1d6242c14cc9fc416b3b">m_objectList</a>;  
+<a name="l00382"></a><a class="code" href="classito_1_1_ui_organizer.html#a62b6704f44e962de60bc49ac2119fe0a">00382</a>     <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#a62b6704f44e962de60bc49ac2119fe0a">m_garbageCollectorTimer</a>;                    
+<a name="l00383"></a><a class="code" href="classito_1_1_ui_organizer.html#a933fbcada42133f3debd6473510a405b">00383</a>     QMap&lt;QObject*, QThread*&gt; <a class="code" href="classito_1_1_ui_organizer.html#a933fbcada42133f3debd6473510a405b">m_watcherThreads</a>;   
+<a name="l00385"></a><a class="code" href="classito_1_1_ui_organizer.html#aa580af425acc37d023c4bbf1e55db961">00385</a>     <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#aa580af425acc37d023c4bbf1e55db961">autoIncUiDialogCounter</a>;        
+<a name="l00386"></a><a class="code" href="classito_1_1_ui_organizer.html#ab8839365761de9900da48a372671f0aa">00386</a>     <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classito_1_1_ui_organizer.html#ab8839365761de9900da48a372671f0aa">autoIncObjectCounter</a>;        
+<a name="l00388"></a>00388     <span class="keywordtype">void</span> setApiPointersToWidgetAndChildren(QWidget *widget);
+<a name="l00389"></a>00389     <span class="comment">//moved the uiLoader object to here from loadDesignerPluginWidget and createNewDialog methods as according</span>
+<a name="l00390"></a>00390     <span class="comment">//to valgrind it causes memory leaks. So better have only one instance created and maintain mem leaks low ;-)</span>
+<a name="l00391"></a>00391     QUiLoader *m_pUiLoader;
+<a name="l00392"></a>00392     QHash&lt;QString, QTranslator*&gt; m_transFiles;
 <a name="l00393"></a>00393 
-<a name="l00394"></a>00394     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFileDialogExistingDir(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keyword">const</span> QString &amp;caption, QSharedPointer&lt;QString&gt; directory, <span class="keywordtype">int</span> options = QFileDialog::ShowDirsOnly, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL); <span class="comment">//options are of type QFileDialog::Options</span>
-<a name="l00395"></a>00395     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFileOpenDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keyword">const</span> QString &amp;caption, <span class="keyword">const</span> QString &amp;directory, <span class="keyword">const</span> QString &amp;filter, QSharedPointer&lt;QString&gt; file, <span class="keywordtype">int</span> selectedFilterIndex = 0, <span class="keywordtype">int</span> options = 0, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00396"></a>00396     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFileSaveDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keyword">const</span> QString &amp;caption, <span class="keyword">const</span> QString &amp;directory, <span class="keyword">const</span> QString &amp;filter, QSharedPointer&lt;QString&gt; file, <span class="keywordtype">int</span> selectedFilterIndex = 0, <span class="keywordtype">int</span> options = 0, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00397"></a>00397 
-<a name="l00398"></a>00398     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> exists(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;bool&gt; exists, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00399"></a>00399     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getPropertyInfos(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QVariantMap&gt; retPropertyMap, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00400"></a>00400     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> readProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QVariantMap&gt; properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00401"></a>00401     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> writeProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QVariantMap &amp;properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00402"></a>00402     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> readProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <span class="keyword">const</span> QString &amp;widgetName, QSharedPointer&lt;QVariantMap&gt; properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00403"></a>00403     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> writeProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <span class="keyword">const</span> QString &amp;widgetName, <span class="keyword">const</span> QVariantMap &amp;properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00404"></a>00404     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getAttribute(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> attributeNumber, QSharedPointer&lt;bool&gt; value, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00405"></a>00405     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setAttribute(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> attributeNumber, <span class="keywordtype">bool</span> value, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00406"></a>00406     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getWindowFlags(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;int&gt; flags, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00407"></a>00407     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setWindowFlags(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> flags, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00408"></a>00408     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> widgetMetaObjectCounts(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;int&gt; classInfoCount, QSharedPointer&lt;int&gt; enumeratorCount, QSharedPointer&lt;int&gt; methodCount, QSharedPointer&lt;int&gt; propertyCount, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00394"></a>00394 signals:
+<a name="l00395"></a>00395 
+<a name="l00396"></a>00396 <span class="keyword">public</span> slots:
+<a name="l00397"></a>00397     <span class="keywordtype">void</span> pythonKeyboardInterrupt(<span class="keywordtype">bool</span> checked);
+<a name="l00398"></a>00398 
+<a name="l00399"></a>00399     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> loadPluginWidget(<span class="keywordtype">void</span>* algoWidgetFunc, <span class="keywordtype">int</span> uiDescription, <span class="keyword">const</span> StringMap &amp;dialogButtons, QVector&lt;ito::ParamBase&gt; *paramsMand, QVector&lt;ito::ParamBase&gt; *paramsOpt, QSharedPointer&lt;unsigned int&gt;dialogHandle, QSharedPointer&lt;unsigned int&gt;initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; className, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00400"></a>00400     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> createNewDialog(<span class="keyword">const</span> QString &amp;filename, <span class="keywordtype">int</span> uiDescription, <span class="keyword">const</span> StringMap &amp;dialogButtons, QSharedPointer&lt;unsigned int&gt; dialogHandle, QSharedPointer&lt;unsigned int&gt; initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; className, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00401"></a>00401     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> deleteDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00402"></a>00402     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <span class="keywordtype">int</span> modalLevel, QSharedPointer&lt;int&gt; retCodeIfModal, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00403"></a>00403     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> hideDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00404"></a>00404     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setAttribute(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, Qt::WidgetAttribute attribute, <span class="keywordtype">bool</span> on = <span class="keyword">true</span>, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00405"></a>00405     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> isVisible(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, QSharedPointer&lt;bool&gt; visible, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00406"></a>00406     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> handleExist(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, QSharedPointer&lt;bool&gt; exist, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00407"></a>00407     
+<a name="l00408"></a>00408     <a class="code" href="structito_1_1_ui_container.html" title="Every instance of this class contains information about one user interface (main window, dialog, dock widget...) which is organized by UiOrganizer.">UiContainer</a>* getUiDialogByHandle(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle);
 <a name="l00409"></a>00409 
-<a name="l00410"></a>00410     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getChildObject(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keyword">const</span> QString &amp;objectName, QSharedPointer&lt;unsigned int&gt; objectID, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00411"></a>00411     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getChildObject2(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> parentObjectID, <span class="keyword">const</span> QString &amp;objectName, QSharedPointer&lt;unsigned int&gt; objectID, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00412"></a>00412     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getChildObject3(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> parentObjectID, <span class="keyword">const</span> QString &amp;objectName, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; widgetClassName, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00413"></a>00413     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getSignalIndex(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;signalSignature, QSharedPointer&lt;int&gt; signalIndex, QSharedPointer&lt;QObject*&gt; objPtr, QSharedPointer&lt;IntList&gt; argTypes, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00414"></a>00414     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> callSlotOrMethod(<span class="keywordtype">bool</span> slotNotMethod, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> slotOrMethodIndex, QSharedPointer&lt;FctCallParamContainer&gt; args, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00415"></a>00415 
-<a name="l00416"></a>00416     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keyword">const</span> QString &amp;classname, ito::UiOrganizer::tQMapArg *objInfo, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00417"></a>00417     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keyword">const</span> QObject *obj, <span class="keywordtype">int</span> type, ito::UiOrganizer::tQMapArg* propMap, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00418"></a>00418     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> type, ito::UiOrganizer::tQMapArg *propMap, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL)
-<a name="l00419"></a>00419     {
-<a name="l00420"></a>00420         <span class="keywordflow">return</span> getObjectInfo(getWeakObjectReference(objectID), type, propMap, semaphore);
-<a name="l00421"></a>00421     }
-<a name="l00422"></a>00422     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QByteArray&gt; objectName, QSharedPointer&lt;QByteArray&gt; widgetClassName, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00423"></a>00423     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectChildrenInfo(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">bool</span> recursive, QSharedPointer&lt;QStringList&gt; objectNames, QSharedPointer&lt;QStringList&gt; classNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00424"></a>00424 
-<a name="l00425"></a>00425     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectID(<span class="keyword">const</span> QObject *obj, QSharedPointer&lt;unsigned int&gt; objectID, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00426"></a>00426 
-<a name="l00427"></a>00427     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> connectWithKeyboardInterrupt(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;signalSignature, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00428"></a>00428     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getMethodDescriptions(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;MethodDescriptionList&gt; methodList, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00429"></a>00429 
-<a name="l00430"></a>00430     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> createFigure(QSharedPointer&lt; QSharedPointer&lt;unsigned int&gt; &gt; guardedFigureHandle, QSharedPointer&lt;unsigned int&gt; initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;int&gt; rows, QSharedPointer&lt;int&gt; cols, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00431"></a>00431     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getSubplot(QSharedPointer&lt;unsigned int&gt; figHandle, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> subplotIndex, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; objectName, QSharedPointer&lt;QByteArray&gt; widgetClassName, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00432"></a>00432 
-<a name="l00433"></a>00433     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figurePlot(<a class="code" href="classito_1_1_ui_data_container.html">ito::UiDataContainer</a> &amp;dataCont, QSharedPointer&lt;unsigned int&gt; figHandle, QSharedPointer&lt;unsigned int&gt; objectID, <span class="keywordtype">int</span> areaRow, <span class="keywordtype">int</span> areaCol, QString className, QVariantMap properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00434"></a>00434     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureLiveImage(<a class="code" href="classito_1_1_add_in_data_i_o.html" title="base class for all dataIO plugin classes">AddInDataIO</a>* dataIO, QSharedPointer&lt;unsigned int&gt; figHandle, QSharedPointer&lt;unsigned int&gt; objectID, <span class="keywordtype">int</span> areaRow, <span class="keywordtype">int</span> areaCol, QString className, QVariantMap properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00435"></a>00435     
-<a name="l00436"></a>00436     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureRemoveGuardedHandle(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> figHandle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00437"></a>00437     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureClose(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> figHandle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
-<a name="l00438"></a>00438     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figurePickPoints(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;ito::DataObject&gt; coords, <span class="keywordtype">int</span> maxNrPoints, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
-<a name="l00439"></a>00439     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureDrawGeometricElements(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;ito::DataObject&gt; coords, <span class="keywordtype">int</span> elementType, <span class="keywordtype">int</span> maxNrElements, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
-<a name="l00440"></a>00440     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figurePickPointsInterrupt(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID);
-<a name="l00441"></a>00441     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> isFigureItem(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID,  QSharedPointer&lt;unsigned int&gt; isFigureItem, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
-<a name="l00442"></a>00442 
-<a name="l00443"></a>00443     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getAvailableWidgetNames(QSharedPointer&lt;QStringList&gt; widgetNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
-<a name="l00444"></a>00444 
-<a name="l00445"></a>00445     <span class="keywordtype">void</span> figureDestroyed(QObject *obj)
-<a name="l00446"></a>00446     {
-<a name="l00447"></a>00447         qDebug() &lt;&lt; obj;
-<a name="l00448"></a>00448     }
-<a name="l00449"></a>00449 
-<a name="l00450"></a>00450 <span class="keyword">private</span> slots:
-<a name="l00451"></a>00451     <span class="keywordtype">void</span> watcherThreadFinished();
-<a name="l00452"></a>00452 
-<a name="l00453"></a>00453 };
-<a name="l00454"></a>00454 
-<a name="l00455"></a>00455 } <span class="comment">//namespace ito</span>
+<a name="l00410"></a>00410     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getDockedStatus(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, QSharedPointer&lt;bool&gt; docked, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00411"></a>00411     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setDockedStatus(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keywordtype">bool</span> docked, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00412"></a>00412 
+<a name="l00413"></a>00413     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetDouble(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keywordtype">double</span> defaultValue, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;double&gt; value, <span class="keywordtype">double</span> min = -2147483647, <span class="keywordtype">double</span> max = 2147483647, <span class="keywordtype">int</span> decimals = 1, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00414"></a>00414     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetInt(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keywordtype">int</span> defaultValue, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;int&gt; value, <span class="keywordtype">int</span> min = -2147483647, <span class="keywordtype">int</span> max = 2147483647, <span class="keywordtype">int</span> step = 1, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00415"></a>00415     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetItem(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keyword">const</span> QStringList &amp;stringList, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;QString&gt; value, <span class="keywordtype">int</span> currentIndex = 0, <span class="keywordtype">bool</span> editable = <span class="keyword">false</span>, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00416"></a>00416     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showInputDialogGetText(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;label, <span class="keyword">const</span> QString &amp;defaultString, QSharedPointer&lt;bool&gt; ok, QSharedPointer&lt;QString&gt; value, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00417"></a>00417     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showMessageBox(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> type, <span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;text, <span class="keywordtype">int</span> buttons, <span class="keywordtype">int</span> defaultButton, QSharedPointer&lt;int&gt; retButton, QSharedPointer&lt;QString&gt; retButtonText, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00418"></a>00418 
+<a name="l00419"></a>00419     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFileDialogExistingDir(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;caption, QSharedPointer&lt;QString&gt; directory, <span class="keywordtype">int</span> options = QFileDialog::ShowDirsOnly, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL); <span class="comment">//options are of type QFileDialog::Options</span>
+<a name="l00420"></a>00420     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFileOpenDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;caption, <span class="keyword">const</span> QString &amp;directory, <span class="keyword">const</span> QString &amp;filter, QSharedPointer&lt;QString&gt; file, <span class="keywordtype">int</span> selectedFilterIndex = 0, <span class="keywordtype">int</span> options = 0, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00421"></a>00421     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFilesOpenDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;caption, <span class="keyword">const</span> QString &amp;directory, <span class="keyword">const</span> QString &amp;filter, QSharedPointer&lt;QStringList&gt; files, <span class="keywordtype">int</span> selectedFilterIndex = 0, <span class="keywordtype">int</span> options = 0, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00422"></a>00422     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> showFileSaveDialog(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QString &amp;caption, <span class="keyword">const</span> QString &amp;directory, <span class="keyword">const</span> QString &amp;filter, QSharedPointer&lt;QString&gt; file, <span class="keywordtype">int</span> selectedFilterIndex = 0, <span class="keywordtype">int</span> options = 0, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00423"></a>00423 
+<a name="l00424"></a>00424     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> exists(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;bool&gt; exists, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00425"></a>00425     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getPropertyInfos(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QVariantMap&gt; retPropertyMap, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00426"></a>00426     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> readProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QVariantMap&gt; properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00427"></a>00427     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> writeProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QVariantMap &amp;properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00428"></a>00428     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> readProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <span class="keyword">const</span> QString &amp;widgetName, QSharedPointer&lt;QVariantMap&gt; properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00429"></a>00429     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> writeProperties(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> handle, <span class="keyword">const</span> QString &amp;widgetName, <span class="keyword">const</span> QVariantMap &amp;properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00430"></a>00430     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getAttribute(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> attributeNumber, QSharedPointer&lt;bool&gt; value, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00431"></a>00431     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setAttribute(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> attributeNumber, <span class="keywordtype">bool</span> value, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00432"></a>00432     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getWindowFlags(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;int&gt; flags, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00433"></a>00433     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> setWindowFlags(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> flags, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00434"></a>00434     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> widgetMetaObjectCounts(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;int&gt; classInfoCount, QSharedPointer&lt;int&gt; enumeratorCount, QSharedPointer&lt;int&gt; methodCount, QSharedPointer&lt;int&gt; propertyCount, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL );
+<a name="l00435"></a>00435 
+<a name="l00436"></a>00436     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getChildObject(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uiHandle, <span class="keyword">const</span> QString &amp;objectName, QSharedPointer&lt;unsigned int&gt; objectID, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00437"></a>00437     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getChildObject2(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> parentObjectID, <span class="keyword">const</span> QString &amp;objectName, QSharedPointer&lt;unsigned int&gt; objectID, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00438"></a>00438     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getChildObject3(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> parentObjectID, <span class="keyword">const</span> QString &amp;objectName, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; widgetClassName, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00439"></a>00439     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getSignalIndex(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QByteArray &amp;signalSignature, QSharedPointer&lt;int&gt; signalIndex, QSharedPointer&lt;QObject*&gt; objPtr, QSharedPointer&lt;IntList&gt; argTypes, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00440"></a>00440     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> callSlotOrMethod(<span class="keywordtype">bool</span> slotNotMethod, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> slotOrMethodIndex, QSharedPointer&lt;FctCallParamContainer&gt; args, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00441"></a>00441 
+<a name="l00442"></a>00442     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keyword">const</span> QString &amp;classname, <span class="keywordtype">bool</span> pythonNotCStyle, ito::UiOrganizer::ClassInfoContainerList *objectInfo, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00443"></a>00443     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keyword">const</span> QObject *obj, <span class="keywordtype">int</span> type, <span class="keywordtype">bool</span> pythonNotCStyle, ito::UiOrganizer::ClassInfoContainerList* objectInfo, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00444"></a>00444     <span class="keyword">inline</span> <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectInfo(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">int</span> type, <span class="keywordtype">bool</span> pythonNotCStyle, ito::UiOrganizer::ClassInfoContainerList *objectInfo, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL)
+<a name="l00445"></a>00445     {
+<a name="l00446"></a>00446         <span class="keywordflow">return</span> getObjectInfo(getWeakObjectReference(objectID), type, pythonNotCStyle, objectInfo, semaphore);
+<a name="l00447"></a>00447     }
+<a name="l00448"></a>00448 
+<a name="l00449"></a>00449     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectAndWidgetName(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QByteArray&gt; objectName, QSharedPointer&lt;QByteArray&gt; widgetClassName, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00450"></a>00450     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectChildrenInfo(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keywordtype">bool</span> recursive, QSharedPointer&lt;QStringList&gt; objectNames, QSharedPointer&lt;QStringList&gt; classNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00451"></a>00451 
+<a name="l00452"></a>00452     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getObjectID(<span class="keyword">const</span> QObject *obj, QSharedPointer&lt;unsigned int&gt; objectID, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00453"></a>00453 
+<a name="l00454"></a>00454     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> connectWithKeyboardInterrupt(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, <span class="keyword">const</span> QByteArray &amp;signalSignature, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00455"></a>00455     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getMethodDescriptions(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;MethodDescriptionList&gt; methodList, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
 <a name="l00456"></a>00456 
-<a name="l00457"></a>00457 Q_DECLARE_METATYPE(ito::UiOrganizer::tQMapArg*)
-<a name="l00458"></a>00458 
-<a name="l00459"></a>00459 <span class="preprocessor">#endif</span>
+<a name="l00457"></a>00457     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> createFigure(QSharedPointer&lt; QSharedPointer&lt;unsigned int&gt; &gt; guardedFigureHandle, QSharedPointer&lt;unsigned int&gt; initSlotCount, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;int&gt; rows, QSharedPointer&lt;int&gt; cols, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00458"></a>00458     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getSubplot(QSharedPointer&lt;unsigned int&gt; figHandle, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> subplotIndex, QSharedPointer&lt;unsigned int&gt; objectID, QSharedPointer&lt;QByteArray&gt; objectName, QSharedPointer&lt;QByteArray&gt; widgetClassName, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00459"></a>00459 
+<a name="l00460"></a>00460     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figurePlot(<a class="code" href="classito_1_1_ui_data_container.html">ito::UiDataContainer</a> &amp;dataCont, QSharedPointer&lt;unsigned int&gt; figHandle, QSharedPointer&lt;unsigned int&gt; objectID, <span class="keywordtype">int</span> areaRow, <span class="keywordtype">int</span> areaCol, QString className, QVariantMap properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00461"></a>00461     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureLiveImage(<a class="code" href="classito_1_1_add_in_data_i_o.html" title="base class for all dataIO plugin classes">AddInDataIO</a>* dataIO, QSharedPointer&lt;unsigned int&gt; figHandle, QSharedPointer&lt;unsigned int&gt; objectID, <span class="keywordtype">int</span> areaRow, <span class="keywordtype">int</span> areaCol, QString className, QVariantMap properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00462"></a>00462     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureDesignerWidget(QSharedPointer&lt;unsigned int&gt; figHandle, QSharedPointer&lt;unsigned int&gt; objectID, <span class="keywordtype">int</span> areaRow, <span class="keywordtype">int</span> areaCol, QString className, QVariantMap properties, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00463"></a>00463 
+<a name="l00464"></a>00464     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureClose(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> figHandle, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore = NULL);
+<a name="l00465"></a>00465     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figurePickPoints(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QVector&lt;ito::Shape&gt; &gt; shapes, <span class="keywordtype">int</span> maxNrPoints, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
+<a name="l00466"></a>00466     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figureDrawGeometricShapes(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID, QSharedPointer&lt;QVector&lt;ito::Shape&gt; &gt; shapes, <span class="keywordtype">int</span> shapeType, <span class="keywordtype">int</span> maxNrElements, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
+<a name="l00467"></a>00467     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> figurePickPointsInterrupt(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID);
+<a name="l00468"></a>00468     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> isFigureItem(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> objectID,  QSharedPointer&lt;unsigned int&gt; isFigureItem, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
+<a name="l00469"></a>00469 
+<a name="l00470"></a>00470     <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> getAvailableWidgetNames(QSharedPointer&lt;QStringList&gt; widgetNames, <a class="code" href="class_itom_shared_semaphore.html" title="semaphore which can be used for asychronous thread communication. By using this class it is possible ...">ItomSharedSemaphore</a> *semaphore);
+<a name="l00471"></a>00471 
+<a name="l00472"></a>00472     <span class="keywordtype">void</span> figureDestroyed(QObject *obj);
+<a name="l00473"></a>00473 
+<a name="l00474"></a>00474 <span class="keyword">private</span> slots:
+<a name="l00475"></a>00475     <span class="keywordtype">void</span> watcherThreadFinished();
+<a name="l00476"></a>00476 
+<a name="l00477"></a>00477 };
+<a name="l00478"></a>00478 
+<a name="l00479"></a>00479 } <span class="comment">//namespace ito</span>
+<a name="l00480"></a>00480 
+<a name="l00481"></a>00481 Q_DECLARE_METATYPE(ito::UiOrganizer::ClassInfoContainerList*)
+<a name="l00482"></a>00482 
+<a name="l00483"></a>00483 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>uiOrganizer.h</b>      </li>
-      <li class="footer">Generated on Fri Mar 4 2016 14:30:57 for itom by&#160;
+      <li class="footer">Generated on Thu Aug 4 2016 08:22:20 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

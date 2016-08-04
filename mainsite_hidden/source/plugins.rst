@@ -59,15 +59,18 @@ Motors / Actuators
    
    plugins/actuators/aerotechEnsemble.rst
    plugins/actuators/dummyMotor.rst
+   plugins/actuators/FirgelliLAC.rst
    plugins/actuators/leicaMotorFocus.rst
+   plugins/actuators/NanotecStepMotor.rst
    plugins/actuators/piPiezoCtrl.rst
-   plugins/actuators/piGCS2.rst
-   plugins/actuators/usbMotion3XIII.rst
+   plugins/actuators/piGCS2.rst 
    plugins/actuators/SMC100.rst
    plugins/actuators/ST8SMC4USB.rst
+   plugins/actuators/ThorlabsBP.rst
+   plugins/actuators/ThorlabsISM.rst
    plugins/actuators/uhlRegister.rst
    plugins/actuators/uhlText.rst
-   plugins/actuators/NanotecStepMotor.rst
+   plugins/actuators/usbMotion3XIII.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~

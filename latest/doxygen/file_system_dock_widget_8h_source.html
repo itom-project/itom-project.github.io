@@ -138,106 +138,112 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00053"></a>00053     {
 <a name="l00054"></a>00054         Q_OBJECT
 <a name="l00055"></a>00055 
-<a name="l00056"></a>00056         <span class="keyword">public</span>:
-<a name="l00057"></a>00057             <a class="code" href="classito_1_1_file_system_dock_widget.html">FileSystemDockWidget</a>(<span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;objName, QWidget *parent = NULL, <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_abstract_dock_widget.html#a5fa1af58eea3db3c2633270f0577bc85">docked</a> = <span class="keyword">true</span>, <span class="keywordtype">bool</span> isDockAvailable = <span class="keyword">true</span>, tFloatingStyle floatingStyle = floatingNone, tMovingStyle movingStyle = movingEnabled, <span class="keyword">const</span> QString &amp;baseDirectory = QDir::currentPath());
-<a name="l00058"></a>00058             ~<a class="code" href="classito_1_1_file_system_dock_widget.html">FileSystemDockWidget</a>();
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060         <span class="keyword">protected</span>:
-<a name="l00061"></a>00061             <span class="keywordtype">void</span> createActions();
-<a name="l00062"></a>00062             <span class="keywordtype">void</span> createMenus();
-<a name="l00063"></a>00063             <span class="keywordtype">void</span> createToolBars();
-<a name="l00064"></a>00064             <span class="keywordtype">void</span> createStatusBar(){}
-<a name="l00065"></a>00065             <span class="keywordtype">void</span> updateActions();
-<a name="l00066"></a>00066             <span class="keywordtype">void</span> updatePythonActions(){ updateActions(); }
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068             QString getHtmlTag(<span class="keyword">const</span> QString &amp;tag);
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070             <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_file_system_dock_widget.html#a44d195df427e3cb2d3ddbe78efde3472" title="eventFilter for m_pWindow">eventFilter</a>(QObject *obj, QEvent *event);
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072         <span class="keyword">private</span>:
-<a name="l00073"></a>00073             <span class="keywordtype">void</span> fillFilterList();
-<a name="l00074"></a>00074             <span class="keywordtype">void</span> showInGraphicalShell(<span class="keyword">const</span> QString &amp;filePath);
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076             QMenu* m_pShowDirListMenu;
-<a name="l00077"></a>00077             QMenu* m_pFileSystemSettingMenu;
-<a name="l00078"></a>00078             QMenu* m_pContextMenu;
-<a name="l00079"></a>00079             QTextBrowser* m_pPathEdit;
-<a name="l00080"></a>00080             QToolBar* m_pMainToolbar;
-<a name="l00081"></a>00081             <a class="code" href="classito_1_1_q_tree_view_itom.html">QTreeViewItom</a>* m_pTreeView;
-<a name="l00082"></a>00082             QLabel* m_pLblFilter;
-<a name="l00083"></a>00083             QComboBox* m_pCmbFilter;
-<a name="l00084"></a>00084             QFileSystemModel* m_pFileSystemModel;
-<a name="l00085"></a>00085             QSignalMapper *m_newDirSelectedMapper;
-<a name="l00086"></a>00086             QString baseDirectory;
-<a name="l00087"></a>00087             QHash&lt;QString,QStringList&gt; defaultFilterPatterns;
-<a name="l00088"></a>00088             QMutex baseDirChangeMutex;
-<a name="l00089"></a>00089             QList&lt;QUrl&gt; m_clipboardCutData; <span class="comment">//this mime-data has recently be selected by a cut action and is no available in QClipboard</span>
-<a name="l00090"></a>00090             <span class="keywordtype">int</span> *m_pColumnWidth;
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActMoveCDUp;
-<a name="l00093"></a>00093             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActSelectCD;
-<a name="l00094"></a>00094             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActCopyDir;
-<a name="l00095"></a>00095             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActPasteDir;
-<a name="l00096"></a>00096             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActOpenFile;
-<a name="l00097"></a>00097             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActExecuteFile;
-<a name="l00098"></a>00098             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActLocateOnDisk;
-<a name="l00099"></a>00099             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActRenameItem;
-<a name="l00100"></a>00100             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActDeleteItems;
-<a name="l00101"></a>00101             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActCutItems;
-<a name="l00102"></a>00102             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActCopyItems;
-<a name="l00103"></a>00103             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActPasteItems;
-<a name="l00104"></a>00104             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActNewDir;
-<a name="l00105"></a>00105             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActNewPyFile;
-<a name="l00106"></a>00106             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pViewList;
-<a name="l00107"></a>00107             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pViewDetails;
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109             QAction *m_lastMovedShowDirAction;
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111         signals:
-<a name="l00112"></a>00112             <span class="keywordtype">void</span> currentDirChanged();
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114         <span class="keyword">private</span> slots:
-<a name="l00115"></a>00115             <span class="keywordtype">void</span> mnuMoveCDUp();
-<a name="l00116"></a>00116             <span class="keywordtype">void</span> mnuSelectCD();
-<a name="l00117"></a>00117             <span class="keywordtype">void</span> mnuCopyDir();
-<a name="l00118"></a>00118             <span class="keywordtype">void</span> mnuPasteDir();
-<a name="l00119"></a>00119             <span class="keywordtype">void</span> mnuLocateOnDisk();
-<a name="l00120"></a>00120             <span class="keywordtype">void</span> mnuExecuteFile();
-<a name="l00121"></a>00121             <span class="keywordtype">void</span> mnuOpenFile();
-<a name="l00122"></a>00122             <span class="keywordtype">void</span> mnuRenameItem();
-<a name="l00123"></a>00123             <span class="keywordtype">void</span> mnuDeleteItems();
-<a name="l00124"></a>00124             <span class="keywordtype">void</span> mnuCutItems();
-<a name="l00125"></a>00125             <span class="keywordtype">void</span> mnuCopyItems();
-<a name="l00126"></a>00126             <span class="keywordtype">void</span> mnuPasteItems();
-<a name="l00127"></a>00127             <span class="keywordtype">void</span> mnuNewDir();
-<a name="l00128"></a>00128             <span class="keywordtype">void</span> mnuNewPyFile();
-<a name="l00129"></a>00129             <span class="keywordtype">void</span> showList();
-<a name="l00130"></a>00130             <span class="keywordtype">void</span> showDetails();
-<a name="l00131"></a>00131             <span class="keywordtype">void</span> mnuToggleView();
-<a name="l00132"></a>00132             <span class="keywordtype">void</span> newDirSelected(<span class="keyword">const</span> QString&amp; text);
-<a name="l00133"></a>00133             <span class="keywordtype">void</span> cmbFilterEditTextChanged(<span class="keyword">const</span> QString &amp;text);
-<a name="l00134"></a>00134             <span class="keywordtype">void</span> openFile(<span class="keyword">const</span> QModelIndex&amp; index);
-<a name="l00135"></a>00135             <span class="keywordtype">void</span> treeViewContextMenuRequested(<span class="keyword">const</span> QPoint &amp;pos);
-<a name="l00136"></a>00136             <span class="keywordtype">void</span> setTreeViewHideColumns(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;hide);
-<a name="l00137"></a>00137             <span class="keywordtype">void</span> removeActionFromDirList(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;pos);
-<a name="l00138"></a>00138             <span class="keywordtype">void</span> itemDoubleClicked(<span class="keyword">const</span> QModelIndex &amp;index);
-<a name="l00139"></a>00139 
-<a name="l00140"></a>00140             <span class="keywordtype">void</span> pathAnchorClicked(<span class="keyword">const</span> QUrl &amp;link);
-<a name="l00141"></a>00141 
-<a name="l00142"></a>00142         <span class="keyword">public</span> slots:
-<a name="l00143"></a>00143             <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> changeBaseDirectory(QString dir);
-<a name="l00144"></a>00144             <span class="keywordtype">void</span> processError(QProcess::ProcessError error);
-<a name="l00145"></a>00145     };
-<a name="l00146"></a>00146 
-<a name="l00147"></a>00147 } <span class="comment">//end namespace ito</span>
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149 <span class="preprocessor">#endif</span>
+<a name="l00056"></a>00056             Q_PROPERTY(QColor linkColor READ linkColor WRITE setLinkColor DESIGNABLE <span class="keyword">true</span>);
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         <span class="keyword">public</span>:
+<a name="l00059"></a>00059             <a class="code" href="classito_1_1_file_system_dock_widget.html">FileSystemDockWidget</a>(<span class="keyword">const</span> QString &amp;title, <span class="keyword">const</span> QString &amp;objName, QWidget *parent = NULL, <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_abstract_dock_widget.html#a5fa1af58eea3db3c2633270f0577bc85">docked</a> = <span class="keyword">true</span>, <span class="keywordtype">bool</span> isDockAvailable = <span class="keyword">true</span>, tFloatingStyle floatingStyle = floatingNone, tMovingStyle movingStyle = movingEnabled, <span class="keyword">const</span> QString &amp;baseDirectory = QDir::currentPath());
+<a name="l00060"></a>00060             ~<a class="code" href="classito_1_1_file_system_dock_widget.html">FileSystemDockWidget</a>();
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062             QColor linkColor() { <span class="keywordflow">return</span> m_linkColor; }
+<a name="l00063"></a>00063             <span class="keywordtype">void</span> setLinkColor(<span class="keyword">const</span> QColor &amp;color);
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065         <span class="keyword">protected</span>:
+<a name="l00066"></a>00066             <span class="keywordtype">void</span> createActions();
+<a name="l00067"></a>00067             <span class="keywordtype">void</span> createMenus();
+<a name="l00068"></a>00068             <span class="keywordtype">void</span> createToolBars();
+<a name="l00069"></a>00069             <span class="keywordtype">void</span> createStatusBar(){}
+<a name="l00070"></a>00070             <span class="keywordtype">void</span> updateActions();
+<a name="l00071"></a>00071             <span class="keywordtype">void</span> updatePythonActions(){ updateActions(); }
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073             QString getHtmlTag(<span class="keyword">const</span> QString &amp;tag);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075             <span class="keywordtype">bool</span> <a class="code" href="classito_1_1_file_system_dock_widget.html#a44d195df427e3cb2d3ddbe78efde3472" title="eventFilter for m_pWindow">eventFilter</a>(QObject *obj, QEvent *event);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077         <span class="keyword">private</span>:
+<a name="l00078"></a>00078             <span class="keywordtype">void</span> fillFilterList();
+<a name="l00079"></a>00079             <span class="keywordtype">void</span> showInGraphicalShell(<span class="keyword">const</span> QString &amp;filePath);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081             QMenu* m_pShowDirListMenu;
+<a name="l00082"></a>00082             QMenu* m_pFileSystemSettingMenu;
+<a name="l00083"></a>00083             QMenu* m_pContextMenu;
+<a name="l00084"></a>00084             QTextBrowser* m_pPathEdit;
+<a name="l00085"></a>00085             QToolBar* m_pMainToolbar;
+<a name="l00086"></a>00086             <a class="code" href="classito_1_1_q_tree_view_itom.html">QTreeViewItom</a>* m_pTreeView;
+<a name="l00087"></a>00087             QLabel* m_pLblFilter;
+<a name="l00088"></a>00088             QComboBox* m_pCmbFilter;
+<a name="l00089"></a>00089             QFileSystemModel* m_pFileSystemModel;
+<a name="l00090"></a>00090             QSignalMapper *m_newDirSelectedMapper;
+<a name="l00091"></a>00091             QString baseDirectory;
+<a name="l00092"></a>00092             QHash&lt;QString,QStringList&gt; defaultFilterPatterns;
+<a name="l00093"></a>00093             QMutex baseDirChangeMutex;
+<a name="l00094"></a>00094             QList&lt;QUrl&gt; m_clipboardCutData; <span class="comment">//this mime-data has recently be selected by a cut action and is no available in QClipboard</span>
+<a name="l00095"></a>00095             <span class="keywordtype">int</span> *m_pColumnWidth;
+<a name="l00096"></a>00096             QColor m_linkColor;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActMoveCDUp;
+<a name="l00099"></a>00099             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActSelectCD;
+<a name="l00100"></a>00100             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActCopyDir;
+<a name="l00101"></a>00101             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActPasteDir;
+<a name="l00102"></a>00102             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActOpenFile;
+<a name="l00103"></a>00103             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActExecuteFile;
+<a name="l00104"></a>00104             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActLocateOnDisk;
+<a name="l00105"></a>00105             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActRenameItem;
+<a name="l00106"></a>00106             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActDeleteItems;
+<a name="l00107"></a>00107             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActCutItems;
+<a name="l00108"></a>00108             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActCopyItems;
+<a name="l00109"></a>00109             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActPasteItems;
+<a name="l00110"></a>00110             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActNewDir;
+<a name="l00111"></a>00111             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pActNewPyFile;
+<a name="l00112"></a>00112             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pViewList;
+<a name="l00113"></a>00113             <a class="code" href="classito_1_1_abstract_dock_widget_1_1_shortcut_action.html">ShortcutAction</a>* m_pViewDetails;
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115             QAction *m_lastMovedShowDirAction;
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117         signals:
+<a name="l00118"></a>00118             <span class="keywordtype">void</span> currentDirChanged();
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120         <span class="keyword">private</span> slots:
+<a name="l00121"></a>00121             <span class="keywordtype">void</span> mnuMoveCDUp();
+<a name="l00122"></a>00122             <span class="keywordtype">void</span> mnuSelectCD();
+<a name="l00123"></a>00123             <span class="keywordtype">void</span> mnuCopyDir();
+<a name="l00124"></a>00124             <span class="keywordtype">void</span> mnuPasteDir();
+<a name="l00125"></a>00125             <span class="keywordtype">void</span> mnuLocateOnDisk();
+<a name="l00126"></a>00126             <span class="keywordtype">void</span> mnuExecuteFile();
+<a name="l00127"></a>00127             <span class="keywordtype">void</span> mnuOpenFile();
+<a name="l00128"></a>00128             <span class="keywordtype">void</span> mnuRenameItem();
+<a name="l00129"></a>00129             <span class="keywordtype">void</span> mnuDeleteItems();
+<a name="l00130"></a>00130             <span class="keywordtype">void</span> mnuCutItems();
+<a name="l00131"></a>00131             <span class="keywordtype">void</span> mnuCopyItems();
+<a name="l00132"></a>00132             <span class="keywordtype">void</span> mnuPasteItems();
+<a name="l00133"></a>00133             <span class="keywordtype">void</span> mnuNewDir();
+<a name="l00134"></a>00134             <span class="keywordtype">void</span> mnuNewPyFile();
+<a name="l00135"></a>00135             <span class="keywordtype">void</span> showList();
+<a name="l00136"></a>00136             <span class="keywordtype">void</span> showDetails();
+<a name="l00137"></a>00137             <span class="keywordtype">void</span> mnuToggleView();
+<a name="l00138"></a>00138             <span class="keywordtype">void</span> newDirSelected(<span class="keyword">const</span> QString&amp; text);
+<a name="l00139"></a>00139             <span class="keywordtype">void</span> cmbFilterEditTextChanged(<span class="keyword">const</span> QString &amp;text);
+<a name="l00140"></a>00140             <span class="keywordtype">void</span> openFile(<span class="keyword">const</span> QModelIndex&amp; index);
+<a name="l00141"></a>00141             <span class="keywordtype">void</span> treeViewContextMenuRequested(<span class="keyword">const</span> QPoint &amp;pos);
+<a name="l00142"></a>00142             <span class="keywordtype">void</span> setTreeViewHideColumns(<span class="keyword">const</span> <span class="keywordtype">bool</span> &amp;hide);
+<a name="l00143"></a>00143             <span class="keywordtype">void</span> removeActionFromDirList(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;pos);
+<a name="l00144"></a>00144             <span class="keywordtype">void</span> itemDoubleClicked(<span class="keyword">const</span> QModelIndex &amp;index);
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146             <span class="keywordtype">void</span> pathAnchorClicked(<span class="keyword">const</span> QUrl &amp;link);
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148         <span class="keyword">public</span> slots:
+<a name="l00149"></a>00149             <a class="code" href="classito_1_1_ret_val.html" title="Class for managing status values (like errors or warning)">RetVal</a> changeBaseDirectory(QString dir);
+<a name="l00150"></a>00150             <span class="keywordtype">void</span> processError(QProcess::ProcessError error);
+<a name="l00151"></a>00151     };
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153 } <span class="comment">//end namespace ito</span>
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>fileSystemDockWidget.h</b>      </li>
-      <li class="footer">Generated on Fri Mar 4 2016 14:30:58 for itom by&#160;
+      <li class="footer">Generated on Thu Aug 4 2016 08:22:21 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

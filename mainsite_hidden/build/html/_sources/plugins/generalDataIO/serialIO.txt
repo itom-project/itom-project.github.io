@@ -212,10 +212,10 @@ In order to get a list of all available COM ports under Windows, the following p
 
 .. code-block:: python
     
-    '''This script can be used as example for Windows
-    to detect registered COM ports for this computer'''
+    #This script can be used as example for Windows
+    #to detect registered COM ports for this computer
     import winreg as wreg
-
+    
     def DetectCOMPorts():
         try:
             regconn = wreg.ConnectRegistry( None, wreg.HKEY_LOCAL_MACHINE )
@@ -229,12 +229,12 @@ In order to get a list of all available COM ports under Windows, the following p
         finally:
             key.Close()
         return values_list
-
+    
     def NumberOfCOMPorts( values_list ):
         for subkey in iter( values_list ):
             print( "Name : " + subkey[0] )
             print( "Data : " + subkey[1] )
-
+    
     NumberOfCOMPorts( DetectCOMPorts() )
 
 Installation

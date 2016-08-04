@@ -110,45 +110,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00025"></a>00025 <span class="preprocessor"></span>
 <a name="l00026"></a>00026 <span class="preprocessor">#include &lt;QtGui&gt;</span>
 <a name="l00027"></a>00027 <span class="preprocessor">#include &lt;qdialog.h&gt;</span>
-<a name="l00028"></a>00028 <span class="comment">//#include &lt;qpair&gt;</span>
-<a name="l00029"></a>00029 <span class="comment">//#include &lt;qlist&gt;</span>
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;ui_dialogAbout.h&quot;</span>
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="keyword">namespace </span>ito
-<a name="l00034"></a>00034 {
-<a name="l00035"></a>00035 
-<a name="l00036"></a><a class="code" href="classito_1_1_dialog_about_q_itom.html">00036</a> <span class="keyword">class </span><a class="code" href="classito_1_1_dialog_about_q_itom.html">DialogAboutQItom</a> : <span class="keyword">public</span> QDialog 
-<a name="l00037"></a>00037 {
-<a name="l00038"></a>00038     Q_OBJECT
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     <span class="keyword">public</span>:
-<a name="l00041"></a>00041         <a class="code" href="classito_1_1_dialog_about_q_itom.html">DialogAboutQItom</a>(<span class="keyword">const</span> QMap&lt;QString, QString&gt; &amp;versionMap);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043         ~<a class="code" href="classito_1_1_dialog_about_q_itom.html">DialogAboutQItom</a>() {m_VersionString.clear();};
+<a name="l00028"></a>00028 <span class="preprocessor">#include &lt;qcolor.h&gt;</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;ui_dialogAbout.h&quot;</span>
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 <span class="keyword">namespace </span>ito
+<a name="l00033"></a>00033 {
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="classito_1_1_dialog_about_q_itom.html">00035</a> <span class="keyword">class </span><a class="code" href="classito_1_1_dialog_about_q_itom.html">DialogAboutQItom</a> : <span class="keyword">public</span> QDialog 
+<a name="l00036"></a>00036 {
+<a name="l00037"></a>00037     Q_OBJECT
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039     Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor DESIGNABLE <span class="keyword">true</span>);
+<a name="l00040"></a>00040     Q_PROPERTY(QColor linkColor READ linkColor WRITE setLinkColor DESIGNABLE <span class="keyword">true</span>);
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042     <span class="keyword">public</span>:
+<a name="l00043"></a>00043         <a class="code" href="classito_1_1_dialog_about_q_itom.html">DialogAboutQItom</a>(<span class="keyword">const</span> QMap&lt;QString, QString&gt; &amp;versionMap);
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045     <span class="keyword">private</span>:
-<a name="l00046"></a>00046         Ui::DialogAboutQItom ui;
-<a name="l00047"></a>00047         QString m_VersionString;
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049     <span class="keyword">public</span> slots:
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052     <span class="keyword">private</span> slots:
-<a name="l00053"></a>00053         <span class="keywordtype">void</span> on_pushButtonCopy_clicked();
-<a name="l00054"></a>00054         <span class="keywordtype">void</span> on_pushButton_close_clicked();
+<a name="l00045"></a>00045         ~<a class="code" href="classito_1_1_dialog_about_q_itom.html">DialogAboutQItom</a>() {m_VersionString.clear();};
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047         QColor linkColor() { <span class="keywordflow">return</span> m_linkColor; }
+<a name="l00048"></a>00048         <span class="keywordtype">void</span> setLinkColor(<span class="keyword">const</span> QColor &amp;color);
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050         QColor textColor() { <span class="keywordflow">return</span> m_textColor; }
+<a name="l00051"></a>00051         <span class="keywordtype">void</span> setTextColor(<span class="keyword">const</span> QColor &amp;color);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053     <span class="keyword">private</span>:
+<a name="l00054"></a>00054         <span class="keywordtype">void</span> styleTexts();
 <a name="l00055"></a>00055 
-<a name="l00056"></a>00056 };
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058 } <span class="comment">//end namespace ito</span>
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="preprocessor">#endif // DIALOGABOUTQITOM</span>
+<a name="l00056"></a>00056         Ui::DialogAboutQItom ui;
+<a name="l00057"></a>00057         QString m_VersionString;
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059         QColor m_textColor;
+<a name="l00060"></a>00060         QColor m_linkColor;
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062         QString m_aboutText;
+<a name="l00063"></a>00063         QString m_contributorsText;
+<a name="l00064"></a>00064         QString m_adddressText;
+<a name="l00065"></a>00065         QString m_addressText;
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067     <span class="keyword">public</span> slots:
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     <span class="keyword">private</span> slots:
+<a name="l00071"></a>00071         <span class="keywordtype">void</span> on_pushButtonCopy_clicked();
+<a name="l00072"></a>00072         <span class="keywordtype">void</span> on_pushButton_close_clicked();
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 };
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 } <span class="comment">//end namespace ito</span>
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 <span class="preprocessor">#endif // DIALOGABOUTQITOM</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>dialogAbout.h</b>      </li>
-      <li class="footer">Generated on Fri Mar 4 2016 14:30:57 for itom by&#160;
+      <li class="footer">Generated on Thu Aug 4 2016 08:22:20 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

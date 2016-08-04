@@ -126,50 +126,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00041"></a>00041 
 <a name="l00045"></a><a class="code" href="class_checkable_combo_box.html">00045</a> <span class="keyword">class </span>ITOMWIDGETS_EXPORT <a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a> : <span class="keyword">public</span> QComboBox
 <a name="l00046"></a>00046 {
-<a name="l00047"></a>00047   Q_OBJECT
+<a name="l00047"></a>00047     Q_OBJECT
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="keyword">public</span>:
-<a name="l00050"></a>00050   <a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>(QWidget *parent = 0);
-<a name="l00051"></a>00051   <span class="keyword">virtual</span> ~<a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>();
-<a name="l00052"></a>00052   
-<a name="l00054"></a>00054   QAbstractItemModel* checkableModel()<span class="keyword">const</span>;
-<a name="l00055"></a>00055   <span class="keywordtype">void</span> setCheckableModel(QAbstractItemModel *model);
-<a name="l00056"></a>00056   
-<a name="l00058"></a>00058   QModelIndexList checkedIndexes()<span class="keyword">const</span>;
-<a name="l00060"></a>00060   <span class="keywordtype">bool</span> allChecked()<span class="keyword">const</span>;
-<a name="l00062"></a>00062   <span class="keywordtype">bool</span> noneChecked()<span class="keyword">const</span>;
-<a name="l00063"></a>00063 
-<a name="l00065"></a>00065   <span class="keywordtype">void</span> setCheckState(<span class="keyword">const</span> QModelIndex&amp; index, Qt::CheckState check);
-<a name="l00067"></a>00067   Qt::CheckState checkState(<span class="keyword">const</span> QModelIndex&amp; index)<span class="keyword">const</span>;
-<a name="l00068"></a>00068 
-<a name="l00071"></a>00071   <a class="code" href="class_checkable_model_helper.html">CheckableModelHelper</a>* checkableModelHelper()<span class="keyword">const</span>;
-<a name="l00072"></a>00072   
-<a name="l00074"></a>00074   <span class="keywordtype">bool</span> eventFilter(QObject *o, QEvent *e);
-<a name="l00075"></a>00075   
-<a name="l00076"></a>00076 Q_SIGNALS:
-<a name="l00077"></a>00077   <span class="keywordtype">void</span> checkedIndexesChanged();
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079 <span class="keyword">protected</span> Q_SLOTS:
-<a name="l00080"></a>00080   <span class="keywordtype">void</span> onDataChanged(<span class="keyword">const</span> QModelIndex&amp; topLeft, <span class="keyword">const</span> QModelIndex&amp; bottomRight);
-<a name="l00081"></a>00081 
-<a name="l00082"></a>00082 <span class="keyword">protected</span>:
-<a name="l00084"></a>00084   <span class="keyword">virtual</span> <span class="keywordtype">void</span> paintEvent(QPaintEvent*);
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086 <span class="keyword">protected</span>:
-<a name="l00087"></a>00087   QScopedPointer&lt;CheckableComboBoxPrivate&gt; d_ptr;
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 <span class="keyword">private</span>:
-<a name="l00090"></a>00090   Q_DECLARE_PRIVATE(<a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>);
-<a name="l00091"></a>00091   Q_DISABLE_COPY(<a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>);
-<a name="l00092"></a>00092 };
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094 <span class="preprocessor">#endif</span>
+<a name="l00049"></a>00049     Q_PROPERTY(QVector&lt;int&gt; checkedIndices READ getCheckedIndices WRITE setCheckedIndices);
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="keyword">public</span>:
+<a name="l00052"></a>00052   <a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>(QWidget *parent = 0);
+<a name="l00053"></a>00053   <span class="keyword">virtual</span> ~<a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>();
+<a name="l00054"></a>00054   
+<a name="l00056"></a>00056   QAbstractItemModel* checkableModel()<span class="keyword">const</span>;
+<a name="l00057"></a>00057   <span class="keywordtype">void</span> setCheckableModel(QAbstractItemModel *model);
+<a name="l00058"></a>00058   
+<a name="l00060"></a>00060   QModelIndexList checkedIndexes()<span class="keyword">const</span>;
+<a name="l00062"></a>00062   <span class="keywordtype">bool</span> allChecked()<span class="keyword">const</span>;
+<a name="l00064"></a>00064   <span class="keywordtype">bool</span> noneChecked()<span class="keyword">const</span>;
+<a name="l00065"></a>00065 
+<a name="l00067"></a>00067   <span class="keywordtype">void</span> setCheckState(<span class="keyword">const</span> QModelIndex&amp; index, Qt::CheckState check);
+<a name="l00069"></a>00069   Qt::CheckState checkState(<span class="keyword">const</span> QModelIndex&amp; index)<span class="keyword">const</span>;
+<a name="l00070"></a>00070 
+<a name="l00073"></a>00073   <a class="code" href="class_checkable_model_helper.html">CheckableModelHelper</a>* checkableModelHelper()<span class="keyword">const</span>;
+<a name="l00074"></a>00074   
+<a name="l00076"></a>00076   <span class="keywordtype">bool</span> eventFilter(QObject *o, QEvent *e);
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078   <span class="keywordtype">void</span> setCheckedIndices(<span class="keyword">const</span> QVector&lt;int&gt; &amp;indices);
+<a name="l00079"></a>00079   QVector&lt;int&gt; getCheckedIndices() <span class="keyword">const</span>;
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081   
+<a name="l00082"></a>00082 Q_SIGNALS:
+<a name="l00083"></a>00083   <span class="keywordtype">void</span> checkedIndexesChanged();
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="keyword">protected</span> Q_SLOTS:
+<a name="l00086"></a>00086   <span class="keywordtype">void</span> onDataChanged(<span class="keyword">const</span> QModelIndex&amp; topLeft, <span class="keyword">const</span> QModelIndex&amp; bottomRight);
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088 <span class="keyword">protected</span>:
+<a name="l00090"></a>00090   <span class="keyword">virtual</span> <span class="keywordtype">void</span> paintEvent(QPaintEvent*);
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092 <span class="keyword">protected</span>:
+<a name="l00093"></a>00093   QScopedPointer&lt;CheckableComboBoxPrivate&gt; d_ptr;
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095 <span class="keyword">private</span>:
+<a name="l00096"></a>00096   Q_DECLARE_PRIVATE(<a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>);
+<a name="l00097"></a>00097   Q_DISABLE_COPY(<a class="code" href="class_checkable_combo_box.html">CheckableComboBox</a>);
+<a name="l00098"></a>00098 };
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><b>checkableComboBox.h</b>      </li>
-      <li class="footer">Generated on Fri Mar 4 2016 14:30:57 for itom by&#160;
+      <li class="footer">Generated on Thu Aug 4 2016 08:22:19 for itom by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>
