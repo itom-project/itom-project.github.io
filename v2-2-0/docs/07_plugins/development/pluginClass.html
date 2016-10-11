@@ -1,0 +1,1019 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7.7.10. Plugin class - Basic information &mdash; itom Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="itom Documentation" href="../../index.html"/>
+        <link rel="up" title="7.7. Development under C++" href="plugin-development.html"/>
+        <link rel="next" title="7.7.9. AddInBase" href="plugin-AddInBase-Ref.html"/>
+        <link rel="prev" title="7.7.8. Plugin interface class" href="pluginInterfaceClass.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">7.2. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">7.3. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">7.4. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">7.5. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">7.6. Getting started with algorithm plugins a.k.a. filters</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">7.7. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">7.7.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">7.7.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">7.7.3. DataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">7.7.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">7.7.5. Parameters - Meta Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">7.7.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">7.7.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">7.7.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">7.7.9. AddInBase</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">7.7.10. Plugin class - Basic information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#common-components-for-actuator-and-dataio-plugins">7.7.10.1. Common components for actuator and dataIO plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plugin-framework">7.7.10.2. Plugin-Framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extend-your-plugin-by-registering-further-functions">7.7.10.3. Extend your plugin by registering further functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#possible-parameter-names-for-parameter-map-m-params">7.7.10.4. Possible parameter names for parameter-map <strong>m_params</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">7.7.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-actuator.html">7.7.12. Plugin class - Actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">7.7.13. Plugin class - Algo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">7.7.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">7.7.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">7.7.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">7.7.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">7.7.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">7.7.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">7.7.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">7.8. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+</ul>
+<ul class="simple">
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">itom Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../plugins.html">7. Plugins</a> &raquo;</li>
+      
+          <li><a href="plugin-development.html">7.7. Development under C++</a> &raquo;</li>
+      
+    <li>7.7.10. Plugin class - Basic information</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/07_plugins/development/pluginClass.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="plugin-class-basic-information">
+<span id="plugin-class"></span><h1>7.7.10. Plugin class - Basic information<a class="headerlink" href="#plugin-class-basic-information" title="Permalink to this headline">¶</a></h1>
+<p>All plugins, especially hardware-related ones (derived from <strong>AddInActuator</strong>, <strong>AddInDataIO</strong>, ...), have some similar or identical base components. These are described in this chapter. Therefore
+it is recommended to read this chapter before continuing with the specific documentation about the type of plugin you want to create. The information given in this chapter is mainly important
+for plugins finally derived from classes <strong>AddInActuator</strong> (actuator-plugins) or <strong>AddInDataIO</strong> (displays, cameras, AD-converter, ...). Algorithm or filter-plugins behave a little bit different, however
+it remains worth to read this document first.</p>
+<div class="section" id="common-components-for-actuator-and-dataio-plugins">
+<h2>7.7.10.1. Common components for actuator and dataIO plugins<a class="headerlink" href="#common-components-for-actuator-and-dataio-plugins" title="Permalink to this headline">¶</a></h2>
+<p>The following components and structures are equal for all plugins of type <em>actuator</em> or <em>dataIO</em> (including grabbers):</p>
+<ol class="arabic simple">
+<li>Every plugin has an internal set of parameters, that can can be read or changed by the method <strong>getParam</strong> and <strong>setParam</strong> (class <strong>AddInBase</strong>).</li>
+<li>These parameters are saved in the map <strong>m_params</strong>, member of class <strong>AddInBase</strong>.</li>
+<li>Each parameter is an instance of class <strong>ito::Param</strong>.</li>
+<li>The plugin itself is responsible if the new input to any parameter is valid or if the parameter is readonly as has to reject wrong input. For this purpose the parameters&#8217; meta information or flags can be used.</li>
+<li>Every plugin executes its methods mainly in an own thread.</li>
+<li>The communcation between the plugin and its GUI-components (Config-Dialog, Dock-Widget in main window) must therefore be done using a signal-slot-connection or a simple invoke, that allows to call methods in another thread.</li>
+<li>The plugin&#8217;s <strong>init</strong> method is called with the mandatory and optional parameters, those default is set the in the plugin&#8217;s interface and which are updated by the user input.</li>
+</ol>
+<p>The basic scheme of the live-cycle of any plugin is depicted in the following figure:</p>
+<div class="figure align-center" id="plugin-plugincall-scheme1">
+<a class="reference internal image-reference" href="../../_images/pluginBase1_824.png"><img alt="../../_images/pluginBase1_824.png" src="../../_images/pluginBase1_824.png" style="width: 824.0px; height: 816.0px;" /></a>
+</div>
+<p>At startup of <strong>itom</strong>, one single instance (singleton) of each plugin interface class is created and managed by the <strong>AddInManager</strong>. Later, an instance of the real plugin can be requested, for instance in a python-script or by
+a C-function call. The arguments to this request are two vectors of mandatory and optional parameters (instances of class <strong>ParamBase</strong>), that are passed to the initialization of the plugin. The default state of these vectors is
+obtained by the corresponding interface class (vectors <strong>m_initParamsMand</strong> and <strong>m_initParamsOpt</strong>). These default values have or can be replaced by the values, e.g. indicated in the python script (this is automatically done by <strong>itom</strong>).</p>
+<p>Then <strong>AddInManager</strong> calls <strong>getAddInInst()</strong> of the plugin interface, that is creating a new instance of the plugin by calling its constructor. Please consider, that the mandatory and optional parameters are not passed to the
+constructor yet. Then, the pointer to the plugin is passed back to the <strong>AddInManager</strong>, that now moves the plugin to a newly created thread. From that point on, methods of the plugin should only be called using a
+thread-communcation technique, provided by <strong>Qt</strong>, e.g. using the method <strong>invokeMethod</strong> or the signal-slot-system of <strong>Qt</strong>. Then the method <strong>init</strong> of the plugin is &#8220;invoked&#8221; by the <strong>AddInManager</strong> and the mandatory and
+optional initialization parameters are passed as arguments.</p>
+<p>Next, the plugin can be used. Whenever a method of the plugin is called, either by python or any C-method, this call has to be executed again by an &#8220;over-thread&#8221; communcation technique (<strong>invokeMethod</strong> or signal-slot).
+The last argument of such a call always is a locked instance of <strong>ItomSharedSemaphore</strong>. The caller then waits until the semaphore will be released in the plugin&#8217;s method or a timeout occurred. Please make sure, that
+you release the semaphore in your plugin&#8217;s method only at the point, when you don&#8217;t need any parameters given by the caller any more. Usually it is released at the bottom of your method. Only in special cases (like
+method <strong>waitForDone</strong> (for actuators) it makes sense to release it earlier. For more information about the semaphore see <a class="reference internal" href="plugin-sharedSemaphore.html#plugin-sharedsemaphore"><span class="std std-ref">ItomSharedSemaphore</span></a>.</p>
+<p>Finally, if the plugin should be closed, the inverse function calls with respect to the initialization are executed. That means, the <strong>AddInManager</strong> is at first invoking the method <strong>call</strong> of the plugin (still in its own thread). Then the plugin is moved back to the main thread and then <strong>AddInManager</strong> forces the deletion of the plugin by the method <strong>closeThisInst</strong> of the corresponding interface class.</p>
+<div class="admonition note" id="plugin-class-callinitthread">
+<p class="first admonition-title">Note</p>
+<p class="last">In some cases, it is not possible to initialize the hardware (some cameras) in another thread than the main thread. Since this initialization should be done in the <strong>init</strong> method of the plugin, <strong>itom</strong> provides a
+possibility to call <strong>init</strong> before moving the plugin to the new thread. Hence, those both steps in <a class="reference internal" href="#plugin-plugincall-scheme1"><span class="std std-ref">this scheme</span></a> are switched. This can be done by setting the member <strong>m_callInitInNewThread</strong>
+of the plugin interface class from its default value <strong>true</strong> to <strong>false</strong>. However, only use this possibility if there is no other chance, since the GUI is completely blocked during an initialization executed in the
+main thread (see also <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><span class="std std-ref">Plugin interface class</span></a>).</p>
+</div>
+</div>
+<div class="section" id="plugin-framework">
+<h2>7.7.10.2. Plugin-Framework<a class="headerlink" href="#plugin-framework" title="Permalink to this headline">¶</a></h2>
+<p>The bare framework of any plugin-class of type <strong>DataIO</strong>, <strong>Actuator</strong>, ... (but not <strong>Algo</strong>), looks like this:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;common/addInInterface.h&quot;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">MyPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInActuator</span> <span class="n">OR</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInDataIO</span> <span class="n">OR</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInGrabber</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyPluginInterface</span><span class="p">;</span>
+
+    <span class="k">protected</span><span class="o">:</span>
+        <span class="o">~</span><span class="n">MyPlugin</span><span class="p">(){};</span>
+        <span class="n">MyPlugin</span><span class="p">();</span>
+
+    <span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">execFunc</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="n">funcName</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paramsMand</span><span class="p">,</span> <span class="p">...</span>
+            <span class="p">...</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paramsOpt</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paramsOut</span><span class="p">,</span> <span class="p">...</span>
+            <span class="p">...</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="k">private</span> <span class="nl">slots</span><span class="p">:</span>
+        <span class="kt">void</span> <span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span><span class="kt">bool</span> <span class="n">visible</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>In the corresponding source file you need to write two defines before including the header file above:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#define ITOM_IMPORT_API</span>
+<span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;myPluginHeaderFromAbove.h&quot;</span><span class="cp"></span>
+
+<span class="c1">//implement your code here</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this chapter, hints about implementing the methods in the definitions above are given. In the detailed chapters about every type of plugin, these class definitions will then be extended by the type-specific methods.</p>
+<p>At first, your plugin class must be derived from class <strong>ito::AddInActuator</strong> if you want to create an actuator plugin, from class <strong>ito::AddInGrabber</strong> if you want to create a camera or grabber plugin and finally
+class <strong>ito::AddInDataIO</strong> for other hardware-related plugins. All those classes are derived from <strong>AddInBase</strong>. Next, the plugin&#8217;s class must have the macro <strong>Q_OBJECT</strong> defined, such that the plugin is able to participate at the signal-slot-system of <strong>Qt</strong>. That is necessary for a multi-thread-communcation with the plugin.</p>
+<p>The constructor and destructor of the plugin are defined in the <strong>protected</strong> section. Only the interface class is able to call these methods, since the interface class is declared as friend of the plugin in line 6.</p>
+<p>Then, there are five methods in the <strong>public slots</strong> section, which should be overwritten from their base definition in the class <strong>AddInBase</strong>. The methods <strong>init</strong> and <strong>close</strong> are important for the startup and shutdown
+of an instance of the plugin. <strong>getParam</strong> and <strong>setParam</strong> provide read and/or write access to parameters of the plugin, that are usually stored in the member-map <strong>m_params</strong> (however you can also use <strong>getParam</strong> and <strong>setParam</strong> to read and write other parameters. In some special cases, it is necessary to add further, arbitrary functions to the plugin, for instance in order to start an extra calibration process. These calls are
+executed by the general method <strong>execFunc</strong>, those first argument is the name of the function. You only have to implement this function, if you need this feature. Until now, this has only been necessary for a low amount of
+plugins.</p>
+<p>Before the details about the implementation for these methods are explained, let us also take a look at the definition of the class <strong>AddInBase</strong> itself. Only few public or protected member functions of this class must be
+overwritten by the plugin (those, that have been described above). However, there are still a lot of further member methods which can be overwritten or useful for the functionality of your plugin. The description of the accessible
+member functions and attributes (public, protected, signals, public slots) is described in <a class="reference internal" href="plugin-AddInBase-Ref.html#plugin-addinbase-ref"><span class="std std-ref">AddInBase</span></a>.</p>
+<p>Now, let us give some hints about the implementation of the methods, that have to be overwritten:</p>
+<div class="section" id="constructor">
+<h3>7.7.10.2.1. Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h3>
+<p>The constructor is a protected member method and should usually only be called by the corresponding interface class. A exemplary implementation is:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">MyPlugin</span><span class="o">::</span><span class="n">MyPlugin</span><span class="p">(...</span> <span class="n">further</span> <span class="n">parameters</span> <span class="p">...)</span> <span class="o">:</span>
+    <span class="n">AddInActuator</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">//create internal parameter map</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">Param</span> <span class="n">paramVal</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">String</span> <span class="o">|</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">Readonly</span><span class="p">,</span> <span class="s">&quot;MyPluginName&quot;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">m_params</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">paramVal</span><span class="p">.</span><span class="n">getName</span><span class="p">(),</span> <span class="n">paramVal</span><span class="p">);</span>
+    <span class="c1">//... add further parameters to map</span>
+
+    <span class="c1">//now create dock widget for this plugin (if available)</span>
+    <span class="n">MyPluginDockWidget</span> <span class="o">*</span><span class="n">myDockWidget</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyPluginDockWidget</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="c1">//here: connect signals from the dock widget to the plugin</span>
+    <span class="c1">// connections that inform the dock widget about changes in parameters, status... should be created</span>
+    <span class="c1">// and destroyed in the method &#39;dockWidgetVisibilityChanged&#39;.</span>
+
+    <span class="c1">//if you can and want, you can assign the unique identification string for this plugin here:</span>
+    <span class="c1">//m_identifier = QString(&quot;my unique plugin nr: %1&quot;).arg(yourSerialNumber)</span>
+    <span class="c1">//you can also set this in the init-method.</span>
+
+    <span class="n">Qt</span><span class="o">::</span><span class="n">DockWidgetAreas</span> <span class="n">areas</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">LeftDockWidgetArea</span> <span class="o">|</span> <span class="n">Qt</span><span class="o">::</span><span class="n">RightDockWidgetArea</span><span class="p">;</span>
+    <span class="n">QDockWidget</span><span class="o">::</span><span class="n">DockWidgetFeatures</span> <span class="n">features</span> <span class="o">=</span> <span class="n">QDockWidget</span><span class="o">::</span><span class="n">DockWidgetClosable</span> <span class="o">|</span> <span class="n">QDockWidget</span><span class="o">::</span><span class="n">DockWidgetFloatable</span> <span class="o">|</span> <span class="n">QDockWidget</span><span class="o">::</span><span class="n">DockWidgetMovable</span><span class="p">;</span>
+    <span class="n">createDockWidget</span><span class="p">(</span><span class="s">&quot;MyDockWidgetName&quot;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">areas</span><span class="p">,</span> <span class="n">myDockWidget</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>For the constructor consider the following remarks:</p>
+<ol class="arabic simple">
+<li>The constructor is executed in the main thread and therefore is able to create widgets like the dock widget.</li>
+<li>The constructor can have an arbitrary amount and type of parameters; the method <strong>getAddInInst</strong> of the interface class must be adapted to them.</li>
+<li>Call the constructor of the base class (e.g. <strong>AddInActuator</strong>, <strong>AddInDataIO</strong>, <strong>AddInGrabber</strong>) in your constructor.</li>
+<li>The constructor does not get the mandatory and optional parameters given by to user for initializing the plugin.</li>
+<li>Create all internal parameters that are part of the parameter-map <strong>m_params</strong> and provide some default values.</li>
+<li>If your plugin should provide a dock widget (that can be shown as dockable toolbox in the main window of <strong>itom</strong>), follow the snippet from the example above.</li>
+<li>If your dock widget should be visible at initialization of the plugin or should be undocked as default state, overwrite and change the method <strong>dockWidgetDefaultStyle</strong> of class <strong>AddInBase</strong>.</li>
+<li>See the specific documentation of each plugin to see which internal parameters must be available and which conventions exist for some specific parameters, that can be created.</li>
+<li>If you want, set the unique identification string <strong>m_identifier</strong> in this constructor. You can also set it later in the <strong>init</strong>-method. If you don&#8217;t set it, the auto-assigned unique ID is used for identifying your instance.</li>
+</ol>
+</div>
+<div class="section" id="destructor">
+<h3>7.7.10.2.2. Destructor<a class="headerlink" href="#destructor" title="Permalink to this headline">¶</a></h3>
+<p>Use the destructor (executed in main thread) for some final deletion work. Usually an empty body of the destructor is sufficient.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">MyPlugin</span><span class="o">::~</span><span class="n">MyPlugin</span><span class="p">()</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="init">
+<h3>7.7.10.2.3. Init<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h3>
+<p>The method <strong>init</strong> has the following bare framework:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ItomSharedSemaphoreLocker</span> <span class="n">locker</span><span class="p">(</span><span class="n">waitCond</span><span class="p">);</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">;</span>
+
+    <span class="c1">//use the content of paramsMand and paramsOpt (order and type</span>
+    <span class="c1">// with respect to m_initParamsMand and m_initParamsOpt of</span>
+    <span class="c1">// interface class) in order to initialize the hardware and</span>
+    <span class="c1">// change values of the m_params-map if necessary.</span>
+
+    <span class="c1">//if you want you can set the unique identification string here:</span>
+    <span class="c1">//m_identifier = QString(&quot;IAmAUniqueStringDescribingThisPlugin&quot;)</span>
+
+    <span class="c1">// emit signal about changed parameters</span>
+    <span class="n">emit</span> <span class="nf">parametersChanged</span><span class="p">(</span><span class="n">m_params</span><span class="p">);</span>
+
+    <span class="c1">//release the wait condition and set its returnValue before</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">waitCond</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">returnValue</span> <span class="o">=</span> <span class="n">retValue</span><span class="p">;</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">setInitialized</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span> <span class="c1">//plugin is initialized</span>
+    <span class="k">return</span> <span class="n">retValue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Consider the following hints for the implementation of the <strong>init</strong>-method:</p>
+<ol class="arabic simple">
+<li>Usually it is executed in a new thread (see <a class="reference internal" href="#plugin-class-callinitthread"><span class="std std-ref">here</span></a>)</li>
+<li>The parameters are the filled mandatory and optional parameter vectors, those default implementation has been given in the constructor of the interface class.</li>
+<li>You can be sure, that both the order and type of those plugins remains invariant.</li>
+<li>Initialize the plugin with respect to these parameters.</li>
+<li>If necessary change the value of the internal parameters <strong>m_params</strong>.</li>
+<li>If so, emit the signal <strong>parametersChanged(m_params)</strong>.</li>
+<li>At the end of the method release the wait condition.</li>
+<li>Afterwards call <strong>setInitialized(true)</strong> in order to confirm the initialization of the plugin.</li>
+<li>See the specific documentation of each plugin to see, what else has to be done in the method <strong>init</strong>.</li>
+</ol>
+</div>
+<div class="section" id="close">
+<h3>7.7.10.2.4. Close<a class="headerlink" href="#close" title="Permalink to this headline">¶</a></h3>
+<p>The method <strong>close</strong> is always executed as last method in the plugin thread. Disconnect your hardware in this method. A simple exemplary implementation is:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ItomSharedSemaphoreLocker</span> <span class="n">locker</span><span class="p">(</span><span class="n">waitCond</span><span class="p">);</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">;</span>
+
+    <span class="c1">//your code comes here</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">waitCond</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">returnValue</span> <span class="o">=</span> <span class="n">retValue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">retValue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="getparam">
+<h3>7.7.10.2.5. getParam<a class="headerlink" href="#getparam" title="Permalink to this headline">¶</a></h3>
+<p>This method is the getter-method for reading the current value of internal parameters, that usually are an item of the map <strong>m_params</strong>. In this
+method (like in others, too) methods provided by the <strong>itom</strong> API are used. Therefore, you need to include the API header in your source file, e.g. by</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;common/apiFunctionsInc.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>The prototype for the method <em>getParam</em> then looks like this:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ItomSharedSemaphoreLocker</span> <span class="n">locker</span><span class="p">(</span><span class="n">waitCond</span><span class="p">);</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">key</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">hasIndex</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">suffix</span><span class="p">;</span>
+    <span class="n">ParamMapIterator</span> <span class="n">it</span><span class="p">;</span>
+
+    <span class="c1">//parse the given parameter-name (if you support indexed or suffix-based parameters)</span>
+    <span class="n">retValue</span> <span class="o">+=</span> <span class="n">apiParseParamName</span><span class="p">(</span><span class="n">val</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(),</span> <span class="n">key</span><span class="p">,</span> <span class="n">hasIndex</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">suffix</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">retValue</span> <span class="o">==</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//gets the parameter key from m_params map (read-only is allowed, since we only want to get the value).</span>
+        <span class="n">retValue</span> <span class="o">+=</span> <span class="n">apiGetParamFromMapByKey</span><span class="p">(</span><span class="n">m_params</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">retValue</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="c1">//put your switch-case.. for getting the right value here</span>
+
+        <span class="c1">//finally, save the desired value in the argument val (this is a shared pointer!)</span>
+        <span class="c1">//if the requested parameter name has an index, e.g. roi[0], then the sub-value of the</span>
+        <span class="c1">//array is split and returned using the api-function apiGetParam</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">hasIndex</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="n">apiGetParam</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">,</span> <span class="n">hasIndex</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">retValue</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">waitCond</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">returnValue</span> <span class="o">=</span> <span class="n">retValue</span><span class="p">;</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">retValue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <strong>getParam</strong> is either called directly, by changing the thread or by the <strong>Python</strong> script execution, if the appropriate method
+<strong>getParam</strong> in <strong>Python</strong> is called. For guaranteeing a thread-safe implementation, the first argument is a shared pointer to a
+value of class <strong>ito::Param</strong>. In case of success, the requested value must be saved into this given parameter. The second argument
+is a string containing the parameter name.</p>
+<p>It is possible to pass a single parameter name or to follow a given string-syntax in order to
+also give a certain array index as well as an additional suffix string. Rules for this syntax are given in the section <a class="reference internal" href="#plugin-class-paramname"><span class="std std-ref">Possible parameter names for parameter-map m_params</span></a>.
+In order to split the given raw name into its possible components <strong>name</strong>, <strong>index</strong> and <strong>suffix</strong>, the method <strong>parseParamName</strong> defined in <strong>helperCommon.h</strong>
+can be used. In the exemplary implementation above, the parameter-name is finally searched in the map <strong>m_params</strong> and if found, the value of this parameter
+is copied to the given argument <strong>val</strong>. However, this implementation is the most basic one and you can also implement further lines of code.</p>
+<p>Since this method can also be called from another thread, an instance of <strong>ItomSharedSemaphore</strong> is passed, that finally needs to be released. The destruction of the
+pointer <strong>waitCond</strong> is done by the locker-instance <strong>locker</strong>.</p>
+</div>
+<div class="section" id="setparam">
+<h3>7.7.10.2.6. setParam<a class="headerlink" href="#setparam" title="Permalink to this headline">¶</a></h3>
+<p>The method <strong>getParam</strong> is the analog method to <strong>setParam</strong>. However, in <strong>setParam</strong> you will not only passed a parametername but also the new value for this parameter.
+Then you need to implement the following checks:</p>
+<ul class="simple">
+<li>Check whether your internal parameter is <strong>read-only</strong> and if so, reject the set-command.</li>
+<li>Verify the compatibility of the parameter-type of the new and internal parameter.</li>
+<li>Consider further restrictions given by a possible meta information that is appended to the internal parameter and check if the new value fits to these restrictions.</li>
+<li>If any internal parameter changed, emit the signal <strong>parametersChanged</strong> with <strong>m_params</strong> as argument. This signal is globally defined in the base class <strong>AddInBase</strong> and is for instance connected with GUI-elements like the possible dock-widget (toolbox) of this plugin.</li>
+</ul>
+<p>Finally, an exemplary (simplified) version for the method <strong>setParam</strong> is:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ItomSharedSemaphoreLocker</span> <span class="n">locker</span><span class="p">(</span><span class="n">waitCond</span><span class="p">);</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">);</span>
+    <span class="n">QString</span> <span class="n">key</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">hasIndex</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="n">suffix</span><span class="p">;</span>
+    <span class="n">ParamMapIterator</span> <span class="n">it</span><span class="p">;</span>
+
+    <span class="c1">//parse the given parameter-name (if you support indexed or suffix-based parameters)</span>
+    <span class="n">retValue</span> <span class="o">+=</span> <span class="n">apiParseParamName</span><span class="p">(</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">getName</span><span class="p">(),</span> <span class="n">key</span><span class="p">,</span> <span class="n">hasIndex</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">suffix</span> <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">isMotorMoving</span><span class="p">())</span> <span class="c1">//this if-case is for actuators only.</span>
+    <span class="p">{</span>
+        <span class="n">retValue</span> <span class="o">+=</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retError</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">&quot;any axis is moving. Parameters cannot be set&quot;</span><span class="p">).</span><span class="n">toLatin1</span><span class="p">().</span><span class="n">data</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">retValue</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="c1">//gets the parameter key from m_params map (read-only is not allowed and leads to ito::retError).</span>
+        <span class="n">retValue</span> <span class="o">+=</span> <span class="n">apiGetParamFromMapByKey</span><span class="p">(</span><span class="n">m_params</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">retValue</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="c1">//OPTION 1:</span>
+        <span class="c1">//here the new parameter is checked whether its type corresponds or can be cast into the</span>
+        <span class="c1">// value in m_params and whether the new type fits to the requirements of any possible</span>
+        <span class="c1">// meta structure.</span>
+        <span class="n">retValue</span> <span class="o">+=</span> <span class="n">apiValidateParam</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">,</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+        <span class="c1">//OPTION 2 (recommended):</span>
+        <span class="c1">//if you program for itom 1.4.0 or higher (Interface version &gt;= 1.3.1) you should use this</span>
+        <span class="c1">//API method instead of the one above: The difference is, that incoming parameters that are</span>
+        <span class="c1">//compatible but do not have the same type than the corresponding m_params value are cast</span>
+        <span class="c1">//to the type of the internal parameter and incoming double values are rounded to the</span>
+        <span class="c1">//next value (depending on a possible step size, if different than 0.0)</span>
+        <span class="n">retValue</span> <span class="o">+=</span> <span class="n">apiValidateAndCastParam</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">,</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">retValue</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s">&quot;async&quot;</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">//check the new value and if ok, assign it to the internal parameter</span>
+            <span class="n">retValue</span> <span class="o">+=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">copyValueFrom</span><span class="p">(</span> <span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">val</span><span class="p">)</span> <span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s">&quot;demoKey&quot;</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">//check the new value and if ok, assign it to the internal parameter</span>
+            <span class="n">retValue</span> <span class="o">+=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">copyValueFrom</span><span class="p">(</span> <span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">val</span><span class="p">)</span> <span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="c1">//all parameters that don&#39;t need further checks can simply be assigned</span>
+            <span class="c1">//to the value in m_params (the rest is already checked above)</span>
+            <span class="n">retValue</span> <span class="o">+=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">copyValueFrom</span><span class="p">(</span> <span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">val</span><span class="p">)</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">retValue</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">emit</span> <span class="n">parametersChanged</span><span class="p">(</span><span class="n">m_params</span><span class="p">);</span> <span class="c1">//send changed parameters to any connected dialogs or dock-widgets</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">waitCond</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">returnValue</span> <span class="o">=</span> <span class="n">retValue</span><span class="p">;</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">retValue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this base implementation, the parametername is firstly searched in the <strong>m_params</strong>-map. If found, the internal parameter is checked for the
+<strong>read-onlyness</strong>. Next, the method distinguishes between numeric and non-numeric parameters, since the numeric-ones can possibly be casted from one
+numeric type to another one. If these pre-requisites are met, you should then check the new value for certain restrictions and if this is met, too,
+the internal parameter can be filled with the content of the given, new value. Else, appropriate error messages should be returned and the semaphore <strong>waitCond</strong>
+must finally be released.</p>
+<p>If you want to set multiple parameters in an uninterrupted sequence, you can also call or invoke the method <strong>setParamVector</strong> defined in <strong>AddInBase</strong>. You don&#8217;t have to
+implement this method, since this is already done. For more infos about this method, see the definition of <strong>AddInBase</strong> (<a class="reference internal" href="plugin-AddInBase-Ref.html#plugin-addinbase-ref"><span class="std std-ref">AddInBase</span></a>).</p>
+</div>
+</div>
+<div class="section" id="extend-your-plugin-by-registering-further-functions">
+<h2>7.7.10.3. Extend your plugin by registering further functions<a class="headerlink" href="#extend-your-plugin-by-registering-further-functions" title="Permalink to this headline">¶</a></h2>
+<p>As already mentioned above, you can extend the set of methods of each plugin, defined by their base classes, by registering further functions. This is for instance
+useful, if you want to provide methods for starting a gamma correction, starting a specific calibration, ...</p>
+<p>Each such method has the same arguments than the <strong>init</strong>-method of the plugin:</p>
+<ul class="simple">
+<li>A vector of mandatory parameters (class <strong>ParamBase</strong>)</li>
+<li>A vector of optional parameters (class <strong>ParamBase</strong>)</li>
+<li>A Vector of out-only parameters (class <strong>ParamBase</strong>)</li>
+</ul>
+<p>In the constructor of your plugin, you need to register each of those methods by also predefining the default set of all parameter-vectors (mandatory, optional, out).
+Only, if this step has been done, the corresponding method can be called, for instance by using the method <strong>exec</strong> in the <strong>Python</strong> scripting language. The call to this method finally
+leads to a call of the method <strong>execFunc</strong>, defined in the class <strong>AddInBase</strong>, which has to be overwritten in your plugin, if you want to provide at least one additional method.</p>
+<p>The first parameter of <strong>execFunc</strong> is the name of the additional method. Therefore you need to check for this name and then execute the corresponding algorithm.</p>
+<p>An exemplary implementation of the method <strong>execFunc</strong> is</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">MyPlugin</span><span class="o">::</span><span class="n">execFunc</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="n">funcName</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paramsMand</span><span class="p">,</span> <span class="p">...</span>
+    <span class="p">...</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paramsOpt</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paramsOut</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">;</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span> <span class="o">*</span><span class="n">param1</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span> <span class="o">*</span><span class="n">param2</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">funcName</span> <span class="o">==</span> <span class="s">&quot;saveXMLParams&quot;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">param1</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">getParamByName</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">paramsMand</span><span class="p">),</span> <span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">retValue</span><span class="p">);</span>
+        <span class="n">param2</span> <span class="o">=</span> <span class="n">ito</span><span class="o">::</span><span class="n">getParamByName</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="o">*</span><span class="n">paramsOpt</span><span class="p">),</span> <span class="s">&quot;overwriteIfExists&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">retValue</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">retValue</span><span class="p">.</span><span class="n">containsError</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">retValue</span> <span class="o">+=</span> <span class="n">XmlParameter</span><span class="o">::</span><span class="n">saveXmlParams</span><span class="p">(</span> <span class="n">param1</span><span class="o">-&gt;</span><span class="n">getVal</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(),</span> <span class="n">m_xmlParams</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">param2</span><span class="o">-&gt;</span><span class="n">getVal</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">retValue</span> <span class="o">+=</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retError</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">tr</span><span class="p">(</span><span class="s">&quot;function name &#39;%s&#39; does not exist&quot;</span><span class="p">).</span><span class="n">toLatin1</span><span class="p">().</span><span class="n">data</span><span class="p">(),</span> <span class="n">funcName</span><span class="p">.</span><span class="n">toLatin1</span><span class="p">().</span><span class="n">data</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">waitCond</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">returnValue</span> <span class="o">=</span> <span class="n">retValue</span><span class="p">;</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
+        <span class="n">waitCond</span><span class="o">-&gt;</span><span class="n">deleteSemaphore</span><span class="p">();</span>
+        <span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">retValue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this method, one additional function (name <strong>saveXMLParams</strong>) is integrated, which only is called with one mandatory and optional parameter and no further
+output parameter. The corresponding registration of this method is integrated in the constructor of your plugin:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">//register exec functions</span>
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">pMand</span><span class="p">;</span>
+<span class="n">pMand</span> <span class="o">&lt;&lt;</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">String</span> <span class="o">|</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">In</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">&quot;absolute filename to xml-parameter file&quot;</span><span class="p">).</span><span class="n">toLatin1</span><span class="p">().</span><span class="n">data</span><span class="p">());</span>
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">pOpt</span><span class="p">;</span>
+<span class="n">pOpt</span> <span class="o">&lt;&lt;</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="p">(</span><span class="s">&quot;overwriteIfExists&quot;</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">Int</span> <span class="o">|</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">In</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">&quot;parameter description&quot;</span><span class="p">).</span><span class="n">toLatin1</span><span class="p">().</span><span class="n">data</span><span class="p">());</span>
+<span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">pOut</span><span class="p">;</span>
+<span class="n">registerExecFunc</span><span class="p">(</span><span class="s">&quot;saveXMLParams&quot;</span><span class="p">,</span> <span class="n">pMand</span><span class="p">,</span> <span class="n">pOpt</span><span class="p">,</span> <span class="n">pOut</span><span class="p">,</span> <span class="n">tr</span><span class="p">(</span><span class="s">&quot;description&quot;</span><span class="p">));</span>
+</pre></div>
+</td></tr></table></div>
+<p>Please consider that only the following parameter types are allowed as output parameters. It is therefore not allowed to use dataObjects as output parameters.
+In this case, pass a dataObject as optional or mandatory parameter and mark their type with the flags <strong>ito::ParamBase::In</strong> combined with <strong>ito::ParamBase::Out</strong> (by-reference):</p>
+<ul class="simple">
+<li>String</li>
+<li>Char</li>
+<li>Integer</li>
+<li>Double</li>
+<li>Char-Array</li>
+<li>Integer-Array</li>
+<li>Double-Array</li>
+</ul>
+</div>
+<div class="section" id="possible-parameter-names-for-parameter-map-m-params">
+<span id="plugin-class-paramname"></span><h2>7.7.10.4. Possible parameter names for parameter-map <strong>m_params</strong><a class="headerlink" href="#possible-parameter-names-for-parameter-map-m-params" title="Permalink to this headline">¶</a></h2>
+<p>The parameters which you add to the <strong>m_params</strong> map, must have a name which fits to the following rules:</p>
+<ul class="simple">
+<li>The name starts with a lower or upper case character, hence a value between <em>a-z</em> or <em>A-Z</em></li>
+<li>The first character of the name can be followed by an infinite number of alpha-numerical characters (including characters like <em>_</em> or <em>-</em>).</li>
+</ul>
+<p>If the user tries to get or set a parameter e.g. using the python-commands <strong>setParam</strong> or <strong>getParam</strong>, the parameter name firstly is checked if it exists in the <strong>m_params</strong> vector before the corresponding getter or setter methods in the plugin are called. However not the full given parameter string has to match any available key-name in the <strong>m_params</strong> map, since there are further information which can be encoded in the parameter name:</p>
+<p>Sometimes it is useful to create a parameter as integer or double array, e.g. for the speed values of every single axis. In this case you will create a parameter with the name <strong>speed</strong> having a type <strong>typeDoubleArray</strong>. Then the user can either access the whole array using the real parameter name <strong>speed</strong>, or the user can access one single value of the array by appending the index within brackets at the parameter name. In this case, it is the programmers task to parse the given parameter string and separate the parameter&#8217;s real name (here: speed) and the index. Then the index has to be checked with respect to its lower and upper bound.</p>
+<p>As further possibility, it is also allowed to append further information to a parameter. This is done by appending a colon-character to the parameter name followed by any string, which is the additional information string.</p>
+<p>To sum this description up, let us assume that the parameter in <strong>m_params</strong> has the name <strong>PARAMNAME</strong>, which fits to the rules above. Then <strong>itom</strong> will accept parameter names, which correspond to the following rules:</p>
+<ul class="simple">
+<li>PARAMNAME</li>
+<li>PARAMNAME[INDEX]</li>
+<li>PARAMNAME[INDEX]:ADDITIONALTAG</li>
+<li>PARAMNAME:ADDITIONALTAG</li>
+</ul>
+<p><strong>INDEX</strong> has to be any fixed-pointer number, the <strong>ADDITIONALTAG</strong> can be any string.</p>
+<p>It is the programmer&#8217;s responsibility to split the given parameter name in the three components <strong>PARAMNAME</strong>, <strong>INDEX</strong> and <strong>ADDITIONALTAG</strong> if the corresponding parameter has the ability to handle indexed-values or even additional information (encoded in <strong>ADDITIONALTAG</strong>).</p>
+<p>In order to execute this split you can use the api-method</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">apiParseParamName</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">name</span><span class="p">,</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">paramName</span><span class="p">,</span> <span class="kt">bool</span> <span class="o">&amp;</span><span class="n">hasIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">,</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">additionalTag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>defined in <strong>apiFunctionsInc.h</strong>.</p>
+<p>As an alternative you can use the following regular expression:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">QString</span> <span class="n">regularExpression</span> <span class="o">=</span> <span class="s">&quot;^([a-zA-Z]+</span><span class="se">\\</span><span class="s">w*)(</span><span class="se">\\</span><span class="s">[(</span><span class="se">\\</span><span class="s">d+)</span><span class="se">\\</span><span class="s">]){0,1}(:(.*)){0,1}$&quot;</span><span class="p">;</span>
+<span class="n">QRegExp</span> <span class="nf">rx</span><span class="p">(</span><span class="n">regularExpression</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">rx</span><span class="p">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">yourString</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//yourString does not match the regular expression</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+    <span class="n">QStringList</span> <span class="n">components</span> <span class="o">=</span> <span class="n">rx</span><span class="p">.</span><span class="n">capturedTexts</span><span class="p">();</span>
+    <span class="c1">//components consists of the following sub-strings:</span>
+    <span class="cm">/*</span>
+<span class="cm">    [0] full string</span>
+<span class="cm">    [1] PARAMNAME</span>
+<span class="cm">    [2] [INDEX] or empty-string if no index is given</span>
+<span class="cm">    [3] INDEX or empty-string if no index is given</span>
+<span class="cm">    [4] :ADDITIONALTAG or empty-string if no tag is given</span>
+<span class="cm">    [5] ADDITIONALTAG or empty-string if no tag is given</span>
+<span class="cm">    */</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plugin-AddInBase-Ref.html" class="btn btn-neutral float-right" title="7.7.9. AddInBase" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pluginInterfaceClass.html" class="btn btn-neutral" title="7.7.8. Plugin interface class" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Oct 11, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'f520b48',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
