@@ -16,6 +16,17 @@ Overview
 
 .. pluginsummaryextended::
     :plugin: IDSuEye
+
+Initialization
+==============
+  
+The following parameters are mandatory or optional for initializing an instance of this plugin:
+    
+    .. plugininitparams::
+        :plugin: IDSuEye
+        
+Usually, the next free camera is opened by *camera_id* = 0. If you want to select a specific camera, make sure to set unique camera IDs in the IDS camera manager tool.
+Then set *camera_id* to the desired camera ID (range 1..254).
     
 Parameters
 ===========
@@ -77,13 +88,7 @@ An instance of this plugin has the following internal parameters:
 **y1**: {int}
     Index of bottom boundary pixel within ROI
 
-Initialization
-==============
-  
-The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
-    .. plugininitparams::
-        :plugin: IDSuEye
+
         
 Compilation
 ===========
@@ -110,5 +115,4 @@ Changelog
 
 * itom setup 2.0.0: This plugin has been compiled using the uEye SDK 4.61
 * itom setup 2.1.0: This plugin has been compiled using the uEye SDK 4.61
-* itom setup > 2.1.0: This plugin has been compiled using the uEye SDK 4.80
-
+* itom setup 2.2.0: This plugin has been compiled using the uEye SDK 4.80
