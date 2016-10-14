@@ -34,6 +34,7 @@ One main application of itom is the development and operation of sensor and meas
 News
 -----
 
+* 2016-10-14: Due to a bug in the update of the workspace and a known issue in the contained Python package pyparsing 2.1.6, we decided to release an updated setup version **2.2.1**. It is only a bugfix with respect to the setup version 2.2.0.
 * 2016-10-11: Today **itom 2.2.0** has been released. The Windows setups and the sources (tag v2.2.0) are ready for download. It comes with a lot of bugfixes, improvements and new plugins, like **FirgelliLac**, **Roughness**, **CyUSB**, **ThorlabsISM** and **ThorlabsBP**. For more information see the changelog at http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html.
 * 2016-08-04: The actuator plugins **FirgelliLAC**, **ThorlabsBP** and **ThorlabsISM** have been added to the plugin repository.
 * 2016-06-20: *itom* can now also be compiled on the Raspberry Pi. This has been tested for the version 2 and 3 of the Raspi. Check the documentation under http://itom.bitbucket.org/latest/docs/02_installation/build_raspi.html how to compile itom on your Raspberry.
