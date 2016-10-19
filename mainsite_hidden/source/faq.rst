@@ -22,7 +22,7 @@ General
         itom for all versions up to 2.2.1 will not be properly scaled on high-resolution displays. We are currently working on this issue to 
         improve the problem. In order to overcome this problem (Windows only), it is possible to tell Windows that an application is only
         prepared for 96dpi (default) screens such that Windows will internally handle the scaling for 4k displays.
-        Place the following manifest file (<documents/qitom.exe.manifest>`_ into the same folder of itom to start the application in the
+        Place the following manifest file (`qitom.exe.manifest <documents/qitom.exe.manifest>`_) into the same folder of itom to start the application in the
         compatibility mode. For more information see http://www.danantonielli.com/adobe-app-scaling-on-high-dpi-displays-fix/
 
 itom 2.1.0
