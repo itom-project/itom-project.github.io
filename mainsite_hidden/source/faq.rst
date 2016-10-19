@@ -17,6 +17,13 @@ General
         Usually this is automatically done within the Python installer, however it is possible to unselect this option. Re-logon to your Windows session
         in order to let Windows reload this environment variable. See http://www.computerhope.com/issues/ch000549.htm for
         information how to add a value to the PATH environment variable in Windows.
+    
+    Scaling problems on high-resolution displays (4k)
+        itom for all versions up to 2.2.1 will not be properly scaled on high-resolution displays. We are currently working on this issue to 
+        improve the problem. In order to overcome this problem (Windows only), it is possible to tell Windows that an application is only
+        prepared for 96dpi (default) screens such that Windows will internally handle the scaling for 4k displays.
+        Place the following manifest file (<documents/qitom.exe.manifest>`_ into the same folder of itom to start the application in the
+        compatibility mode. For more information see http://www.danantonielli.com/adobe-app-scaling-on-high-dpi-displays-fix/
 
 itom 2.1.0
 --------------
