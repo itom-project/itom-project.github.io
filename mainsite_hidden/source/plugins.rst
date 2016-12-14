@@ -71,6 +71,7 @@ Motors / Actuators
    plugins/actuators/uhlRegister.rst
    plugins/actuators/uhlText.rst
    plugins/actuators/usbMotion3XIII.rst
+   plugins/actuators/piezosystemJena_NV40_1.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~
