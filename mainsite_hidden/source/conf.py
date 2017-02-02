@@ -14,6 +14,12 @@
 
 import sys, os, itom
 
+#package sphinxcontrib-fulltoc from pypi.python.org required
+try:
+    import sphinxcontrib
+except ImportError:
+    raise RuntimeError("Please install the package sphinxcontrib-fulltoc before creating the website")
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.

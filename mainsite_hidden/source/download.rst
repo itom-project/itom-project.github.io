@@ -62,7 +62,7 @@ Older versions are only hosted at sourceforge.net:
 History of components of older versions
 -----------------------------------------
 
-**Version 2.2.0**
+**Version 2.2.0** / **Version 2.2.1**
 
 * compiled using Qt5.6.1-1
 * Python 3.5.1
