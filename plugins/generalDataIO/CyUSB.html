@@ -10,8 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -26,7 +24,6 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="NI-DAQmx" href="../ad-converters/NI-DAQmx.html" />
@@ -132,13 +129,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`CyUSB`</span></a></td>
+<td><span>itom-plugin for a USB port communication with Cypress Semiconductor USB chips.</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`CyUSB`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`CyUSB`</span></a></td>
+<td><span>licensed under LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows</td>
@@ -147,18 +144,51 @@
 <td>Any generic USB devices</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`CyUSB`</span></a></td>
+<td><span>J Krauter, ITO University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>ItomCyUSB is a itom-Plugin which gives direct/raw access to a device connected to the serial port.
+It can be used by plugins for communication analog to the USB port.
+The plugin is implemented for Window.</p>
+<p>To connect to a device you need the vendor ID and the product ID.</p>
+<p>The setVal and getVal functions will write and read on the specified endpoint.</p>
+<p>!Only the setVal function could be tested!</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>VendorID</strong>: {int} [0,65535], default: 1204, step: 1</dt>
+<dd>The vendor ID of the device to connect to</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>ProductID</strong>: {int} [0,65535], default: 61696, step: 1</dt>
+<dd>The product ID of the device to connect to</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>printInfoAboutAllDevices</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>If true, all information about connected devices is printed to the console.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>debug</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>If true, all communication commands are printed to the dockWidget.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>timeout</strong>: {float, optional} [0.0,65.0], default: 4.0</dt>
+<dd>Timeout for reading commands in [s].</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
@@ -240,8 +270,8 @@ directory similar than <strong>C:Program FilesCypressUSBCY3684_EZ-USB_FX2LP_DVK1
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+        &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
@@ -250,9 +280,9 @@ the JavaScript coming from www.google-analytics.com.
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-51395951-1', 'bitbucket.org');
+  ga('create', 'UA-51395951-1', 'auto');
   ga('send', 'pageview');
 
 </script>

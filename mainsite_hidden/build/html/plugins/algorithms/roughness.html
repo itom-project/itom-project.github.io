@@ -10,8 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -26,7 +24,6 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="X3P Input Output" href="x3pio.html" />
@@ -157,10 +154,10 @@
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
 <li>roughnessProfile</li>
-<li>calcRoughnessProfile</li>
-<li>calcAbbottCurve</li>
 <li>evalRoughnessProfile</li>
+<li>calcRoughnessProfile</li>
 <li>getGaussianFilterKernel</li>
+<li>calcAbbottCurve</li>
 </ol>
 </div>
 <div class="section" id="filters">
@@ -188,6 +185,50 @@ The last filter evaluates the given roughness parameter and returns the result. 
 <li><strong>periodicity</strong> (<em>int - optional</em>) &#8211; 0: non periodic profile (default), 1: periodic profile (not implemented yet)</li>
 <li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the convolution based calculation. The convolution kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
 <li><strong>sampling_length_mode</strong> (<em>int - optional</em>) &#8211; mode how to split the measurement length (ml) into different sampling lengths (sl): 0: split ml into five samples (warn if the sl does not correspond to Lc), 1: split ml into n samples whose length is Lc, 2: same as 1 but only use the first 5 sampling lengths.</li>
+<li><strong>mr_range</strong> (<em>int range</em><em> [</em><em>v1</em><em>,</em><em>v2</em><em>) </em><em>- optional</em>) &#8211; [min,max] range in percent for the parameter Rdc or Wdc (height difference between two levels of the Abbott-Firstone-Curve</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - resulting values. See docstring of filter.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">seq. of float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nr_of_samples - Number of evaluated samples per line (5 is the desired value with respect to DIN EN ISO 4288), Rt is evaluated over the whole measurement range, therefore nr_of_samples is 1.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="evalRoughnessProfile">
+<code class="descname">evalRoughnessProfile</code><span class="sig-paren">(</span><em>roughness</em>, <em>param</em>, <em>Lc</em><span class="optional">[</span>, <em>nr_of_endeffect_pixels</em>, <em>sampling_length_mode</em>, <em>result_detailed</em>, <em>mr_range</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#evalRoughnessProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates given roughness or waviness profiles for a specific roughness profile parameter.</p>
+<p>The given roughness data is evaluated line by line. If only one line is evaluated, &#8216;result&#8217; contains:</p>
+<p>(mean-value-over-all-samples, min-value-over-all-samples, max-value-over-all-samples)</p>
+<p>The result values are always in µm. In case of Rt (or Wt), the evaluation is not separated to various samples, therefore mean, min and max contain the same values.</p>
+<p>If multiple lines are evaluated, the result contains the</p>
+<p>(mean-value-over-all-lines, min-value, max-value, std-dev),
+where min-value, max-value and std-dev are calculated over the mean-values of all lines.</p>
+<p>The evaluation is done based on DIN EN ISO 4287:2010, the separation of different sample lengths is based on DIN EN ISO 4288:1997.</p>
+<p>Possible roughness parameters are Rv, Rz, Rt, Ra, Rq, Rsk, Rku, Rdq, Rda, Rdc. If you pass the waviness profile instead of the roughness profile
+the parameters are then Wv, Wz, Wt, Wa, Wq, Wsk, Wku, Wdq, Wda, Wdc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>roughness</strong> (<em>dataObject</em>) &#8211; real input object (1D or 2D, no unsigned data types) - must be either the output argument &#8216;roughness&#8217; or &#8216;waviness&#8217; from filter &#8216;calcRoughnessProfile&#8217;. The roughness is determined row-by-row. The axis units must be set to &#8216;mm&#8217;, &#8216;µm&#8217; or &#8216;nm&#8217;.</li>
+<li><strong>param</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; roughness or waviness parameter to determine</li>
+<li><strong>Lc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm used for the separation between the waviness and roughness</li>
+<li><strong>nr_of_endeffect_pixels</strong> (<em>int - optional</em>) &#8211; nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</li>
+<li><strong>sampling_length_mode</strong> (<em>int - optional</em>) &#8211; mode how to split the measurement length (ml) into different sampling lengths (sl): 0: split ml into five samples (warn if the sl does not correspond to Lc), 1: split ml into n samples whose length is Lc, 2: same as 1 but only use the first 5 sampling lengths.</li>
+<li><strong>result_detailed</strong> (<em>dataObject - optional</em>) &#8211; returns a Nx3 float64 data object will the mean,min and max roughness value for each evaluated line (only interesting if input contains more than one line)</li>
 <li><strong>mr_range</strong> (<em>int range</em><em> [</em><em>v1</em><em>,</em><em>v2</em><em>) </em><em>- optional</em>) &#8211; [min,max] range in percent for the parameter Rdc or Wdc (height difference between two levels of the Abbott-Firstone-Curve</li>
 </ul>
 </td>
@@ -252,6 +293,26 @@ controlled using the parameter &#8216;cutoff_factor&#8217;.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="getGaussianFilterKernel">
+<code class="descname">getGaussianFilterKernel</code><span class="sig-paren">(</span><em>kernel</em>, <em>cutoff_wavelength</em>, <em>spacing</em><span class="optional">[</span>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getGaussianFilterKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the gaussian filter kernel as used by calcRoughnessProfile, based on EN ISO 11562</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>kernel</strong> (<em>dataObject</em>) &#8211; kernel data object that contains the kernel after the call.</li>
+<li><strong>cutoff_wavelength</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm</li>
+<li><strong>spacing</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; spacing in µm between two adjacent pixels</li>
+<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the length of the filter kernel. The kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="calcAbbottCurve">
 <code class="descname">calcAbbottCurve</code><span class="sig-paren">(</span><em>roughness</em>, <em>abbott</em><span class="optional">[</span>, <em>nr_of_endeffect_pixels</em>, <em>histogram</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcAbbottCurve" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter calculates the Abbott firestone curve (as well as an optional histogram) of
@@ -266,70 +327,6 @@ a roughness or waviness profile, e.g. obtained from the filter &#8216;calcRoughn
 <li><strong>abbott</strong> (<em>dataObject</em>) &#8211; abbott firestone curve with a horizontal step width of 1% (float64, size: Mx100 for M rows in the input object.</li>
 <li><strong>nr_of_endeffect_pixels</strong> (<em>int - optional</em>) &#8211; nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</li>
 <li><strong>histogram</strong> (<em>dataObject - optional</em>) &#8211; optional histogram with 100 buckets (int32, 1x100). Only the first line is evaluated.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="evalRoughnessProfile">
-<code class="descname">evalRoughnessProfile</code><span class="sig-paren">(</span><em>roughness</em>, <em>param</em>, <em>Lc</em><span class="optional">[</span>, <em>nr_of_endeffect_pixels</em>, <em>sampling_length_mode</em>, <em>result_detailed</em>, <em>mr_range</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#evalRoughnessProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates given roughness or waviness profiles for a specific roughness profile parameter.</p>
-<p>The given roughness data is evaluated line by line. If only one line is evaluated, &#8216;result&#8217; contains:</p>
-<p>(mean-value-over-all-samples, min-value-over-all-samples, max-value-over-all-samples)</p>
-<p>The result values are always in µm. In case of Rt (or Wt), the evaluation is not separated to various samples, therefore mean, min and max contain the same values.</p>
-<p>If multiple lines are evaluated, the result contains the</p>
-<p>(mean-value-over-all-lines, min-value, max-value, std-dev),
-where min-value, max-value and std-dev are calculated over the mean-values of all lines.</p>
-<p>The evaluation is done based on DIN EN ISO 4287:2010, the separation of different sample lengths is based on DIN EN ISO 4288:1997.</p>
-<p>Possible roughness parameters are Rv, Rz, Rt, Ra, Rq, Rsk, Rku, Rdq, Rda, Rdc. If you pass the waviness profile instead of the roughness profile
-the parameters are then Wv, Wz, Wt, Wa, Wq, Wsk, Wku, Wdq, Wda, Wdc.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>roughness</strong> (<em>dataObject</em>) &#8211; real input object (1D or 2D, no unsigned data types) - must be either the output argument &#8216;roughness&#8217; or &#8216;waviness&#8217; from filter &#8216;calcRoughnessProfile&#8217;. The roughness is determined row-by-row. The axis units must be set to &#8216;mm&#8217;, &#8216;µm&#8217; or &#8216;nm&#8217;.</li>
-<li><strong>param</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; roughness or waviness parameter to determine</li>
-<li><strong>Lc</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm used for the separation between the waviness and roughness</li>
-<li><strong>nr_of_endeffect_pixels</strong> (<em>int - optional</em>) &#8211; nr of pixels at both sides of the profile that contain wrong values to the final length of the convolution filter kernel. Skip these pixels in any evaluation (see DIN EN ISO 16610-21, 4.3; DIN EN ISO 16610-28 will show more information when it is released in a final version)</li>
-<li><strong>sampling_length_mode</strong> (<em>int - optional</em>) &#8211; mode how to split the measurement length (ml) into different sampling lengths (sl): 0: split ml into five samples (warn if the sl does not correspond to Lc), 1: split ml into n samples whose length is Lc, 2: same as 1 but only use the first 5 sampling lengths.</li>
-<li><strong>result_detailed</strong> (<em>dataObject - optional</em>) &#8211; returns a Nx3 float64 data object will the mean,min and max roughness value for each evaluated line (only interesting if input contains more than one line)</li>
-<li><strong>mr_range</strong> (<em>int range</em><em> [</em><em>v1</em><em>,</em><em>v2</em><em>) </em><em>- optional</em>) &#8211; [min,max] range in percent for the parameter Rdc or Wdc (height difference between two levels of the Abbott-Firstone-Curve</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">result - resulting values. See docstring of filter.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">seq. of float</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nr_of_samples - Number of evaluated samples per line (5 is the desired value with respect to DIN EN ISO 4288), Rt is evaluated over the whole measurement range, therefore nr_of_samples is 1.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="getGaussianFilterKernel">
-<code class="descname">getGaussianFilterKernel</code><span class="sig-paren">(</span><em>kernel</em>, <em>cutoff_wavelength</em>, <em>spacing</em><span class="optional">[</span>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getGaussianFilterKernel" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the gaussian filter kernel as used by calcRoughnessProfile, based on EN ISO 11562</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>kernel</strong> (<em>dataObject</em>) &#8211; kernel data object that contains the kernel after the call.</li>
-<li><strong>cutoff_wavelength</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm</li>
-<li><strong>spacing</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; spacing in µm between two adjacent pixels</li>
-<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the length of the filter kernel. The kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
 </ul>
 </td>
 </tr>
@@ -361,8 +358,8 @@ the parameters are then Wv, Wz, Wt, Wa, Wq, Wsk, Wku, Wdq, Wda, Wdc.</p>
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+        &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
@@ -371,9 +368,9 @@ the JavaScript coming from www.google-analytics.com.
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-51395951-1', 'bitbucket.org');
+  ga('create', 'UA-51395951-1', 'auto');
   ga('send', 'pageview');
 
 </script>

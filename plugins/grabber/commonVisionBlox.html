@@ -10,8 +10,6 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -26,7 +24,6 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="VRMagic" href="VRMagic.html" />
@@ -142,13 +139,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`CommonVisionBlox`</span></a></td>
+<td><span>GenICam cameras via Common Vision Blox from Stemmer</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`CommonVisionBlox`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`CommonVisionBlox`</span></a></td>
+<td><span>Licensed under LGPL, Stemmer Common Vision Blox under its own license.</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows</td>
@@ -157,18 +154,39 @@
 <td>GenICam via Common Vision Blox</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`CommonVisionBlox`</span></a></td>
+<td><span>M. Gronle, ITO Uni Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin can connect to various cameras via the GenICam interface of the commercial tool Common Vision Blox from company Stemmer.</p>
+<blockquote>
+<div><p>Until now, the plugin is only implemented for monochrome pixel formats mono8, mono10, mono12, mono14 and mono16. Besides the ROI and
+exposure time, all parameters need to be read and set using the parameter raw:suffix where suffix is the real GenICam parameter, obtained
+via the Stemmer configuration tool. If a bitdepth &gt; 8 bit is chosen, an error might occur during acquisition. Then check the indicated ini file
+from Stemmer GenICam and don&#8217;t set the pixelFormat property to auto but Mono16.</p>
+<p>In case of a slow connection, check the communication center of Stemmer for hints or bugs in the connection, e.g. use the filter driver for GigE connections.</p>
+<p>This plugin has been tested with DALSA Genie HM1400 and Xenics Bobcat 640 GigE.</p>
+</div></blockquote>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>scanForCameras</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>If 1 scan for new cameras, else take the last opened camera (default). If you scan for new cameras, the configuration file (ini) created in CommonVisionBlox for GenICam or other cameras will be reset to the default values.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>bpp</strong>: {int, optional} [8,16], default: 16, step: 2</dt>
+<dd>desired monochromatic bitdepth. Dependent on this parameter PixelFormat is set to mono8, mono10, mono12, mono14 or mono16. Make sure the bitdepth is supported by your camera</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
@@ -255,8 +273,8 @@ CommonVisionBlox will be forced to scan for newly connected cameras and the conf
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.2.
+        &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
@@ -265,9 +283,9 @@ the JavaScript coming from www.google-analytics.com.
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-51395951-1', 'bitbucket.org');
+  ga('create', 'UA-51395951-1', 'auto');
   ga('send', 'pageview');
 
 </script>
