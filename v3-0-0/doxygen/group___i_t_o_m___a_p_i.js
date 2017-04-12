@@ -1,0 +1,27 @@
+var group___i_t_o_m___a_p_i =
+[
+    [ "apiAddInClose", "group___i_t_o_m___a_p_i.html#ga7b1bb07c624e1828212a63cf03315f24", null ],
+    [ "apiAddInGetInitParams", "group___i_t_o_m___a_p_i.html#gaa95413191f9228fd7c53109dd307d40d", null ],
+    [ "apiAddInOpenActuator", "group___i_t_o_m___a_p_i.html#ga353608f19b4ee2772e7ab2944b9d0f4b", null ],
+    [ "apiAddInOpenDataIO", "group___i_t_o_m___a_p_i.html#gac3b97dc9026de5198c23cd1946da84cc", null ],
+    [ "apiCreateFromDataObject", "group___i_t_o_m___a_p_i.html#ga353993f2efe89c1a0b6bf7db7377a9b3", null ],
+    [ "apiCreateFromNamedDataObject", "group___i_t_o_m___a_p_i.html#gacf529ab7a9d581232485b6066bed9657", null ],
+    [ "apiFilterCall", "group___i_t_o_m___a_p_i.html#ga2150c7c4585a9af481666fc823d55604", null ],
+    [ "apiFilterGetFunc", "group___i_t_o_m___a_p_i.html#gaa28b7acf3f1d4d42f415126a85e55bba", null ],
+    [ "apiGetCurrentWorkingDir", "group___i_t_o_m___a_p_i.html#gaf680a69debdb157cb5fd1e73b5612eb7", null ],
+    [ "apiGetParamFromMapByKey", "group___i_t_o_m___a_p_i.html#ga5482fe416a2fbb4d91c3ed3a4996d735", null ],
+    [ "apiGetSettingsFile", "group___i_t_o_m___a_p_i.html#gaf45fdea7738a25bc69c64fc51fe0078e", null ],
+    [ "apiParseParamName", "group___i_t_o_m___a_p_i.html#ga4feb8816d2ae455a985ab6f2c59a23e1", null ],
+    [ "apiShowConfigurationDialog", "group___i_t_o_m___a_p_i.html#ga95812455749c4ef08faa52f984571d8c", null ],
+    [ "apiUpdateParameters", "group___i_t_o_m___a_p_i.html#gaa8790ca74567f863d730b685049a1166", null ],
+    [ "apiValidateAndCastParam", "group___i_t_o_m___a_p_i.html#ga5a308310624820ec9f75b2136a6d462e", null ],
+    [ "apiValidateCharArrayMeta", "group___i_t_o_m___a_p_i.html#ga0a5ff52498b460f55287eb7cb6119737", null ],
+    [ "apiValidateCharMeta", "group___i_t_o_m___a_p_i.html#ga3c85ec90c4c1fed61540f8d9d8582945", null ],
+    [ "apiValidateDoubleArrayMeta", "group___i_t_o_m___a_p_i.html#ga4f5ce2605d1e2da94924319791fedfbe", null ],
+    [ "apiValidateDoubleMeta", "group___i_t_o_m___a_p_i.html#ga878bb44347d1401f312982df8f3603ff", null ],
+    [ "apiValidateHWMeta", "group___i_t_o_m___a_p_i.html#gadda397b13aab6449f40daa3ae1c0a5f2", null ],
+    [ "apiValidateIntArrayMeta", "group___i_t_o_m___a_p_i.html#ga3b71a316adde8fa8584d1bef9df675ba", null ],
+    [ "apiValidateIntMeta", "group___i_t_o_m___a_p_i.html#ga45b1b8ed71d596565cf97bbb7211fc32", null ],
+    [ "apiValidateParam", "group___i_t_o_m___a_p_i.html#ga4a8e95959be9d4fb7d362fcbc9417ace", null ],
+    [ "apiValidateStringMeta", "group___i_t_o_m___a_p_i.html#ga65420c35412fd847ac56f4903f5dea2e", null ]
+];

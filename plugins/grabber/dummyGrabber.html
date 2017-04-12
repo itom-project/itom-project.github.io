@@ -10,6 +10,9 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -24,7 +27,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="IDS uEye" href="IDSuEyeCamera.html" />
     <link rel="prev" title="CMU1394" href="cmu1394.html" />
@@ -88,6 +97,8 @@
 <li class="toctree-l4"><a class="reference internal" href="avantesAvaSpec.html">Avantes AvaSpec Spectrometer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="commonVisionBlox.html">GenICam cameras via Common Vision Blox</a></li>
 <li class="toctree-l4"><a class="reference internal" href="VRMagic.html">VRMagic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="genicam.html">GenICam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="NITWidySWIR.html">NITWidySWIR</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#motors-actuators">Motors / Actuators</a></li>
@@ -136,7 +147,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>Ein virtueller Weißrausch-Grabber</span></td>
+<td><span>A virtual white noise grabber</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
 <td><span>DataIO</span></td>
@@ -157,10 +168,10 @@
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>Der DummyGrabber ist eine virtuelle Kamera, womit eine Kamera mit weißem Rauschen simuliert wird.</p>
-<p>Die Kamera wird mit der maximalen Breite und Höhe des simulierten Kamerachips inizialisiert (beides muss ein Vielfaches von 4 sein). Das Rauschen wird in Bereich zwischen 0 und der aktuellen Bittiefe (bpp - bit per pixel) skaliert. Die tatsächliche Größe des Kamerabilds wird über den Parameter &#8216;ROI&#8217; eingestellt, wenn die Maße innerhalb der Größe des Kamerachips liegen.</p>
-<p>Diese Kamera kann entweder als ein 2D-Sensor (Breite und Höhe &gt;= 4) oder als Linienkamera (Höhe = 1) inizialisiert werden.</p>
-<p>Dieses Plugin kann ebenfalls als Vorlage zur Programmierung anderer Grabber dienen.</p>
+<p>The DummyGrabber is a virtual camera which emulates a camera with white noise.</p>
+<p>The camera is initialized with a maximum width and height of the simulated camera chip (both need to be a multiple of 4). The noise is always scaled in the range between 0 and the current bitdepth (bpp - bit per pixel). The real size of the camera image is controlled using the parameter &#8216;roi&#8217; if the sizes stay within the limits given by the size of the camera chip.</p>
+<p>You can initialize this camera either as a 2D sensor with a width and height &gt;= 4 or as line camera whose height is equal to 1.</p>
+<p>This plugin can also be used as template for other grabber.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
@@ -169,17 +180,17 @@
 <div><ul class="simple">
 <li><dl class="first docutils">
 <dt><strong>maxXSize</strong>: {int, optional} [4,4096], default: 640, step: 4</dt>
-<dd>Breite des virtuellen Sensors</dd>
+<dd>Width of virtual sensor chip</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>maxYSize</strong>: {int, optional} [1,4096], default: 480, step: 1</dt>
-<dd>Höhe des virtuellen Sensors. Für Linienkameras ist dieser Wert beispielsweise 1, für 2D-Kameras 4.</dd>
+<dd>Height of virtual sensor chip, please set this value to 1 (line camera) or a value dividable by 4 for a 2D camera.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>bpp</strong>: {int, optional} [8,30], default: 8, step: 2</dt>
-<dd>Bits pro Pixel, normalerweise 8-16 Bit Grauwerte</dd>
+<dd>Bits per Pixel, usually 8-16bit grayvalues</dd>
 </dl>
 </li>
 </ul>
@@ -235,7 +246,7 @@
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

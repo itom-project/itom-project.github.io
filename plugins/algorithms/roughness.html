@@ -10,6 +10,9 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -24,7 +27,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="X3P Input Output" href="x3pio.html" />
     <link rel="prev" title="RawImport filters" href="rawImport.html" />
@@ -153,16 +162,36 @@
 <p>Some algorithms the plugin &#8216;fittingFilters&#8217; for a valid execution.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
+<li>getGaussianFilterKernel</li>
 <li>roughnessProfile</li>
 <li>evalRoughnessProfile</li>
 <li>calcRoughnessProfile</li>
-<li>getGaussianFilterKernel</li>
 <li>calcAbbottCurve</li>
 </ol>
 </div>
 <div class="section" id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
+<dl class="function">
+<dt id="getGaussianFilterKernel">
+<code class="descname">getGaussianFilterKernel</code><span class="sig-paren">(</span><em>kernel</em>, <em>cutoff_wavelength</em>, <em>spacing</em><span class="optional">[</span>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getGaussianFilterKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the gaussian filter kernel as used by calcRoughnessProfile, based on EN ISO 11562</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>kernel</strong> (<em>dataObject</em>) &#8211; kernel data object that contains the kernel after the call.</li>
+<li><strong>cutoff_wavelength</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm</li>
+<li><strong>spacing</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; spacing in µm between two adjacent pixels</li>
+<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the length of the filter kernel. The kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="function">
 <dt id="roughnessProfile">
 <code class="descname">roughnessProfile</code><span class="sig-paren">(</span><em>input</em>, <em>param</em>, <em>Lc</em>, <em>Ls</em><span class="optional">[</span>, <em>remove_form</em>, <em>periodicity</em>, <em>cutoff_factor</em>, <em>sampling_length_mode</em>, <em>mr_range</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#roughnessProfile" title="Permalink to this definition">¶</a></dt>
@@ -293,26 +322,6 @@ controlled using the parameter &#8216;cutoff_factor&#8217;.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="getGaussianFilterKernel">
-<code class="descname">getGaussianFilterKernel</code><span class="sig-paren">(</span><em>kernel</em>, <em>cutoff_wavelength</em>, <em>spacing</em><span class="optional">[</span>, <em>cutoff_factor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getGaussianFilterKernel" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the gaussian filter kernel as used by calcRoughnessProfile, based on EN ISO 11562</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>kernel</strong> (<em>dataObject</em>) &#8211; kernel data object that contains the kernel after the call.</li>
-<li><strong>cutoff_wavelength</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; cut-off wavelength in µm</li>
-<li><strong>spacing</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; spacing in µm between two adjacent pixels</li>
-<li><strong>cutoff_factor</strong> (<em>float - optional</em>) &#8211; quality factor for the length of the filter kernel. The kernel is set to zero for indices &gt; cutoff-wavelength * cutoff_factor. See ISO 16610-21:2013 A.5: 0.5 for general purpose, high precision: 0.6, reference software: 1.0</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="calcAbbottCurve">
 <code class="descname">calcAbbottCurve</code><span class="sig-paren">(</span><em>roughness</em>, <em>abbott</em><span class="optional">[</span>, <em>nr_of_endeffect_pixels</em>, <em>histogram</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#calcAbbottCurve" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter calculates the Abbott firestone curve (as well as an optional histogram) of
@@ -359,7 +368,7 @@ a roughness or waviness profile, e.g. obtained from the filter &#8216;calcRoughn
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

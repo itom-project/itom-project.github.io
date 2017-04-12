@@ -1,0 +1,28 @@
+var classito_1_1_user_organizer =
+[
+    [ "UserOrganizer", "classito_1_1_user_organizer.html#a4f4c1677cd06f37827beb848fdcb5a0f", null ],
+    [ "UserOrganizer", "classito_1_1_user_organizer.html#a92ad477e9a66a3438d3b1a69e4419db6", null ],
+    [ "~UserOrganizer", "classito_1_1_user_organizer.html#a77e468a9acab972c8175ea23c9b7a789", null ],
+    [ "closeInstance", "classito_1_1_user_organizer.html#aba8d1c8fa4fdd5f61f9a1aa80119be9a", null ],
+    [ "getInstance", "classito_1_1_user_organizer.html#a9c4998d807067c46e320b62b079b6a38", null ],
+    [ "getSettingsFile", "classito_1_1_user_organizer.html#afb37be64ec368ae865301ae8ca97f224", null ],
+    [ "getUserFeatures", "classito_1_1_user_organizer.html#abd45eeb47c76e7e8f37a3ef6a364175f", null ],
+    [ "getUserID", "classito_1_1_user_organizer.html#a9aae9cfc4be91d1f66c2664b9c7a24ab", null ],
+    [ "getUserID", "classito_1_1_user_organizer.html#acc94c02fc8e4503d18b516e927a6ada8", null ],
+    [ "getUserModel", "classito_1_1_user_organizer.html#adc8199ab487e4246f7d98c23cfcd8f5c", null ],
+    [ "getUserName", "classito_1_1_user_organizer.html#ac5e89f6025d0f7ac0454c5e8194eec32", null ],
+    [ "getUserRole", "classito_1_1_user_organizer.html#a1de40b1bf1667ce4cad268579d5fceee", null ],
+    [ "hasFeature", "classito_1_1_user_organizer.html#a48866dda73c3c05b5a29314e26f4464c", null ],
+    [ "loadSettings", "classito_1_1_user_organizer.html#ac539829b708965f0716ca91424c6ab6d", null ],
+    [ "readUserDataFromFile", "classito_1_1_user_organizer.html#a0c177487a696acefe099be8be6d75a06", null ],
+    [ "scanSettingFilesAndLoadModel", "classito_1_1_user_organizer.html#a3eb1c2512ede08fbea20a8f0c161dbf6", null ],
+    [ "writeUserDataToFile", "classito_1_1_user_organizer.html#a84a14a34c50030a59dd503c26a804ae8", null ],
+    [ "m_features", "classito_1_1_user_organizer.html#ad5b61aef5a1c97d88c67339b826f8106", null ],
+    [ "m_lastOpenedUserName", "classito_1_1_user_organizer.html#ac070dfc594c2fe26ce1a6503fea2ecdd", null ],
+    [ "m_pUserOrganizer", "classito_1_1_user_organizer.html#ad4dd0b0b3b51bb912e189dc3c2505ddc", null ],
+    [ "m_settingsFile", "classito_1_1_user_organizer.html#ad37d2feed393d1c7b95cecfd9bc9a3b7", null ],
+    [ "m_strConstStdUser", "classito_1_1_user_organizer.html#ae2f697e7b87fd1de8fbc898bf2b7e1a6", null ],
+    [ "m_userModel", "classito_1_1_user_organizer.html#ab1bc3bd7ddfa8d13dba5a670463fc14b", null ],
+    [ "m_userName", "classito_1_1_user_organizer.html#ae028121aa0612d9e1a3cbafa8cd3537b", null ],
+    [ "m_userRole", "classito_1_1_user_organizer.html#a487d355c88389f063ea0dc8465a7b15b", null ]
+];

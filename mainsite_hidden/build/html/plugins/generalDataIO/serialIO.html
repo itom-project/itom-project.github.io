@@ -10,6 +10,9 @@
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -24,7 +27,13 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="GLDisplay" href="glDisplay.html" />
     <link rel="prev" title="GWInstekPSP" href="gwInstekPSP.html" />
@@ -85,6 +94,7 @@
 <li class="toctree-l4"><a class="reference internal" href="libUSB.html">LibUSB</a></li>
 <li class="toctree-l4"><a class="reference internal" href="hidApi.html">HidApi</a></li>
 <li class="toctree-l4"><a class="reference internal" href="CyUSB.html">CyUSB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thorlabsPowerMeter.html">Thorlabs Power Meter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../plugins.html#ad-converters">AD-Converters</a></li>
@@ -131,7 +141,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>Itom-Plugin zur Kommunikation über die Serielle Schnittstelle</span></td>
+<td><span>itom-plugin for a serial port communication</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
 <td><span>DataIO</span></td>
@@ -366,42 +376,32 @@ to <em>getVal</em>. By this configuration you will automatically wait for the fu
 <div class="section" id="get-a-list-of-available-com-ports-under-windows">
 <h2>Get a list of available COM ports under Windows<a class="headerlink" href="#get-a-list-of-available-com-ports-under-windows" title="Permalink to this headline">¶</a></h2>
 <p>In order to get a list of all available COM ports under Windows, the following python code snippet can be used. It reads the corresponding registry entries:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">python</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1">#This script can be used as example for Windows</span>
+<span class="c1">#to detect registered COM ports for this computer</span>
+<span class="kn">import</span> <span class="nn">winreg</span> <span class="kn">as</span> <span class="nn">wreg</span>
+
+<span class="k">def</span> <span class="nf">DetectCOMPorts</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">regconn</span> <span class="o">=</span> <span class="n">wreg</span><span class="o">.</span><span class="n">ConnectRegistry</span><span class="p">(</span> <span class="bp">None</span><span class="p">,</span> <span class="n">wreg</span><span class="o">.</span><span class="n">HKEY_LOCAL_MACHINE</span> <span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">wreg</span><span class="o">.</span><span class="n">OpenKey</span><span class="p">(</span> <span class="n">regconn</span><span class="p">,</span> <span class="s2">&quot;HARDWARE</span><span class="se">\\</span><span class="s2">DEVICEMAP</span><span class="se">\\</span><span class="s2">SERIALCOMM&quot;</span><span class="p">,</span> <span class="n">wreg</span><span class="o">.</span><span class="n">KEY_READ</span> <span class="p">)</span>
+        <span class="n">values_count</span> <span class="o">=</span> <span class="n">wreg</span><span class="o">.</span><span class="n">QueryInfoKey</span><span class="p">(</span> <span class="n">key</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">values_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="n">values_count</span> <span class="p">):</span>
+            <span class="n">values_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">wreg</span><span class="o">.</span><span class="n">EnumValue</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">i</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span> <span class="ne">WindowsError</span><span class="p">,</span> <span class="ne">EnvironmentError</span> <span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Unable to Connect to the Window Registry and read keys&quot;</span> <span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">key</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">values_list</span>
+
+<span class="k">def</span> <span class="nf">NumberOfCOMPorts</span><span class="p">(</span> <span class="n">values_list</span> <span class="p">):</span>
+    <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span> <span class="n">values_list</span> <span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Name : &quot;</span> <span class="o">+</span> <span class="n">subkey</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Data : &quot;</span> <span class="o">+</span> <span class="n">subkey</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">NumberOfCOMPorts</span><span class="p">(</span> <span class="n">DetectCOMPorts</span><span class="p">()</span> <span class="p">)</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>#This script can be used as example for Windows
-#to detect registered COM ports for this computer
-import winreg as wreg</p>
-<dl class="docutils">
-<dt>def DetectCOMPorts():</dt>
-<dd><dl class="first docutils">
-<dt>try:</dt>
-<dd><p class="first">regconn = wreg.ConnectRegistry( None, wreg.HKEY_LOCAL_MACHINE )
-key = wreg.OpenKey( regconn, &#8220;HARDWARE\DEVICEMAP\SERIALCOMM&#8221;, wreg.KEY_READ )
-values_count = wreg.QueryInfoKey( key )[1]
-values_list = []
-for i in range( values_count ):</p>
-<blockquote class="last">
-<div>values_list.append( wreg.EnumValue( key, i ) )</div></blockquote>
-</dd>
-<dt>except ( WindowsError, EnvironmentError ):</dt>
-<dd>print( &#8220;Unable to Connect to the Window Registry and read keys&#8221; )</dd>
-<dt>finally:</dt>
-<dd>key.Close()</dd>
-</dl>
-<p class="last">return values_list</p>
-</dd>
-<dt>def NumberOfCOMPorts( values_list ):</dt>
-<dd><dl class="first last docutils">
-<dt>for subkey in iter( values_list ):</dt>
-<dd>print( &#8220;Name : &#8221; + subkey[0] )
-print( &#8220;Data : &#8221; + subkey[1] )</dd>
-</dl>
-</dd>
-</dl>
-<p>NumberOfCOMPorts( DetectCOMPorts() )</p>
-</div></blockquote>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -444,7 +444,7 @@ your user to the <strong>dialout</strong> group, logout once and login again.</p
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking
