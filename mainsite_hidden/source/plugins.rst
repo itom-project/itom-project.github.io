@@ -29,12 +29,18 @@ Cameras / Grabbers / AD-Converter
 .. toctree::
    :maxdepth: 1
    
+   plugins/grabber/AndorSDK3.rst
+   plugins/grabber/avantesAvaSpec.rst
+   plugins/grabber/avtVimba.rst
    plugins/grabber/cmu1394.rst
+   plugins/grabber/commonVisionBlox.rst
    plugins/grabber/dummyGrabber.rst
-   plugins/grabber/IDSuEyeCamera.rst
    plugins/grabber/fileGrabber.rst
    plugins/grabber/fireGrabber.rst
+   plugins/grabber/genicam.rst
+   plugins/grabber/IDSuEyeCamera.rst
    plugins/grabber/msMediaFoundation.rst
+   plugins/grabber/NITWidySWIR.rst
    plugins/grabber/openCVGrabber.rst
    plugins/grabber/pcoCamera.rst
    plugins/grabber/pcoPixelFly.rst
@@ -44,14 +50,8 @@ Cameras / Grabbers / AD-Converter
    plugins/grabber/thorlabsCCS.rst
    plugins/grabber/v4l2.rst
    plugins/grabber/vistek.rst
-   plugins/grabber/ximea.rst
-   plugins/grabber/avtVimba.rst
-   plugins/grabber/AndorSDK3.rst
-   plugins/grabber/avantesAvaSpec.rst
-   plugins/grabber/commonVisionBlox.rst
    plugins/grabber/VRMagic.rst
-   plugins/grabber/genicam.rst
-   plugins/grabber/NITWidySWIR.rst
+   plugins/grabber/ximea.rst
 
 Motors / Actuators
 ~~~~~~~~~~~~~~~~~~~
@@ -64,8 +64,9 @@ Motors / Actuators
    plugins/actuators/FirgelliLAC.rst
    plugins/actuators/leicaMotorFocus.rst
    plugins/actuators/NanotecStepMotor.rst
-   plugins/actuators/piPiezoCtrl.rst
+   plugins/actuators/piezosystemJena_NV40_1.rst
    plugins/actuators/piGCS2.rst 
+   plugins/actuators/piPiezoCtrl.rst
    plugins/actuators/SMC100.rst
    plugins/actuators/ST8SMC4USB.rst
    plugins/actuators/ThorlabsBP.rst
@@ -73,7 +74,6 @@ Motors / Actuators
    plugins/actuators/uhlRegister.rst
    plugins/actuators/uhlText.rst
    plugins/actuators/usbMotion3XIII.rst
-   plugins/actuators/piezosystemJena_NV40_1.rst
 
 Further hardware devices
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,16 +81,16 @@ Further hardware devices
 .. toctree::
    :maxdepth: 1
    
-   plugins/generalDataIO/dispWindow.rst
-   plugins/generalDataIO/gwInstekPSP.rst
-   plugins/generalDataIO/serialIO.rst
-   plugins/generalDataIO/glDisplay.rst
-   plugins/generalDataIO/LibModBus.rst
-   plugins/generalDataIO/SuperlumBS.rst
-   plugins/generalDataIO/SuperlumBL.rst
-   plugins/generalDataIO/libUSB.rst
-   plugins/generalDataIO/hidApi.rst
    plugins/generalDataIO/CyUSB.rst
+   plugins/generalDataIO/dispWindow.rst
+   plugins/generalDataIO/glDisplay.rst
+   plugins/generalDataIO/gwInstekPSP.rst
+   plugins/generalDataIO/hidApi.rst
+   plugins/generalDataIO/LibModBus.rst
+   plugins/generalDataIO/libUSB.rst
+   plugins/generalDataIO/serialIO.rst
+   plugins/generalDataIO/SuperlumBL.rst
+   plugins/generalDataIO/SuperlumBS.rst
    plugins/generalDataIO/thorlabsPowerMeter.rst
    
 AD-Converters
@@ -109,6 +109,7 @@ Algorithms
    :maxdepth: 1
    
    plugins/algorithms/basicFilters.rst
+   plugins/algorithms/BasicGPLFilters.rst
    plugins/algorithms/dataObjectArithmetic.rst
    plugins/algorithms/dataObjectIO.rst
    plugins/algorithms/fittingFilters.rst
@@ -117,8 +118,7 @@ Algorithms
    plugins/algorithms/pclTools.rst
    plugins/algorithms/rawImport.rst
    plugins/algorithms/roughness.rst
-   plugins/algorithms/x3pio.rst
-    
+   plugins/algorithms/x3pio.rst    
     
 Plugin Development
 -------------------
