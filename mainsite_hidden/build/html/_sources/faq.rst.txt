@@ -12,7 +12,7 @@ General
 .. glossary::
 
     Error message from Python packages
-        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be load, 
+        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded, 
         the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
         The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
 
