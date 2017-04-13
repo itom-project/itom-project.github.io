@@ -10,6 +10,16 @@ General
 --------------
 
 .. glossary::
+
+    Error message from Python packages
+        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be load, 
+        the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
+        The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
+
+itom 3.0.0
+--------------
+
+.. glossary::
     
     Error message at startup: python35.dll could not be found (fixed in version 3.0.0)
         From Python 3.5 on, the Windows installer does not copy the corresponding DLL libraries to the Windows system directory. Please make
