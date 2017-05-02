@@ -147,106 +147,23 @@
 <p>Furthermore this plugin also contains methods to finally subtract or reconstruct the fitted surfaces.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
-<li>fitPolynom1D_Z</li>
-<li>polyval2D</li>
-<li>subtract1DRegression</li>
 <li>subtractRegressionPlane</li>
-<li>polyfitWeighted2D</li>
-<li>polyfitWeighted2DSinglePoints</li>
-<li>fillInvalidAreas</li>
 <li>polyval2DSinglePoints</li>
-<li>getInterpolatedValues</li>
-<li>fitPlane</li>
-<li>fitPolynom2D</li>
 <li>subtractPlane</li>
+<li>fillInvalidAreas</li>
+<li>fitPolynom1D_Z</li>
+<li>getInterpolatedValues</li>
+<li>fitPolynom2D</li>
+<li>subtract1DRegression</li>
+<li>polyfitWeighted2D</li>
+<li>polyval2D</li>
+<li>polyfitWeighted2DSinglePoints</li>
+<li>fitPlane</li>
 </ol>
 </div>
 <div class="section" id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
-<dl class="function">
-<dt id="fitPolynom1D_Z">
-<code class="descname">fitPolynom1D_Z</code><span class="sig-paren">(</span><em>data</em>, <em>polynoms</em>, <em>order</em><span class="optional">[</span>, <em>weights</em>, <em>xVals</em>, <em>numThreads</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom1D_Z" title="Permalink to this definition">¶</a></dt>
-<dd><p>One-dimensional polynomial fit in z-direction for a 3D - data object.</p>
-<p>The input data object must be three-dimensional and is internally casted to float64 (if not yet done). The resulting polynomial parameters per pixel are stored in the output data object &#8216;polynoms&#8217; whose z-dimension is equal to (order+2). The first (order+1) planes contain the coefficients p0...pn and the last plane contain the pixel wise residual error.</p>
-<p>The polynomial is y(x) = p0 + x*p1 ... + x^n*pn
-The residual is the sum of the quadratical errors from each valid pixel to the fitted polynomial.</p>
-<p>If no &#8216;xVals&#8217; are assigned, the x-values for each plane are calculated using the offset and scale of the data-object in z-direction, such that an equally spaced vector of (0,1,2,3...) is the default.</p>
-<p>You can additionally give a weight data object (same dimension than &#8216;data&#8217;) for weighting the values. NaN values in &#8216;data&#8217; and weights &lt;= 0 are ignored. If a fit cannot be done due to too less or degenerated values, NaN is returned in &#8216;polynoms&#8217; at this pixel.</p>
-<p>For a first order fit, a direct least squares solution is used which is very fast, for the other orders a system of linear equations is solved (using a SVD decomposition) which can be slower. On a multi-core processor you can assign a number of threads that are used to parallely compute the approximations for each pixel.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>dataObject</em>) &#8211; input data object (3 dimensions).</li>
-<li><strong>polynoms</strong> (<em>dataObject</em>) &#8211; </li>
-<li><strong>order</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order</li>
-<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights (same dimensions than data)</li>
-<li><strong>xVals</strong> (<em>seq. of float - optional</em>) &#8211; x-value vector (length must be the same than z-size of data) [default: equally spaced values are assumed using scale and offset of the data object in z-direction]</li>
-<li><strong>numThreads</strong> (<em>int - optional</em>) &#8211; number of threads used for the parallel determination</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="polyval2D">
-<code class="descname">polyval2D</code><span class="sig-paren">(</span><em>dataZ</em>, <em>coefficients</em>, <em>orderX</em>, <em>orderY</em><span class="sig-paren">)</span><a class="headerlink" href="#polyval2D" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method evaluates a two-dimensional polynom for every point in a given data object</p>
-<p>For every single pixel in the input data object &#8216;dataZ&#8217;, its physical coordinate (using scale and offset of the data object) is taken and the polynomial (given by its coefficients) is evaluated and stored in the pixel. The data object is hereby converted to float64.</p>
-<p>The polynomial coefficients (p0, p1, ...) are those returned by the filter &#8216;fitPolynom2D&#8217; and depend on the polynomial order in X and Y direction:</p>
-<blockquote>
-<div><p>if (orderX &lt;= orderY):</p>
-<blockquote>
-<div>f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</div></blockquote>
-<p>else:</p>
-<blockquote>
-<div>f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
-</div></blockquote>
-<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>dataZ</strong> (<em>dataObject</em>) &#8211; data object with given size and data type including scale and offset value. Depending on these values, this data object is finally filled with the evaluated polynomial function</li>
-<li><strong>coefficients</strong> (<em>seq. of float</em>) &#8211; polynom coefficients as they come from polyfitWeighted2D</li>
-<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
-<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="subtract1DRegression">
-<code class="descname">subtract1DRegression</code><span class="sig-paren">(</span><em>input</em>, <em>output</em>, <em>order</em><span class="optional">[</span>, <em>axis</em>, <em>numThreads</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#subtract1DRegression" title="Permalink to this definition">¶</a></dt>
-<dd><p>subtracts a one-dimensional fitted polynom (along a given axis) from the values in the given 1D or 2D data object.</p>
-<p>This filter operates inplace and subtracts from fitted one-dimensional polynoms from the values in the given 2D data object &#8216;data&#8217;. The polynoms are either fitted along the
-vertical or horizontal axis. You can choose a polynomial order between 1 (line) and 7. The values are uniformly weighted for the fit. The algorithm uses a fast, direct solution
-for the line regression fits and a singular value decomposition for all other cases (see fitPolynom1D_Z). The fit is done in double precision while the type of &#8216;data&#8217; is not changed.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>input</strong> (<em>dataObject</em>) &#8211; real valued input object (1D or 2D)</li>
-<li><strong>output</strong> (<em>dataObject</em>) &#8211; resulting output object (same than input is allowed, else output has the same type and size than input)</li>
-<li><strong>order</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order</li>
-<li><strong>axis</strong> (<em>int - optional</em>) &#8211; axis index along which the 1d regressions are independently determined and subtracted (0: vertical, 1: horizontal).</li>
-<li><strong>numThreads</strong> (<em>int - optional</em>) &#8211; number of threads used for the parallel determination</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="function">
 <dt id="subtractRegressionPlane">
 <code class="descname">subtractRegressionPlane</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>method</em>, <em>validPointProbability</em>, <em>allowedErrorProbability</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#subtractRegressionPlane" title="Permalink to this definition">¶</a></dt>
@@ -270,11 +187,11 @@ for the line regression fits and a singular value decomposition for all other ca
 </dd></dl>
 
 <dl class="function">
-<dt id="polyfitWeighted2D">
-<code class="descname">polyfitWeighted2D</code><span class="sig-paren">(</span><em>inputData</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>weights</em>, <em>reduceFactor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#polyfitWeighted2D" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method fits a two-dimensional polynomial of given order in x- and y-direction to the data &#8216;inputData&#8217;.</p>
-<p>For the fit, the optional scale and offset values of the input data object are considered. The fit is executed in double precision, such that the input is converted to float64 (if not yet done). NaN values in the input data object are ignored. Optionally, you can give a weighting data object (needs to have the same dimension and size than inputData) such that the values are weighted with the values of the data object &#8216;weights&#8217;. Values with corresponding weights &lt;= 0 are ignored as well.</p>
-<p>Depending on the orders, the fitted polynomial, whose coefficients are returned by this filter, has the following form:</p>
+<dt id="polyval2DSinglePoints">
+<code class="descname">polyval2DSinglePoints</code><span class="sig-paren">(</span><em>dataX</em>, <em>dataY</em>, <em>dataZ</em>, <em>coefficients</em>, <em>orderX</em>, <em>orderY</em><span class="sig-paren">)</span><a class="headerlink" href="#polyval2DSinglePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method evaluates a two-dimensional polynom for every x- and y- coordinate given in xData in yData</p>
+<p>For every single pixel whose x- and y-coordinate is given by corresponding values in xData and yData the polynomial (given by its coefficients) is evaluated and stored in zData (float64, same size than xData and yData).
+The polynomial coefficients (p0, p1, ...) are those returned by the filter &#8216;fitPolynom2D&#8217; and depend on the polynomial order in X and Y direction:</p>
 <blockquote>
 <div><p>if (orderX &lt;= orderY):</p>
 <blockquote>
@@ -284,25 +201,18 @@ for the line regression fits and a singular value decomposition for all other ca
 <div>f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
 </div></blockquote>
 <p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
-<p>The solver uses a Vandermonde matrix V as solving strategy and tries to solve V*p=Z, where Z are the valid values of the input data object. The overdetermined system of linear equations is finally solved using a QR factorization of V. If this module is compiled with LAPACK, its solvers are used, else the solve-command of OpenCV (slower) is called. In order to speed up the calculation you can use the parameter &#8216;reduceFactor&#8217;. If it is set to any value &gt;= 1, The input plane is divided into a grid of (orderY+1)*reduceFactor x (orderX+1)*reduceFactor rectangles. In every rectangle an arbitrary valid value is selected and used for the determination only. If no valid value could be found after a certain number of new random values, no value is taken from this rectangle. The algorithm returns an error if less values could have been selected than are needed for the fit of given orders.</p>
-<p>The definition of the polynomial function is slightly different than the one used in the similar fitting function &#8216;fitPolynom2D&#8217;.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputData</strong> (<em>dataObject</em>) &#8211; input data object, the fit is based on the regular grid (x,y) defined by the scaling and offset of this data object</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dataX</strong> (<em>dataObject</em>) &#8211; data object with x-coordinates (interpreted as float64).</li>
+<li><strong>dataY</strong> (<em>dataObject</em>) &#8211; data object with y-coordinates (interpreted as float64).</li>
+<li><strong>dataZ</strong> (<em>dataObject</em>) &#8211; This data object is finally filled with the evaluated polynomial function (float64)</li>
+<li><strong>coefficients</strong> (<em>seq. of float</em>) &#8211; polynom coefficients as they come from polyfitWeighted2D</li>
 <li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
 <li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
-<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights, if not given all values are equally weighted</li>
-<li><strong>reduceFactor</strong> (<em>float - optional</em>) &#8211; If this factor is &gt;= 1.0, every plane of the data object is divided into fields (reduceFactor * (orderXorY+1)) in x-direction and y-direction respectively, where one random, valid value is picked. If &lt; 1.0 (e.g. -1.0 [default]) all valid points are picked</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coefficients - fitted polynomial coefficients</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
 </td>
 </tr>
 </tbody>
@@ -310,41 +220,22 @@ for the line regression fits and a singular value decomposition for all other ca
 </dd></dl>
 
 <dl class="function">
-<dt id="polyfitWeighted2DSinglePoints">
-<code class="descname">polyfitWeighted2DSinglePoints</code><span class="sig-paren">(</span><em>xData</em>, <em>yData</em>, <em>zData</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>weights</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#polyfitWeighted2DSinglePoints" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method fits a two-dimensional polynomial of given order in x- and y-direction to the points whose x, y and z coordinates are given in &#8216;xData&#8217;, &#8216;yData&#8217; and &#8216;zData&#8217;.</p>
-<p>The fit is executed in double precision, such that the input is converted to float64 (if not yet done). NaN values in the x, y or z data objects are ignored. Optionally, you can give a weighting data object (needs to have the same dimension and size than inputData) such that the values are weighted with the values of the data object &#8216;weights&#8217;. Values with corresponding weights &lt;= 0 are ignored as well.</p>
-<p>All input data objects must have the same size.</p>
-<p>Depending on the orders, the fitted polynomial, whose coefficients are returned by this filter, has the following form:</p>
-<blockquote>
-<div><p>if (orderX &lt;= orderY):</p>
-<blockquote>
-<div>z = f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</div></blockquote>
-<p>else:</p>
-<blockquote>
-<div>z = f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
-</div></blockquote>
-<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
-<p>The solver uses a Vandermonde matrix V as solving strategy and tries to solve V*p=Z, where Z are the valid values of the input data object. The overdetermined system of linear equations is finally solved using a QR factorization of V. If this module is compiled with LAPACK, its solvers are used, else the solve-command of OpenCV (slower) is called.</p>
-<p>The definition of the polynomial function is slightly different than the one used in the similar fitting function &#8216;fitPolynom2D&#8217;.</p>
+<dt id="subtractPlane">
+<code class="descname">subtractPlane</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em>, <em>A</em>, <em>B</em>, <em>C</em><span class="sig-paren">)</span><a class="headerlink" href="#subtractPlane" title="Permalink to this definition">¶</a></dt>
+<dd><p>subtracts plane from 2D-dataObject given by plane-parameters A,B,C (z=A+Bx+Cy)</p>
+<p>If the destinationImage is not the same than the sourceImage, the destinationImage finally is a new data object with the same size and type than the sourceImage and contains the data of the sourceImage subtracted by the given plane. If both are the same, the subtraction is executed in-place.</p>
+<p>If the input dataObject contains more than one plane, the subtraction is executed separately for each plane.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>xData</strong> (<em>dataObject</em>) &#8211; input data object with x-coordinates of points</li>
-<li><strong>yData</strong> (<em>dataObject</em>) &#8211; input data object with y-coordinates of points</li>
-<li><strong>zData</strong> (<em>dataObject</em>) &#8211; input data object with z-coordinates of points</li>
-<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
-<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
-<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights, if not given all values are equally weighted</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
+<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image data object</li>
+<li><strong>A</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter A of regression plane z = A + Bx + Cy, which is subtracted</li>
+<li><strong>B</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter B of regression plane z = A + Bx + Cy, which is subtracted</li>
+<li><strong>C</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter C of regression plane z = A + Bx + Cy, which is subtracted</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coefficients - fitted polynomial coefficients</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
 </td>
 </tr>
 </tbody>
@@ -416,31 +307,26 @@ The extend is the maximum horizontal and vertical distance from a edge element o
 </dd></dl>
 
 <dl class="function">
-<dt id="polyval2DSinglePoints">
-<code class="descname">polyval2DSinglePoints</code><span class="sig-paren">(</span><em>dataX</em>, <em>dataY</em>, <em>dataZ</em>, <em>coefficients</em>, <em>orderX</em>, <em>orderY</em><span class="sig-paren">)</span><a class="headerlink" href="#polyval2DSinglePoints" title="Permalink to this definition">¶</a></dt>
-<dd><p>This method evaluates a two-dimensional polynom for every x- and y- coordinate given in xData in yData</p>
-<p>For every single pixel whose x- and y-coordinate is given by corresponding values in xData and yData the polynomial (given by its coefficients) is evaluated and stored in zData (float64, same size than xData and yData).
-The polynomial coefficients (p0, p1, ...) are those returned by the filter &#8216;fitPolynom2D&#8217; and depend on the polynomial order in X and Y direction:</p>
-<blockquote>
-<div><p>if (orderX &lt;= orderY):</p>
-<blockquote>
-<div>f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</div></blockquote>
-<p>else:</p>
-<blockquote>
-<div>f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
-</div></blockquote>
-<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
+<dt id="fitPolynom1D_Z">
+<code class="descname">fitPolynom1D_Z</code><span class="sig-paren">(</span><em>data</em>, <em>polynoms</em>, <em>order</em><span class="optional">[</span>, <em>weights</em>, <em>xVals</em>, <em>numThreads</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom1D_Z" title="Permalink to this definition">¶</a></dt>
+<dd><p>One-dimensional polynomial fit in z-direction for a 3D - data object.</p>
+<p>The input data object must be three-dimensional and is internally casted to float64 (if not yet done). The resulting polynomial parameters per pixel are stored in the output data object &#8216;polynoms&#8217; whose z-dimension is equal to (order+2). The first (order+1) planes contain the coefficients p0...pn and the last plane contain the pixel wise residual error.</p>
+<p>The polynomial is y(x) = p0 + x*p1 ... + x^n*pn
+The residual is the sum of the quadratical errors from each valid pixel to the fitted polynomial.</p>
+<p>If no &#8216;xVals&#8217; are assigned, the x-values for each plane are calculated using the offset and scale of the data-object in z-direction, such that an equally spaced vector of (0,1,2,3...) is the default.</p>
+<p>You can additionally give a weight data object (same dimension than &#8216;data&#8217;) for weighting the values. NaN values in &#8216;data&#8217; and weights &lt;= 0 are ignored. If a fit cannot be done due to too less or degenerated values, NaN is returned in &#8216;polynoms&#8217; at this pixel.</p>
+<p>For a first order fit, a direct least squares solution is used which is very fast, for the other orders a system of linear equations is solved (using a SVD decomposition) which can be slower. On a multi-core processor you can assign a number of threads that are used to parallely compute the approximations for each pixel.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>dataX</strong> (<em>dataObject</em>) &#8211; data object with x-coordinates (interpreted as float64).</li>
-<li><strong>dataY</strong> (<em>dataObject</em>) &#8211; data object with y-coordinates (interpreted as float64).</li>
-<li><strong>dataZ</strong> (<em>dataObject</em>) &#8211; This data object is finally filled with the evaluated polynomial function (float64)</li>
-<li><strong>coefficients</strong> (<em>seq. of float</em>) &#8211; polynom coefficients as they come from polyfitWeighted2D</li>
-<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
-<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
+<li><strong>data</strong> (<em>dataObject</em>) &#8211; input data object (3 dimensions).</li>
+<li><strong>polynoms</strong> (<em>dataObject</em>) &#8211; </li>
+<li><strong>order</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order</li>
+<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights (same dimensions than data)</li>
+<li><strong>xVals</strong> (<em>seq. of float - optional</em>) &#8211; x-value vector (length must be the same than z-size of data) [default: equally spaced values are assumed using scale and offset of the data object in z-direction]</li>
+<li><strong>numThreads</strong> (<em>int - optional</em>) &#8211; number of threads used for the parallel determination</li>
 </ul>
 </td>
 </tr>
@@ -475,6 +361,175 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">values - output vector of type ito::float64 containing the interpolated values (NaN if no value could be found)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fitPolynom2D">
+<code class="descname">fitPolynom2D</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>fittedImage</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a polynomial p(x,y) of order (orderX, orderY) in x- and y-direction.</p>
+<p>The fit function always looks like this:</p>
+<p>f(x,y) = sum_{m=0}^{M} sum_{n=0}^{N} ( p_nm * x^n * y^m )</p>
+<p>This definition is slightly different from the polynomial fitted by the similar function &#8216;polyfitWeighted2d&#8217;.</p>
+<p>Puts the fitted points into the data object &#8216;fittedImage&#8217;. This method does not weight the input values and does not
+return the coefficients for the polynomial. Use polyfitWeighted2d if you want to have an enhanced fit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
+<li><strong>fittedImage</strong> (<em>dataObject</em>) &#8211; destination data object with fitted values</li>
+<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; order of the fitting polynomial in x-direction</li>
+<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; order of the fitting polynomial y-direction</li>
+<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 infinite values in input image will be copied to output</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">sigma - Variance value <em>sigma</em> of polynomial fit.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="subtract1DRegression">
+<code class="descname">subtract1DRegression</code><span class="sig-paren">(</span><em>input</em>, <em>output</em>, <em>order</em><span class="optional">[</span>, <em>axis</em>, <em>numThreads</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#subtract1DRegression" title="Permalink to this definition">¶</a></dt>
+<dd><p>subtracts a one-dimensional fitted polynom (along a given axis) from the values in the given 1D or 2D data object.</p>
+<p>This filter operates inplace and subtracts from fitted one-dimensional polynoms from the values in the given 2D data object &#8216;data&#8217;. The polynoms are either fitted along the
+vertical or horizontal axis. You can choose a polynomial order between 1 (line) and 7. The values are uniformly weighted for the fit. The algorithm uses a fast, direct solution
+for the line regression fits and a singular value decomposition for all other cases (see fitPolynom1D_Z). The fit is done in double precision while the type of &#8216;data&#8217; is not changed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>input</strong> (<em>dataObject</em>) &#8211; real valued input object (1D or 2D)</li>
+<li><strong>output</strong> (<em>dataObject</em>) &#8211; resulting output object (same than input is allowed, else output has the same type and size than input)</li>
+<li><strong>order</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order</li>
+<li><strong>axis</strong> (<em>int - optional</em>) &#8211; axis index along which the 1d regressions are independently determined and subtracted (0: vertical, 1: horizontal).</li>
+<li><strong>numThreads</strong> (<em>int - optional</em>) &#8211; number of threads used for the parallel determination</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="polyfitWeighted2D">
+<code class="descname">polyfitWeighted2D</code><span class="sig-paren">(</span><em>inputData</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>weights</em>, <em>reduceFactor</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#polyfitWeighted2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method fits a two-dimensional polynomial of given order in x- and y-direction to the data &#8216;inputData&#8217;.</p>
+<p>For the fit, the optional scale and offset values of the input data object are considered. The fit is executed in double precision, such that the input is converted to float64 (if not yet done). NaN values in the input data object are ignored. Optionally, you can give a weighting data object (needs to have the same dimension and size than inputData) such that the values are weighted with the values of the data object &#8216;weights&#8217;. Values with corresponding weights &lt;= 0 are ignored as well.</p>
+<p>Depending on the orders, the fitted polynomial, whose coefficients are returned by this filter, has the following form:</p>
+<blockquote>
+<div><p>if (orderX &lt;= orderY):</p>
+<blockquote>
+<div>f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</div></blockquote>
+<p>else:</p>
+<blockquote>
+<div>f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
+</div></blockquote>
+<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
+<p>The solver uses a Vandermonde matrix V as solving strategy and tries to solve V*p=Z, where Z are the valid values of the input data object. The overdetermined system of linear equations is finally solved using a QR factorization of V. If this module is compiled with LAPACK, its solvers are used, else the solve-command of OpenCV (slower) is called. In order to speed up the calculation you can use the parameter &#8216;reduceFactor&#8217;. If it is set to any value &gt;= 1, The input plane is divided into a grid of (orderY+1)*reduceFactor x (orderX+1)*reduceFactor rectangles. In every rectangle an arbitrary valid value is selected and used for the determination only. If no valid value could be found after a certain number of new random values, no value is taken from this rectangle. The algorithm returns an error if less values could have been selected than are needed for the fit of given orders.</p>
+<p>The definition of the polynomial function is slightly different than the one used in the similar fitting function &#8216;fitPolynom2D&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputData</strong> (<em>dataObject</em>) &#8211; input data object, the fit is based on the regular grid (x,y) defined by the scaling and offset of this data object</li>
+<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
+<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
+<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights, if not given all values are equally weighted</li>
+<li><strong>reduceFactor</strong> (<em>float - optional</em>) &#8211; If this factor is &gt;= 1.0, every plane of the data object is divided into fields (reduceFactor * (orderXorY+1)) in x-direction and y-direction respectively, where one random, valid value is picked. If &lt; 1.0 (e.g. -1.0 [default]) all valid points are picked</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coefficients - fitted polynomial coefficients</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="polyval2D">
+<code class="descname">polyval2D</code><span class="sig-paren">(</span><em>dataZ</em>, <em>coefficients</em>, <em>orderX</em>, <em>orderY</em><span class="sig-paren">)</span><a class="headerlink" href="#polyval2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method evaluates a two-dimensional polynom for every point in a given data object</p>
+<p>For every single pixel in the input data object &#8216;dataZ&#8217;, its physical coordinate (using scale and offset of the data object) is taken and the polynomial (given by its coefficients) is evaluated and stored in the pixel. The data object is hereby converted to float64.</p>
+<p>The polynomial coefficients (p0, p1, ...) are those returned by the filter &#8216;fitPolynom2D&#8217; and depend on the polynomial order in X and Y direction:</p>
+<blockquote>
+<div><p>if (orderX &lt;= orderY):</p>
+<blockquote>
+<div>f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</div></blockquote>
+<p>else:</p>
+<blockquote>
+<div>f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
+</div></blockquote>
+<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dataZ</strong> (<em>dataObject</em>) &#8211; data object with given size and data type including scale and offset value. Depending on these values, this data object is finally filled with the evaluated polynomial function</li>
+<li><strong>coefficients</strong> (<em>seq. of float</em>) &#8211; polynom coefficients as they come from polyfitWeighted2D</li>
+<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
+<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="polyfitWeighted2DSinglePoints">
+<code class="descname">polyfitWeighted2DSinglePoints</code><span class="sig-paren">(</span><em>xData</em>, <em>yData</em>, <em>zData</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>weights</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#polyfitWeighted2DSinglePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method fits a two-dimensional polynomial of given order in x- and y-direction to the points whose x, y and z coordinates are given in &#8216;xData&#8217;, &#8216;yData&#8217; and &#8216;zData&#8217;.</p>
+<p>The fit is executed in double precision, such that the input is converted to float64 (if not yet done). NaN values in the x, y or z data objects are ignored. Optionally, you can give a weighting data object (needs to have the same dimension and size than inputData) such that the values are weighted with the values of the data object &#8216;weights&#8217;. Values with corresponding weights &lt;= 0 are ignored as well.</p>
+<p>All input data objects must have the same size.</p>
+<p>Depending on the orders, the fitted polynomial, whose coefficients are returned by this filter, has the following form:</p>
+<blockquote>
+<div><p>if (orderX &lt;= orderY):</p>
+<blockquote>
+<div>z = f(x,y) = sum_{i=0}^orderX sum_{j=0}^{orderY-i} p_{ij} x^i y^j</div></blockquote>
+<p>else:</p>
+<blockquote>
+<div>z = f(x,y) = sum_{j=0}^orderY sum_{i=0}^{orderX-i} p_{ij} x^i y^j</div></blockquote>
+</div></blockquote>
+<p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
+<p>The solver uses a Vandermonde matrix V as solving strategy and tries to solve V*p=Z, where Z are the valid values of the input data object. The overdetermined system of linear equations is finally solved using a QR factorization of V. If this module is compiled with LAPACK, its solvers are used, else the solve-command of OpenCV (slower) is called.</p>
+<p>The definition of the polynomial function is slightly different than the one used in the similar fitting function &#8216;fitPolynom2D&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xData</strong> (<em>dataObject</em>) &#8211; input data object with x-coordinates of points</li>
+<li><strong>yData</strong> (<em>dataObject</em>) &#8211; input data object with y-coordinates of points</li>
+<li><strong>zData</strong> (<em>dataObject</em>) &#8211; input data object with z-coordinates of points</li>
+<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in x-direction</li>
+<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; polynomial order in y-direction</li>
+<li><strong>weights</strong> (<em>dataObject - optional</em>) &#8211; weights, if not given all values are equally weighted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">coefficients - fitted polynomial coefficients</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seq. of float</p>
@@ -523,61 +578,6 @@ a random search using the equation</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="fitPolynom2D">
-<code class="descname">fitPolynom2D</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>fittedImage</em>, <em>orderX</em>, <em>orderY</em><span class="optional">[</span>, <em>replaceNaN</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#fitPolynom2D" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit a polynomial p(x,y) of order (orderX, orderY) in x- and y-direction.</p>
-<p>The fit function always looks like this:</p>
-<p>f(x,y) = sum_{m=0}^{M} sum_{n=0}^{N} ( p_nm * x^n * y^m )</p>
-<p>This definition is slightly different from the polynomial fitted by the similar function &#8216;polyfitWeighted2d&#8217;.</p>
-<p>Puts the fitted points into the data object &#8216;fittedImage&#8217;. This method does not weight the input values and does not
-return the coefficients for the polynomial. Use polyfitWeighted2d if you want to have an enhanced fit.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
-<li><strong>fittedImage</strong> (<em>dataObject</em>) &#8211; destination data object with fitted values</li>
-<li><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; order of the fitting polynomial in x-direction</li>
-<li><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; order of the fitting polynomial y-direction</li>
-<li><strong>replaceNaN</strong> (<em>int - optional</em>) &#8211; if 0 infinite values in input image will be copied to output</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">sigma - Variance value <em>sigma</em> of polynomial fit.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)">float</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="subtractPlane">
-<code class="descname">subtractPlane</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em>, <em>A</em>, <em>B</em>, <em>C</em><span class="sig-paren">)</span><a class="headerlink" href="#subtractPlane" title="Permalink to this definition">¶</a></dt>
-<dd><p>subtracts plane from 2D-dataObject given by plane-parameters A,B,C (z=A+Bx+Cy)</p>
-<p>If the destinationImage is not the same than the sourceImage, the destinationImage finally is a new data object with the same size and type than the sourceImage and contains the data of the sourceImage subtracted by the given plane. If both are the same, the subtraction is executed in-place.</p>
-<p>If the input dataObject contains more than one plane, the subtraction is executed separately for each plane.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sourceImage</strong> (<em>dataObject</em>) &#8211; source image data object</li>
-<li><strong>destinationImage</strong> (<em>dataObject</em>) &#8211; destination image data object</li>
-<li><strong>A</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter A of regression plane z = A + Bx + Cy, which is subtracted</li>
-<li><strong>B</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter B of regression plane z = A + Bx + Cy, which is subtracted</li>
-<li><strong>C</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Parameter C of regression plane z = A + Bx + Cy, which is subtracted</li>
-</ul>
 </td>
 </tr>
 </tbody>

@@ -15,6 +15,10 @@ General
         If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded, 
         the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
         The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
+        
+    Error message regarding PYTHONHOME variable
+        If a new itom setup version is installed on a computer with an already installed itom and Python can not be started, 
+        it may be a problem with python environment variables. First, delete this variable, reboot your system und install itom again. 
 
 itom 3.0.0
 --------------
