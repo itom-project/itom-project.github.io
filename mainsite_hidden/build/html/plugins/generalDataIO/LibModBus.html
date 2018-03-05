@@ -1,38 +1,33 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>LibModBus &#8212; itom</title>
-    
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '2.1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="LibUSB" href="libUSB.html" />
     <link rel="prev" title="HidApi" href="hidApi.html" />
  
 
 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -102,12 +97,14 @@
                         title="next chapter">LibUSB</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -127,13 +124,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>itom-plugin for a modbus communication</span></td>
+<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`LibModBus`</span></a></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><span>DataIO</span></td>
+<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`LibModBus`</span></a></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><span>licensed under LGPL</span></td>
+<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`LibModBus`</span></a></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -142,63 +139,20 @@
 <td>Modbus communication over TCP/IP and RTU</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><span>J.Nitsche, IPROM, TU Braunschweig</span></td>
+<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`LibModBus`</span></a></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>LibModBus is a itom-Plugin which provides modbusTCP and modbusRTU communication.
-The plugin is based on libmodbus v3.1.1 library and tested under Windows only atm.
-Registers are addressed using the modbus_read_registers (0x03) and modbus_write_registers (0x10) functions of libmodbus, coils are addressed using the modbus_read_bits (0x01) and modbus_write_bits (0x0F) functions.
-The plugin-functions used are getVal(dObj) and setVal(dObj) with a data object of the size 1xN with N the number of registers to be read/written.
-The content of the registers is expected as data in the uint16 data object for registers or uint8 data object for coils, the addressing of the registers is performed by a dObj-MetaTag &#8216;registers&#8217; containing a string with address and number of consecutive registers seperated by &#8216;,&#8217; and different registers seperated by &#8216;;&#8217; i.e.: &#8216;10,2;34,1;77,4&#8217; to address registers 10,11;34;77..80. Number 1 of consecutive registers can be left out i.e.:&#8216;10,2;34;77,4&#8217;
-If no MetaTag is set, values of m_params[&#8216;registers&#8217;] is tried to be used for addressing.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div><ul class="simple">
-<li><dl class="first docutils">
-<dt><strong>target</strong>: {str} default: 127.0.0.1</dt>
-<dd>Adress of the target device. IP-Adress for ModbusTCP (i.e. 127.0.0.1) or COM-Port for ModbusRTU (i.e. COM1)</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>port</strong>: {int, optional} [0,1024], default: 502, step: 1</dt>
-<dd>The number of the TCP port for ModBusTCP (default 502) or slave ID for ModbusRTU</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>baud</strong>: {int, optional} [50,4000000], default: 9600, step: 1</dt>
-<dd>The baudrate of the port for RTU communication</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>parity</strong>: {str, optional} default: N</dt>
-<dd>Parity for RTU communication (N,E,O)</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>databit</strong>: {int, optional} [5,8], default: 8, step: 1</dt>
-<dd>Number of bits to be written in line for RTU communication</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>stopbit</strong>: {int, optional} [1,2], default: 1, step: 1</dt>
-<dd>Stop bits after every n bits for RTU communication</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>output_mode</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
-<dd>Enables command-line output of different readouts (e.g. register values of getVal)</dd>
-</dl>
-</li>
-</ul>
-</div></blockquote>
+<div></div></blockquote>
 <p>An example for opening a <em>LibModBus</em> instance at local host <em>127.0.0.1</em>; port <em>502</em> is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lmb</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;LibModBus&quot;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">502</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lmb</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;LibModBus&quot;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">502</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -225,21 +179,21 @@ parameters can be changed using <em>setParam</em>.</p>
 <dt><strong>output_mode</strong>: {bool}</dt>
 <dd>if output_mode is true, multiple outputs will be sent to command line, e.g. register values of getVal function. Default is false</dd>
 <dt><strong>registers</strong>: {str}</dt>
-<dd>fallback addressing for modbus registers. This value will be used, if a dataObject without &#8216;registers&#8217;-tag is sent to the getVal- or setVal-function.
-<em>registers</em> needs to be stored with address and number of consecutive registers seperated by &#8216;,&#8217; and different registers seperated by &#8216;;&#8217; i.e.: &#8216;10,2;34,1;77,4&#8217; to address registers 10,11;34;77..80. Number 1 of consecutive registers can be left out i.e.:&#8216;10,2;34;77,4&#8217;</dd>
+<dd>fallback addressing for modbus registers. This value will be used, if a dataObject without ‘registers’-tag is sent to the getVal- or setVal-function.
+<em>registers</em> needs to be stored with address and number of consecutive registers seperated by ‘,’ and different registers seperated by ‘;’ i.e.: ‘10,2;34,1;77,4’ to address registers 10,11;34;77..80. Number 1 of consecutive registers can be left out i.e.:‘10,2;34;77,4’</dd>
 </dl>
 </div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Values can be read or written via modbus communication using the <em>getVal(dObj)</em> and <em>setVal(dObj)</em> functions. The dataObject <em>dObj</em> needs to be two dimensional with the first dimension set to 1,
-the second dimension has to have the exact size of the numbers of written or read registers. As modbus uses 16bit integer values, dObj must be initialized as &#8216;uint16&#8217; for modbus register values.
-To read or write coils, dObj must be initialized as &#8216;uint8&#8217; as the decision for using read/write coil or read/write register only depends on the data type of the input data object.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
+the second dimension has to have the exact size of the numbers of written or read registers. As modbus uses 16bit integer values, dObj must be initialized as ‘uint16’ for modbus register values.
+To read or write coils, dObj must be initialized as ‘uint8’ as the decision for using read/write coil or read/write register only depends on the data type of the input data object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To address the requested registers, either parameter <em>registers</em> can be used, or obj can be given a <em>registers</em>-tag. The <em>registers</em>-tag has to have the same structure as the <em>registers</em> parameter.
 The parameter is useful if the same registers need to be read/written multiple times while the tag should be used for changing registers.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">lmb</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;LibModBus&quot;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">502</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lmb</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;LibModBus&quot;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">502</span><span class="p">)</span>
 <span class="n">lmb</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s1">&#39;registers&#39;</span><span class="p">,</span><span class="s1">&#39;10,2;34,1;77,4;100,1;101,1;102,1&#39;</span><span class="p">)</span>
 <span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>           <span class="c1">#initializes register-object</span>
 <span class="n">coilObj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>        <span class="c1">#initializes coil-object</span>
@@ -277,7 +231,7 @@ The parameter is useful if the same registers need to be read/written multiple t
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2017, Institut für Technische Optik, Universität Stuttgart.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.5.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.0.
     </div>
 <div class="footer">This page uses <a href="http://analytics.google.com/">
 Google Analytics</a> to collect statistics. You can disable it by blocking

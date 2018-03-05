@@ -33,7 +33,7 @@ Parameters
 These parameters are available and can be used to configure the **PGRFlyCapture** instance. Many of them are directly initialized by the
 parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method *getParam*, writeable
 parameters can be changed using *setParam*. If a parameter is read-only, it is not writeable or supported by the specific camera.
-	
+
 **bpp**: {int}
     bitdepth of each pixel
 **cam_firmware_build_time**: {str}, read-only
@@ -72,18 +72,22 @@ parameters can be changed using *setParam*. If a parameter is read-only, it is n
     If 1 (default), the timestamp, frame counter and roi position (depending on the camera model) will be acquired and added into the first pixels of the image (available as tag of the data object as well), 0: metadata disabled
 **name**: {str}, read-only
     name of the camera
+**num_idle_grabs_after_param_change**: {int}
+    With some cameras, parameter changes like the exposure time or gain will only take effect x images after the change. If this parameter is set to > 0, the given number of images are acquired after changing any parameter in order to delete the intermediate images.
 **offset**: {float}
     offset (normalized value 0..1, mapped to PG-parameter BRIGHTNESS)
 **packetsize**: {int}
     Packet size of current image settings
 **roi**: {int rect [x0,y0,width,height]}
     region of interest, ROI (x,y,width,height)
-**sharpness**: {int}, read-only
+**sharpness**: {int}
     Sharpness
 **sizex**: {int}, read-only
     Pixelsize in x (cols)
 **sizey**: {int}, read-only
     Pixelsize in y (rows)
+**start_delay**: {float}
+    On some computers, a blue screen sometimes occurs if the time gap between starting the camera and acquiring an image is too short. In this case, try to increase this parameter (in s).
 **timeout**: {float}
     Timeout for acquiring images in seconds
 **trigger_mode**: {int}
@@ -92,7 +96,7 @@ parameters can be changed using *setParam*. If a parameter is read-only, it is n
     For hardware trigger only: Set the polarity of the trigger (0: trigger active low, 1: trigger active high)
 **video_mode**: {int}, read-only
     Current video mode, default is Mode7
-	
+
 Image Acquisition
 ===================
 
@@ -114,6 +118,18 @@ The tags are:
 If 'metadata' is 0 or if the camera model does not support this additional information, no tags are appended to each data object.
 Please consider, that the image information is embedded in the first pixels of each image (see https://www.ptgrey.com/tan/10563).
 
+When camera property settings take effect
+===========================================
+
+In the technical documentations of PointGrey cameras, there is a section about **when camera property settings take effect**. This
+section gives hints after how many acquired images changes in properties like integration_time, gain, etc. will be *visible* in the
+next image. With respect to this documentation, most changes will be applied to the "after next" image, if the camera is in trigger-mode.
+If the camera is in free-run mode (trigger_mode = -1), it sometimes needs up to 4 frames until changes become visible!
+
+Usually, the plugin does not acquire any idle grabs after having changed any parameter. However, if you set the parameter 'num_idle_grabs_after_param_change'
+to any value bigger than zero, the number of images are acquired. This happens at the next call of **startDevice** if the camera is currently stopped 
+or immediately at the end of the **setParam** command.
+
 Changelog
 ==========
 
@@ -124,6 +140,7 @@ Changelog
 * itom setup 2.1.0: This plugin has been compiled using the FlyCapture 2.7.3.18
 * itom setup 2.2.0: This plugin has been compiled using the FlyCapture 2.7.3.18, under Windows it requires the Microsoft C++ Redistributable 2012
 * itom setup 3.0.0: This plugin has been compiled using the FlyCapture 2.7.3.18, under Windows it requires the Microsoft C++ Redistributable 2012
+* itom setup 3.1.0: This plugin has been compiled using the FlyCapture 2.11.3.425, under Windows it requires the Microsoft C++ Redistributable 2012
 
 Linux
 ======

@@ -13,32 +13,37 @@ Latest documentations:
 * `User documentation <https://itom.bitbucket.io/latest/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/latest/doxygen>`_
 
-Current setup version 3.0.0:
+Current setup version 3.1.0:
+
+* `User documentation <https://itom.bitbucket.io/v3-1-0/docs>`_
+* `Doxygen source code documentation <https://itom.bitbucket.io/v3-1-0/doxygen>`_
+
+Previous .setup version 3.0.0:
 
 * `User documentation <https://itom.bitbucket.io/v3-0-0/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v3-0-0/doxygen>`_
 
-Current setup version 2.2.1:
+Previous setup version 2.2.1:
 
 * `User documentation <https://itom.bitbucket.io/v2-2-1/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v2-2-1/doxygen>`_
 
-Current setup version 2.2.0:
+Previous setup version 2.2.0:
 
 * `User documentation <https://itom.bitbucket.io/v2-2-0/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v2-2-0/doxygen>`_
 
-Current setup version 2.1.0:
+Previous setup version 2.1.0:
 
 * `User documentation <https://itom.bitbucket.io/v2-1-0/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v2-1-0/doxygen>`_
 
-Current setup version 2.0.0:
+Previous setup version 2.0.0:
 
 * `User documentation <https://itom.bitbucket.io/v2-0-0/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v2-0-0/doxygen>`_
 
-Current setup version 1.4.0:
+Previous setup version 1.4.0:
 
 * `User documentation <https://itom.bitbucket.io/v1-4-0/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v1-4-0/doxygen>`_
