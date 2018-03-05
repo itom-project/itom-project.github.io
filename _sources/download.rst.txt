@@ -3,6 +3,11 @@
 Downloads
 =========
 
+The current version 3.1.0 is available from
+
+* `<https://bitbucket.org/itom/itom/downloads>`_ or
+* `<http://sourceforge.net/projects/itom/files/v3.1.0/>`_
+
 Besides compiling **itom** from the sources, there are binaries for the Windows version of **itom** (32/64bit).
 These binaries contain the core application of **itom** together with a small selection of plugins and most designer plugins
 that provide the plot and figure widgets of **itom**.
@@ -41,12 +46,8 @@ component. These components are:
 
 Other packages can easily be downloaded and installed using the integrated Python package manager.
 
-The current version 3.1.0 is available from
-
-* `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v3.1.0/>`_
-
 Older versions are only hosted at sourceforge.net:
+---------------------------------------------------
 
 * `itom 3.0.0 <http://sourceforge.net/projects/itom/files/v3.0.0/>`_
 * `itom 2.2.1 <http://sourceforge.net/projects/itom/files/v2.2.1/>`_
