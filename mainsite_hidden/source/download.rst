@@ -3,20 +3,29 @@
 Downloads
 =========
 
-The current version 3.1.0 is available from
-
-* `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v3.1.0/>`_
-
 Besides compiling **itom** from the sources, there are binaries for the Windows version of **itom** (32/64bit).
 These binaries contain the core application of **itom** together with a small selection of plugins and most designer plugins
 that provide the plot and figure widgets of **itom**.
+
+**Repository & Direct Downloads**
+
+.. container:: mdl-grid
+
+	.. button:: :text: End-User Setup (Windows)
+	 :link: https://sourceforge.net/projects/itom/files/latest/download
+
+	.. button:: :text: Downloads @SourceForge
+	 :link: http://sourceforge.net/projects/itom/files
+
+	.. button:: :text: SOURCE @Bitbucket
+	 :link: https://bitbucket.org/itom/itom/overview
+
 
 The installers are available in a default version and an All-In-One version. The default version simply contains **itom** and
 the necessary runtime libraries while the all-in-one solution also contains 3rd party dependencies that can be installed as optional
 component. These components are:
 
-**Version 3.1.0** 
+**Version 3.1.0**
 
 * compiled using Qt5.9.0
 * Python 3.6.1
@@ -44,10 +53,34 @@ component. These components are:
 * PointCloudLibrary 1.8.0
 * VTK 7.1.1
 
+
 Other packages can easily be downloaded and installed using the integrated Python package manager.
 
-Older versions are only hosted at sourceforge.net:
----------------------------------------------------
+The current version 3.1.0 is available from
+
+* `<https://bitbucket.org/itom/itom/downloads>`_ or
+* `<http://sourceforge.net/projects/itom/files/v3.1.0/>`_
+
+
+
+.. important::
+
+    Error message regarding PYTHONHOME variable
+        If a new itom setup version is installed on a computer with an already installed itom and Python can not be started, 
+        it may be a problem with python environment variables. First, delete this variable, reboot your system und install itom again. 
+
+
+.. note::
+    
+    Error message from Python packages
+        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded, 
+        the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
+        The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
+
+.. raw:: html
+
+	<button class="accordion" style="font-family:Roboto">Old versions</button>
+	<div class="panel">
 
 * `itom 3.0.0 <http://sourceforge.net/projects/itom/files/v3.0.0/>`_
 * `itom 2.2.1 <http://sourceforge.net/projects/itom/files/v2.2.1/>`_
@@ -62,17 +95,18 @@ Older versions are only hosted at sourceforge.net:
 * `itom 1.0.13 <http://sourceforge.net/projects/itom/files/v1.0.13>`_
 * `itom 1.0.12 <http://sourceforge.net/projects/itom/files/v1.0.12>`_
 
-.. note::
-    
-    Please read the section :ref:`sec-known-issues` if you encounter any problems during the installation
-    or the execution of itom.
-    
-History of components of older versions
------------------------------------------
+.. raw:: html
+
+	</div>
+
+.. raw:: html
+
+	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
+	<div class="panel">
 
 **Version 3.0.0**
 
-* compiled using Qt5.6.1-1
+* Qt5.6.1-1
 * Python 3.6.1
 * openCV 3.1.0
 * QScintilla 2.9.1
@@ -165,3 +199,7 @@ History of components of older versions
 * PyParsing 2.0
 * six 1.6.1
 * dateutil 2.2
+
+.. raw:: html
+
+	</div>

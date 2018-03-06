@@ -1,1 +1,0 @@
-.. include:: ../../../../../plugins/x3pio/docs/x3pio.rst

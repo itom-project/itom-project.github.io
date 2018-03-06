@@ -22,7 +22,7 @@ Among others, we thank the following institutions for their support:
    where you can find an enhanced 3D visualization plugin (also part of the **itom** Windows setup).
    
    **twip optical solutions** also offers commercial support for **itom** as well as the development of plugins. For more
-   information see http://www.twip-os.com/?lang=en#services.
+   information see `TWIP <http://www.twip-os.com/?lang=en#services>`_.
 
 -----
 

@@ -1,0 +1,70 @@
+<header class="mdl-layout__header {% if theme_header_waterfall|tobool %}mdl-layout__header--waterfall{% endif %} {% if theme_header_scroll|tobool %}mdl-layout__header--scroll{% endif %}">
+    <div class="mdl-layout__header-row">
+        {% if theme_show_header_title|tobool %}
+        <!-- Title -->
+        <span class="mdl-layout-title">
+            <a class="brand" href="{{ pathto(master_doc) }}">
+                {%- if logo %}
+                <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="{{ project }}"/>
+                {%- else %}
+                {{ project }}
+                {%- endif %}
+            </a>
+        </span>
+        {% endif %}
+        <nav class="mdl-navigation breadcrumb">
+            {%- for parent in parents %}
+            <a class="mdl-navigation__link" href="{{ parent.link|e }}">{{ parent.title }}</a><i class="material-icons">navigate_next</i>
+            {%- endfor %}
+            <a class="mdl-navigation__link is-active">{{ title }}</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+		
+		<a href="https://sourceforge.net/projects/itom/" target="_blank" alt="Download ITOM">
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent hideSmall" style="margin-right: 20px;">
+            	<span class="mdl-color-text--white">Download</span>
+				<i class="material-icons mdl-color-text--white">&#xe2c4</i>
+			</button>
+		</a>
+		
+		{% if next %}
+		<a href="{{ next.link|e }}" alt="Next">
+		<button class="mdl-button mdl-js-button mdl-button--icon mdl-button--raised mdl-button--accent" style="margin-right: 10px;">
+			<i class="material-icons mdl-color-text--white" >&#xE5CC;</i>
+		</button>
+		</a>
+		{% endif %}
+		
+		
+		<label class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+			<a href="{{ pathto(master_doc) }}" alt="Home">
+				<i class="material-icons">home</i>
+			</a>
+		</label>
+		{% include "header_search.html" %}
+    </div>
+	<!--
+    <div class="mdl-layout__header-row header-links">
+		<div class="mdl-layout-spacer"></div>
+		<nav class="mdl-navigation">
+		
+		
+		
+		
+		{%- for title, href, isExternal, icon in theme_header_links %}
+			  {% if isExternal %}
+				  <a  class="mdl-navigation__link" href="{{ href }}">
+					  {% if icon %}<i class="material-icons navigation-link-icon">{{ icon }}</i>{% endif %}
+					  {{ title }}
+				  </a>
+			  {%- else -%}
+				  <a  class="mdl-navigation__link" href="{{ pathto(href) }}">
+					  {% if icon %}<i class="material-icons navigation-link-icon">{{ icon }}</i>{% endif %}
+					  {{ title }}
+				  </a>
+			  {%- endif -%}
+		{%- endfor %}
+		
+	  </nav>
+    </div>-->
+</header>

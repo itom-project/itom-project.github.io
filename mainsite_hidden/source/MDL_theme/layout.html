@@ -1,0 +1,105 @@
+{% extends "basic/layout.html" %}
+
+{% block htmltitle %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0,user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:200,400,500,700" rel="stylesheet">
+
+    {{ super() }}
+{% endblock %}
+
+{% set css_files = css_files + [
+    '_static/MDL/material.itom.min.em.css',
+    '_static/AnimHeader.css'
+] %}
+    <!--'_static/material-design-lite-1.3.0/material.' + theme_primary_color|e + '-' + theme_accent_color|e + '.min.css',-->
+{% set script_files = script_files + [
+    '_static/MDL/material.min.js',
+    '_static/MDL_theme.js',
+    '_static/AnimHeader.js'
+  ]
+%}
+
+{%- block header %}{%- endblock %}
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+{%- block sidebar1 %}{% endblock %}
+{%- block sidebar2 %}{% endblock %}
+{%- block footer %}{%- endblock %}
+
+
+{%- block content %}
+
+<div class="mdl-layout mdl-js-layout {% if theme_fixed_header|tobool %}mdl-layout--fixed-header{% endif %} {% if theme_fixed_drawer|tobool %}mdl-layout--fixed-drawer{%- else -%}has-drawer{% endif %}">
+    {% include "header.html" %}
+    {% include "drawer.html" %}
+    
+	<main class="mdl-layout__content">
+	{% if pagename == 'index' %}
+		<!--Hero-->
+		<div class="mdl-layout__header-row mdl-color--primary" id="index-banner">
+			<img id="ib" src="_static\itomlogoAnim.gif" height="auto" alt=""/>
+			<div class="container" style="margin-left:0px">
+				<h1 class="cd-headline letters type">
+					<span>ITOM </span>
+					<span class="cd-words-wrapper">
+						<b class="is-visible">measures</b>
+						<b>automates</b>
+						<b>evaluates</b>
+						<b>analyzes</b>
+						<b>plots</b>
+						<b>calculates</b>
+						<b>programms</b>
+					</span>
+				</h1>
+			</div>
+		</div>
+		<div class="mdl-grid">
+			<div class="mdl-layout--small-screen-only mdl-cell mdl-cell--12-col">
+				<img class="" alt="itom display"  src="_static/disp_mini2.jpg" style="position: relative;  margin: 0 auto; width: 90%; max-width: 800px; left: 5%;" />
+			</div>
+			<div class="mdl-layout--large-screen-only mdl-cell mdl-cell--6-col-desktop">
+				<img class="" src="_static/disp_lg2.jpg" width="90%" style="position:relative; top:20px; left:-16px; margin:0 0" alt="itom display"/>
+			</div>
+			<div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--12-col-tablet" >
+				<h3>Powerful. Professional. Fast.</h3>
+				<p class"mdl-typography--title">Use Python scripting language in a powerful IDE including Python debugging</p>
+				<h3>Getting Started easy & quick</h3>
+				<p class"mdl-typography--title">Setup includes the most widely used python packages available (Numpy, Scipy, Matplotlib, etc.).<br>Includes OpenCV, Qt Framework, Point Cloud Library, and much more.</p>
+				<h3>Open-Source & Platform independant</h3>
+				<p class"mdl-typography--title">Source code is licensed for sharing and improving through community work inclusive commercially free usable.<br>Runs on many Platforms - from Windows to Linux, Mac and Raspi</p>
+				<h3>Plug'n'Play Hardware</h3>
+				<p class"mdl-typography--title">Cameras, light sources, actuators, IO devices and various other hardware can be controlled and data mined. Use the simple Qt Designer to make professionally looking GUIs.</p>
+				<h3>Custom GUIs</h3>
+				<p class"mdl-typography--title">Simply create professionally looking GUIs with the WYSIWYG Qt-Designer.</p>
+			</div>
+		</div>
+	{% endif %}
+
+        <div class="page-content">
+            {% block body %} {% endblock %}
+            <div class="pagenation">
+            {%- if prev %}
+               <a id="button-prev" href="{{ prev.link|e }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" role="botton" {{ accesskey("P") }}>
+                   <i class="material-icons">arrow_back</i>PREVIOUS
+               </a>
+            <div class="mdl-tooltip" data-mdl-for="button-prev">
+            {{ prev.title|striptags }}
+            </div>
+            {%- endif %}
+            {%- if next %}
+               <a id="button-next" href="{{ next.link|e }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" role="botton" {{ accesskey("N") }}>
+                    NEXT <i class="material-icons">arrow_forward</i>
+               </a>
+            <div class="mdl-tooltip" data-mdl-for="button-next">
+            {{ next.title|striptags }}
+            </div>
+            {%- endif %}
+            </div>
+        </div>
+        {% if theme_show_footer|tobool %}{% include "footer.html" %}{% endif %}
+    </main>
+</div>
+{%- endblock %}

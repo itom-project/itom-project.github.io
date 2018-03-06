@@ -12,7 +12,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os, itom
+import sys, os ##itom
+sys.path.insert(0, os.path.abspath('..'))
+sys.path.append(os.path.abspath('_ext'))
 
 #package sphinxcontrib-fulltoc from pypi.python.org required
 try:
@@ -25,7 +27,7 @@ except ImportError:
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 #directory of this file
-sys.path.append(os.path.join(itom.getAppPath(),'SDK' + os.sep + 'docs' + os.sep + 'sphinxext'))
+#sys.path.append(os.path.join(itom.getAppPath(),'SDK' + os.sep + 'docs' + os.sep + 'sphinxext'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -34,7 +36,7 @@ sys.path.append(os.path.join(itom.getAppPath(),'SDK' + os.sep + 'docs' + os.sep 
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.intersphinx', 'sphinx.ext.coverage', 'sphinx.ext.mathjax', 'sphinx.ext.ifconfig', 'sphinx.ext.viewcode', 'sphinxcontrib.fulltoc', 'itom_extension', 'itom_domain']
+extensions = ['button','sphinx.ext.intersphinx', 'sphinx.ext.coverage', 'sphinx.ext.mathjax', 'sphinx.ext.ifconfig', 'sphinx.ext.viewcode', 'sphinxcontrib.fulltoc']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -50,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'itom'
-copyright = '2017, Institut für Technische Optik, Universität Stuttgart'
+copyright = '2018, Institut für Technische Optik, Universität Stuttgart'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -103,7 +105,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = '_itom_theme' #'sphinxdoc' #'pyramid' #default'
+html_theme = 'MDL_theme' #'sphinxdoc' #'pyramid' #default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -127,7 +129,7 @@ html_logo = "_static\\itomlogo.png"
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-#html_favicon = None
+html_favicon = "_static\\ITOMfavicon.ico"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -177,6 +179,8 @@ html_show_sourcelink = False
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'itomdoc'
+
+#html_experimental_html5_writer=True
 
 
 # -- Options for LaTeX output --------------------------------------------------
