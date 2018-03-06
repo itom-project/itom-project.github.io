@@ -6,7 +6,7 @@ Qt
 * Design of custom GUIs in the Qt Designer WYSIWYG tool (drag & drop)
 * Events created by the GUI can be linked to Python functions
 
-.. image:: ..\\_static\\QtDesigner.png
+.. image:: ..\\_static\\qtDesigner.png
     :alt: Qt Designer
     :width: 75%
     :align: center
