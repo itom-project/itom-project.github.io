@@ -2,6 +2,13 @@
 Hardware
 =====================
 
+
+.. image:: ..\\_static\\drag&dropHW.svg
+    :alt: drag & drop hardware
+    :width: 30%
+    :align: left
+
+
 * Hardware (Grabber, A/D convertes, raw IO, actuator) can be included as hardware plugins
 * Homogenous hardware implementation (use of same script to control different devices of same hardware type)
 * Complex algorithms, filters, GUIs or widgets can be included as software plugins
