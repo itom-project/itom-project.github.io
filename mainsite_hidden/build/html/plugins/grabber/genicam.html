@@ -24,18 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
     <script type="text/javascript" src="../../_static/AnimHeader.js"></script>
@@ -174,13 +162,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`GenICam`</span></a></td>
+<td><span>Camera control of devices that support the GenICam standard</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`GenICam`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`GenICam`</span></a></td>
+<td><span>licensed under LGPL, this plugin is based on GenICam licensed under the GenICam license 1.5 (see GenICam_License.txt)</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -189,18 +177,73 @@
 <td>Camera control of devices that support the GenICam standard</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`GenICam`</span></a></td>
+<td><span>M. Gronle, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugins is a wrapper for the GenICam 3 interface and is able to control cameras, that
+support the GenICam standard. The connection is realized by a transport layer library of the specific camera
+vendor. This library has the file suffix .cti and must be in the same binary representation (32/64bit) than itom and this plugin.</p>
+<p>Usually, the locations of cti-files are contained in the environment variable GENICAM_GENTL64_PATH or GENICAM_GENTL32_PATH.
+Indicate the path to your desired transport layer in order to access a camera. If the parameter GenTLProducer is kept empty,
+a list of all detected cti-files is printed to the command line. Every transport layer can support one or multiple interfaces (USB3, GigE, Firewire…).
+Indicate the right interface or leave ‘interface’ empty, in order to get a list of all supported interfaces by the selected transport layer.</p>
+<p>In order to keep this plugin compatible to other camera plugins, the additional parameters ‘integration_time’, ‘roi’, ‘sizex’, ‘sizey’,
+and ‘bpp’ are added to the plugin are kept synchronized with ‘ExposureTime’, ‘Width’, ‘Height’, ‘OffsetX’, ‘OffsetY’ or ‘PixelFormat’.</p>
+<p>Up to now the following pixel formats are supported: Mono8, Mono10, Mono10p, Mono10Packed, Mono12, Mono12p, Mono12Packed, Mono14 and Mono16.</p>
+<p>This plugin has been tested with the following cameras:</p>
+<ul class="simple">
+<li>Allied Vision, Manta (Firewire)</li>
+<li>Ximea (USB3)</li>
+<li>Baumer TXG12 (GigE)</li>
+<li>Vistek, exo174MU3 (USB3)</li>
+<li>Vistek, exo174MGE (GigE)</li>
+</ul>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>GenTLProducer</strong>: {str, optional} default: C:XIMEAGenTL Producerx64ximea.gentlX64.cti</dt>
+<dd>Indicate either a string containing the vendor and model name separated with a semicolon (e.g. ‘XIMEA GmbH.;xiApi’) or the path to a cti file (GenICam GenTL transport layer) with the file suffix .cti of the respective camera driver. If nothing is indicated, a list of all auto-detected vendors and models is returned.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>interface</strong>: {str, optional} default: auto</dt>
+<dd>interface to be opened (e.g. IIDC, U3V, USB3, USB, Ethernet…). Open with an empty string to get a list of all possible interfaces for the chosen transport layer. Default: ‘auto’ opens the first supported interface of the chosen transport layer.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>deviceID</strong>: {str, optional} default:</dt>
+<dd>name of the device to be opened. Leave empty to open first detected device of given transport layer and interface.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>streamIndex</strong>: {int, optional} [0,2147483647], default: 0, step: 1</dt>
+<dd>index of data stream to be opened (default: 0).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>paramVisibilityLevel</strong>: {int, optional} [0,3], default: 1, step: 1</dt>
+<dd>Visibility level of parameters (0: Beginner, 1: Expert, 2: Guru, 3: Invisible).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>portIndex</strong>: {int, optional} [0,2147483647], default: 0, step: 1</dt>
+<dd>port index to be opened (default: 0).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>verbose</strong>: {int, optional} [0,5], default: 1, step: 1</dt>
+<dd>verbose level (0: print nothing, 1: only print errors, 2: print errors and warnings, 3: print errors, warnings, informations, 4: debug, 5: all (gives even information about parameter changes or buffer states)).</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="starting-a-device">
 <h2>Starting a device<a class="headerlink" href="#starting-a-device" title="Permalink to this headline">¶</a></h2>

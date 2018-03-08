@@ -24,18 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
     <script type="text/javascript" src="../../_static/AnimHeader.js"></script>
@@ -165,13 +153,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`USBMotion3XIII`</span></a></td>
+<td><span>A motor driver for the USB Motion 3x III card, COPTONIX GmbH, www.coptonix.com</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`USBMotion3XIII`</span></a></td>
+<td><span>Actuator</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`USBMotion3XIII`</span></a></td>
+<td><span>Licensed under LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows</td>
@@ -180,18 +168,63 @@
 <td>USB Motion 3x III controller from COPTONIX GmbH (www.coptonix.com)</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`USBMotion3XIII`</span></a></td>
+<td><span>M. Gronle, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin is a wrapper for the driver of the USB Motion 3x III card of COPTONIX GmbH (www.coptonix.com). It is able to address up to three different 3-phase stepper motors with up to 64 microstep-accuracy.</p>
+<p>The controller is connected to the computer by a USB connection. The wrapper addresses the methods given by the Windows library provided by COPTONIX. For more information about the driver see the corresponding website of the manufacturer (The 64bit DLL was directly provided by COPTONIX).</p>
+<p>If you change any parameters like speed or acceleration, set the values and then read the values again, since the currently set values might slightly differ from the desired values due to rounding uncertainties.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>serialNumber</strong>: {str} default: auto</dt>
+<dd>serial number or string of the device to open, or ‘auto’ if next unused device should be opened or ‘0’,‘1’… to indicate the index of the device to open.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>axisSteps1</strong>: {float, optional} [0.0,100000.0], default: 0.0</dt>
+<dd>number of full steps per unit (deg or mm) of axis 1, 0: axis not connected [default]</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>axisSteps2</strong>: {float, optional} [0.0,100000.0], default: 0.0</dt>
+<dd>number of full steps per unit (deg or mm) of axis 2, 0: axis not connected [default]</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>axisSteps3</strong>: {float, optional} [0.0,100000.0], default: 0.0</dt>
+<dd>number of full steps per unit (deg or mm) of axis 3, 0: axis not connected [default]</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>unit1</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>unit of axis 1, 0: degree (default), 1: mm</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>unit2</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>unit of axis 2, 0: degree (default), 1: mm</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>unit3</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>unit of axis 3, 0: degree (default), 1: mm</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>switchSettings</strong>: {int, optional} [0,63], default: 0, step: 1</dt>
+<dd>SwitchSettings</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>

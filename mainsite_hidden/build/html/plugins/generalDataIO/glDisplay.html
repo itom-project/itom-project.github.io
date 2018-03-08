@@ -24,18 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
     <script type="text/javascript" src="../../_static/AnimHeader.js"></script>
@@ -161,13 +149,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`GLDisplay`</span></a></td>
+<td><span>Frameless window to display images using OpenGL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`GLDisplay`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`GLDisplay`</span></a></td>
+<td><span>LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -176,18 +164,61 @@
 <td>OpenGL based widget to show any textures given by dataObjects</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`GLDisplay`</span></a></td>
+<td><span>M. Gronle, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin displays a frameless window that displays one or multiple arrays using OpenGL technology.
+Each array is then created as texture, where the horizontal and vertical wrap property can be chosen individually.
+OpenGL allows a fast switch between all created textures.</p>
+<p>Per default, the window is either displayed in a second screen (fullscreen) or if only one screen is available -
+placed as small window in the top left corner of the main screen. Otherwise chose an appropriate x0, y0, xsize and ysize
+parameter at initialization.</p>
+<p>In order to assign textures, use the exec-function ‘addTextures’ and pass a 2d or 3d dataObject, where in the latter case
+every plane of the 3d dataObject is registered as single texture. Create the tags ‘wrapT’, ‘wrapS’, ‘MinFilter’ or ‘MagFilter’
+to control the repeatability of every texture or its interpolation method.</p>
+<p>Allowed values for these tags are:</p>
+<ul class="simple">
+<li>‘MagFilter’ (interpolation used when the texture is smaller than the window size): ‘GL_NEAREST’ (default) or ‘GL_LINEAR’</li>
+<li>‘MinFilter’ (interpolation used when the texture is bigger than the window size): ‘GL_NEAREST’ (default), ‘GL_LINEAR’, ‘GL_LINEAR_MIPMAP_NEAREST’, ‘GL_NEAREST_MIPMAP_NEAREST’, ‘GL_LINEAR_MIPMAP_LINEAR’</li>
+<li>‘wrapT’ (vertical scaling mode): ‘GL_REPEAT’ (default), ‘SCALED’, ‘GL_MIRRORED_REPEAT, ‘GL_CLAMP_TO_EDGE’</li>
+<li>‘wrapS’ (horizontal scaling mode): ‘GL_REPEAT’ (default), ‘SCALED’, ‘GL_MIRRORED_REPEAT’, ‘GL_CLAMP_TO_EDGE’</li>
+</ul>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>x0</strong>: {int, optional} [-4096,4096], default: 0, step: 1</dt>
+<dd>x0 position of window</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>y0</strong>: {int, optional} [-4096,4096], default: 0, step: 1</dt>
+<dd>y0 position of window</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>xsize</strong>: {int, optional} [0,4096], default: 0, step: 1</dt>
+<dd>width of window, if 0 (default) the window is positioned in the second screen or gets a default width of 100px if no second screen is available.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>ysize</strong>: {int, optional} [0,4096], default: 0, step: 1</dt>
+<dd>height of window, if 0 (default) the window is positioned in the second screen or gets a default height of 100px if no second screen is available.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>lut</strong>: {seq. of int (char), optional}</dt>
+<dd>Lookup table for a gamma correction with 256 values. If given, the gamma correction will be enabled (default: off) and the projected values are then modified with lut[value].</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>

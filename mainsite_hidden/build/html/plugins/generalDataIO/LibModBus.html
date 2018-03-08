@@ -24,18 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
     <script type="text/javascript" src="../../_static/AnimHeader.js"></script>
@@ -161,13 +149,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`LibModBus`</span></a></td>
+<td><span>itom-plugin for a modbus communication</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`LibModBus`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`LibModBus`</span></a></td>
+<td><span>licensed under GPL, since the libmodbus is also licensed under GPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -176,18 +164,61 @@
 <td>Modbus communication over TCP/IP and RTU</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`LibModBus`</span></a></td>
+<td><span>J.Nitsche, IPROM, TU Braunschweig</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>LibModBus is a itom-Plugin which provides modbusTCP and modbusRTU communication.
+The plugin is based on libmodbus v3.1.1 library and tested under Windows only atm.
+Registers are addressed using the modbus_read_registers (0x03) and modbus_write_registers (0x10) functions of libmodbus, coils are addressed using the modbus_read_bits (0x01) and modbus_write_bits (0x0F) functions.
+The plugin-functions used are getVal(dObj) and setVal(dObj) with a data object of the size 1xN with N the number of registers to be read/written.
+The content of the registers is expected as data in the uint16 data object for registers or uint8 data object for coils, the addressing of the registers is performed by a dObj-MetaTag ‘registers’ containing a string with address and number of consecutive registers seperated by ‘,’ and different registers seperated by ‘;’ i.e.: ‘10,2;34,1;77,4’ to address registers 10,11;34;77..80. Number 1 of consecutive registers can be left out i.e.:‘10,2;34;77,4’
+If no MetaTag is set, values of m_params[‘registers’] is tried to be used for addressing.</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>target</strong>: {str} default: 127.0.0.1</dt>
+<dd>Adress of the target device. IP-Adress for ModbusTCP (i.e. 127.0.0.1) or COM-Port for ModbusRTU (i.e. COM1)</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>port</strong>: {int, optional} [0,1024], default: 502, step: 1</dt>
+<dd>The number of the TCP port for ModBusTCP (default 502) or slave ID for ModbusRTU</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>baud</strong>: {int, optional} [50,4000000], default: 9600, step: 1</dt>
+<dd>The baudrate of the port for RTU communication</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>parity</strong>: {str, optional} default: N</dt>
+<dd>Parity for RTU communication (N,E,O)</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>databit</strong>: {int, optional} [5,8], default: 8, step: 1</dt>
+<dd>Number of bits to be written in line for RTU communication</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>stopbit</strong>: {int, optional} [1,2], default: 1, step: 1</dt>
+<dd>Stop bits after every n bits for RTU communication</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>output_mode</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>Enables command-line output of different readouts (e.g. register values of getVal)</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 <p>An example for opening a <em>LibModBus</em> instance at local host <em>127.0.0.1</em>; port <em>502</em> is:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lmb</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;LibModBus&quot;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">502</span><span class="p">)</span>
 </pre></div>

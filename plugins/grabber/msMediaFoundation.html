@@ -24,18 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
     <script type="text/javascript" src="../../_static/AnimHeader.js"></script>
@@ -174,13 +162,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`MSMediaFoundation`</span></a></td>
+<td><span>MSMediaFoundation</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`MSMediaFoundation`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`MSMediaFoundation`</span></a></td>
+<td><span>licensed under LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows (Vista, 7, 8)</td>
@@ -189,10 +177,10 @@
 <td>USB Plug&amp;Play Cameras, including cameras from The Imaging Source</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`MSMediaFoundation`</span></a></td>
+<td><span>M. Gronle, H. Bieger, ITO, University Stuttgart</span></td>
 </tr>
 <tr class="row-odd"><td><strong>Version</strong>:</td>
-<td><a href="#id9"><span class="problematic" id="id10">:pluginversion:`MSMediaFoundation`</span></a></td>
+<td><span>1.2.0</span></td>
 </tr>
 <tr class="row-even"><td><strong>Available</strong>:</td>
 <td>This plugin will be part of the itom setup from itom 1.2.0 on.</td>
@@ -231,7 +219,29 @@ Currently, only cameras with the media type <em>RGB24</em> or <em>YUY2</em> are 
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>cameraNumber</strong>: {int, optional} [0,255], default: 0, step: 1</dt>
+<dd>consecutive number of the connected camera (starting with 0, default)</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>colorMode</strong>: {str, optional} default: auto</dt>
+<dd>color mode of camera (auto|color|red|green|blue|gray, default: auto -&gt; color or gray)</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>mediaTypeID</strong>: {int, optional} [-1,1000], default: 0, step: 1</dt>
+<dd>ID of the media format. 0 (default) takes the first from the list (must be MFVideoFormat_RGBA24 as subtype). -1: prints out a list of devices and quits the initialization, other: other index from the list of available types</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>flipImage</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>if 1 image is vertically flipped (default: 0)</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
