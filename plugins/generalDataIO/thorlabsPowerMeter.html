@@ -24,8 +24,6 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
     <script type="text/javascript" src="../../_static/AnimHeader.js"></script>
@@ -151,13 +149,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`ThorlabsPowerMeter`</span></a></td>
+<td><span>ThorlabsPowerMeter</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`ThorlabsPowerMeter`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`ThorlabsPowerMeter`</span></a></td>
+<td><span>LPGL, uses Thorlabs CCS VISA Instrument Driver (LGPL licensed)</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows</td>
@@ -166,18 +164,33 @@
 <td>Thorlabs Power and Energy Meter Consoles PM100x</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`ThorlabsPowerMeter`</span></a></td>
+<td><span>Robin Hahn, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin can be used to control any Thorlabs PM100x Power Console with a connected photodiode power sensors. Other sensors like thermal or pyroelectric sensors are currently not supported by this plugin.
+If you start the plugin without further parameters (device=’‘), the first connected device is opened.
+Set device = ‘&lt;scan&gt;’ in order to get a printed list of detected devices. Use the device string or the desired
+device in order to open this specific one.</p>
+<p>The plugin was tested with a PM100A console and a standard photodiode power sensor.</p>
+<p>This plugin gives full control over the connected device. For high attenuation there is a known issue when setting the power range via the slider widget (this belongs to the great range of possible values) in the config dialog or the dock widget.The power range is at any time fully accessible over the setParam command.</p>
+<p>For compiling this plugin, you need to install the Thorlabs PM100x Instrument Driver or the Optical Power Meter Utility (including the driver) , shipped with the spectrometer.
+Then set the CMake variable Thorlabs_IVI_VISA_INCLUDE_DIR to the include directory (e.g. C:/Program Files/IVI Foundation/VISA/Win64/Include)</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>device</strong>: {str} default:</dt>
+<dd>device name that should be opened, an empty string opens the first device that is found. Pass ‘&lt;scan&gt;’ for displaying all devices</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
