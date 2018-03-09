@@ -13,7 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:200,400,500,700" rel="stylesheet">
 
     
-    <title>NI-DAQmx &#8212; itom</title>
+    <title>niDAQmx &#8212; itom</title>
 
     <link rel="stylesheet" href="../../_static/MDL_theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -23,6 +23,8 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../../_static/MDL/material.min.js"></script>
     <script type="text/javascript" src="../../_static/MDL_theme.js"></script>
@@ -40,7 +42,7 @@
         <nav class="mdl-navigation breadcrumb">
             <a class="mdl-navigation__link" href="../../plugins.html">Plugins</a><i class="material-icons">navigate_next</i>
             <a class="mdl-navigation__link" href="../adconv.html">AD-Converters</a><i class="material-icons">navigate_next</i>
-            <a class="mdl-navigation__link is-active">NI-DAQmx</a>
+            <a class="mdl-navigation__link is-active">niDAQmx</a>
         </nav>
         <div class="mdl-layout-spacer"></div>
 		
@@ -111,7 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../GDIO.html">General Data IO</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../adconv.html">AD-Converters</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="MeasurementComputing.html">MeasurementComputing</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">NI-DAQmx</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">niDAQmx</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms/ Filters</a></li>
@@ -131,8 +133,8 @@
 
         <div class="page-content">
             
-  <div class="section" id="ni-daqmx">
-<h1>NI-DAQmx<a class="headerlink" href="#ni-daqmx" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="nidaqmx">
+<h1>niDAQmx<a class="headerlink" href="#nidaqmx" title="Permalink to this headline">¶</a></h1>
 <table border="1" class="docutils">
 <colgroup>
 <col width="13%" />
@@ -140,13 +142,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`NI-DAQmx`</span></a></td>
+<td><span>niDAQmx</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
-<td><a href="#id3"><span class="problematic" id="id4">:plugintype:`NI-DAQmx`</span></a></td>
+<td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`NI-DAQmx`</span></a></td>
+<td><span>licensed under LGPL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -155,7 +157,7 @@
 <td>NI-ADDA Converter</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`Martin Hoppe`</span></a></td>
+<td><span>Martin Hoppe, ITO, University Stuttgart</span></td>
 </tr>
 <tr class="row-odd"><td><strong>Requires</strong>:</td>
 <td>NI-DAQmx Lib and DLL</td>
@@ -165,16 +167,25 @@
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The plugin implements the DAQmx functions for analog-digital-converters from National Instruments. The installation needs the NI-DAQmx Library that can be downloaded from the NI website (<a class="reference external" href="http://www.ni.com/download/ni-daqmx-14.2/5046/en/">http://www.ni.com/download/ni-daqmx-14.2/5046/en/</a>)</p>
+<p>The plugin implements the DAQmx functions for analog-digital-converters from National Instruments.
+The installation needs the NI-DAQmx Library that can be downloaded from the NI website (<a class="reference external" href="http://www.ni.com/download/ni-daqmx-14.2/5046/en/">http://www.ni.com/download/ni-daqmx-14.2/5046/en/</a>)</p>
 </div>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
-<div></div></blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>device</strong>: {str, optional} default: Dev1</dt>
+<dd>Name of the target Device, Dev1 as default, cDAQ1Mod1 for compactDAQ single module Device. Other names see device description in NI MAX</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
-<p>These parameters are available and can be used to configure the <strong>NI-DAQmx</strong> instance. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable
+<p>These parameters are available and can be used to configure the <strong>niDAQmx</strong> instance. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable
 parameters can be changed using <em>setParam</em>. In general the string returned is a semicolon comma separated string. Groups are separated by semicolon, elements inside groups with a comma.
 Example: the answer of taskStatus =&gt; “ai,0;ao,0;ci,-1;co,-1;di,-1;do,-1”</p>
 <dl class="docutils">
@@ -282,7 +293,7 @@ This parameter is only required for writing data. When reading data the type of 
 <div class="section" id="changelog">
 <h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>itom setup 3.1.0: This plugin has been compiled using the NI-DAQmx 17.6.0</li>
+<li>itom setup 3.1.0: This plugin has been compiled using the niDAQmx 17.6.0</li>
 </ul>
 </div>
 </div>
