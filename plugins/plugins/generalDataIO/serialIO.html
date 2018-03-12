@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3.10. SerialIO &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="itom Documentation" href="../../index.html"/>
+        <link rel="up" title="3. General Data IO" href="../GDIO.html"/>
+        <link rel="next" title="3.11. Thorlabs Power Meter" href="thorlabsPowerMeter.html"/>
+        <link rel="prev" title="3.9. LibUSB" href="libUSB.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../GDIO.html">3. General Data IO</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CyUSB.html">3.1. CyUSB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LibModBus.html">3.2. LibModBus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SuperlumBL.html">3.3. SuperlumBL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SuperlumBS.html">3.4. SuperlumBS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispWindow.html">3.5. DispWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glDisplay.html">3.6. GLDisplay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwInstekPSP.html">3.7. GWInstekPSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hidApi.html">3.8. HidApi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libUSB.html">3.9. LibUSB</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.10. SerialIO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">3.10.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">3.10.2. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">3.10.3. Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">3.10.4. Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-the-serialio-plugin-to-wait-for-full-answers">3.10.5. Configure the serialIO plugin to wait for full answers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clear-input-or-output-buffer">3.10.6. Clear input or output buffer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-a-list-of-available-com-ports-under-windows">3.10.7. Get a list of available COM ports under Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">3.10.8. Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">3.10.9. Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="thorlabsPowerMeter.html">3.11. Thorlabs Power Meter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../GDIO.html">3. General Data IO</a> &raquo;</li>
+        
+      <li>3.10. SerialIO</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/plugins/generalDataIO/serialIO.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="serialio">
+<h1>3.10. SerialIO<a class="headerlink" href="#serialio" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>itom-plugin for a serial port communication</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>DataIO</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>licensed under LGPL</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows, Linux</td>
+</tr>
+<tr class="row-odd"><td><strong>Devices</strong>:</td>
+<td>COM-Ports (Windows), ttySx and ttyUSBx (Linux)</td>
+</tr>
+<tr class="row-even"><td><strong>Author</strong>:</td>
+<td><span>H. Bieger, C. Kohler, ITO, University Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>3.10.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin encapsulates the access to the serial port. It can be used on both
+Windows and linux based operating systems.</p>
+<p>In <strong>itom</strong>, this plugin is also interally used by other plugins (e.g. <em>PIPiezoCtrl</em>, <em>UhlActuator</em>, <em>LeicaMotorFocus</em> or <em>PiezosystemJena</em>).</p>
+<p>Features are:</p>
+<ul class="simple">
+<li>Access to the port settings by its internal parameters and the initialization.</li>
+<li>Support for different baudrates, stop bits, parity and flow control.</li>
+<li>Endline characters can automatically appended to each sent string and are split from received strings.</li>
+<li>Any string can be sent with a certain delay in between each character (useful for older devices).</li>
+<li>A debugging parameter allows displaying the entire data transfer in the optional toolbox.</li>
+<li>The configuration dialog can be used to send user-defined strings via the opened connection.</li>
+</ul>
+</div>
+<div class="section" id="initialization">
+<h2>3.10.2. Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>For a connection to a serial port, create a new instance of this plugin using:</p>
+<dl class="function">
+<dt>
+<code class="descname">dataIO</code><span class="sig-paren">(</span><em>&quot;SerialIO&quot;</em>, <em>port</em>, <em>baud</em>, <em>endline</em><span class="optional">[</span>, <em>bits</em>, <em>stopbits</em>, <em>parity</em>, <em>flow</em>, <em>sendDelay</em>, <em>timeout</em>, <em>debug</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<dd><p>This is the necessary constructor of the class <em>dataIO</em> of <em>itom</em> in order to create a new instance of the plugin <strong>serialIO</strong>.</p>
+<p>The parameter are as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="12%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>port</td>
+<td>int</td>
+<td>Windows: COM-port number (e.g. 1), Linux: ttySx, ttyUSBx or ttyACMx (x is port, see infos below)</td>
+</tr>
+<tr class="row-even"><td>baud</td>
+<td>int</td>
+<td>Baudrate (see <em>baudrate</em> in the parameter description below)</td>
+</tr>
+<tr class="row-odd"><td>endline</td>
+<td>str</td>
+<td>endline character (see <em>endline</em> in the parameter description below)</td>
+</tr>
+<tr class="row-even"><td>bits</td>
+<td>int, optional</td>
+<td>number of bits to be written in line [5,8], default: 8</td>
+</tr>
+<tr class="row-odd"><td>stopbits</td>
+<td>int, optional</td>
+<td>stop bits after every n bits [1,2], default: 1</td>
+</tr>
+<tr class="row-even"><td>parity</td>
+<td>int, optional</td>
+<td>0: no parity [default], 1: odd parity, 2: even parity</td>
+</tr>
+<tr class="row-odd"><td>flow</td>
+<td>int, optional</td>
+<td>bitmask for the flow control (see <em>flow</em> in the parameter description below) [0, 127], default: 0</td>
+</tr>
+<tr class="row-even"><td>sendDelay</td>
+<td>int, optional</td>
+<td>0: write output buffer in one block, else: delay in ms after each character (same for input)</td>
+</tr>
+<tr class="row-odd"><td>timeout</td>
+<td>float, optional</td>
+<td>Timeout for reading the current input buffer of the serial port in [s], [0,64], default: 4s</td>
+</tr>
+<tr class="row-even"><td>enableDebug</td>
+<td>int, optional</td>
+<td>0: no debug output [default], 1: all data transfer is printed to the toolbox</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>An example for opening port <strong>COM 1</strong> with 9600 bauds is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9600</span><span class="p">,</span> <span class="n">endline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For linux, the port number may start with zero. If port numbers &lt; 1000 are given, at first the serial port <strong>ttySx</strong> is checked, where
+x is the given port number. If <strong>ttySx</strong> does not exist, <strong>ttyUSBx</strong> is searched. If a port number in the range [1000,1999] is given,
+the device <strong>ttyUSBx</strong> is used, where <em>x</em> is (port - 1000). Finally, if port is in the range [2000,2999], the device <strong>ttyACMx</strong> is
+searched, where <em>x</em> is (port - 2000).</p>
+</div>
+<div class="section" id="parameters">
+<h2>3.10.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>These parameters are available and can be used to configure the <strong>serialIO</strong> instance. Many of them are directly initialized by the
+parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable
+parameters can be changed using <em>setParam</em>.</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of the plugin (<em>SerialIO</em>)</dd>
+<dt><strong>port</strong>: {int}, read-only</dt>
+<dd>connected COM port number (defined by initialization)</dd>
+<dt><strong>baud</strong>: {int}</dt>
+<dd><p class="first">current baudrate in symbols per second (approximately bits/sec). Allowed baudrates are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">2400</span><span class="p">,</span>
+<span class="mi">4800</span><span class="p">,</span> <span class="mi">9600</span><span class="p">,</span> <span class="mi">19200</span><span class="p">,</span> <span class="mi">38400</span><span class="p">,</span> <span class="mi">57600</span><span class="p">,</span> <span class="mi">115200</span><span class="p">,</span> <span class="mi">230400</span><span class="p">,</span> <span class="mi">460800</span><span class="p">,</span>
+<span class="mi">500000</span><span class="p">,</span> <span class="mi">576000</span><span class="p">,</span> <span class="mi">921600</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">1152000</span><span class="p">,</span> <span class="mi">1500000</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">,</span>
+<span class="mi">2500000</span><span class="p">,</span> <span class="mi">3000000</span><span class="p">,</span> <span class="mi">3500000</span><span class="p">,</span> <span class="mi">4000000</span>
+</pre></div>
+</div>
+<p class="last">However not all baudrates are supported on each operating system.</p>
+</dd>
+<dt><strong>bits</strong>: {int}</dt>
+<dd>Number of bits to be written in line [5,8]</dd>
+<dt><strong>stopbits</strong>: {int}</dt>
+<dd>Stop bits after every n-th bit [1,2]</dd>
+<dt><strong>parity</strong>: {int}</dt>
+<dd>Parity check
+0: no parity
+1: odd parity
+2: even parity</dd>
+<dt><strong>flow</strong>: {int}</dt>
+<dd><p class="first">bitmask for the flow control. This mask is an or-combination of the following values (add values for resulting flow value):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Xon</span><span class="p">,</span><span class="n">Xoff</span><span class="p">:</span> <span class="n">Xoff</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span> <span class="n">Xon</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="mf">1.</span> <span class="n">bit</span>
+<span class="n">rts</span> <span class="n">control</span><span class="p">:</span> <span class="n">disabled</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span> <span class="n">enabled</span> <span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">handshake</span> <span class="p">(</span><span class="mi">4</span> <span class="ow">or</span> <span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span> <span class="mf">2.</span> <span class="ow">and</span> <span class="mf">3.</span> <span class="n">bit</span>
+<span class="n">cts</span> <span class="n">control</span><span class="p">:</span> <span class="n">disabled</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span> <span class="n">enabled</span> <span class="p">(</span><span class="mi">8</span><span class="p">);</span> <span class="mf">4.</span> <span class="n">bit</span>
+<span class="n">dtr</span> <span class="n">control</span><span class="p">:</span> <span class="n">disabled</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span> <span class="n">enabled</span> <span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">handshake</span> <span class="p">(</span><span class="mi">32</span> <span class="ow">or</span> <span class="mi">32</span><span class="o">+</span><span class="mi">16</span><span class="p">);</span> <span class="mf">5.</span> <span class="ow">and</span> <span class="mf">6.</span> <span class="n">bit</span>
+<span class="n">dsr</span> <span class="n">control</span><span class="p">:</span> <span class="n">disabled</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="p">),</span> <span class="n">enabled</span> <span class="p">(</span><span class="mi">64</span><span class="p">);</span> <span class="mf">7.</span> <span class="n">bit</span>
+</pre></div>
+</div>
+<p class="last">Example: Xon, rts handshake, dsr enabled is 1 + 4 + 64 = 69 for the flow value</p>
+</dd>
+<dt><strong>endline</strong>: {str}</dt>
+<dd><p class="first">If a string is put to the output buffer (and send via the opened port), the endline-string is automatically appended to the string.
+Typical values are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n\r</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p class="last">Use the empty endline character string (“”) if you want to have full control.</p>
+</dd>
+<dt><strong>endlineRead</strong>: {str}</dt>
+<dd>Same behaviour like <strong>endline</strong>, however it determines the delimiter for incoming strings and is only
+used or evaluated in <strong>readline</strong> is 1. The user is referred to <strong>readline</strong>.</dd>
+<dt><strong>readline</strong>: {int}</dt>
+<dd><blockquote class="first">
+<div>Per default, <strong>readline</strong> is set to 0. This means that the <strong>getVal</strong> command returns the values that are currently
+available at the input buffer of the computer. If you call <strong>getVal</strong> too fast, it might be, that the full answer
+is not available yet. Then you need to recall <strong>getVal</strong> again.
+If you set <strong>readline</strong> to 1, <strong>getVal</strong> collects values from the input buffer and checks if <strong>endlineRead</strong> is contained in the string. If so, <strong>getVal</strong> writes
+all characters also those behind the first appearance of <strong>endlineRead</strong> into the bytearray. Neverteless the number of obtained signs returned by <strong>getVal</strong>
+just counts the signs to the first apperance of <em>endlineRead</em>.
+Remaining characters are recognized at the next call to <strong>getVal</strong>. If no endline characters is detected within <em>timeout</em> seconds, a timeout (error code: 256)
+is raised.
+The following code example demonstrates how to obtain the bytearray until the <strong>endlineRead</strong> sign.</div></blockquote>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s1">&#39;readline&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">signs</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">signs</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>sendDelay</strong>: {str}</dt>
+<dd>This value represents a delay (in ms) after each character that is send and received</dd>
+<dt><strong>timeout</strong>: {double}</dt>
+<dd>Timeout in seconds. If the incoming buffer of the serial port cannot be read within this time, the call returns. [0,65]</dd>
+<dt><strong>enableDebug</strong>: {int}</dt>
+<dd>Set this value to 1 if you want to read the entire data transfer in the toolbox of an instance (disabled: 0).</dd>
+</dl>
+</div>
+<div class="section" id="usage">
+<h2>3.10.4. Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Lets assume a serial port connection should be established with the following properties:</p>
+<ul class="simple">
+<li>COM 1</li>
+<li>9600 baud</li>
+<li>8 bits</li>
+<li>1 stopbit</li>
+<li>no parity</li>
+<li>every command should finish with “\n”</li>
+</ul>
+<p>Then open the serial port and assign it to the variable <em>serial</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9600</span><span class="p">,</span><span class="n">endline</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">bits</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">stopbits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">parity</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you have a scenario that you need to ask for the position of an actuator. Maybe the string to send in order to ask
+for the current position is <strong>POS?n</strong>, then use the <strong>setVal</strong> method to send this string (<em>\n</em> is automatically appended):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span><span class="o">.</span><span class="n">setVal</span><span class="p">(</span><span class="s2">&quot;POS?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then it is necessary to get the result. Therefore create a bytearray with enough space and pass this array to the <strong>getVal</strong> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ba</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="c1">#array with nine elements</span>
+<span class="nb">len</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>len</em> finally contains the number of characters that have been filled by the serial port, of course, <em>len</em> cannot be bigger than
+the size of the allocated buffer <em>ba</em>. If the serial port does not respond at all within the given timeout time, an error is raised.
+<em>getVal</em> does not wait until the entire buffer is filled or the timeout occurs but returns immediately with the content of the buffer that
+has been filled until this time. In order to get the full answer, it is also possible to repeatedly call <em>getVal</em>.</p>
+</div>
+<div class="section" id="configure-the-serialio-plugin-to-wait-for-full-answers">
+<h2>3.10.5. Configure the serialIO plugin to wait for full answers<a class="headerlink" href="#configure-the-serialio-plugin-to-wait-for-full-answers" title="Permalink to this headline">¶</a></h2>
+<p>Per default, the user will send a request to a device. The device will then probably answer to this request using a specified string pattern.
+If the parameter <strong>readline</strong> is set to 0 (default), a call to <em>getVal</em> (see usage above), will only return all characters that fit into the
+buffer size and are currently available at the input buffer of the serial port. If the device need more time for the entire answer, the remaining
+part of the answer can only be obtained by continuously calling <em>getVal</em> until the entire answer is obtained.</p>
+<p>Usually, an answer always ends by a certain endline character sequence. If this sequence contains 1 or 2 characters, you can also configure
+the serialIO plugin such that <em>getVal</em> will continuously check the input buffer of the serial port and collect all characters until the endline
+sequence (parameter <strong>endlineRead</strong>) is detected or a timeout occurred. If the endline sequence was found, the characters until but without the
+first endline sequence are returned by the passed buffer. Remaining characters are put onto an internal buffer and considered at the next call
+to <em>getVal</em>. By this configuration you will automatically wait for the full answer without further programming work and without idle delay times.</p>
+<p>An example for this alternative approach is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;readline&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">serial</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;endlineRead&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">buffer</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">serial</span><span class="o">.</span><span class="n">setVal</span><span class="p">(</span><span class="s2">&quot;POS?&quot;</span><span class="p">)</span>
+<span class="n">num</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="nb">buffer</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;full answer from device&quot;</span><span class="p">,</span> <span class="nb">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="clear-input-or-output-buffer">
+<h2>3.10.6. Clear input or output buffer<a class="headerlink" href="#clear-input-or-output-buffer" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, it is necessary to immediately clear all characters inside of the input buffer (obtained by <em>getVal</em>) and/or output buffer (send by <em>setVal</em>). This can be done using specific <strong>exec</strong>-functions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;clearInputBuffer&quot;</span><span class="p">)</span> <span class="c1">#clear input buffer</span>
+<span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;clearOutputBuffer&quot;</span><span class="p">)</span> <span class="c1">#clear output buffer</span>
+
+<span class="c1">#alternative:</span>
+<span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;clearBuffer&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#clear input buffer</span>
+<span class="n">serial</span><span class="o">.</span><span class="k">exec</span><span class="p">(</span><span class="s2">&quot;clearBuffer&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">#clear output buffer</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-a-list-of-available-com-ports-under-windows">
+<h2>3.10.7. Get a list of available COM ports under Windows<a class="headerlink" href="#get-a-list-of-available-com-ports-under-windows" title="Permalink to this headline">¶</a></h2>
+<p>In order to get a list of all available COM ports under Windows, the following python code snippet can be used. It reads the corresponding registry entries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#This script can be used as example for Windows</span>
+<span class="c1">#to detect registered COM ports for this computer</span>
+<span class="kn">import</span> <span class="nn">winreg</span> <span class="kn">as</span> <span class="nn">wreg</span>
+
+<span class="k">def</span> <span class="nf">DetectCOMPorts</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">regconn</span> <span class="o">=</span> <span class="n">wreg</span><span class="o">.</span><span class="n">ConnectRegistry</span><span class="p">(</span> <span class="bp">None</span><span class="p">,</span> <span class="n">wreg</span><span class="o">.</span><span class="n">HKEY_LOCAL_MACHINE</span> <span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">wreg</span><span class="o">.</span><span class="n">OpenKey</span><span class="p">(</span> <span class="n">regconn</span><span class="p">,</span> <span class="s2">&quot;HARDWARE</span><span class="se">\\</span><span class="s2">DEVICEMAP</span><span class="se">\\</span><span class="s2">SERIALCOMM&quot;</span><span class="p">,</span> <span class="n">wreg</span><span class="o">.</span><span class="n">KEY_READ</span> <span class="p">)</span>
+        <span class="n">values_count</span> <span class="o">=</span> <span class="n">wreg</span><span class="o">.</span><span class="n">QueryInfoKey</span><span class="p">(</span> <span class="n">key</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">values_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="n">values_count</span> <span class="p">):</span>
+            <span class="n">values_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">wreg</span><span class="o">.</span><span class="n">EnumValue</span><span class="p">(</span> <span class="n">key</span><span class="p">,</span> <span class="n">i</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span> <span class="ne">WindowsError</span><span class="p">,</span> <span class="ne">EnvironmentError</span> <span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Unable to Connect to the Window Registry and read keys&quot;</span> <span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">key</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">values_list</span>
+
+<span class="k">def</span> <span class="nf">NumberOfCOMPorts</span><span class="p">(</span> <span class="n">values_list</span> <span class="p">):</span>
+    <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span> <span class="n">values_list</span> <span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Name : &quot;</span> <span class="o">+</span> <span class="n">subkey</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span> <span class="s2">&quot;Data : &quot;</span> <span class="o">+</span> <span class="n">subkey</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">NumberOfCOMPorts</span><span class="p">(</span> <span class="n">DetectCOMPorts</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>3.10.8. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>For using this plugin no further 3rd party libraries or drivers are necessary.</p>
+<p>If you are using linux to open a serial connection and you are running <strong>itom</strong> without root privileges, which is recommended, you have to add
+your user to the <strong>dialout</strong> group, logout once and login again.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo adduser USERNAME dialout
+</pre></div>
+</div>
+<p>where USERNAME ist the username under which you are running <strong>itom</strong></p>
+</div>
+<div class="section" id="changelog">
+<h2>3.10.9. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>itom 1.2.0 is shipped with version 0.0.2 of serialIO</li>
+<li>parameters ‘readline’ and ‘endlineRead’ are available in serialIO version &gt;= 1.0.0</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="thorlabsPowerMeter.html" class="btn btn-neutral float-right" title="3.11. Thorlabs Power Meter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="libUSB.html" class="btn btn-neutral" title="3.9. LibUSB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Mar 12, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

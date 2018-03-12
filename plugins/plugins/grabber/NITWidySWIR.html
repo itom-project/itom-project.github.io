@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.3. NITWidySWIR &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="itom Documentation" href="../../index.html"/>
+        <link rel="up" title="1. Camera/ Grabber" href="../grabbers.html"/>
+        <link rel="next" title="1.4. VRMagic" href="VRMagic.html"/>
+        <link rel="prev" title="1.2. IDS uEye" href="IDSuEyeCamera.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AndorSDK3.html">1.1. Andor SDK3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IDSuEyeCamera.html">1.2. IDS uEye</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.3. NITWidySWIR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">1.3.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">1.3.2. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">1.3.3. Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#image-acquisition">1.3.4. Image Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">1.3.5. Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compilation">1.3.6. Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">1.3.7. Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VRMagic.html">1.4. VRMagic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avantesAvaSpec.html">1.5. Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avtVimba.html">1.6. AVT Vimba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmu1394.html">1.7. CMU1394</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commonVisionBlox.html">1.8. GenICam cameras via Common Vision Blox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dummyGrabber.html">1.9. DummyGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileGrabber.html">1.10. FileGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fireGrabber.html">1.11. FireGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genicam.html">1.12. GenICam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="msMediaFoundation.html">1.13. MSMediaFoundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openCVGrabber.html">1.14. OpenCVGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoCamera.html">1.15. PCOCamera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoPixelFly.html">1.16. PCOPixelFly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoSensicam.html">1.17. PCOSensicam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgrFlyCapture.html">1.18. PGRFlyCapture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qCam.html">1.19. QCam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thorlabsCCS.html">1.20. Thorlabs CCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v4l2.html">1.21. V4L2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vistek.html">1.22. Vistek</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ximea.html">1.23. Ximea</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../grabbers.html">1. Camera/ Grabber</a> &raquo;</li>
+        
+      <li>1.3. NITWidySWIR</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/plugins/grabber/NITWidySWIR.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="nitwidyswir">
+<h1>1.3. NITWidySWIR<a class="headerlink" href="#nitwidyswir" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>Plugin for cameras from NEW IMAGING TECHNOLOGIES (NIT).</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>DataIO</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>LPGL</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows only</td>
+</tr>
+<tr class="row-odd"><td><strong>Devices</strong>:</td>
+<td>Cameras from company <em>NIT</em> (tested with USB2 WidySWIR 640U-S)</td>
+</tr>
+<tr class="row-even"><td><strong>Author</strong>:</td>
+<td><span>J. Krauter, ITO, University Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>1.3.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>This dataIO grabber plugin runs with the NITLIBRARY API from the company NEW IMAGING TECHNOLOGIES (NIT).</dt>
+<dd><p class="first">This plugin has been tested using the Widy SWIR 640U-S camera in USB2 version and the SDK version 1.5.
+In this itom plugin a bad pixel correction is not implemented, because for optical measurement applications it is not necessary.</p>
+<dl class="last docutils">
+<dt><strong>WARNING</strong>: Some parameters do no work with the current tested camera!</dt>
+<dd>NITLibrary defines the parameter <strong>“offset, gain, histogram threshold, pixel clock”</strong> as changable, but with the current version is does not!
+The parameter <strong>pixel_clock</strong> is set to <em>Readonly</em>, because the camera acquisition crash. This problem should be tested with the next NITLibrary version.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="initialization">
+<h2>1.3.2. Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>printManual</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>If printManual is set to 1, the parameters of the camera are printed into the itom shelf.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>printParameterValues</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>If printParameterValues is set to 1, all available values of the parameters are printed into the itom shelf.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>deviceNumber</strong>: {int, optional} [0,99], default: -1, step: 1</dt>
+<dd>Number of the device, which you want to connect.</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>1.3.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><strong>bpp</strong>: {int}</dt>
+<dd>Bits per pixel bpp (8,14).</dd>
+<dt><strong>enablePixelCorrection</strong>: {int}</dt>
+<dd>enables pixel correction by using NIT NUC files. By changing the integration_time the NUC file is changed, too.</dd>
+<dt><strong>firmware_version</strong>: {float}, read-only</dt>
+<dd>Firmware version of connectecd device.</dd>
+<dt><strong>framerate</strong>: {int}</dt>
+<dd>Framerate of image acquisition (0..1000) in [fps].</dd>
+<dt><strong>gain</strong>: {float}</dt>
+<dd>Gain of camera (0..7.5) in [no unit].</dd>
+<dt><strong>histogram_threshold</strong>: {float}</dt>
+<dd>Histogram threshold of image acquisition (0.025, 0.1, 0.4, 1.6) in [%].</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>Integrationtime of connected device (0.1..25.6) in [s].</dd>
+<dt><strong>model_id</strong>: {str}, read-only</dt>
+<dd>Model ID of connected device.</dd>
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>Name of plugin.</dd>
+<dt><strong>nucFilePath</strong>: {str}</dt>
+<dd>Path of the NUC pixel correction files.</dd>
+<dt><strong>offset</strong>: {float}</dt>
+<dd>Offset of image acquisition (0..100) in [%].</dd>
+<dt><strong>pixel_clock</strong>: {float}, read-only</dt>
+<dd>Pixel clock of device (12.5, 16.66, 20, 25, 33.33, 40, 50, 66.66, 80) in [MHz].</dd>
+<dt><strong>roi</strong>: {int rect [x0,y0,width,height]}, read-only</dt>
+<dd>Region of Interest ROI [x0, y0, width, height].</dd>
+<dt><strong>serial_number</strong>: {int}, read-only</dt>
+<dd>Serial number of connected device.</dd>
+<dt><strong>shutter_mode</strong>: {str}</dt>
+<dd>Shutter Mode of connected device (Global Shutter, Rolling).</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt>
+<dd>Width of ROI (x-direction).</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt>
+<dd>Height of ROI (y-direction).</dd>
+<dt><strong>trigger_mode</strong>: {str}</dt>
+<dd>Trigger Mode of connected device (Disabled, Input, Output). Use Disabled for software trigger.</dd>
+</dl>
+</div>
+<div class="section" id="image-acquisition">
+<h2>1.3.4. Image Acquisition<a class="headerlink" href="#image-acquisition" title="Permalink to this headline">¶</a></h2>
+<p>With this camera an image is acquired by the standard <strong>itom</strong> image acquisition syntax:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cam</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;NITWidySWIR&quot;</span><span class="p">)</span> <span class="c1"># get instance of plugin</span>
+<span class="n">cam</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span> <span class="c1"># start device</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span> <span class="c1"># define dataObject</span>
+<span class="n">cam</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="c1"># acquire an image</span>
+<span class="n">cam</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="c1"># collect the image in a dataObject</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The camera can be initialized with two optional parameters (<strong>printManual, printParameterValues</strong>).</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cam</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;NITWidySWIR&quot;</span><span class="p">,</span> <span class="n">printManual</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">printParameterValues</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>printParameterValues</strong> print all values of the parameters in the itom shelf.
+<strong>printManual</strong> prints the Manual, given by the camera link in the following:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><div class="first last line-block">
+<div class="line">Manual: ——————</div>
+<div class="line">Connector</div>
+<div class="line">Model</div>
+<div class="line">Firmware Version</div>
+<div class="line">Serial Number</div>
+<div class="line">————————–</div>
+<div class="line">First Column :</div>
+<div class="line">Number of Column :</div>
+<div class="line">First Line :</div>
+<div class="line">Number of Line :</div>
+<div class="line">Pixel Depth :</div>
+<div class="line">Trigger Mode :</div>
+<div class="line">Mode :</div>
+<div class="line">Pixel Clock :</div>
+<div class="line">Gain :</div>
+<div class="line">Offset :</div>
+<div class="line">Exposure Time :</div>
+<div class="line">Histogram Threshold :</div>
+</div>
+</td>
+<td rowspan="2"><div class="first last line-block">
+<div class="line"><br /></div>
+<div class="line">USB 2.0</div>
+<div class="line">NSC1201</div>
+<div class="line">8.0</div>
+<div class="line">24a8c</div>
+<div class="line"><br /></div>
+<div class="line">{ 0, 4, … , 628, 632 }</div>
+<div class="line">{ 8, 16, … , 632, 640 }</div>
+<div class="line">{ 0, 4, … , 500, 504 }</div>
+<div class="line">{ 8, 16, … , 504, 512 }</div>
+<div class="line">{ 8bits, 14bits }</div>
+<div class="line">{ Output, Input, Disabled }</div>
+<div class="line">{ Rolling, Global Shutter }</div>
+<div class="line">{ 12.5MHz, 16.66MHz, … , 66.66MHz, 80MHz }</div>
+<div class="line">{ AGC, 0.25, … , 7.50, 7.75 }</div>
+<div class="line">{ 0.00% full scale, 0.39% full scale, … , 99.06% full scale, 99.45% full scale }</div>
+<div class="line">{ 100 µs, 200 µs, … , 25500 µs, 25600 µs }</div>
+<div class="line">{ 1.6%, 0.4%, 0.1%, 0.025% }</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="installation">
+<h2>1.3.5. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p><em>Windows:</em></p>
+<ul class="simple">
+<li>The USB2 <strong>NITWidySWIR</strong> driver is installed automatically by Windows after the first connection.</li>
+</ul>
+</div>
+<div class="section" id="compilation">
+<h2>1.3.6. Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
+<p>In order to compile the <strong>NITWidySWIR</strong> plugin, get the <strong>SDK C++</strong>, which will be deliverd together with the camera on a USB stick or contact the company (<a class="reference external" href="http://www.new-imaging-technologies.com">http://www.new-imaging-technologies.com</a>).
+Then set the CMake variable <strong>NITLIBRARY_INCLUDE_DIR</strong> to the directory: <strong>…\SDK C++\NITLIBRARY 1.5\include++</strong>.
+CMake will find all necessary files.</p>
+</div>
+<div class="section" id="changelog">
+<h2>1.3.7. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>itom setup 2.2.1: This plugin has been compiled using the NITLibrary 1.5</li>
+<li>itom setup 3.0.0: This plugin has been compiled using the NITLibrary 1.5</li>
+<li>itom setup 3.1.0: This plugin has been compiled using the NITLibrary 1.5</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="VRMagic.html" class="btn btn-neutral float-right" title="1.4. VRMagic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="IDSuEyeCamera.html" class="btn btn-neutral" title="1.2. IDS uEye" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Mar 12, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.8. DummyMotor &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="itom Documentation" href="../../index.html"/>
+        <link rel="up" title="2. Motors/ Actuators" href="../actuators.html"/>
+        <link rel="next" title="2.9. LeicaMotorFocus" href="leicaMotorFocus.html"/>
+        <link rel="prev" title="2.7. AerotechEnsemble" href="aerotechEnsemble.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FirgelliLAC.html">2.1. Firgelli LAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NanotecStepMotor.html">2.2. Nanotec Stepper Motor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SMC100.html">2.3. NewportSMC100</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ST8SMC4USB.html">2.4. STANDA 8SMC4-USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThorlabsBP.html">2.5. Thorlabs Benchtop Piezo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThorlabsISM.html">2.6. Thorlabs ISM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aerotechEnsemble.html">2.7. AerotechEnsemble</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.8. DummyMotor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.8.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">2.8.2. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">2.8.3. Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="leicaMotorFocus.html">2.9. LeicaMotorFocus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piGCS2.html">2.10. PI GCS2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piPiezoCtrl.html">2.11. PIPiezoCtrl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piezosystemJena_NV40_1.html">2.12. Piezosystem Jena NV40/1 CLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uhlRegister.html">2.13. Uhl stages (register based)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uhlText.html">2.14. Uhl stages (text based)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usbMotion3XIII.html">2.15. USBMotion3XIII</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../actuators.html">2. Motors/ Actuators</a> &raquo;</li>
+        
+      <li>2.8. DummyMotor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/plugins/actuators/dummyMotor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dummymotor">
+<h1>2.8. DummyMotor<a class="headerlink" href="#dummymotor" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>A virtual motor to test real actuators.</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>Actuator</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>Licensed under LPGL.</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows, Linux</td>
+</tr>
+<tr class="row-odd"><td><strong>Devices</strong>:</td>
+<td>Virtual dummy motor with</td>
+</tr>
+<tr class="row-even"><td><strong>Author</strong>:</td>
+<td><span>W. Lyda, ITO, University Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>2.8.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The DummyMotor is a virtual actuator plugin that emulates up to 10 linear axes.</p>
+<p>The real number of simulated axes is given by the initialization parameter ‘numAxis’. Use this plugin to simulate or develop your measurement system at another computer. Whenever a position command is executed, this plugin sleeps until the time needed for the positioning (with respect to the speed of the axis) expired.</p>
+</div>
+<div class="section" id="initialization">
+<h2>2.8.2. Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>numAxis</strong>: {int, optional} [1,6], default: 1, step: 1</dt>
+<dd>Number of axis for this motor</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>motorName</strong>: {str, optional} default: DummyMotor</dt>
+<dd>Name for this dummyMotor</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>useLimits</strong>: {seq. of int, optional} 6-6 values, each value in range [0:1:1]</dt>
+<dd>Use axes limits and limit switches</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>limitPos</strong>: {seq. of float, optional} 6.000000-6.000000 values, each value in range [-9999999999999999818630698308109481982927274216983785721776674794699138106539424938898600659703096825493544616522696356805028364441642842329313746550197144253860793660984920822957311285732475861572950035529728.000000:9999999999999999818630698308109481982927274216983785721776674794699138106539424938898600659703096825493544616522696356805028364441642842329313746550197144253860793660984920822957311285732475861572950035529728.000000]</dt>
+<dd>positive limits of axes</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>limitNeg</strong>: {seq. of float, optional} 6.000000-6.000000 values, each value in range [-9999999999999999818630698308109481982927274216983785721776674794699138106539424938898600659703096825493544616522696356805028364441642842329313746550197144253860793660984920822957311285732475861572950035529728.000000:9999999999999999818630698308109481982927274216983785721776674794699138106539424938898600659703096825493544616522696356805028364441642842329313746550197144253860793660984920822957311285732475861572950035529728.000000]</dt>
+<dd>negative limits of axes</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>2.8.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following parameters:</p>
+<dl class="docutils">
+<dt><strong>accel</strong>: {float}</dt>
+<dd>Acceleration in mm/s^2, currently not implemented</dd>
+<dt><strong>async</strong>: {int}</dt>
+<dd>Toggles if motor has to wait until end of movement (0:sync) or not (1:async)</dd>
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of the plugin</dd>
+<dt><strong>numaxis</strong>: {int}, read-only</dt>
+<dd>Number of Axis attached to this stage</dd>
+<dt><strong>speed</strong>: {float}</dt>
+<dd>Speed of the axis between 0.1 and 100000 mm/s</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="leicaMotorFocus.html" class="btn btn-neutral float-right" title="2.9. LeicaMotorFocus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="aerotechEnsemble.html" class="btn btn-neutral" title="2.7. AerotechEnsemble" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Mar 12, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

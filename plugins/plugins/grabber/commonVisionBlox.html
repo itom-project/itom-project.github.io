@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.8. GenICam cameras via Common Vision Blox &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="itom Documentation" href="../../index.html"/>
+        <link rel="up" title="1. Camera/ Grabber" href="../grabbers.html"/>
+        <link rel="next" title="1.9. DummyGrabber" href="dummyGrabber.html"/>
+        <link rel="prev" title="1.7. CMU1394" href="cmu1394.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AndorSDK3.html">1.1. Andor SDK3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IDSuEyeCamera.html">1.2. IDS uEye</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NITWidySWIR.html">1.3. NITWidySWIR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VRMagic.html">1.4. VRMagic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avantesAvaSpec.html">1.5. Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avtVimba.html">1.6. AVT Vimba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmu1394.html">1.7. CMU1394</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.8. GenICam cameras via Common Vision Blox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">1.8.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">1.8.2. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">1.8.3. Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">1.8.4. Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acquisition">1.8.5. Acquisition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hints">1.8.6. Hints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dummyGrabber.html">1.9. DummyGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileGrabber.html">1.10. FileGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fireGrabber.html">1.11. FireGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genicam.html">1.12. GenICam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="msMediaFoundation.html">1.13. MSMediaFoundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openCVGrabber.html">1.14. OpenCVGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoCamera.html">1.15. PCOCamera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoPixelFly.html">1.16. PCOPixelFly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoSensicam.html">1.17. PCOSensicam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgrFlyCapture.html">1.18. PGRFlyCapture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qCam.html">1.19. QCam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thorlabsCCS.html">1.20. Thorlabs CCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v4l2.html">1.21. V4L2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vistek.html">1.22. Vistek</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ximea.html">1.23. Ximea</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../grabbers.html">1. Camera/ Grabber</a> &raquo;</li>
+        
+      <li>1.8. GenICam cameras via Common Vision Blox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/plugins/grabber/commonVisionBlox.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="genicam-cameras-via-common-vision-blox">
+<h1>1.8. GenICam cameras via Common Vision Blox<a class="headerlink" href="#genicam-cameras-via-common-vision-blox" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Summary</strong>:</td>
+<td><span>GenICam cameras via Common Vision Blox from Stemmer</span></td>
+</tr>
+<tr class="row-even"><td><strong>Type</strong>:</td>
+<td><span>DataIO</span></td>
+</tr>
+<tr class="row-odd"><td><strong>License</strong>:</td>
+<td><span>Licensed under LGPL, Stemmer Common Vision Blox under its own license.</span></td>
+</tr>
+<tr class="row-even"><td><strong>Platforms</strong>:</td>
+<td>Windows</td>
+</tr>
+<tr class="row-odd"><td><strong>Devices</strong>:</td>
+<td>GenICam via Common Vision Blox</td>
+</tr>
+<tr class="row-even"><td><strong>Author</strong>:</td>
+<td><span>M. Gronle, ITO Uni Stuttgart</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>1.8.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This plugin can connect to various cameras via the GenICam interface of the commercial tool Common Vision Blox from company Stemmer.</p>
+<blockquote>
+<div><p>Until now, the plugin is only implemented for monochrome pixel formats mono8, mono10, mono12, mono14 and mono16. Besides the ROI and
+exposure time, all parameters need to be read and set using the parameter raw:suffix where suffix is the real GenICam parameter, obtained
+via the Stemmer configuration tool. If a bitdepth &gt; 8 bit is chosen, an error might occur during acquisition. Then check the indicated ini file
+from Stemmer GenICam and don’t set the pixelFormat property to auto but Mono16.</p>
+<p>In case of a slow connection, check the communication center of Stemmer for hints or bugs in the connection, e.g. use the filter driver for GigE connections.</p>
+<p>This plugin has been tested with DALSA Genie HM1400 and Xenics Bobcat 640 GigE.</p>
+</div></blockquote>
+</div>
+<div class="section" id="initialization">
+<h2>1.8.2. Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt><strong>scanForCameras</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
+<dd>If 1 scan for new cameras, else take the last opened camera (default). If you scan for new cameras, the configuration file (ini) created in CommonVisionBlox for GenICam or other cameras will be reset to the default values.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>bpp</strong>: {int, optional} [8,16], default: 16, step: 2</dt>
+<dd>desired monochromatic bitdepth. Dependent on this parameter PixelFormat is set to mono8, mono10, mono12, mono14 or mono16. Make sure the bitdepth is supported by your camera</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2>1.8.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="docutils">
+<dt><strong>name</strong>: {str}, read-only</dt>
+<dd>name of plugin</dd>
+<dt><strong>integration_time</strong>: {float}</dt>
+<dd>Exposure time of chip (in seconds)</dd>
+<dt><strong>heartbeat_timeout</strong>: {int}</dt>
+<dd>Heartbeat timeout of GigE Vision Transport Layer</dd>
+<dt><strong>acquisition_mode</strong>: {str}</dt>
+<dd>‘snap’ is a single image acquisition (only possible in trigger_mode ‘off’), ‘grab’ is a continuous acquisition</dd>
+<dt><strong>trigger_mode</strong>: {str}</dt>
+<dd>‘off’: camera is not explicitly triggered but operated in freerun mode. The next acquired image is provided upon acquire, ‘software’ sets trigger mode to On and fires a software trigger at acquire (only possible in acquisition_mode ‘grab’)</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt>
+<dd>Pixelsize in x (cols)</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt>
+<dd>Pixelsize in y (rows)</dd>
+<dt><strong>bpp</strong>: {int}, read-only</dt>
+<dd>bit depth</dd>
+<dt><strong>raw</strong>: {str}</dt>
+<dd>use raw:paramname to set internal paramname of camera to value. paramname is the original GenICam parameter name.</dd>
+<dt><strong>vendor_name</strong>: {str}, read-only</dt>
+<dd>vendor name</dd>
+<dt><strong>model_name</strong>: {str}, read-only</dt>
+<dd>model name</dd>
+<dt><strong>roi</strong>: {int seq.}</dt>
+<dd>ROI (x,y,width,height) [this replaces the values x0,x1,y0,y1]</dd>
+</dl>
+</div>
+<div class="section" id="usage">
+<h2>1.8.4. Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Until now, only monochrome cameras with pixel format Mono8, Mono10, .. Mono16 are supported. Only the parameter integration_time
+is created as plugin parameter (redirected to ExposureTime or ExposureTimeAbs with an assumed time base of micro seconds, integration_time
+is still in seconds). All other parameters can be directly accessed via the string parameter ‘raw’, e.g.</p>
+<p>cam.getParam(“raw:ExposureMode”) or
+cam.setParam(“raw:ExposureMode”, “Timed”)</p>
+<p>The getParam command will also print out more information about the parameter. If ‘raw’ is obtained without suffix, all parameters
+are printed to the command line.</p>
+</div>
+<div class="section" id="acquisition">
+<h2>1.8.5. Acquisition<a class="headerlink" href="#acquisition" title="Permalink to this headline">¶</a></h2>
+<p>You can obtain images either by setting the camera in a continuous image acquisition mode (parameter <strong>acquisition_mode</strong> = <strong>grab</strong>) or by acquiring single
+images upon a call to acquire (<strong>acquisition_mode</strong> = <strong>snap</strong>). You should try the method which gives better performance for your camera. Try to decrease the acquisition
+rate if you have packet losts. In mode <strong>grab</strong> you can additionally trigger the next acquired image by setting <strong>trigger_mode</strong> to <strong>software</strong> instead of <strong>off</strong>. In the latter
+case, acquire decards all old images and obtains the next acquired image.</p>
+</div>
+<div class="section" id="hints">
+<h2>1.8.6. Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
+<p>Try to enable jumbo frames in your network adapter and set the packet size in Common Vision Blox to the highest rate. Save the configuration before
+loading the camera in itom. If you want to operate the camera with more than 8bit, make sure to set the CVB Color Format to Mono16 in Common Vision Blox (not auto)
+and save the configuration as well.</p>
+<p>Usually you need to configure the camera and its communication first in CommonVisionBlox before using the camera in itom. Open CommonVisionBlox and configure the camera.
+Then safe the configuration (stored in %CVBDATA%/Drivers/GenICam.ini where %CVBDATA% is an environment variable created by CommonVisionBlox) by clicking the corresponding button.</p>
+<p>If the camera is loaded in itom, the specific camera and configuration is obtained by this file (if <strong>scanForCameras</strong> is set to False). If you set <strong>scanForCameras</strong> to True,
+CommonVisionBlox will be forced to scan for newly connected cameras and the configuration file is automatically reset to its default.</p>
+<p>Things to configure are for example:</p>
+<ul class="simple">
+<li>color format (bit depth…)</li>
+<li>packet size</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dummyGrabber.html" class="btn btn-neutral float-right" title="1.9. DummyGrabber" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cmu1394.html" class="btn btn-neutral" title="1.7. CMU1394" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Mar 12, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

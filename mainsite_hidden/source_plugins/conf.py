@@ -12,7 +12,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+import sys, os, itom
 import sphinx
 import itom as itomFuncs
 import __main__
@@ -25,6 +25,7 @@ import inspect
 #sys.path.insert(0, os.path.abspath('.'))
 sys.path.append(os.path.abspath('sphinxext'))
 sys.path.append(os.path.abspath('ext'))
+sys.path.append(os.path.join(itom.getAppPath(),'SDK' + os.sep + 'docs' + os.sep + 'sphinxext'))
 
 thisDir = os.path.dirname( os.path.abspath (inspect.getfile(inspect.currentframe())))
 

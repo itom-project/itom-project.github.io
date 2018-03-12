@@ -14,7 +14,7 @@ Documentation
 		<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--4dp">
          	<div class="mdl-card__title mdl-card--expand mdl-color--primary"><span class="mdl-card__title-text">User Docs</span></div>
             <div class="mdl-card__supporting-text">How to use itom</div>
-            <div class="mdl-card__actions  mdl-card--border"><a href=".\latest\docs" target="_blank" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent mdl-js-ripple-effect"><i class="material-icons">add</i></a></div>
+            <div class="mdl-card__actions  mdl-card--border"><a href=".\latest\docs\index.html" target="_blank" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent mdl-js-ripple-effect"><i class="material-icons">add</i></a></div>
          </div>
 		<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--4dp">
          	<div class="mdl-card__title mdl-card--expand mdl-color--primary"><span class="mdl-card__title-text">Plugin Docs</span></div>
@@ -29,7 +29,7 @@ Documentation
 		<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--4dp">
          	<div class="mdl-card__title mdl-card--expand mdl-color--primary"><span class="mdl-card__title-text">Devs</span></div>
             <div class="mdl-card__supporting-text">Documentation of itom <b>CORE</b></div>
-            <div class="mdl-card__actions  mdl-card--border"><a href=".\latest\doxygen" target="_blank" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent mdl-js-ripple-effect"><i class="material-icons">add</i></a></div>
+            <div class="mdl-card__actions  mdl-card--border"><a href=".\latest\doxygen\index.html" target="_blank" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent mdl-js-ripple-effect"><i class="material-icons">add</i></a></div>
          </div>
 		<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--4dp">
          	<div class="mdl-card__title mdl-card--expand mdl-color--primary"><span class="mdl-card__title-text">News</span></div>

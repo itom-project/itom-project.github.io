@@ -4,7 +4,7 @@ Plots
 
 One of the most used features in ITOM is its enormous plotting capability.
 
-**1d, 2d, 2.5d, 3d plots**
+**Plots in 1D, 2D, 2.5D and 3D**
 
 * plots of dependend 1d-line plot of a 2d plot 
 * plot xData over yData 
@@ -16,7 +16,7 @@ One of the most used features in ITOM is its enormous plotting capability.
 Plotting 2D
 ------------
 
-.. image:: ..\\_static\\plots\\plot2d.png
+.. image:: ..\\_static\\plots\\plot2d.jpg
     :alt: itom software
     :width: 60%
     :align: center
@@ -24,12 +24,12 @@ Plotting 2D
 Plotting 3D
 ------------
 
-.. image:: ..\\_static\\plots\\plot3d.png
+.. image:: ..\\_static\\plots\\plot3d.jpg
     :alt: itom software
     :width: 60%
     :align: center
 
-.. image:: ..\\_static\\plots\\microlenses.png
+.. image:: ..\\_static\\plots\\microlenses.jpg
     :alt: itom software
     :width: 60%
     :align: center

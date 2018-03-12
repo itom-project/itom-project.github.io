@@ -12,7 +12,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os ##itom
+import sys, os, itom
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.append(os.path.abspath('_ext'))
 
@@ -27,7 +27,7 @@ except ImportError:
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 #directory of this file
-#sys.path.append(os.path.join(itom.getAppPath(),'SDK' + os.sep + 'docs' + os.sep + 'sphinxext'))
+sys.path.append(os.path.join(itom.getAppPath(),'SDK' + os.sep + 'docs' + os.sep + 'sphinxext'))
 
 # -- General configuration -----------------------------------------------------
 
