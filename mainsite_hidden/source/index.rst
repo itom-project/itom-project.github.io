@@ -68,10 +68,10 @@ It can be used in a multitude of application areas, but especially is devoted to
 			<div class="mdl-card__title"><span class="mdl-card__title-text">Developer</span></div>
 			<div class="mdl-card__supporting-text">Help improve and understand the structure behind the ITOM Software. The Source Code is hosted @ Bitbucket.org</div>
 			<div class="mdl-card__actions mdl-card--border">
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/itom">itom Repository</a>
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/plugins">Plugins</a>
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/designerplugins">Designer Plugins</a>
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/macrosim">MacroSIM</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/itom" target="_blank">itom Repository</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/plugins" target="_blank">Plugins</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/designerplugins" target="_blank">Designer Plugins</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/macrosim" target="_blank">MacroSIM</a>
 		  </div>
 		</div>
 		<div class="mdl-cell mdl-cell--12-col info-card-wide mdl-card mdl-shadow--4dp">
@@ -82,10 +82,10 @@ It can be used in a multitude of application areas, but especially is devoted to
 			If you have individual questions about itom, plugins or if you miss support for s specific hardware device, please contact us using the information below.
 			</div>
 			<div class="mdl-card__actions mdl-card--border">
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://lists.sourceforge.net/lists/listinfo/itom-discussions">Mailing List</a>
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/itom/issues">General Bugs</a>
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/plugins/issues">Plugin Bugs</a>
-			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/designerplugins/issues">Designer Plugin Bugs</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://lists.sourceforge.net/lists/listinfo/itom-discussions" target="_blank">Mailing List</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/itom/issues" target="_blank">General Bugs</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/plugins/issues" target="_blank">Plugin Bugs</a>
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/designerplugins/issues" target="_blank">Designer Plugin Bugs</a>
 			</div>
 		</div>
 	</div>
