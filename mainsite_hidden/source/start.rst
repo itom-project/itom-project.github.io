@@ -87,15 +87,15 @@ Currently the All-in-One Setup is only available for WINDOWS users. Mac and Linu
 	
 		|setup5|
 
-.. |setup1| image:: _static\\setup1.png
+.. |setup1| image:: _static\\setup1.jpg
                          :width: 400px
 .. |setup2| image:: _static\\setup2.png
                          :width: 400px
 .. |setup3| image:: _static\\setup3.png
                          :width: 400px
-.. |setup4| image:: _static\\setup4.png
+.. |setup4| image:: _static\\setup4.jpg
                          :width: 400px
-.. |setup5| image:: _static\\setup5.png
+.. |setup5| image:: _static\\setup5.jpg
                          :width: 600px
 .. |setupPip| image:: _static\\setupPip.png
                          :width: 400px

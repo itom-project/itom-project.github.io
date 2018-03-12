@@ -20,7 +20,7 @@ def scanForRstFiles(folder, recursive = True):
     return result
 
 #scan all rst-files in mainsite_hidden/source/plugins
-abspath = os.path.join(itom.getCurrentPath(), "source/plugins")
+abspath = os.path.join(itom.getCurrentPath(), "source_plugins/plugins")
 
 destinations = scanForRstFiles(abspath, True)
 

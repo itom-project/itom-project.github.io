@@ -1,6 +1,6 @@
-.. _sec-screenshots:
+.. _sec-examples:
 
-Screenshots
+Examples
 =============
 
 The following screenshots give you an overview about **itom**.
@@ -16,7 +16,7 @@ The following screenshots give you an overview about **itom**.
 
 
 .. figure:: _static/screenshots/win7/scriptEditor.png
-   :width: 50%
+   :width: 75%
    :align: center
    :alt: script editor
    
@@ -31,21 +31,21 @@ The following screenshots give you an overview about **itom**.
    2D plot (*itom2dqwtplot*) with optional property toolbox
 
 .. figure:: _static/screenshots/win7/plugintoolbox.png
-   :width: 50%
+   :width: 75%
    :align: center
    :alt: plugin toolbox
    
    plugin toolbox for all detected hardware and algorithm plugins
 
 .. figure:: _static/screenshots/win7/filesystemtoolbox.png
-   :width: 50%
+   :width: 60%
    :align: center
    :alt: file system toolbox
    
    toolbox with file system to easily get access to script files and other loadable files (e.g. images...)
 
 .. figure:: _static/screenshots/win7/workspacetoolbox.png
-   :width: 30%
+   :width: 50%
    :align: center
    :alt: workspace toolbox
    
@@ -105,7 +105,7 @@ The following screenshots give you an overview about **itom**.
 
 
 .. figure:: _static/screenshots/win8/loadedPlugins.png
-   :width: 50%
+   :width: 75%
    :align: center
    :alt: loaded plugins
    
