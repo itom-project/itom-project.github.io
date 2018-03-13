@@ -1,17 +1,13 @@
 <header class="mdl-layout__header {% if theme_header_waterfall|tobool %}mdl-layout__header--waterfall{% endif %} {% if theme_header_scroll|tobool %}mdl-layout__header--scroll{% endif %}">
     <div class="mdl-layout__header-row">
-        {% if theme_show_header_title|tobool %}
-        <!-- Title -->
-        <span class="mdl-layout-title">
-            <a class="brand" href="{{ pathto(master_doc) }}">
-                {%- if logo %}
-                <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="{{ project }}"/>
-                {%- else %}
-                {{ project }}
-                {%- endif %}
+		{% if pagename == 'index' %}
+		<span class="mdl-layout-title" style="margin-right:15px">
+            <a class="brand" href="http://www.ito.uni-stuttgart.de" target="_blank">              
+                <img class="logo" src="_static/ITOInverted.png" alt="ITO" height=48px />
             </a>
         </span>
-        {% endif %}
+		<i class="material-icons">navigate_next</i>
+		{% endif %}
         <nav class="mdl-navigation breadcrumb">
             {%- for parent in parents %}
             <a class="mdl-navigation__link" href="{{ parent.link|e }}">{{ parent.title }}</a><i class="material-icons">navigate_next</i>
@@ -37,6 +33,8 @@
 			</a>
 		</label>
 		{% include "header_search.html" %}
+
+        <!-- Title -->
     </div>
 	<!--
     <div class="mdl-layout__header-row header-links">
