@@ -4,7 +4,7 @@ Qt
 
 Itom is written in C++ using the open source framework Qt. Qt enhances the functionalities of C++, mainly by providing a cross-platform GUI, allowing itom to run on both Windows and Linux operating systems. Since itom is also designed for multi-core processors, its modules run partly in different threads that allow operating an actuator, simultaneously acquiring images while keeping the main window reactive for user interaction. Therefore, the core application, the python script engine as well as all plugins run in their separate threads.
 
-.. image:: ..\\_static\\qtDesigner.jpg
+.. image:: ..\\_static\\features\\qtDesigner.jpg
     :alt: Qt Designer
     :width: 75%
     :align: center
@@ -13,7 +13,7 @@ Itom is written in C++ using the open source framework Qt. Qt enhances the funct
 * Design of custom GUIs in the Qt Designer WYSIWYG tool (drag & drop)
 * Events created by the GUI can be linked to Python functions
 
-.. image:: ..\\_static\\gui.jpg
+.. image:: ..\\_static\\features\\gui.jpg
     :alt: itom software
     :width: 75%
     :align: center

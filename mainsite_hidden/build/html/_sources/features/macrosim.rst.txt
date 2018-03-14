@@ -7,12 +7,12 @@ MacroSim is an GPU accelerated ray tracing engine
 	* implemented as a itom software plugin: `MacroSim <https://bitbucket.org/itom/macrosim/wiki/Home>`_
 
 
-.. image:: ..\\_static\\macrosim2.png
+.. image:: ..\\_static\\features\\macrosim2.png
     :alt: itom software
-    :width: 75%
+    :width: 60%
     :align: center
 	
-.. image:: ..\\_static\\macrosimTrace.jpg
+.. image:: ..\\_static\\features\\macrosimTrace.jpg
     :alt: itom software
-    :width: 50%
+    :width: 60%
     :align: center

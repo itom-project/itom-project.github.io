@@ -16,7 +16,7 @@ One of the most used features in ITOM is its enormous plotting capability.
 Plotting 2D
 ------------
 
-.. image:: ..\\_static\\plots\\plot2d.jpg
+.. image:: ..\\_static\\features\\plot2d.jpg
     :alt: itom software
     :width: 60%
     :align: center
@@ -24,12 +24,12 @@ Plotting 2D
 Plotting 3D
 ------------
 
-.. image:: ..\\_static\\plots\\plot3d.jpg
+.. image:: ..\\_static\\features\\plot3d.jpg
     :alt: itom software
     :width: 60%
     :align: center
 
-.. image:: ..\\_static\\plots\\microlenses.jpg
+.. image:: ..\\_static\\features\\microlenses.jpg
     :alt: itom software
     :width: 60%
     :align: center
@@ -37,7 +37,7 @@ Plotting 3D
 Plotting DataObject
 --------------------
 
-.. image:: ..\\_static\\plots\\plotDataObject.png
+.. image:: ..\\_static\\features\\plotDataObject.png
     :alt: itom software
     :width: 60%
     :align: center
@@ -45,7 +45,7 @@ Plotting DataObject
 Plot X over Y
 ----------------
 
-.. image:: ..\\_static\\plots\\plotXY.png
+.. image:: ..\\_static\\features\\plotXY.png
     :alt: itom software
     :width: 60%
     :align: center
@@ -59,7 +59,7 @@ Point Cloud Library
 * Filtering, feature estimation, surface reconstruction, registration, model fitting, segmentation
 * Stitch 3d point clouds together
 
-.. image:: ..\\_static\\plots\\plotPCL.png
+.. image:: ..\\_static\\features\\plotPCL.png
     :alt: itom software
     :width: 60%
     :align: center

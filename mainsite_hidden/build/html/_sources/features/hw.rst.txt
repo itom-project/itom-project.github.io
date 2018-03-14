@@ -11,7 +11,7 @@ One main feature of ITOM is its simple integration of hardware:
 
 
 
-.. image:: ..\\_static\\HW.jpg
+.. image:: ..\\_static\\features\\HW.jpg
     :alt: Hardware
     :width: 60%
     :align: center
