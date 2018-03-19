@@ -8,9 +8,7 @@ from docutils.parsers.rst import Directive
 from docutils.parsers.rst.directives import unchanged
 
 BUTTON_TEMPLATE = jinja2.Template(u"""
-<a target="_blank" href="{{ link }}">
-    <div class="mdl-cell mdl-cell--12-col mdl-button mdl-button--accent mdl-button--raised mdl-js-button mdl-js-ripple-effect">{{ text }}</div>
-</a>
+<a target="_blank" href="{{ link }}" class="mdl-cell mdl-button mdl-button--accent mdl-button--raised mdl-js-button mdl-js-ripple-effect">{{ text }}</a>
 """)
 
 # placeholder node for document graph

@@ -11,19 +11,21 @@ that provide the plot and figure widgets of **itom**.
 
 .. container:: mdl-grid
 
-	.. button:: :text: End-User Setup (Windows)
+	.. button:: :text: End-User Setup (Win x64/x86)
 	 :link: https://sourceforge.net/projects/itom/files/latest/download
 
-	.. button:: :text: Downloads @SourceForge
-	 :link: http://sourceforge.net/projects/itom/files
+	.. button:: :text: Developer Setup
+	 :link: https://sourceforge.net/projects/itom/files/all-in-one-build-setup
 
-	.. button:: :text: SOURCE @Bitbucket
+	.. button:: :text: SOURCE CODE @ Bitbucket
 	 :link: https://bitbucket.org/itom/itom/overview
 
 
-The installers are available in a default version and an All-In-One version. The default version simply contains **itom** and
-the necessary runtime libraries while the all-in-one solution also contains 3rd party dependencies that can be installed as optional
-component. These components are:
+| **Windows:** 	Choose either End-User Setup **OR** Developer Setup **OR** Git-clone the Source
+| **Linux:**		(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_linux.html>`_)
+| **Mac:**		(OS X) Clone git source code (`MacOS instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_osx.html>`_)
+|
+| The End-User Setup version includes **itom** and the following components:
 
 **Version 3.1.0**
 
