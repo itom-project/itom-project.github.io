@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="itom Documentation" href="../../index.html"/>
-        <link rel="up" title="1. Camera/ Grabber" href="../grabbers.html"/>
-        <link rel="next" title="1.13. MSMediaFoundation" href="msMediaFoundation.html"/>
-        <link rel="prev" title="1.11. FireGrabber" href="fireGrabber.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.13. MSMediaFoundation" href="msMediaFoundation.html" />
+    <link rel="prev" title="1.11. FireGrabber" href="fireGrabber.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -141,7 +132,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">itom Plugins</a>
@@ -149,9 +140,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -234,12 +226,16 @@ a list of all detected cti-files is printed to the command line. Every transport
 Indicate the right interface or leave ‘interface’ empty, in order to get a list of all supported interfaces by the selected transport layer.</p>
 <p>In order to keep this plugin compatible to other camera plugins, the additional parameters ‘integration_time’, ‘roi’, ‘sizex’, ‘sizey’,
 and ‘bpp’ are added to the plugin are kept synchronized with ‘ExposureTime’, ‘Width’, ‘Height’, ‘OffsetX’, ‘OffsetY’ or ‘PixelFormat’.</p>
-<p>Up to now the following pixel formats are supported: Mono8, Mono10, Mono10p, Mono10Packed, Mono12, Mono12p, Mono12Packed, Mono14 and Mono16.</p>
+<p>Up to now the following pixel formats are supported: Mono8, Mono10, Mono10p, Mono10Packed, Mono12, Mono12p, Mono12Packed, Mono14 and Mono16.
+In order to operate framegrabber-based cameras (CoaXPress, Camera Link) with this plugin, please read the additional information in the
+documenation of this plugin.</p>
 <p>This plugin has been tested with the following cameras:</p>
 <ul class="simple">
 <li>Allied Vision, Manta (Firewire)</li>
+<li>Allied Vision, Goldeye G-008 SWIR (GigE)</li>
 <li>Ximea (USB3)</li>
 <li>Baumer TXG12 (GigE)</li>
+<li>Mikrotron (CoaXPress) with Active Silicon Framegrabber (FireBird)</li>
 <li>Vistek, exo174MU3 (USB3)</li>
 <li>Vistek, exo174MGE (GigE)</li>
 </ul>
@@ -282,6 +278,11 @@ and ‘bpp’ are added to the plugin are kept synchronized with ‘ExposureTime
 <li><dl class="first docutils">
 <dt><strong>verbose</strong>: {int, optional} [0,5], default: 1, step: 1</dt>
 <dd>verbose level (0: print nothing, 1: only print errors, 2: print errors and warnings, 3: print errors, warnings, informations, 4: debug, 5: all (gives even information about parameter changes or buffer states)).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>accessLevel</strong>: {int, optional} [2,4], default: 4, step: 1</dt>
+<dd>Access level to the device: (Readonly: 2, Control: 3, Exclusive: 4).</dd>
 </dl>
 </li>
 </ul>
@@ -521,9 +522,7 @@ This is implicitely done, if a vistek cti file is loaded. It is also possible to
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -541,12 +540,12 @@ This is implicitely done, if a vistek cti file is loaded. It is also possible to
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 13, 2018.
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      Last updated on Nov 29, 2018.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -561,35 +560,33 @@ This is implicitely done, if a vistek cti file is loaded. It is also possible to
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

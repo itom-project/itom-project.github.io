@@ -24,28 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="itom Documentation" href="../../index.html"/>
-        <link rel="up" title="1. Camera/ Grabber" href="../grabbers.html"/>
-        <link rel="next" title="1.19. QCam" href="qCam.html"/>
-        <link rel="prev" title="1.17. PCOSensicam" href="pcoSensicam.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.19. QCam" href="qCam.html" />
+    <link rel="prev" title="1.17. PCOSensicam" href="pcoSensicam.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -139,7 +130,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">itom Plugins</a>
@@ -147,9 +138,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -202,13 +194,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>Point Grey FlyCapture2 Cameras</span></td>
+<td><span>Plugin for PGR FlyCapture2 Camerainterface</span></td>
 </tr>
 <tr class="row-even"><td><strong>Type</strong>:</td>
 <td><span>DataIO</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><span>GPL / this plugin needs to link agains the FlyCapture2 SDK from Point Grey Research, that comes with its own license. The FlyCapture2 SDK contains components that are licensed under GPL.</span></td>
+<td><span>licensed under LGPL. For the license information of **FlyCapture2** see the specific documentation of Point Grey Research.</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -217,49 +209,19 @@
 <td>Point Grey cameras (USB3) supported by Fly Capture driver. (GigE possible, but not implemented yet)</td>
 </tr>
 <tr class="row-even"><td><strong>Author</strong>:</td>
-<td><span>W. Lyda, M. Gronle, P. Wagner, ITO, University Stuttgart</span></td>
+<td><span>W. Lyda, ITO, University Stuttgart</span></td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="overview">
 <h2>1.18.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>This plugin supports Point Grey cameras (currently USB models only) that can be run by the FlyCapture2 interface from Point Grey Research.
-This plugin was mainly tested with Flea3 (monochrome) and Grasshopper3 cameras (monochrome, color) under Windows and Linux.</p>
-<p>The plugin has been compiled using the FlyCapture2 library version 2.12.3.2.</p>
-<p>In order to compile the plugin by yourself, you need to install the FlyCapture2 SDK in 32bit or 64bit (depending on itom) and make
-sure that the development files (include files and libraries) are installed as well (option Cross Platform Dev Files). Then set the CMake variable PGRFLYCAP_INCLUDE_DIR
-to the include directory of the FlyCapture2 SDK. The depending variable PGRFYLCAP_API_DIR is then automatically set (if not, delete it and
-re-configure CMake).</p>
-<p>This plugin automatically copies the necessary FlyCapture2 DLLs to the lib-folder of itom.</p>
+<p>itom plugin for Point Grey Research cameras that can be run with the <strong>FlyCapture2</strong> camera interface (e.g. the USB 3.0 Flea3 camera).</p>
+<p>For compiling this plugin, install FlyCapture2 in 32bit or 64bit depending on <strong>itom</strong> and set the CMake variable <strong>PGRFLYCAP_API_DIR</strong> to the base directory of FlyCapture2.</p>
 <p>This plugin has mainly been tested with cameras of type Flea3 and Grasshopper3.</p>
 </div>
 <div class="section" id="initialization">
 <h2>1.18.2. Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
-<blockquote>
-<div><ul class="simple">
-<li><dl class="first docutils">
-<dt><strong>cameraNumber</strong>: {int, optional} [-1,10], default: -1, step: 1</dt>
-<dd>Continuous camera number [0,10], default: -1 uses the next free camera.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>bppLimit</strong>: {int, optional} [-1,16], default: -1, step: 1</dt>
-<dd>Limits the bitdepth to the given level [8, 12, 16]. As default the maximum level is used (-1)</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>forceSync</strong>: {int, optional} [0,1], default: 0, step: 1</dt>
-<dd>Direct enable software sync if present</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><strong>colorMode</strong>: {str, optional} default: gray</dt>
-<dd>colorMode: ‘gray’ (default) or ‘color’ if color camera. In color mode, bpp is limited to 8 per color.</dd>
-</dl>
-</li>
-</ul>
-</div></blockquote>
 </div>
 <div class="section" id="parameters">
 <h2>1.18.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
@@ -383,9 +345,7 @@ calling <em>startDevice</em> for cameras with an image size bigger than 2MB if t
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -403,12 +363,12 @@ calling <em>startDevice</em> for cameras with an image size bigger than 2MB if t
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 13, 2018.
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      Last updated on Nov 29, 2018.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -423,35 +383,33 @@ calling <em>startDevice</em> for cameras with an image size bigger than 2MB if t
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

@@ -24,27 +24,18 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="itom Documentation" href="../../index.html"/>
-        <link rel="up" title="5. Algorithms/ Filters" href="../algorithms.html"/>
-        <link rel="prev" title="5.10. Roughness" href="roughness.html"/> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="5.10. Roughness" href="roughness.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -124,7 +115,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">itom Plugins</a>
@@ -132,9 +123,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -193,7 +185,7 @@
 <td><span>Algorithm</span></td>
 </tr>
 <tr class="row-odd"><td><strong>License</strong>:</td>
-<td><span>licensed under LGPL / ISO5436-2 XML under LPGL</span></td>
+<td><span>LGPL / ISO5436-2 XML under LPGL</span></td>
 </tr>
 <tr class="row-even"><td><strong>Platforms</strong>:</td>
 <td>Windows, Linux</td>
@@ -224,10 +216,53 @@ not exist, such that the scaling factor is multiplied to each value before stori
 since this might lead to precision loss. If a scaling is required for fixed point data types, the values are stored as double values
 in x3p, such that there is enough space for the scaled values.</p>
 <p>These filters are defined in the plugin:</p>
+<ol class="arabic simple">
+<li>loadX3p</li>
+<li>saveX3p</li>
+</ol>
 </div>
 <div class="section" id="filters">
 <h2>5.11.2. Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
+<dl class="function">
+<dt id="loadX3p">
+<code class="descname">loadX3p</code><span class="sig-paren">(</span><em>destinationObject</em>, <em>filename</em><span class="optional">[</span>, <em>xyUnit</em>, <em>valueUnit</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#loadX3p" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads dataObject from x3p file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>destinationObject</strong> (<em>dataObject</em>) – Empty dataObject</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – source file name</li>
+<li><strong>xyUnit</strong> (<em>str - optional</em>) – Unit of x and y axes. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</li>
+<li><strong>valueUnit</strong> (<em>str - optional</em>) – Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="saveX3p">
+<code class="descname">saveX3p</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>filename</em><span class="optional">[</span>, <em>binary</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#saveX3p" title="Permalink to this definition">¶</a></dt>
+<dd><p>saves dataObject to x3p file. x3p defines all axes in meter, if the unit of any axis is m, cm, mm, ?m or nm they are correctly converted to m.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sourceObject</strong> (<em>dataObject</em>) – DataObject</li>
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</li>
+<li><strong>binary</strong> (<em>int - optional</em>) – Save data in binary (1, default) or ascii format - use binary for big objects (&gt; 5000 Points)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="compilation">
 <h2>5.11.3. Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
@@ -272,9 +307,7 @@ This should point to xsd.exe within the bin folder of CodeSynthesis, not to any 
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -290,12 +323,12 @@ This should point to xsd.exe within the bin folder of CodeSynthesis, not to any 
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      Last updated on Mar 13, 2018.
+        &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      Last updated on Nov 29, 2018.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -310,35 +343,33 @@ This should point to xsd.exe within the bin folder of CodeSynthesis, not to any 
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
