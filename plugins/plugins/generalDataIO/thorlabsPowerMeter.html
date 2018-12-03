@@ -99,7 +99,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#parameters">3.11.3. Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#additional-functions-exec-functions">3.11.4. Additional functions (exec functions)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#installation">3.11.5. Installation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#changelog">3.11.6. Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemplary-usage-from-python">3.11.6. Exemplary usage from Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">3.11.7. Changelog</a></li>
 </ul>
 </li>
 </ul>
@@ -274,10 +275,49 @@ Then set the CMake variable Thorlabs_IVI_VISA_INCLUDE_DIR to the include directo
 <h2>3.11.5. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>For using this plugin, please install the PM100x_Instrument_Driver that is shipped with the Thorlabs power meter.</p>
 </div>
+<div class="section" id="exemplary-usage-from-python">
+<h2>3.11.6. Exemplary usage from Python<a class="headerlink" href="#exemplary-usage-from-python" title="Permalink to this headline">¶</a></h2>
+<p>In the following script, the first detectable power meter is connected and a oscilloscope-like
+plot is opened that displays a moving graph of recent intensity values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;pmXXX&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+<span class="n">pmXXX</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;ThorlabsPowerMeter&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">numPoints</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="n">numPoints</span><span class="p">],</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">plot_handle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot1</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">timeout</span><span class="p">():</span>
+            <span class="k">global</span> <span class="n">timer_id</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+            <span class="n">pmXXX</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="c1">#acquire new intensity value</span>
+
+            <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">numPoints</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:]</span> <span class="c1">#shift pixels to the left by one...</span>
+
+            <span class="n">pmXXX</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#get the recently acquired value</span>
+            <span class="n">image</span><span class="o">.</span><span class="n">copyMetaInfo</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+            <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">numPoints</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#...append new value to the end of image</span>
+
+            <span class="k">if</span> <span class="n">plot_handle</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="k">try</span><span class="p">:</span>
+                            <span class="n">plot_handle</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span> <span class="c1">#update the displayed image</span>
+                    <span class="k">except</span><span class="p">:</span>
+                            <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Figure has been closed. Stop acquisition...&quot;</span><span class="p">)</span>
+                    <span class="n">timer_id</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                    <span class="k">del</span> <span class="n">timer_id</span>
+
+    <span class="n">timer_id</span> <span class="o">=</span> <span class="n">timer</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span> <span class="c1">#call timeout every 50ms</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="changelog">
-<h2>3.11.6. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
-<p>itom 3.0.0: plugin uses the driver PM100x_Instrument_Driver in version 3.0.2
-itom 3.1.0: plugin uses the driver PM100x_Instrument_Driver in version 1.0.2 (Thorlabs has changed the Version the 1 again)</p>
+<h2>3.11.7. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>itom 3.0.0: plugin uses the driver PM100x_Instrument_Driver in version 3.0.2</li>
+<li>itom 3.1.0: plugin uses the driver PM100x_Instrument_Driver in version 1.0.2 (Thorlabs has changed the major version number again)</li>
+<li>Due to the chaotic version handling of Thorlabs PowerMeter, the source code is changed such that only version 3.0.2 is no longer supported.</li>
+</ul>
 </div>
 </div>
 
@@ -302,7 +342,7 @@ itom 3.1.0: plugin uses the driver PM100x_Instrument_Driver in version 1.0.2 (Th
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
-      Last updated on Nov 29, 2018.
+      Last updated on Dec 03, 2018.
 
     </p>
   </div>
@@ -337,6 +377,7 @@ itom 3.1.0: plugin uses the driver PM100x_Instrument_Driver in version 1.0.2 (Th
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

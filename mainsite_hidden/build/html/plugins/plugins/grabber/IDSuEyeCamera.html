@@ -88,8 +88,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#support-for-thorlabs-cameras">1.2.3. Support for Thorlabs cameras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">1.2.4. Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compilation">1.2.5. Compilation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#known-problems">1.2.6. Known problems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#changelog">1.2.7. Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acquisiton-of-image-sequences">1.2.6. Acquisiton of image sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-problems">1.2.7. Known problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">1.2.8. Changelog</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="NITWidySWIR.html">1.3. NITWidySWIR</a></li>
@@ -268,9 +269,9 @@ These cameras are OEM versions from IDS. This plugin has for instance been teste
 <h2>1.2.4. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <p>An instance of this plugin has the following internal parameters:</p>
 <dl class="docutils">
-<dt><strong>auto_blacklevel_enabled</strong>: {int}, read-only</dt>
+<dt><strong>auto_blacklevel_enabled</strong>: {int}</dt>
 <dd>If the camera supports an auto blacklevel correction (auto offset in addition to offset), this feature can be enabled / disabled by this parameter.</dd>
-<dt><strong>binning</strong>: {int}</dt>
+<dt><strong>binning</strong>: {int}, read-only</dt>
 <dd>Horizontal and vertical binning, depending on camera ability. 104 means a 1x binning in horizontal and 4x binning in vertical direction. (values up to 1x, 2x, 3x, 4x, 5x, 6x, 8x, 12x are valid; if read-only binning is not supported; some cameras only support certain combinations of binnings.)</dd>
 <dt><strong>bpp</strong>: {int}</dt>
 <dd>Bitdepth of each pixel</dd>
@@ -296,6 +297,8 @@ These cameras are OEM versions from IDS. This plugin has for instance been teste
 <dd>If long exposure time is available, this parameter let you enable this. If this value is changed, the range and value of integration_time might change, too.</dd>
 <dt><strong>name</strong>: {str}, read-only</dt>
 <dd>GrabberName</dd>
+<dt><strong>num_buffer</strong>: {int}</dt>
+<dd>Number of Buffers used for acquisition. Note that if this is &gt; 1, a sequence of images will be acquired.</dd>
 <dt><strong>offset</strong>: {float}</dt>
 <dd>Offset (leads to blacklevel offset) (normalized value 0..1). Readonly if not adjustable.</dd>
 <dt><strong>pixel_clock</strong>: {int}</dt>
@@ -311,7 +314,7 @@ These cameras are OEM versions from IDS. This plugin has for instance been teste
 <dt><strong>sizey</strong>: {int}, read-only</dt>
 <dd>Pixelsize in y (rows)</dd>
 <dt><strong>timeout</strong>: {float}</dt>
-<dd>Timeout for acquiring images in seconds</dd>
+<dd>timeout in seconds when waiting for the next image. For sequences x1000.</dd>
 <dt><strong>trigger_mode</strong>: {str}</dt>
 <dd>trigger modes for starting a new image acquisition, depending on the camera the following modes are supported: ‘off’ (fixed frame_rate), without fixed frame_rate: ‘software’, ‘hi_lo’, ‘lo_hi’, ‘pre_hi_lo’, ‘pre_lo_hi’</dd>
 <dt><strong>x0</strong>: {int}</dt>
@@ -335,13 +338,20 @@ need to install any DirectShow or ActiveX components as well as additional drive
 <p>Under linux, simply install the drivers from the IDS website. After an successful installation, the header file <em>ueye.h</em> and the library file is installed
 to the default directories under linux. The CMakeLists.txt file of this itom plugin will then automatically detect these files and compile the plugin.</p>
 </div>
+<div class="section" id="acquisiton-of-image-sequences">
+<h2>1.2.6. Acquisiton of image sequences<a class="headerlink" href="#acquisiton-of-image-sequences" title="Permalink to this headline">¶</a></h2>
+<p>If the number of buffers (num_buffer) is set to a value greater than 1, a sequence of images will be acquired with the acquire()-function (without frameloss). The sequence
+is retrieved by getVal() as usual, but the obtained dataObject will be 3D. The number of planes corresponds to the amount of images in the sequence (i.e. the number of buffers).
+Please be aware that the necessary memory for the sequence will be allocated and there is no dynamic limitation of the parameter. Choosing a high value for the number of buffers
+might crash the program, if the sytems memory is insufficient.</p>
+</div>
 <div class="section" id="known-problems">
-<h2>1.2.6. Known problems<a class="headerlink" href="#known-problems" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.7. Known problems<a class="headerlink" href="#known-problems" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes, the camera raises an acquisition error right after a change of the trigger mode. In this case, make an idle-grab (with a possible try-except) before starting
 with the right acquisition parameters.</p>
 </div>
 <div class="section" id="changelog">
-<h2>1.2.7. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<h2>1.2.8. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>itom setup 2.0.0: This plugin has been compiled using the uEye SDK 4.61</li>
 <li>itom setup 2.1.0: This plugin has been compiled using the uEye SDK 4.61</li>
@@ -373,7 +383,7 @@ with the right acquisition parameters.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
-      Last updated on Nov 29, 2018.
+      Last updated on Dec 03, 2018.
 
     </p>
   </div>
@@ -408,6 +418,7 @@ with the right acquisition parameters.</p>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

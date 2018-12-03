@@ -98,10 +98,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#starting-a-device">1.12.3. Starting a device</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">1.12.4. Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#verbose-level">1.12.5. Verbose level</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compilation">1.12.6. Compilation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#genicam-license">1.12.7. GenICam License</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#changelog">1.12.8. Changelog</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#workaround">1.12.9. Workaround</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coaxpress-or-camera-link">1.12.6. CoaXPress or Camera Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compilation">1.12.7. Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#genicam-license">1.12.8. GenICam License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">1.12.9. Changelog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#workaround">1.12.10. Workaround</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="msMediaFoundation.html">1.13. MSMediaFoundation</a></li>
@@ -362,15 +363,29 @@ warning or error messages will be printed to the command line of itom. The diffe
 <li>4: debug: this level contains all levels above including detailed information about the startup process as well as detected parameters of the device</li>
 <li>5: all: all information is printed including details about the state of all image buffers and reported changes in device-specific parameters.</li>
 </ul>
+<p>In verbose level 5, both the zipper or unzipped xml configuration file of the camera (and framegrabber, if available) are saved to files on the harddrive.
+The filenames are printed to the command line of itom.</p>
+</div>
+<div class="section" id="coaxpress-or-camera-link">
+<h2>1.12.6. CoaXPress or Camera Link<a class="headerlink" href="#coaxpress-or-camera-link" title="Permalink to this headline">¶</a></h2>
+<p>If cameras are connected via CoaXPress or Camera Link to the computer, the image from the camera is transferred to the framegrabber at first. The
+framegrabber can then transform the image another time and this GenICam plugin obtains the image from the framegrabber. The real size and format of
+the image is then read from the framegrabber.</p>
+<p>Both the camera and the framegrabber, which might come from different manufacturers, provide a set of parameters. In order to distinguish between both,
+all parameters of the framegrabber will have the prefix <strong>Fg_</strong>. Please remark, that some framegrabbers need to be properly parameterized before starting
+the device.</p>
+<p>In the example of an Active Silicon CoaXPress framegrabber, you have to set the parameters <strong>Fg_IncomingWidth</strong> to the <strong>Width</strong> of the camera,
+<strong>Fg_IncomingHeight</strong> to the <strong>Height</strong> of the camera and <strong>Fg_IncomingPixelFormat</strong> to the current pixel format of the camera. Then adjust the
+values <strong>Fg_Width</strong>, <strong>Fg_Height</strong> and <strong>Fg_PixelFormat</strong> to suitable values, since these values are read by itom to configure a proper image acquisition.</p>
 </div>
 <div class="section" id="compilation">
-<h2>1.12.6. Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
+<h2>1.12.7. Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
 <p>In order to compile this plugin, download the latest GenICam(TM) GenApi reference implementation from <a class="reference external" href="http://www.emva.org/standards-technology/genicam/genicam-downloads/">http://www.emva.org/standards-technology/genicam/genicam-downloads/</a>.
 Unpack the corresponding archive (under Windows: Development and Runtime.zip) in one folder and set the CMake variable GENICAM_ROOT to this base folder.
 After re-configuring CMake the other variables (e.g. GENICAM_GCBASE_LIBRARY…) should be found automatically.</p>
 </div>
 <div class="section" id="genicam-license">
-<h2>1.12.7. GenICam License<a class="headerlink" href="#genicam-license" title="Permalink to this headline">¶</a></h2>
+<h2>1.12.8. GenICam License<a class="headerlink" href="#genicam-license" title="Permalink to this headline">¶</a></h2>
 <p>This plugin uses the official GenICam library to access the camera devices. Here is a copy of the GenICam license file:</p>
 <p>GenICam comes in two versions</p>
 <ul class="simple">
@@ -506,13 +521,13 @@ subdiretory. If not, you can download them from the internet.</p>
 Microsoft Visual C++ compiler in the version 12.0</p>
 </div>
 <div class="section" id="changelog">
-<h2>1.12.8. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<h2>1.12.9. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>itom setup 3.1.0: This plugin has been compiled using GenICam 3.0.2</li>
 </ul>
 </div>
 <div class="section" id="workaround">
-<h2>1.12.9. Workaround<a class="headerlink" href="#workaround" title="Permalink to this headline">¶</a></h2>
+<h2>1.12.10. Workaround<a class="headerlink" href="#workaround" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Vistek, GigE, Windows: It seems that the Camera Link transport layer library (cti-file) has to be loaded by itom before the GigE transport layer is loaded.
 This is implicitely done, if a vistek cti file is loaded. It is also possible to load the CL cti file using a load library command in Python.</li>
@@ -541,7 +556,7 @@ This is implicitely done, if a vistek cti file is loaded. It is also possible to
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
-      Last updated on Nov 29, 2018.
+      Last updated on Dec 03, 2018.
 
     </p>
   </div>
@@ -576,6 +591,7 @@ This is implicitely done, if a vistek cti file is loaded. It is also possible to
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   
