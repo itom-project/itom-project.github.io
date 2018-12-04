@@ -41,7 +41,7 @@ def createDocumentation(buildernames):
     for buildername in buildernames:
         outdir = pathConv(os.path.join(itom.getCurrentPath(),"build/" + buildername + "/plugins"))
         doctreedir = pathConv(os.path.join(itom.getCurrentPath(),"build/doctrees"))
-        postcopydir = pathConv(os.path.join(itom.getCurrentPath(), "../plugins"))
+        postcopydir = pathConv(os.path.join(itom.getCurrentPath(), "../plugindoc"))
             
         confoverrides = {}
     
