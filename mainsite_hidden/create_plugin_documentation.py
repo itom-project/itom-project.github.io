@@ -41,7 +41,7 @@ def createDocumentation(buildernames):
     for buildername in buildernames:
         outdir = pathConv(os.path.join(itom.getCurrentPath(),"build/" + buildername + "/plugins"))
         doctreedir = pathConv(os.path.join(itom.getCurrentPath(),"build/doctrees"))
-        postcopydir = pathConv(os.path.join(itom.getCurrentPath(), ".."))
+        postcopydir = pathConv(os.path.join(itom.getCurrentPath(), "../plugins"))
             
         confoverrides = {}
     
@@ -60,9 +60,9 @@ def createDocumentation(buildernames):
         else:
             app.builder.build_update()
         
-        #if (buildername == "html"):
-            #distutils.dir_util.copy_tree(outdir, postcopydir)
-            #print("files copied to ", postcopydir)
+        if (buildername == "html"):
+            distutils.dir_util.copy_tree(outdir, postcopydir)
+            print("files copied to ", postcopydir)
 
 def setOverloads():
     
