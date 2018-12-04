@@ -10,7 +10,7 @@ Furthermore it is possible to develop user defined algorithms in C/C++ and put t
 .. container:: mdl-grid
 
 	.. button:: :text: Plugin Documentation
-	 :link: .\plugins\index.html
+	 :link: .\plugindoc\index.html
 
 
 The **itom** setup already comes with many exemplary plugins. Other plugins are available as source files in the corresponding `Plugins repository <https://bitbucket.org/itom/plugins>`_. 
