@@ -27,41 +27,43 @@ that provide the plot and figure widgets of **itom**.
 |
 | The End-User Setup version includes **itom** and the following components:
 
-**Version 3.1.0**
+**Version 3.2.0**
 
-* compiled using Qt5.9.0
+* compiled using Qt5.10.1
 * Python 3.6.1
-* openCV 3.2.0
-* QScintilla 2.10
-* Pip 9.0.1
-* Numpy 1.13.3+mkl
-* Scipy 1.0.0
-* six 1.11.0
-* pytz 2017.2
-* Matplotlib 2.0.2
-* Frosted 1.4.1.Post2
-* PyParsing 2.2.0
-* dateutil 2.6.1
-* Pies 2.6.7
+* openCV 3.7.2
+* wheel 0.33.1
+* six 1.12.0
+* setuptools 41.0.0
+* scipy 1.2.1
+* scikit image 0.15.0
+* PyWavelets 1.0.2
+* python dateutil 2.8.0
+* pyparsing 2.3.1
+* pyflakes 2.1.1
+* pip 19.0.2
+* pillow 6.0.0
+* parso 0.3.4
+* openCV python 4.0.1
+* numpy 1.16.2+mkl
+* networkx 2.1
+* matplotlib 3.0.3
+* kiwisolver 1.0.1
+* jedi 0.13.3
+* imageio 2.5.0
+* decorator 4.4.0
 * cycler 0.10.0
-* scikit-image 0.13.1
-* decorator 4.1.2
-* networkx 2.0
-* Pillow 4.3.0
-* dask 0.15.4
-* toolz 0.8.2
-* olefile 0.44
-* PyWavelets 0.5.2
-* PointCloudLibrary 1.8.0
-* VTK 7.1.1
+* PointCloudLibrary 1.9.1
+* VTK 8.2.0
+
 
 
 Other packages can easily be downloaded and installed using the integrated Python package manager.
 
-The current version 3.1.0 is available from
+The current version 3.2.0 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v3.1.0/>`_
+* `<http://sourceforge.net/projects/itom/files/v3.2.0/>`_
 
 
 
@@ -84,6 +86,7 @@ The current version 3.1.0 is available from
 	<button class="accordion" style="font-family:Roboto">Old versions</button>
 	<div class="panel">
 
+* `itom 3.1.0 <http://sourceforge.net/projects/itom/files/v3.1.0/>`_
 * `itom 3.0.0 <http://sourceforge.net/projects/itom/files/v3.0.0/>`_
 * `itom 2.2.1 <http://sourceforge.net/projects/itom/files/v2.2.1/>`_
 * `itom 2.2.0 <http://sourceforge.net/projects/itom/files/v2.2.0/>`_
@@ -105,6 +108,35 @@ The current version 3.1.0 is available from
 
 	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
 	<div class="panel">
+
+**Version 3.1.0**
+
+* compiled using Qt5.9.0
+* Python 3.6.1
+* openCV 3.2.0
+* QScintilla 2.10
+* Pip 9.0.1
+* Numpy 1.13.3+mkl
+* Scipy 1.0.0
+* six 1.11.0
+* pytz 2017.2
+* Matplot lib 2.0.2
+* Frosted 1.4.1.Post2
+* PyParsing 2.2.0
+* dateutil 2.6.1
+* Pies 2.6.7
+* cycler 0.10.0
+* scikit-image 0.13.1
+* decorator 4.1.2
+* networkx 2.0
+* Pillow 4.3.0
+* dask 0.15.4
+* toolz 0.8.2
+* olefile 0.44
+* PyWavelets 0.5.2
+* PointCloudLibrary 1.8.0
+* VTK 7.1.1
+
 
 **Version 3.0.0**
 
