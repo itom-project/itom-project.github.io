@@ -117,7 +117,7 @@ Under linux, simply install the drivers from the IDS website. After an successfu
 to the default directories under linux. The CMakeLists.txt file of this itom plugin will then automatically detect these files and compile the plugin.
 
 Acquisiton of image sequences
-============================
+==============================
 
 If the number of buffers (num_buffer) is set to a value greater than 1, a sequence of images will be acquired with the acquire()-function (without frameloss). The sequence
 is retrieved by getVal() as usual, but the obtained dataObject will be 3D. The number of planes corresponds to the amount of images in the sequence (i.e. the number of buffers).
@@ -138,3 +138,4 @@ Changelog
 * itom setup 2.2.0, 2.2.1: This plugin has been compiled using the uEye SDK 4.80 (In order to use newer USB3 cameras with the USB2 port, install the 4.81 driver)
 * itom setup 3.0.0: This plugin has been compiled using the uEye SDK 4.81
 * itom setup 3.1.0: This plugin has been compiled using the uEye SDK 4.90.3
+* itom setup >3.1.0: This plugin has been compiled using the uEye SDK 4.91.0

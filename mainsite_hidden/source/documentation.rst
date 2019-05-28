@@ -41,6 +41,12 @@ Documentation
 	<button class="accordion">Previous documentations:</button>
 	<div class="panel">
 
+Version 3.1.0:
+
+* `User documentation <https://itom.bitbucket.io/v3-1-0/docs>`_
+* `Doxygen source code documentation <https://itom.bitbucket.io/v3-1-0/doxygen>`_
+	
+	
 Version 3.0.0:
 
 * `User documentation <https://itom.bitbucket.io/v3-0-0/docs>`_

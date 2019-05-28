@@ -1,0 +1,35 @@
+Update Webpage
+==============
+
+Pre-requisits:
+? ITOM (uptodate source and all plugins compiled and loaded by itom)
+? Python Pkgs: Sphinx, sphinxcontrib-fulltoc, sphinx-rtd-theme
+
+* Update .RST - files/ Update HTML files
+
+* Delete all files in ..\mainsite_hidden\build\
+
+* Start ITOM (As Admin)
+
+###### Updating in the following order:
+
+Update Plugin-Doc
+-----------------
+* Run script:	"update_plugindoc_source_plugins.py"
+	###select the itom/source - folder (repository)
+	###this copies the current RST plugin docs to the webpage-dir for further processing
+* Run Script:	"create_plugin_documentation.py"
+	###this creates the plugin docu for the website (saved to ..\plugindoc\)
+
+Update Website
+--------------	
+* Run Script:	"create_html_documentation.py"
+	###this creates the itom website (copied to main website dir ..)
+
+Update USER-DOC
+---------------
+* Update "documentation.rst" file with new itom version
+	###check if there is folder ..\vX.X.X of last Version (older UserDocs)
+* Run script:	"create-doc.py" from directory build/itom/docs/userDoc
+	###check buildernames = ["qthelp", "html", "latex"] in line 44
+* Copy folder build/itom/docs/userDoc/build/html to the folder ../latest

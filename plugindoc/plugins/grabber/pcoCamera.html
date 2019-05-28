@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="1.16. PCOPixelFly" href="pcoPixelFly.html" />
     <link rel="prev" title="1.14. OpenCVGrabber" href="openCVGrabber.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -185,29 +187,29 @@
             
   <div class="section" id="pcocamera">
 <h1>1.15. PCOCamera<a class="headerlink" href="#pcocamera" title="Permalink to this headline">¶</a></h1>
-<table border="1" class="docutils">
+<table class="docutils align-center">
 <colgroup>
-<col width="13%" />
-<col width="87%" />
+<col style="width: 13%" />
+<col style="width: 87%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>Summary</strong>:</td>
-<td><span>DLL for PCO-Cameras</span></td>
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><span>DLL for PCO-Cameras</span></p></td>
 </tr>
-<tr class="row-even"><td><strong>Type</strong>:</td>
-<td><span>DataIO</span></td>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><span>DataIO</span></p></td>
 </tr>
-<tr class="row-odd"><td><strong>License</strong>:</td>
-<td><span>LGPL / copyright of the external DLLs belongs to PCO</span></td>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><span>LGPL / copyright of the external DLLs belongs to PCO</span></p></td>
 </tr>
-<tr class="row-even"><td><strong>Platforms</strong>:</td>
-<td>Windows</td>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Windows</p></td>
 </tr>
-<tr class="row-odd"><td><strong>Devices</strong>:</td>
-<td>PCO Cameras supported by the pco.sdk</td>
+<tr class="row-odd"><td><p><strong>Devices</strong>:</p></td>
+<td><p>PCO Cameras supported by the pco.sdk</p></td>
 </tr>
-<tr class="row-even"><td><strong>Author</strong>:</td>
-<td><span>W. Lyda, C. Lingel, M. Gronle, ITO, University Stuttgart</span></td>
+<tr class="row-even"><td><p><strong>Author</strong>:</p></td>
+<td><p><span>W. Lyda, C. Lingel, M. Gronle, ITO, University Stuttgart</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -226,43 +228,43 @@ The plugin has mainly been developed and tested using the cameras PCO.1200s, PCO
 <p>These parameters are available and can be used to configure the <strong>PCOCamera</strong> instance. Many of them are directly initialized by the
 parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable
 parameters can be changed using <em>setParam</em>.</p>
-<dl class="docutils">
-<dt><strong>name</strong>: {str}, read-only</dt>
-<dd>name of the plugin (<em>PCOCamera</em>)</dd>
-<dt><strong>camera_name</strong>: {str}, read-only</dt>
-<dd>device name of camera</dd>
-<dt><strong>interface</strong>: {str}, read-only</dt>
-<dd>name of the interface (eithernet, USB, cameralink…)</dd>
-<dt><strong>x0</strong>, <strong>x1</strong>: {int}</dt>
-<dd>first and last column (zero-based) of a software region of interest. The real camera image can be cropped to a region of interest, the
-corresponding horizontal boundaries are given by <strong>x0</strong> and <strong>x1</strong>, whereas the current width is obtained by <strong>sizex</strong>.</dd>
-<dt><strong>y0</strong>, <strong>y1</strong>: {int}</dt>
-<dd>the same than above but first and last row (related to the height of the ROI).</dd>
-<dt><strong>sizex</strong>, <strong>sizey</strong>: {int}, read-only</dt>
-<dd>width and height of the region of interest or the full camera size (default)</dd>
-<dt><strong>bpp</strong>: {int}</dt>
-<dd>bit depth, bits per pixel (usually not adjustable)</dd>
-<dt><strong>temperatures</strong>: {double}, read-only</dt>
-<dd>list containing the current CCD, camera and power supply temperatures in degree celcius</dd>
-<dt><strong>coolingSetPointTemperature</strong>: {int}</dt>
-<dd>set point for the CCD cooling control in degree celcius (only available if supported with this camera)</dd>
-<dt><strong>IRSensitivity</strong>: {bool} [0,1]</dt>
-<dd>enables (True, 1) or disables (False, 0) the IR sensitivity of the image sensor, parameter is set to read-only if not available for the specific camera</dd>
-<dt><strong>pixelrate</strong>: {int}</dt>
-<dd>Transer pixelrate for data from the camera in MHz.</dd>
-<dt><strong>conversionFactor</strong>: {double}</dt>
-<dd>conversion factor in electrons/count</dd>
-<dt><strong>binning</strong>: {int}</dt>
-<dd>Horizontal and vertical binning. The value is obtained by <em>horizontal * 100 + vertical</em>. Therefore, no binning corresponds to 101. Some cameras accepts a linear range of binning values [1,2,…max], others only allow a binary range [1,2,4,8,..max]. If the binning is changed, the region of interest is adapted as well to a suitable value.</dd>
-<dt><strong>gain</strong>: {double}, read-only</dt>
-<dd>not available</dd>
-<dt><strong>offset</strong>: {double}, read-only</dt>
-<dd>not available</dd>
+<dl class="simple">
+<dt><strong>name</strong>: {str}, read-only</dt><dd><p>name of the plugin (<em>PCOCamera</em>)</p>
+</dd>
+<dt><strong>camera_name</strong>: {str}, read-only</dt><dd><p>device name of camera</p>
+</dd>
+<dt><strong>interface</strong>: {str}, read-only</dt><dd><p>name of the interface (eithernet, USB, cameralink…)</p>
+</dd>
+<dt><strong>x0</strong>, <strong>x1</strong>: {int}</dt><dd><p>first and last column (zero-based) of a software region of interest. The real camera image can be cropped to a region of interest, the
+corresponding horizontal boundaries are given by <strong>x0</strong> and <strong>x1</strong>, whereas the current width is obtained by <strong>sizex</strong>.</p>
+</dd>
+<dt><strong>y0</strong>, <strong>y1</strong>: {int}</dt><dd><p>the same than above but first and last row (related to the height of the ROI).</p>
+</dd>
+<dt><strong>sizex</strong>, <strong>sizey</strong>: {int}, read-only</dt><dd><p>width and height of the region of interest or the full camera size (default)</p>
+</dd>
+<dt><strong>bpp</strong>: {int}</dt><dd><p>bit depth, bits per pixel (usually not adjustable)</p>
+</dd>
+<dt><strong>temperatures</strong>: {double}, read-only</dt><dd><p>list containing the current CCD, camera and power supply temperatures in degree celcius</p>
+</dd>
+<dt><strong>coolingSetPointTemperature</strong>: {int}</dt><dd><p>set point for the CCD cooling control in degree celcius (only available if supported with this camera)</p>
+</dd>
+<dt><strong>IRSensitivity</strong>: {bool} [0,1]</dt><dd><p>enables (True, 1) or disables (False, 0) the IR sensitivity of the image sensor, parameter is set to read-only if not available for the specific camera</p>
+</dd>
+<dt><strong>pixelrate</strong>: {int}</dt><dd><p>Transer pixelrate for data from the camera in MHz.</p>
+</dd>
+<dt><strong>conversionFactor</strong>: {double}</dt><dd><p>conversion factor in electrons/count</p>
+</dd>
+<dt><strong>binning</strong>: {int}</dt><dd><p>Horizontal and vertical binning. The value is obtained by <em>horizontal * 100 + vertical</em>. Therefore, no binning corresponds to 101. Some cameras accepts a linear range of binning values [1,2,…max], others only allow a binary range [1,2,4,8,..max]. If the binning is changed, the region of interest is adapted as well to a suitable value.</p>
+</dd>
+<dt><strong>gain</strong>: {double}, read-only</dt><dd><p>not available</p>
+</dd>
+<dt><strong>offset</strong>: {double}, read-only</dt><dd><p>not available</p>
+</dd>
 </dl>
 <p>Most parameters not only have a minimum and maximum value but also a step size.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Please consider that the parameters defining the region of interest may change if the binning is changed, since an increased binning value decreases the available image size.</p>
+<p class="admonition-title">Note</p>
+<p>Please consider that the parameters defining the region of interest may change if the binning is changed, since an increased binning value decreases the available image size.</p>
 </div>
 </div>
 <div class="section" id="compilation">
@@ -274,14 +276,15 @@ For GigE cameras you also need to install the PCO GigE driver and make sure that
 <div class="section" id="changelog">
 <h2>1.15.5. Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>itom setup 1.2.0: This plugin has been compiled using pco.sdk 1.17.0.632</li>
-<li>itom setup 1.3.0: This plugin has been compiled using pco.sdk 1.17.0.632</li>
-<li>itom setup 1.4.0: This plugin has been compiled using pco.sdk 1.17.0.632</li>
-<li>itom setup 2.0.0: This plugin has been compiled using pco.sdk 1.17.0.632</li>
-<li>itom setup 2.1.0: This plugin has been compiled using pco.sdk 1.17.0.632</li>
-<li>itom setup 2.2.0: This plugin has been compiled using pco.sdk 1.18.0.000</li>
-<li>itom setup 3.0.0: This plugin has been compiled using pco.sdk 1.18.0.000</li>
-<li>itom setup 3.1.0: This plugin has been compiled using pco.sdk 1.23.0.000</li>
+<li><p>itom setup 1.2.0: This plugin has been compiled using pco.sdk 1.17.0.632</p></li>
+<li><p>itom setup 1.3.0: This plugin has been compiled using pco.sdk 1.17.0.632</p></li>
+<li><p>itom setup 1.4.0: This plugin has been compiled using pco.sdk 1.17.0.632</p></li>
+<li><p>itom setup 2.0.0: This plugin has been compiled using pco.sdk 1.17.0.632</p></li>
+<li><p>itom setup 2.1.0: This plugin has been compiled using pco.sdk 1.17.0.632</p></li>
+<li><p>itom setup 2.2.0: This plugin has been compiled using pco.sdk 1.18.0.000</p></li>
+<li><p>itom setup 3.0.0: This plugin has been compiled using pco.sdk 1.18.0.000</p></li>
+<li><p>itom setup 3.1.0: This plugin has been compiled using pco.sdk 1.23.0.000</p></li>
+<li><p>itom setup &gt;3.1.0: This plugin has been compiled using pco.sdk 1.24</p></li>
 </ul>
 </div>
 </div>
@@ -297,7 +300,7 @@ For GigE cameras you also need to install the PCO GigE driver and make sure that
         <a href="pcoPixelFly.html" class="btn btn-neutral float-right" title="1.16. PCOPixelFly" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="openCVGrabber.html" class="btn btn-neutral" title="1.14. OpenCVGrabber" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="openCVGrabber.html" class="btn btn-neutral float-left" title="1.14. OpenCVGrabber" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -307,7 +310,9 @@ For GigE cameras you also need to install the PCO GigE driver and make sure that
   <div role="contentinfo">
     <p>
         &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
-      Last updated on Dec 04, 2018.
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
 
     </p>
   </div>
@@ -324,37 +329,16 @@ For GigE cameras you also need to install the PCO GigE driver and make sure that
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../../',
-              VERSION:'',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
