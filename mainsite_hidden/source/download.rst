@@ -27,11 +27,11 @@ that provide the plot and figure widgets of **itom**.
 |
 | The End-User Setup version includes **itom** and the following components:
 
-**Version 3.2.0**
+**Version 3.2.0** compiled using:
 
-* compiled using Qt5.10.1
-* Python 3.6.1
-* openCV 3.7.2
+* Qt 5.10.1
+* Python 3.7.2
+* openCV 3.4.5
 * wheel 0.33.1
 * six 1.12.0
 * setuptools 41.0.0
