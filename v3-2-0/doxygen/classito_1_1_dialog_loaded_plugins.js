@@ -1,0 +1,28 @@
+var classito_1_1_dialog_loaded_plugins =
+[
+    [ "DialogLoadedPlugins", "classito_1_1_dialog_loaded_plugins.html#a56dbc566010e68feaba98e3f85a51a35", null ],
+    [ "~DialogLoadedPlugins", "classito_1_1_dialog_loaded_plugins.html#a0aa1cc64c293b497aa05ca979c18ea9b", null ],
+    [ "filter", "classito_1_1_dialog_loaded_plugins.html#ac7333b3976c97eceaddcdd5eca7639bb", null ],
+    [ "init", "classito_1_1_dialog_loaded_plugins.html#a9af7dbb9c4d8f15857e8b0d308e268eb", null ],
+    [ "on_cmdError_clicked", "classito_1_1_dialog_loaded_plugins.html#a9b0265927df4039e4ce264c38fce9fe9", null ],
+    [ "on_cmdIgnored_clicked", "classito_1_1_dialog_loaded_plugins.html#a9e34acb6b326554fa0111c4c2c1bb41d", null ],
+    [ "on_cmdMessage_clicked", "classito_1_1_dialog_loaded_plugins.html#a43db1dc77a96cab561467cfc43357199", null ],
+    [ "on_cmdWarning_clicked", "classito_1_1_dialog_loaded_plugins.html#a7777d8faed02dcb686dda30dfcb22b3b", null ],
+    [ "on_filterEdit_textChanged", "classito_1_1_dialog_loaded_plugins.html#a2a67c2ae16ed0d8c59a8ee71246e05d8", null ],
+    [ "on_onlyCompatibleCheck_clicked", "classito_1_1_dialog_loaded_plugins.html#a433ca10d1630260e15104a5dce56ec1d", null ],
+    [ "on_tree_itemSelectionChanged", "classito_1_1_dialog_loaded_plugins.html#a4e09edfb789b543590cd66b1c459b716", null ],
+    [ "pluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#a341d941f6d952602119cf12a9bc91361", null ],
+    [ "setPluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#a40dd9824eb89a1fe816a83af2898c7d6", null ],
+    [ "setSortChar", "classito_1_1_dialog_loaded_plugins.html#af0d0db30e580b0839dc3dd66ece0aad4", null ],
+    [ "m_cmdError", "classito_1_1_dialog_loaded_plugins.html#a4956e3ccc4a8ef96be04240730b0ee99", null ],
+    [ "m_cmdIgnored", "classito_1_1_dialog_loaded_plugins.html#a9044c405756d4879d45b4aa5aea90266", null ],
+    [ "m_cmdMessage", "classito_1_1_dialog_loaded_plugins.html#ab4b550de2ce6d084f9d3b994ebdc143b", null ],
+    [ "m_cmdWarning", "classito_1_1_dialog_loaded_plugins.html#aa0b6bdc555346763f39a07a53ec34037", null ],
+    [ "m_content", "classito_1_1_dialog_loaded_plugins.html#a897bd2fa6082e0dd25617d85557950cb", null ],
+    [ "m_fileIconProvider", "classito_1_1_dialog_loaded_plugins.html#aa2517fc7b191fb44b3c0429aab59e530", null ],
+    [ "m_items", "classito_1_1_dialog_loaded_plugins.html#a53f36364baa9fa942425bfaaf1648fcf", null ],
+    [ "m_pluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#a80102c734a2e134c847b25bb05eb9585", null ],
+    [ "m_windowTitle", "classito_1_1_dialog_loaded_plugins.html#a93556a8108f0ae89c3651eb977eda90f", null ],
+    [ "ui", "classito_1_1_dialog_loaded_plugins.html#a7a7ffe5f0ccdd850cfd970c88f951aed", null ],
+    [ "pluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#a4c9c6356f4553391afab75ef4bb5f737", null ]
+];
