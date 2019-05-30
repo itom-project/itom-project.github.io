@@ -34,6 +34,7 @@ var searchData=
   ['breakpointdockwidget',['BreakPointDockWidget',['../classito_1_1_break_point_dock_widget.html',1,'ito']]],
   ['breakpointitem',['BreakPointItem',['../structito_1_1_break_point_item.html',1,'ito::BreakPointItem'],['../structito_1_1_break_point_item.html#acf3875bec8bfb929244a2e634146eb61',1,'ito::BreakPointItem::BreakPointItem()']]],
   ['breakpointmodel',['BreakPointModel',['../class_break_point_model.html',1,'']]],
+  ['breakpointpanel',['BreakpointPanel',['../classito_1_1_breakpoint_panel.html',1,'ito']]],
   ['bringwindowsontop',['bringWindowsOnTop',['../classito_1_1_process_organizer.html#ab3f6cd83a7ee46f21b5ef3968215ae1c',1,'ito::ProcessOrganizer']]],
   ['browse',['browse',['../class_path_line_edit.html#a0b68ed38a983fe6b64c46e041f9d49b7',1,'PathLineEdit']]],
   ['browsebutton',['BrowseButton',['../class_path_line_edit_private.html#a8977c39293fde803d44534d8ac117765',1,'PathLineEditPrivate']]],

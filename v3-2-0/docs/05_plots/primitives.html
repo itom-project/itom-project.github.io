@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.11. Markers, user selections and geometric shapes &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Extending the user interface of itom" href="../06_extended_gui/extended_gui.html" />
+    <link rel="prev" title="6.10. Matplotlib" href="matplotlib.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plots.html">6. Plots and Figures</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.11. Markers, user selections and geometric shapes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#drawing-items-into-a-qwt-plot">6.11.1. Drawing items into a Qwt-plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#script-based-pick-and-plot-from-to-a-qwt-widget">6.11.2. Script based pick and plot from / to a Qwt-widget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implemented-functions-signals-and-slots">6.11.3. Implemented Functions, Signals and Slots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#indexing-for-geometric-elements">6.11.4. Indexing for Geometric Elements</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#evaluation-of-geometric-elements">6.11.5. Evaluation of Geometric Elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo-scripts-and-examples">6.11.6. Demo Scripts and Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="plots.html">6. Plots and Figures</a> &raquo;</li>
+        
+      <li>6.11. Markers, user selections and geometric shapes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/05_plots/primitives.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="markers-user-selections-and-geometric-shapes">
+<span id="primitives"></span><h1>6.11. Markers, user selections and geometric shapes<a class="headerlink" href="#markers-user-selections-and-geometric-shapes" title="Permalink to this headline">¶</a></h1>
+<p>The plot-widgets <a class="reference internal" href="linePlots.html#itom1dqwtplot"><span class="std std-ref">Plot of an N x M dataObject with 1 x M x-vector</span></a> and <a class="reference internal" href="imagePlots.html#itom2dqwtplot"><span class="std std-ref">Itom2dQwtPlot</span></a> (short: Qwt-plots) support displaying markers, geometric shapes by script or by user interaction.
+This section will give a short introduction about plotting, read- /write-functions and the corresponding plots and the internal geometric element structure.</p>
+<p>At last the evaluateGeomtrics-plugin for direct evaluation of geometric elements is introduced.</p>
+<p>Displaying geometric shapes or markers onto Qwt-plots can be done by three different ways:</p>
+<ul class="simple">
+<li><p>GUI based approach by draw and delete options in the toolbar or the <strong>Tools</strong> menu.</p></li>
+<li><p>Displaying shapes and markers by a Python script.</p></li>
+<li><p>Get the position and size of specified shapes or markers by the user and optionally display them by script.</p></li>
+</ul>
+<div class="section" id="drawing-items-into-a-qwt-plot">
+<h2>6.11.1. Drawing items into a Qwt-plot<a class="headerlink" href="#drawing-items-into-a-qwt-plot" title="Permalink to this headline">¶</a></h2>
+<p>The plot functionality can be accessed by three different ways. The first way is the GUI based approach where the user presses the
+“switch draw mode”-button in the button-bar of the plot. The button represents the current item to be plotted.
+The red X (“clear button”) will delete all geometric elements within the plot either drawn by hand or by script.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/drawInto2DToolbarIcons.png"><img alt="../_images/drawInto2DToolbarIcons.png" src="../_images/drawInto2DToolbarIcons.png" style="width: 839.0px; height: 36.0px;" /></a>
+</div>
+<p>At the moment “itom” supports the following shapes:</p>
+<ul class="simple">
+<li><p>point</p></li>
+<li><p>line</p></li>
+<li><p>rectangle (alignment parallel to axes)</p></li>
+<li><p>ellipse (alignment parallel to axes)</p></li>
+</ul>
+<p>To draw an item, select the right shape from the <strong>tools &gt;&gt; switch draw mode</strong> menu. The button is then in an active, toggled state and you can start
+by clicking the canvas. For lines, rectangles and ellipses, you have to click once for the first point of the item and another time for the second time.
+During the design mode, a green line indicates the current position and size of the draft, after the last necessary mouse click, the shape design
+is finished and its color turns to the corresponding inverse color of the current color palette.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/drawInto2D.png"><img alt="../_images/drawInto2D.png" src="../_images/drawInto2D.png" style="width: 840.0px; height: 888.0px;" /></a>
+</div>
+<p>By clicking the <strong>tools &gt;&gt; clear marker</strong> menu, all current shapes are deleted. After creation the geometric elements can be edited by left-clicking one of the element handles which becomes high-lighted (squares) and moving the mouse.
+By pressing the “ctrl”-button during mouse-movement the element resize behaviour will be changed depending on the element type.
+Lines will be changed to horizontal or vertical alignment.
+Rectangles and ellipses will be become squares or circles according to plot coordinates (x/y-space) and not pixel coordinates.
+To avoid confusion with plot aspect, a button for fixed axis aspect ratio (“1:1”) was added to the plot bar.</p>
+</div>
+<div class="section" id="script-based-pick-and-plot-from-to-a-qwt-widget">
+<h2>6.11.2. Script based pick and plot from / to a Qwt-widget<a class="headerlink" href="#script-based-pick-and-plot-from-to-a-qwt-widget" title="Permalink to this headline">¶</a></h2>
+<p>To allow more complex user interaction with scripts, e.g. script based element picking, the plot functionality can be started by script either blocking or non-blocking.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">myImage</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">number</span><span class="p">,</span> <span class="n">handle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">myImage</span><span class="p">,</span> <span class="s2">&quot;itom2dQwtPlot&quot;</span><span class="p">)</span>
+
+<span class="c1"># Blocking access which return the values for a single point in myElement</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">drawAndPickElements</span><span class="p">(</span><span class="n">plotItem</span><span class="o">.</span><span class="n">PrimitivePoint</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># get center of shape</span>
+<span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">center</span>
+
+<span class="c1"># None blocking plot</span>
+<span class="c1"># Structure will be dataObject([1, 11], &#39;float32&#39;) with [idx, type, x, y, 0, 0, 0, 0]</span>
+<span class="n">handle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;userInteractionStart&quot;</span><span class="p">,</span> <span class="n">plotItem</span><span class="o">.</span><span class="n">PrimitivePoint</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># --&gt; Read out later after plot is finished</span>
+<span class="n">myGeometry</span> <span class="o">=</span> <span class="n">handle</span><span class="p">[</span><span class="s2">&quot;geometricShapes&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The blocking code will wait until the selection is done or the selection was aborted by user and will than return the corresponding object.
+The non-blocking code will return directly. To access the geometric elements the corresponding “signal” for userInteractionDone should be used to noticed
+the end of the user interaction.</p>
+<p>The geometric elements can also be set by script by calling the corresponding slot.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+<span class="p">[</span><span class="n">nr</span><span class="p">,</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;itom2dqwtplot&quot;</span><span class="p">)</span>
+<span class="n">element</span><span class="o">=</span><span class="n">shape</span><span class="p">(</span><span class="n">shape</span><span class="o">.</span><span class="n">Point</span><span class="p">,[</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">])</span>
+<span class="n">h</span><span class="p">[</span><span class="s1">&#39;geometricShapes&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">element</span>
+</pre></div>
+</div>
+<p>For more informations see also <a class="reference internal" href="markers.html#plot-markers"><span class="std std-ref">Markers in plots</span></a></p>
+<p>The geometric elements can be read any time using the property “geometricShapes”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reading geometric elements</span>
+<span class="n">myGeometry</span> <span class="o">=</span> <span class="n">handle</span><span class="p">[</span><span class="s2">&quot;geometricShapes&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The object “myGeometry” consists of all geometric elements with in the plot.
+This kind of reading differs from the blocking-variant (“drawAndPickElements”). The blocking-variant returns only the data created during the current function call and ignores old geometric elements.
+For the different definitions of the geometric elements see section “Indexing of Geometric Elements”.</p>
+</div>
+<div class="section" id="implemented-functions-signals-and-slots">
+<h2>6.11.3. Implemented Functions, Signals and Slots<a class="headerlink" href="#implemented-functions-signals-and-slots" title="Permalink to this headline">¶</a></h2>
+<p>The Qwt-plot widgets functions had to be updated. The Qwt-Widgets got the following properties, respectively setter- / getter-functions related to plotting:</p>
+<ul class="simple">
+<li><p>“geometricElementsCount”,    get the number of geometric elements in this plot, READONLY</p></li>
+<li><p>“keepAspectRatio”,           enable or disable a fixed aspect ratio of 1:1 for the plot canvas.</p></li>
+<li><p>“enablePlotting”,            enable and disable plotting toolbar</p></li>
+<li><p>“selectedGeometry”,          set / get the current selected geometric element</p></li>
+</ul>
+<p>In complete theses the functionality of the drawing interface, the following slots have been added to the widgets:</p>
+<ul class="simple">
+<li><p>“plotMarkers”                Add markers and geometric elements to plot according to dataObject and style type. For geometric “style is not used”, type in “b”.</p></li>
+<li><p>“userInteractionStart”       Start a non-blocking user interaction for “multipointpick” or geometric elements with element count.</p></li>
+<li><p>“clearGeometricElements”     Delete all existing geometric elements within the plot</p></li>
+</ul>
+<p>To register changes in the plot elements and finished user interactions, the following signals where implemented:</p>
+<ul class="simple">
+<li><p>“userInteractionDone”,       Emitted, when user interaction is finished or aborted</p></li>
+<li><p>“plotItemChanged”,           Emitted, when a geometric element was changed and changing is finished. Not fully Python-Compatible.</p></li>
+<li><p>“plotItemDeleted”,           Emitted, when a specific plot item is deleted</p></li>
+<li><p>“plotItemsDeleted”,          Emitted, when all plot items are deleted</p></li>
+<li><p>“plotItemsFinished”,         Emitted, when the plotting function is finished, similar to userInteractionDone</p></li>
+</ul>
+<p>For the blocking connection the plotItem-class got the additional function drawAndPickElements(type, dataObject, count), see <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotItem</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the plot is embedded in a graphical user interface, the python based access to the plot via its object name returns an instance of <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem" title="itom.uiItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">uiItem</span></code></a>.
+However, you can cast this instance to <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotItem</span></code></a> using a python cast operator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itom</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">itom</span><span class="o">.</span><span class="n">plotItem</span><span class="p">(</span><span class="n">myGui</span><span class="o">.</span><span class="n">plotObjectName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <em>myGui.plotObjectName</em> is not an instance of <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotItem</span></code></a> a runtime error is thrown. This cast is only available for itom &gt; 1.4.0.</p>
+</div>
+</div>
+<div class="section" id="indexing-for-geometric-elements">
+<h2>6.11.4. Indexing for Geometric Elements<a class="headerlink" href="#indexing-for-geometric-elements" title="Permalink to this headline">¶</a></h2>
+<p>The definition of the geometric elements depends on the implementation. The “plotMarker” and its corresponding getter- / setter-function uses a Matlab orientated structure.
+The structure a dataObject with 8 rows and n columns where n depends on the number of elements.
+Points are defined by their location, while ellipses and rectangles are defined by their diagonal edges.</p>
+<p>The “geometricElements”-property uses geometric elements in a more mathematical orientated description. The dataObject structure is defined as “float32” with n by 11 elements.
+Most setter functions also support “float32” elements. Each of the n rows corresponds to an elements (except polygon-shapes). The indexing follows the geometricPrimitive-struct in c++.</p>
+<p>The geometricPrimitive is a struct within the c-Stuctur of the program designed for exchanging the geometric elements from plots to other elements.
+The structure can be used row-wise as dataObject or float32-lists</p>
+<p>At the moment only tPoint, tLine, tEllipse and tRectangle are supported.</p>
+<p>The cells contain:</p>
+<ol class="arabic simple">
+<li><p>The unique index of the current primitive, castable to int32 with a maximum up to 16bit index values</p></li>
+<li><p>Type flag 0000FFFF and further flags e.g. read&amp;write only FFFF0000</p></li>
+<li><p>First coordinate with x value</p></li>
+<li><p>First coordinate with y value</p></li>
+<li><p>First coordinate with z value</p></li>
+</ol>
+<p>All other values depends on the primitive type and may change between each type.</p>
+<ul class="simple">
+<li><p>A point is defined as idx, flags, centerX0, centerY0, centerZ0</p></li>
+<li><p>A line is defined as idx, flags, x0, y0, z0, x1, y1, z1</p></li>
+<li><p>A ellipse is defined as idx, flags, centerX, centerY, centerZ, r1, r2</p></li>
+<li><p>A circle is defined as idx, flags, centerX, centerY, centerZ, r</p></li>
+<li><p>A rectangle is defined as idx, flags, x0, y0, z0, x1, y1, z1, alpha</p></li>
+<li><p>A square is defined as idx, flags, centerX, centerY, centerZ, a, alpha</p></li>
+<li><p>A polygon is defined as idx, flags, posX, posY, posZ, directionX, directionY, directionZ, idx, numIdx</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>doxygenclass: Cannot find file: C:\itom_qt5.10_vs2015\build\itom\docs\doxygen\xml\index.xml</p>
+</div>
+</div>
+<div class="section" id="evaluation-of-geometric-elements">
+<h2>6.11.5. Evaluation of Geometric Elements<a class="headerlink" href="#evaluation-of-geometric-elements" title="Permalink to this headline">¶</a></h2>
+<p>The evaluateGeomtrics-widget is designed to load geometric definition stored in a float32 dataObject with a column-size of &gt;10 elements and a row for each geometric element to display.
+Further more it allows the evaluation of geometric relations between the geometric primitives. See section <a class="reference internal" href="../06_extended_gui/list_custom_widgets.html#listcustomdesignerwidgets"><span class="std std-ref">Custom Designer Widgets</span></a> for the widget description.</p>
+</div>
+<div class="section" id="demo-scripts-and-examples">
+<h2>6.11.6. Demo Scripts and Examples<a class="headerlink" href="#demo-scripts-and-examples" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><strong>uiMeasureToolMain.py</strong></p>
+<div class="line-block">
+<div class="line"><em>Description</em>: Advanced GUI which enables geometric plotting and measurements within a 2D-QWT-Plot. This file shows how to auto-connect to signals and how to use buttons. The corresponding ui-file is uiMeasureToolMain.ui.</div>
+</div>
+</li>
+<li><p><strong>demoPickPointsAndMarkers.py</strong></p>
+<div class="line-block">
+<div class="line"><em>Description</em>: Demo for picking &amp; plotting points and picking &amp; plotting ellipses.</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../06_extended_gui/extended_gui.html" class="btn btn-neutral float-right" title="7. Extending the user interface of itom" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="matplotlib.html" class="btn btn-neutral float-left" title="6.10. Matplotlib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

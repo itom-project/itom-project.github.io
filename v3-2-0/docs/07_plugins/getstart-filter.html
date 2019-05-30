@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>8.6. Getting started with algorithm plugins a.k.a. filters &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.7. Development under C++" href="development/plugin-development.html" />
+    <link rel="prev" title="8.5. Getting started with actuators" href="getstart-actuator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plugins.html">8. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_concept.html">8.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-hardware.html">8.2. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-grabber.html">8.3. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-adda.html">8.4. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-actuator.html">8.5. Getting started with actuators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.6. Getting started with algorithm plugins a.k.a. filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">8.6.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-of-filters">8.6.2. Usage of filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development/plugin-development.html">8.7. Development under C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/openCVMat.html">8.8. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="plugins.html">8. Plugins</a> &raquo;</li>
+        
+      <li>8.6. Getting started with algorithm plugins a.k.a. filters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/07_plugins/getstart-filter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started-with-algorithm-plugins-a-k-a-filters">
+<span id="getstartfilter"></span><h1>8.6. Getting started with algorithm plugins a.k.a. filters<a class="headerlink" href="#getting-started-with-algorithm-plugins-a-k-a-filters" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>8.6.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Algorithm plugins may contain often used filters, specialised algorithms that work faster if implemented in C++ rather than python, or even complex software including e.g. GUIs and measurement control along with evaluation algorithms.
+Each plugin can contain a number of algorithms, which are named <strong>filters</strong> due to historical reasons.
+Like for every plugin, information on the filter is gained by selecting <strong>Info…</strong> from the context menu of your <strong>plugin</strong> or the actual <strong>filter</strong>. Here, you will find the mandatory and optional parameters of the specific filter.</p>
+<p>You can also get information on filters using the <strong>filterHelp()</strong> command in python. Without argument, it gives a list of all available filters including a short info string. If you know a part of your filter’s name, the list will only contain filters using this name. If you use the complete name of filter, detailed help like in the GUI approach will be displayed.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">filterHelp</span><span class="p">()</span>            <span class="c1"># list of all available filters</span>
+<span class="n">filterHelp</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>      <span class="c1"># list shortened to filters containing &#39;mean&#39;</span>
+<span class="n">filterHelp</span><span class="p">(</span><span class="s1">&#39;calcMeanZ&#39;</span><span class="p">)</span> <span class="c1"># detailed information on &#39;calcMeanZ&#39;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="usage-of-filters">
+<h2>8.6.2. Usage of filters<a class="headerlink" href="#usage-of-filters" title="Permalink to this headline">¶</a></h2>
+<p>Once you know the name of the filter you want to use, you can call it by use of the <strong>filter()</strong> command. It takes the filtername as string and the mandatory and optional parameters as arguments. Paramaters may be provided in designated order in keyword based notation.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;[filtername]&quot;</span><span class="p">,</span> <span class="n">mandParams</span><span class="p">,</span> <span class="n">optParams</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most filters require some sort of destination dataObject. Make sure to provide suitable dimensions and datatype.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="development/plugin-development.html" class="btn btn-neutral float-right" title="8.7. Development under C++" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getstart-actuator.html" class="btn btn-neutral float-left" title="8.5. Getting started with actuators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

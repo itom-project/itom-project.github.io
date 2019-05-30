@@ -1,0 +1,28 @@
+var classito_1_1_breakpoint_panel =
+[
+    [ "BreakpointPanel", "classito_1_1_breakpoint_panel.html#a8ae3e029b827e44364b0b1d9b388e987", null ],
+    [ "~BreakpointPanel", "classito_1_1_breakpoint_panel.html#a992be7474f2add236fe8c3b7c709d8bf", null ],
+    [ "clearAllBreakpointsRequested", "classito_1_1_breakpoint_panel.html#a783746ecbd14d5e78e1c990452ee6478", null ],
+    [ "contextMenuEvent", "classito_1_1_breakpoint_panel.html#a1608553a4ff7cdf8ffb36ee893bada86", null ],
+    [ "editBreakpointRequested", "classito_1_1_breakpoint_panel.html#ab81bdb0622e18963a47a651a91f2ab1d", null ],
+    [ "gotoNextBreakPointRequested", "classito_1_1_breakpoint_panel.html#a10f1aebe6f84581f0d8c8988158e1c43", null ],
+    [ "gotoPreviousBreakRequested", "classito_1_1_breakpoint_panel.html#aa13c135ec31de37504964d77d1492985", null ],
+    [ "menuClearAllBreakpoints", "classito_1_1_breakpoint_panel.html#ae52ffdc12e58f7d31a1e29f72183e161", null ],
+    [ "menuEditBreakpoint", "classito_1_1_breakpoint_panel.html#a6baac98c7ef9b605367af879c20bb22e", null ],
+    [ "menuGotoNextBreakPoint", "classito_1_1_breakpoint_panel.html#a90fdca50389d011d2711af4a72c86c12", null ],
+    [ "menuGotoPreviousBreakPoint", "classito_1_1_breakpoint_panel.html#a1c222d98f34cdc8d0f69f06ec394a5a8", null ],
+    [ "menuToggleBreakpoint", "classito_1_1_breakpoint_panel.html#a6d2c70f9a618d5aa6559746c163f092a", null ],
+    [ "menuToggleEnableBreakpoint", "classito_1_1_breakpoint_panel.html#a18def834d99c5170c4dadfa0030c75e3", null ],
+    [ "mouseReleaseEvent", "classito_1_1_breakpoint_panel.html#afd9d514489102c680f985e3dd299f5ef", null ],
+    [ "paintEvent", "classito_1_1_breakpoint_panel.html#adfffb778c72856bc6fbef10d17071689", null ],
+    [ "setCurrentLine", "classito_1_1_breakpoint_panel.html#a6caa46f72d627a7225b205fa15d2c6fc", null ],
+    [ "sizeHint", "classito_1_1_breakpoint_panel.html#a1108a58fb9dbcd339c29a64ec4770907", null ],
+    [ "toggleBreakpointRequested", "classito_1_1_breakpoint_panel.html#a4898ebe7d09a011c4865ebfceb4bb5fd", null ],
+    [ "toggleEnableBreakpointRequested", "classito_1_1_breakpoint_panel.html#a4fdb2cf22cc6823b75cc61fb81ad55d8", null ],
+    [ "m_contextMenuActions", "classito_1_1_breakpoint_panel.html#a92413dbda0ee3cff18e77abe3f37568a", null ],
+    [ "m_contextMenuLine", "classito_1_1_breakpoint_panel.html#aaf38fda14e1e4ce32151d41a055c3dd9", null ],
+    [ "m_currentLine", "classito_1_1_breakpoint_panel.html#a0b2d85f5020e05cb85d6a376a81fac61", null ],
+    [ "m_currentLineIcon", "classito_1_1_breakpoint_panel.html#a2a012276493bf6ebf2e88740b664e072", null ],
+    [ "m_icons", "classito_1_1_breakpoint_panel.html#a7fa19056c5a17d9f8cd26c2daa45509f", null ],
+    [ "m_pContextMenu", "classito_1_1_breakpoint_panel.html#ae930ff197f72e523164a1b3149c19916", null ]
+];

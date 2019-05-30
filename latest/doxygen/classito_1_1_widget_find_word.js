@@ -13,6 +13,6 @@ var classito_1_1_widget_find_word =
     [ "setCursorToTextField", "classito_1_1_widget_find_word.html#a7f3504e2dc0d93e750966c0c3481369e", null ],
     [ "setFindBarEnabled", "classito_1_1_widget_find_word.html#a90eb1a3222184ec7fd986a861a92b175", null ],
     [ "setSuccessState", "classito_1_1_widget_find_word.html#a84c215c1c99a8b9f3cb351c30b1ce1a9", null ],
-    [ "setText", "classito_1_1_widget_find_word.html#a4c9aed1ebca64888e9bef9256fb0cd6f", null ],
+    [ "setText", "classito_1_1_widget_find_word.html#a6aed1b1463aa81f06bf35c0fa5feaf48", null ],
     [ "ui", "classito_1_1_widget_find_word.html#a0befed31d6a5a79277bf3d773fe8caac", null ]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['resizemode',['ResizeMode',['../class_qt_tree_property_browser.html#ab79b17fc1b8470b04672ce000bcc5d74',1,'QtTreePropertyBrowser']]],
-  ['rgbselectionflags',['RGBSelectionFlags',['../classito_1_1_rgba32.html#a2b5362f1f324db75958f50d4f846d0a8',1,'ito::Rgba32']]]
+  ['plotdataformat',['PlotDataFormat',['../namespaceito.html#a55f4ab0831a04329db11d3389d368ed9',1,'ito']]],
+  ['plotdatatype',['PlotDataType',['../namespaceito.html#abd3b401f17cb5d7d7cc67d4063714b0f',1,'ito']]],
+  ['plotfeature',['PlotFeature',['../namespaceito.html#a00f79137047f084843967eb04c3db750',1,'ito']]]
 ];

@@ -4,6 +4,7 @@ var searchData=
   ['maddingetinitparams',['maddInGetInitParams',['../classito_1_1_api_functions.html#ab278720647bfb00425bbd345e29ca95d',1,'ito::ApiFunctions']]],
   ['maddinopenactuator',['maddInOpenActuator',['../classito_1_1_api_functions.html#a2d2a8d3ea9fa6be3e1528ee6ed5134e4',1,'ito::ApiFunctions']]],
   ['maddinopendataio',['maddInOpenDataIO',['../classito_1_1_api_functions.html#a24434cdc8c5673c7ebef34d8351b0b0f',1,'ito::ApiFunctions']]],
+  ['magnification',['magnification',['../classito_1_1_script_editor_printer.html#a48a0c3586c3834043688be9e8479512a',1,'ito::ScriptEditorPrinter']]],
   ['mainapplication',['MainApplication',['../classito_1_1_main_application.html#a7d1cead14734f7c98849c6f6d1dae2a7',1,'ito::MainApplication']]],
   ['mainwindow',['MainWindow',['../classito_1_1_main_window.html#a37b2f0a2e9b354d4d000c67bf1377c94',1,'ito::MainWindow']]],
   ['mainwindowcloserequest',['mainWindowCloseRequest',['../classito_1_1_main_application.html#a0e84153046831a488aa6b7e7e1d1484c',1,'ito::MainApplication::mainWindowCloseRequest()'],['../classito_1_1_main_window.html#a073dc94da72c7a2e83d6faab0fa5b26d',1,'ito::MainWindow::mainWindowCloseRequest()']]],

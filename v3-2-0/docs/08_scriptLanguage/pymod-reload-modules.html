@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9.7. Reload modified modules &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.8. Python Limitations in itom" href="pymod-limitations.html" />
+    <link rel="prev" title="9.6. Python-Module matlab" href="pymod-matlab.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="script-language.html">9. Python scripting language</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pymod-itom.html">9.1. Python-Module <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-dataObject.html">9.2. Array class DataObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-load-save-files.html">9.3. Save and load images and other files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-popular-python-packages.html">9.4. Popular Python packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-matplotlib.html">9.5. Python-Module matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-matlab.html">9.6. Python-Module matlab</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.7. Reload modified modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-limitations.html">9.8. Python Limitations in <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-problems-and-solutions.html">9.9. Python - common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytutorial.html">9.10. Python tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="script-language.html">9. Python scripting language</a> &raquo;</li>
+        
+      <li>9.7. Reload modified modules</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/08_scriptLanguage/pymod-reload-modules.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reload-modified-modules">
+<span id="script-language-reload-modules"></span><h1>9.7. Reload modified modules<a class="headerlink" href="#reload-modified-modules" title="Permalink to this headline">¶</a></h1>
+<p>Usually, script files (hence <em>modules</em>) that are imported by another script in python are pre-compiled and cached for a faster execution once the script is loaded or imported another time.
+These cached files are always stored in a sub-folder <strong>__pycache__</strong> (file suffix .pyc). The advantage of this feature is a faster code execution once the pre-compiled and cached file is
+available. On the other hand, this feature can bring some drawbacks during the development process if the content of modules or packages may change. Then, these changes will not become active.</p>
+<p>There are different possibilities to force Python to reload such a changed module:</p>
+<ol class="arabic simple">
+<li><p>Restart <strong>itom</strong>: The date of creation of all cached files (pyc) is compared with the change date of the corresponding py-files and they are recompiled if the scripts are newer.</p></li>
+<li><p>The Python builtin-module <strong>imp</strong> provides mechanisms like the method <strong>reload</strong> to force Python to reload a specific module.</p></li>
+<li><p>The mechanisms provided by the <strong>imp</strong> module are covered by the dialog <strong>reload modules…</strong> that is available in the menu <strong>Script &gt;&gt; reload modules</strong> of the main window of <strong>itom</strong>.</p></li>
+</ol>
+<p>4. <strong>itom</strong> consists of a powerful auto-reload tool that can check all modules are their dependencies whether they have changed since the last check and reloads them. This tool is discussed in the
+course of this section.</p>
+<p>At first, let us denote several issues that may happen due to the caching mechanism of <strong>itom</strong>. Consider the following three script files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#script1.py</span>
+<span class="kn">import</span> <span class="nn">mod2</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;version 1&quot;</span><span class="p">)</span>
+<span class="n">mod2</span><span class="o">.</span><span class="n">func2</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#mod2.py</span>
+<span class="kn">import</span> <span class="nn">mod3</span>
+
+<span class="k">def</span> <span class="nf">func2</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;func2, version 1&quot;</span><span class="p">)</span>
+    <span class="n">mod3</span><span class="o">.</span><span class="n">func3</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#mod3.py</span>
+
+<span class="k">def</span> <span class="nf">func3</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;func3, version 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <em>script1.py</em> is now executed, the modules <em>mod2</em> and <em>mod3</em> are imported and cached. The output at the first run is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 1&#39;</span>
+<span class="s1">&#39;func2, version 1&#39;</span>
+<span class="s1">&#39;func3, version 1&#39;</span>
+</pre></div>
+</div>
+<p>If we change now the strings ‘version 1’ to ‘version 2’ in all three files and execute <em>script1.py</em> again, the output will be as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 2&#39;</span>
+<span class="s1">&#39;func2, version 1&#39;</span>
+<span class="s1">&#39;func3, version 1&#39;</span>
+</pre></div>
+</div>
+<p>Only the first line changed, the other two stayed unchanged since <em>mod2</em> and <em>mod3</em> are still cached. Of course a restart of <strong>itom</strong> would lead to the
+right result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 2&#39;</span>
+<span class="s1">&#39;func2, version 2&#39;</span>
+<span class="s1">&#39;func3, version 2&#39;</span>
+</pre></div>
+</div>
+<p>Another possibility would be to reload <em>mod2</em> using the Python builtin-module <em>imp</em>, since <em>mod2</em> is imported by <em>script1.py</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">imp</span>
+<span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">mod2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another execution of <em>script1.py</em> will now lead to the following result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 2&#39;</span>
+<span class="s1">&#39;func2, version 2&#39;</span>
+<span class="s1">&#39;func3, version 1&#39;</span>
+</pre></div>
+</div>
+<p>The last result, coming from <em>mod3</em> is still unchanged. This comes due to the fact that the <em>imp.reload</em> command does not resolve any dependencies but
+only tries to reload one single module, corresponding to the content of one single py-file. Therefore, you always need to know where exactly code changes
+have occurred and reload all related modules. To simplify this mechanism, you can use the dialog <strong>Reload modules…</strong> that is reachable via the <strong>itom</strong> menu
+<strong>Script &gt;&gt; reload modules &gt;&gt; reload modules…</strong>. Sometimes, the reload may fail. Reasons for this and further limitations of the reload process are discussed later.</p>
+<p>In order to provide an easy way to automatically reload all modules that have been changed since the last execution, <strong>itom</strong> provides an auto-reload tool.
+This tool has been inspired by the autoreload module of <em>IPython</em> (<a class="reference external" href="http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html">http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html</a>) and is fully integrated into
+<strong>itom</strong>. Enable the tool by the menu <strong>Script &gt;&gt; reload modules &gt;&gt; autoreload modules</strong>. Depending on further settings, the currently executed script file, code command or
+function is checked (including all its dependencies) for changes are reloaded if necessary. You have full control in which cases you want that check being executed.
+This is controlled by the further options in the submenu <strong>Script &gt;&gt; reload modules</strong>:</p>
+<ul class="simple">
+<li><p>autoreload before script execution: The check is executed whenever you run or debug a script file</p></li>
+<li><p>autoreload before single command: The check is executed before you execute a string command from the command line of <strong>itom</strong></p></li>
+<li><p>autoreload before events and function calls: The check is executed if any python code or function is executed due to an event or signal (e.g. button click in a GUI)</p></li>
+</ul>
+<p>Try to enable the autoreload tool and enable at least the option <em>autoreload before script execution</em>. Then change the version strings in all files to ‘version 3’ and execute script3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 3&#39;</span>
+<span class="s1">&#39;func2, version 3&#39;</span>
+<span class="s1">&#39;func3, version 3&#39;</span>
+</pre></div>
+</div>
+<p>Using this tool, you do not need to worry about reloading any changed modules. This gives you a powerful tool for developing more complex scripts that are divided into multiple files.
+The autoreload tool can also be enabled and configured using the command <a class="reference internal" href="../09_reference/itom_general.html#itom.autoReloader" title="itom.autoReloader"><code class="xref py py-func docutils literal notranslate"><span class="pre">itom.autoReloader()</span></code></a>.</p>
+<p>Sometimes, you will notice that reloading a module using the <em>imp</em> module will fail or not work. Consider the following script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#mod4.py</span>
+
+<span class="k">class</span> <span class="nc">MyRect</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getSizes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;size of MyRect&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now type into the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mod4</span>
+<span class="n">rect</span> <span class="o">=</span> <span class="n">mod4</span><span class="o">.</span><span class="n">MyRect</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">rect</span><span class="o">.</span><span class="n">getSizes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will obtain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;size of MyRect: [4,5]&#39;</span>
+</pre></div>
+</div>
+<p>If you change now the print-command in the method ‘getSizes’ of class ‘MyRect’ to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;width:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;,height:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>and call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">mod4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>in order to reload <em>mod4.py</em> again, a call to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rect</span><span class="o">.</span><span class="n">getSizes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>in the command line will still lead to the old result. This is due to the fact, that the <em>imp</em> module cannot reload objects that are still referenced by another variable. In this case,
+the global variable <strong>rect</strong> is an instance of the class <strong>MyRect</strong>. Therefore, it is not possible to reload this class before deleting the variable <strong>rect</strong>. However, if you enable the
+autoreload tool and enable the option <strong>autoreload before single command</strong> before changing the print command, you will see that this still is also able to replace the code of a class method
+even if there are already active instances of this class.</p>
+<p>The autoreload tool is a way more powerful than the native <em>imp</em> implementation. However there are still some limitations:</p>
+<p>Reloading Python modules in a reliable way is in general difficult, and unexpected things may occur. ‘autoreload’ tries to work
+around common pitfalls by replacing function code objects and parts of classes previously in the module with new versions. This makes the following things to work:</p>
+<ul class="simple">
+<li><p>Functions and classes imported via ‘from xxx import foo’ are upgraded to new versions when ‘xxx’ is reloaded.</p></li>
+<li><p>Methods and properties of classes are upgraded on reload, so that calling ‘c.foo()’ on an object ‘c’ created before the reload causes the new code for ‘foo’ to be executed.</p></li>
+</ul>
+<p>Some of the known remaining caveats are:</p>
+<ul>
+<li><p>Replacing code objects does not always succeed: changing a &#64;property in a class to an ordinary method or a method to a member variable can cause problems (but in old objects only).</p></li>
+<li><p>Functions that are removed (eg. via monkey-patching) from a module before it is reloaded are not upgraded.</p></li>
+<li><p>C extension modules cannot be reloaded, and so cannot be autoreloaded.</p>
+<blockquote>
+<div><p>(taken from <a class="reference external" href="http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html">http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html</a>)</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pymod-limitations.html" class="btn btn-neutral float-right" title="9.8. Python Limitations in itom" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymod-matlab.html" class="btn btn-neutral float-left" title="9.6. Python-Module matlab" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

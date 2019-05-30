@@ -11,6 +11,7 @@ var classito_1_1_python_itom =
     [ "PyAddMenu", "classito_1_1_python_itom.html#a9d193db5f1d839abea6132853ddfc0b3", null ],
     [ "PyAutoReloader", "classito_1_1_python_itom.html#a22e0bc7a44726d01736f7dc2749af948", null ],
     [ "PyCheckSignals", "classito_1_1_python_itom.html#a4ac2feaa0632538327728f32516cb98a", null ],
+    [ "PyClearAll", "classito_1_1_python_itom.html#a83537258613777efea98eaf6613ed792", null ],
     [ "PyClearCommandLine", "classito_1_1_python_itom.html#ae775e98913b3bd653160afe1632416c8", null ],
     [ "PyDumpMenusAndButtons", "classito_1_1_python_itom.html#a13e457f4fbd65fa80fa9e68334c36a63", null ],
     [ "PyFilter", "classito_1_1_python_itom.html#a65028c65f1da4f7d9b513742153f71d3", null ],

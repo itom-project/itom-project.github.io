@@ -18,5 +18,6 @@ var classito_1_1_py_workspace_container =
     [ "m_blackListType", "classito_1_1_py_workspace_container.html#a0c776f4256c413eedc65b3f7072010a7", null ],
     [ "m_expandedFullNames", "classito_1_1_py_workspace_container.html#a21855a577bcdc0b8b1510b8816163a08", null ],
     [ "m_globalNotLocal", "classito_1_1_py_workspace_container.html#a5affb3a3067ee43b074f01e523c2259f", null ],
-    [ "m_rootItem", "classito_1_1_py_workspace_container.html#a83c74d49da422edd0115260fdccad964", null ]
+    [ "m_rootItem", "classito_1_1_py_workspace_container.html#a83c74d49da422edd0115260fdccad964", null ],
+    [ "slotsUnicode", "classito_1_1_py_workspace_container.html#ab99c4ff4e013542caaf7d1b4a056478b", null ]
 ];

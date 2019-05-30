@@ -1,6 +1,6 @@
 var classito_1_1_d_obj_meta =
 [
-    [ "DObjMeta", "classito_1_1_d_obj_meta.html#a180d90ec894a287d2ee8cd4b3ef4c676", null ],
+    [ "DObjMeta", "classito_1_1_d_obj_meta.html#a00158a71159d274c80da334c919f7fe7", null ],
     [ "getAllowedTypes", "classito_1_1_d_obj_meta.html#a6c5bed5a7fed2977e312a0c154d36a16", null ],
     [ "getMaxDim", "classito_1_1_d_obj_meta.html#ae8cb6316b66c9df8b2bcd0a42cc378df", null ],
     [ "getMinDim", "classito_1_1_d_obj_meta.html#ad3eda69d00af5e8b04c35417b3dd1a6f", null ],

@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['lastcommanddockwidget',['LastCommandDockWidget',['../classito_1_1_last_command_dock_widget.html',1,'ito']]],
-  ['lastcommandtreewidget',['LastCommandTreeWidget',['../classito_1_1_last_command_tree_widget.html',1,'ito']]],
-  ['leaffilterproxymodel',['LeafFilterProxyModel',['../classito_1_1_leaf_filter_proxy_model.html',1,'ito']]],
-  ['lineeditdelegate',['LineEditDelegate',['../classito_1_1_line_edit_delegate.html',1,'ito']]]
+  ['jediassignment',['JediAssignment',['../structito_1_1_jedi_assignment.html',1,'ito']]],
+  ['jedicalltip',['JediCalltip',['../structito_1_1_jedi_calltip.html',1,'ito']]],
+  ['jedicalltiprequest',['JediCalltipRequest',['../structito_1_1_jedi_calltip_request.html',1,'ito']]],
+  ['jedicompletion',['JediCompletion',['../structito_1_1_jedi_completion.html',1,'ito']]],
+  ['jedicompletionrequest',['JediCompletionRequest',['../structito_1_1_jedi_completion_request.html',1,'ito']]]
 ];

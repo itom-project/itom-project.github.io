@@ -11,7 +11,7 @@ var classito_1_1_user_organizer =
     [ "getUserID", "classito_1_1_user_organizer.html#ab97de32e38ad2ffc500837165719d0a2", null ],
     [ "getUserModel", "classito_1_1_user_organizer.html#a5457de7392362e084af975de6dd6b49e", null ],
     [ "getUserName", "classito_1_1_user_organizer.html#a7e542696da33ee675f2814789d15b96b", null ],
-    [ "getUserRole", "classito_1_1_user_organizer.html#a23d12ac12f2632d280a96ff25ee554f2", null ],
+    [ "getUserRole", "classito_1_1_user_organizer.html#a3690be8b2dd0cc0f1767049a7cac8b1a", null ],
     [ "hasFeature", "classito_1_1_user_organizer.html#a48866dda73c3c05b5a29314e26f4464c", null ],
     [ "loadSettings", "classito_1_1_user_organizer.html#ac539829b708965f0716ca91424c6ab6d", null ],
     [ "readUserDataFromFile", "classito_1_1_user_organizer.html#a1bddfc42198993891e904e91cc7780bb", null ],

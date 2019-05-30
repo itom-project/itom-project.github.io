@@ -103,7 +103,7 @@ var menudata={children:[
 {text:"w",url:"functions_w.html#index_w"},
 {text:"x",url:"functions_x.html#index_x"},
 {text:"z",url:"functions_z.html#index_z"},
-{text:"~",url:"functions_0x7e.html#index_0x7e"}]},
+{text:"~",url:"functions_~.html#index__7E"}]},
 {text:"Functions",url:"functions_func.html",children:[
 {text:"a",url:"functions_func.html#index_a"},
 {text:"b",url:"functions_func_b.html#index_b"},
@@ -129,7 +129,7 @@ var menudata={children:[
 {text:"w",url:"functions_func_w.html#index_w"},
 {text:"x",url:"functions_func_x.html#index_x"},
 {text:"z",url:"functions_func_z.html#index_z"},
-{text:"~",url:"functions_func_0x7e.html#index_0x7e"}]},
+{text:"~",url:"functions_func_~.html#index__7E"}]},
 {text:"Variables",url:"functions_vars.html",children:[
 {text:"a",url:"functions_vars.html#index_a"},
 {text:"b",url:"functions_vars_b.html#index_b"},
@@ -150,7 +150,17 @@ var menudata={children:[
 {text:"t",url:"functions_vars_t.html#index_t"},
 {text:"u",url:"functions_vars_u.html#index_u"}]},
 {text:"Typedefs",url:"functions_type.html"},
-{text:"Enumerations",url:"functions_enum.html"},
+{text:"Enumerations",url:"functions_enum.html",children:[
+{text:"c",url:"functions_enum.html#index_c"},
+{text:"d",url:"functions_enum.html#index_d"},
+{text:"e",url:"functions_enum.html#index_e"},
+{text:"h",url:"functions_enum.html#index_h"},
+{text:"i",url:"functions_enum.html#index_i"},
+{text:"m",url:"functions_enum.html#index_m"},
+{text:"r",url:"functions_enum.html#index_r"},
+{text:"s",url:"functions_enum.html#index_s"},
+{text:"t",url:"functions_enum.html#index_t"},
+{text:"w",url:"functions_enum.html#index_w"}]},
 {text:"Enumerator",url:"functions_eval.html",children:[
 {text:"a",url:"functions_eval.html#index_a"},
 {text:"b",url:"functions_eval.html#index_b"},

@@ -7,12 +7,14 @@ var classito_1_1_pip_manager =
       [ "taskListPackages2", "classito_1_1_pip_manager.html#afac729cd605d636f692ee07eb1ee2c67a3ef6f0629dd2eb200b9eb2e47204486d", null ],
       [ "taskCheckUpdates", "classito_1_1_pip_manager.html#afac729cd605d636f692ee07eb1ee2c67a80751e66eab721632e643eabb3ec5cfd", null ],
       [ "taskInstall", "classito_1_1_pip_manager.html#afac729cd605d636f692ee07eb1ee2c67a6f35f9711b543f8e1e58749f945bd318", null ],
-      [ "taskUninstall", "classito_1_1_pip_manager.html#afac729cd605d636f692ee07eb1ee2c67a7e8ba824f826ec3fc9fba2e050da0571", null ]
+      [ "taskUninstall", "classito_1_1_pip_manager.html#afac729cd605d636f692ee07eb1ee2c67a7e8ba824f826ec3fc9fba2e050da0571", null ],
+      [ "taskVerifyInstalledPackages", "classito_1_1_pip_manager.html#afac729cd605d636f692ee07eb1ee2c67a8fbc760c0edd832ade1efa2a372f5ff2", null ]
     ] ],
     [ "PipManager", "classito_1_1_pip_manager.html#a2be845103386ed38b5b553699766cfae", null ],
     [ "~PipManager", "classito_1_1_pip_manager.html#a3b9060cae70f92e673c38ef9bd7d4785", null ],
     [ "checkPackageUpdates", "classito_1_1_pip_manager.html#a819ed449f2016f63830acf500a594811", null ],
     [ "checkPipAvailable", "classito_1_1_pip_manager.html#ad16e0a8f90015748eef0e7cf4a6e6c7f", null ],
+    [ "checkVerifyInstalledPackages", "classito_1_1_pip_manager.html#a317991e5abfeaef514f1298415d1bf02", null ],
     [ "clearBuffers", "classito_1_1_pip_manager.html#af0ef5ab43ac60c12e90460b68fe0d3a0", null ],
     [ "columnCount", "classito_1_1_pip_manager.html#a9ab1d56c56f59321e870ab4d458b0234", null ],
     [ "data", "classito_1_1_pip_manager.html#a61f941cce298538845259d170ee4955a", null ],

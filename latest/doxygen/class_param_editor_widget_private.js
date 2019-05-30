@@ -4,6 +4,7 @@ var class_param_editor_widget_private =
     [ "clearGroups", "class_param_editor_widget_private.html#a57b52489e801c00494731395fa7374df", null ],
     [ "enqueue", "class_param_editor_widget_private.html#ac418511ad7f05e0fcc773324ad5ca339", null ],
     [ "m_changedParameters", "class_param_editor_widget_private.html#a43750e76c89e5a639292a77ee2b6f1ec", null ],
+    [ "m_collapsed", "class_param_editor_widget_private.html#aada6e290b11a9ab3b3b95070f65de859", null ],
     [ "m_filteredCategories", "class_param_editor_widget_private.html#abe9f9fde1518b903c14d3a9d7eca6536", null ],
     [ "m_groups", "class_param_editor_widget_private.html#abb83048bb669ca89844658b132a5c21b", null ],
     [ "m_immediatelyModifyPluginParametersAfterChange", "class_param_editor_widget_private.html#a5d49854f298ca09e2d73ee4ea538e2ab", null ],

@@ -5,5 +5,7 @@ var structito_1_1_pip_general_options =
     [ "logPath", "structito_1_1_pip_general_options.html#a39b482b1faccef3d54326f5b956b959e", null ],
     [ "proxy", "structito_1_1_pip_general_options.html#a4b327590b03271bfc93b9acc4644fff0", null ],
     [ "retries", "structito_1_1_pip_general_options.html#a0e66bb0ecb154ed6d349f326b8bbde53", null ],
-    [ "timeout", "structito_1_1_pip_general_options.html#a2185bcd7b868469e5f9f9bb2cd3e1f47", null ]
+    [ "timeout", "structito_1_1_pip_general_options.html#a2185bcd7b868469e5f9f9bb2cd3e1f47", null ],
+    [ "trustedHosts", "structito_1_1_pip_general_options.html#a00ed9cbd702103e9cb7d33ffefbf68e2", null ],
+    [ "useTrustedHosts", "structito_1_1_pip_general_options.html#a8b4955860d4b08199d5b9c510eda6248", null ]
 ];

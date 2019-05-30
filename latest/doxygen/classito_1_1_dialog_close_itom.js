@@ -7,7 +7,7 @@ var classito_1_1_dialog_close_itom =
     [ "on_btnCancel_clicked", "classito_1_1_dialog_close_itom.html#a11f8be39259d17bab756428bdc5e1a00", null ],
     [ "on_btnInterrupt_clicked", "classito_1_1_dialog_close_itom.html#abde070aee08db36b69c800d578ccfeb1", null ],
     [ "timerEvent", "classito_1_1_dialog_close_itom.html#a6204dbe1cb8c0003889e011e11739117", null ],
-    [ "m_secondsElapsed", "classito_1_1_dialog_close_itom.html#ab9daf11f646f526d4f448c51c4fbf721", null ],
+    [ "m_secondsElapsed", "classito_1_1_dialog_close_itom.html#ad3604b25741b243f05e377ff56249a1f", null ],
     [ "m_secondsToWait", "classito_1_1_dialog_close_itom.html#a51f9ec9ccc9fe84d8b12aedbb448cd87", null ],
     [ "m_timerID", "classito_1_1_dialog_close_itom.html#a9eb39c6c142cf0f40b4909b9ee563c0c", null ],
     [ "ui", "classito_1_1_dialog_close_itom.html#ad6b0e6fd1ee0b809125543ee22eb3aee", null ]

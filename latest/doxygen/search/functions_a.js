@@ -15,7 +15,7 @@ var searchData=
   ['loadini',['loadIni',['../classito_1_1_help_tree_dock_widget.html#abdb75c8925194f175669b993303fe2b8',1,'ito::HelpTreeDockWidget']]],
   ['loadobjectheaderfromxmlv1',['loadObjectHeaderFromXMLV1',['../namespaceito.html#a99b23c44aedc092db34847ec3d850a7c',1,'ito']]],
   ['loadparamvals',['loadParamVals',['../classito_1_1_add_in_manager_private.html#a9e7a536d82ba4c8e13955b08a5eb0633',1,'ito::AddInManagerPrivate']]],
-  ['loadsettings',['loadSettings',['../classito_1_1_user_organizer.html#ac539829b708965f0716ca91424c6ab6d',1,'ito::UserOrganizer::loadSettings()'],['../classito_1_1_abstract_py_scintilla_widget.html#a361ff90a1d57a57a5a49b3585b4fef49',1,'ito::AbstractPyScintillaWidget::loadSettings()']]],
+  ['loadsettings',['loadSettings',['../classito_1_1_user_organizer.html#ac539829b708965f0716ca91424c6ab6d',1,'ito::UserOrganizer']]],
   ['loadtagspacefromxmlv1',['loadTagSpaceFromXMLV1',['../namespaceito.html#a4132d915f47775d5edcab7874885c27d',1,'ito']]],
   ['loadxml2dobj',['loadXML2DOBJ',['../namespaceito.html#ad763de2bc627c32993a7a6e361497065',1,'ito']]],
   ['loadxml2qlist',['loadXML2QLIST',['../namespaceito.html#af0411cd240edb9847b61a997a958bc7a',1,'ito::loadXML2QLIST(QMap&lt; QString, ito::Param &gt; *paramList, QString id, QFile &amp;paramFile)'],['../namespaceito.html#af3ff1acd7b8b3e2140db87852be40b77',1,'ito::loadXML2QLIST(QMap&lt; QString, Param &gt; *paramList, QString id, QFile &amp;paramFile)']]],

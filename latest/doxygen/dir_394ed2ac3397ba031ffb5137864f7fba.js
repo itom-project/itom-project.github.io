@@ -20,6 +20,7 @@ var dir_394ed2ac3397ba031ffb5137864f7fba =
     [ "doubleSpinBox_p.h", "double_spin_box__p_8h_source.html", null ],
     [ "fontButton.h", "font_button_8h_source.html", null ],
     [ "itomWidgetsFactory.h", "itom_widgets_factory_8h_source.html", null ],
+    [ "itomWidgetsVersion.h", "itom_widgets_version_8h_source.html", null ],
     [ "menuComboBox.h", "menu_combo_box_8h_source.html", null ],
     [ "menuComboBox_p.h", "menu_combo_box__p_8h_source.html", null ],
     [ "motorAxisController.h", "motor_axis_controller_8h_source.html", null ],
@@ -46,6 +47,6 @@ var dir_394ed2ac3397ba031ffb5137864f7fba =
     [ "sliderWidget.h", "slider_widget_8h_source.html", null ],
     [ "statusLed.h", "status_led_8h_source.html", null ],
     [ "treeComboBox.h", "tree_combo_box_8h_source.html", null ],
-    [ "utils.h", "utils_8h_source.html", null ],
+    [ "utils.h", "itom_widgets_2utils_8h_source.html", null ],
     [ "valueProxy.h", "value_proxy_8h_source.html", null ]
 ];

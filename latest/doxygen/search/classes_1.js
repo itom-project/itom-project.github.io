@@ -6,6 +6,7 @@ var searchData=
   ['breakpointdockwidget',['BreakPointDockWidget',['../classito_1_1_break_point_dock_widget.html',1,'ito']]],
   ['breakpointitem',['BreakPointItem',['../structito_1_1_break_point_item.html',1,'ito']]],
   ['breakpointmodel',['BreakPointModel',['../class_break_point_model.html',1,'']]],
+  ['breakpointpanel',['BreakpointPanel',['../classito_1_1_breakpoint_panel.html',1,'ito']]],
   ['brushcreatorbutton',['BrushCreatorButton',['../class_brush_creator_button.html',1,'']]],
   ['brushcreatorbuttonfactory',['brushCreatorButtonFactory',['../classbrush_creator_button_factory.html',1,'']]],
   ['brushcreatorbuttonprivate',['BrushCreatorButtonPrivate',['../class_brush_creator_button_private.html',1,'']]],

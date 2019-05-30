@@ -1,5 +1,12 @@
 var NAVTREEINDEX4 =
 {
+"class_double_spin_box_private.html#a210d8a16ff907cbae40c9fafe40368d0":[4,0,44,9],
+"class_double_spin_box_private.html#a2af396090c41337430e629454df7d40d":[4,0,44,3],
+"class_double_spin_box_private.html#a2e86098e13ce749e55cbd0c9e9fdff1a":[4,0,44,31],
+"class_double_spin_box_private.html#a348ccb4d7f0c839bf1c7fce3608b1811":[4,0,44,14],
+"class_double_spin_box_private.html#a3549b9aebc6144bfcb683e0522c3eae1":[4,0,44,4],
+"class_double_spin_box_private.html#a3640bb1a0d7b54c71e9cf9881bbced47":[4,0,44,8],
+"class_double_spin_box_private.html#a36d5df9fe83cc7fe8f368b321fca97a3":[4,0,44,6],
 "class_double_spin_box_private.html#a3e809b1be2808bf25b1699328b4162da":[4,0,44,28],
 "class_double_spin_box_private.html#a47e4e39f9b1b679d5800168c84b4112c":[4,0,44,30],
 "class_double_spin_box_private.html#a4b984147c2032f3edc2fa636ad404242":[4,0,44,5],
@@ -130,8 +137,8 @@ var NAVTREEINDEX4 =
 "class_itom_shared_semaphore_locker.html#a1991763f8dea63bb5fcc76ff7e8cbd26":[4,0,55,1],
 "class_itom_shared_semaphore_locker.html#a4ff0849521c26d08ae6f8f8912703e9a":[4,0,55,6],
 "class_itom_shared_semaphore_locker.html#a6b11edd48a0ce72112e5cc7ccbe8a6b7":[4,0,55,0],
+"class_itom_shared_semaphore_locker.html#a6da99f5452d95dea8f7a427fab9bf85d":[4,0,55,5],
 "class_itom_shared_semaphore_locker.html#a70823df9ba749439a3d9b7d8875349df":[4,0,55,3],
-"class_itom_shared_semaphore_locker.html#a86f9da346a774b31dfd0bc9207f08e7a":[4,0,55,5],
 "class_itom_shared_semaphore_locker.html#ad18ffd922d3583b8ce7f22eb8178b6c0":[4,0,55,8],
 "class_itom_shared_semaphore_locker.html#af312f20514ec5701dc593f041b04f077":[4,0,55,2],
 "class_itom_widgets_factory.html":[4,0,56],
@@ -242,12 +249,5 @@ var NAVTREEINDEX4 =
 "class_motor_axis_controller.html#a1b1f46d9c9fa7f3254d5ded30cd43b94":[4,0,62,55],
 "class_motor_axis_controller.html#a21657d2fe94342413b63e159935ed645":[4,0,62,40],
 "class_motor_axis_controller.html#a239c83d9a5017b97a1395fbcce87ea81":[4,0,62,49],
-"class_motor_axis_controller.html#a276abfba85bd3738ee7a4be2eab2f7a9":[4,0,62,13],
-"class_motor_axis_controller.html#a2bd1b6c491a4b0bf80472b5479b6f7c6":[4,0,62,33],
-"class_motor_axis_controller.html#a2f59895be7dc1ad460d466f4e81decca":[4,0,62,19],
-"class_motor_axis_controller.html#a305b193c943127646f3d6f71b144e11b":[4,0,62,59],
-"class_motor_axis_controller.html#a361c06c9f9ad542ae9316c5e82e867e5":[4,0,62,56],
-"class_motor_axis_controller.html#a367c1c5dc10f22eb049bb3c68a48d290":[4,0,62,51],
-"class_motor_axis_controller.html#a3e65bb671f761c42e4581f54a04a07fd":[4,0,62,57],
-"class_motor_axis_controller.html#a409ef32d1bc0f33171667f307ec1c5d9":[4,0,62,63]
+"class_motor_axis_controller.html#a276abfba85bd3738ee7a4be2eab2f7a9":[4,0,62,13]
 };

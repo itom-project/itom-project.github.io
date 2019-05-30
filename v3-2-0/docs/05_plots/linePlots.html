@@ -1,0 +1,1362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.4. line plots (1D) &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.5. image plots (2D)" href="imagePlots.html" />
+    <link rel="prev" title="6.3. Plot classes and default plots" href="plotClasses.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plots.html">6. Plots and Figures</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.4. line plots (1D)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plot-of-an-n-x-m-dataobject">6.4.1. Plot of an N x M dataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plot-of-an-n-x-m-dataobject-with-1-x-m-x-vector">6.4.2. Plot of an N x M dataObject with 1 x M x-vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">6.4.3. Itom1dQwtPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-properties">6.4.3.1. Setting properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#legendtitle-of-line-plots">6.4.3.2. Legendtitle of line plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#properties">6.4.3.3. Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slots">6.4.3.4. Slots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signals">6.4.3.5. Signals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecated-figures">6.4.4. Deprecated figures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="plots.html">6. Plots and Figures</a> &raquo;</li>
+        
+      <li>6.4. line plots (1D)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/05_plots/linePlots.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="line-plots-1d">
+<span id="plot-line"></span><h1>6.4. line plots (1D)<a class="headerlink" href="#line-plots-1d" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plot-of-an-n-x-m-dataobject">
+<h2>6.4.1. Plot of an N x M dataObject<a class="headerlink" href="#plot-of-an-n-x-m-dataobject" title="Permalink to this headline">¶</a></h2>
+<p>In order to plot a 1D line (1 x M or M x 1 DataObject) or multiple lines in a line plot, the designer plugin <strong>Itom1DQwtPlot</strong> is
+the recommended visualization tool. You can either use the <a class="reference internal" href="../09_reference/itom_general.html#itom.plot1" title="itom.plot1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot1()</span></code></a> command or add this class name (<em>itom1dqwtplot</em>) to any <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> or <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">liveImage()</span></code></a> command in order to force the data to be plotted in this plot type. Alternatively set this plugin to be the default plot for 1D static and live plots.</p>
+<p>The latter can be done in the property dialog or itom, tab <strong>Plots and Figures &gt;&gt; Default Plots</strong>. Set there the <em>default figure plot</em> to <em>Itom1DQwtPlot</em> for the
+categories</p>
+<ul class="simple">
+<li><p>DObjLiveLine (live 1D visualization of a dataObject)</p></li>
+<li><p>DObjStaticLine (static 1D visualization of a dataObject)</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/plot1d_2.png"><img alt="../_images/plot1d_2.png" src="../_images/plot1d_2.png" style="width: 796.0px; height: 428.0px;" /></a>
+</div>
+<p>This plot has been created by the following code snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">className</span> <span class="o">=</span> <span class="s1">&#39;itom1dqwtplot&#39;</span><span class="p">,</span> \
+    <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;sin(X/20)&quot;</span><span class="p">,</span> <span class="s2">&quot;valueLabel&quot;</span><span class="p">:</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plot-of-an-n-x-m-dataobject-with-1-x-m-x-vector">
+<span id="itom1dqwtplot"></span><h2>6.4.2. Plot of an N x M dataObject with 1 x M x-vector<a class="headerlink" href="#plot-of-an-n-x-m-dataobject-with-1-x-m-x-vector" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to set an optional x-vector to the plot. This can only be done by giving a second argument to the <a class="reference internal" href="../09_reference/itom_general.html#itom.plot1" title="itom.plot1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot1()</span></code></a> function or by setting the property <strong>xData</strong> to an existing plot.
+To plot an N x M dataObject, the x-vector has to be a 1 x M dataObject.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/spiral.png"><img alt="../_images/spiral.png" src="../_images/spiral.png" style="width: 550.0px; height: 577.0px;" /></a>
+</div>
+<p>This spiral plot has been created by the demo <code class="file docutils literal notranslate"><span class="pre">itom/demo/plots/plotXY.py</span></code>. The three methods to create such a plot are listed here:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># method 1</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">yDataObject</span><span class="p">,</span> <span class="n">xVector</span><span class="p">)</span>
+
+<span class="c1"># method 2</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">yDataObject</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;xData&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xVector</span>
+
+<span class="c1"># method 3</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">yDataObject</span><span class="p">,</span> <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;xData&#39;</span><span class="p">,</span> <span class="n">xVector</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>6.4.3. Itom1dQwtPlot<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>If you call <a class="reference internal" href="../09_reference/itom_general.html#itom.plot1" title="itom.plot1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot1()</span></code></a> or choose <em>itom1dqwtplot</em> as className for the <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> command with a 2D data object as argument,
+is it also possible to plot multiple lines. The plot plugin accepts all available data types, including colors and complex values.</p>
+<p>Data is plotted as follows:</p>
+<ul class="simple">
+<li><p>Real data types: One or multiple lines are plotted where the horizontal axis corresponds to the grid of the data object considering possible scaling and offset values. The line(s) have different colours. The colour of one line can also be adjusted.</p></li>
+<li><p>Complex types: This is the same than for real data types, however you can choose whether the <em>absolute</em>, <em>phase</em>, <em>real</em> or <em>imaginary</em> part of the complex values is plotted.</p></li>
+<li><p>color type: Coloured data objects will be represented by either 3 or 4 lines (red, green and blue, alpha optional) that correspond to the three colour channels or by one line representing the converted gray values.</p></li>
+</ul>
+<p>Using Python or the properties toolbox (View &gt;&gt; properties or via right click on the toolbar), it is possible to adjust many properties like stated in the section Properties below.</p>
+<p>The plot allows value and min/max-picking via place-able marker.</p>
+<p>The plot supports geometric element and marker interaction via <strong>drawAndPickElements(…)</strong> and <strong>call(“userInteractionStart”,…)</strong>. See section <a class="reference internal" href="primitives.html#primitives"><span class="std std-ref">Markers, user selections and geometric shapes</span></a> for a short introduction.</p>
+<p>Calling the <a class="reference internal" href="../09_reference/itom_general.html#itom.plot1" title="itom.plot1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot1()</span></code></a> you can pass also an optional x-vector to plot a xy data set.</p>
+<p>You can also use the “matplotlib”-backend to plot slices or xy-coordinates. See section <a class="reference internal" href="../08_scriptLanguage/pymod-matplotlib.html#pymod-matplotlib"><span class="std std-ref">Python-Module matplotlib</span></a> for more information about how to use “matplotlib”.</p>
+<p>The plot-canvas can be exported to vector and bitmap-graphics via button or menu entry or it can be exported to clipBoard via ctrl-c or a public slot.</p>
+<div class="section" id="setting-properties">
+<h3>6.4.3.1. Setting properties<a class="headerlink" href="#setting-properties" title="Permalink to this headline">¶</a></h3>
+<p>If you want to modify the lines, ploted in the <a class="reference internal" href="#itom1dqwtplot"><span class="std std-ref">Plot of an N x M dataObject with 1 x M x-vector</span></a>, individually you can do this with the help of Python or the curve properties widget (View &gt;&gt; curve properties or via right click on the toolbar).
+The following line properties are acessable via Python:</p>
+<ul class="simple">
+<li><p><strong>visible</strong></p></li>
+<li><p><strong>lineStyle</strong></p></li>
+<li><p><strong>lineWidth</strong></p></li>
+<li><p><strong>lineColor</strong></p></li>
+<li><p><strong>lineJoinStyle</strong></p></li>
+<li><p><strong>lineCapStyle</strong></p></li>
+<li><p><strong>lineSymbolSize</strong></p></li>
+<li><p><strong>lineSymbolStyle</strong></p></li>
+<li><p><strong>legendVisible</strong></p></li>
+</ul>
+<p>A propertie of a line can be acessed as followed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;setCurveProperty&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>with the <em>index</em> (int) of the curve, the name of the <em>property</em> (str) and the value (various) the property will be set to. For a detailed description of the properties read the section below. In the file <code class="file docutils literal notranslate"><span class="pre">itom/demo/plots/demoPlot1DLineProperties.py</span></code>
+a short demonstration of how to set the properties is given.</p>
+<p>For acessing the propties via the user interface the line properties widget can be used. Additional to the properties listed above the legend name, the legend visibility and the symbol color can be set.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/curveProperties.png"><img alt="../_images/curveProperties.png" src="../_images/curveProperties.png" style="width: 718.0px; height: 190.0px;" /></a>
+</div>
+<p>This shows the curve Properties widget.</p>
+<p>If you want to set a propertie global for all curves you can also use the properties widget (View &gt;&gt; properties or via right click on the toolbar)</p>
+</div>
+<div class="section" id="legendtitle-of-line-plots">
+<h3>6.4.3.2. Legendtitle of line plots<a class="headerlink" href="#legendtitle-of-line-plots" title="Permalink to this headline">¶</a></h3>
+<p>Legendtitles of a line plot can be activated and modified by the <strong>curve properties</strong> or by the <strong>plot properties</strong>. Per default the legendtitles are defined as <em>curve 0, curve 1,…</em>
+If the dataObject which is plotted has defined tags named <strong>legendTitle0, legendTitle1, …</strong>, then the tag entries are used as legendTitles.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An example is located in the demo script folder of itom.</p>
+</div>
+<span class="target" id="itom1dqwtplot-ref"></span></div>
+<div class="section" id="properties">
+<h3>6.4.3.3. Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt>
+<code class="descname">legendLabelWidth : int</code></dt>
+<dd><p>Defines the width of a legend label. This can be used to create a longer line in legend entries. The minimal size is 10</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">antiAliased : bool</code></dt>
+<dd><p>True, if all curves should be plot with an anti-aliased render mode (slower) or False if not (faster).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xVector : dataObject</code></dt>
+<dd><p>DataObject representing the x-vector of the plot. Expect a two dimensional dataObject with the last dimension equivalent to the source object. The first dimension must be one.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">axisScale : ItomQwtPlotEnums::ScaleEngine</code></dt>
+<dd><p>linear or logarithmic scale (various bases) can be chosen for the horizontal axis (x-axis). Please consider, that a logarithmic scale can only display values &gt; 1e-100.</p>
+<p>The type ‘ItomQwtPlotEnums::ScaleEngine’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘Linear’ (1)</p></li>
+<li><p>‘Log2’ (2)</p></li>
+<li><p>‘Log10’ (10)</p></li>
+<li><p>‘Log16’ (16)</p></li>
+<li><p>‘LogLog2’ (1002)</p></li>
+<li><p>‘LogLog10’ (1010)</p></li>
+<li><p>‘LogLog16’ (1016)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">valueScale : ItomQwtPlotEnums::ScaleEngine</code></dt>
+<dd><p>linear or logarithmic scale (various bases) can be chosen for the vertical axis (y-axis). Please consider, that a logarithmic scale can only display values &gt; 1e-100 while the lower limit for the double-logarithmic scale is 1+1e-100.</p>
+<p>The type ‘ItomQwtPlotEnums::ScaleEngine’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘Linear’ (1)</p></li>
+<li><p>‘Log2’ (2)</p></li>
+<li><p>‘Log10’ (10)</p></li>
+<li><p>‘Log16’ (16)</p></li>
+<li><p>‘LogLog2’ (1002)</p></li>
+<li><p>‘LogLog10’ (1010)</p></li>
+<li><p>‘LogLog16’ (1016)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pickerLabelAlignment : Qt::Alignment</code></dt>
+<dd><p>Get / set label alignment for the picker labels.</p>
+<p>The type ‘Qt::Alignment’ is a flag mask that can be a combination of one or several of the following values (or-combination number values or semicolon separated strings):</p>
+<ul class="simple">
+<li><p>‘AlignLeft’ (1)</p></li>
+<li><p>‘AlignLeading’ (1)</p></li>
+<li><p>‘AlignRight’ (2)</p></li>
+<li><p>‘AlignTrailing’ (2)</p></li>
+<li><p>‘AlignHCenter’ (4)</p></li>
+<li><p>‘AlignJustify’ (8)</p></li>
+<li><p>‘AlignAbsolute’ (16)</p></li>
+<li><p>‘AlignHorizontal_Mask’ (31)</p></li>
+<li><p>‘AlignTop’ (32)</p></li>
+<li><p>‘AlignBottom’ (64)</p></li>
+<li><p>‘AlignVCenter’ (128)</p></li>
+<li><p>‘AlignBaseline’ (256)</p></li>
+<li><p>‘AlignVertical_Mask’ (480)</p></li>
+<li><p>‘AlignCenter’ (132)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pickerLabelOrientation : Qt::Orientation</code></dt>
+<dd><p>Get / set the label orientation for the picker labels.</p>
+<p>The type ‘Qt::Orientation’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘Horizontal’ (1)</p></li>
+<li><p>‘Vertical’ (2)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pickerLabelVisible : bool</code></dt>
+<dd><p>Enable and disable the labels next to each picker.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">picker : dataObject (readonly)</code></dt>
+<dd><p>Get picker defined by a Mx4 float32 data object. Each row represents one picker and contains the following information: [pixelIndex, physIndex, value, curveIndex]. PixelIndex and physIndex are equal if axisScale = 1 and axisOffset = 0 for the corresponding dataObject.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">currentPickerIndex : int</code></dt>
+<dd><p>Get / set currently active picker.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pickerCount : int (readonly)</code></dt>
+<dd><p>Number of picker within the plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pickerLimit : int</code></dt>
+<dd><p>Define the maximal number of picker for this plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pickerType : ItomQwtPlotEnums::PlotPickerType</code></dt>
+<dd><p>Get / set the current picker type (‘DefaultMarker’, ‘RangeMarker’, ‘ValueRangeMarker’, ‘AxisRangeMarker’)</p>
+<p>The type ‘ItomQwtPlotEnums::PlotPickerType’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘DefaultMarker’ (0)</p></li>
+<li><p>‘RangeMarker’ (1)</p></li>
+<li><p>‘ValueRangeMarker’ (2)</p></li>
+<li><p>‘AxisRangeMarker’ (3)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">columnInterpretation : ItomQwtPlotEnums::MultiLineMode</code></dt>
+<dd><p>Define the interpretation of M x N objects as Auto, FirstRow, FirstCol, MultiRows, MultiCols.</p>
+<p>The type ‘ItomQwtPlotEnums::MultiLineMode’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘AutoRowCol’ (0)</p></li>
+<li><p>‘FirstRow’ (1)</p></li>
+<li><p>‘FirstCol’ (2)</p></li>
+<li><p>‘MultiRows’ (3)</p></li>
+<li><p>‘MultiCols’ (4)</p></li>
+<li><p>‘MultiLayerAuto’ (5)</p></li>
+<li><p>‘MultiLayerCols’ (6)</p></li>
+<li><p>‘MultiLayerRows’ (7)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">grid : GridStyle</code></dt>
+<dd><p>Style of the grid (‘GridNo’, ‘GridMajorXY’, ‘GridMajorX’, ‘GridMajorY’, ‘GridMinorXY’, ‘GridMinorX’, ‘GridMinorY’).</p>
+<p>The type ‘GridStyle’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘GridNo’ (0)</p></li>
+<li><p>‘GridMajorXY’ (1)</p></li>
+<li><p>‘GridMajorX’ (2)</p></li>
+<li><p>‘GridMajorY’ (3)</p></li>
+<li><p>‘GridMinorXY’ (4)</p></li>
+<li><p>‘GridMinorX’ (5)</p></li>
+<li><p>‘GridMinorY’ (6)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">lineSymbolSize : int</code></dt>
+<dd><p>Get / Set the current line symbol size</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">lineSymbol : Symbol</code></dt>
+<dd><p>Get / Set the current line symbol type</p>
+<p>The type ‘Symbol’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘NoSymbol’ (0)</p></li>
+<li><p>‘Ellipse’ (1)</p></li>
+<li><p>‘Rect’ (2)</p></li>
+<li><p>‘Diamond’ (3)</p></li>
+<li><p>‘Triangle’ (4)</p></li>
+<li><p>‘DTriangle’ (5)</p></li>
+<li><p>‘UTriangle’ (6)</p></li>
+<li><p>‘LTriangle’ (7)</p></li>
+<li><p>‘RTriangle’ (8)</p></li>
+<li><p>‘Cross’ (9)</p></li>
+<li><p>‘XCross’ (10)</p></li>
+<li><p>‘HLine’ (11)</p></li>
+<li><p>‘VLine’ (12)</p></li>
+<li><p>‘Star1’ (13)</p></li>
+<li><p>‘Star2’ (14)</p></li>
+<li><p>‘Hexagon’ (15)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">baseLine : float</code></dt>
+<dd><p>If curveStyle is set to ‘Sticks’, ‘SticksVertical’ or ‘SticksHorizontal’, the baseline indicates the start point of each line either in vertical or horizontal direction. For all other curve types, the baseline is considered if fillCurve is set to ‘FillBaseLine’.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">curveFillAlpha : int</code></dt>
+<dd><p>set the alpha value for the curve fill color seperatly.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">curveFillColor : color str, rgba or hex</code></dt>
+<dd><p>the fill color for the curve, invalid color leads to line color selection.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">fillCurve : ItomQwtPlotEnums::FillCurveStyle</code></dt>
+<dd><p>fill curve below / above or according to baseline.</p>
+<p>The type ‘ItomQwtPlotEnums::FillCurveStyle’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘NoCurveFill’ (-1)</p></li>
+<li><p>‘FillBaseLine’ (0)</p></li>
+<li><p>‘FillFromTop’ (1)</p></li>
+<li><p>‘FillFromBottom’ (2)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">curveStyle : ItomQwtPlotEnums::CurveStyle</code></dt>
+<dd><p>set the style of the qwt-plot according to curve styles.</p>
+<p>The type ‘ItomQwtPlotEnums::CurveStyle’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘NoCurve’ (-1)</p></li>
+<li><p>‘Lines’ (0)</p></li>
+<li><p>‘FittedLines’ (1)</p></li>
+<li><p>‘Sticks’ (2)</p></li>
+<li><p>‘SticksHorizontal’ (3)</p></li>
+<li><p>‘SticksVertical’ (4)</p></li>
+<li><p>‘Steps’ (5)</p></li>
+<li><p>‘StepsRight’ (6)</p></li>
+<li><p>‘StepsLeft’ (7)</p></li>
+<li><p>‘Dots’ (8)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">lineStyle : Qt::PenStyle</code></dt>
+<dd><p>style of all lines.</p>
+<p>The type ‘Qt::PenStyle’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘NoPen’ (0)</p></li>
+<li><p>‘SolidLine’ (1)</p></li>
+<li><p>‘DashLine’ (2)</p></li>
+<li><p>‘DotLine’ (3)</p></li>
+<li><p>‘DashDotLine’ (4)</p></li>
+<li><p>‘DashDotDotLine’ (5)</p></li>
+<li><p>‘CustomDashLine’ (6)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">lineWidth : float</code></dt>
+<dd><p>width of all curves in pixel.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">legendTitles : seq. of str</code></dt>
+<dd><p>Seq. of strings with the legend titles for all curves. If no legends are given, the dataObject is checked for tags named ‘legendTitle0’, ‘legendTitle1’… If these tags are not given, the default titles ‘curve 0’, ‘curve 1’… are taken.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">legendPosition : LegendPos</code></dt>
+<dd><p>Position of the legend (Off, Left, Top, Right, Bottom)</p>
+<p>The type ‘LegendPos’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘Off’ (0)</p></li>
+<li><p>‘Left’ (1)</p></li>
+<li><p>‘Top’ (2)</p></li>
+<li><p>‘Right’ (3)</p></li>
+<li><p>‘Bottom’ (4)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">legendFont : font</code></dt>
+<dd><p>Font for legend entries</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">labelFont : font</code></dt>
+<dd><p>Font for axes descriptions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">axisFont : font</code></dt>
+<dd><p>Font for axes tick values.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">titleFont : font</code></dt>
+<dd><p>Font for title.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">valueLabel : str</code></dt>
+<dd><p>Label of the value axis (y-axis) or ‘&lt;auto&gt;’ if the description should be used from data object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">axisLabel : str</code></dt>
+<dd><p>Label of the direction (x/y) axis or ‘&lt;auto&gt;’ if the descriptions from the data object should be used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">title : str</code></dt>
+<dd><p>Title of the plot or ‘&lt;auto&gt;’ if the title of the data object should be used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">bounds :</code></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">complexStyle : ItomQwtPlotEnums::ComplexType</code></dt>
+<dd><p>Defines whether the real, imaginary, phase or absolute of a complex number is shown. Possible options are CmplxAbs(0), CmplxImag (1), CmplxReal (2) and CmplxArg (3).</p>
+<p>The type ‘ItomQwtPlotEnums::ComplexType’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘CmplxAbs’ (0)</p></li>
+<li><p>‘CmplxImag’ (1)</p></li>
+<li><p>‘CmplxReal’ (2)</p></li>
+<li><p>‘CmplxArg’ (3)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">markerLabelsVisible : bool</code></dt>
+<dd><p>Toggle visibility of marker labels, the label is the set name of the marker.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">unitLabelStyle : ito::AbstractFigure::UnitLabelStyle</code></dt>
+<dd><p>style of the axes label (slash: ‘name / unit’, keyword-in: ‘name in unit’, square brackets: ‘name [unit]’</p>
+<p>The type ‘ito::AbstractFigure::UnitLabelStyle’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘UnitLabelSlash’ (0)</p></li>
+<li><p>‘UnitLabelKeywordIn’ (1)</p></li>
+<li><p>‘UnitLabelSquareBrackets’ (2)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometricShapesLabelsVisible : bool</code></dt>
+<dd><p>Toggle visibility of shape labels, the label is the name of the shape.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometricShapesFillOpacitySelected : int</code></dt>
+<dd><p>Opacity for the selected geometric shapes with an area &gt; 0. This value ranges from 0 (not filled) to 255 (opaque).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometricShapesFillOpacity : int</code></dt>
+<dd><p>Opacity for geometric shapes with an area &gt; 0. This value ranges from 0 (not filled) to 255 (opaque).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">allowedGeometricShapes : ItomQwtPlotEnums::ShapeTypes</code></dt>
+<dd><p>Combination of values of enumeration ShapeType to decide which types of geometric shapes are allowed (default: all shape types are allowed)</p>
+<p>The type ‘ItomQwtPlotEnums::ShapeTypes’ is a flag mask that can be a combination of one or several of the following values (or-combination number values or semicolon separated strings):</p>
+<ul class="simple">
+<li><p>‘MultiPointPick’ (1)</p></li>
+<li><p>‘Point’ (2)</p></li>
+<li><p>‘Line’ (4)</p></li>
+<li><p>‘Rectangle’ (8)</p></li>
+<li><p>‘Square’ (16)</p></li>
+<li><p>‘Ellipse’ (32)</p></li>
+<li><p>‘Circle’ (64)</p></li>
+<li><p>‘Polygon’ (128)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometryModificationModes : ItomQwtPlotEnums::ModificationModes</code></dt>
+<dd><p>Bitmask to globally change how geometric shapes can be modified. The possible modes of a shape are both restricted by the shape’s flags and the allowed modes of the plot (move: 0x01, rotate: 0x02, resize: 0x04)</p>
+<p>The type ‘ItomQwtPlotEnums::ModificationModes’ is a flag mask that can be a combination of one or several of the following values (or-combination number values or semicolon separated strings):</p>
+<ul class="simple">
+<li><p>‘Move’ (1)</p></li>
+<li><p>‘Rotate’ (2)</p></li>
+<li><p>‘Resize’ (4)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometricShapesDrawingEnabled : bool</code></dt>
+<dd><p>Enable and disable internal plotting functions and GUI-elements for geometric elements.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">selectedGeometricShape : int</code></dt>
+<dd><p>Get or set the currently highlighted geometric shape. After manipulation the last element stays selected.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometricShapesCount : int (readonly)</code></dt>
+<dd><p>Number of currently existing geometric shapes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">geometricShapes : seq. of shape</code></dt>
+<dd><p>Get or set the geometric shapes on the canvas, they are set as a sequence of itom.shape for each shape.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">keepAspectRatio : bool</code></dt>
+<dd><p>Enable or disable a fixed 1:1 aspect ratio between x and y axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">backgroundColor : color str, rgba or hex</code></dt>
+<dd><p>Get/set the background color.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">canvasColor : color str, rgba or hex</code></dt>
+<dd><p>Get/set the color of the canvas.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">textColor : color str, rgba or hex</code></dt>
+<dd><p>Get/set the color of text and tick-numbers.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">axisColor : color str, rgba or hex</code></dt>
+<dd><p>Get/set the color of the axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">buttonSet : ButtonStyle</code></dt>
+<dd><p>Get/set the button set used (normal or light color for dark themes).</p>
+<p>The type ‘ButtonStyle’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘StyleBright’ (0)</p></li>
+<li><p>‘StyleDark’ (1)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">enableBoxFrame : bool</code></dt>
+<dd><p>If true, a 1px solid border is drawn as a boxed rectangle around the canvas, else no margin is visible on the upper and right side.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">colorMap : str</code></dt>
+<dd><p>Color map (string) that should be used to colorize a non-color data object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zAxisInterval : autoInterval</code></dt>
+<dd><p>Sets the visible range of the displayed z-axis (in coordinates of the data object). Set it to ‘auto’ if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yAxisInterval : autoInterval</code></dt>
+<dd><p>Sets the visible range of the displayed y-axis (in coordinates of the data object). Set it to ‘auto’ if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xAxisInterval : autoInterval</code></dt>
+<dd><p>Sets the visible range of the displayed x-axis (in coordinates of the data object). Set it to ‘auto’ if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">camera : dataIO</code></dt>
+<dd><p>Use this property to set a camera/grabber to this plot (live image).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">displayed : dataObject (readonly)</code></dt>
+<dd><p>This returns the currently displayed data object [read only].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">source : dataObject</code></dt>
+<dd><p>Sets the input data object for this plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">renderLegend : bool</code></dt>
+<dd><p>If this property is true, the legend are included in pixelmaps renderings.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">contextMenuEnabled : bool</code></dt>
+<dd><p>Defines whether the context menu of the plot should be enabled or not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">toolbarVisible : bool</code></dt>
+<dd><p>Toggles the visibility of the toolbar of the plot.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="slots">
+<h3>6.4.3.4. Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt>
+<code class="descname">getDisplayed() [slot]</code></dt>
+<dd><p>returns the currently displayed dataObject.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">showCurveProperties() [slot]</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">getCurveProperty(index, property) [slot]</code></dt>
+<dd><p>Get a property of a specific curve</p>
+<p>Get the value of a property of a specific curve (see slot ‘setCurveProperty’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – zero-based index of the curve whose property should be changed.</p></li>
+<li><p><strong>property</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – name of the property to be changed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value -&gt; value of the requested property</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>variant</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setCurveProperty(index, property, value) [slot]</code></dt>
+<dd><p>Set a property of a specific curve</p>
+<p>Some curve properties can be changed globally for all curves using the global properties. However, it is also possible to
+set a property to different values for each curve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – zero-based index of the curve whose property should be changed.</p></li>
+<li><p><strong>property</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – name of the property to be changed</p></li>
+<li><p><strong>value</strong> (<em>various</em>) – value of the property</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">deletePicker(id) [slot]</code></dt>
+<dd><p>Delete the i-th picker (id &gt;= 0) or all pickers (id = -1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – zero-based index of the picker to be deleted, or -1 if all pickers should be deleted (default). This parameter is optional.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">appendPicker(coordinates, curveIndex, physicalCoordinates) [slot]</code></dt>
+<dd><p>Append plot pickers to a specific curve either in physical (axis) or in pixel coordinates.</p>
+<p>The pixel coordinates are the pixels of the currently displayed dataObject. The coordinates are the axis positions only,
+the values are chosen from the curve values. Existing pickers are not removed before this operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinates</strong> (<em>seq. of float</em>) – x-coordinates of each picker, the y-coordinate is automatically chosen from the shape of the curve. If the size of the sequence plus the number of existing pickers exceed the ‘pickerLimit’, a RuntimeError is thrown.curveIndex : {int} index of the curve where the pickers should be attached to (optional, default: 0 - first curve)</p></li>
+<li><p><strong>physicalCoordinates</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – optional, if True (default), ‘coordinates’ are given in axis coordinates of the plot (hence, physical coordinates of the dataObject; False: ‘coordinates’ are given in pixel coordinates of the dataObject</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setPicker(coordinates, curveIndex, physicalCoordinates) [slot]</code></dt>
+<dd><p>Set plot pickers to a specific curve either in physical (axis) or in pixel coordinates.</p>
+<p>The pixel coordinates are the pixels of the currently displayed dataObject. The coordinates are the axis positions only,
+the values are chosen from the curve values. Existing pickers are deleted at first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinates</strong> (<em>seq. of float</em>) – x-coordinates of each picker, the y-coordinate is automatically chosen from the shape of the curve. If the size of the sequence exceeds the ‘pickerLimit’, a RuntimeError is thrown.curveIndex : {int} index of the curve where the pickers should be attached to (optional, default: 0 - first curve)</p></li>
+<li><p><strong>physicalCoordinates</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – optional, if True (default), ‘coordinates’ are given in axis coordinates of the plot (hence, physical coordinates of the dataObject; False: ‘coordinates’ are given in pixel coordinates of the dataObject</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setLegendTitles(legends) [slot]</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">replot() [slot]</code></dt>
+<dd><p>Force a replot which is for instance necessary if values of the displayed data object changed and you want to update the plot, too.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">deleteMarkers(id) [slot]</code></dt>
+<dd><p>Delete all sets of markers with the given id or all markers if no or an empty id is passed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – name of the marker set that should be removed (optional)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">plotMarkers(coordinates, style, id, plane) [slot]</code></dt>
+<dd><p>Draws sub-pixel wise markers to the canvas of the plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinates</strong> (<a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) – 2xN data object with the 2D coordinates of the markers (first row: X, second row: Y coordinates in axis coordinates of the plot)</p></li>
+<li><p><strong>style</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Style string for the set of markers (e.g. ‘r+20’ for red crosses with a size of 20px)</p></li>
+<li><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Name of the set of added markers (optional, default=’‘)</p></li>
+<li><p><strong>plane</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – If the dataObject has more than 2 dimensions, it is possible to add the markers to a specific plane only (optional, default=-1 -&gt; all planes)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setGeometricShapeLabelVisible(idx, visible) [slot]</code></dt>
+<dd><p>Set the visibility of the label of a geometric shape with the given index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the shape</p></li>
+<li><p><strong>visible</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – True if the label should be displayed close to the shape, else False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setGeometricShapeLabel(idx, label) [slot]</code></dt>
+<dd><p>Set the label of geometric shape with the index idx.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the shape</p></li>
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – new label of the shape</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">updateGeometricShape(geometricShape) [slot]</code></dt>
+<dd><p>Updates an existing geometric shape by the new shape if the index of the shape already exists, else add the new shape to the canvas (similar to ‘addGeometricShape’.</p>
+<p>If the index of the new shape is -1 (default), the next free auto-incremented index will be set for this shape. (C++ only: this new index ist
+stored in the optional ‘newIndex’ parameter).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>geometricShape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new geometric shape</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addGeometricShape(geometricShape) [slot]</code></dt>
+<dd><p>Add a new geometric shape to the canvas if no shape with the same index already exists.</p>
+<p>If the index of the new shape is -1 (default), the next free auto-incremented index will be set for this shape. (C++ only: this new index ist
+stored in the optional ‘newIndex’ parameter).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>geometricShape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new geometric shape</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.6/library/exceptions.html#RuntimeError" title="(in Python v3.6)"><strong>RuntimeError</strong></a> – if the index of the shape is != -1 and does already exist</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setGeometricShapes(geometricShapes) [slot]</code></dt>
+<dd><p>This slot is the same than assigning a sequence of shape to the property ‘geometricShapes’. It replaces all existing shapes by the new set of shapes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>geometricShapes</strong> (<em>seq. of shapes</em>) – Sequence (e.g tuple or list) of shapes that replace all existing shapes by this new set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">deleteGeometricShape(idx) [slot]</code></dt>
+<dd><p>deletes the geometric shape with the given index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – idx is the index of the shape to be removed. This is the index of the shape instance itself and must not always correspond to the index-position of the shape within the tuple of all shapes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">clearGeometricShapes() [slot]</code></dt>
+<dd><p>removes all geometric shapes from the canvas.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">userInteractionStart(type, start, maxNrOfPoints) [slot]</code></dt>
+<dd><p>starts or aborts the process to let the user add a certain number of geometric shapes to the canvas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – type of the geometric shape the user should add (e.g. shape.Line, shape.Point, shape.Rectangle, shape.Square…</p></li>
+<li><p><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – True if the interaction should be started, False if a running interaction process should be aborted</p></li>
+<li><p><strong>maxNrOfPoints</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – number of shapes that should be added, the user can quit earlier by pressing Esc (optional, default: -1 -&gt; infinite number of shapes)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">renderToPixMap(xsize, ysize, resolution) [slot]</code></dt>
+<dd><p>returns a QPixmap with the content of the plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xsize</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – width of the pixmap</p></li>
+<li><p><strong>ysize</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – height of the pixmap</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – resolution of the pixmap in dpi</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">savePlot(filename, xsize, ysize, resolution) [slot]</code></dt>
+<dd><p>saves the plot as image, pdf or svg file (the supported file formats are listed in the save dialog of the plot)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – absolute or relative filename whose suffix defines the file format</p></li>
+<li><p><strong>xsize</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – x-size of the canvas in mm. If 0.0 [default], the size of the canvas is determined by the current size of the figure</p></li>
+<li><p><strong>ysize</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – y-size of the canvas in mm. If 0.0 [default], the size of the canvas is determined by the current size of the figure</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – resolution of image components in the plot in dpi (default: 300dpi)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">copyToClipBoard() [slot]</code></dt>
+<dd><p>copies the entire plot to the clipboard as bitmap data (uses the default export resolution).</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setLinePlot(x0, y0, x1, y1, destID) [slot]</code></dt>
+<dd><p>This slot can be implemented by any plot plugin to force the plot to open a line plot. Here it is not required and therefore not implemented.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">refreshPlot() [slot]</code></dt>
+<dd><p>Triggers an update of the current plot window.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">getPlotID() [slot]</code></dt>
+<dd><p>Return window ID of this plot {int}.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="signals">
+<h3>6.4.3.5. Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt>
+<code class="descname">pickerChanged(pickerIndex, positionX, positionY, curveIndex) [signal]</code></dt>
+<dd><p>This signal is emitted whenever the current picker changed its position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pickerIndex</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the changed picker</p></li>
+<li><p><strong>positionX</strong> (<em>double</em>) – horizontal position of currently changed picker</p></li>
+<li><p><strong>positionY</strong> (<em>double</em>) – vertical position of the currently changed picker</p></li>
+<li><p><strong>curveIndex</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the curve the picker is attached to</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;pickerChanged(int,double,double,int)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapeCurrentChanged(currentShape) [signal]</code></dt>
+<dd><p>This signal is emitted whenever the currently selected geometric has been changed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currentShape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new current shape or an invalid shape if the current shape has been deleted and no other shape is selected now</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapeCurrentChanged(ito::Shape)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapeFinished(shapes, aborted) [signal]</code></dt>
+<dd><p>This signal is emitted whenever one or multiple geometric shapes have been added, removed or modified</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shapes</strong> (<em>tuple of shape</em>) – A tuple containing all shapes that have been modified</p></li>
+<li><p><strong>aborted</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – True if the modification process has been aborted, else False</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapeFinished(QVector&lt;ito::Shape&gt;,bool)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapesDeleted() [signal]</code></dt>
+<dd><p>This signal is emitted when the last geometric shape has been deleted or removed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapesDeleted()&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapeDeleted(idx) [signal]</code></dt>
+<dd><p>This signal is emitted whenever a geometric shape has been deleted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the deleted shape</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapeDeleted(int)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapeChanged(idx, shape) [signal]</code></dt>
+<dd><p>This signal is emitted whenever a geometric shape has been changed (e.g. its position or form has been changed)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the changed shape (this is the index of the second parameter ‘shape’)</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – shape that has been changed</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapeChanged(int,ito::Shape)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapeAdded(idx, shape) [signal]</code></dt>
+<dd><p>This signal is emitted whenever a geometric shape has been added</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – index of the new shape (this is the index of the second parameter ‘shape’)</p></li>
+<li><p><strong>shape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new shape</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapeAdded(int,ito::Shape)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">userInteractionDone(type, aborted, shapes) [signal]</code></dt>
+<dd><p>This signal is emitted if the user finished adding the requested number of shapes or aborted the process by pressing the Esc key</p>
+<p>This signal is only emitted if the user interaction has been started by the slot <em>userInteractionStart</em> or by plotItem.drawAndPickElements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – type of the shapes that have been recently added (e.g. shape.Line, shape.Point, shape.Rectangle, …)</p></li>
+<li><p><strong>aborted</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – True if the user aborted the process by pressing the Esc key before having added the total number of requested shapesshapes : {list of shape} list of shapes that have been added.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;userInteractionDone(int,bool,QVector&lt;ito::Shape&gt;)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">geometricShapeStartUserInput(type, userInteractionReason) [signal]</code></dt>
+<dd><p>This signal is emitted whenever the plot enters a mode where the user can add a new geometric shape using the mouse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – Type of the shape that could be added by the user, this is one of the constants shape.Circle, shape.Ellipse, shape.Line…</p></li>
+<li><p><strong>userInteractionReason</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – True if the process to add a new shape has been initialized by a script-base call, False if it has been started by a button in the toolbar or menu of the plot</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;geometricShapeStartUserInput(int,bool)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="deprecated-figures">
+<h2>6.4.4. Deprecated figures<a class="headerlink" href="#deprecated-figures" title="Permalink to this headline">¶</a></h2>
+<p>The plot-dll “itom1DQWTFigure”  is deprecated and has been replaced by  “Itom1DQwtPlot”.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="imagePlots.html" class="btn btn-neutral float-right" title="6.5. image plots (2D)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plotClasses.html" class="btn btn-neutral float-left" title="6.3. Plot classes and default plots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

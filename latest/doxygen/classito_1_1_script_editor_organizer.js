@@ -13,7 +13,7 @@ var classito_1_1_script_editor_organizer =
     [ "getRecentlyUsedFiles", "classito_1_1_script_editor_organizer.html#afe42b24119c9372e249d4900378f572f", null ],
     [ "newScript", "classito_1_1_script_editor_organizer.html#a3946b49977427fa04907af3d40b583ba", null ],
     [ "openedScripts", "classito_1_1_script_editor_organizer.html#af9d938b9b7cf04aeee7c5ec25dea956a", null ],
-    [ "openNewScriptWindow", "classito_1_1_script_editor_organizer.html#a316202cd2ae8efa1df3d4622abc9f544", null ],
+    [ "openNewScriptWindow", "classito_1_1_script_editor_organizer.html#a8f5ad1654e566c75e58f76b7a4cab022", null ],
     [ "openScript", "classito_1_1_script_editor_organizer.html#a69163989ca6ac980108f8fe7e1d82346", null ],
     [ "openScriptRequested", "classito_1_1_script_editor_organizer.html#a9f854bf9a61ccede1dbeb31180f291de", null ],
     [ "pythonDebugFile", "classito_1_1_script_editor_organizer.html#abc55eacc1656831bea246f8113f306a7", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['iofilter',['IOFilter',['../classito_1_1_i_o_helper.html#a26bfd9414050afcde78219dacc21233b',1,'ito::IOHelper']]]
+  ['handle',['Handle',['../class_range_slider_private.html#ad1afa6eaa7134d72272314dd603740f9',1,'RangeSliderPrivate']]]
 ];

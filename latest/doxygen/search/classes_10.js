@@ -1,14 +1,19 @@
 var searchData=
 [
-  ['testclass',['TestClass',['../class_test_class.html',1,'']]],
-  ['testsubclass',['TestSubClass',['../class_test_sub_class.html',1,'']]],
-  ['timeouts',['Timeouts',['../structito_1_1_app_management_1_1_timeouts.html',1,'ito::AppManagement']]],
-  ['timercallback',['TimerCallback',['../classito_1_1_timer_callback.html',1,'ito']]],
-  ['timercontainer',['TimerContainer',['../structito_1_1_timer_container.html',1,'ito']]],
-  ['toolbar',['Toolbar',['../structito_1_1_abstract_dock_widget_1_1_toolbar.html',1,'ito::AbstractDockWidget']]],
-  ['toolbaritem',['ToolBarItem',['../structito_1_1_abstract_figure_1_1_tool_bar_item.html',1,'ito::AbstractFigure']]],
-  ['toolboxitem',['ToolboxItem',['../structito_1_1_abstract_figure_1_1_toolbox_item.html',1,'ito::AbstractFigure']]],
-  ['treecombobox',['TreeComboBox',['../class_tree_combo_box.html',1,'']]],
-  ['treecomboboxfactory',['TreeComboBoxFactory',['../class_tree_combo_box_factory.html',1,'']]],
-  ['treecomboboxprivate',['TreeComboBoxPrivate',['../class_tree_combo_box_private.html',1,'']]]
+  ['ramerdouglaspeuckerdata',['RamerDouglasPeuckerData',['../structito_1_1_ramer_douglas_peucker_data.html',1,'ito']]],
+  ['range',['Range',['../classito_1_1_range.html',1,'ito']]],
+  ['rangemeta',['RangeMeta',['../classito_1_1_range_meta.html',1,'ito']]],
+  ['rangeslider',['RangeSlider',['../class_range_slider.html',1,'']]],
+  ['rangesliderfactory',['RangeSliderFactory',['../class_range_slider_factory.html',1,'']]],
+  ['rangesliderprivate',['RangeSliderPrivate',['../class_range_slider_private.html',1,'']]],
+  ['rangewidget',['RangeWidget',['../class_range_widget.html',1,'']]],
+  ['rangewidgetfactory',['RangeWidgetFactory',['../class_range_widget_factory.html',1,'']]],
+  ['rangewidgetprivate',['RangeWidgetPrivate',['../class_range_widget_private.html',1,'']]],
+  ['rectmeta',['RectMeta',['../classito_1_1_rect_meta.html',1,'ito']]],
+  ['relation',['relation',['../classrelation.html',1,'']]],
+  ['retval',['RetVal',['../classito_1_1_ret_val.html',1,'ito']]],
+  ['rgba32',['Rgba32',['../classito_1_1_rgba32.html',1,'ito']]],
+  ['rgba32_5f',['rgba32_',['../structrgba32__.html',1,'']]],
+  ['rgbabase32',['RgbaBase32',['../classito_1_1_rgba_base32.html',1,'ito']]],
+  ['rgbchannel',['RGBChannel',['../classito_1_1_r_g_b_channel.html',1,'ito']]]
 ];

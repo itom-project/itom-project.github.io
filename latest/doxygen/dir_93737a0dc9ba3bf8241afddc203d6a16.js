@@ -9,6 +9,7 @@ var dir_93737a0dc9ba3bf8241afddc203d6a16 =
     [ "pythonFont.h", "python_font_8h_source.html", null ],
     [ "pythonItom.h", "python_itom_8h_source.html", null ],
     [ "pythonItomMetaObject.h", "python_itom_meta_object_8h_source.html", null ],
+    [ "pythonJedi.h", "python_jedi_8h_source.html", null ],
     [ "pythonMatlab.h", "python_matlab_8h_source.html", null ],
     [ "pythonNone.h", "python_none_8h_source.html", null ],
     [ "pythonNpDataObject.h", "python_np_data_object_8h_source.html", null ],
@@ -28,5 +29,6 @@ var dir_93737a0dc9ba3bf8241afddc203d6a16 =
     [ "pythonUi.h", "python_ui_8h_source.html", null ],
     [ "pythonUiTimer.h", "python_ui_timer_8h_source.html", null ],
     [ "pythonWorkspace.h", "python_workspace_8h_source.html", null ],
+    [ "pythonWrapper.h", "python_wrapper_8h_source.html", null ],
     [ "qDebugStream.h", "q_debug_stream_8h_source.html", null ]
 ];

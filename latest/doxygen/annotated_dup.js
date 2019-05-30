@@ -5,8 +5,7 @@ var annotated_dup =
       [ "DataType< ito::BlueChannel >", "classcv_1_1_data_type_3_01ito_1_1_blue_channel_01_4.html", "classcv_1_1_data_type_3_01ito_1_1_blue_channel_01_4" ],
       [ "DataType< ito::GreenChannel >", "classcv_1_1_data_type_3_01ito_1_1_green_channel_01_4.html", "classcv_1_1_data_type_3_01ito_1_1_green_channel_01_4" ],
       [ "DataType< ito::RedChannel >", "classcv_1_1_data_type_3_01ito_1_1_red_channel_01_4.html", "classcv_1_1_data_type_3_01ito_1_1_red_channel_01_4" ],
-      [ "DataType< ito::Rgba32 >", "classcv_1_1_data_type_3_01ito_1_1_rgba32_01_4.html", "classcv_1_1_data_type_3_01ito_1_1_rgba32_01_4" ],
-      [ "DataType< ito::uint32 >", "classcv_1_1_data_type_3_01ito_1_1uint32_01_4.html", "classcv_1_1_data_type_3_01ito_1_1uint32_01_4" ]
+      [ "DataType< ito::Rgba32 >", "classcv_1_1_data_type_3_01ito_1_1_rgba32_01_4.html", "classcv_1_1_data_type_3_01ito_1_1_rgba32_01_4" ]
     ] ],
     [ "ito", "namespaceito.html", "namespaceito" ],
     [ "AbstractPropertyPageWidget", "class_abstract_property_page_widget.html", null ],

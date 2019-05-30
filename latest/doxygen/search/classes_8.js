@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['indentermode',['IndenterMode',['../classito_1_1_indenter_mode.html',1,'ito']]],
+  ['indentfolddetector',['IndentFoldDetector',['../classito_1_1_indent_fold_detector.html',1,'ito']]],
+  ['inputtextmode',['InputTextMode',['../structito_1_1_console_widget_1_1_input_text_mode.html',1,'ito::ConsoleWidget']]],
   ['intarraymeta',['IntArrayMeta',['../classito_1_1_int_array_meta.html',1,'ito']]],
   ['intervalmeta',['IntervalMeta',['../classito_1_1_interval_meta.html',1,'ito']]],
   ['intmeta',['IntMeta',['../classito_1_1_int_meta.html',1,'ito']]],

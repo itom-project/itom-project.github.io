@@ -15,7 +15,7 @@ var classito_1_1_python_qt_conversion =
       [ "other", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a700248f45de40d148eeb3742cb8da9b6", null ]
     ] ],
     [ "AddInBaseToPyObject", "classito_1_1_python_qt_conversion.html#a5e52d847d9f7b65e86ade6082021aafd", null ],
-    [ "baseObjectDeleterDataObject", "classito_1_1_python_qt_conversion.html#a4e0591b31b81515b9545bd9d461e7fc7", null ],
+    [ "baseObjectDeleterDataObject", "classito_1_1_python_qt_conversion.html#a7359ff69246b6ef737edf745a5c518ea", null ],
     [ "ByteArrayToPyUnicode", "classito_1_1_python_qt_conversion.html#a04e361232ad818964778002e4c81b497", null ],
     [ "ConvertQtValueToPythonInternal", "classito_1_1_python_qt_conversion.html#a14c7231c532e219b8d81f7348545cf2b", null ],
     [ "DataObjectToPyObject", "classito_1_1_python_qt_conversion.html#a3eead282f5534792f7f6d5d20297e43c", null ],

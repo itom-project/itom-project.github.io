@@ -10,6 +10,7 @@ var dir_d034911456b81c53ceffbc2e4138298a =
     [ "FontEditor.h", "_font_editor_8h_source.html", null ],
     [ "itomCustomTypes.h", "itom_custom_types_8h_source.html", null ],
     [ "Property.h", "_property_8h_source.html", null ],
+    [ "propertyEditorVersion.h", "property_editor_version_8h_source.html", null ],
     [ "QPropertyEditorWidget.h", "_q_property_editor_widget_8h_source.html", null ],
     [ "QPropertyModel.h", "_q_property_model_8h_source.html", null ],
     [ "QVariantDelegate.h", "_q_variant_delegate_8h_source.html", null ],

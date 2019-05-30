@@ -43,6 +43,7 @@ var classito_1_1_abstract_dock_widget =
     [ "init", "classito_1_1_abstract_dock_widget.html#ae3cadb5b1a9f7db88844febc13246bf0", null ],
     [ "isEnabled", "classito_1_1_abstract_dock_widget.html#aa5621f5a7f95180b5290a18518ea3d3e", null ],
     [ "isVisible", "classito_1_1_abstract_dock_widget.html#a75a47178c8ee8c96ff57fcaf41ac06d9", null ],
+    [ "mini", "classito_1_1_abstract_dock_widget.html#a516ef485ae13c60586173e6b8a4a4cd9", null ],
     [ "minimumSizeHint", "classito_1_1_abstract_dock_widget.html#a27b5461b8224a46e31c2ad5361d0e00d", null ],
     [ "mnuStayOnTop", "classito_1_1_abstract_dock_widget.html#a73df674fd3444eb6a45e94a60e2b3132", null ],
     [ "mnuStayOnTopOfApp", "classito_1_1_abstract_dock_widget.html#a61fbefe2e299d8922c75f7a769f588e4", null ],

@@ -1,6 +1,6 @@
 var classito_1_1_dialog_about_q_itom =
 [
-    [ "DialogAboutQItom", "classito_1_1_dialog_about_q_itom.html#ad9f1c009b3e0beddc3d1da02ebaaeb12", null ],
+    [ "DialogAboutQItom", "classito_1_1_dialog_about_q_itom.html#a4d532fdb1b1d2e1abd27e4a918468930", null ],
     [ "~DialogAboutQItom", "classito_1_1_dialog_about_q_itom.html#a32d128984126e4ef2270ed08d485e6b5", null ],
     [ "linkColor", "classito_1_1_dialog_about_q_itom.html#a25aa03e91dde6f48baa83f29e4a10bbb", null ],
     [ "on_pushButton_close_clicked", "classito_1_1_dialog_about_q_itom.html#a694e5cc5384738e7460db671faf373cf", null ],
