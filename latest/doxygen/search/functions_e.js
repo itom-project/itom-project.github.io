@@ -102,7 +102,7 @@ var searchData=
   ['pydataioplugin_5fstartdevice',['PyDataIOPlugin_startDevice',['../classito_1_1_python_plugins.html#a35f47834287c6bd2fc7d59ef637687ad',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fstopdevice',['PyDataIOPlugin_stopDevice',['../classito_1_1_python_plugins.html#a361a4d768f0f5338d458e1ef53e941f8',1,'ito::PythonPlugins']]],
   ['pydbgcommandloop',['PyDbgCommandLoop',['../classito_1_1_python_engine.html#abe7075509a1ee2c2e4f65d49a3938c4d',1,'ito::PythonEngine']]],
-  ['pydoc_5fstrvar',['PyDoc_STRVAR',['../namespaceito.html#ab9ad4da0acbb059de7022b026077643f',1,'ito']]],
+  ['pydoc_5fstrvar',['PyDoc_STRVAR',['../namespaceito.html#a22c462075ba2389e3e94f900b872bd18',1,'ito']]],
   ['pyinititom',['PyInitItom',['../classito_1_1_python_itom.html#a5393b281cefd117462a8c91fb624bbed',1,'ito::PythonItom']]],
   ['pymatlabmatdataobjectconverter',['PyMatlabMatDataObjectConverter',['../classito_1_1_python_itom.html#a09e5cbea1d4933d238868fe3d84133e9',1,'ito::PythonItom']]],
   ['pynewscript',['PyNewScript',['../classito_1_1_python_itom.html#abf6b730caaef3c2c69c364df8bbdbd72',1,'ito::PythonItom']]],

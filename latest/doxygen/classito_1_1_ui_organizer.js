@@ -75,7 +75,7 @@ var classito_1_1_ui_organizer =
     [ "getReadableMethodSignature", "classito_1_1_ui_organizer.html#a99b113e0e57f90088ed8bf80b61c6729", null ],
     [ "getReadableParameter", "classito_1_1_ui_organizer.html#ab138bbbee9524b08abea2f3fdd6374e5", null ],
     [ "getRegisteredTimers", "classito_1_1_ui_organizer.html#af20621c8f3760be3db1b9691a029d7f8", null ],
-    [ "getSignalIndex", "classito_1_1_ui_organizer.html#a294b6bc9bd102cf6fd47999b1ee43503", null ],
+    [ "getSignalIndex", "classito_1_1_ui_organizer.html#ab1ad1da9e03a1aaba858fedab3ffb270", null ],
     [ "getSubplot", "classito_1_1_ui_organizer.html#a487b6b53c25cfbaaff604369509bfe6b", null ],
     [ "getUiDialogByHandle", "classito_1_1_ui_organizer.html#a911bcf5912b8ee39deda0057233d92c1", null ],
     [ "getWeakObjectReference", "classito_1_1_ui_organizer.html#a15ad27d8452298adb7d4d2188555e767", null ],

@@ -24,7 +24,9 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "itom", "index.html", [
-    [ "Introduction", "index.html#intro_sec", null ],
+    [ "QPropertyEditor", "index.html", [
+      [ "Introduction", "index.html#intro_sec", null ]
+    ] ],
     [ "Todo List", "todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -84,7 +86,7 @@ var NAVTREEINDEX =
 "classito_1_1_break_point_dock_widget.html#a5974c97b122a50d0362f530404c2a934",
 "classito_1_1_code_completion_mode.html#a60e02bd3723d7748f82d08a737ec8cf5a71632472485ff21114998113d48e84f3",
 "classito_1_1_code_editor_style.html#a0d0938794c59fccae795d5896705d82a",
-"classito_1_1_data_object.html#a63065deb6a36f16524c0ab6b4d811f2c",
+"classito_1_1_data_object.html#a5dc296c7d79cf3816340b22a9eb2d17c",
 "classito_1_1_designer_widget_organizer.html",
 "classito_1_1_dialog_replace.html#a0ef6f70f089777e1a2fc77c773aa9ae5",
 "classito_1_1_figure_widget.html#abc40beded5e7d6539a1800245375abac",
@@ -99,16 +101,16 @@ var NAVTREEINDEX =
 "classito_1_1_python_figure.html#a38c34063ec3b6c67df0a91bd16723b3a",
 "classito_1_1_python_qt_conversion.html#a1d5ebc1dca0455280f367700bf85e1e9",
 "classito_1_1_python_timer.html#a6387e7a5aec38ae7602e6d42ee71d877",
-"classito_1_1_rgba32.html#a2b5362f1f324db75958f50d4f846d0a8ad6d2a9d4a537c3c6c33813641f9d644c",
+"classito_1_1_rgba32.html#a2b5362f1f324db75958f50d4f846d0a8aaa872e0ac87c9c3ba3ba7ef42263c7ff",
 "classito_1_1_script_editor_printer.html#ab140390c220c964bfdd191d0d2db94a0",
 "classito_1_1_syntax_highlighter_base.html#ab85851bb6a504d0ae304750afd6ae4b8",
 "classito_1_1_user_ui_dialog.html#a5130e182468e1452a7e35f75bb8830f6",
 "classito_1_1_widget_prop_palettes.html#a5beb7ae86ae40845029677c081e2cea9",
 "dataobj_8h_source.html",
-"namespacemembers_p.html",
-"struct_qt_string_property_manager_private_1_1_data.html#a82c1b5121e7f5733869b3a330d31feb5",
-"structito_1_1_pip_install.html#a6f8ee21e8cb0073afd8399712faa37a8",
-"user_organizer_8h_source.html"
+"namespacemembers_o.html",
+"struct_qt_string_property_manager_private_1_1_data.html#a453c1121e3c1147457723a7655090de1",
+"structito_1_1_pip_install.html#a584792cd6850a7666166bce4da5d0cbf",
+"user_management_edit_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

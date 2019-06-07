@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['itom',['itom',['../index.html',1,'']]]
+  ['qpropertyeditor',['QPropertyEditor',['../index.html',1,'']]]
 ];

@@ -212,7 +212,7 @@ var searchData=
   ['pydataobjectiter',['PyDataObjectIter',['../structito_1_1_python_data_object_1_1_py_data_object_iter.html',1,'ito::PythonDataObject']]],
   ['pydataobjecttypes',['PyDataObjectTypes',['../structito_1_1_python_data_object_1_1_py_data_object_types.html',1,'ito::PythonDataObject']]],
   ['pydbgcommandloop',['PyDbgCommandLoop',['../classito_1_1_python_engine.html#abe7075509a1ee2c2e4f65d49a3938c4d',1,'ito::PythonEngine']]],
-  ['pydoc_5fstrvar',['PyDoc_STRVAR',['../namespaceito.html#ab9ad4da0acbb059de7022b026077643f',1,'ito']]],
+  ['pydoc_5fstrvar',['PyDoc_STRVAR',['../namespaceito.html#a22c462075ba2389e3e94f900b872bd18',1,'ito']]],
   ['pyfigure',['PyFigure',['../structito_1_1_python_figure_1_1_py_figure.html',1,'ito::PythonFigure']]],
   ['pyfont',['PyFont',['../structito_1_1_python_font_1_1_py_font.html',1,'ito::PythonFont']]],
   ['pygotoassignmentmode',['PyGotoAssignmentMode',['../classito_1_1_py_goto_assignment_mode.html',1,'ito']]],

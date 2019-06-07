@@ -1,5 +1,6 @@
 var NAVTREEINDEX48 =
 {
+"user_management_edit_8h_source.html":[5,0,0,0,8,9,17],
 "user_organizer_8h_source.html":[5,0,0,0,8,6,7],
 "user_ui_dialog_8h_source.html":[5,0,0,0,8,9,18],
 "user_ui_widget_8h_source.html":[5,0,0,0,8,9,19],

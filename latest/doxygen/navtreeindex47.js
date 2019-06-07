@@ -1,5 +1,6 @@
 var NAVTREEINDEX47 =
 {
+"structito_1_1_pip_install.html#a584792cd6850a7666166bce4da5d0cbf":[4,0,1,207,1],
 "structito_1_1_pip_install.html#a6f8ee21e8cb0073afd8399712faa37a8":[4,0,1,207,5],
 "structito_1_1_pip_install.html#a7ff02988c5e15c2278606f2ed9c9f6ba":[4,0,1,207,0],
 "structito_1_1_pip_install.html#a7ff02988c5e15c2278606f2ed9c9f6baa81c11935664861421858ce671bd78186":[4,0,1,207,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX47 =
 "type_defs_8h_source.html":[5,0,0,0,1,29],
 "ui_organizer_8h_source.html":[5,0,0,0,8,6,5],
 "user_interaction_watcher_8h_source.html":[5,0,0,0,8,6,6],
-"user_management_8h_source.html":[5,0,0,0,8,9,16],
-"user_management_edit_8h_source.html":[5,0,0,0,8,9,17]
+"user_management_8h_source.html":[5,0,0,0,8,9,16]
 };
