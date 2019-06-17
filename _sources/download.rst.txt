@@ -27,7 +27,7 @@ that provide the plot and figure widgets of **itom**.
 |
 | The End-User Setup version includes **itom** and the following components:
 
-**Version 3.2.0** compiled using:
+**Version 3.2.1** compiled using:
 
 * Qt 5.10.1
 * Python 3.7.2
@@ -60,10 +60,10 @@ that provide the plot and figure widgets of **itom**.
 
 Other packages can easily be downloaded and installed using the integrated Python package manager.
 
-The current version 3.2.0 is available from
+The current version 3.2.1 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/v3.2.0/>`_
+* `<http://sourceforge.net/projects/itom/files/v3.2.1/>`_
 
 
 
@@ -86,6 +86,7 @@ The current version 3.2.0 is available from
 	<button class="accordion" style="font-family:Roboto">Old versions</button>
 	<div class="panel">
 
+* `itom 3.2.0 <http://sourceforge.net/projects/itom/files/v3.2.0/>`_
 * `itom 3.1.0 <http://sourceforge.net/projects/itom/files/v3.1.0/>`_
 * `itom 3.0.0 <http://sourceforge.net/projects/itom/files/v3.0.0/>`_
 * `itom 2.2.1 <http://sourceforge.net/projects/itom/files/v2.2.1/>`_
@@ -108,6 +109,36 @@ The current version 3.2.0 is available from
 
 	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
 	<div class="panel">
+
+**Version 3.2.0** compiled using:
+
+* Qt 5.10.1
+* Python 3.7.2
+* openCV 3.4.5
+* wheel 0.33.1
+* six 1.12.0
+* setuptools 41.0.0
+* scipy 1.2.1
+* scikit image 0.15.0
+* PyWavelets 1.0.2
+* python dateutil 2.8.0
+* pyparsing 2.3.1
+* pyflakes 2.1.1
+* pip 19.0.2
+* pillow 6.0.0
+* parso 0.3.4
+* openCV python 4.0.1
+* numpy 1.16.2+mkl
+* networkx 2.1
+* matplotlib 3.0.3
+* kiwisolver 1.0.1
+* jedi 0.13.3
+* imageio 2.5.0
+* decorator 4.4.0
+* cycler 0.10.0
+* PointCloudLibrary 1.9.1
+* VTK 8.2.0
+
 
 **Version 3.1.0**
 
