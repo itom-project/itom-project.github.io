@@ -12,7 +12,7 @@ Most important features:
 
 For more information visit: `OpenCV Webpage <https://opencv.org/>`_
 
-Itom offers the full power of python 3 in combination with **OpenCV 3**.
+Itom offers the full power of python 3 in combination with **OpenCV 4**.
 All OpenCV functions can be easily used and the results are visualized and further processed (e.g. output to Matlab) in python.
 
 OpenCV is the standard open source image processing library. It is used in many applications for low-level image processing tasks up to dedicated computer vision applications. It can be used in C++, Java as well as python even for commercial projects. The methods are implemented in a very efficient manner and can be used with all sorts of images (color, monochrome and different depths).
