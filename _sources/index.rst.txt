@@ -66,8 +66,9 @@ It can be used in a multitude of application areas, but especially is devoted to
 		</div>
 		<div class="mdl-cell mdl-cell--12-col dev-card-wide mdl-card mdl-shadow--4dp">
 			<div class="mdl-card__title"><span class="mdl-card__title-text">Developer</span></div>
-			<div class="mdl-card__supporting-text">Help improve and understand the structure behind the ITOM Software. The Source Code is hosted @ Bitbucket.org</div>
+			<div class="mdl-card__supporting-text">Help improve and understand the structure behind the ITOM Software. The Source Code is hosted on Bitbucket.org</div>
 			<div class="mdl-card__actions mdl-card--border">
+			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://sourceforge.net/projects/itom/files/all-in-one-build-setup" target="_blank">Dev Kit</a>
 			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/itom" target="_blank">itom Repository</a>
 			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/plugins" target="_blank">Plugins</a>
 			 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://bitbucket.org/itom/designerplugins" target="_blank">Designer Plugins</a>

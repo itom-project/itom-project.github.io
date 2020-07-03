@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5.7. OpenCV Filters (non free)" href="openCVFiltersNonFree.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> itom Plugins
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> itom Plugins
           
 
           
@@ -73,6 +74,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -109,6 +111,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -147,11 +150,11 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../algorithms.html">5. Algorithms/ Filters</a> &raquo;</li>
+          <li><a href="../algorithms.html"><span class="section-number">5. </span>Algorithms/ Filters</a> &raquo;</li>
         
-      <li>5.6. OpenCV Filters</li>
+      <li><span class="section-number">5.6. </span>OpenCV Filters</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -171,8 +174,8 @@
            <div itemprop="articleBody">
             
   <div class="section" id="opencv-filters">
-<h1>5.6. OpenCV Filters<a class="headerlink" href="#opencv-filters" title="Permalink to this headline">¶</a></h1>
-<table class="docutils align-center">
+<h1><span class="section-number">5.6. </span>OpenCV Filters<a class="headerlink" href="#opencv-filters" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 13%" />
 <col style="width: 87%" />
@@ -196,7 +199,7 @@
 </tbody>
 </table>
 <div class="section" id="overview">
-<h2>5.6.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This plugin provides wrappers for various OpenCV algorithms. These are for instance:</p>
 <ul class="simple">
 <li><p>morphological filters (dilation, erosion)</p></li>
@@ -213,6 +216,7 @@ In addition to the cv2 methods, they can sometimes operate on multi-plane dataOb
 the tags and meta information and save protocol data.</p>
 <p>These filters are defined in the plugin:</p>
 <ol class="arabic simple">
+<li><p>cvBilateralFilter</p></li>
 <li><p>cvBlur</p></li>
 <li><p>cvCalibrateCamera</p></li>
 <li><p>cvCannyEdge</p></li>
@@ -241,7 +245,7 @@ the tags and meta information and save protocol data.</p>
 <li><p>cvMergeChannels</p></li>
 <li><p>cvMorphologyEx</p></li>
 <li><p>cvProjectPoints</p></li>
-<li><p>cvRemapParams</p></li>
+<li><p>cvRemap</p></li>
 <li><p>cvRemoveSpikes</p></li>
 <li><p>cvResize</p></li>
 <li><p>cvRotate180</p></li>
@@ -254,11 +258,41 @@ the tags and meta information and save protocol data.</p>
 </ol>
 </div>
 <div class="section" id="filters">
-<h2>5.6.2. Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.6.2. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
 <p>Detailed overview about all defined filters:</p>
-<dl class="function">
+<dl class="py function">
+<dt id="cvBilateralFilter">
+<code class="sig-name descname">cvBilateralFilter</code><span class="sig-paren">(</span><em class="sig-param">inputObject</em>, <em class="sig-param">outputObject</em>, <em class="sig-param">diameter</em>, <em class="sig-param">sigmaColor</em>, <em class="sig-param">sigmaSpace</em><span class="optional">[</span>, <em class="sig-param">borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvBilateralFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resizes an image</p>
+<p>The function resize resizes the image ‘inputObject’ down to or up by the specific factors.</p>
+<p>To shrink an image, it will generally look best with CV_INTER_AREA interpolation, whereas to enlarge an image,
+it will generally look best with CV_INTER_CUBIC (slow) or CV_INTER_LINEAR (faster but still looks OK).
+The axisScale properties of the x- and y-axes of the outputObject are divided by fx and fy respectively, while the offset values are multiplied with fx and fy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputObject</strong> (<em>dataObject</em>) – input image (8-bit or floating-point, 1-Channel or 3-Channel)</p></li>
+<li><p><strong>outputObject</strong> (<em>dataObject</em>) – output image, will have the same type and size than inputObject.</p></li>
+<li><p><strong>diameter</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – diameter of each pixel neighborhood that is used during filtering. If it is non-positive, it is computed from sigmaSpace..</p></li>
+<li><p><strong>sigmaColor</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – Filter sigma in the color space. A larger value of the parameter means that farther colors within the pixel neighborhood (see sigmaSpace) will be mixed together, resulting in larger areas of semi-equal color.</p></li>
+<li><p><strong>sigmaSpace</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – Filter sigma in the coordinate space. A larger value of the parameter means that farther pixels will influence each other as long as their colors are close enough (see sigmaColor ). When diameter&gt;0, it specifies the neighborhood size regardless of sigmaSpace. Otherwise, diameter is proportional to sigmaSpace..</p></li>
+<li><p><strong>borderType</strong> – border mode used to extrapolate pixels outside of the image. The following values are possible:</p></li>
+</ul>
+</dd>
+</dl>
+<p>BORDER_CONSTANT (0) (iiiiii|abcdefgh|iiiiiii with some specified i)
+BORDER_REPLICATE (1) (aaaaaa|abcdefgh|hhhhhhh)
+BORDER_REFLECT  (2) (fedcba|abcdefgh|hgfedcb)
+BORDER_WRAP (3) (cdefgh|abcdefgh|abcdefg)
+BORDER_TRANSPARENT (4) (gfedcb|abcdefgh|gfedcba)
+BORDER_ISOLATED (4) (do not look outside of ROI)</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="cvBlur">
-<code class="descname">cvBlur</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>kernelSizeX</em>, <em>kernelSizeY</em>, <em>anchor</em>, <em>borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvBlur" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvBlur</code><span class="sig-paren">(</span><em class="sig-param">sourceImage</em>, <em class="sig-param">destinationImage</em><span class="optional">[</span>, <em class="sig-param">kernelSizeX</em>, <em class="sig-param">kernelSizeY</em>, <em class="sig-param">anchor</em>, <em class="sig-param">borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvBlur" title="Permalink to this definition">¶</a></dt>
 <dd><p>Planewise median blur filter.</p>
 <p>This filter applies the method cv::blur to every plane in the source data object. The function smoothes the images by a simple mean-filter. Theresult is contained in the destination object. It can handle data objects of type uint8, uint16, int16, ito::tInt32, float32 and float64 only.</p>
 <p>The cv::blur interally calls the cv::boxfilter()-method.</p>
@@ -279,9 +313,9 @@ Warning: NaN-handling for floats not verified.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvCalibrateCamera">
-<code class="descname">cvCalibrateCamera</code><span class="sig-paren">(</span><em>objectPoints</em>, <em>imagePoints</em>, <em>imageSize</em>, <em>cameraMatrix</em>, <em>distCoeffs</em>, <em>rvecs</em>, <em>tvecs</em><span class="optional">[</span>, <em>flags</em>, <em>maxCounts</em>, <em>epsilonAccuracy</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCalibrateCamera" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvCalibrateCamera</code><span class="sig-paren">(</span><em class="sig-param">objectPoints</em>, <em class="sig-param">imagePoints</em>, <em class="sig-param">imageSize</em>, <em class="sig-param">cameraMatrix</em>, <em class="sig-param">distCoeffs</em>, <em class="sig-param">rvecs</em>, <em class="sig-param">tvecs</em><span class="optional">[</span>, <em class="sig-param">flags</em>, <em class="sig-param">maxCounts</em>, <em class="sig-param">epsilonAccuracy</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCalibrateCamera" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the camera intrinsic and extrinsic parameters from several views of a calibration pattern.</p>
 <p>The function estimates the intrinsic camera parameters and extrinsic parameters for each of the views. The coordinates of 3D object points and their corresponding 2D projections in each view must be specified.
 That may be achieved by using an object with a known geometry and easily detectable feature points. Such an object is called a calibration rig or calibration pattern, and OpenCV has built-in support for
@@ -319,9 +353,9 @@ before using it in the way that for each view, the last rows are cut where eithe
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvCannyEdge">
-<code class="descname">cvCannyEdge</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>lowThreshold</em>, <em>highThresholdRatio</em>, <em>kernelSize</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCannyEdge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvCannyEdge</code><span class="sig-paren">(</span><em class="sig-param">sourceImage</em>, <em class="sig-param">destinationImage</em><span class="optional">[</span>, <em class="sig-param">lowThreshold</em>, <em class="sig-param">highThresholdRatio</em>, <em class="sig-param">kernelSize</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCannyEdge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Canny Edge detector using cv::DFT.</p>
 <p>It’s just Canny’s edge filter</p>
 <dl class="field-list simple">
@@ -337,9 +371,9 @@ before using it in the way that for each view, the last rows are cut where eithe
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvComputeCorrespondEpilines">
-<code class="descname">cvComputeCorrespondEpilines</code><span class="sig-paren">(</span><em>points</em>, <em>whichImage</em>, <em>F</em>, <em>lines</em><span class="sig-paren">)</span><a class="headerlink" href="#cvComputeCorrespondEpilines" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvComputeCorrespondEpilines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">points</span></em>, <em class="sig-param"><span class="n">whichImage</span></em>, <em class="sig-param"><span class="n">F</span></em>, <em class="sig-param"><span class="n">lines</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvComputeCorrespondEpilines" title="Permalink to this definition">¶</a></dt>
 <dd><p>For points in an image of a stereo pair, computes the corresponding epilines in the other image.</p>
 <p>For every point in one of the two images of a stereo pair, the function finds the equation of the corresponding epipolar line in the other image.</p>
 <p>From the fundamental matrix definition (see findFundamentalMat()), line l^{(2)}_i in the second image for the point p^{(1)}_i in the first image (when whichImage=1) is computed as:</p>
@@ -359,9 +393,9 @@ before using it in the way that for each view, the last rows are cut where eithe
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvCornerSubPix">
-<code class="descname">cvCornerSubPix</code><span class="sig-paren">(</span><em>image</em>, <em>corners</em>, <em>winSize</em><span class="optional">[</span>, <em>zeroZone</em>, <em>maxCount</em>, <em>epsilon</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCornerSubPix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvCornerSubPix</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">corners</em>, <em class="sig-param">winSize</em><span class="optional">[</span>, <em class="sig-param">zeroZone</em>, <em class="sig-param">maxCount</em>, <em class="sig-param">epsilon</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCornerSubPix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refines the corner locations e.g. from cvFindChessboardCorners.</p>
 <p>This filter is a wrapper for the cv::method cv::cornerSubPix. Check the openCV-doku for more details</p>
 <dl class="field-list simple">
@@ -378,9 +412,9 @@ before using it in the way that for each view, the last rows are cut where eithe
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvCvtColor">
-<code class="descname">cvCvtColor</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>code</em>, <em>dstChan</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCvtColor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvCvtColor</code><span class="sig-paren">(</span><em class="sig-param">sourceImage</em>, <em class="sig-param">destinationImage</em><span class="optional">[</span>, <em class="sig-param">code</em>, <em class="sig-param">dstChan</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvCvtColor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an image from one color space to another.
 In case of linear transformations, the range does not matter. But in case of a non-linear transformation,
 an input RGB image should be normalized to the proper value range to get the correct results, for example,
@@ -415,9 +449,9 @@ assumed by the function. So, before calling cvtColor , you need first to scale t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvDilate">
-<code class="descname">cvDilate</code><span class="sig-paren">(</span><em>sourceObj</em>, <em>destinationObj</em><span class="optional">[</span>, <em>element</em>, <em>anchor</em>, <em>iterations</em>, <em>borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvDilate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvDilate</code><span class="sig-paren">(</span><em class="sig-param">sourceObj</em>, <em class="sig-param">destinationObj</em><span class="optional">[</span>, <em class="sig-param">element</em>, <em class="sig-param">anchor</em>, <em class="sig-param">iterations</em>, <em class="sig-param">borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvDilate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dilates every plane of a data object by using a specific structuring element.</p>
 <p>This filter applies the dialation method cvDilate of OpenCV to every plane in the source data object. The result is contained in the destination object. It can handle data objects of type uint8, uint16, int16, float32 and float64 only.</p>
 <p>It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.</p>
@@ -438,9 +472,9 @@ assumed by the function. So, before calling cvtColor , you need first to scale t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvDrawChessboardCorners">
-<code class="descname">cvDrawChessboardCorners</code><span class="sig-paren">(</span><em>image</em>, <em>patternSize</em>, <em>corners</em>, <em>patternWasFound</em><span class="sig-paren">)</span><a class="headerlink" href="#cvDrawChessboardCorners" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvDrawChessboardCorners</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">patternSize</span></em>, <em class="sig-param"><span class="n">corners</span></em>, <em class="sig-param"><span class="n">patternWasFound</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvDrawChessboardCorners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the detected chessboard corners.</p>
 <p>The function draws individual chessboard corners detected either as red circles if the board was not found, or as colored corners connected with lines if the board was found.</p>
 <dl class="field-list simple">
@@ -455,9 +489,9 @@ assumed by the function. So, before calling cvtColor , you need first to scale t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvDrawKeypoints">
-<code class="descname">cvDrawKeypoints</code><span class="sig-paren">(</span><em>image</em>, <em>keypoints</em>, <em>outImage</em><span class="optional">[</span>, <em>color</em>, <em>flags</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvDrawKeypoints" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvDrawKeypoints</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">keypoints</em>, <em class="sig-param">outImage</em><span class="optional">[</span>, <em class="sig-param">color</em>, <em class="sig-param">flags</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvDrawKeypoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws keypoints.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -479,9 +513,9 @@ assumed by the function. So, before calling cvtColor , you need first to scale t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvDrawMatcher">
-<code class="descname">cvDrawMatcher</code><span class="sig-paren">(</span><em>first_image</em>, <em>second_image</em>, <em>first_keypoints</em>, <em>second_keypoints</em>, <em>matches</em>, <em>out_img</em><span class="optional">[</span>, <em>match_color</em>, <em>single_point_color</em>, <em>flags</em>, <em>max_match_distance</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvDrawMatcher" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvDrawMatcher</code><span class="sig-paren">(</span><em class="sig-param">first_image</em>, <em class="sig-param">second_image</em>, <em class="sig-param">first_keypoints</em>, <em class="sig-param">second_keypoints</em>, <em class="sig-param">matches</em>, <em class="sig-param">out_img</em><span class="optional">[</span>, <em class="sig-param">match_color</em>, <em class="sig-param">single_point_color</em>, <em class="sig-param">flags</em>, <em class="sig-param">max_match_distance</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvDrawMatcher" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw the obtained matches points between two images.
 This function draws matches of keypoints from two images in the output image. Match is a line connecting two keypoints (circles).</p>
 <dl class="field-list simple">
@@ -512,9 +546,9 @@ This function draws matches of keypoints from two images in the output image. Ma
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvErode">
-<code class="descname">cvErode</code><span class="sig-paren">(</span><em>sourceObj</em>, <em>destinationObj</em><span class="optional">[</span>, <em>element</em>, <em>anchor</em>, <em>iterations</em>, <em>borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvErode" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvErode</code><span class="sig-paren">(</span><em class="sig-param">sourceObj</em>, <em class="sig-param">destinationObj</em><span class="optional">[</span>, <em class="sig-param">element</em>, <em class="sig-param">anchor</em>, <em class="sig-param">iterations</em>, <em class="sig-param">borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvErode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Erodes every plane of a data object by using a specific structuring element.</p>
 <p>This filter applies the erosion method cvErode of OpenCV to every plane in the source data object. The result is contained in the destination object. It can handle data objects of type uint8, uint16, int16, float32 and float64 only.</p>
 <p>It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.</p>
@@ -535,9 +569,9 @@ This function draws matches of keypoints from two images in the output image. Ma
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvEstimateAffine3DParams">
-<code class="descname">cvEstimateAffine3DParams</code><span class="sig-paren">(</span><em>sources</em>, <em>destinations</em>, <em>output</em><span class="optional">[</span>, <em>inliers</em>, <em>ransacThreshold</em>, <em>confidence</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvEstimateAffine3DParams" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvEstimateAffine3DParams</code><span class="sig-paren">(</span><em class="sig-param">sources</em>, <em class="sig-param">destinations</em>, <em class="sig-param">output</em><span class="optional">[</span>, <em class="sig-param">inliers</em>, <em class="sig-param">ransacThreshold</em>, <em class="sig-param">confidence</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvEstimateAffine3DParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes an optimal affine transformation between two 3D point sets</p>
 <p>The function estimates an optimal 3D affine transformation between two 3D point sets using the RANSAC algorithm. The transformation describes then
 [destination;1] = output * [source;1] for each point in sources and destinations 3D point set.</p>
@@ -561,9 +595,9 @@ This function draws matches of keypoints from two images in the output image. Ma
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFFT1D">
-<code class="descname">cvFFT1D</code><span class="sig-paren">(</span><em>sourceImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvFFT1D" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFFT1D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sourceImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvFFT1D" title="Permalink to this definition">¶</a></dt>
 <dd><p>1D-dimentional fourier-transformation using cv::DFT.</p>
 <p>This filter tries to perform an inplace FFT for a given line or 2D-dataObject. The FFT is calculated linewise.The result is a complex-dataObject. The axis-scales and units are invertes and modified.</p>
 <p>This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, false, false, true)-function.</p>
@@ -574,9 +608,9 @@ This function draws matches of keypoints from two images in the output image. Ma
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFFT2D">
-<code class="descname">cvFFT2D</code><span class="sig-paren">(</span><em>sourceImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvFFT2D" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFFT2D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sourceImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvFFT2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>2D-dimentional fourier-transformation using cv::DFT.</p>
 <p>This filter tries to perform an inplace FFT for a given 2D-dataObject. The FFT is calculated planewise.The result is a complex-dataObject. The axis-scales and units are invertes and modified.</p>
 <p>This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, false, false, false)-function.</p>
@@ -587,9 +621,9 @@ This function draws matches of keypoints from two images in the output image. Ma
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFindChessboardCorners">
-<code class="descname">cvFindChessboardCorners</code><span class="sig-paren">(</span><em>dataObject</em>, <em>patternSize</em>, <em>corners</em><span class="optional">[</span>, <em>flags</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindChessboardCorners" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFindChessboardCorners</code><span class="sig-paren">(</span><em class="sig-param">dataObject</em>, <em class="sig-param">patternSize</em>, <em class="sig-param">corners</em><span class="optional">[</span>, <em class="sig-param">flags</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindChessboardCorners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the positions of internal corners of the chessboard.</p>
 <p>This filter is a wrapper for the cv::method cv::findChessboardCorners.
 The openCV-function attempts to determine whether the input image is a view of the chessboard pattern and locate the internal chessboard corners. The function returns a non-zero value if all of the corners are found and they are placed in a certain order (row by row, left to right in every row). Otherwise, if the function fails to find all the corners or reorder them, it returns 0. For example, a regular chessboard has 8 x 8 squares and 7 x 7 internal corners, that is, points where the black squares touch each other. The detected coordinates are approximate, and to determine their positions more accurately, the function calls cornerSubPix().</p>
@@ -622,9 +656,9 @@ The openCV-function attempts to determine whether the input image is a view of t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFindCircles">
-<code class="descname">cvFindCircles</code><span class="sig-paren">(</span><em>image</em>, <em>circles</em><span class="optional">[</span>, <em>dp</em>, <em>min_dist</em>, <em>canny_threshold</em>, <em>acc_threshold</em>, <em>min_radius</em>, <em>max_radius</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindCircles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFindCircles</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">circles</em><span class="optional">[</span>, <em class="sig-param">dp</em>, <em class="sig-param">min_dist</em>, <em class="sig-param">canny_threshold</em>, <em class="sig-param">acc_threshold</em>, <em class="sig-param">min_radius</em>, <em class="sig-param">max_radius</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindCircles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds circles in a grayscale image using the Hough transform.</p>
 <p>This filter is a wrapper for the OpenCV-function cv::HoughCircles.The function finds circles in a grayscale image using a modification of the Hough transform.Based on this filter, circles are identified and located.The result is a dataObject where the number of rows corresponds to the number of found circles, each row is (x,y,r).</p>
 <dl class="field-list simple">
@@ -643,9 +677,9 @@ The openCV-function attempts to determine whether the input image is a view of t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFindFundamentalMat">
-<code class="descname">cvFindFundamentalMat</code><span class="sig-paren">(</span><em>points1</em>, <em>points2</em>, <em>F</em><span class="optional">[</span>, <em>method</em>, <em>param1</em>, <em>param2</em>, <em>status</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindFundamentalMat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFindFundamentalMat</code><span class="sig-paren">(</span><em class="sig-param">points1</em>, <em class="sig-param">points2</em>, <em class="sig-param">F</em><span class="optional">[</span>, <em class="sig-param">method</em>, <em class="sig-param">param1</em>, <em class="sig-param">param2</em>, <em class="sig-param">status</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindFundamentalMat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a fundamental matrix from the corresponding points in two images.</p>
 <p>The epipolar geometry is described by the following equation:</p>
 <p>[p_2; 1]^T F [p_1; 1] = 0</p>
@@ -667,9 +701,9 @@ Normally just one matrix is found. But in case of the 7-point algorithm, the fun
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFindHomography">
-<code class="descname">cvFindHomography</code><span class="sig-paren">(</span><em>srcPoints</em>, <em>dstPoints</em>, <em>homography</em><span class="optional">[</span>, <em>interpolation</em>, <em>ransacReprojThreshold</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindHomography" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFindHomography</code><span class="sig-paren">(</span><em class="sig-param">srcPoints</em>, <em class="sig-param">dstPoints</em>, <em class="sig-param">homography</em><span class="optional">[</span>, <em class="sig-param">interpolation</em>, <em class="sig-param">ransacReprojThreshold</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFindHomography" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds a perspective transformation between two planes.</p>
 <p>The functions find and return the perspective transformation H between the source and the destination planes:</p>
 <p>s_i vecthree{x’_i}{y’_i}{1} sim H vecthree{x_i}{y_i}{1}</p>
@@ -690,9 +724,9 @@ is minimized.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFlannBasedMatcher">
-<code class="descname">cvFlannBasedMatcher</code><span class="sig-paren">(</span><em>first_descriptors</em>, <em>second_descriptors</em>, <em>Matching_descriptor</em><span class="optional">[</span>, <em>max_distance</em>, <em>first_keypoints</em>, <em>second_keypoints</em>, <em>first_best_matches_points</em>, <em>second_best_matches_points</em>, <em>good_matches</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFlannBasedMatcher" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFlannBasedMatcher</code><span class="sig-paren">(</span><em class="sig-param">first_descriptors</em>, <em class="sig-param">second_descriptors</em>, <em class="sig-param">Matching_descriptor</em><span class="optional">[</span>, <em class="sig-param">max_distance</em>, <em class="sig-param">first_keypoints</em>, <em class="sig-param">second_keypoints</em>, <em class="sig-param">first_best_matches_points</em>, <em class="sig-param">second_best_matches_points</em>, <em class="sig-param">good_matches</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvFlannBasedMatcher" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function uses the nearest search methods to find the best matching points. Matching methods by means of Flann matcher.
 This includes some nearest neighbour algorithms to calculate the distance between two points.</p>
 <p>If desired, this function can also return a filtered list of matches and keypoints (keypoints1 and keypoints2) that only contain matches and keypoints whose matched distances
@@ -714,9 +748,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFlipLeftRight">
-<code class="descname">cvFlipLeftRight</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvFlipLeftRight" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFlipLeftRight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scrImage</span></em>, <em class="sig-param"><span class="n">destImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvFlipLeftRight" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter flips the image left to right.</p>
 <p>This filter applies the flip method cvFlip of OpenCV with the flipCode &gt; 0 to a 2D source data object. The result is contained in the destination object</p>
 <p>It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated
@@ -731,9 +765,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvFlipUpDown">
-<code class="descname">cvFlipUpDown</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvFlipUpDown" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvFlipUpDown</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scrImage</span></em>, <em class="sig-param"><span class="n">destImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvFlipUpDown" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter flips the image upside down.</p>
 <p>This filter applies the flip method cvFlip of OpenCV with the flipCode = 0 to a 2D source data object. The result is contained in the destination object.</p>
 <p>It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated
@@ -748,9 +782,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvIFFT1D">
-<code class="descname">cvIFFT1D</code><span class="sig-paren">(</span><em>sourceImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvIFFT1D" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvIFFT1D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sourceImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvIFFT1D" title="Permalink to this definition">¶</a></dt>
 <dd><p>1D-dimentional inverse fourier-transformation using cv::DFT.</p>
 <p>This filter tries to perform an inplace FFT for a given line or 2D-dataObject. The FFT is calculated linewise.The result is a real-dataObject. The axis-scales and units are invertes and modified.</p>
 <p>This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, true, true, true)-function.</p>
@@ -761,9 +795,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvIFFT2D">
-<code class="descname">cvIFFT2D</code><span class="sig-paren">(</span><em>sourceImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvIFFT2D" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvIFFT2D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sourceImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvIFFT2D" title="Permalink to this definition">¶</a></dt>
 <dd><p>2D-dimentional inverse fourier-transformation using cv::DFT.</p>
 <p>This filter tries to perform an inplace FFT for a given 2D-dataObject. The FFT is calculated planewise.The result is a real-dataObject. The axis-scales and units are invertes and modified.</p>
 <p>This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, true, true, false)-function.</p>
@@ -774,9 +808,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvInitUndistortRectifyMap">
-<code class="descname">cvInitUndistortRectifyMap</code><span class="sig-paren">(</span><em>cameraMatrix</em>, <em>distCoeffs</em>, <em>size</em>, <em>map1</em>, <em>map2</em><span class="optional">[</span>, <em>R</em>, <em>newCameraMatrix</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvInitUndistortRectifyMap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvInitUndistortRectifyMap</code><span class="sig-paren">(</span><em class="sig-param">cameraMatrix</em>, <em class="sig-param">distCoeffs</em>, <em class="sig-param">size</em>, <em class="sig-param">map1</em>, <em class="sig-param">map2</em><span class="optional">[</span>, <em class="sig-param">R</em>, <em class="sig-param">newCameraMatrix</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvInitUndistortRectifyMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the undistortion and rectification transformation map.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -793,9 +827,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvMedianBlur">
-<code class="descname">cvMedianBlur</code><span class="sig-paren">(</span><em>sourceImage</em>, <em>destinationImage</em><span class="optional">[</span>, <em>kernelSize</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvMedianBlur" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvMedianBlur</code><span class="sig-paren">(</span><em class="sig-param">sourceImage</em>, <em class="sig-param">destinationImage</em><span class="optional">[</span>, <em class="sig-param">kernelSize</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvMedianBlur" title="Permalink to this definition">¶</a></dt>
 <dd><p>Planewise median blur filter.</p>
 <p>The function smoothes an image using the median filter with the kernel-size x kernel-size aperture. Each channel of a multi-channel image is processed independently. It can handle data objects of type uint8, uint16, int16, ito::tInt32, float32 and float64 only.</p>
 <p>The itom-wrapping does not work inplace currently. A new dataObject is allocated.</p>
@@ -811,9 +845,9 @@ are bounded by max_distance. You only need to indicate parameters belonging to t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvMergeChannels">
-<code class="descname">cvMergeChannels</code><span class="sig-paren">(</span><em>inputObject</em>, <em>outputObject</em><span class="optional">[</span>, <em>alpha</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvMergeChannels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvMergeChannels</code><span class="sig-paren">(</span><em class="sig-param">inputObject</em>, <em class="sig-param">outputObject</em><span class="optional">[</span>, <em class="sig-param">alpha</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvMergeChannels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduces a [4x…xMxN] or [3x…xMxN] uint8 data object to a […xMxN] rgba32 data object where the
 first dimension is merged into the color type. If the first dimension is equal to 4, the planes are used for the blue, green, red and alpha
 component, in case of three, the alpha component is set to the optional alpha value.</p>
@@ -828,9 +862,9 @@ component, in case of three, the alpha component is set to the optional alpha va
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvMorphologyEx">
-<code class="descname">cvMorphologyEx</code><span class="sig-paren">(</span><em>sourceObj</em>, <em>destinationObj</em>, <em>operation</em><span class="optional">[</span>, <em>element</em>, <em>anchor</em>, <em>iterations</em>, <em>borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvMorphologyEx" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvMorphologyEx</code><span class="sig-paren">(</span><em class="sig-param">sourceObj</em>, <em class="sig-param">destinationObj</em>, <em class="sig-param">operation</em><span class="optional">[</span>, <em class="sig-param">element</em>, <em class="sig-param">anchor</em>, <em class="sig-param">iterations</em>, <em class="sig-param">borderType</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvMorphologyEx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Erodes every plane of a data object by using a specific structuring element.</p>
 <p>Performs advanced morphological transformations.The function cv::morphologyEx can perform advanced morphological transformations using an erosion and dilation as basic operations.MORPH_ERODE Any of the operations can be done in - place.In case of multi - channel images, each channel is processed independently.).</p>
 <dl class="field-list simple">
@@ -848,9 +882,9 @@ component, in case of three, the alpha component is set to the optional alpha va
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvProjectPoints">
-<code class="descname">cvProjectPoints</code><span class="sig-paren">(</span><em>inputObject</em>, <em>outputObject</em>, <em>M</em>, <em>distCoeff</em>, <em>RVec</em>, <em>TVec</em><span class="sig-paren">)</span><a class="headerlink" href="#cvProjectPoints" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvProjectPoints</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputObject</span></em>, <em class="sig-param"><span class="n">outputObject</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="n">distCoeff</span></em>, <em class="sig-param"><span class="n">RVec</span></em>, <em class="sig-param"><span class="n">TVec</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvProjectPoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Project points from object into image space using the given calibration matrices,
 distortion coefficients rotation and tralsation vector.</p>
 <dl class="field-list simple">
@@ -867,9 +901,9 @@ distortion coefficients rotation and tralsation vector.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="cvRemapParams">
-<code class="descname">cvRemapParams</code><span class="sig-paren">(</span><em>source</em>, <em>destination</em>, <em>map1</em>, <em>map2</em><span class="optional">[</span>, <em>interpolation</em>, <em>interpolation</em>, <em>borderValue</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvRemapParams" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt id="cvRemap">
+<code class="sig-name descname">cvRemap</code><span class="sig-paren">(</span><em class="sig-param">source</em>, <em class="sig-param">destination</em>, <em class="sig-param">map1</em>, <em class="sig-param">map2</em><span class="optional">[</span>, <em class="sig-param">interpolation</em>, <em class="sig-param">borderMode</em>, <em class="sig-param">borderValue</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvRemap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a generic geometrical transformation to an image.</p>
 <p>The function remap transforms the source image using the specified map:</p>
 <p>dst(x,y) = src(map_x(x,y),map_y(x,y))</p>
@@ -885,17 +919,33 @@ indices in a table of interpolation coefficients.</p>
 <li><p><strong>destination</strong> (<em>dataObject</em>) – destination image. It hast the same size as map1 and the same type as src.</p></li>
 <li><p><strong>map1</strong> (<em>dataObject</em>) – The first map of x values</p></li>
 <li><p><strong>map2</strong> (<em>dataObject</em>) – The second map of y values</p></li>
-<li><p><strong>interpolation</strong> (<em>int - optional</em>) – Interpolation method. The following values are possible: INTER_NEAREST (0), INTER_LINEAR (1), INTER_CUBIC (2), INTER_LANCZOS4  (4)</p></li>
-<li><p><strong>interpolation</strong> – Pixel extrapolation method. When boderMode == BORDER_TRANSPARENT, it means that the pixels in the destination image that corresponds to the outliers in the source image are not modified by the function. The following values are possible: BORDER_CONSTANT (0)BORDER_REPLICATE (1)BORDER_REFLECT (2)BORDER_WRAP (3)BORDER_REFLECT101 (4)BORDER_TRANSPARENT (5)BORDER_DEFAULT (4)BORDER_ISOLATED (16)</p></li>
-<li><p><strong>borderValue</strong> (<em>float - optional</em>) – value used in case of a constant border. By default, it is 0</p></li>
+<li><p><strong>interpolation</strong> – Interpolation method. The following values are possible:</p></li>
 </ul>
 </dd>
 </dl>
+<p>INTER_NEAREST (0)
+INTER_LINEAR (1)
+INTER_CUBIC (2)
+INTER_LANCZOS4 (4)
+:type interpolation: int - optional
+:param borderMode: Pixel extrapolation method. When boderMode == BORDER_TRANSPARENT (5), it means that the pixels in the destination image that corresponds to the outliers in the source image are not modified by the function.
+The following values are possible:
+BORDER_CONSTANT (0)
+BORDER_REPLICATE (1)
+BORDER_REFLECT (2)
+BORDER_WRAP (3)
+BORDER_REFLECT101 (4)
+BORDER_TRANSPARENT (5)
+BORDER_DEFAULT (4)
+BORDER_ISOLATED (16)
+:type borderMode: int - optional
+:param borderValue: value used in case of a constant border. By default, it is 0
+:type borderValue: float - optional</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvRemoveSpikes">
-<code class="descname">cvRemoveSpikes</code><span class="sig-paren">(</span><em>sourceObject</em>, <em>destinationObject</em><span class="optional">[</span>, <em>kernelSize</em>, <em>lowestValue</em>, <em>highestValue</em>, <em>newValue</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvRemoveSpikes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvRemoveSpikes</code><span class="sig-paren">(</span><em class="sig-param">sourceObject</em>, <em class="sig-param">destinationObject</em><span class="optional">[</span>, <em class="sig-param">kernelSize</em>, <em class="sig-param">lowestValue</em>, <em class="sig-param">highestValue</em>, <em class="sig-param">newValue</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvRemoveSpikes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set single spikes at measurement edges to a new value.</p>
 <p>This filter creates a binary mask for the input object. The value of mask(y,x) will be 1 if value of input(y,x) is within the specified range and is finite.The mask is eroded and than dilated by kernel size using openCV cv::erode and cv::dilate with a single iteration. In the last step the value of output(y,x) is set to newValue if mask(y,x) is 0.</p>
 <p>It is allowed to let the filter work inplace if you give the same source and destination data object, else the destination data object is verified if it fits to the size and type of the source data object and if not a new one is allocated and the input data is copied to the new object.</p>
@@ -913,9 +963,9 @@ indices in a table of interpolation coefficients.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvResize">
-<code class="descname">cvResize</code><span class="sig-paren">(</span><em>inputObject</em>, <em>outputObject</em>, <em>fx</em>, <em>fy</em><span class="optional">[</span>, <em>interpolation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvResize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvResize</code><span class="sig-paren">(</span><em class="sig-param">inputObject</em>, <em class="sig-param">outputObject</em>, <em class="sig-param">fx</em>, <em class="sig-param">fy</em><span class="optional">[</span>, <em class="sig-param">interpolation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvResize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resizes an image</p>
 <p>The function resize resizes the image ‘inputObject’ down to or up by the specific factors.</p>
 <p>To shrink an image, it will generally look best with CV_INTER_AREA interpolation, whereas to enlarge an image,
@@ -928,15 +978,22 @@ The axisScale properties of the x- and y-axes of the outputObject are divided by
 <li><p><strong>outputObject</strong> (<em>dataObject</em>) – output image, will have the same type than inputObject. Its size corresponds to the size of the input object multiplied with fx and fy respectively.</p></li>
 <li><p><strong>fx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – scale factor along the horizontal axis.</p></li>
 <li><p><strong>fy</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – scale factor along the vertical axis.</p></li>
-<li><p><strong>interpolation</strong> (<em>int - optional</em>) – Interpolation method. The following values are possible: INTER_NEAREST (0), INTER_LINEAR (1), INTER_AREA (3), INTER_CUBIC (2), INTER_LANCZOS4  (4)</p></li>
+<li><p><strong>interpolation</strong> – Interpolation method. The following values are possible:</p></li>
 </ul>
 </dd>
 </dl>
+<p>INTER_NEAREST (0)
+INTER_LINEAR (1)
+INTER_AREA (3)
+INTER_CUBIC (2)
+INTER_LANCZOS4 (4)</p>
+<dl class="field-list simple">
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvRotate180">
-<code class="descname">cvRotate180</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvRotate180" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvRotate180</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scrImage</span></em>, <em class="sig-param"><span class="n">destImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvRotate180" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter rotates the image by 180?.</p>
 <p>This filter applies the flip method cvFlip from OpenCV horizontally and vertically to rotate the object. The result is contained in the destination object</p>
 <p>It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.</p>
@@ -950,9 +1007,9 @@ The axisScale properties of the x- and y-axes of the outputObject are divided by
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvRotateM90">
-<code class="descname">cvRotateM90</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvRotateM90" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvRotateM90</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scrImage</span></em>, <em class="sig-param"><span class="n">destImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvRotateM90" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter rotates the image by 90? clock wise.</p>
 <p>This filter applies the flip method cvFlip and the transpose method cvTranspose of OpenCV to rotate the object. The result is contained in the destination object</p>
 <p>It is allowed to let the filter work pseudo inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.</p>
@@ -966,9 +1023,9 @@ The axisScale properties of the x- and y-axes of the outputObject are divided by
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvRotateP90">
-<code class="descname">cvRotateP90</code><span class="sig-paren">(</span><em>scrImage</em>, <em>destImage</em><span class="sig-paren">)</span><a class="headerlink" href="#cvRotateP90" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvRotateP90</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scrImage</span></em>, <em class="sig-param"><span class="n">destImage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvRotateP90" title="Permalink to this definition">¶</a></dt>
 <dd><p>This filter rotates the image by 90? count clock wise.</p>
 <p>This filter applies the flip method cvFlip and the transpose method cvTranspose of OpenCV to rotate the object. The result is contained in the destination object</p>
 <p>It is allowed to let the filter work pseudo inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.</p>
@@ -982,9 +1039,9 @@ The axisScale properties of the x- and y-axes of the outputObject are divided by
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvSplitChannels">
-<code class="descname">cvSplitChannels</code><span class="sig-paren">(</span><em>rgbaObject</em>, <em>outputObject</em><span class="sig-paren">)</span><a class="headerlink" href="#cvSplitChannels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvSplitChannels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rgbaObject</span></em>, <em class="sig-param"><span class="n">outputObject</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cvSplitChannels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a rgba32 data object (with four channels blue, green, red, alpha) into
 an output data object of type ‘uint8’ and a shape that has one dimension more than the input object and the first dimension is equal to 4.
 The four color components are then distributed into the 4 planes of the first dimension.</p>
@@ -999,9 +1056,9 @@ The four color components are then distributed into the 4 planes of the first di
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvUndistort">
-<code class="descname">cvUndistort</code><span class="sig-paren">(</span><em>source</em>, <em>destination</em>, <em>cameraMatrix</em>, <em>distCoeffs</em><span class="optional">[</span>, <em>newCameraMatrix</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvUndistort" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvUndistort</code><span class="sig-paren">(</span><em class="sig-param">source</em>, <em class="sig-param">destination</em>, <em class="sig-param">cameraMatrix</em>, <em class="sig-param">distCoeffs</em><span class="optional">[</span>, <em class="sig-param">newCameraMatrix</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvUndistort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transforms an image to compensate for lens distortion.</p>
 <p>The function transforms an image to compensate radial and tangential lens distortion.
 The function is simply a combination of cvInitUndistortRectifyMap() (with unity R) and cvRemap() (with bilinear interpolation).
@@ -1020,9 +1077,9 @@ See the former function for details of the transformation being performed.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvUndistortPoints">
-<code class="descname">cvUndistortPoints</code><span class="sig-paren">(</span><em>source</em>, <em>destination</em>, <em>cameraMatrix</em>, <em>distCoeffs</em><span class="optional">[</span>, <em>R</em>, <em>P</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvUndistortPoints" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvUndistortPoints</code><span class="sig-paren">(</span><em class="sig-param">source</em>, <em class="sig-param">destination</em>, <em class="sig-param">cameraMatrix</em>, <em class="sig-param">distCoeffs</em><span class="optional">[</span>, <em class="sig-param">R</em>, <em class="sig-param">P</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvUndistortPoints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the ideal point coordinates from the observed point coordinates.</p>
 <p>The function is similar to cvUndistort() and cvInitUndistortRectifyMap() but it operates on a sparse set of points instead of a raster image. Also the function performs a reverse transformation to cvProjectPoints() .
 In case of a 3D object, it does not reconstruct its 3D coordinates, but for a planar object, it does, up to a translation vector, if the proper R is specified.</p>
@@ -1040,9 +1097,9 @@ In case of a 3D object, it does not reconstruct its 3D coordinates, but for a pl
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="cvWarpPerspective">
-<code class="descname">cvWarpPerspective</code><span class="sig-paren">(</span><em>inputObject</em>, <em>outputObject</em>, <em>M</em><span class="optional">[</span>, <em>interpolation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvWarpPerspective" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cvWarpPerspective</code><span class="sig-paren">(</span><em class="sig-param">inputObject</em>, <em class="sig-param">outputObject</em>, <em class="sig-param">M</em><span class="optional">[</span>, <em class="sig-param">interpolation</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#cvWarpPerspective" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a perspective transformation to an image</p>
 <p>The function warpPerspective transforms the source image using the specified matrix H</p>
 <dl class="field-list simple">
@@ -1080,14 +1137,22 @@ In case of a 3D object, it does not reconstruct its 3D coordinates, but for a pl
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2011-2018, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
       <span class="lastupdated">
-        Last updated on May 28, 2019.
+        Last updated on Jul 03, 2020.
       </span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1098,7 +1163,6 @@ In case of a 3D object, it does not reconstruct its 3D coordinates, but for a pl
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

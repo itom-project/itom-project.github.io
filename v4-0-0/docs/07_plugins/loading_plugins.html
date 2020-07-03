@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7.2. Loading plugins &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.3. How to use hardware plugins" href="getstart-hardware.html" />
+    <link rel="prev" title="7.1. Basic concept" href="basic_concept.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.2. Loading plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-hardware.html">7.3. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-grabber.html">7.4. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-adda.html">7.5. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-actuator.html">7.6. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-filter.html">7.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/plugin-development.html">7.8. Development under C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/openCVMat.html">7.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="plugins.html"><span class="section-number">7. </span>Plugins</a> &raquo;</li>
+        
+      <li><span class="section-number">7.2. </span>Loading plugins</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/07_plugins/loading_plugins.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="loading-plugins">
+<span id="plugins-loading"></span><h1><span class="section-number">7.2. </span>Loading plugins<a class="headerlink" href="#loading-plugins" title="Permalink to this headline">¶</a></h1>
+<p>itom plugins are dynamically linked libraries (Windows: DLL files, Linux: SO files), based on the Qt plugin
+mechanism (see <a class="reference internal" href="development/plugin-development.html#plugins-dev"><span class="std std-ref">the plugin programming section</span></a> of this documentation for more information).</p>
+<p>At startup of <strong>itom</strong>, the subdirectory <strong>plugins</strong> of the <strong>itom</strong> root directory is recursively scanned for all
+available library files. Usually the folder structure of the <strong>plugins</strong> directory is like the following example
+(Windows):</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/folderStructure.png"><img alt="../_images/folderStructure.png" src="../_images/folderStructure.png" style="width: 823.0px; height: 449.0px;" /></a>
+</div>
+<p>Usually, each plugin project automatically creates a subfolder in the <strong>plugins</strong> base directory. This subfolder
+then contains optional translation, documentation or sample files as well as at least one library (DLL). Usually
+libraries with the file suffix <strong>d.dll</strong> correspond to debug built versions of the libraries and <em>dll</em> files
+without the suffix <em>d</em> are the release versions. Of course, the debug versions are usually not contained in
+default versions of <strong>itom</strong>.</p>
+<p>When <strong>itom</strong> detects any kind of library in any subfolder of the <strong>plugins</strong> base directory, it is tested with
+respect to different rules, before it is accepted as <strong>itom</strong> plugin and loaded.</p>
+<p>All plugins of <strong>itom</strong> can make use of commonly used libraries of <strong>itom</strong>, located in the SDK subfolder of the
+<strong>itom</strong> root directory. Plugins can only be successfully loaded by <strong>itom</strong>, if they where compiled with binary
+compatible versions of all common libraries (e.g. dataObject, commonLib, commonLibQt…) than the current version
+of <strong>itom</strong>. To ensure this, the major interface to all plugins, denoted as <strong>ito::AddInInterface</strong>, is eqipped
+with a version number, following the scheme of semantic versioning (semver.org). Hence, a core developer of
+<strong>itom</strong> has to increment the major version number of this interface (see file <strong>addInInterfaceVersion.h</strong>)
+if at least one of the commonly used libraries are changed in a binary-incompatible way. If methods are
+added to one of these libraries, the minor version number of the add-in interface has to be incremented…</p>
+<p>At the startup of <strong>itom</strong>, the application recursively scans the <strong>plugins</strong> folder and looks for any <em>DLL</em>-file on
+Windows machines or <em>so</em>-file on a Linux operating system. Then each DLL is tried to be loaded using the plugin
+system provided by the <strong>Qt</strong>-framework. The <em>DLL</em> can successfully be loaded if the following prerequisites are fulfilled:</p>
+<ul class="simple">
+<li><p>The plugin is a release version if <strong>itom</strong> is started in release mode OR</p></li>
+<li><p>The plugin is a debug version (this can for example be seen if the DLL-name ends with <em>…d.dll</em>) if <strong>itom</strong> is started in debug mode</p></li>
+<li><p>The plugin is compiled using the same major and minor version of <strong>Qt</strong> than <strong>itom</strong>
+(it is possible to load a plugin compiled with <strong>Qt</strong> 5.9.6 with <strong>itom</strong> compiled with 5.9.3)</p></li>
+<li><p>The plugin is compiled with the same compiler and the same bitness level (x86/x64) than <strong>itom</strong> (e.g. MSVC 2015, x64)</p></li>
+<li><p>If the plugin is dependent on other shared libraries which are not linked using a delay-load mechanism, the plugin
+can only be loaded if every necessary shared library can be found and successfully be loaded. If the dependency
+could not be loaded, the plugin-load fails with an error message <em>module could not be loaded</em>.</p></li>
+<li><p>The remarks contained in the plugin with respect to a minimum and maximum version number of <strong>itom</strong> must correspond
+to the version number of your <strong>itom</strong></p></li>
+<li><p>The add-in interface number, that was used to compile a plugin, has to be compatible to the current add-in interface
+number of <strong>itom</strong>. The compatibility is given if the major part of the version number is equal and if the minor
+version number of the plugin is greater or equal than the minor number, contained in <strong>itom</strong>.</p></li>
+</ul>
+<p>Finally, every successfully loaded plugin is included in the <a class="reference internal" href="../04_itom_gui/plugins.html#gui-plugins"><span class="std std-ref">plugins toolbox</span></a> of <strong>itom</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The version number of the add-in interface has nothing to do with the version number of <strong>itom</strong>. This
+add-in interface version number is contained in the file <strong>common/addInInterfaceVersion.h</strong> and can also
+be seen in the property dialog of any plugin library (under Windows).</p>
+</div>
+<p>The load status of all plugins can be seen in the <strong>loaded plugins</strong> dialog of <strong>itom</strong> (menu <strong>file &gt;&gt; loaded plugins…</strong>):</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/loadStatusOfPlugins.png"><img alt="../_images/loadStatusOfPlugins.png" src="../_images/loadStatusOfPlugins.png" style="width: 622.0px; height: 496.0px;" /></a>
+</div>
+<p>In this dialog, you can see all detected libraries including their load status. Whenever a plugin could not be loaded,
+expand the major entry and click the subentry. Then you can read the full error message below the tree view.</p>
+<p>Here is a list of common error messages in this dialog:</p>
+<ol class="arabic simple">
+<li><p><strong>Could not load library ‘…’: Module could not be loaded</strong>: It is likely, that the plugin library depends on further
+3rd party libraries, which could not be detected (in the itom root directory, in the subdirectory <em>lib*</em> or in any
+pathes, contained in the PATH environment variable of the operating system). Under Windows, it is recommended to
+use the <em>dependency walker</em> tool to check the dependencies of the corresponding plugin library.</p></li>
+<li><p><strong>AddIn ‘…’ fits to the obsolete interface 3.3.2. The AddIn interface of this version of ‘itom’ is 4.0.0.</strong>: This
+indicates that the plugin is compiled with an older version of the itom SDK. Please re-compile the plugin with the
+current version of the SDK.</p></li>
+<li><p><strong>AddIn ‘…’ fits to a new addIn-interface, which is not supported by this version of itom.
+The AddIn interface of this version of ‘itom’ is 4.0.0.</strong>: The plugin is likely to be compiled with a newer version
+of the itom SDK than used by this version of <strong>itom</strong>.</p></li>
+<li><p><strong>The plugin ‘…’ uses an incompatible Qt library</strong>: The plugin has been compiled with an incompatible version of
+Qt, also with respect to the release / debug match between itom and its plugins.</p></li>
+<li><p><strong>The file ‘…’ is not a valid Qt plugin.</strong>: This library is no Qt / itom plugin at all. Maybe it is a 3rd party
+library, used by any other plugin.</p></li>
+<li><p><strong>AddIn ‘…’ does not fit to the general interface AddInInterfaceBase</strong>: This library seems to be a Qt library,
+but does not implement the required interface of <strong>itom</strong> plugins (<em>ito.AddIn.InterfaceBase/major-version-number</em>).</p></li>
+</ol>
+<p>Please consider, that the loaded plugins dialog also displays the load status of additional designer plugins
+(located in the subfolder <em>designer</em> of <strong>itom</strong>). These designer plugins contain plots or additional widgets, that
+can be included in user defined GUIs of <strong>itom</strong>. They follow another interface system. For more information see
+<a class="reference internal" href="../05_plots/plots.html#plotsandfigures"><span class="std std-ref">Plots and Figures</span></a> or <a class="reference internal" href="../06_extended_gui/list_custom_widgets.html#listcustomdesignerwidgets"><span class="std std-ref">Custom Designer Widgets</span></a>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="getstart-hardware.html" class="btn btn-neutral float-right" title="7.3. How to use hardware plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basic_concept.html" class="btn btn-neutral float-left" title="7.1. Basic concept" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on Jul 03, 2020.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -2,8 +2,8 @@
 Face detection
 =======================================
 
-With the support of Python 3 and OpenCV 3 lots of image processing can be done with ease.
-In this example we show a simple itom script to detect faces off a webcam live image.
+With the support of Python libraries and the OpenCV-Library many image processing problems can be solved.
+In this example we show a simple itom script to detect faces acquired by a live webcam.
 
 Detection with Webcam
 -----------------------------------------

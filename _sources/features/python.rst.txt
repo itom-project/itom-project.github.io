@@ -34,7 +34,7 @@ The IDE is highly customizable - Dark Theme, colors, fonts, indentation, dockabl
 Python Packages
 ------------------
 
-The embedded Python scripting language (version 3) allows you to use all functionalities that are provided by Python or other freely available packages as Numpy, Scipy or Matplotlib.
+The embedded Python scripting language (Ver. 3) allows you to use all functionalities that are provided by Python or other freely available packages as Numpy, Scipy or Matplotlib.
 Additionally, itom is connected to the Python scripting language by the package itom that acts as an interface to the core application as well as all its plugins.
 Further interesting packages for machine learning, image data processing and AI can easily be integrated with our package manager.
 

@@ -2,7 +2,7 @@
 Hough Transform and Edge detection
 ======================================
 
-**Itom** offers the full power of **Python 3** in combination with **OpenCV 3**.
+**Itom** offers the full power of **Python** in combination with **OpenCV**.
 All OpenCV functions can be easily used and the results are visualized and further processed (e.g. output to Matlab) in python.
 
 Often, edge detection and noise reduction are first applied in order to perform further processing like the Hough transform.

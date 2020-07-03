@@ -37,12 +37,9 @@ Introduction
 Installation
 ------------------
 
-Currently the All-in-One Setup is only available for WINDOWS users. Mac and Linux: compile source @ :ref:`sec-downloads`
+Currently the Setup-Version is only available for WINDOWS OS. MacOS and Linux Distros need to compile source from `Git <https://bitbucket.org/itom/itom/overview>`_
 
-| Get the latest versions from the :ref:`sec-downloads` page or from the link below.
-| You should use the correct Bit-Version according to your Windows system (32bit/ 64bit).
-
-*(If you don't know which Version you have, Goto: >>Control Panel >>System >>System type: 32Bit or 64Bit)*
+| Get the latest version from :ref:`sec-downloads` page or see the link below.
 
 **Download Setup .EXE-File**
 
@@ -102,8 +99,8 @@ Currently the All-in-One Setup is only available for WINDOWS users. Mac and Linu
 .. |setupVC| image:: _static\\setupVC.png
                          :width: 400px
 
-First use of ITOM
--------------------
+How to start using ITOM
+-----------------------
 
 First of all, let's introduce you to the IDE and your first steps using itom.
 
@@ -111,4 +108,4 @@ First of all, let's introduce you to the IDE and your first steps using itom.
 
 * Use our `Cheatsheet for Python with itom <documents/itom_cheatsheet.pdf>`_ to learn some basics
 
-*	See `documentation <https://itom.bitbucket.io/latest/docs>`_ on how to use itom in detail
+*	See `Documentation <https://itom.bitbucket.io/latest/docs>`_ for information on itom details and functions
