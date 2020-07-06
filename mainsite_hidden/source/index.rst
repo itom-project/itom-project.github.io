@@ -98,7 +98,7 @@ It can be used in a multitude of application areas, but especially is devoted to
 License and Copyright
 ------------------------
 
-The core components and the main application of **itom** are covered by the **GNU Library General Public Licence** (GNU LGPL). All components belonging to the SDK of **itom** (e.g. dataObject, pointCloud, addInInterface,...) are additionally covered by an **itom** exception. The main idea of this exception is to allow other libraries (e.g. plugins) to include and link agains components of **itom** SDK independent on the specific license model of the respective “other” library. For more information see `License <http://itom.bitbucket.org/latest/docs/01_introduction/introduction.html#licensing>`_.
+The core components and the main application of **itom** are covered by the **GNU Library General Public Licence** (GNU LGPL). All components belonging to the SDK of **itom** (e.g. dataObject, pointCloud, addInInterface,...) are additionally covered by an **itom** exception. The main idea of this exception is to allow other libraries (e.g. plugins) to include and link agains components of **itom** SDK independent on the specific license model of the respective “other” library. For more information see `License <http://itom.bitbucket.io/latest/docs/01_introduction/introduction.html#licensing>`_.
 
 **itom** is a project provided by
 
