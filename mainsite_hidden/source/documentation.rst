@@ -34,7 +34,7 @@ Documentation
 		<div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--4dp">
          	<div class="mdl-card__title mdl-card--expand mdl-color--primary"><span class="mdl-card__title-text">News</span></div>
             <div class="mdl-card__supporting-text">Changelog & Releases</div>
-            <div class="mdl-card__actions  mdl-card--border"><a href="http://itom.bitbucket.org/latest/docs/00_releaseNotes/whats-new.html" target="_blank" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent mdl-js-ripple-effect"><i class="material-icons">add</i></a></div>
+            <div class="mdl-card__actions  mdl-card--border"><a href="http://itom.bitbucket.io/latest/docs/00_releaseNotes/whats-new.html" target="_blank" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--accent mdl-js-ripple-effect"><i class="material-icons">add</i></a></div>
          </div>
 	</div>
 	<hr>
