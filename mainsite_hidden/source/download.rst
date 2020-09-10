@@ -22,7 +22,7 @@ that provide the plot and figure widgets of **itom**.
 
 
 | **Windows:** 	Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
-| **Linux:**		(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_linux.html>`_)
+| **Linux:**		(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_debian.html>`_)
 | **Mac:**		(OS X) Clone git source code (`MacOS instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_osx.html>`_)
 |
 | The End-User Setup version includes **itom** and the following components:
