@@ -6,7 +6,7 @@ var structito_1_1_break_point_item =
     [ "enabled", "structito_1_1_break_point_item.html#a64b354c73724948fec3a7b66e828fe4e", null ],
     [ "filename", "structito_1_1_break_point_item.html#a32cc1e97265e49d39339826f4f44f424", null ],
     [ "ignoreCount", "structito_1_1_break_point_item.html#a59925c48cde3f15797ef9e2c4c1cf8dd", null ],
-    [ "lineno", "structito_1_1_break_point_item.html#aa9b14b93903b54b085576688adb98fb3", null ],
+    [ "lineIdx", "structito_1_1_break_point_item.html#a06d4ad5b203d6c0cfd6f8143e675c362", null ],
     [ "pythonDbgBpNumber", "structito_1_1_break_point_item.html#a8ae9a8618f33dbe19d67b8b5e07ac0af", null ],
     [ "temporary", "structito_1_1_break_point_item.html#a170cb89ac3b1a70f91da3dead21e82ac", null ]
 ];

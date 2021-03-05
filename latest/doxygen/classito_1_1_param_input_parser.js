@@ -12,7 +12,7 @@ var classito_1_1_param_input_parser =
     [ "getHWValue", "classito_1_1_param_input_parser.html#a1183e944fe0eb04fc42cc53a3b810242", null ],
     [ "getIntArray", "classito_1_1_param_input_parser.html#ab04365f090e2ea9092450fcfa5fe9b6e", null ],
     [ "getIntValue", "classito_1_1_param_input_parser.html#a0c8e417c23e4a0cfeac9bee7b604b0b8", null ],
-    [ "getItemSize", "classito_1_1_param_input_parser.html#a565a61f19342de4c4c813338d8b656e6", null ],
+    [ "getItemSize", "classito_1_1_param_input_parser.html#acee0cde55eed8067196d3dd81abe0cbd", null ],
     [ "getParameters", "classito_1_1_param_input_parser.html#a44836cf4cbcac2bc3ab39fb6ff7644b4", null ],
     [ "getStringValue", "classito_1_1_param_input_parser.html#a7a793c45ab1f777ebb0496e51bd4440a", null ],
     [ "renderTypeChar", "classito_1_1_param_input_parser.html#af7955f05959af27063875efca8611c59", null ],

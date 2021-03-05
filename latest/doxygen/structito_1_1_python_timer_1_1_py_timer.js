@@ -1,5 +1,5 @@
 var structito_1_1_python_timer_1_1_py_timer =
 [
-    [ "callbackFunc", "structito_1_1_python_timer_1_1_py_timer.html#a54e941a0cb137c1dcff38a0f48d019f5", null ],
-    [ "timer", "structito_1_1_python_timer_1_1_py_timer.html#a2748c3356d637bb9a4cf9e0f9dd26304", null ]
+    [ "callbackFunc", "structito_1_1_python_timer_1_1_py_timer.html#a98aa2839de4efa93e6aa9a0bce6ff85f", null ],
+    [ "timer", "structito_1_1_python_timer_1_1_py_timer.html#a98d5ef352854681d542751d9c3efa98a", null ]
 ];

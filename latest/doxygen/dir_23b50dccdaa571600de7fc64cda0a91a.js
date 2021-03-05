@@ -8,6 +8,7 @@ var dir_23b50dccdaa571600de7fc64cda0a91a =
     [ "models", "dir_9c42d0d14b3cc77e93a9d607076a40d2.html", "dir_9c42d0d14b3cc77e93a9d607076a40d2" ],
     [ "organizer", "dir_43da97134f31e35f9c36295a1bfb37c7.html", "dir_43da97134f31e35f9c36295a1bfb37c7" ],
     [ "python", "dir_93737a0dc9ba3bf8241afddc203d6a16.html", "dir_93737a0dc9ba3bf8241afddc203d6a16" ],
+    [ "textdiff", "dir_b935fc20447dc3f9fde40703ee3dd175.html", "dir_b935fc20447dc3f9fde40703ee3dd175" ],
     [ "ui", "dir_8f678271c866c3fb2a130ca17dfa1741.html", "dir_8f678271c866c3fb2a130ca17dfa1741" ],
     [ "widgets", "dir_3d2c2fb9921ac0e687e0ebceee98b580.html", "dir_3d2c2fb9921ac0e687e0ebceee98b580" ],
     [ "AppManagement.h", "_app_management_8h_source.html", null ],

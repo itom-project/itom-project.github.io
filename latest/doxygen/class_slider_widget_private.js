@@ -2,9 +2,9 @@ var class_slider_widget_private =
 [
     [ "SliderWidgetPrivate", "class_slider_widget_private.html#a77a32e601121cfe2ada8231afee1cbb3", null ],
     [ "~SliderWidgetPrivate", "class_slider_widget_private.html#a40af5413b30275f2e3f8bf9d10075da2", null ],
-    [ "equal", "class_slider_widget_private.html#aeee4b9e183e7354a1ad652fb6482402f", null ],
+    [ "equal", "class_slider_widget_private.html#a843e03eb709e77feb5829a088f6c09a3", null ],
     [ "Q_DECLARE_PUBLIC", "class_slider_widget_private.html#a0c9a57dc52a0c4416f1c7b805238f35d", null ],
-    [ "synchronizedSpinBoxWidth", "class_slider_widget_private.html#a2c2d649cee05d6193a2b389bee48f363", null ],
+    [ "synchronizedSpinBoxWidth", "class_slider_widget_private.html#a2c83c3b1702a103a3ca9d1ee1788c0b4", null ],
     [ "synchronizeSiblingDecimals", "class_slider_widget_private.html#a004653133e63b01c9dd8152f8e6fc6ac", null ],
     [ "synchronizeSiblingWidth", "class_slider_widget_private.html#a258e947ae6b72516d06b1d7bd16098db", null ],
     [ "updateSpinBoxDecimals", "class_slider_widget_private.html#ab5a254729ce3324d0b8710dabdef3076", null ],

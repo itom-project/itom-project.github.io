@@ -9,7 +9,7 @@ var classito_1_1_process_organizer =
     [ "getFirstExistingProcess", "classito_1_1_process_organizer.html#a393c21a2be3aea76f5cb52539ec4dccb", null ],
     [ "getProcess", "classito_1_1_process_organizer.html#a680dc1bc4409478fce85013714edbf70", null ],
     [ "getProcesses", "classito_1_1_process_organizer.html#a57df0249d91d9ac7b137c6fc18e8b189", null ],
-    [ "getStandardOutputBuffer", "classito_1_1_process_organizer.html#ab4e539934d9311190f0578c3bac26ac6", null ],
+    [ "getStandardOutputBuffer", "classito_1_1_process_organizer.html#a6f00bb438b076e7f2f7faae6d2b60655", null ],
     [ "processError", "classito_1_1_process_organizer.html#abb526679230dc12d726f359b7ff315db", null ],
     [ "processFinished", "classito_1_1_process_organizer.html#a00d770526c6e97b74e354d7553edb32c", null ],
     [ "readyReadStandardOutput", "classito_1_1_process_organizer.html#a7e4b843be9681597eb879ad4cb79fff8", null ],

@@ -1,22 +1,28 @@
 var searchData=
 [
-  ['pagestep',['pageStep',['../class_slider_widget.html#aa654acf17e51e4872c19e5a4c61335c9',1,'SliderWidget']]],
+  ['pagestep',['pageStep',['../class_slider_widget.html#ab388993616fd6694901091b5c6dc911d',1,'SliderWidget']]],
   ['paintevent',['paintEvent',['../classito_1_1_breakpoint_panel.html#adfffb778c72856bc6fbef10d17071689',1,'ito::BreakpointPanel::paintEvent()'],['../class_checkable_combo_box.html#ab90d285d9060f13a1d228edebafb650b',1,'CheckableComboBox::paintEvent()'],['../class_combo_box.html#a65d0a4df3998286fac67777542c475a2',1,'ComboBox::paintEvent()']]],
-  ['paletteorganizer',['PaletteOrganizer',['../classito_1_1_palette_organizer.html',1,'ito::PaletteOrganizer'],['../classito_1_1_palette_organizer.html#ab09a33b6bc929d9e641ff1d741babf6c',1,'ito::PaletteOrganizer::PaletteOrganizer()']]],
+  ['palette',['palette',['../class_tool_tip.html#a9bc5f09138e2d93b32d55e1d6b311f9d',1,'ToolTip']]],
+  ['paletteorganizer',['PaletteOrganizer',['../classito_1_1_palette_organizer.html',1,'ito']]],
+  ['paletteorganizer',['PaletteOrganizer',['../classito_1_1_palette_organizer.html#ab09a33b6bc929d9e641ff1d741babf6c',1,'ito::PaletteOrganizer']]],
   ['panel',['Panel',['../classito_1_1_panel.html',1,'ito']]],
   ['panelsmanager',['PanelsManager',['../classito_1_1_panels_manager.html',1,'ito']]],
-  ['param',['Param',['../classito_1_1_param.html',1,'ito::Param'],['../classito_1_1_param.html#afa72a4a4bc579046a41b6d9842654bb7',1,'ito::Param::Param()'],['../classito_1_1_param.html#a55d4b274c653bcc47eed7b52cf0c09ba',1,'ito::Param::Param(const ByteArray &amp;name)'],['../classito_1_1_param.html#a67941a801b7b5171ceb9d8047fd7b6d0',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type)'],['../classito_1_1_param.html#a2c7408f151293e884f3e811cb2e85863',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const char *val, const char *info)'],['../classito_1_1_param.html#a82b6694eea172c04463ea99900bdfa8d',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const char minVal, const char maxVal, const char val, const char *info)'],['../classito_1_1_param.html#a01b783717c863027a377f24670dbe485',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const int32 minVal, const int32 maxVal, const int32 val, const char *info)'],['../classito_1_1_param.html#a4e7e2099f60b1a51aab71a72a911f124',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const float64 minVal, const float64 maxVal, const float64 val, const char *info)'],['../classito_1_1_param.html#a1a8f70d6a302dda063f3ea38f3e59c64',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const int32 *values, const char *info)'],['../classito_1_1_param.html#a8f91a6c167178a3dc03e2cb7aafdb9ca',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const float64 *values, const char *info)'],['../classito_1_1_param.html#a61821260a5c1f363b8156dfc9b29272a',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const complex128 *values, const char *info)'],['../classito_1_1_param.html#a51ea6d37e3e6fa54e4c792e78893426f',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const char val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a9562520a08f75946003b83c1bce0b930',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const int32 val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a6ebd5d607fac30c275a9da1faafac785',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const float64 val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a0ca5ef467fe051febe3f5952972c9bad',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const complex128 val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a2389b35172c2306cfd2c8eff984e46c5',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const char *values, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a7a0bcebdad2d9af1a1698940cbe8105f',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const int32 *values, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#aec1d2f76bd9e893cdcc2a0ad4d253ff8',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const float64 *values, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a475a66f0f24fe0b3b47867e67b4ce3c0',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const complex128 *values, ParamMeta *meta, const char *info)']]],
-  ['parambase',['ParamBase',['../classito_1_1_param_base.html',1,'ito::ParamBase'],['../classito_1_1_param_base.html#abbf1dacce700c4e22be21fcadda4c68c',1,'ito::ParamBase::ParamBase()'],['../classito_1_1_param_base.html#ac4d46eb322c8076f41760187918932c1',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name)'],['../classito_1_1_param_base.html#a278853d62981bba7b2d69ab5a4ac2b62',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type)'],['../classito_1_1_param_base.html#af039633063ba03a831b12f7614c56e85',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const char *val)'],['../classito_1_1_param_base.html#af7cfd7eec2fe97aca6e72c2291422fe4',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const float64 val)'],['../classito_1_1_param_base.html#a8b8ea4fb6f4196b1310dacfd5c89e1b9',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const int32 val)'],['../classito_1_1_param_base.html#a20bb13af32e1181ed3aa526d23c1a633',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const complex128 val)'],['../classito_1_1_param_base.html#a4a36cf3cb10a720d45ffbf60617f3b7b',1,'ito::ParamBase::ParamBase(const ParamBase &amp;copyConstr)']]],
+  ['param',['Param',['../classito_1_1_param.html',1,'ito']]],
+  ['param',['Param',['../classito_1_1_param.html#afa72a4a4bc579046a41b6d9842654bb7',1,'ito::Param::Param()'],['../classito_1_1_param.html#a55d4b274c653bcc47eed7b52cf0c09ba',1,'ito::Param::Param(const ByteArray &amp;name)'],['../classito_1_1_param.html#a67941a801b7b5171ceb9d8047fd7b6d0',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type)'],['../classito_1_1_param.html#a2c7408f151293e884f3e811cb2e85863',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const char *val, const char *info)'],['../classito_1_1_param.html#a82b6694eea172c04463ea99900bdfa8d',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const char minVal, const char maxVal, const char val, const char *info)'],['../classito_1_1_param.html#a01b783717c863027a377f24670dbe485',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const int32 minVal, const int32 maxVal, const int32 val, const char *info)'],['../classito_1_1_param.html#a4e7e2099f60b1a51aab71a72a911f124',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const float64 minVal, const float64 maxVal, const float64 val, const char *info)'],['../classito_1_1_param.html#a1a8f70d6a302dda063f3ea38f3e59c64',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const int32 *values, const char *info)'],['../classito_1_1_param.html#a8f91a6c167178a3dc03e2cb7aafdb9ca',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const float64 *values, const char *info)'],['../classito_1_1_param.html#a61821260a5c1f363b8156dfc9b29272a',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const complex128 *values, const char *info)'],['../classito_1_1_param.html#a51ea6d37e3e6fa54e4c792e78893426f',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const char val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a9562520a08f75946003b83c1bce0b930',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const int32 val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a6ebd5d607fac30c275a9da1faafac785',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const float64 val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a0ca5ef467fe051febe3f5952972c9bad',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const complex128 val, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a2389b35172c2306cfd2c8eff984e46c5',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const char *values, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a7a0bcebdad2d9af1a1698940cbe8105f',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const int32 *values, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#aec1d2f76bd9e893cdcc2a0ad4d253ff8',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const float64 *values, ParamMeta *meta, const char *info)'],['../classito_1_1_param.html#a475a66f0f24fe0b3b47867e67b4ce3c0',1,'ito::Param::Param(const ByteArray &amp;name, const uint32 type, const unsigned int size, const complex128 *values, ParamMeta *meta, const char *info)']]],
+  ['parambase',['ParamBase',['../classito_1_1_param_base.html#abbf1dacce700c4e22be21fcadda4c68c',1,'ito::ParamBase::ParamBase()'],['../classito_1_1_param_base.html#ac4d46eb322c8076f41760187918932c1',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name)'],['../classito_1_1_param_base.html#a278853d62981bba7b2d69ab5a4ac2b62',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type)'],['../classito_1_1_param_base.html#af039633063ba03a831b12f7614c56e85',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const char *val)'],['../classito_1_1_param_base.html#af7cfd7eec2fe97aca6e72c2291422fe4',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const float64 val)'],['../classito_1_1_param_base.html#a8b8ea4fb6f4196b1310dacfd5c89e1b9',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const int32 val)'],['../classito_1_1_param_base.html#a20bb13af32e1181ed3aa526d23c1a633',1,'ito::ParamBase::ParamBase(const ByteArray &amp;name, const uint32 type, const complex128 val)'],['../classito_1_1_param_base.html#a4a36cf3cb10a720d45ffbf60617f3b7b',1,'ito::ParamBase::ParamBase(const ParamBase &amp;copyConstr)']]],
+  ['parambase',['ParamBase',['../classito_1_1_param_base.html',1,'ito']]],
   ['paramchararraypropertymanager',['ParamCharArrayPropertyManager',['../classito_1_1_param_char_array_property_manager.html',1,'ito']]],
   ['paramchararraypropertymanagerprivate',['ParamCharArrayPropertyManagerPrivate',['../classito_1_1_param_char_array_property_manager_private.html',1,'ito']]],
-  ['paramcharpropertyfactory',['ParamCharPropertyFactory',['../classito_1_1_param_char_property_factory.html',1,'ito::ParamCharPropertyFactory'],['../classito_1_1_param_char_property_factory.html#a6ff6b4b05f20d15260057491c39e96ae',1,'ito::ParamCharPropertyFactory::ParamCharPropertyFactory()']]],
+  ['paramcharpropertyfactory',['ParamCharPropertyFactory',['../classito_1_1_param_char_property_factory.html',1,'ito']]],
+  ['paramcharpropertyfactory',['ParamCharPropertyFactory',['../classito_1_1_param_char_property_factory.html#a6ff6b4b05f20d15260057491c39e96ae',1,'ito::ParamCharPropertyFactory']]],
   ['paramcharpropertyfactoryprivate',['ParamCharPropertyFactoryPrivate',['../classito_1_1_param_char_property_factory_private.html',1,'ito']]],
   ['paramcharpropertymanager',['ParamCharPropertyManager',['../classito_1_1_param_char_property_manager.html',1,'ito']]],
   ['paramcharwidget',['ParamCharWidget',['../classito_1_1_param_char_widget.html',1,'ito']]],
   ['paramcharwidgetprivate',['ParamCharWidgetPrivate',['../classito_1_1_param_char_widget_private.html',1,'ito']]],
   ['paramdoublearraypropertymanager',['ParamDoubleArrayPropertyManager',['../classito_1_1_param_double_array_property_manager.html',1,'ito']]],
   ['paramdoublearraypropertymanagerprivate',['ParamDoubleArrayPropertyManagerPrivate',['../classito_1_1_param_double_array_property_manager_private.html',1,'ito']]],
-  ['paramdoublepropertyfactory',['ParamDoublePropertyFactory',['../classito_1_1_param_double_property_factory.html',1,'ito::ParamDoublePropertyFactory'],['../classito_1_1_param_double_property_factory.html#a4a9e061524063ccba335b46c0dd8fc7a',1,'ito::ParamDoublePropertyFactory::ParamDoublePropertyFactory()']]],
+  ['paramdoublepropertyfactory',['ParamDoublePropertyFactory',['../classito_1_1_param_double_property_factory.html#a4a9e061524063ccba335b46c0dd8fc7a',1,'ito::ParamDoublePropertyFactory']]],
+  ['paramdoublepropertyfactory',['ParamDoublePropertyFactory',['../classito_1_1_param_double_property_factory.html',1,'ito']]],
   ['paramdoublepropertyfactoryprivate',['ParamDoublePropertyFactoryPrivate',['../classito_1_1_param_double_property_factory_private.html',1,'ito']]],
   ['paramdoublepropertymanager',['ParamDoublePropertyManager',['../classito_1_1_param_double_property_manager.html',1,'ito']]],
   ['paramdoublewidget',['ParamDoubleWidget',['../classito_1_1_param_double_widget.html',1,'ito']]],
@@ -31,28 +37,32 @@ var searchData=
   ['paraminputparser',['ParamInputParser',['../classito_1_1_param_input_parser.html',1,'ito']]],
   ['paramintarraypropertymanager',['ParamIntArrayPropertyManager',['../classito_1_1_param_int_array_property_manager.html',1,'ito']]],
   ['paramintarraypropertymanagerprivate',['ParamIntArrayPropertyManagerPrivate',['../classito_1_1_param_int_array_property_manager_private.html',1,'ito']]],
-  ['paramintervalpropertyfactory',['ParamIntervalPropertyFactory',['../classito_1_1_param_interval_property_factory.html',1,'ito::ParamIntervalPropertyFactory'],['../classito_1_1_param_interval_property_factory.html#a0db019f993d8ecb489e6bb5d09d1e606',1,'ito::ParamIntervalPropertyFactory::ParamIntervalPropertyFactory()']]],
+  ['paramintervalpropertyfactory',['ParamIntervalPropertyFactory',['../classito_1_1_param_interval_property_factory.html#a0db019f993d8ecb489e6bb5d09d1e606',1,'ito::ParamIntervalPropertyFactory']]],
+  ['paramintervalpropertyfactory',['ParamIntervalPropertyFactory',['../classito_1_1_param_interval_property_factory.html',1,'ito']]],
   ['paramintervalpropertyfactoryprivate',['ParamIntervalPropertyFactoryPrivate',['../classito_1_1_param_interval_property_factory_private.html',1,'ito']]],
   ['paramintervalpropertymanager',['ParamIntervalPropertyManager',['../classito_1_1_param_interval_property_manager.html',1,'ito']]],
-  ['paramintpropertyfactory',['ParamIntPropertyFactory',['../classito_1_1_param_int_property_factory.html',1,'ito::ParamIntPropertyFactory'],['../classito_1_1_param_int_property_factory.html#aaff2909f3631c1ae287ae04b9786907b',1,'ito::ParamIntPropertyFactory::ParamIntPropertyFactory()']]],
+  ['paramintpropertyfactory',['ParamIntPropertyFactory',['../classito_1_1_param_int_property_factory.html#aaff2909f3631c1ae287ae04b9786907b',1,'ito::ParamIntPropertyFactory']]],
+  ['paramintpropertyfactory',['ParamIntPropertyFactory',['../classito_1_1_param_int_property_factory.html',1,'ito']]],
   ['paramintpropertyfactoryprivate',['ParamIntPropertyFactoryPrivate',['../classito_1_1_param_int_property_factory_private.html',1,'ito']]],
   ['paramintpropertymanager',['ParamIntPropertyManager',['../classito_1_1_param_int_property_manager.html',1,'ito']]],
   ['paramintwidget',['ParamIntWidget',['../classito_1_1_param_int_widget.html',1,'ito']]],
   ['paramintwidgetprivate',['ParamIntWidgetPrivate',['../classito_1_1_param_int_widget_private.html',1,'ito']]],
-  ['parammeta',['ParamMeta',['../classito_1_1_param_meta.html',1,'ito::ParamMeta'],['../classito_1_1_param_meta.html#a8226932dcb42866e0cce03e88c938fa7',1,'ito::ParamMeta::ParamMeta(ito::ByteArray category=ito::ByteArray())'],['../classito_1_1_param_meta.html#a2f8a3ebcedcd063c58bc911f2d701e21',1,'ito::ParamMeta::ParamMeta(MetaRtti type, ito::ByteArray category=ito::ByteArray())']]],
+  ['parammeta',['ParamMeta',['../classito_1_1_param_meta.html',1,'ito']]],
+  ['parammeta',['ParamMeta',['../classito_1_1_param_meta.html#a8226932dcb42866e0cce03e88c938fa7',1,'ito::ParamMeta::ParamMeta(ito::ByteArray category=ito::ByteArray())'],['../classito_1_1_param_meta.html#a2f8a3ebcedcd063c58bc911f2d701e21',1,'ito::ParamMeta::ParamMeta(MetaRtti type, ito::ByteArray category=ito::ByteArray())']]],
   ['paramotherpropertymanager',['ParamOtherPropertyManager',['../classito_1_1_param_other_property_manager.html',1,'ito']]],
   ['paramrectpropertymanager',['ParamRectPropertyManager',['../classito_1_1_param_rect_property_manager.html',1,'ito']]],
   ['paramrectpropertymanagerprivate',['ParamRectPropertyManagerPrivate',['../classito_1_1_param_rect_property_manager_private.html',1,'ito']]],
   ['paramsmand',['paramsMand',['../structito_1_1_exec_func_params.html#acde35e273523407183099d7ea0f81105',1,'ito::ExecFuncParams']]],
   ['paramsopt',['paramsOpt',['../structito_1_1_exec_func_params.html#a4e1de75fd8d170d433bc463201d4a93d',1,'ito::ExecFuncParams']]],
   ['paramsout',['paramsOut',['../structito_1_1_exec_func_params.html#a2f3342ed7995dd59aac07934101ea522',1,'ito::ExecFuncParams']]],
-  ['paramstringpropertyfactory',['ParamStringPropertyFactory',['../classito_1_1_param_string_property_factory.html',1,'ito::ParamStringPropertyFactory'],['../classito_1_1_param_string_property_factory.html#a5a26fdc3a584432f632e40a8073609bd',1,'ito::ParamStringPropertyFactory::ParamStringPropertyFactory()']]],
+  ['paramstringpropertyfactory',['ParamStringPropertyFactory',['../classito_1_1_param_string_property_factory.html#a5a26fdc3a584432f632e40a8073609bd',1,'ito::ParamStringPropertyFactory']]],
+  ['paramstringpropertyfactory',['ParamStringPropertyFactory',['../classito_1_1_param_string_property_factory.html',1,'ito']]],
   ['paramstringpropertyfactoryprivate',['ParamStringPropertyFactoryPrivate',['../classito_1_1_param_string_property_factory_private.html',1,'ito']]],
   ['paramstringpropertymanager',['ParamStringPropertyManager',['../classito_1_1_param_string_property_manager.html',1,'ito']]],
   ['paramstringwidget',['ParamStringWidget',['../classito_1_1_param_string_widget.html',1,'ito']]],
   ['paramstringwidgetprivate',['ParamStringWidgetPrivate',['../classito_1_1_param_string_widget_private.html',1,'ito']]],
   ['paramtypemask',['paramTypeMask',['../namespaceito.html#ad9158b33ef1d02a45a7d603ed6ad0906',1,'ito']]],
-  ['parent',['parent',['../classito_1_1_pip_manager.html#a973bd83e07d009fb6248fd482309bee0',1,'ito::PipManager::parent()'],['../classito_1_1_user_model.html#a3881315d272e9de9eb976034bce45895',1,'ito::UserModel::parent()'],['../classito_1_1_plug_in_model.html#a739e47df6b956f1786d633e2268a406b',1,'ito::PlugInModel::parent()'],['../class_qt_browser_item.html#afed8197ad887301642017d7b61c185b7',1,'QtBrowserItem::parent()'],['../class_q_property_model.html#abd1113af2982c40ba645f5dff24b5346',1,'QPropertyModel::parent(const QModelIndex &amp;index) const'],['../class_q_property_model.html#abd1113af2982c40ba645f5dff24b5346',1,'QPropertyModel::parent(const QModelIndex &amp;index) const']]],
+  ['parent',['parent',['../classito_1_1_pip_manager.html#a415fc63cdcfdf52deb182552677bde4c',1,'ito::PipManager::parent()'],['../classito_1_1_timer_model.html#a345e85eccde727b678c18ff5505a16a3',1,'ito::TimerModel::parent()'],['../classito_1_1_user_model.html#a604eb142c099a6f584b97c26f2c3ce1d',1,'ito::UserModel::parent()'],['../classito_1_1_plug_in_model.html#a3fc83075640c1aeea0a8e826908564ec',1,'ito::PlugInModel::parent()'],['../class_qt_browser_item.html#a4ac772c5b9b4601bd85a35ff06a8058f',1,'QtBrowserItem::parent()'],['../class_q_property_model.html#a5c11bffbc67d9770021aff513f245d7a',1,'QPropertyModel::parent(const QModelIndex &amp;index) const '],['../class_q_property_model.html#a5c11bffbc67d9770021aff513f245d7a',1,'QPropertyModel::parent(const QModelIndex &amp;index) const ']]],
   ['parenthesisinfo',['ParenthesisInfo',['../classito_1_1_utils_1_1_parenthesis_info.html',1,'ito::Utils']]],
   ['parsefilterwidgetcontent',['parseFilterWidgetContent',['../classito_1_1_help_tree_dock_widget.html#a342aad66dd1d22510546f57314934857',1,'ito::HelpTreeDockWidget']]],
   ['parseparam',['parseParam',['../classito_1_1_help_tree_dock_widget.html#ab36b8ff074a889c8d3c476103abf4ba0',1,'ito::HelpTreeDockWidget']]],
@@ -60,13 +70,15 @@ var searchData=
   ['parseparams',['parseParams',['../namespaceito.html#a8fe6cab8c18f8e06ec5b141d57ab1389',1,'ito']]],
   ['parseparamvector',['parseParamVector',['../classito_1_1_help_tree_dock_widget.html#a8b01d2a21e779711e469ed8f34783348',1,'ito::HelpTreeDockWidget']]],
   ['parseposparams',['parsePosParams',['../namespaceito.html#afb4b7505de2474537f0ff7a5e678cf94',1,'ito']]],
-  ['patch',['patch',['../classito_1_1_sem_ver_version.html#aa1016f6654c17df1401bb1cdc1809b52',1,'ito::SemVerVersion']]],
+  ['patch',['patch',['../classito_1_1_sem_ver_version.html#afaca679b65177068d3460e137d4df917',1,'ito::SemVerVersion']]],
   ['pathlineedit',['PathLineEdit',['../class_path_line_edit.html',1,'PathLineEdit'],['../class_path_line_edit.html#acea687a2514a9c455ddb345231a8d4bd',1,'PathLineEdit::PathLineEdit(QWidget *parent=0)'],['../class_path_line_edit.html#a80a9c9b7282d1e448afc322fe0651475',1,'PathLineEdit::PathLineEdit(const QString &amp;label, const QStringList &amp;nameFilters, Filters filters=PathLineEdit::AllEntries, QWidget *parent=0)']]],
   ['pathlineeditfactory',['PathLineEditFactory',['../class_path_line_edit_factory.html',1,'']]],
   ['pathlineeditprivate',['PathLineEditPrivate',['../class_path_line_edit_private.html',1,'']]],
   ['pclinvalid',['pclInvalid',['../namespaceito.html#a71867bc7a24c8fcb06b8cf63f5a3360eaa2585c0961b5f357d98ed732c17b9359',1,'ito']]],
-  ['pclpoint',['PCLPoint',['../classito_1_1_p_c_l_point.html',1,'ito::PCLPoint'],['../classito_1_1_p_c_l_point.html#a2317033b6e83b59285312f6d5ee4906f',1,'ito::PCLPoint::PCLPoint()'],['../classito_1_1_p_c_l_point.html#a11f2dca9f3a4f4b43cbefd7a747c9c0e',1,'ito::PCLPoint::PCLPoint(ito::tPCLPointType type)'],['../classito_1_1_p_c_l_point.html#a0395375b81dcd11580da9f69c3afeed9',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZ &amp;point)'],['../classito_1_1_p_c_l_point.html#a6384ca5b82f7cc0b29247be1c357550b',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZI &amp;point)'],['../classito_1_1_p_c_l_point.html#a1030d890b2b0d46564ae5920bffbc607',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZRGBA &amp;point)'],['../classito_1_1_p_c_l_point.html#aaae915c75ed42bd3660fa1b4114d2911',1,'ito::PCLPoint::PCLPoint(const pcl::PointNormal &amp;point)'],['../classito_1_1_p_c_l_point.html#a63f1f811a9f5f3442099b16c198dfe4b',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZINormal &amp;point)'],['../classito_1_1_p_c_l_point.html#a77ac1dd6310d6b36bca0088130d43c8b',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZRGBNormal &amp;point)'],['../classito_1_1_p_c_l_point.html#a63f62c6694d6cd72d8fcbd1d4e6903bf',1,'ito::PCLPoint::PCLPoint(const PCLPoint &amp;p)']]],
-  ['pclpointcloud',['PCLPointCloud',['../classito_1_1_p_c_l_point_cloud.html',1,'ito::PCLPointCloud'],['../classito_1_1_p_c_l_point_cloud.html#ab6c1fcf34cf69a56dfbf474f854f9627',1,'ito::PCLPointCloud::PCLPointCloud()'],['../classito_1_1_p_c_l_point_cloud.html#a91719e440bf89af7aacefd79b6c0388b',1,'ito::PCLPointCloud::PCLPointCloud(ito::tPCLPointType type)'],['../classito_1_1_p_c_l_point_cloud.html#afbdbea2de386986c1131eb01e3618998',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZ &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a334fa8b16dd147429cc323d40331b924',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZI &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#ad3a072b0fba72336b5e0080a8db29dd8',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZRGBA &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#ae28128f32c2ff43c1b6d394a0607f176',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointNormal &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a7a2bab6e7829ea1949fac40378f31e3d',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZINormal &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a47ed45b08290c20f95cd7df5512fcd7d',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZRGBNormal &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a027a3a84b7dcec8715611726761e53e0',1,'ito::PCLPointCloud::PCLPointCloud(uint32_t width_, uint32_t height_, ito::tPCLPointType type_, const PCLPoint &amp;value_=PCLPoint())'],['../classito_1_1_p_c_l_point_cloud.html#aac5a53461bceb5c4abdf5bd29f882cda',1,'ito::PCLPointCloud::PCLPointCloud(PCLPointCloud &amp;pc)'],['../classito_1_1_p_c_l_point_cloud.html#a59083794ce8c86bc6cb99c1bb01f568e',1,'ito::PCLPointCloud::PCLPointCloud(const PCLPointCloud &amp;pc)'],['../classito_1_1_p_c_l_point_cloud.html#a1805d524fcf4f9009580f100f7563fd3',1,'ito::PCLPointCloud::PCLPointCloud(const PCLPointCloud &amp;pc, const std::vector&lt; int &gt; &amp;indices)']]],
+  ['pclpoint',['PCLPoint',['../classito_1_1_p_c_l_point.html#a2317033b6e83b59285312f6d5ee4906f',1,'ito::PCLPoint::PCLPoint()'],['../classito_1_1_p_c_l_point.html#a11f2dca9f3a4f4b43cbefd7a747c9c0e',1,'ito::PCLPoint::PCLPoint(ito::tPCLPointType type)'],['../classito_1_1_p_c_l_point.html#a0395375b81dcd11580da9f69c3afeed9',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZ &amp;point)'],['../classito_1_1_p_c_l_point.html#a6384ca5b82f7cc0b29247be1c357550b',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZI &amp;point)'],['../classito_1_1_p_c_l_point.html#a1030d890b2b0d46564ae5920bffbc607',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZRGBA &amp;point)'],['../classito_1_1_p_c_l_point.html#aaae915c75ed42bd3660fa1b4114d2911',1,'ito::PCLPoint::PCLPoint(const pcl::PointNormal &amp;point)'],['../classito_1_1_p_c_l_point.html#a63f1f811a9f5f3442099b16c198dfe4b',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZINormal &amp;point)'],['../classito_1_1_p_c_l_point.html#a77ac1dd6310d6b36bca0088130d43c8b',1,'ito::PCLPoint::PCLPoint(const pcl::PointXYZRGBNormal &amp;point)'],['../classito_1_1_p_c_l_point.html#a63f62c6694d6cd72d8fcbd1d4e6903bf',1,'ito::PCLPoint::PCLPoint(const PCLPoint &amp;p)']]],
+  ['pclpoint',['PCLPoint',['../classito_1_1_p_c_l_point.html',1,'ito']]],
+  ['pclpointcloud',['PCLPointCloud',['../classito_1_1_p_c_l_point_cloud.html#ab6c1fcf34cf69a56dfbf474f854f9627',1,'ito::PCLPointCloud::PCLPointCloud()'],['../classito_1_1_p_c_l_point_cloud.html#a91719e440bf89af7aacefd79b6c0388b',1,'ito::PCLPointCloud::PCLPointCloud(ito::tPCLPointType type)'],['../classito_1_1_p_c_l_point_cloud.html#afbdbea2de386986c1131eb01e3618998',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZ &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a334fa8b16dd147429cc323d40331b924',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZI &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#ad3a072b0fba72336b5e0080a8db29dd8',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZRGBA &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#ae28128f32c2ff43c1b6d394a0607f176',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointNormal &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a7a2bab6e7829ea1949fac40378f31e3d',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZINormal &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a47ed45b08290c20f95cd7df5512fcd7d',1,'ito::PCLPointCloud::PCLPointCloud(pcl::PointCloud&lt; pcl::PointXYZRGBNormal &gt;::Ptr pclPtr)'],['../classito_1_1_p_c_l_point_cloud.html#a027a3a84b7dcec8715611726761e53e0',1,'ito::PCLPointCloud::PCLPointCloud(uint32_t width_, uint32_t height_, ito::tPCLPointType type_, const PCLPoint &amp;value_=PCLPoint())'],['../classito_1_1_p_c_l_point_cloud.html#aac5a53461bceb5c4abdf5bd29f882cda',1,'ito::PCLPointCloud::PCLPointCloud(PCLPointCloud &amp;pc)'],['../classito_1_1_p_c_l_point_cloud.html#a59083794ce8c86bc6cb99c1bb01f568e',1,'ito::PCLPointCloud::PCLPointCloud(const PCLPointCloud &amp;pc)'],['../classito_1_1_p_c_l_point_cloud.html#a1805d524fcf4f9009580f100f7563fd3',1,'ito::PCLPointCloud::PCLPointCloud(const PCLPointCloud &amp;pc, const std::vector&lt; int &gt; &amp;indices)']]],
+  ['pclpointcloud',['PCLPointCloud',['../classito_1_1_p_c_l_point_cloud.html',1,'ito']]],
   ['pclpolygonmesh',['PCLPolygonMesh',['../classito_1_1_p_c_l_polygon_mesh.html',1,'ito']]],
   ['pclxyz',['pclXYZ',['../namespaceito.html#a71867bc7a24c8fcb06b8cf63f5a3360ea6273432d3a0ca503e1a77d27ad8ab994',1,'ito']]],
   ['pclxyzi',['pclXYZI',['../namespaceito.html#a71867bc7a24c8fcb06b8cf63f5a3360ea6385e470bdc9a9e3aead145eb0ded4d8',1,'ito']]],
@@ -83,8 +95,11 @@ var searchData=
   ['pinpopup',['pinPopup',['../class_popup_widget.html#a4094fcf1625bf436051c74d9c7fe1816',1,'PopupWidget']]],
   ['pipgeneraloptions',['PipGeneralOptions',['../structito_1_1_pip_general_options.html',1,'ito']]],
   ['pipinstall',['PipInstall',['../structito_1_1_pip_install.html',1,'ito']]],
-  ['pipmanager',['PipManager',['../classito_1_1_pip_manager.html',1,'ito::PipManager'],['../classito_1_1_pip_manager.html#a2be845103386ed38b5b553699766cfae',1,'ito::PipManager::PipManager()']]],
-  ['pixelpostorangevalue',['pixelPosToRangeValue',['../class_range_slider_private.html#a26400a2b8340ebfab0785b8ef94bb595',1,'RangeSliderPrivate']]],
+  ['pipmanager',['PipManager',['../classito_1_1_pip_manager.html#a2be845103386ed38b5b553699766cfae',1,'ito::PipManager']]],
+  ['pipmanager',['PipManager',['../classito_1_1_pip_manager.html',1,'ito']]],
+  ['pipmode',['PipMode',['../classito_1_1_pip_manager.html#ad2d783d8b8f27341d20908bb7f56b530',1,'ito::PipManager']]],
+  ['pipmodedirect',['pipModeDirect',['../classito_1_1_pip_manager.html#ad2d783d8b8f27341d20908bb7f56b530ad10fcf85b9f3d4bd3636a541120315e7',1,'ito::PipManager']]],
+  ['pixelpostorangevalue',['pixelPosToRangeValue',['../class_range_slider_private.html#a29d5b5e17cedadadcf436bc0bbe348d0',1,'RangeSliderPrivate']]],
   ['placeholdertext',['placeholderText',['../class_search_box.html#a133ef2f788967b41ffc6862ffebc654a',1,'SearchBox']]],
   ['plane',['plane',['../classito_1_1_d_obj_const_iterator.html#ae6d117b4df4a735b68a5e786e017be72',1,'ito::DObjConstIterator']]],
   ['planecontinuous',['planeContinuous',['../classito_1_1_d_obj_const_iterator.html#a76b8e7a5313760b2600726323b5f5ff9',1,'ito::DObjConstIterator']]],
@@ -111,9 +126,11 @@ var searchData=
   ['plugin_5fshowtoolbox',['plugin_showToolbox',['../namespaceito.html#ac145e823451a24a203e1a201da54bbdc',1,'ito']]],
   ['plugininfo',['PluginInfo',['../classito_1_1_plugin_info.html',1,'ito']]],
   ['pluginloadstatus',['PluginLoadStatus',['../structito_1_1_plugin_load_status.html',1,'ito']]],
-  ['pluginmodel',['PlugInModel',['../classito_1_1_plug_in_model.html',1,'ito::PlugInModel'],['../classito_1_1_plug_in_model.html#a424bc4eb696132c110de84ce9b8c781c',1,'ito::PlugInModel::PlugInModel()']]],
+  ['pluginmodel',['PlugInModel',['../classito_1_1_plug_in_model.html',1,'ito']]],
+  ['pluginmodel',['PlugInModel',['../classito_1_1_plug_in_model.html#a424bc4eb696132c110de84ce9b8c781c',1,'ito::PlugInModel']]],
   ['pluginmodelprivate',['PlugInModelPrivate',['../classito_1_1_plug_in_model_private.html',1,'ito']]],
-  ['pluginthreadctrl',['PluginThreadCtrl',['../classito_1_1_plugin_thread_ctrl.html',1,'ito::PluginThreadCtrl'],['../classito_1_1_plugin_thread_ctrl.html#ad0ad77dbb7b20868f40d92c33092891d',1,'ito::PluginThreadCtrl::PluginThreadCtrl()'],['../classito_1_1_plugin_thread_ctrl.html#aab2b538b4a4dd614f58b0cf744fbd737',1,'ito::PluginThreadCtrl::PluginThreadCtrl(const ito::ParamBase &amp;pluginParameter, ito::RetVal *retval=NULL)'],['../classito_1_1_plugin_thread_ctrl.html#afd45a8beb26ae37e71d188e157e1a353',1,'ito::PluginThreadCtrl::PluginThreadCtrl(ito::AddInBase *plugin, ito::RetVal *retval=NULL)'],['../classito_1_1_plugin_thread_ctrl.html#a0c47a967d9a6821507b6804ae2558b6b',1,'ito::PluginThreadCtrl::PluginThreadCtrl(const PluginThreadCtrl &amp;other)']]],
+  ['pluginthreadctrl',['PluginThreadCtrl',['../classito_1_1_plugin_thread_ctrl.html',1,'ito']]],
+  ['pluginthreadctrl',['PluginThreadCtrl',['../classito_1_1_plugin_thread_ctrl.html#ad0ad77dbb7b20868f40d92c33092891d',1,'ito::PluginThreadCtrl::PluginThreadCtrl()'],['../classito_1_1_plugin_thread_ctrl.html#aab2b538b4a4dd614f58b0cf744fbd737',1,'ito::PluginThreadCtrl::PluginThreadCtrl(const ito::ParamBase &amp;pluginParameter, ito::RetVal *retval=NULL)'],['../classito_1_1_plugin_thread_ctrl.html#afd45a8beb26ae37e71d188e157e1a353',1,'ito::PluginThreadCtrl::PluginThreadCtrl(ito::AddInBase *plugin, ito::RetVal *retval=NULL)'],['../classito_1_1_plugin_thread_ctrl.html#a0c47a967d9a6821507b6804ae2558b6b',1,'ito::PluginThreadCtrl::PluginThreadCtrl(const PluginThreadCtrl &amp;other)']]],
   ['point',['Point',['../classito_1_1_shape.html#a87c948ea66d29e252a337cae90298792a87dc782b57973c2f92e64f87a2295d0c',1,'ito::Shape']]],
   ['pointcloud',['PointCloud',['../namespaceito.html#abd3b401f17cb5d7d7cc67d4063714b0fab6ff58696dec6c2e0839a001388fa947',1,'ito']]],
   ['pointcloudptr',['PointCloudPtr',['../classito_1_1_param_base.html#a9c925b2556cb088a275d30a9bdb166dba237092fdea4566cbffd3765155d4470a',1,'ito::ParamBase']]],
@@ -121,41 +138,40 @@ var searchData=
   ['polygon',['Polygon',['../classito_1_1_shape.html#a87c948ea66d29e252a337cae90298792a5120cc53d0131ff3ca87b27d1bcbd43d',1,'ito::Shape']]],
   ['polygonmesh',['PolygonMesh',['../namespaceito.html#abd3b401f17cb5d7d7cc67d4063714b0fa2da3a841845c2c99c1abb5d67c53f54e',1,'ito']]],
   ['polygonmeshptr',['PolygonMeshPtr',['../classito_1_1_param_base.html#a9c925b2556cb088a275d30a9bdb166dbaf1594fe2bfac5677474e823b84af96a5',1,'ito::ParamBase']]],
-  ['popup',['popup',['../class_slider_widget.html#aa58e853916e5113c60a61929593dcaa6',1,'SliderWidget']]],
+  ['popup',['popup',['../class_slider_widget.html#a42b9cbf23ce6bb028ffba4e806146c9d',1,'SliderWidget']]],
   ['popupwidget',['PopupWidget',['../class_popup_widget.html',1,'']]],
   ['popupwidgetfactory',['PopupWidgetFactory',['../class_popup_widget_factory.html',1,'']]],
   ['popupwidgetprivate',['PopupWidgetPrivate',['../class_popup_widget_private.html',1,'']]],
   ['positionschanged',['positionsChanged',['../class_double_range_slider.html#a4ee99b685023e264e71863efc36d3050',1,'DoubleRangeSlider::positionsChanged()'],['../class_range_slider.html#af7dee415d4727b7970525bbd4a806cff',1,'RangeSlider::positionsChanged()']]],
-  ['prefix',['prefix',['../class_double_range_widget.html#a55975b9eebd3c8e72174d4ffaf26a7ff',1,'DoubleRangeWidget::prefix()'],['../class_double_spin_box.html#a3b7584c59de87be3bcb1473a828ab04f',1,'DoubleSpinBox::prefix()'],['../class_range_widget.html#a359c82c1cd59ab9f8803990e43a0ac49',1,'RangeWidget::prefix()'],['../class_slider_widget.html#a7badb8bf3aa1dd964a58e2de0a50b05e',1,'SliderWidget::prefix()']]],
+  ['prefix',['prefix',['../class_double_range_widget.html#aafd2621c90a299e21e75f321b2bcf93b',1,'DoubleRangeWidget::prefix()'],['../class_double_spin_box.html#ad14426fba79ee52d4de8de6acefca052',1,'DoubleSpinBox::prefix()'],['../class_range_widget.html#a585c721c37f6f6c8ed4ad4773bc7a4b7',1,'RangeWidget::prefix()'],['../class_slider_widget.html#ae19b23a167c73708c677fd606bc4fe19',1,'SliderWidget::prefix()']]],
   ['prepareparamvectors',['prepareParamVectors',['../classito_1_1_add_in_algo.html#a283163b8818a77ddb203e40e41a72f88',1,'ito::AddInAlgo']]],
-  ['primitivecontainer',['PrimitiveContainer',['../class_primitive_container.html',1,'']]],
   ['printrange',['printRange',['../classito_1_1_script_editor_printer.html#ab140390c220c964bfdd191d0d2db94a0',1,'ito::ScriptEditorPrinter']]],
   ['processerror',['processError',['../classito_1_1_process_organizer.html#abb526679230dc12d726f359b7ff315db',1,'ito::ProcessOrganizer']]],
   ['processfinished',['processFinished',['../classito_1_1_process_organizer.html#a00d770526c6e97b74e354d7553edb32c',1,'ito::ProcessOrganizer']]],
   ['processorganizer',['ProcessOrganizer',['../classito_1_1_process_organizer.html',1,'ito']]],
   ['processstreambuffer',['processStreamBuffer',['../classito_1_1_console_widget.html#a99ceca9837b84f7cadde8ebc4edda351',1,'ito::ConsoleWidget']]],
-  ['progressmaximum',['progressMaximum',['../classito_1_1_function_cancellation_and_observer.html#a56e29af6cbbd17782233aab78cdb962c',1,'ito::FunctionCancellationAndObserver']]],
-  ['progressminimum',['progressMinimum',['../classito_1_1_function_cancellation_and_observer.html#ab21978013fb26ed2a50a998c6e05bfad',1,'ito::FunctionCancellationAndObserver']]],
+  ['progressmaximum',['progressMaximum',['../classito_1_1_function_cancellation_and_observer.html#a75de9b9c3e14ef4296680551089b0a67',1,'ito::FunctionCancellationAndObserver']]],
+  ['progressminimum',['progressMinimum',['../classito_1_1_function_cancellation_and_observer.html#a9da724492159f3d7b43c621dedb57a66',1,'ito::FunctionCancellationAndObserver']]],
   ['progresstext',['progressText',['../classito_1_1_function_cancellation_and_observer.html#a67bce33ad340fe3739fc9b6ae0da5dc7',1,'ito::FunctionCancellationAndObserver']]],
-  ['progressvalue',['progressValue',['../classito_1_1_function_cancellation_and_observer.html#acacb249f6f39976fb9fec177a5136b0e',1,'ito::FunctionCancellationAndObserver']]],
+  ['progressvalue',['progressValue',['../classito_1_1_function_cancellation_and_observer.html#aa3e472d413e74f7a725a967044c7e52d',1,'ito::FunctionCancellationAndObserver']]],
   ['propagatecheckstatetochildren',['propagateCheckStateToChildren',['../class_checkable_model_helper_private.html#a086e8bc1dbfc635ad346b7d87e5e9098',1,'CheckableModelHelperPrivate']]],
   ['propagatedepth',['PropagateDepth',['../class_checkable_model_helper_private.html#af99456d883a69a06c7a9a83128bf823a',1,'CheckableModelHelperPrivate']]],
   ['propagateupdatepending',['propagateUpdatePending',['../classito_1_1_channel.html#a1d706010d7587617f85f17020e0f54f2',1,'ito::Channel']]],
-  ['properties',['properties',['../class_qt_abstract_property_manager.html#a64eadbdc86e5f1ae27d0b41b6bceeb9d',1,'QtAbstractPropertyManager::properties()'],['../class_qt_abstract_property_browser.html#a40857c10306dfdf70106898d0e74bd8c',1,'QtAbstractPropertyBrowser::properties()']]],
+  ['properties',['properties',['../class_qt_abstract_property_manager.html#af10a7f87a398b2b49ece913baf46b1ec',1,'QtAbstractPropertyManager::properties()'],['../class_qt_abstract_property_browser.html#a64371ab43c9e8c9cecf7fb692a531e0e',1,'QtAbstractPropertyBrowser::properties()']]],
   ['propertieschanged',['propertiesChanged',['../classito_1_1_help_tree_dock_widget.html#aa97bcbca7805137fdc55fa01edace60a',1,'ito::HelpTreeDockWidget']]],
   ['propertieswithoutvaluemarked',['propertiesWithoutValueMarked',['../class_qt_tree_property_browser.html#aa5bb38654aba2fd239b46b393002d43f',1,'QtTreePropertyBrowser']]],
-  ['property',['Property',['../class_property.html',1,'Property'],['../class_property.html#ad5708ada57dcb446016dc2d5cd2c6662',1,'Property::Property(const QString &amp;name=QString(), QObject *propertyObject=0, QObject *parent=0)'],['../class_property.html#ad5708ada57dcb446016dc2d5cd2c6662',1,'Property::Property(const QString &amp;name=QString(), QObject *propertyObject=0, QObject *parent=0)'],['../class_qt_browser_item.html#a2c4edfa9e76dfaefc5866f2e3e9d48f4',1,'QtBrowserItem::property()']]],
+  ['property',['Property',['../class_property.html',1,'Property'],['../class_property.html#ad5708ada57dcb446016dc2d5cd2c6662',1,'Property::Property(const QString &amp;name=QString(), QObject *propertyObject=0, QObject *parent=0)'],['../class_property.html#ad5708ada57dcb446016dc2d5cd2c6662',1,'Property::Property(const QString &amp;name=QString(), QObject *propertyObject=0, QObject *parent=0)'],['../class_qt_browser_item.html#a8cfce687bc55a33defacbd321b3a77d2',1,'QtBrowserItem::property()']]],
   ['propertychanged',['propertyChanged',['../class_qt_abstract_property_manager.html#a4dd203a9014a26e141b8a8f6b8c5e22d',1,'QtAbstractPropertyManager']]],
   ['propertydestroyed',['propertyDestroyed',['../class_qt_abstract_property_manager.html#a2aefea1236ae8c6451d58a87db3be309',1,'QtAbstractPropertyManager']]],
   ['propertyinserted',['propertyInserted',['../class_qt_abstract_property_manager.html#a3e23d91d77fd1ad3657f5e12efd83839',1,'QtAbstractPropertyManager']]],
-  ['propertymanager',['propertyManager',['../class_qt_property.html#afbf9a7febbdb3461572aa5fc9e210245',1,'QtProperty::propertyManager()'],['../class_qt_abstract_editor_factory.html#a8bd19d2e1488aef12477861227de8903',1,'QtAbstractEditorFactory::propertyManager()']]],
-  ['propertymanagers',['propertyManagers',['../class_qt_abstract_editor_factory.html#acc3cbd244244e9e9373232b58f68dcf4',1,'QtAbstractEditorFactory']]],
-  ['propertyname',['propertyName',['../class_qt_property.html#a4a99f1d7379bcc1ed0736d8b414a3040',1,'QtProperty']]],
+  ['propertymanager',['propertyManager',['../class_qt_property.html#a7ad6143ada1595b7b304c3324568f31e',1,'QtProperty::propertyManager()'],['../class_qt_abstract_editor_factory.html#ace9100d13892013be5c0ae886629357d',1,'QtAbstractEditorFactory::propertyManager()']]],
+  ['propertymanagers',['propertyManagers',['../class_qt_abstract_editor_factory.html#a62c833c60837abdc41c4a8e416b96b63',1,'QtAbstractEditorFactory']]],
+  ['propertyname',['propertyName',['../class_qt_property.html#ac15755ee28f7718b44121a1365b39a8a',1,'QtProperty']]],
   ['propertyobject',['propertyObject',['../class_property.html#adf97983bf41ea2ef8e973c999b9de1b9',1,'Property::propertyObject()'],['../class_property.html#adf97983bf41ea2ef8e973c999b9de1b9',1,'Property::propertyObject()']]],
   ['propertypage',['PropertyPage',['../structito_1_1_dialog_properties_1_1_property_page.html',1,'ito::DialogProperties']]],
   ['propertypair',['PropertyPair',['../struct_property_pair.html',1,'']]],
   ['propertyremoved',['propertyRemoved',['../class_qt_abstract_property_manager.html#ad80c2fd295b32b398c90bb85e145d4c0',1,'QtAbstractPropertyManager']]],
-  ['propertytype',['propertyType',['../class_qt_variant_property.html#ae4c0ffc1f91914c1513685e10e435bfc',1,'QtVariantProperty::propertyType()'],['../class_qt_variant_property_manager.html#a45afcf7341022677099b06728dc92107',1,'QtVariantPropertyManager::propertyType()']]],
+  ['propertytype',['propertyType',['../class_qt_variant_property.html#a61984558f141a6e63d9f0e4e05ae86f3',1,'QtVariantProperty::propertyType()'],['../class_qt_variant_property_manager.html#afb992fbd8634064b153452ebe5a6bbd6',1,'QtVariantPropertyManager::propertyType()']]],
   ['proxy',['Proxy',['../class_double_slider_private.html#a3dbfd57c7c8fd3784314fff442ff9eb8',1,'DoubleSliderPrivate']]],
   ['proxystyle',['ProxyStyle',['../class_proxy_style.html',1,'']]],
   ['proxystyleprivate',['ProxyStylePrivate',['../class_proxy_style_private.html',1,'']]],
@@ -191,6 +207,7 @@ var searchData=
   ['pyautointerval',['PyAutoInterval',['../structito_1_1_python_auto_interval_1_1_py_auto_interval.html',1,'ito::PythonAutoInterval']]],
   ['pycalltipsmode',['PyCalltipsMode',['../classito_1_1_py_calltips_mode.html',1,'ito']]],
   ['pycmap',['PyCMap',['../structito_1_1_py_c_map.html',1,'ito']]],
+  ['pycodeformatter',['PyCodeFormatter',['../classito_1_1_py_code_formatter.html',1,'ito']]],
   ['pydataioplugin',['PyDataIOPlugin',['../structito_1_1_python_plugins_1_1_py_data_i_o_plugin.html',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5facquire',['PyDataIOPlugin_acquire',['../classito_1_1_python_plugins.html#a063a96d39edf280cf94b7ac94499246d',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fcopyval',['PyDataIOPlugin_copyVal',['../classito_1_1_python_plugins.html#a12bf3b3cef7f46a18914b40b3f8b4832',1,'ito::PythonPlugins']]],
@@ -211,7 +228,7 @@ var searchData=
   ['pydataioplugin_5fname',['PyDataIOPlugin_name',['../classito_1_1_python_plugins.html#a97daf8b6803e0a87fd96a9eb5aef032c',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fnew',['PyDataIOPlugin_new',['../classito_1_1_python_plugins.html#a0b3840ad098e31aa3f705ca2eac945e3',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fsetparam',['PyDataIOPlugin_setParam',['../classito_1_1_python_plugins.html#a3bd1ddca1f2b9b5a195eb6155ec74189',1,'ito::PythonPlugins']]],
-  ['pydataioplugin_5fsetval',['PyDataIOPlugin_setVal',['../classito_1_1_python_plugins.html#aaee8c776a5735e4a493e8ee66a93d222',1,'ito::PythonPlugins']]],
+  ['pydataioplugin_5fsetval',['PyDataIOPlugin_setVal',['../classito_1_1_python_plugins.html#a14c7ffdeef22e42ca8946ffe88e5b955',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fshowconfiguration',['PyDataIOPlugin_showConfiguration',['../classito_1_1_python_plugins.html#a87601207e28374b51604ae505f320c23',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fshowtoolbox',['PyDataIOPlugin_showToolbox',['../classito_1_1_python_plugins.html#a1719b161ab74df3f0aef73702d0e2079',1,'ito::PythonPlugins']]],
   ['pydataioplugin_5fstartdevice',['PyDataIOPlugin_startDevice',['../classito_1_1_python_plugins.html#a35f47834287c6bd2fc7d59ef637687ad',1,'ito::PythonPlugins']]],
@@ -221,7 +238,149 @@ var searchData=
   ['pydataobjectiter',['PyDataObjectIter',['../structito_1_1_python_data_object_1_1_py_data_object_iter.html',1,'ito::PythonDataObject']]],
   ['pydataobjecttypes',['PyDataObjectTypes',['../structito_1_1_python_data_object_1_1_py_data_object_types.html',1,'ito::PythonDataObject']]],
   ['pydbgcommandloop',['PyDbgCommandLoop',['../classito_1_1_python_engine.html#abe7075509a1ee2c2e4f65d49a3938c4d',1,'ito::PythonEngine']]],
-  ['pydoc_5fstrvar',['PyDoc_STRVAR',['../namespaceito.html#a3a5ef839c826c5af19cc0ec0df067632',1,'ito']]],
+  ['pydoc_5fstrvar',['PyDoc_STRVAR',['../namespaceito.html#a436531932ee63c6830b212c7f5531ec1',1,'ito::PyDoc_STRVAR(dataObjectInit_doc,&quot;dataObject(dims = [], dtype = \&quot;uint8\&quot;, continuous = 0, data = None) -&gt; dataObject \n\
+\n\
+Creates a new n-dimensional dataObject array. \n\
+\n\
+The :class:`dataObject` represents a multidimensional array of fixed-size items \n\
+(integer, floating-point or complex values) and contains further, optional, meta \n\
+information, like units, axis descriptions, scalings, general tags, ... \n\
+Recently the following data types (dtype) are supported: \n\
+\n\
+* Integer (int8, uint8, int16, uint16, int32),\n\
+* Floating point (float32, float64 (=&gt; double)),\n\
+* Complex (complex64 (2x float32), complex128 (2x float64)).\n\
+* Color (rgba32 (uint32 or uint[4] containing the four 8bit values [R, G, B, Alpha])).\n\
+\n\
+Arrays can also be constructed using some of the static pre-initialization methods \n\
+:meth:`zeros`, :meth:`ones`, :meth:`rand` or :meth:`randN`  \n\
+(refer to the See Also section below). \n\
+\n\
+Parameters \n\
+----------- \n\
+dims : sequence of int, optional \n\
+    ``dims`` is a list or tuple indicating the size of each dimension. The length \n\
+    of this sequence defines the dimension of this dataObject. As an example, \n\
+    ``dims = [2, 3]`` creates a two-dimensional dataObject with two rows and three columns. \n\
+    If ``dims`` is not given, an empty data object is created. \n\
+dtype : str, optional \n\
+    Data type of each element in the array. Possible values are: \n\
+    &apos;int8&apos;, &apos;uint8&apos;, &apos;int16&apos;, &apos;uint16&apos;, &apos;int32&apos;, &apos;float32&apos;, &apos;float64&apos;, &apos;complex64&apos;, \n\
+    &apos;complex128&apos;, &apos;rgba32&apos;. \n\
+continuous : int, optional \n\
+    The last two dimensions of a dataObject are always stored as continuous junk of memory, \n\
+    denoted as plane. If ``continuous`` is set to ``1``, even a dataObject with a dimension \n\
+    ``n &gt; 2`` will allocate one big block of memory and continuously stores the matrix data \n\
+    there. \n\
+    If ``continuous`` is 0, different junks of memory are allocated for each plane, the planes \n\
+    are referenced by means of an index vector. This is recommended for large arrays, since \n\
+    the operating system might get trouble allocated one very big continuous junk of memory, \n\
+    instead of multiple smaller ones. \n\
+data : int or float or complex or rgba or sequence of int or sequence of float or sequence of complex or dataObject or np.ndarray, optional \n\
+    If ``data`` is a single value, all values in the dataObject are set to this single value. \n\
+    Else, the sequence or array-like object must have the same number of values than \n\
+    the data object. These values will then be assigned to the new data object (filled row by row).\n\
+\n\
+Notes \n\
+------ \n\
+The :class:`itom.dataObject` is a direct wrapper for the underlying C++ class *dataObject*. \n\
+This array class mainly is based on the class *Mat* of the computer vision library (OpenCV). \n\
+\n\
+In order to handle huge matrices, the data object can divide one array into chunks in memory.\n\
+Each subpart (called matrix-plane) is two-dimensional and covers data of the last two dimensions.\n\
+In C++-context each of these matrix-planes is of type cv::Mat_&lt;type&gt; and can be used with \n\
+every operator given by the openCV-framework (version 2.3.1 or higher).\n\
+\n\
+The dimensions of the matrix are structured descending. So if we assume to have a n-dimensional \n\
+matrix ``A``, where each dimension has its size s_i, the dimensions order is n, .., z, y, x and \n\
+the corresponding sizes of ``A`` are [s_n, s_(n-1),  s_(n-2), ..., s_y, s_x].\n\
+\n\
+In order to make the data object compatible to continuously organized data structures, like \n\
+numpy-arrays, it is also possible to have all matrix-planes in one data-block in memory \n\
+(not recommended for huge matrices). Nevertheless, the indicated data structure with the \n\
+two-dimensional sub-matrix-planes is still existing. The data organization is equal to the \n\
+one of openCV, hence, two-dimensional matrices are stored row-by-row (C-style)...\n\
+\n\
+In addition to OpenCV, itom.dataObject supports complex valued data types for all operators and methods. \n\
+\n\
+Warning &apos;uint32&apos; is currently not available, since it is not fully supported by the underlying OpenCV matrices.\n\
+\n\
+**Deep Copy, Shallow Copy and ROI** \n\
+\n\
+It is possible to set a n-dimensional region of interest (ROI) to each matrix, the virtual dimensions,\n\
+which will be delivered if the user asks for the matrix size.\n\
+To avoid copy operations where possible a simple =_Operator will also make a shallow copy of the object.\n\
+Shallow copies share the same data (elements and meta data) with the original object, hence manipulations of one object will affect the\n\
+original object and all shallow copies.\n\
+\n\
+The opposite a deep copy of a dataObject (by sourceObject.copy()) creates a complete mew matrix with own meta data object.\n\
+\n\
+Example::\n\
+    \n\
+    #Create an object \n\
+    dObj = dataObject([5, 10, 10], &apos;int8&apos;)\n\
+    \n\
+    # Make a shallow copy \n\
+    dObjShallow = dObj \n\
+    \n\
+    # Make a shallow copy on ROI\n\
+    dObjROI = dObj[1, :, :] \n\
+    \n\
+    # Set the value of element [1, 0, 0] to 0\n\
+    dObj[1, 0, 0] = 0\n\
+    \n\
+    # Make a deep copy of the dObjROI\n\
+    dObjROICopy = dObjROI.copy()\n\
+    \n\
+    # Set the value of dObjROICopy element [0, 0, 0] to 127 without effecting other objects\n\
+    dObjROICopy[0, 0, 0] = 127\n\
+\n\
+**Constructor** \n\
+\n\
+The function dataObject([dims [, dtype=&apos;uint8&apos;[, continuous = 0][, data = valueOrSequence]]])\n\
+creates a new itom-dataObject filled with undefined data.\n\
+If no parameters are given, an uninitilized DataObject (dims = 0, no sizes) is created.\n\
+\n\
+As second possibility you can also use the copy-constructor &apos;dataObject(anyArray : Union[dataObject, np.ndarray], dtype : str = &apos;&apos;, continuous : int = 0)&apos;, \n\
+where &apos;anyArray&apos; must be any array-like structure which is parsable by the numpy-interface. If a dtype is given or if continuous is 1, \n\
+the new data object will be a type-casted (and / or continuous) copy of &apos;anyArray&apos;.\n\
+\n\
+See Also \n\
+---------- \n\
+ones : Static method to construct a data object filled with ones. \n\
+zeros : Static method to construct a data object filled with zeros. \n\
+nans : Static method to construct a data object (float or complex only) with NaNs. \n\
+rand : Static method to construct a randomly filled data object (uniform distribution). \n\
+randN : Static method to construct a randomly filled data object (gaussian distribution).&quot;)'],['../namespaceito.html#a53f10804a760cba04f3a8d3c7336752c',1,'ito::PyDoc_STRVAR(pyItom_FigureClose_doc,&quot;close(handle) -&gt; None \\\n\
+close(all = \&quot;all\&quot;) -&gt; None \n\
+\n\
+Closes a specific or all opened figures. \n\
+\n\
+This method closes and deletes either one specific figure (if ``handle`` is given \n\
+and valid), or all opened figures (if the string argument ``\&quot;all\&quot;`` is given). \n\
+All figure can only be closed, if no other figure references this figure (e.g. \n\
+line cut of an image plot (2D). \n\
+\n\
+This method is a redirect of the staticmethod :meth:`figure.close`. \n\
+\n\
+Parameters \n\
+----------- \n\
+handle : int \n\
+    a valid figure handle, whose reference figure should be closed. \n\
+    This figure handle is for instance obtained by the first value of the \n\
+    returned tuple of :meth:`plot`, :meth:`plot1`, :meth:`plot2` among others. \n\
+all : {\&quot;all\&quot;} \n\
+    Pass the string ``\&quot;all\&quot;``  if all closeable opened figures should be closed. \n\
+\n\
+Notes \n\
+------- \n\
+If a :class:`figure` instance still keeps a reference to any figure, it is only closed \n\
+and will be deleted after that the last referencing instance has been deleted. \n\
+\n\
+See Also \n\
+--------- \n\
+figure.close&quot;)']]],
+  ['pydocstringgeneratormode',['PyDocstringGeneratorMode',['../classito_1_1_py_docstring_generator_mode.html',1,'ito']]],
   ['pyfigure',['PyFigure',['../structito_1_1_python_figure_1_1_py_figure.html',1,'ito::PythonFigure']]],
   ['pyfont',['PyFont',['../structito_1_1_python_font_1_1_py_font.html',1,'ito::PythonFont']]],
   ['pygotoassignmentmode',['PyGotoAssignmentMode',['../classito_1_1_py_goto_assignment_mode.html',1,'ito']]],
@@ -255,9 +414,10 @@ var searchData=
   ['pyrgba',['PyRgba',['../structito_1_1_python_rgba_1_1_py_rgba.html',1,'ito::PythonRgba']]],
   ['pyshape',['PyShape',['../structito_1_1_python_shape_1_1_py_shape.html',1,'ito::PythonShape']]],
   ['pystream',['PyStream',['../classito_1_1_py_stream.html',1,'ito']]],
-  ['pythonaddbreakpoint',['pythonAddBreakpoint',['../classito_1_1_python_engine.html#a27d2a40655a2a9c653841b8a69c5fa18',1,'ito::PythonEngine']]],
+  ['pythonaddbreakpoint',['pythonAddBreakpoint',['../classito_1_1_python_engine.html#a6beec9c8fa5a3f46195e8f2dedb56c23',1,'ito::PythonEngine']]],
+  ['pythonadditionalmoduleitom',['PythonAdditionalModuleITOM',['../classito_1_1_python_engine.html#a39c4f85311527871fe49c0d85a348f8b',1,'ito::PythonEngine']]],
   ['pythonautointerval',['PythonAutoInterval',['../classito_1_1_python_auto_interval.html',1,'ito']]],
-  ['pythonbusy',['pythonBusy',['../classito_1_1_abstract_dock_widget.html#a093035f59cae340a866d2a1c80676e82',1,'ito::AbstractDockWidget::pythonBusy()'],['../classito_1_1_main_window.html#a038c9819d63f02cfe7e3b187b8746065',1,'ito::MainWindow::pythonBusy()']]],
+  ['pythonbusy',['pythonBusy',['../classito_1_1_abstract_dock_widget.html#a0d0fbbe002d0bed95cef79314164aa9c',1,'ito::AbstractDockWidget::pythonBusy()'],['../classito_1_1_main_window.html#a428fff84aa8ae9eb4510d0328b5fdb04',1,'ito::MainWindow::pythonBusy()']]],
   ['pythoncodecheck',['pythonCodeCheck',['../classito_1_1_python_engine.html#aeb47161aae9a3f70ac084b76acd5e6d6',1,'ito::PythonEngine']]],
   ['pythoncommon',['PythonCommon',['../classito_1_1_python_common.html',1,'ito']]],
   ['pythondataobject',['PythonDataObject',['../classito_1_1_python_data_object.html',1,'ito']]],
@@ -266,15 +426,15 @@ var searchData=
   ['pythondebugfile',['pythonDebugFile',['../classito_1_1_script_editor_organizer.html#abc55eacc1656831bea246f8113f306a7',1,'ito::ScriptEditorOrganizer']]],
   ['pythondebugfilerequest',['pythonDebugFileRequest',['../classito_1_1_script_dock_widget.html#ad138d98a2838653f02df8ab5695777c8',1,'ito::ScriptDockWidget']]],
   ['pythondebugfilerequested',['pythonDebugFileRequested',['../classito_1_1_script_editor_organizer.html#aba206c41da6725323559a0f7524627dd',1,'ito::ScriptEditorOrganizer']]],
-  ['pythondebugmode',['pythonDebugMode',['../classito_1_1_abstract_dock_widget.html#ae9ada838f45e4993ccc806b8a7eb96c3',1,'ito::AbstractDockWidget::pythonDebugMode()'],['../classito_1_1_main_window.html#a8f92ec052783e6af744d480b6588986b',1,'ito::MainWindow::pythonDebugMode()']]],
+  ['pythondebugmode',['pythonDebugMode',['../classito_1_1_abstract_dock_widget.html#affcb2d3ce1f2b8be3af4f9604f984be4',1,'ito::AbstractDockWidget::pythonDebugMode()'],['../classito_1_1_main_window.html#a158f8f1345dfd664f0f9dc5ee19ecc8a',1,'ito::MainWindow::pythonDebugMode()']]],
   ['pythondebugpositionchanged',['pythonDebugPositionChanged',['../classito_1_1_script_editor_organizer.html#a1772179845ea5bde3bff20e58309b888',1,'ito::ScriptEditorOrganizer']]],
   ['pythonengine',['PythonEngine',['../classito_1_1_python_engine.html',1,'ito']]],
   ['pythonfigure',['PythonFigure',['../classito_1_1_python_figure.html',1,'ito']]],
   ['pythonfont',['PythonFont',['../classito_1_1_python_font.html',1,'ito']]],
-  ['pythongenericslot',['pythonGenericSlot',['../classito_1_1_python_engine.html#a20d73d9094a94458a7ea4b558f53ac1b',1,'ito::PythonEngine']]],
   ['pythoninterruptexecution',['pythonInterruptExecution',['../classito_1_1_script_dock_widget.html#af5fc2b7d0e54f77b9d6861c20dd10d0a',1,'ito::ScriptDockWidget']]],
-  ['pythoninwaitingmode',['pythonInWaitingMode',['../classito_1_1_abstract_dock_widget.html#add51a8a4198cfa97676000de77eba173',1,'ito::AbstractDockWidget::pythonInWaitingMode()'],['../classito_1_1_main_window.html#a9ba63182a7adcbcba2d65bca04d40f6b',1,'ito::MainWindow::pythonInWaitingMode()']]],
+  ['pythoninwaitingmode',['pythonInWaitingMode',['../classito_1_1_abstract_dock_widget.html#a81357fbd223c26940402e30a0f7cd47b',1,'ito::AbstractDockWidget::pythonInWaitingMode()'],['../classito_1_1_main_window.html#aad058c3438b04c844f29da67d2ac470d',1,'ito::MainWindow::pythonInWaitingMode()']]],
   ['pythonitom',['PythonItom',['../classito_1_1_python_itom.html',1,'ito']]],
+  ['pythonjedirunner',['PythonJediRunner',['../classito_1_1_python_jedi_runner.html',1,'ito']]],
   ['pythonlogwidget',['PythonLogWidget',['../class_python_log_widget.html',1,'']]],
   ['pythonlogwidgetfactory',['PythonLogWidgetFactory',['../class_python_log_widget_factory.html',1,'']]],
   ['pythonlogwidgetprivate',['PythonLogWidgetPrivate',['../class_python_log_widget_private.html',1,'']]],
@@ -290,19 +450,24 @@ var searchData=
   ['pythonproxy',['PythonProxy',['../classito_1_1_python_proxy.html',1,'ito']]],
   ['pythonqobjectmarshal',['PythonQObjectMarshal',['../structito_1_1_python_q_object_marshal.html',1,'ito']]],
   ['pythonqtconversion',['PythonQtConversion',['../classito_1_1_python_qt_conversion.html',1,'ito']]],
-  ['pythonqtsignalmapper',['PythonQtSignalMapper',['../classito_1_1_python_qt_signal_mapper.html',1,'ito::PythonQtSignalMapper'],['../classito_1_1_python_qt_signal_mapper.html#a413f23e9497a19c0290a49fe9d4994aa',1,'ito::PythonQtSignalMapper::PythonQtSignalMapper()']]],
+  ['pythonqtsignalmapper',['PythonQtSignalMapper',['../classito_1_1_python_qt_signal_mapper.html',1,'ito']]],
+  ['pythonqtsignalmapper',['PythonQtSignalMapper',['../classito_1_1_python_qt_signal_mapper.html#a413f23e9497a19c0290a49fe9d4994aa',1,'ito::PythonQtSignalMapper']]],
   ['pythonqtsignalmapperbase',['PythonQtSignalMapperBase',['../classito_1_1_python_qt_signal_mapper_base.html',1,'ito']]],
-  ['pythonqtsignaltarget',['PythonQtSignalTarget',['../classito_1_1_python_qt_signal_target.html',1,'ito::PythonQtSignalTarget'],['../classito_1_1_python_qt_signal_target.html#a8439afe759106e37b9fc5aac52b42b98',1,'ito::PythonQtSignalTarget::PythonQtSignalTarget()'],['../classito_1_1_python_qt_signal_target.html#abc617056c41ad41daee807035d6b890f',1,'ito::PythonQtSignalTarget::PythonQtSignalTarget(IntList &amp;argTypeList, int slotId, int signalId, PyObject *callable, const char *signal, int minRepeatInterval)'],['../classito_1_1_python_qt_signal_target.html#a906ec1b5475e5cda9ef11c44ade170bf',1,'ito::PythonQtSignalTarget::PythonQtSignalTarget(const PythonQtSignalTarget &amp;copy)']]],
+  ['pythonqtsignaltarget',['PythonQtSignalTarget',['../classito_1_1_python_qt_signal_target.html',1,'ito']]],
+  ['pythonqtsignaltarget',['PythonQtSignalTarget',['../classito_1_1_python_qt_signal_target.html#a8439afe759106e37b9fc5aac52b42b98',1,'ito::PythonQtSignalTarget::PythonQtSignalTarget()'],['../classito_1_1_python_qt_signal_target.html#abc617056c41ad41daee807035d6b890f',1,'ito::PythonQtSignalTarget::PythonQtSignalTarget(IntList &amp;argTypeList, int slotId, int signalId, PyObject *callable, const char *signal, int minRepeatInterval)'],['../classito_1_1_python_qt_signal_target.html#a906ec1b5475e5cda9ef11c44ade170bf',1,'ito::PythonQtSignalTarget::PythonQtSignalTarget(const PythonQtSignalTarget &amp;copy)']]],
   ['pythonregion',['PythonRegion',['../classito_1_1_python_region.html',1,'ito']]],
   ['pythonrgba',['PythonRgba',['../classito_1_1_python_rgba.html',1,'ito']]],
   ['pythonrunfile',['pythonRunFile',['../classito_1_1_script_editor_organizer.html#a9e7b53e8a3602cfb5e3851d8d340981a',1,'ito::ScriptEditorOrganizer']]],
   ['pythonrunfilerequest',['pythonRunFileRequest',['../classito_1_1_script_dock_widget.html#a5f8589fc5c2bc16febce80050e667fb0',1,'ito::ScriptDockWidget']]],
   ['pythonrunfilerequested',['pythonRunFileRequested',['../classito_1_1_script_editor_organizer.html#a7c9ea78657bef0435ec6b21a8ca13709',1,'ito::ScriptEditorOrganizer']]],
   ['pythonrunselection',['pythonRunSelection',['../classito_1_1_script_dock_widget.html#ae6a2f25e48122a88c4a00eb1f6888582',1,'ito::ScriptDockWidget']]],
+  ['pythonrunstring',['pythonRunString',['../classito_1_1_python_engine.html#aceb7965d80c70c55b9567c4130301b99',1,'ito::PythonEngine']]],
   ['pythonsetup',['pythonSetup',['../classito_1_1_python_engine.html#aeec0204eca712b3c944c9202d46438d2',1,'ito::PythonEngine']]],
   ['pythonshape',['PythonShape',['../classito_1_1_python_shape.html',1,'ito']]],
   ['pythonsharedpointerguard',['PythonSharedPointerGuard',['../classito_1_1_python_shared_pointer_guard.html',1,'ito']]],
   ['pythonstatechanged',['pythonStateChanged',['../classito_1_1_abstract_dock_widget.html#aa0242a1684049cb6cf6d8e8fb11adfb8',1,'ito::AbstractDockWidget::pythonStateChanged()'],['../classito_1_1_main_window.html#a56cd0337ad4f38d89b1a3634596662cb',1,'ito::MainWindow::pythonStateChanged()']]],
+  ['pythonstatepublisher',['PythonStatePublisher',['../classito_1_1_python_state_publisher.html',1,'ito']]],
+  ['pythonstatetransition',['pythonStateTransition',['../classito_1_1_python_engine.html#a012054daa0978faa396e5d8561d872cd',1,'ito::PythonEngine']]],
   ['pythonstream',['PythonStream',['../structito_1_1_py_stream_1_1_python_stream.html',1,'ito::PyStream']]],
   ['pythonstream_5fdealloc',['PythonStream_dealloc',['../classito_1_1_py_stream.html#a15757574a08f725bf0dc65223cc313a8',1,'ito::PyStream']]],
   ['pythonstream_5fflush',['PythonStream_flush',['../classito_1_1_py_stream.html#a9ebc2125ee3f298b5568538dddc9961e',1,'ito::PyStream']]],
@@ -321,6 +486,7 @@ var searchData=
   ['pyuiitem',['PyUiItem',['../structito_1_1_python_ui_1_1_py_ui_item.html',1,'ito::PythonUi']]],
   ['pyuiitem_5fchildren',['PyUiItem_children',['../classito_1_1_python_ui.html#af197ef4ecd739bfe301c5152ef2eb7fa',1,'ito::PythonUi']]],
   ['pyuiitem_5fexists',['PyUiItem_exists',['../classito_1_1_python_ui.html#a4e0ce361f36f66f9d0255a97e2117269',1,'ito::PythonUi']]],
+  ['pyuiitem_5fgetlayout',['PyUiItem_getLayout',['../classito_1_1_python_ui.html#ac126331758a5720a0458eee50f544a2e',1,'ito::PythonUi']]],
   ['pyuiitem_5finfo',['PyUiItem_info',['../classito_1_1_python_ui.html#a0d8ca69231a6e372d13c17b37ac603ad',1,'ito::PythonUi']]],
   ['pywidgetorfilterhelp',['PyWidgetOrFilterHelp',['../namespaceito.html#a9d28eae15e9624a9b374e03abe6d8f83',1,'ito']]],
   ['pyworkspacecontainer',['PyWorkspaceContainer',['../classito_1_1_py_workspace_container.html',1,'ito']]],

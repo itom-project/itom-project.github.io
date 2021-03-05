@@ -2,7 +2,7 @@ var class_qt_variant_property_manager_private =
 [
     [ "QtVariantPropertyManagerPrivate", "class_qt_variant_property_manager_private.html#a95cd0755e0bb45d72981f67b28a44b86", null ],
     [ "createSubProperty", "class_qt_variant_property_manager_private.html#a35673057243cb927fa12f465f1b073d0", null ],
-    [ "internalPropertyToType", "class_qt_variant_property_manager_private.html#a26fc88a91ca9aaedc9c3a01048249324", null ],
+    [ "internalPropertyToType", "class_qt_variant_property_manager_private.html#af6db47b38a96140f79d02b96dd653929", null ],
     [ "removeSubProperty", "class_qt_variant_property_manager_private.html#abac2c65bc225a23847617785efd0fe3d", null ],
     [ "slotConstraintChanged", "class_qt_variant_property_manager_private.html#af31f7d33b549f7f96e0800b1c2c6f60d", null ],
     [ "slotConstraintChanged", "class_qt_variant_property_manager_private.html#a8dfc9c91d6d7d55e1d25ce34582fc02f", null ],

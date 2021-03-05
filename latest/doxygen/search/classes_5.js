@@ -21,5 +21,6 @@ var searchData=
   ['fonteditor',['FontEditor',['../class_font_editor.html',1,'']]],
   ['functioncancellationandobserver',['FunctionCancellationAndObserver',['../classito_1_1_function_cancellation_and_observer.html',1,'ito']]],
   ['functioncancellationandobserverprivate',['FunctionCancellationAndObserverPrivate',['../classito_1_1_function_cancellation_and_observer_private.html',1,'ito']]],
+  ['functioninfo',['FunctionInfo',['../structito_1_1_py_docstring_generator_mode_1_1_function_info.html',1,'ito::PyDocstringGeneratorMode']]],
   ['funcweakref',['FuncWeakRef',['../classito_1_1_func_weak_ref.html',1,'ito']]]
 ];

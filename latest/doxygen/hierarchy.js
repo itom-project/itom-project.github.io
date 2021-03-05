@@ -25,6 +25,7 @@ var hierarchy =
     [ "ito::ApiFunctions", "classito_1_1_api_functions.html", null ],
     [ "ito::apiFunctionsGraph", "classito_1_1api_functions_graph.html", null ],
     [ "ito::AppManagement", "classito_1_1_app_management.html", null ],
+    [ "ito::PyDocstringGeneratorMode::ArgInfo", "structito_1_1_py_docstring_generator_mode_1_1_arg_info.html", null ],
     [ "ito::AutoInterval", "classito_1_1_auto_interval.html", null ],
     [ "ito::PythonEngine::AutoReload", "structito_1_1_python_engine_1_1_auto_reload.html", null ],
     [ "basic_streambuf", null, [
@@ -42,8 +43,7 @@ var hierarchy =
     [ "CheckableComboBoxPrivate", "class_checkable_combo_box_private.html", null ],
     [ "CheckableModelHelperPrivate", "class_checkable_model_helper_private.html", null ],
     [ "ito::ClassInfoContainer", "structito_1_1_class_info_container.html", null ],
-    [ "ito::ClassNavigatorItem", "classito_1_1_class_navigator_item.html", null ],
-    [ "ito::ConsoleWidget::cmdQueueStruct", "structito_1_1_console_widget_1_1cmd_queue_struct.html", null ],
+    [ "ito::ConsoleWidget::CmdQueueItem", "structito_1_1_console_widget_1_1_cmd_queue_item.html", null ],
     [ "ito::CodeCheckerItem", "classito_1_1_code_checker_item.html", null ],
     [ "ito::PythonEngine::CodeCheckerOptions", "structito_1_1_python_engine_1_1_code_checker_options.html", null ],
     [ "ito::CodeEditorStyle", "classito_1_1_code_editor_style.html", null ],
@@ -54,6 +54,8 @@ var hierarchy =
     [ "CompleterPrivate", "class_completer_private.html", null ],
     [ "ito::complex128_", "structito_1_1complex128__.html", null ],
     [ "ito::CodeEditor::CursorPosition", "structito_1_1_code_editor_1_1_cursor_position.html", null ],
+    [ "QtIntPropertyManagerPrivate::Data", "struct_qt_int_property_manager_private_1_1_data.html", null ],
+    [ "QtDoublePropertyManagerPrivate::Data", "struct_qt_double_property_manager_private_1_1_data.html", null ],
     [ "QtStringPropertyManagerPrivate::Data", "struct_qt_string_property_manager_private_1_1_data.html", null ],
     [ "QtDatePropertyManagerPrivate::Data", "struct_qt_date_property_manager_private_1_1_data.html", null ],
     [ "QtPointFPropertyManagerPrivate::Data", "struct_qt_point_f_property_manager_private_1_1_data.html", null ],
@@ -66,8 +68,6 @@ var hierarchy =
     [ "QtFlagPropertyManagerPrivate::Data", "struct_qt_flag_property_manager_private_1_1_data.html", null ],
     [ "ito::ByteArray::Data", "structito_1_1_byte_array_1_1_data.html", null ],
     [ "ito::AbstractParamPropertyManagerPrivate::Data", "structito_1_1_abstract_param_property_manager_private_1_1_data.html", null ],
-    [ "QtIntPropertyManagerPrivate::Data", "struct_qt_int_property_manager_private_1_1_data.html", null ],
-    [ "QtDoublePropertyManagerPrivate::Data", "struct_qt_double_property_manager_private_1_1_data.html", null ],
     [ "ito::DataObject", "classito_1_1_data_object.html", null ],
     [ "ito::DataObjectTagsPrivate", "classito_1_1_data_object_tags_private.html", null ],
     [ "ito::DataObjectTagType", "classito_1_1_data_object_tag_type.html", null ],
@@ -76,9 +76,11 @@ var hierarchy =
     [ "cv::DataType< ito::GreenChannel >", "classcv_1_1_data_type_3_01ito_1_1_green_channel_01_4.html", null ],
     [ "cv::DataType< ito::RedChannel >", "classcv_1_1_data_type_3_01ito_1_1_red_channel_01_4.html", null ],
     [ "cv::DataType< ito::Rgba32 >", "classcv_1_1_data_type_3_01ito_1_1_rgba32_01_4.html", null ],
+    [ "ito::PythonStatePublisher::DelayedTransition", "structito_1_1_python_state_publisher_1_1_delayed_transition.html", null ],
     [ "ito::DequeCommandList", "classito_1_1_deque_command_list.html", null ],
     [ "DesignerWidgetOrganizer", "class_designer_widget_organizer.html", null ],
     [ "ito::DialogPipManagerInstallDefaults", "structito_1_1_dialog_pip_manager_install_defaults.html", null ],
+    [ "DiffEdit", "struct_diff_edit.html", null ],
     [ "ito::DObjConstIterator", "classito_1_1_d_obj_const_iterator.html", [
       [ "ito::DObjIterator", "classito_1_1_d_obj_iterator.html", null ]
     ] ],
@@ -127,6 +129,7 @@ var hierarchy =
     [ "EditorFactoryPrivate< QtKeySequenceEdit >", "class_editor_factory_private.html", [
       [ "QtKeySequenceEditorFactoryPrivate", "class_qt_key_sequence_editor_factory_private.html", null ]
     ] ],
+    [ "ito::OutlineSelectorWidget::EditorOutline", "structito_1_1_outline_selector_widget_1_1_editor_outline.html", null ],
     [ "ito::ExecFuncParams", "structito_1_1_exec_func_params.html", null ],
     [ "ExtraSelection", null, [
       [ "ito::TextDecoration", "structito_1_1_text_decoration.html", null ]
@@ -143,8 +146,8 @@ var hierarchy =
     [ "ito::FoldScope", "classito_1_1_fold_scope.html", null ],
     [ "FontButtonPrivate", "class_font_button_private.html", null ],
     [ "ito::FunctionCancellationAndObserverPrivate", "classito_1_1_function_cancellation_and_observer_private.html", null ],
+    [ "ito::PyDocstringGeneratorMode::FunctionInfo", "structito_1_1_py_docstring_generator_mode_1_1_function_info.html", null ],
     [ "ito::FuncWeakRef", "classito_1_1_func_weak_ref.html", null ],
-    [ "geometricPrimitives", "structgeometric_primitives.html", null ],
     [ "ito::GoBackNavigationItem", "structito_1_1_go_back_navigation_item.html", null ],
     [ "ito::GuiHelper", "classito_1_1_gui_helper.html", null ],
     [ "ito::HelpSystem", "classito_1_1_help_system.html", null ],
@@ -178,11 +181,16 @@ var hierarchy =
     [ "ItomSharedSemaphore", "class_itom_shared_semaphore.html", null ],
     [ "ItomSharedSemaphoreLocker", "class_itom_shared_semaphore_locker.html", null ],
     [ "ito::JediAssignment", "structito_1_1_jedi_assignment.html", null ],
+    [ "ito::JediAssignmentRequest", "structito_1_1_jedi_assignment_request.html", null ],
     [ "ito::JediCalltip", "structito_1_1_jedi_calltip.html", null ],
     [ "ito::JediCalltipRequest", "structito_1_1_jedi_calltip_request.html", null ],
     [ "ito::JediCompletion", "structito_1_1_jedi_completion.html", null ],
     [ "ito::JediCompletionRequest", "structito_1_1_jedi_completion_request.html", null ],
+    [ "ito::JediGetHelp", "structito_1_1_jedi_get_help.html", null ],
+    [ "ito::JediGetHelpRequest", "structito_1_1_jedi_get_help_request.html", null ],
+    [ "MatchContext", "struct_match_context.html", null ],
     [ "ito::MethodDescription", "classito_1_1_method_description.html", null ],
+    [ "MiddleSnake", "struct_middle_snake.html", null ],
     [ "ito::Mode", "classito_1_1_mode.html", [
       [ "ito::AutoIndentMode", "classito_1_1_auto_indent_mode.html", [
         [ "ito::PyAutoIndentMode", "classito_1_1_py_auto_indent_mode.html", null ]
@@ -200,19 +208,22 @@ var hierarchy =
         [ "ito::LineNumberPanel", "classito_1_1_line_number_panel.html", null ]
       ] ],
       [ "ito::PyCalltipsMode", "classito_1_1_py_calltips_mode.html", null ],
+      [ "ito::PyDocstringGeneratorMode", "classito_1_1_py_docstring_generator_mode.html", null ],
       [ "ito::SymbolMatcherMode", "classito_1_1_symbol_matcher_mode.html", null ],
       [ "ito::SyntaxHighlighterBase", "classito_1_1_syntax_highlighter_base.html", [
         [ "ito::PythonSyntaxHighlighter", "classito_1_1_python_syntax_highlighter.html", null ]
       ] ],
       [ "ito::WordClickMode", "classito_1_1_word_click_mode.html", [
         [ "ito::PyGotoAssignmentMode", "classito_1_1_py_goto_assignment_mode.html", null ]
-      ] ]
+      ] ],
+      [ "ito::WordHoverTooltipMode", "classito_1_1_word_hover_tooltip_mode.html", null ]
     ] ],
     [ "MotorAxisControllerPrivate", "class_motor_axis_controller_private.html", null ],
     [ "ito::DataObject::MROI", "structito_1_1_data_object_1_1_m_r_o_i.html", null ],
     [ "ito::DataObject::MSize", "structito_1_1_data_object_1_1_m_size.html", null ],
     [ "ito::PythonSyntaxHighlighter::NamedRegExp", "structito_1_1_python_syntax_highlighter_1_1_named_reg_exp.html", null ],
     [ "ObjectControllerPrivate", "class_object_controller_private.html", null ],
+    [ "ito::OutlineItem", "classito_1_1_outline_item.html", null ],
     [ "ito::ParamBase", "classito_1_1_param_base.html", [
       [ "ito::Param", "classito_1_1_param.html", null ]
     ] ],
@@ -260,7 +271,6 @@ var hierarchy =
       [ "ito::ActuatorThreadCtrl", "classito_1_1_actuator_thread_ctrl.html", null ],
       [ "ito::DataIOThreadCtrl", "classito_1_1_data_i_o_thread_ctrl.html", null ]
     ] ],
-    [ "PrimitiveContainer", "class_primitive_container.html", null ],
     [ "ito::DialogProperties::PropertyPage", "structito_1_1_dialog_properties_1_1_property_page.html", null ],
     [ "PropertyPair", "struct_property_pair.html", null ],
     [ "ProxyStylePrivate", "class_proxy_style_private.html", null ],
@@ -313,6 +323,7 @@ var hierarchy =
     [ "QAbstractItemModel", null, [
       [ "ito::PipManager", "classito_1_1_pip_manager.html", null ],
       [ "ito::PlugInModel", "classito_1_1_plug_in_model.html", null ],
+      [ "ito::TimerModel", "classito_1_1_timer_model.html", null ],
       [ "ito::UserModel", "classito_1_1_user_model.html", null ],
       [ "QPropertyModel", "class_q_property_model.html", null ],
       [ "QPropertyModel", "class_q_property_model.html", null ]
@@ -396,6 +407,7 @@ var hierarchy =
       [ "ito::DialogUserManagement", "classito_1_1_dialog_user_management.html", null ],
       [ "ito::DialogUserManagementEdit", "classito_1_1_dialog_user_management_edit.html", null ],
       [ "ito::DialogVariableDetail", "classito_1_1_dialog_variable_detail.html", null ],
+      [ "ito::OutlineSelectorWidget", "classito_1_1_outline_selector_widget.html", null ],
       [ "ito::ParamInputDialog", "classito_1_1_param_input_dialog.html", null ],
       [ "ito::UserUiDialog", "classito_1_1_user_ui_dialog.html", null ],
       [ "PenCreatorDialog", "class_pen_creator_dialog.html", null ],
@@ -436,9 +448,13 @@ var hierarchy =
     [ "QItemDelegate", null, [
       [ "ComboBoxDelegate", "class_combo_box_delegate.html", null ],
       [ "ito::FigurePluginDelegate", "classito_1_1_figure_plugin_delegate.html", null ],
+      [ "ito::SelectorDelegate", "classito_1_1_selector_delegate.html", null ],
       [ "QtPropertyEditorDelegate", "class_qt_property_editor_delegate.html", null ],
       [ "QVariantDelegate", "class_q_variant_delegate.html", null ],
       [ "QVariantDelegate", "class_q_variant_delegate.html", null ]
+    ] ],
+    [ "QLabel", null, [
+      [ "ToolTipLabel", "class_tool_tip_label.html", null ]
     ] ],
     [ "QLineEdit", null, [
       [ "SearchBox", "class_search_box.html", null ]
@@ -446,11 +462,17 @@ var hierarchy =
     [ "QListView", null, [
       [ "ito::QListViewItom", "classito_1_1_q_list_view_itom.html", null ]
     ] ],
+    [ "QListWidget", null, [
+      [ "ito::TabSwitcherWidget", "classito_1_1_tab_switcher_widget.html", null ]
+    ] ],
     [ "QMainWindow", null, [
       [ "ito::AbstractFigure", "classito_1_1_abstract_figure.html", null ],
       [ "ito::DialogSnapshot", "classito_1_1_dialog_snapshot.html", null ],
       [ "ito::MainWindow", "classito_1_1_main_window.html", null ],
       [ "SampleApp", "class_sample_app.html", null ]
+    ] ],
+    [ "QMenu", null, [
+      [ "ito::MenuOnlyForEnter", "classito_1_1_menu_only_for_enter.html", null ]
     ] ],
     [ "QObject", null, [
       [ "BasePopupWidgetPrivate", "class_base_popup_widget_private.html", [
@@ -512,10 +534,14 @@ var hierarchy =
       [ "ito::ParamInputParser", "classito_1_1_param_input_parser.html", null ],
       [ "ito::ProcessOrganizer", "classito_1_1_process_organizer.html", null ],
       [ "ito::PyCalltipsMode", "classito_1_1_py_calltips_mode.html", null ],
+      [ "ito::PyCodeFormatter", "classito_1_1_py_code_formatter.html", null ],
+      [ "ito::PyDocstringGeneratorMode", "classito_1_1_py_docstring_generator_mode.html", null ],
       [ "ito::PythonEngine", "classito_1_1_python_engine.html", null ],
+      [ "ito::PythonJediRunner", "classito_1_1_python_jedi_runner.html", null ],
       [ "ito::PythonQtSignalMapperBase", "classito_1_1_python_qt_signal_mapper_base.html", [
         [ "ito::PythonQtSignalMapper", "classito_1_1_python_qt_signal_mapper.html", null ]
       ] ],
+      [ "ito::PythonStatePublisher", "classito_1_1_python_state_publisher.html", null ],
       [ "ito::PyWorkspaceContainer", "classito_1_1_py_workspace_container.html", null ],
       [ "ito::QDebugStream", "classito_1_1_q_debug_stream.html", null ],
       [ "ito::ScriptEditorOrganizer", "classito_1_1_script_editor_organizer.html", null ],
@@ -524,10 +550,11 @@ var hierarchy =
       [ "ito::SymbolMatcherMode", "classito_1_1_symbol_matcher_mode.html", null ],
       [ "ito::TextDecorationsSignals", "classito_1_1_text_decorations_signals.html", null ],
       [ "ito::TimerCallback", "classito_1_1_timer_callback.html", null ],
-      [ "ito::UiOrganizer<>", "classito_1_1_ui_organizer.html", null ],
+      [ "ito::UiOrganizer", "classito_1_1_ui_organizer.html", null ],
       [ "ito::UserInteractionWatcher", "classito_1_1_user_interaction_watcher.html", null ],
       [ "ito::UserOrganizer", "classito_1_1_user_organizer.html", null ],
       [ "ito::WordClickMode", "classito_1_1_word_click_mode.html", null ],
+      [ "ito::WordHoverTooltipMode", "classito_1_1_word_hover_tooltip_mode.html", null ],
       [ "ItomWidgetsFactory", "class_itom_widgets_factory.html", null ],
       [ "MenuComboBoxFactory", "class_menu_combo_box_factory.html", null ],
       [ "MenuComboBoxPrivate", "class_menu_combo_box_private.html", null ],
@@ -659,8 +686,6 @@ var hierarchy =
       [ "RangeWidgetFactory", "class_range_widget_factory.html", null ],
       [ "SearchBoxFactory", "class_search_box_factory.html", null ],
       [ "SliderWidgetFactory", "class_slider_widget_factory.html", null ],
-      [ "StaticQtMetaObject", "struct_static_qt_meta_object.html", null ],
-      [ "StaticQtMetaObject", "struct_static_qt_meta_object.html", null ],
       [ "StatusLedFactory", "class_status_led_factory.html", null ],
       [ "TestClass", "class_test_class.html", [
         [ "TestSubClass", "class_test_sub_class.html", null ]
@@ -688,6 +713,14 @@ var hierarchy =
       [ "ColorPickerButton", "class_color_picker_button.html", null ],
       [ "FontButton", "class_font_button.html", null ],
       [ "PenCreatorButton", "class_pen_creator_button.html", null ]
+    ] ],
+    [ "QRunnable", null, [
+      [ "ito::JediRunnable", "classito_1_1_jedi_runnable.html", [
+        [ "ito::CalltipRunnable", "classito_1_1_calltip_runnable.html", null ],
+        [ "ito::CompletionRunnable", "classito_1_1_completion_runnable.html", null ],
+        [ "ito::GetHelpRunnable", "classito_1_1_get_help_runnable.html", null ],
+        [ "ito::GoToAssignmentRunnable", "classito_1_1_go_to_assignment_runnable.html", null ]
+      ] ]
     ] ],
     [ "QSlider", null, [
       [ "RangeSlider", "class_range_slider.html", null ],
@@ -737,9 +770,6 @@ var hierarchy =
     [ "QtFontPropertyManagerPrivate", "class_qt_font_property_manager_private.html", null ],
     [ "QtGroupBoxPropertyBrowserPrivate", "class_qt_group_box_property_browser_private.html", null ],
     [ "QtGroupPropertyType", "class_qt_group_property_type.html", null ],
-    [ "QThread", null, [
-      [ "ito::Sleeper", "classito_1_1_sleeper.html", null ]
-    ] ],
     [ "QtIntPropertyManagerPrivate", "class_qt_int_property_manager_private.html", null ],
     [ "QtKeySequencePropertyManagerPrivate", "class_qt_key_sequence_property_manager_private.html", null ],
     [ "QtLocalePropertyManagerPrivate", "class_qt_locale_property_manager_private.html", null ],
@@ -796,9 +826,11 @@ var hierarchy =
         [ "ito::WidgetPropConsoleGeneral", "classito_1_1_widget_prop_console_general.html", null ],
         [ "ito::WidgetPropConsoleLastCommand", "classito_1_1_widget_prop_console_last_command.html", null ],
         [ "ito::WidgetPropConsoleWrap", "classito_1_1_widget_prop_console_wrap.html", null ],
+        [ "ito::WidgetPropEditorAutoCodeFormat", "classito_1_1_widget_prop_editor_auto_code_format.html", null ],
         [ "ito::WidgetPropEditorAutoCompletion", "classito_1_1_widget_prop_editor_auto_completion.html", null ],
         [ "ito::WidgetPropEditorCalltips", "classito_1_1_widget_prop_editor_calltips.html", null ],
         [ "ito::WidgetPropEditorCodeCheckers", "classito_1_1_widget_prop_editor_code_checkers.html", null ],
+        [ "ito::WidgetPropEditorDocstringGenerator", "classito_1_1_widget_prop_editor_docstring_generator.html", null ],
         [ "ito::WidgetPropEditorGeneral", "classito_1_1_widget_prop_editor_general.html", null ],
         [ "ito::WidgetPropEditorGotoAssignment", "classito_1_1_widget_prop_editor_goto_assignment.html", null ],
         [ "ito::WidgetPropEditorScripts", "classito_1_1_widget_prop_editor_scripts.html", null ],
@@ -868,10 +900,11 @@ var hierarchy =
     [ "ito::WidgetPropEditorStyles::StyleNode", "structito_1_1_widget_prop_editor_styles_1_1_style_node.html", null ],
     [ "ito::Utils::TextBlockHelper", "classito_1_1_utils_1_1_text_block_helper.html", null ],
     [ "ito::AppManagement::Timeouts", "structito_1_1_app_management_1_1_timeouts.html", null ],
-    [ "ito::TimerContainer<>", "structito_1_1_timer_container.html", null ],
+    [ "ito::TimerModel::TimerItem", "structito_1_1_timer_model_1_1_timer_item.html", null ],
     [ "ito::AbstractDockWidget::Toolbar", "structito_1_1_abstract_dock_widget_1_1_toolbar.html", null ],
     [ "ito::AbstractFigure::ToolBarItem", "structito_1_1_abstract_figure_1_1_tool_bar_item.html", null ],
     [ "ito::AbstractFigure::ToolboxItem", "structito_1_1_abstract_figure_1_1_toolbox_item.html", null ],
+    [ "ToolTip", "class_tool_tip.html", null ],
     [ "TreeComboBoxPrivate", "class_tree_combo_box_private.html", null ],
     [ "Ui_DoubleRangeWidget", null, [
       [ "DoubleRangeWidgetPrivate", "class_double_range_widget_private.html", null ]
@@ -891,10 +924,11 @@ var hierarchy =
     [ "UserInfo", "class_user_info.html", null ],
     [ "ito::UserInfoStruct", "structito_1_1_user_info_struct.html", null ],
     [ "ValueProxyPrivate", "class_value_proxy_private.html", null ],
+    [ "varray", "structvarray.html", null ],
     [ "Vec3f", "struct_vec3f.html", null ],
     [ "ito::VisibleBlock", "structito_1_1_visible_block.html", null ],
-    [ "QtButtonPropertyBrowserPrivate::WidgetItem", "struct_qt_button_property_browser_private_1_1_widget_item.html", null ],
     [ "QtGroupBoxPropertyBrowserPrivate::WidgetItem", "struct_qt_group_box_property_browser_private_1_1_widget_item.html", null ],
+    [ "QtButtonPropertyBrowserPrivate::WidgetItem", "struct_qt_button_property_browser_private_1_1_widget_item.html", null ],
     [ "ito::WidgetWrapper", "classito_1_1_widget_wrapper.html", null ],
     [ "ito::PanelsManager::ZoneItems", "structito_1_1_panels_manager_1_1_zone_items.html", null ]
 ];

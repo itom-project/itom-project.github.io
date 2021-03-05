@@ -9,7 +9,7 @@ var classito_1_1_abstract_add_in_config_dialog =
     [ "AbstractAddInConfigDialog", "classito_1_1_abstract_add_in_config_dialog.html#a1ec517749db73a624b43405d345fda3c", null ],
     [ "~AbstractAddInConfigDialog", "classito_1_1_abstract_add_in_config_dialog.html#a912fc28d8f8551a379182355c937db93", null ],
     [ "applyParameters", "classito_1_1_abstract_add_in_config_dialog.html#a9fc205b919cf1f954f7c1ef60f38311c", null ],
-    [ "observeInvocation", "classito_1_1_abstract_add_in_config_dialog.html#a960d1dc81f4b8307a2f70d5b4debeb4b", null ],
+    [ "observeInvocation", "classito_1_1_abstract_add_in_config_dialog.html#a0565bfc23fb53006874b978a27865ed0", null ],
     [ "parametersChanged", "classito_1_1_abstract_add_in_config_dialog.html#a621dfef1bd8a900551afda450712f5d5", null ],
     [ "setPluginParameter", "classito_1_1_abstract_add_in_config_dialog.html#a72408c64d430079a20884e7316329d0d", null ],
     [ "setPluginParameters", "classito_1_1_abstract_add_in_config_dialog.html#a900a651ac56656c441ea43f45076d0a0", null ],

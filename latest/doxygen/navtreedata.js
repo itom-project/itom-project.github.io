@@ -1,34 +1,11 @@
-/*
-@ @licstart  The following is the entire license notice for the
-JavaScript code in this file.
-
-Copyright (C) 1997-2017 by Dimitri van Heesch
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-@licend  The above is the entire license notice
-for the JavaScript code in this file
-*/
 var NAVTREE =
 [
   [ "itom", "index.html", [
     [ "Introduction", "index.html#intro_sec", null ],
     [ "Todo List", "todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
-    [ "Namespaces", "namespaces.html", [
-      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+    [ "Namespaces", null, [
+      [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", "namespacemembers_dup" ],
         [ "Functions", "namespacemembers_func.html", null ],
@@ -37,8 +14,8 @@ var NAVTREE =
         [ "Enumerator", "namespacemembers_eval.html", null ]
       ] ]
     ] ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
+    [ "Classes", null, [
+      [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
@@ -52,8 +29,8 @@ var NAVTREE =
         [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
+    [ "Files", null, [
+      [ "File List", "files.html", "files" ]
     ] ]
   ] ]
 ];
@@ -61,54 +38,56 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"class_checkable_combo_box_private.html#a0680f98e63b3a51c6c3713551127f41d",
-"class_combo_box.html#ad7613c89ada7e64ced7e90f2db4b1289",
-"class_double_range_widget.html#af7fd96e745c0f92f1fc2191f33a50507",
-"class_double_spin_box_private.html#a65b1b2e5f9b857416074b087ac9bbd14",
-"class_motor_axis_controller.html#a60bc7905071c15b5dd03932e0402696f",
-"class_param_editor_widget_private.html#a5cde38fda782c17c04df15dd547d7e5a",
-"class_plot_info_picker.html#a46b977fb3991adc603d1a58e9a4aefaf",
-"class_python_log_widget_private.html#aae36cc4d9a47ed1f012feb3e162cf4f6",
-"class_qt_button_property_browser_private.html#a339e7542257f883f667a38f840c6ecce",
-"class_qt_double_property_manager.html#a5c5e24308b5e1449bc8a63073c9095bf",
-"class_qt_key_sequence_edit.html#ae5f997b5885530a0b248f2b66fdaf77c",
-"class_qt_property_private.html#af73e2e3e292d9277697728023f2b5f18",
-"class_qt_time_property_manager.html",
-"class_qt_variant_property_manager_private.html#aca60361c7a51ce554aeed0cc24648d32",
-"class_range_widget_private.html#ac06d4558f47e3cfec485d60a5f3a26b9",
-"class_string_list_editor.html#ae8c52c5d8c9c8909583b79d5f7c878a0",
-"classito_1_1_a_i_manager_widget.html#aff555b03d471f93197b1d5384f428583",
-"classito_1_1_abstract_dock_widget.html#ae9f501550f07763d296902a13fb3d8ea",
-"classito_1_1_add_in_algo.html#a3d8340fd4e3ac6ba5d2d2e3306017520adb01dc3422d165840c46acfb10b9f0ca",
-"classito_1_1_add_in_manager.html#a9ed52201de09851e5f4d68dc522d7d92",
-"classito_1_1_breakpoint_panel.html#a992be7474f2add236fe8c3b7c709d8bf",
-"classito_1_1_code_completion_mode.html#ab6289abb2df7798279fc2a204f715a16",
-"classito_1_1_col_curve.html#a4f2a85a7bf8b5630265d0adeb508a636",
-"classito_1_1_data_object.html#a707f177346aed9923d84304e2c8e4b24",
-"classito_1_1_designer_widget_organizer.html#af1a5b294ca7e7be903672b65e04070ca",
-"classito_1_1_dialog_replace.html#aaaf5b52192d8b3d4e18fa8c19d37b2b5",
-"classito_1_1_file_system_dock_widget.html#a2a43df55fe125ba0bfa0cb735b810444",
-"classito_1_1_help_system.html#a8744c8318dbb197a409422fc8fc4028f",
-"classito_1_1_last_command_dock_widget.html#a0617cc7478c9e371b4f0aeae71e5d89b",
-"classito_1_1_method_description.html#af9dfe04c5146f9f25bb750bec5ca4d65",
-"classito_1_1_panel.html#a315091c88425c2db1a570974c22f74da",
-"classito_1_1_param_double_property_factory.html#ae17ded6c2d79e1e01a551fad977b30e2",
-"classito_1_1_param_meta.html#a58b89769afcccb920b31261493127069af321a9cbe346dadfb39b74533c0325bc",
-"classito_1_1_process_organizer.html#ab4e539934d9311190f0578c3bac26ac6",
-"classito_1_1_python_data_object.html#a837c4861527f1c0893fe022da45a0c5b",
-"classito_1_1_python_figure.html#a49bdcf55555e84104d26aebe13551f21",
-"classito_1_1_python_proxy.html",
-"classito_1_1_python_syntax_highlighter.html#ab3a1b66c5a7cd290d423b10dedfc71ba",
-"classito_1_1_ret_val.html#af374c85783e79c2ff8a10daabb3325e5",
-"classito_1_1_script_editor_organizer.html#a7f5430fbb7332a666bd65a9c8d78476d",
-"classito_1_1_style_item.html#afb788bb30fe49ab896c813830dc0f52eac8f2098ffe92904a9a46ae47051e9925",
-"classito_1_1_ui_organizer.html#ae72ed3e1f433cd67ea2f6319ed903813",
-"classito_1_1_widget_prop_general_language.html#a42b57293066931e4ddf4a0d4f41da807",
-"classitom_q_double_spin_box.html#a4c7383e0b20ff0cfa552efea2102dd65",
-"itom_spin_box_8h_source.html",
-"struct_qt_int_property_manager_private_1_1_data.html#ae03e6f8f5d0d5979a961dca90bd488f4",
-"structito_1_1_jedi_assignment.html#a54968caa3a15731e7a220036ad260a38",
-"structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eba992a65591d8e2b68bda700e7a6dd40f1"
+"class_checkable_combo_box_factory.html#afa6f766c2c82f5088edc69de91f91f7d",
+"class_combo_box.html#ab871a6896c9458455eb1ad140ec31421",
+"class_double_range_widget.html#aedc891164c4fe54e9c8fd6e668d9be1f",
+"class_double_spin_box_private.html#a4b984147c2032f3edc2fa636ad404242",
+"class_motor_axis_controller.html#a5a5928e44b3680fb1c81fdf15d3c0a5b",
+"class_param_editor_widget.html#ae54add3a621b967ce4924b1711ab2abf",
+"class_plot_info_marker.html#a3ed5bd5493ae296ad583083ef4be0004",
+"class_python_log_widget.html#ad97d441bc35ba434d4f92756c3411aa4",
+"class_qt_browser_item_private.html#a38d163bf6b10056793b39613b71c66b3",
+"class_qt_date_time_edit_factory_private.html#a7cf9f378d6a04e4f978a65d891b40649",
+"class_qt_int_property_manager.html#acf24786c2e0990165cc69349d6acc580",
+"class_qt_property_editor_delegate.html#ac7b0021bc7537dc4bee0136dc31c17e8",
+"class_qt_string_property_manager.html#ac31df9df19965d39cb09c1f02f7b16a8",
+"class_qt_variant_property_manager_private.html#a65a59a5944fb6d4088ea26c526e2d80f",
+"class_range_widget.html#af3c08247f6382d0c638dd0dd99e2d755",
+"class_status_led_private.html#a18d869980c932ea54f6e37f711bc0467",
+"classcv_1_1_data_type_3_01ito_1_1_red_channel_01_4.html",
+"classito_1_1_abstract_dock_widget.html#a52211c8b931a9b0a11920186a9a71724",
+"classito_1_1_abstract_property_page_widget.html#a880edf2ca0396d7d5d3650a687b030fb",
+"classito_1_1_add_in_interface_base.html#a3eeada178598684c2688e6a9390b115a",
+"classito_1_1_auto_interval.html#ac292d8040e2dc861159b6526a67b9c4a",
+"classito_1_1_checker_bookmark_panel.html#a8ffea706ede6eebeeb387b3dcef8e5dc",
+"classito_1_1_code_editor.html#abc1618f03725674bd5e6bdc7479bd2d6",
+"classito_1_1_data_object.html#a1d60276efa79a8bf940106594e52957c",
+"classito_1_1_data_object_tags_private.html#ac0c275c13b4c200ba6b500e8a73eb916",
+"classito_1_1_dialog_pip_manager.html#aca1b280cbbbac08f5bbea9b664518c2b",
+"classito_1_1_error_line_highlighter_mode.html#a05567f07cf8c051d5d1518d553c468a4",
+"classito_1_1_func_weak_ref.html#ae2b3892b253a5f82de1b23cf8d1660c2",
+"classito_1_1_i_o_helper.html#aae0cc6ab91787d516587e2189b34c226a9abb71fe31348f6cb5ceb5726ec446be",
+"classito_1_1_main_application.html#adca34a257410580d64f8663aeb96b28eadb55dbb2a5a1868993131b75bf6a0f2b",
+"classito_1_1_outline_item.html#a8859a69fe57a191a0d03f884644aaf89",
+"classito_1_1_panels_manager.html#afd4f9eec9dff572d12561fbf4468a9f4",
+"classito_1_1_param_double_widget_private.html#a04d634eabf8864556a89d6c6858d8419",
+"classito_1_1_param_rect_property_manager.html#aef0a82911a93d4b128813ca74231de41",
+"classito_1_1_py_auto_indent_mode.html#ad6bd00302d5f7068b36196392bddfa64",
+"classito_1_1_python_data_object.html#a7066192e89a571793ca37b3775cdb465",
+"classito_1_1_python_engine.html#af644159a50fefc95b9c1f1245ea3a801",
+"classito_1_1_python_plugins.html#aadd611eb92174872dd94ad9d697f4a7d",
+"classito_1_1_python_shape.html#a738627bb007ebbbdae04af3e116a442d",
+"classito_1_1_r_g_b_channel.html#a02a7404f7cafb2dc50a12f48272d0714",
+"classito_1_1_script_dock_widget.html#abbe2e8c19c59200aeab3bf5a8f370c44",
+"classito_1_1_shortcut_action.html#a28f588bd858568244fd67e83f76ef0ad",
+"classito_1_1_ui_data_container.html#a257cdb43cc4819a9efe36b8abda03c9c",
+"classito_1_1_widget_info_box.html",
+"classito_1_1_widget_prop_workspace_unpack.html#a835ef5922b1154fe613ad0c3cf06390b",
+"dir_08d237fc27d4ecd563f71c5d52f2fecc.html",
+"param_meta_8h_source.html",
+"struct_vec3f.html#a4b42e0a23d2a75674d9ad6080493e4ba",
+"structito_1_1_jedi_get_help.html#a67d39b7158a8eaee6e2794cacc0e0ccd",
+"structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594ebabfc42a704859d1776039fd6be92f2667"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

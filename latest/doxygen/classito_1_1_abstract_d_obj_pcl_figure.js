@@ -1,11 +1,11 @@
 var classito_1_1_abstract_d_obj_pcl_figure =
 [
     [ "~AbstractDObjPclFigure", "classito_1_1_abstract_d_obj_pcl_figure.html#a8e41460b1b6211d094ddbab6f993193c", null ],
-    [ "getColorMap", "classito_1_1_abstract_d_obj_pcl_figure.html#a57faef09276a162967965e0cea4945ff", null ],
-    [ "getDataObject", "classito_1_1_abstract_d_obj_pcl_figure.html#a55aefee466e41173c5a9c5ae7ce865e2", null ],
-    [ "getXAxisInterval", "classito_1_1_abstract_d_obj_pcl_figure.html#a298587ac0095c7a6da0553333869cf86", null ],
-    [ "getYAxisInterval", "classito_1_1_abstract_d_obj_pcl_figure.html#ab4984b32907fd7b405f7ab78c3104982", null ],
-    [ "getZAxisInterval", "classito_1_1_abstract_d_obj_pcl_figure.html#a1a0d10a1d09d2cb586f30cacfb0e5a58", null ],
+    [ "getColorMap", "classito_1_1_abstract_d_obj_pcl_figure.html#a1338119d4294e611e55796f967e95445", null ],
+    [ "getDataObject", "classito_1_1_abstract_d_obj_pcl_figure.html#a759af844a0fd94dc8b0457f2879589ce", null ],
+    [ "getXAxisInterval", "classito_1_1_abstract_d_obj_pcl_figure.html#a94a90e1fb4cb1296e55f593af351e589", null ],
+    [ "getYAxisInterval", "classito_1_1_abstract_d_obj_pcl_figure.html#ad06e8063bdfd91c664550079a1571240", null ],
+    [ "getZAxisInterval", "classito_1_1_abstract_d_obj_pcl_figure.html#a6dfa03c03405058d62f800b4bfe0001b", null ],
     [ "renderToPixMap", "classito_1_1_abstract_d_obj_pcl_figure.html#a0b7d0cf3bdfe2172e09a9add5732716d", null ],
     [ "setColorMap", "classito_1_1_abstract_d_obj_pcl_figure.html#aa7cfbfa0c9611d8afd9027be21869fac", null ],
     [ "setDataObject", "classito_1_1_abstract_d_obj_pcl_figure.html#a248eaf07233795b9642e37be6e3f9162", null ],

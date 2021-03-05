@@ -2,9 +2,9 @@ var class_checkable_model_helper_private =
 [
     [ "CheckableModelHelperPrivate", "class_checkable_model_helper_private.html#a4313cf77e49572158296c57318c6312d", null ],
     [ "~CheckableModelHelperPrivate", "class_checkable_model_helper_private.html#a2eddc5f0b15df570d7b81115204a4c46", null ],
-    [ "checkState", "class_checkable_model_helper_private.html#a66fe263f889b61322225f4ddd288119a", null ],
+    [ "checkState", "class_checkable_model_helper_private.html#a7d73c8fccfee689ce1942c1190c43c0f", null ],
     [ "forceCheckability", "class_checkable_model_helper_private.html#a14489e4cd46990ba4a92156068378e9d", null ],
-    [ "indexDepth", "class_checkable_model_helper_private.html#a3daa203f5900d70a8170fde2244fc812", null ],
+    [ "indexDepth", "class_checkable_model_helper_private.html#aec63ace99bc677ce24b2fb79460786e0", null ],
     [ "init", "class_checkable_model_helper_private.html#afa36db92c305fc1142d2777e6d10465b", null ],
     [ "propagateCheckStateToChildren", "class_checkable_model_helper_private.html#a086e8bc1dbfc635ad346b7d87e5e9098", null ],
     [ "Q_DECLARE_PUBLIC", "class_checkable_model_helper_private.html#a12f1042ef62ec097879c21d6cd6208b3", null ],

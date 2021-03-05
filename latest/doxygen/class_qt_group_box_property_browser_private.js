@@ -1,14 +1,14 @@
 var class_qt_group_box_property_browser_private =
 [
     [ "WidgetItem", "struct_qt_group_box_property_browser_private_1_1_widget_item.html", "struct_qt_group_box_property_browser_private_1_1_widget_item" ],
-    [ "createEditor", "class_qt_group_box_property_browser_private.html#ac2fbd429e30f5b97b49433ad6b402cd5", null ],
-    [ "hasHeader", "class_qt_group_box_property_browser_private.html#ad95ffe73ee86a41d95abb6878e1fffe4", null ],
+    [ "createEditor", "class_qt_group_box_property_browser_private.html#a7d6acf0aebb9f825f4d945b142e88f62", null ],
+    [ "hasHeader", "class_qt_group_box_property_browser_private.html#ae3e85e55200f08fbf8180793e907ccf0", null ],
     [ "init", "class_qt_group_box_property_browser_private.html#a9356efff09bd5631756f428f2310c7c5", null ],
-    [ "insertRow", "class_qt_group_box_property_browser_private.html#a6bc1298e1de83ad99d9d637a084ec777", null ],
+    [ "insertRow", "class_qt_group_box_property_browser_private.html#ad08c8d51753f2612c242427db6be2431", null ],
     [ "propertyChanged", "class_qt_group_box_property_browser_private.html#a3a3428c1cbea1eb3f7acd719951e1f0c", null ],
     [ "propertyInserted", "class_qt_group_box_property_browser_private.html#a26d0f8291954a3bcf96b03b28ac58eee", null ],
     [ "propertyRemoved", "class_qt_group_box_property_browser_private.html#a39909951f535a2fa0b6a80720cbcdd28", null ],
-    [ "removeRow", "class_qt_group_box_property_browser_private.html#a9c0f49c57ce34d34a950121c63af1e45", null ],
+    [ "removeRow", "class_qt_group_box_property_browser_private.html#a111d60fb2f5e057782ffa3df7d81be4a", null ],
     [ "slotEditorDestroyed", "class_qt_group_box_property_browser_private.html#a01bc9332fa34017a4956d7d5db5b8453", null ],
     [ "slotUpdate", "class_qt_group_box_property_browser_private.html#a524af97d7342c7b5cc19e546c167bfbe", null ],
     [ "updateItem", "class_qt_group_box_property_browser_private.html#ab3f4edb50b895d5b5bb3fbc913371a15", null ],

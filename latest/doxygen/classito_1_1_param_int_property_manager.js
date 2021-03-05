@@ -7,6 +7,6 @@ var classito_1_1_param_int_property_manager =
     [ "setParam", "classito_1_1_param_int_property_manager.html#aecdd1fc092aefc2ebcb92a4594b3ea11", null ],
     [ "setValue", "classito_1_1_param_int_property_manager.html#a0f448365ee514d692fd9c1338bf07d5e", null ],
     [ "valueChanged", "classito_1_1_param_int_property_manager.html#ac6c8b8f79e87e586689237d1adb4d73b", null ],
-    [ "valueIcon", "classito_1_1_param_int_property_manager.html#a29d25439e67503078852071a83bc757e", null ],
-    [ "valueText", "classito_1_1_param_int_property_manager.html#a8437ff8694e268441d5c7c82139298d2", null ]
+    [ "valueIcon", "classito_1_1_param_int_property_manager.html#ad22928b00d17bd98832909d8cdaea00c", null ],
+    [ "valueText", "classito_1_1_param_int_property_manager.html#ab9b13038933684996dff78ceb0f1f493", null ]
 ];

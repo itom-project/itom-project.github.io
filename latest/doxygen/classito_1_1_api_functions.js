@@ -12,6 +12,7 @@ var classito_1_1_api_functions =
     [ "mcreateFromNamedDataObject", "classito_1_1_api_functions.html#ae26a6557a80f0f2d176c16b308b8c2a8", null ],
     [ "mfilterAuthor", "classito_1_1_api_functions.html#a5324554424b04fd5578945206e614b0e", null ],
     [ "mfilterCall", "classito_1_1_api_functions.html#aaa936b6af6199d7ead60508937e1c90c", null ],
+    [ "mfilterCallExt", "classito_1_1_api_functions.html#a9fe1f44d553ace5141ef7c427a21b1a9", null ],
     [ "mfilterGetFunc", "classito_1_1_api_functions.html#a18583fa31b7e535c894fc0438e8993d8", null ],
     [ "mfilterParam", "classito_1_1_api_functions.html#a5339f91de7aadc037161dd162a8e3e7d", null ],
     [ "mfilterParamBase", "classito_1_1_api_functions.html#a4b8ac867f6d883303b5f066680ea83aa", null ],

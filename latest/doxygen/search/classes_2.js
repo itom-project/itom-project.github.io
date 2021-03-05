@@ -1,6 +1,7 @@
 var searchData=
 [
   ['callstackdockwidget',['CallStackDockWidget',['../classito_1_1_call_stack_dock_widget.html',1,'ito']]],
+  ['calltiprunnable',['CalltipRunnable',['../classito_1_1_calltip_runnable.html',1,'ito']]],
   ['caretlinehighlightermode',['CaretLineHighlighterMode',['../classito_1_1_caret_line_highlighter_mode.html',1,'ito']]],
   ['channel',['Channel',['../classito_1_1_channel.html',1,'ito']]],
   ['channelprivate',['ChannelPrivate',['../classito_1_1_channel_private.html',1,'ito']]],
@@ -15,8 +16,7 @@ var searchData=
   ['checkablemodelhelperprivate',['CheckableModelHelperPrivate',['../class_checkable_model_helper_private.html',1,'']]],
   ['checkerbookmarkpanel',['CheckerBookmarkPanel',['../classito_1_1_checker_bookmark_panel.html',1,'ito']]],
   ['classinfocontainer',['ClassInfoContainer',['../structito_1_1_class_info_container.html',1,'ito']]],
-  ['classnavigatoritem',['ClassNavigatorItem',['../classito_1_1_class_navigator_item.html',1,'ito']]],
-  ['cmdqueuestruct',['cmdQueueStruct',['../structito_1_1_console_widget_1_1cmd_queue_struct.html',1,'ito::ConsoleWidget']]],
+  ['cmdqueueitem',['CmdQueueItem',['../structito_1_1_console_widget_1_1_cmd_queue_item.html',1,'ito::ConsoleWidget']]],
   ['codecheckeritem',['CodeCheckerItem',['../classito_1_1_code_checker_item.html',1,'ito']]],
   ['codecheckeroptions',['CodeCheckerOptions',['../structito_1_1_python_engine_1_1_code_checker_options.html',1,'ito::PythonEngine']]],
   ['codecompletionmode',['CodeCompletionMode',['../classito_1_1_code_completion_mode.html',1,'ito']]],
@@ -38,6 +38,7 @@ var searchData=
   ['comboboxprivate',['ComboBoxPrivate',['../class_combo_box_private.html',1,'']]],
   ['completer',['Completer',['../class_completer.html',1,'']]],
   ['completerprivate',['CompleterPrivate',['../class_completer_private.html',1,'']]],
+  ['completionrunnable',['CompletionRunnable',['../classito_1_1_completion_runnable.html',1,'ito']]],
   ['complex128_5f',['complex128_',['../structito_1_1complex128__.html',1,'ito']]],
   ['consolewidget',['ConsoleWidget',['../classito_1_1_console_widget.html',1,'ito']]],
   ['cursorposition',['CursorPosition',['../structito_1_1_code_editor_1_1_cursor_position.html',1,'ito::CodeEditor']]]

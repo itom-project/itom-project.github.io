@@ -10,7 +10,7 @@ var classito_1_1_dialog_user_management =
     [ "on_userList_doubleClicked", "classito_1_1_dialog_user_management.html#a91b73f0ff514005203c284538a92ad00", null ],
     [ "readModel", "classito_1_1_dialog_user_management.html#a27e38bf9bd67f0984d7152bbc2236602", null ],
     [ "userListCurrentChanged", "classito_1_1_dialog_user_management.html#a3825d4fa60bc59b5603496227984c295", null ],
-    [ "m_currentUser", "classito_1_1_dialog_user_management.html#ae4c0b5cd884bde743c1e8e60956f4721", null ],
+    [ "m_currentUserName", "classito_1_1_dialog_user_management.html#a7147eb608a495a4e9c5123ce8c80f100", null ],
     [ "m_userModel", "classito_1_1_dialog_user_management.html#a0997a368a71c82e9793aae5b87f54d02", null ],
     [ "ui", "classito_1_1_dialog_user_management.html#ad13094149d04abe60f57da120aae123a", null ]
 ];

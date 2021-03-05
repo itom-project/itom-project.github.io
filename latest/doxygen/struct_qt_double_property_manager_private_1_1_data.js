@@ -1,8 +1,8 @@
 var struct_qt_double_property_manager_private_1_1_data =
 [
     [ "Data", "struct_qt_double_property_manager_private_1_1_data.html#a676c8c65f604a05684b39689e493b480", null ],
-    [ "maximumValue", "struct_qt_double_property_manager_private_1_1_data.html#a00f7c7bf7d4201b88b7e9abe4fd3c917", null ],
-    [ "minimumValue", "struct_qt_double_property_manager_private_1_1_data.html#a2856b1f1675ed8e12ee20d4c3385ecac", null ],
+    [ "maximumValue", "struct_qt_double_property_manager_private_1_1_data.html#ab0077fdedad5a70c83110cfe552fead7", null ],
+    [ "minimumValue", "struct_qt_double_property_manager_private_1_1_data.html#ab35ceed78071e15bca6f0f6cafa93f8b", null ],
     [ "setMaximumValue", "struct_qt_double_property_manager_private_1_1_data.html#a9510185a6b408086544e3e48be8721b2", null ],
     [ "setMinimumValue", "struct_qt_double_property_manager_private_1_1_data.html#a79ed8d2ba7dbf173275fe593c083201d", null ],
     [ "decimals", "struct_qt_double_property_manager_private_1_1_data.html#abc88e731441a172fe9621f32e732066e", null ],

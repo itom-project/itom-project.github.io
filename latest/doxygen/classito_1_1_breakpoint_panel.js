@@ -18,7 +18,7 @@ var classito_1_1_breakpoint_panel =
     [ "removeAllLineSelectors", "classito_1_1_breakpoint_panel.html#a86c5b1db1f796c007302e90c04769797", null ],
     [ "setCurrentLine", "classito_1_1_breakpoint_panel.html#a6caa46f72d627a7225b205fa15d2c6fc", null ],
     [ "setSelectedCallstackLine", "classito_1_1_breakpoint_panel.html#a327527416805868e2946f20e6c5539e0", null ],
-    [ "sizeHint", "classito_1_1_breakpoint_panel.html#a1108a58fb9dbcd339c29a64ec4770907", null ],
+    [ "sizeHint", "classito_1_1_breakpoint_panel.html#afc6f2123df6ba073250edf542583633b", null ],
     [ "toggleBreakpointRequested", "classito_1_1_breakpoint_panel.html#a4898ebe7d09a011c4865ebfceb4bb5fd", null ],
     [ "toggleEnableBreakpointRequested", "classito_1_1_breakpoint_panel.html#a4fdb2cf22cc6823b75cc61fb81ad55d8", null ],
     [ "m_contextMenuActions", "classito_1_1_breakpoint_panel.html#a92413dbda0ee3cff18e77abe3f37568a", null ],

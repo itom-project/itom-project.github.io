@@ -43,6 +43,7 @@ var searchData=
   ['apifunctions',['ApiFunctions',['../classito_1_1_api_functions.html',1,'ito']]],
   ['apifunctionsgraph',['apiFunctionsGraph',['../classito_1_1api_functions_graph.html',1,'ito']]],
   ['appmanagement',['AppManagement',['../classito_1_1_app_management.html',1,'ito']]],
+  ['arginfo',['ArgInfo',['../structito_1_1_py_docstring_generator_mode_1_1_arg_info.html',1,'ito::PyDocstringGeneratorMode']]],
   ['autoindentmode',['AutoIndentMode',['../classito_1_1_auto_indent_mode.html',1,'ito']]],
   ['autointerval',['AutoInterval',['../classito_1_1_auto_interval.html',1,'ito']]],
   ['autointervalproperty',['AutoIntervalProperty',['../classito_1_1_auto_interval_property.html',1,'ito']]],

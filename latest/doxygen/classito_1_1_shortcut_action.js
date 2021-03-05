@@ -5,7 +5,7 @@ var classito_1_1_shortcut_action =
     [ "ShortcutAction", "classito_1_1_shortcut_action.html#a072ad301de5c1376b688dc6ad71e6ffe", null ],
     [ "ShortcutAction", "classito_1_1_shortcut_action.html#a71c2b3c569599e795501d0c574594004", null ],
     [ "~ShortcutAction", "classito_1_1_shortcut_action.html#a2647821617202807b74d7d0b6b199399", null ],
-    [ "action", "classito_1_1_shortcut_action.html#a5c31f1fc000bbe78ee750304647e14f5", null ],
+    [ "action", "classito_1_1_shortcut_action.html#ac843647378153c02d0dc79a02b785f24", null ],
     [ "connectTrigger", "classito_1_1_shortcut_action.html#a28de8635dd4fa59fdd7eec9fdb45c3fb", null ],
     [ "parentDockStateChanged", "classito_1_1_shortcut_action.html#a28f588bd858568244fd67e83f76ef0ad", null ],
     [ "setEnabled", "classito_1_1_shortcut_action.html#af64b32e1c6a9db8f3397882ef02747d3", null ],

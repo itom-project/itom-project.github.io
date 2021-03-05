@@ -1,12 +1,30 @@
 var classito_1_1_widget_wrapper =
 [
-    [ "WidgetWrapper", "classito_1_1_widget_wrapper.html#ab3ce1b0866b65535af24af2cf6160e0e", null ],
+    [ "WidgetWrapper", "classito_1_1_widget_wrapper.html#acbf331775dd188e0cb32a1f44ac759dc", null ],
     [ "~WidgetWrapper", "classito_1_1_widget_wrapper.html#a15d06dc1483317b994ad64c397323425", null ],
     [ "buildMethodDescription", "classito_1_1_widget_wrapper.html#ad0d7594b9186516b6a91b13fb07ee433", null ],
     [ "call", "classito_1_1_widget_wrapper.html#aa1c28bd2ba3e6da566c63be390c2f480", null ],
+    [ "callAction", "classito_1_1_widget_wrapper.html#a7206a9cf9ced19fb840c0bc152983134", null ],
+    [ "callBoxLayout", "classito_1_1_widget_wrapper.html#aaf72d59e49f716cb712f0d9ac6272c3d", null ],
+    [ "callComboBox", "classito_1_1_widget_wrapper.html#acbbf205da0bcf900cd75d332c67be715", null ],
+    [ "callFormLayout", "classito_1_1_widget_wrapper.html#ae9c34945d1f285b0e2579f42359e49b6", null ],
+    [ "callGridLayout", "classito_1_1_widget_wrapper.html#a55a658db02d4c62e7a5215a84db1af67", null ],
+    [ "callLayout", "classito_1_1_widget_wrapper.html#a0dd83459d950b22040c7d3808129d62e", null ],
+    [ "callListWidget", "classito_1_1_widget_wrapper.html#a672141eb8f9d459a1d22b21e574285ff", null ],
+    [ "callMainWindow", "classito_1_1_widget_wrapper.html#ae91f98abac796440f084bbabbaccfa00", null ],
+    [ "callObject", "classito_1_1_widget_wrapper.html#a3a3a33dad1de68088353a378f143c907", null ],
+    [ "callSplitter", "classito_1_1_widget_wrapper.html#a00cbc97943f5df3b2f2a6de7be1d1ada", null ],
+    [ "callStatusBar", "classito_1_1_widget_wrapper.html#a767528d3bcf652b36b9d9605c07d4395", null ],
+    [ "callTableView", "classito_1_1_widget_wrapper.html#ad92fc8612e7aa3e2cdb93c6c109e409f", null ],
+    [ "callTableWidget", "classito_1_1_widget_wrapper.html#afa2cfb617e8a688364b832168a4209dc", null ],
+    [ "callTabWidget", "classito_1_1_widget_wrapper.html#ad1a7c159b98980612dfe055e95542c20", null ],
+    [ "callToolBar", "classito_1_1_widget_wrapper.html#a9a0ff29fbea3baa86769fef6210ba0bb", null ],
+    [ "callWidget", "classito_1_1_widget_wrapper.html#a9b536874f5c538228cb9e1439879e427", null ],
     [ "fakeProperty", "classito_1_1_widget_wrapper.html#a5693aab1c7068b737a8f6032427edf95", null ],
     [ "getMethodList", "classito_1_1_widget_wrapper.html#aeafb5afae45646f97bcd1c0c25906c18", null ],
     [ "initMethodHash", "classito_1_1_widget_wrapper.html#aebc378085faa08476a58fa9ba166d125", null ],
-    [ "initialized", "classito_1_1_widget_wrapper.html#a1350f26f9d915ab0082ae347ed3e5220", null ],
-    [ "methodHash", "classito_1_1_widget_wrapper.html#a189235d12a74973fa10fd9cfabb47dd1", null ]
+    [ "m_initialized", "classito_1_1_widget_wrapper.html#a65135c432ad6f61dbe5b23839b4bf38f", null ],
+    [ "m_methodHash", "classito_1_1_widget_wrapper.html#aacad4f42685f6bbe53be12444389b5b6", null ],
+    [ "m_methodIndexNotFound", "classito_1_1_widget_wrapper.html#aabae514a0843a58dc736f810e7a06daf", null ],
+    [ "m_pUiOrganizer", "classito_1_1_widget_wrapper.html#ad7b010917a810bd7ad9fca505b3cce86", null ]
 ];

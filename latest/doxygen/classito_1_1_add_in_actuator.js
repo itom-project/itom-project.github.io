@@ -12,7 +12,7 @@ var classito_1_1_add_in_actuator =
     [ "getStatus", "classito_1_1_add_in_actuator.html#a04c9401cb8825ee06e54f761597e45f3", null ],
     [ "initStatusAndPositions", "classito_1_1_add_in_actuator.html#a5a5e38b29b48c90fe43407fc8a2c9e51", null ],
     [ "isInterrupted", "classito_1_1_add_in_actuator.html#afe7bd58cdd3df69a14a47f1be1e7e8fd", null ],
-    [ "isMotorMoving", "classito_1_1_add_in_actuator.html#a012ddcdaf9d3d683f8f948d694e6ce77", null ],
+    [ "isMotorMoving", "classito_1_1_add_in_actuator.html#a7ed0ad94cce0bab4bfa72dc2e2f24781", null ],
     [ "Q_DECLARE_PRIVATE", "classito_1_1_add_in_actuator.html#a153499d4dc3fd355b17e0c69babe0921", null ],
     [ "replaceStatus", "classito_1_1_add_in_actuator.html#a879c4c6925b7c8ef2d69b0ae68944758", null ],
     [ "replaceStatus", "classito_1_1_add_in_actuator.html#a159f594c4e60bea0d436efb39ab60bb4", null ],

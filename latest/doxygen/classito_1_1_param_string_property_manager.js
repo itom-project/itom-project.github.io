@@ -7,5 +7,5 @@ var classito_1_1_param_string_property_manager =
     [ "setParam", "classito_1_1_param_string_property_manager.html#ac0a9fd84a8d4d7d1aa6678067f627ed6", null ],
     [ "setValue", "classito_1_1_param_string_property_manager.html#a87ba8833bf3de0f10f722537684cb723", null ],
     [ "valueChanged", "classito_1_1_param_string_property_manager.html#a1a4863c226d8934f3945a6acba02dace", null ],
-    [ "valueText", "classito_1_1_param_string_property_manager.html#ae0cc115cc4c6f81d527d458e2927b3c7", null ]
+    [ "valueText", "classito_1_1_param_string_property_manager.html#a05d177a2347793fbf2157059da8d5116", null ]
 ];

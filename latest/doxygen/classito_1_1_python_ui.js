@@ -42,6 +42,8 @@ var classito_1_1_python_ui =
     [ "PyUiItem_getAttribute", "classito_1_1_python_ui.html#ac52ed6ee2e4c486ed386958932c78c56", null ],
     [ "PyUiItem_getattro", "classito_1_1_python_ui.html#a9d21c7c460e0dadceb4d36ef95ccb06c", null ],
     [ "PyUiItem_getChild", "classito_1_1_python_ui.html#a0cebf672fc3f7f554132fa4c79e095ae", null ],
+    [ "PyUiItem_getClassName", "classito_1_1_python_ui.html#a0a9f495952db82dbc276c7efec5a9b2e", null ],
+    [ "PyUiItem_getLayout", "classito_1_1_python_ui.html#ac126331758a5720a0458eee50f544a2e", null ],
     [ "PyUiItem_getProperties", "classito_1_1_python_ui.html#ac446af46616ed0ad03ccb288b509559a", null ],
     [ "PyUiItem_getPropertyInfo", "classito_1_1_python_ui.html#a92b27235316f9fb37789c403df6d5b5d", null ],
     [ "PyUiItem_getTopLevelSignalMapper", "classito_1_1_python_ui.html#acdda8513e00348d945950560285b6af7", null ],

@@ -2,7 +2,7 @@ var classito_1_1_py_calltips_mode =
 [
     [ "PyCalltipsMode", "classito_1_1_py_calltips_mode.html#a445a9c3ae41038e6a677aae291ac91d5", null ],
     [ "~PyCalltipsMode", "classito_1_1_py_calltips_mode.html#ad73e1d4083f019fa8c4c66fa10da1de8", null ],
-    [ "isLastChardEndOfWord", "classito_1_1_py_calltips_mode.html#a463d03efe476d184dca17c665cf3c615", null ],
+    [ "isLastChardEndOfWord", "classito_1_1_py_calltips_mode.html#a3164ad280c5f7e47bf42357ef5f7f8ea", null ],
     [ "onJediCalltipResultAvailable", "classito_1_1_py_calltips_mode.html#a12794c3a8719934295bc3711bb25a381", null ],
     [ "onKeyReleased", "classito_1_1_py_calltips_mode.html#a3deac916d148ecb2203d2596ffd8b071", null ],
     [ "onStateChanged", "classito_1_1_py_calltips_mode.html#af2e369991cd0a2c3a3eefed9f109fdc8", null ],

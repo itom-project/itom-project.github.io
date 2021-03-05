@@ -25,5 +25,5 @@ var searchData=
   ['ttype',['tType',['../classito_1_1_string_meta.html#a012fb711b11bea4cbbc696a357335ece',1,'ito::StringMeta']]],
   ['tuitype',['tUiType',['../structito_1_1_ui_container.html#a77e8d23b0db9b99e8687195506f594eb',1,'ito::UiContainer']]],
   ['twintype',['tWinType',['../classito_1_1_ui_organizer.html#a37fe4a6efc28694e57ba10b5285c42d1',1,'ito::UiOrganizer']]],
-  ['type',['Type',['../classito_1_1_param_base.html#a9c925b2556cb088a275d30a9bdb166db',1,'ito::ParamBase']]]
+  ['type',['Type',['../classito_1_1_outline_item.html#a85341e469e71a5f73828d1225e2d1d52',1,'ito::OutlineItem::Type()'],['../classito_1_1_param_base.html#a9c925b2556cb088a275d30a9bdb166db',1,'ito::ParamBase::Type()']]]
 ];

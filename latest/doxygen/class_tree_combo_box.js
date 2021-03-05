@@ -13,8 +13,8 @@ var class_tree_combo_box =
     [ "resizePopup", "class_tree_combo_box.html#a66910bd26916be7354ea79049a00a599", null ],
     [ "setVisibleModelColumn", "class_tree_combo_box.html#ad2c3a077b81c1fd25935d55d826a075a", null ],
     [ "showPopup", "class_tree_combo_box.html#af19094257c7a73847b79bd90959f8599", null ],
-    [ "treeView", "class_tree_combo_box.html#a5ee1f29eb56d645b03600a5ec0dc7fe4", null ],
-    [ "visibleModelColumn", "class_tree_combo_box.html#a200188e6362919fdb753d0f6a1c33e36", null ],
+    [ "treeView", "class_tree_combo_box.html#a8f7680dc9c4a6285fbcdd33befc8191b", null ],
+    [ "visibleModelColumn", "class_tree_combo_box.html#ae0604da7ba0823bf0a583533a35c03d8", null ],
     [ "d_ptr", "class_tree_combo_box.html#ae7fdfc37e181f0bd678a220a8cf459bb", null ],
     [ "visibleModelColumn", "class_tree_combo_box.html#a7cf5b3b56fba6d6646fa7d126c2e7c79", null ]
 ];

@@ -7,6 +7,7 @@ var searchData=
   ['pclxyznormal',['pclXYZNormal',['../namespaceito.html#a71867bc7a24c8fcb06b8cf63f5a3360ea5f6680f5c10ff985f0be8ce06780e16a',1,'ito']]],
   ['pclxyzrgba',['pclXYZRGBA',['../namespaceito.html#a71867bc7a24c8fcb06b8cf63f5a3360eaefd9ce8422846a24673536424375f223',1,'ito']]],
   ['pclxyzrgbnormal',['pclXYZRGBNormal',['../namespaceito.html#a71867bc7a24c8fcb06b8cf63f5a3360ea6dd64651a1b85540ac80b6efa5eeb738',1,'ito']]],
+  ['pipmodedirect',['pipModeDirect',['../classito_1_1_pip_manager.html#ad2d783d8b8f27341d20908bb7f56b530ad10fcf85b9f3d4bd3636a541120315e7',1,'ito::PipManager']]],
   ['plsferror',['plsfError',['../namespaceito.html#ae8f52a66afae16e3bb3802d701859fcfa89928bf15c88b96936c0f981580994ba',1,'ito']]],
   ['plsfignored',['plsfIgnored',['../namespaceito.html#ae8f52a66afae16e3bb3802d701859fcfa8e51ce1381d3ccf924b2b6152b554f88',1,'ito']]],
   ['plsfincompatible',['plsfIncompatible',['../namespaceito.html#ae8f52a66afae16e3bb3802d701859fcfa266ad0ed0ef69190509ee0f625f29880',1,'ito']]],

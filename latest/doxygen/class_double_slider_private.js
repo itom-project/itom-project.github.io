@@ -1,11 +1,11 @@
 var class_double_slider_private =
 [
     [ "DoubleSliderPrivate", "class_double_slider_private.html#a280b47a840ac043e5185c1bc1aee3827", null ],
-    [ "fromInt", "class_double_slider_private.html#a02de0e50f5eecae2564462ff8b9dc5a5", null ],
+    [ "fromInt", "class_double_slider_private.html#a264c1393dd37d98476736c04a80d747e", null ],
     [ "init", "class_double_slider_private.html#a14d3c368e9ce90754196285632d4be71", null ],
     [ "Q_DECLARE_PUBLIC", "class_double_slider_private.html#a00d8fc6ffdd14e7215f12845cf46c92b", null ],
-    [ "safeFromInt", "class_double_slider_private.html#a292aa226e58f02ad61e11f09a4d78a8c", null ],
-    [ "toInt", "class_double_slider_private.html#aecae6f5762ad62a59b6aba6caf24b160", null ],
+    [ "safeFromInt", "class_double_slider_private.html#ae3a9eaf9d1ec0d3ee6b6561a90abd6cd", null ],
+    [ "toInt", "class_double_slider_private.html#ae3dd357cf66339aab921073f3b09a86b", null ],
     [ "updateOffset", "class_double_slider_private.html#a4e376e49d81de12a228983598f991372", null ],
     [ "HandleToolTip", "class_double_slider_private.html#a7efad3d86cfbe7dade4ed13213aa4c96", null ],
     [ "Maximum", "class_double_slider_private.html#a90efd83c1b8ea2cf1c797c5949875a30", null ],

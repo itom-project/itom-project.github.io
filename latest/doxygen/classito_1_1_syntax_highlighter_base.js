@@ -3,7 +3,7 @@ var classito_1_1_syntax_highlighter_base =
     [ "SyntaxHighlighterBase", "classito_1_1_syntax_highlighter_base.html#acb25ed650142c6a6ec27647e7919f131", null ],
     [ "~SyntaxHighlighterBase", "classito_1_1_syntax_highlighter_base.html#a9c8a84ea50236e415df77a78cbf7ccc5", null ],
     [ "default_highlight_block", "classito_1_1_syntax_highlighter_base.html#a349d6fb9dc73266da5a8d93c8d4199fa", null ],
-    [ "editorStyle", "classito_1_1_syntax_highlighter_base.html#aa2e6ca34be031ede9725091631ccf6a7", null ],
+    [ "editorStyle", "classito_1_1_syntax_highlighter_base.html#a24f4811ed4db897046b7a6ff7aff7f7f", null ],
     [ "findPrevNonBlankBlock", "classito_1_1_syntax_highlighter_base.html#a02f155a65d48808eba5f2bc35a6b7147", null ],
     [ "highlight_block", "classito_1_1_syntax_highlighter_base.html#aab4ff92b0ea0bd9caf605716ed9a9423", null ],
     [ "highlightBlock", "classito_1_1_syntax_highlighter_base.html#aa388350581b246beaae926935e4cf4d0", null ],

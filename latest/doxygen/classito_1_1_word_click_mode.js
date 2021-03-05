@@ -15,7 +15,7 @@ var classito_1_1_word_click_mode =
     [ "selectWordCursor", "classito_1_1_word_click_mode.html#a2584f10db509af54a10815a497fd1903", null ],
     [ "setWordClickModifiers", "classito_1_1_word_click_mode.html#aea0d388dc4959902f07164519fe0a076", null ],
     [ "wordClicked", "classito_1_1_word_click_mode.html#a4016ee87652bbe69af390c4bdd306af4", null ],
-    [ "wordClickModifiers", "classito_1_1_word_click_mode.html#a7d84dd96decdb24375d485e927ffdfdb", null ],
+    [ "wordClickModifiers", "classito_1_1_word_click_mode.html#a42e56ea63ed4c3af96d69507a0501686", null ],
     [ "m_cursor", "classito_1_1_word_click_mode.html#a57c5212bf424cad13cf44f3125c6d407", null ],
     [ "m_deco", "classito_1_1_word_click_mode.html#a235f39bbcb84078b58853de29ff5bae3", null ],
     [ "m_mouseMoveKeyboardModifiers", "classito_1_1_word_click_mode.html#a93de823b4cdcf6248978f28ac043ed2b", null ],

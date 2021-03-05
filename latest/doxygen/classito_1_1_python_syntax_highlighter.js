@@ -1,7 +1,7 @@
 var classito_1_1_python_syntax_highlighter =
 [
     [ "NamedRegExp", "structito_1_1_python_syntax_highlighter_1_1_named_reg_exp.html", "structito_1_1_python_syntax_highlighter_1_1_named_reg_exp" ],
-    [ "QQRegExp", "classito_1_1_python_syntax_highlighter.html#ab3a1b66c5a7cd290d423b10dedfc71ba", null ],
+    [ "QQRegExp", "classito_1_1_python_syntax_highlighter.html#acfc76754eb8f516dfbad972bb21aa1c3", null ],
     [ "State", "classito_1_1_python_syntax_highlighter.html#afaed26c4d57f71194b00cbbb399578e7", [
       [ "Normal", "classito_1_1_python_syntax_highlighter.html#afaed26c4d57f71194b00cbbb399578e7ac89a0288cc64138ae9674c96556c43cd", null ],
       [ "InsideSq3String", "classito_1_1_python_syntax_highlighter.html#afaed26c4d57f71194b00cbbb399578e7a383fa885c57e58029aa760c2b9c8cc06", null ],
@@ -12,7 +12,7 @@ var classito_1_1_python_syntax_highlighter =
     [ "PythonSyntaxHighlighter", "classito_1_1_python_syntax_highlighter.html#a5c0df197391657478fe05a5378025b2c", null ],
     [ "~PythonSyntaxHighlighter", "classito_1_1_python_syntax_highlighter.html#a1b456007b4c6e5dd421e8fe4c7719a8f", null ],
     [ "default_highlight_block", "classito_1_1_python_syntax_highlighter.html#aaa480851e62638a4deb50e9fddebac04", null ],
-    [ "getFormatFromStyle", "classito_1_1_python_syntax_highlighter.html#abec418daa3d726175484b66c28c6c739", null ],
+    [ "getFormatFromStyle", "classito_1_1_python_syntax_highlighter.html#a2b59c676650d13efb90430bb3feca60d", null ],
     [ "getTextCharFormat", "classito_1_1_python_syntax_highlighter.html#a57ea19a3c000f83479c893f444d8763b", null ],
     [ "highlight_block", "classito_1_1_python_syntax_highlighter.html#a125409abdd7b5e48843dc141bfcbff88", null ],
     [ "makePythonPatterns", "classito_1_1_python_syntax_highlighter.html#a283d0fbd7d462812173666928144a014", null ],

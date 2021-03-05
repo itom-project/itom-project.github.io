@@ -2,7 +2,7 @@ var class_itom_shared_semaphore =
 [
     [ "ItomSharedSemaphore", "class_itom_shared_semaphore.html#a3b4222d9317002264c8ca6e7f61fb67c", null ],
     [ "~ItomSharedSemaphore", "class_itom_shared_semaphore.html#a57e755a991e527b6b6ee05eb1e28e639", null ],
-    [ "available", "class_itom_shared_semaphore.html#aad34f112de17bd48eada42f4906061f1", null ],
+    [ "available", "class_itom_shared_semaphore.html#ad106f9bc68adc2555469d563da4b7d5a", null ],
     [ "deleteSemaphore", "class_itom_shared_semaphore.html#ae8630abd1baad833d7acbeaeea8131db", null ],
     [ "isCallerStillWaiting", "class_itom_shared_semaphore.html#adc09a64be632856c6055eacc7980b895", null ],
     [ "release", "class_itom_shared_semaphore.html#a5e4ba91682eadd70bf6ce5ba1731af55", null ],

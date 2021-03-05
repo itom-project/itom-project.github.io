@@ -1,9 +1,9 @@
 var class_combo_box_private =
 [
     [ "ComboBoxPrivate", "class_combo_box_private.html#a2a688da8ad9972f4cc2c5a75aa8de407", null ],
-    [ "initStyleOption", "class_combo_box_private.html#a00d4cf8a74149d4973b23e29a442fc55", null ],
+    [ "initStyleOption", "class_combo_box_private.html#a894ac0628b8c4e687089e745dfe5a69d", null ],
     [ "Q_DECLARE_PUBLIC", "class_combo_box_private.html#acd419392699f63e2b3675fea0f465ea1", null ],
-    [ "recomputeSizeHint", "class_combo_box_private.html#a931e4b8dbaa9182069fb3a99bf58fef0", null ],
+    [ "recomputeSizeHint", "class_combo_box_private.html#ab0839fc9b7ff34e6389eb432e49f253b", null ],
     [ "DefaultIcon", "class_combo_box_private.html#a9bc43733c070d86903cead7669063e35", null ],
     [ "DefaultText", "class_combo_box_private.html#a37cd7731c516707fff99e36232f1b8a6", null ],
     [ "ElideMode", "class_combo_box_private.html#ace6d29977bacfc4c13b04ba806baf6eb", null ],

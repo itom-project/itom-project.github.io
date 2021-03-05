@@ -9,5 +9,6 @@ var classito_1_1_add_in_base_private =
     [ "m_pThread", "classito_1_1_add_in_base_private.html#a5e65055cc35cfaf3aad49e18ee9a0b71", null ],
     [ "m_refCount", "classito_1_1_add_in_base_private.html#aee236c996cedd487b78af6978d5f3354", null ],
     [ "m_refCountMutex", "classito_1_1_add_in_base_private.html#a013817c4272a3b2ca1cbc45dc1f7a74f", null ],
-    [ "m_uniqueID", "classito_1_1_add_in_base_private.html#ae744ab74544dff08eb85aa10ccc06279", null ]
+    [ "m_uniqueID", "classito_1_1_add_in_base_private.html#ae744ab74544dff08eb85aa10ccc06279", null ],
+    [ "m_userMutex", "classito_1_1_add_in_base_private.html#a4a0d7e371102d92991ced2e4f7b2bb62", null ]
 ];

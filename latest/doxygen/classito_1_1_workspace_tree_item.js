@@ -10,5 +10,5 @@ var classito_1_1_workspace_tree_item =
     [ "WorkspaceTreeItem", "classito_1_1_workspace_tree_item.html#ae204dc024ddabc598381e797779ebe10", null ],
     [ "WorkspaceTreeItem", "classito_1_1_workspace_tree_item.html#afc1c84faafe84592a3e3c19f3813c760", null ],
     [ "~WorkspaceTreeItem", "classito_1_1_workspace_tree_item.html#a7ac319d963cdf8fe3fcaa24e5532a661", null ],
-    [ "operator<", "classito_1_1_workspace_tree_item.html#a2840705b01a048f6800ca27cf06894b2", null ]
+    [ "operator<", "classito_1_1_workspace_tree_item.html#aaf43f2020c39215422431905757c29bd", null ]
 ];

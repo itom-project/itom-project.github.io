@@ -8,7 +8,7 @@ var class_plot_info_d_object =
     [ "updateInfoDetail", "class_plot_info_d_object.html#a97a33f6965a2af849545045827bf952e", null ],
     [ "updateInfoHeader", "class_plot_info_d_object.html#a215c93d2629b31ac47f3e9aa9b02b170", null ],
     [ "updateInfoHeader", "class_plot_info_d_object.html#a9a67d418c849b5c8de44dbcd7150f059", null ],
-    [ "useDetailInfo", "class_plot_info_d_object.html#aa4c9d7bb03af31022a14916fe48c311b", null ],
+    [ "useDetailInfo", "class_plot_info_d_object.html#a63b6048b462e800dab89aa21bf4e74b9", null ],
     [ "m_addDetailInfo", "class_plot_info_d_object.html#ac58c183a10e5ca6b28f520714f6b5f1d", null ],
     [ "m_infoDetail", "class_plot_info_d_object.html#a5c024d913c270bd76b1e23a37b171bbb", null ],
     [ "m_infoHeader", "class_plot_info_d_object.html#ac4be852856d3878a63b5c26de8b2fefc", null ],

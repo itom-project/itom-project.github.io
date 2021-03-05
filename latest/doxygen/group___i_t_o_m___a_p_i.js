@@ -7,6 +7,7 @@ var group___i_t_o_m___a_p_i =
     [ "apiCreateFromDataObject", "group___i_t_o_m___a_p_i.html#ga353993f2efe89c1a0b6bf7db7377a9b3", null ],
     [ "apiCreateFromNamedDataObject", "group___i_t_o_m___a_p_i.html#gacf529ab7a9d581232485b6066bed9657", null ],
     [ "apiFilterCall", "group___i_t_o_m___a_p_i.html#ga2150c7c4585a9af481666fc823d55604", null ],
+    [ "apiFilterCallExt", "group___i_t_o_m___a_p_i.html#gabb293241dc1c9fb366b0b0eeb494271e", null ],
     [ "apiFilterGetFunc", "group___i_t_o_m___a_p_i.html#gaa28b7acf3f1d4d42f415126a85e55bba", null ],
     [ "apiGetCurrentWorkingDir", "group___i_t_o_m___a_p_i.html#gaf680a69debdb157cb5fd1e73b5612eb7", null ],
     [ "apiGetParamFromMapByKey", "group___i_t_o_m___a_p_i.html#ga5482fe416a2fbb4d91c3ed3a4996d735", null ],

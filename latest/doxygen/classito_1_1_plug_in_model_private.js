@@ -3,6 +3,7 @@ var classito_1_1_plug_in_model_private =
     [ "PlugInModelPrivate", "classito_1_1_plug_in_model_private.html#aae7821ef18729a4ea48c2a4ef08ecc56", null ],
     [ "~PlugInModelPrivate", "classito_1_1_plug_in_model_private.html#a66d773158b852c8632a78a570f24c17e", null ],
     [ "m_alignment", "classito_1_1_plug_in_model_private.html#a8377fa88c7024c1e615aeb1428c09db4", null ],
+    [ "m_bgColorItemsWithPythonRef", "classito_1_1_plug_in_model_private.html#a4f581fbecd661cd42f782bbe20551a49", null ],
     [ "m_headers", "classito_1_1_plug_in_model_private.html#a619febadf3f38aee5a461626ff16d985", null ],
     [ "m_iconActuator", "classito_1_1_plug_in_model_private.html#a4ccddb8441a5e53214442c44650895df", null ],
     [ "m_iconADDA", "classito_1_1_plug_in_model_private.html#a091b38c1c53602d84ec7cbaa2587f1eb", null ],

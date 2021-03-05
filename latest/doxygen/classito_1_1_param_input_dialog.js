@@ -2,10 +2,10 @@ var classito_1_1_param_input_dialog =
 [
     [ "ParamInputDialog", "classito_1_1_param_input_dialog.html#ac063c141383fef6c97c9350b3c62d345", null ],
     [ "~ParamInputDialog", "classito_1_1_param_input_dialog.html#ad20ef911ea71bfa2e5a320f2fd7aef7d", null ],
-    [ "getItemData", "classito_1_1_param_input_dialog.html#a51fa3f4731ce3d5e01b79f790c52b5d2", null ],
+    [ "getItemData", "classito_1_1_param_input_dialog.html#acb228326a8418cb8cc7c30abba00c2e0", null ],
     [ "getStringList", "classito_1_1_param_input_dialog.html#a4e426ff46a362aed846076f77390a789", null ],
-    [ "listWidget", "classito_1_1_param_input_dialog.html#a689c22cd4dae2a134c25ed78e8d0b688", null ],
-    [ "newItemText", "classito_1_1_param_input_dialog.html#a9901c57903dccd9329b898e9372fc95b", null ],
+    [ "listWidget", "classito_1_1_param_input_dialog.html#a8b273af7706caeacbf1f1bed9e72a783", null ],
+    [ "newItemText", "classito_1_1_param_input_dialog.html#aa3dcd8d4be073d4f6b9a08f36b7b9dbf", null ],
     [ "on_buttonBox_clicked", "classito_1_1_param_input_dialog.html#aa067c501d2f352d5a585027ca444d57b", null ],
     [ "on_deleteListItemButton_clicked", "classito_1_1_param_input_dialog.html#a4233fb1c0a41b56332b8b5aabf70d2ce", null ],
     [ "on_listWidget_currentRowChanged", "classito_1_1_param_input_dialog.html#a29f2cb8b1954643852a14e3484cd87d5", null ],

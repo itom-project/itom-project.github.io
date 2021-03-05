@@ -2,6 +2,7 @@ var classito_1_1_a_i_manager_widget =
 [
     [ "AIManagerWidget", "classito_1_1_a_i_manager_widget.html#a61bea8e681f0dcfdea5cb1f9222c6ffe", null ],
     [ "~AIManagerWidget", "classito_1_1_a_i_manager_widget.html#a0296a999bf836cb4e6f5b24a69161b0f", null ],
+    [ "backgroundColorInstancesWithPythonRef", "classito_1_1_a_i_manager_widget.html#a841a439be69f7444e30213134bdb5a1f", null ],
     [ "CloseInstance", "classito_1_1_a_i_manager_widget.html#a2291d971fd2a40a54f9bbbb061ba2f65", null ],
     [ "createActions", "classito_1_1_a_i_manager_widget.html#ae074f0ed224cfcad097570f2bb171dec", null ],
     [ "createMenus", "classito_1_1_a_i_manager_widget.html#aff555b03d471f93197b1d5384f428583", null ],
@@ -21,6 +22,7 @@ var classito_1_1_a_i_manager_widget =
     [ "mnuToggleDockWidget", "classito_1_1_a_i_manager_widget.html#a854aa27b1f1b8a47592e76c336143a44", null ],
     [ "mnuToggleView", "classito_1_1_a_i_manager_widget.html#ad6c36f218c79d47e656327017535319e", null ],
     [ "selectionChanged", "classito_1_1_a_i_manager_widget.html#a3311133a93bbef89798e2d68ef71ce12", null ],
+    [ "setBackgroundColorInstancesWithPythonRef", "classito_1_1_a_i_manager_widget.html#a50aeb3b577af6ed295a0396cb0609bc3", null ],
     [ "setTreeViewHideColumns", "classito_1_1_a_i_manager_widget.html#ab237fe20b0bdd76f82fe3f543b04d002", null ],
     [ "showDetails", "classito_1_1_a_i_manager_widget.html#a9bdc618af943f2e294626612d96e170a", null ],
     [ "showDockWidget", "classito_1_1_a_i_manager_widget.html#ac1c7443a8c7669b81372c995276bd612", null ],
@@ -47,8 +49,10 @@ var classito_1_1_a_i_manager_widget =
     [ "m_pMainToolbar", "classito_1_1_a_i_manager_widget.html#a56cfd0464dfeaff4d1af262661ed6cb9", null ],
     [ "m_pMainToolbarSeparator1", "classito_1_1_a_i_manager_widget.html#a75b9bde904d4d8f0c0ca6d085276f5d9", null ],
     [ "m_pMainToolbarSeparator2", "classito_1_1_a_i_manager_widget.html#a46639c51dfd4457290e3ec3127e6bed8", null ],
+    [ "m_pPlugInModel", "classito_1_1_a_i_manager_widget.html#ab14513f3abb40dbefce5fc84e980e060", null ],
     [ "m_pShowConfDialog", "classito_1_1_a_i_manager_widget.html#a5716d036f5a5df23d4c0282baee22d50", null ],
     [ "m_pSortFilterProxyModel", "classito_1_1_a_i_manager_widget.html#a0a3903dc44e9f3ee1033a3c5716208b9", null ],
     [ "m_pViewDetails", "classito_1_1_a_i_manager_widget.html#a7a8d70cbab42d61e6290bbbb1e09079c", null ],
-    [ "m_pViewList", "classito_1_1_a_i_manager_widget.html#a2ca7a7c0789492df8a5452c8c052f157", null ]
+    [ "m_pViewList", "classito_1_1_a_i_manager_widget.html#a2ca7a7c0789492df8a5452c8c052f157", null ],
+    [ "backgroundColorInstancesWithPythonRef", "classito_1_1_a_i_manager_widget.html#ad2abf0bfe6b1253a7bfd7f2e4db3b418", null ]
 ];

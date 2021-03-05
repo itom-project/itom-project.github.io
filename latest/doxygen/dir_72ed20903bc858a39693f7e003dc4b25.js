@@ -11,6 +11,8 @@ var dir_72ed20903bc858a39693f7e003dc4b25 =
     [ "delayJobRunner.h", "delay_job_runner_8h_source.html", null ],
     [ "mode.h", "mode_8h_source.html", null ],
     [ "panel.h", "panel_8h_source.html", null ],
+    [ "pyCodeFormatter.h", "py_code_formatter_8h_source.html", null ],
     [ "textBlockUserData.h", "text_block_user_data_8h_source.html", null ],
-    [ "textDecoration.h", "text_decoration_8h_source.html", null ]
+    [ "textDecoration.h", "text_decoration_8h_source.html", null ],
+    [ "toolTip.h", "tool_tip_8h_source.html", null ]
 ];

@@ -7,11 +7,11 @@ var classito_1_1_text_decorations_manager =
     [ "append", "classito_1_1_text_decorations_manager.html#ac8b416796e823812c8ca464d646b7c5e", null ],
     [ "begin", "classito_1_1_text_decorations_manager.html#a5f88ce6550a740e647157df017c7559d", null ],
     [ "clear", "classito_1_1_text_decorations_manager.html#a8c864cda714caa098ba68d3c176f326f", null ],
-    [ "constBegin", "classito_1_1_text_decorations_manager.html#a38653fa9eeb0485c2241e6618ba83cfe", null ],
-    [ "constEnd", "classito_1_1_text_decorations_manager.html#a778e03a4eeafd33fa7c383be538d33f8", null ],
+    [ "constBegin", "classito_1_1_text_decorations_manager.html#af4f430a35c1546ac2efa808c2dc93773", null ],
+    [ "constEnd", "classito_1_1_text_decorations_manager.html#ad6fbd79dbdb906cdd79c38b99db36bc0", null ],
     [ "contains", "classito_1_1_text_decorations_manager.html#a726f72d15cb5b437ca0f1fc7efad3aab", null ],
     [ "end", "classito_1_1_text_decorations_manager.html#a02cd852fbf2f7bd5b3fd3d4e008ba3d9", null ],
-    [ "getExtraSelections", "classito_1_1_text_decorations_manager.html#a80cd549af53c499c04f9d97c27a22827", null ],
+    [ "getExtraSelections", "classito_1_1_text_decorations_manager.html#a9ac686ba43b6d7888f22a4775e3a9d61", null ],
     [ "remove", "classito_1_1_text_decorations_manager.html#a8f802153eb9ac06ea7a1a5e3a5357c25", null ],
     [ "m_decorations", "classito_1_1_text_decorations_manager.html#a98e5cb19dd4a9ae567456254549b7fe4", null ]
 ];

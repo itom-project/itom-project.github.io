@@ -4,7 +4,7 @@ var classito_1_1_dialog_replace =
     [ "~DialogReplace", "classito_1_1_dialog_replace.html#a987d6eaf087c24cda4839cad30ca717a", null ],
     [ "closeEvent", "classito_1_1_dialog_replace.html#a1824aa7866687dbacda016c368406d9f", null ],
     [ "comboBoxAddItem", "classito_1_1_dialog_replace.html#af95a8d77ce7ca1c82db0f85fcb6717ba", null ],
-    [ "comboBoxGetIndex", "classito_1_1_dialog_replace.html#a2d8f4c59924317f8f59f2fb180959af6", null ],
+    [ "comboBoxGetIndex", "classito_1_1_dialog_replace.html#af47bac055c96db595436ad6f2f1b5c1d", null ],
     [ "findNext", "classito_1_1_dialog_replace.html#a211bf7bd3b923b1a35f039e247e4001d", null ],
     [ "on_checkBoxReplaceWith_clicked", "classito_1_1_dialog_replace.html#aaa2e80494285e031b9ca6ce25fab0bee", null ],
     [ "on_pushButtonExpand_clicked", "classito_1_1_dialog_replace.html#a9e2d76247ee2c4432224457ff783b38f", null ],

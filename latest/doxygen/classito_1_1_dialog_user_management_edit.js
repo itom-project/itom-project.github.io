@@ -3,6 +3,7 @@ var classito_1_1_dialog_user_management_edit =
     [ "DialogUserManagementEdit", "classito_1_1_dialog_user_management_edit.html#a47c8295495ceceb6056b8d98ccc14dd9", null ],
     [ "~DialogUserManagementEdit", "classito_1_1_dialog_user_management_edit.html#a290727a55f888deee4f56762aa79c41e", null ],
     [ "clearName", "classito_1_1_dialog_user_management_edit.html#abc3f99fe68ae0c188be5979fc813df42", null ],
+    [ "enableWidgetsByUserRole", "classito_1_1_dialog_user_management_edit.html#a66c48740de6f979bc9017c55c3b31a0d", null ],
     [ "on_buttonBox_clicked", "classito_1_1_dialog_user_management_edit.html#ac60e4e01c2877a013e4f393c6519e7e2", null ],
     [ "on_cmdAutoID_toggled", "classito_1_1_dialog_user_management_edit.html#acdbf4152928bc785b7a543f57eadb4bf", null ],
     [ "on_cmdUseWindowsUser_clicked", "classito_1_1_dialog_user_management_edit.html#aefe6e8f7bbc7fe09bf83e522715ddf1a", null ],

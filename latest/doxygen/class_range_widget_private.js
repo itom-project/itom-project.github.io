@@ -2,10 +2,10 @@ var class_range_widget_private =
 [
     [ "RangeWidgetPrivate", "class_range_widget_private.html#a8a04f9ca62249280908e9680c6dc2013", null ],
     [ "connectSlider", "class_range_widget_private.html#afc67408d7fe9439ab8c77e09359675d0", null ],
-    [ "equal", "class_range_widget_private.html#a4d71a0bcb38185dccdccd6a45ed86f7b", null ],
+    [ "equal", "class_range_widget_private.html#a8b4f1086af99f90e825aabfff713b596", null ],
     [ "Q_DECLARE_PUBLIC", "class_range_widget_private.html#aab538a74e2afb1012aaae9d8ccfe2788", null ],
     [ "relayout", "class_range_widget_private.html#a47f7a611151df80628b67a1cf9de00b2", null ],
-    [ "synchronizedSpinBoxWidth", "class_range_widget_private.html#a057b9c671e29fc1ea3eb141382f2d6b6", null ],
+    [ "synchronizedSpinBoxWidth", "class_range_widget_private.html#aead94a4aa3aea305fb5d46b8518bf1f6", null ],
     [ "synchronizeSiblingSpinBox", "class_range_widget_private.html#ac06d4558f47e3cfec485d60a5f3a26b9", null ],
     [ "updateSpinBoxWidth", "class_range_widget_private.html#a49b44a32f40bd34d391456ead777c8ad", null ],
     [ "AutoSpinBoxWidth", "class_range_widget_private.html#a4bfbf4d347e22701c5807c5ba1bfc86c", null ],

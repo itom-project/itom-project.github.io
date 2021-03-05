@@ -11,7 +11,7 @@ var class_qt_char_edit =
     [ "paintEvent", "class_qt_char_edit.html#ab712d9b84483f0f6a0bf260da6d592bb", null ],
     [ "setValue", "class_qt_char_edit.html#aa5314c665ede605d786a1f7ccc84b474", null ],
     [ "slotClearChar", "class_qt_char_edit.html#ad9d3690db12f0d703008cfd017eb1c84", null ],
-    [ "value", "class_qt_char_edit.html#a2626fd3582607716750b4feeada4a15d", null ],
+    [ "value", "class_qt_char_edit.html#aea3ffafb8534bcd723fe68313fd1a2b0", null ],
     [ "valueChanged", "class_qt_char_edit.html#a0c14107c837d078a07feae44d9f266b4", null ],
     [ "m_lineEdit", "class_qt_char_edit.html#a553aafa26415ab9922e6943d880fbfdd", null ],
     [ "m_value", "class_qt_char_edit.html#a34966e8104599e12e62ce2eb3c823360", null ]

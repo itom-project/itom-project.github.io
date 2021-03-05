@@ -11,7 +11,7 @@ var classito_1_1_dialog_loaded_plugins =
     [ "on_filterEdit_textChanged", "classito_1_1_dialog_loaded_plugins.html#a2a67c2ae16ed0d8c59a8ee71246e05d8", null ],
     [ "on_onlyCompatibleCheck_clicked", "classito_1_1_dialog_loaded_plugins.html#a433ca10d1630260e15104a5dce56ec1d", null ],
     [ "on_tree_itemSelectionChanged", "classito_1_1_dialog_loaded_plugins.html#a4e09edfb789b543590cd66b1c459b716", null ],
-    [ "pluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#a341d941f6d952602119cf12a9bc91361", null ],
+    [ "pluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#acc262ca6b9c3c12fb89aec86ec8d82b6", null ],
     [ "setPluginBackgroundColor", "classito_1_1_dialog_loaded_plugins.html#a40dd9824eb89a1fe816a83af2898c7d6", null ],
     [ "setSortChar", "classito_1_1_dialog_loaded_plugins.html#af0d0db30e580b0839dc3dd66ece0aad4", null ],
     [ "m_cmdError", "classito_1_1_dialog_loaded_plugins.html#a4956e3ccc4a8ef96be04240730b0ee99", null ],

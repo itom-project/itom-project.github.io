@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['namefilters',['NameFilters',['../class_path_line_edit_private.html#a1c0c4b6f9cd38bf3c67895b440c443f5',1,'PathLineEditPrivate']]]
+  ['oldsize',['OldSize',['../class_collapsible_group_box_private.html#aaa5d572f94820ab3289e270c5ba8b7fc',1,'CollapsibleGroupBoxPrivate']]]
 ];

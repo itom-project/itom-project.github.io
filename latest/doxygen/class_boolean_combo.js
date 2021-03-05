@@ -10,6 +10,6 @@ var class_boolean_combo =
     [ "currentChanged", "class_boolean_combo.html#a2ec5e249bc9ee626b6aa360d8d14185f", null ],
     [ "setValue", "class_boolean_combo.html#a00460c525bdb48ff67430377af7265f9", null ],
     [ "setValue", "class_boolean_combo.html#a00460c525bdb48ff67430377af7265f9", null ],
-    [ "value", "class_boolean_combo.html#acb44f6c7a7ed99249bcc793cc4c735f7", null ],
-    [ "value", "class_boolean_combo.html#acb44f6c7a7ed99249bcc793cc4c735f7", null ]
+    [ "value", "class_boolean_combo.html#a91e36a0dfad6be730a963bc875cb57d2", null ],
+    [ "value", "class_boolean_combo.html#a91e36a0dfad6be730a963bc875cb57d2", null ]
 ];

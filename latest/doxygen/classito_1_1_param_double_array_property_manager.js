@@ -8,9 +8,9 @@ var classito_1_1_param_double_array_property_manager =
     [ "Q_PRIVATE_SLOT", "classito_1_1_param_double_array_property_manager.html#aa50538bd50d1b0256cb2ede9e11fd311", null ],
     [ "setParam", "classito_1_1_param_double_array_property_manager.html#ad68a4c6ef8be227da0bcb225e30df48b", null ],
     [ "setValue", "classito_1_1_param_double_array_property_manager.html#adf36657e9ccf9cb8fbd8c6c4b49e2b75", null ],
-    [ "subPropertyManager", "classito_1_1_param_double_array_property_manager.html#a0a064b639c6e8c6c3741fd4ad65acf35", null ],
+    [ "subPropertyManager", "classito_1_1_param_double_array_property_manager.html#a26da74273790ed32b63ea1131f73ee69", null ],
     [ "uninitializeProperty", "classito_1_1_param_double_array_property_manager.html#a539e907032842a74f51fb3df40609db7", null ],
     [ "valueChanged", "classito_1_1_param_double_array_property_manager.html#a31cb0465fb460b8c3bdec7e9060f2313", null ],
-    [ "valueText", "classito_1_1_param_double_array_property_manager.html#a75e4c4cebff5311c036def9a53f76691", null ],
+    [ "valueText", "classito_1_1_param_double_array_property_manager.html#a0e3d53dffd74ad4cec81342043499ab8", null ],
     [ "d_ptr", "classito_1_1_param_double_array_property_manager.html#a002c8ce03b9277d3139704e615fd58b2", null ]
 ];

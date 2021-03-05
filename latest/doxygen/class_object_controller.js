@@ -2,9 +2,9 @@ var class_object_controller =
 [
     [ "ObjectController", "class_object_controller.html#a581ea45cf59962816803ae99257cda6b", null ],
     [ "~ObjectController", "class_object_controller.html#a542abafbc790b4a085bdfcfb48d5fb5f", null ],
-    [ "getDisplayName", "class_object_controller.html#a73bac1ac50b3a0ac68ee9ddd806b9428", null ],
-    [ "getFilter", "class_object_controller.html#a8423d02217f473830b1f7231a59e3d23", null ],
-    [ "object", "class_object_controller.html#a114e615367e0618d2bec140b5ed0d22f", null ],
+    [ "getDisplayName", "class_object_controller.html#acee065de74c221a2bac69b9523db9bb8", null ],
+    [ "getFilter", "class_object_controller.html#a811e2f592ebfb24121a4dffa2d1eb41a", null ],
+    [ "object", "class_object_controller.html#a37d409302f3233a17116a1c5deae4d79", null ],
     [ "setDisplayName", "class_object_controller.html#a9754483a5c4461a27bd67089878c8884", null ],
     [ "setFilter", "class_object_controller.html#a316c97ffbc2b0773e66c977cfd4cfd72", null ],
     [ "setObject", "class_object_controller.html#a2dd1b88ec6df7d0f9639a3221d6dad94", null ],
