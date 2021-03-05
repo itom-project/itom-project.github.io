@@ -49,6 +49,7 @@ The following plugins are contained in the open source `Plugins repository <http
 	IDSuEyeCamera, All IDS Imaging cameras
 	MSMediaFoundation, "USB Plug&Play Cameras, Webcams, including cameras from The Imaging Source"
 	NITWidySWIR, Cameras from company NIT (tested with USB2 WidySWIR 640U-S)
+	OceanOpticsSpec, OceanOptics Spectrometer
 	OpenCVGrabber, USB Plug&Play Cameras and further cameras supported by OpenCV
 	PCOCamera, PCO Cameras supported by the pco.sdk
 	PCOPixelFly, PCO Pixelfly qet cameras with frame grabber board
@@ -77,6 +78,7 @@ The following plugins are contained in the open source `Plugins repository <http
 	ST8SMC4USB (Standa), Motor-Controller STANDA 8SMC4-USB-B8-1
 	ThorlabsBP, One or multi-axis piezo controllers of type Thorlabs Benchtop Piezo
 	ThorlabsISM, "Control Thorlabs Integrated Stepper Motors, e.g. K10CR1 Rotation Stage"
+	ThorlabsKCubeIM, Thorlabs KCube Motion Controller
 	UhlRegister, Stages from Uhl (also compatible with Lang)
 	UhlText, Stages from Uhl (also compatible with Lang and Merzhaeuser)
 	usbMotion3XIII, USB Motion 3x III controller from COPTONIX GmbH (www.coptonix.com)
@@ -93,11 +95,13 @@ The following plugins are contained in the open source `Plugins repository <http
 	hidApi, Any generic HID device
 	libUSB, Any generic USB devices
 	LibModBus, Modbus communication over TCP/IP and RTU
+	OphirPowermeter, Control Powermeters from Ophir/MKS
 	SerialIO, "COM-Ports (Windows), ttySx and ttyUSBx (Linux)"
 	SuperlumBL, Lightsource from company Superlum
 	SuperlumBS, Lightsource from company SuperlumBS
 	ThorlabsPowerMeter, Thorlabs Power and Energy Meter Consoles PM100x
-
+	ThorlabsFF, 
+	
 .. csv-table:: 
 	:header: AD-Converter
 	:widths: 300 400

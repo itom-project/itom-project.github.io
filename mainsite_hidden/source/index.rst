@@ -13,7 +13,7 @@
 
 
 ITOM Software
-============================================================================
+=============
 
 **ITOM** is an open source software suite for operating measurement systems, laboratory automation and data evaluation.
 

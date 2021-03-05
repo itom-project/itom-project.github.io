@@ -7,25 +7,120 @@ Besides compiling **itom** from the sources, there are binaries for the Windows 
 These binaries contain the core application of **itom** together with a small selection of plugins and most designer plugins
 that provide the plot and figure widgets of **itom**.
 
-**Repository & Direct Downloads**
+**Direct Downloads & Source Repository**
 
-.. container:: mdl-grid
+.. container:: mdl-grid--no-spacing
 
-	.. button:: :text: End-User Setup (Windows x64)
+	.. button:: :text: Setup (Win x64, EXE)
 	 :link: https://sourceforge.net/projects/itom/files/latest/download
 
-	.. button:: :text: Development Kit
+	.. button:: :text: Portable (Win x64, ZIP)
+	 :link: https://sourceforge.net/projects/itom/files/v4.1.0/
+
+	.. button:: :text: SourceCode DevKit
 	 :link: https://sourceforge.net/projects/itom/files/all-in-one-build-setup
 
-	.. button:: :text: SOURCE CODE @ Bitbucket
+	.. button:: :text: SourceCode Repository
 	 :link: https://bitbucket.org/itom/itom/overview
 
 
-| **Windows:** 	Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
-| **Linux:**		(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_debian.html>`_)
+| **Windows:**	Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
+| **Linux:**	(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_debian.html>`_)
 | **Mac:**		(OS X) Clone git source code (`MacOS instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_osx.html>`_)
+| **SourceCode DevKit:**    Includes almost all tools to build from Repository with instructions and automated script files.
 |
 | The End-User Setup version includes **itom** and the following components:
+
+
+**Version 4.1.0** compiled using:
+
+* Qt 5.12.6
+* OpenCV 4.2.0
+* PointCloudLibrary 1.10.0
+* VTK 8.2.0
+* Python 3.8.1
+* Pip 20.1.1
+* Numpy 1.18.5
+* Scipy 1.4.1
+* six 1.15.0
+* Matplotlib 3.2.1
+* PyParsing 2.4.7
+* cycler 0.10.0
+* scikit-image 0.15.0
+* decorator 4.4.2
+* networkx 2.4
+* Pillow 7.1.2
+* PyWavelets 1.1.1
+* Decorator 4.4.2
+* flake8 3.8.3
+* imageio 2.8.0
+* jedi 0.17.0
+* kiwisolver 1.2.0
+* mccabe 0.6.1
+* opencv-python 4.2.0.34
+* parso 0.7.0
+* pycodestyle 2.6.0
+* pyflakes 2.2.0
+* pyparsing 2.4.7
+* python-dateutil 2.8.1
+* setuptools 47.3.1
+* tifffile 2020.6.3
+* weheel 0.34.2
+
+
+Other packages can easily be downloaded and installed using the integrated Python package manager.
+
+The current version 4.0.0 is available from
+
+* `<https://bitbucket.org/itom/itom/downloads>`_ or
+* `<http://sourceforge.net/projects/itom/files/latest/>`_
+
+
+
+.. important::
+
+    Error message regarding PYTHONHOME variable
+        If a new itom setup version is installed on a computer with an already installed itom and Python can not be started, 
+        it may be a problem with python environment variables. First, delete this variable, reboot your system und install itom again. 
+
+
+.. note::
+    
+    Error message from Python packages
+        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded, 
+        the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
+        The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
+
+.. raw:: html
+
+	<button class="accordion" style="font-family:Roboto">Old versions</button>
+	<div class="panel">
+
+* `itom 4.0.0 <http://sourceforge.net/projects/itom/files/v4.0.0/>`_
+* `itom 3.2.1 <http://sourceforge.net/projects/itom/files/v3.2.1/>`_
+* `itom 3.2.0 <http://sourceforge.net/projects/itom/files/v3.2.0/>`_
+* `itom 3.1.0 <http://sourceforge.net/projects/itom/files/v3.1.0/>`_
+* `itom 3.0.0 <http://sourceforge.net/projects/itom/files/v3.0.0/>`_
+* `itom 2.2.1 <http://sourceforge.net/projects/itom/files/v2.2.1/>`_
+* `itom 2.2.0 <http://sourceforge.net/projects/itom/files/v2.2.0/>`_
+* `itom 2.1.0 <http://sourceforge.net/projects/itom/files/v2.1.0/>`_
+* `itom 2.0.0 <http://sourceforge.net/projects/itom/files/v2.0.0/>`_
+* `itom 1.4.0 <http://sourceforge.net/projects/itom/files/v1.4.0/>`_
+* `itom 1.3.0 <http://sourceforge.net/projects/itom/files/v1.3.0>`_
+* `itom 1.2.0 <http://sourceforge.net/projects/itom/files/v1.2.0>`_
+* `itom 1.1.0 <http://sourceforge.net/projects/itom/files/v1.1.0>`_
+* `itom 1.0.14 <http://sourceforge.net/projects/itom/files/v1.0.14>`_
+* `itom 1.0.13 <http://sourceforge.net/projects/itom/files/v1.0.13>`_
+* `itom 1.0.12 <http://sourceforge.net/projects/itom/files/v1.0.12>`_
+
+.. raw:: html
+
+	</div>
+
+.. raw:: html
+
+	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
+	<div class="panel">
 
 **Version 4.0.0** compiled using:
 
@@ -61,60 +156,6 @@ that provide the plot and figure widgets of **itom**.
 * setuptools 47.3.1
 * tifffile 2020.6.3
 * weheel 0.34.2
-
-Other packages can easily be downloaded and installed using the integrated Python package manager.
-
-The current version 4.0.0 is available from
-
-* `<https://bitbucket.org/itom/itom/downloads>`_ or
-* `<http://sourceforge.net/projects/itom/files/latest/>`_
-
-
-
-.. important::
-
-    Error message regarding PYTHONHOME variable
-        If a new itom setup version is installed on a computer with an already installed itom and Python can not be started, 
-        it may be a problem with python environment variables. First, delete this variable, reboot your system und install itom again. 
-
-
-.. note::
-    
-    Error message from Python packages
-        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded, 
-        the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
-        The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
-
-.. raw:: html
-
-	<button class="accordion" style="font-family:Roboto">Old versions</button>
-	<div class="panel">
-
-
-* `itom 3.2.1 <http://sourceforge.net/projects/itom/files/v3.2.1/>`_
-* `itom 3.2.0 <http://sourceforge.net/projects/itom/files/v3.2.0/>`_
-* `itom 3.1.0 <http://sourceforge.net/projects/itom/files/v3.1.0/>`_
-* `itom 3.0.0 <http://sourceforge.net/projects/itom/files/v3.0.0/>`_
-* `itom 2.2.1 <http://sourceforge.net/projects/itom/files/v2.2.1/>`_
-* `itom 2.2.0 <http://sourceforge.net/projects/itom/files/v2.2.0/>`_
-* `itom 2.1.0 <http://sourceforge.net/projects/itom/files/v2.1.0/>`_
-* `itom 2.0.0 <http://sourceforge.net/projects/itom/files/v2.0.0/>`_
-* `itom 1.4.0 <http://sourceforge.net/projects/itom/files/v1.4.0/>`_
-* `itom 1.3.0 <http://sourceforge.net/projects/itom/files/v1.3.0>`_
-* `itom 1.2.0 <http://sourceforge.net/projects/itom/files/v1.2.0>`_
-* `itom 1.1.0 <http://sourceforge.net/projects/itom/files/v1.1.0>`_
-* `itom 1.0.14 <http://sourceforge.net/projects/itom/files/v1.0.14>`_
-* `itom 1.0.13 <http://sourceforge.net/projects/itom/files/v1.0.13>`_
-* `itom 1.0.12 <http://sourceforge.net/projects/itom/files/v1.0.12>`_
-
-.. raw:: html
-
-	</div>
-
-.. raw:: html
-
-	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
-	<div class="panel">
 
 **Version 3.2.1** compiled using:
 
