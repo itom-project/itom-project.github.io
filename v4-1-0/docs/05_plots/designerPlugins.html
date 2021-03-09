@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>5.12. Programming plot designer plugins in C++ &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Extending the user interface of itom" href="../06_extended_gui/extended_gui.html" />
+    <link rel="prev" title="5.11. Markers, user selections and geometric shapes" href="primitives.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plots.html">5. Plots and Figures</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">5.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">5.2. Figure Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotClasses.html">5.3. Plot classes and default plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linePlots.html">5.4. line plots (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagePlots.html">5.5. image plots (2D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">5.6. isometric Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vtk3dplot.html">5.7. 3D plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers.html">5.8. Markers in plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html">5.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">5.10. Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives.html">5.11. Markers, user selections and geometric shapes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.12. Programming plot designer plugins in C++</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">5.12.1. General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies-and-versioning">5.12.2. Dependencies and Versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#factory-class">5.12.3. Factory Class</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">7. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="plots.html"><span class="section-number">5. </span>Plots and Figures</a> &raquo;</li>
+        
+      <li><span class="section-number">5.12. </span>Programming plot designer plugins in C++</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/05_plots/designerPlugins.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="programming-plot-designer-plugins-in-c">
+<span id="plot-designer-plugins"></span><h1><span class="section-number">5.12. </span>Programming plot designer plugins in C++<a class="headerlink" href="#programming-plot-designer-plugins-in-c" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general">
+<h2><span class="section-number">5.12.1. </span>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<p>Plots in itom are single libraries, programmed in C++ and based on the concept of <strong>designer plugins</strong> in Qt.
+These designer plugins have the possibility to appear as widgets in the <strong>Qt Designer</strong>, if it is opened via itom
+and can therefore be integrated in user-defined user interfaces.</p>
+<p>itom designer plugins are located in the <strong>designer</strong> subfolder of itom. This folder will also be added as additional
+search directory, if the Qt Designer application is started from itom (only in this case). Then the Qt designer also
+scans this directory for compatible libraries, implemented the Qt designer plugin interface and - in the case of success -
+makes the contained widgets available in the list of available widgets.</p>
+</div>
+<div class="section" id="dependencies-and-versioning">
+<h2><span class="section-number">5.12.2. </span>Dependencies and Versioning<a class="headerlink" href="#dependencies-and-versioning" title="Permalink to this headline">¶</a></h2>
+<p>All designer plugins of itom (plots or other designer plugins) can or have to link against some libraries, contained
+in the itom SDK. These libraries are (among others, see the folder <strong>SDK/lib/&lt;your compiler&gt;</strong>):</p>
+<ol class="arabic simple">
+<li><p><strong>itomCommonQtLib</strong>: This library contains many basic classes for plugins, designer plugins…</p></li>
+<li><p><strong>dataObject</strong>: Contains the basic matrix class of itom, the <a class="reference internal" href="../07_plugins/development/plugin-dataObject.html#plugin-dataobject"><span class="std std-ref">class dataObject</span></a></p></li>
+<li><p><strong>qpropertyeditor</strong>: This class contains the property editor widget, that is used by all plots to show the properties of the plot</p></li>
+<li><dl class="simple">
+<dt><strong>itomWidgets</strong>: This class is part of the itom core application and contains further smaller widgets, that can also be used in</dt><dd><p>other plugins</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>itomShapeLib</strong>: This library contains the C++ library <strong>ito::shape</strong>, used as container for shapes like lines,</dt><dd><p>rectangles, circles, squares, ellipses or polygons</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>itomCommonLib</strong>: This library contains further commonly used basic classes, which have no dependency to Qt (RetVal, Param…)</p></li>
+<li><p><strong>itomCommonPlotLib</strong>: This library contains further basic classes for plot plugins</p></li>
+</ol>
+<p>Whenever itom is using a plot or other widget from an itom designer plugin, the binary compatibility between itom
+and every plugin has to be assured (similar to other plugins of itom, see also <a class="reference internal" href="../07_plugins/loading_plugins.html#plugins-loading"><span class="std std-ref">this document</span></a>).</p>
+<p>This binary compatibility is defined by the following two main topics:</p>
+<ol class="arabic simple">
+<li><p>The plugin has to implement the correct interface, in accordance to its destination (plot plugin, further widget plugin, …)</p></li>
+<li><p>The plugin has to link against a binary compatible version of all libraries of the itom SDK, which are used by this plugin.</p></li>
+</ol>
+<p>To assure this, the basic interfaces to plot plugins, designer plugins as well as general itom plugins are subject to
+version numbers, that following the schematic of semantic versioning (semver.org). While the interface to general itom
+plugins is versioned by the <strong>addInInterface version number</strong> (see the file <strong>SDK/include/common/addInInterfaceVersion.h</strong>),
+the specific interface class to itom plot designer plugins, is versioned by the <strong>itom designerplugin interface number</strong>
+(see the file <strong>SDK/include/plot/designerPluginInterfaceVersion.h</strong>).</p>
+<p>In order to also cover the 2nd point of the binary compatibility list above, the <strong>addInInterface version number</strong> is
+also incremented (following semantic versioning), if one of the libraries of the SDK are changed. Plot specific things
+are covered by the <strong>itom designerplugin interface number</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>itom will only load a designer plugin, if the two version numbers, readout from the library, are compatible to the
+required version numbers of the core application of itom. However, problems might occur if an incompatible designer
+widget library is located in the designer folder. Therefore, a message will be shown at startup of itom, that informs
+the user to manually delete affected files. The reason is, that itom cannot prevent the Qt Designer application, started
+from itom, to load these incompatible libraries, which might crash the Qt Designer application. The same crash might
+happen if the user generates a user-defined GUI from a <em>ui</em>-file, that contains at least one widget from an incompatible
+library.</p>
+</div>
+</div>
+<div class="section" id="factory-class">
+<h2><span class="section-number">5.12.3. </span>Factory Class<a class="headerlink" href="#factory-class" title="Permalink to this headline">¶</a></h2>
+<p>The factory class of a designer plugin is usually derived from <strong>QDesignerCustomWidgetInterface</strong>. However if an itom
+plot widget is implemented, its factory class has to be derived from the class <strong>ito::AbstractItomDesignerPlugin</strong>, which
+itself is derived from <strong>QDesignerCustomWidgetInterface</strong>.</p>
+<p>The header file of this factory class then looks like this:</p>
+<div class="highlight-c++ notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;plot/AbstractItomDesignerPlugin.h&quot;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">YourPluginPlotFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AbstractItomDesignerPlugin</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+    <span class="nf">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span> <span class="s">&quot;org.qt-project.Qt.QDesignerCustomWidgetInterface&quot;</span> <span class="kt">FILE</span> <span class="s">&quot;pluginMetaData.json&quot;</span><span class="p">)</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">YourPluginPlotFactory</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="kt">bool</span> <span class="nf">isContainer</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="nf">isInitialized</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QIcon</span> <span class="nf">icon</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="nf">domXml</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="nf">group</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="nf">includeFile</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="nf">name</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="nf">toolTip</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QString</span> <span class="nf">whatsThis</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="nf">createWidget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">);</span>
+    <span class="n">QWidget</span> <span class="o">*</span><span class="nf">createWidgetWithMode</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AbstractFigure</span><span class="o">::</span><span class="n">WindowMode</span> <span class="n">winMode</span><span class="p">,</span> <span class="n">QWidget</span><span class="o">*</span> <span class="n">parent</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">QDesignerFormEditorInterface</span> <span class="o">*</span><span class="n">core</span><span class="p">);</span>
+
+<span class="k">private</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">initialized</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>Most of the methods follow the rules of default classes, implementing the <strong>QDesignerCustomWidgetInterface</strong> (see
+<a class="reference external" href="https://doc.qt.io/qt-5/qdesignercustomwidgetinterface.html">https://doc.qt.io/qt-5/qdesignercustomwidgetinterface.html</a>). However, there are some itom specific additions:</p>
+<ol class="arabic simple">
+<li><p>From itom 3.3.0, use the macro <strong>Q_PLUGIN_METADATA</strong> as stated in the snippet above. The indicated json file
+is an auto-generated json file, contained in the itom subfolder <strong>SDK/include</strong> and contains the two
+version numbers of the <strong>itom addInInterface</strong> and <strong>itom designerplugin interface</strong> (see chapter above). This
+meta information can then be read-out by itom at startup without the need to create an instances of contained
+classes. Please also add this macro to any other designer plugins, that make use of any libraries of the itom SDK.</p></li>
+<li><p><strong>createWidgetWithMode</strong>: This specific factory method is called only if a plot designer widget is called by
+a default itom figure (no user-defined GUI but an ordinary itom figure window).</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../06_extended_gui/extended_gui.html" class="btn btn-neutral float-right" title="6. Extending the user interface of itom" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="primitives.html" class="btn btn-neutral float-left" title="5.11. Markers, user selections and geometric shapes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,709 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>8.5. Python-Module matplotlib &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.6. Python-Module matlab" href="pymod-matlab.html" />
+    <link rel="prev" title="8.4. Popular Python packages" href="pymod-popular-python-packages.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">7. Plugins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="script-language.html">8. Python scripting language</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pymod-itom.html">8.1. Python-Module <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-dataObject.html">8.2. Array class DataObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-load-save-files.html">8.3. Save and load images and other files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-popular-python-packages.html">8.4. Popular Python packages</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.5. Python-Module matplotlib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-matplotlib-backend-to-itom">8.5.1. Set Matplotlib backend to itom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-matplotlib-example">8.5.2. Simple Matplotlib example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#embedding-a-matplotlib-figure-in-your-own-user-interface">8.5.3. Embedding a matplotlib figure in your own user interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#size-control-over-matplotlib-canvas">8.5.4. Size control over Matplotlib canvas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#font-not-found-in-matplotlib">8.5.5. Font not found in Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-an-animation-via-matplotlib">8.5.6. Creating an animation via Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-figures-for-a-thesis-report">8.5.7. Creating figures for a thesis/report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#designer-plugin-matplotlibplot">8.5.8. Designer plugin MatplotlibPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#properties">8.5.8.1. Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slots">8.5.8.2. Slots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signals">8.5.8.3. Signals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-matlab.html">8.6. Python-Module matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-reload-modules.html">8.7. Reload modified modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-limitations.html">8.8. Python Limitations in <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-problems-and-solutions.html">8.9. Python - common problems and solutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytutorial.html">8.10. Python tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="script-language.html"><span class="section-number">8. </span>Python scripting language</a> &raquo;</li>
+        
+      <li><span class="section-number">8.5. </span>Python-Module matplotlib</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/08_scriptLanguage/pymod-matplotlib.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-module-matplotlib">
+<span id="pymod-matplotlib"></span><h1><span class="section-number">8.5. </span>Python-Module matplotlib<a class="headerlink" href="#python-module-matplotlib" title="Permalink to this headline">¶</a></h1>
+<p>The module <strong>matplotlib</strong> can be used in order to create two or three dimensional plots like in these examples:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/matplotlib_intro.png"><img alt="../_images/matplotlib_intro.png" src="../_images/matplotlib_intro.png" style="width: 854.0px; height: 278.0px;" /></a>
+</div>
+<p>Since the internal plotting methods of <strong>itom</strong> mainly provide display widgets for plotting matrix contents and images, <strong>matplotlib</strong> can be
+used for plotting other types of graphics like graphs, line plots, bars… A huge list of examples can be found under <a class="reference external" href="http://matplotlib.org/gallery.html">http://matplotlib.org/gallery.html</a>.</p>
+<div class="section" id="set-matplotlib-backend-to-itom">
+<h2><span class="section-number">8.5.1. </span>Set Matplotlib backend to itom<a class="headerlink" href="#set-matplotlib-backend-to-itom" title="Permalink to this headline">¶</a></h2>
+<p><strong>Matplotlib 1.4.x or lower</strong></p>
+<p>In order to render the output of <strong>matplotlib</strong> into an <strong>itom</strong> window or a user interface generated by <strong>itom</strong> (see <a class="reference internal" href="../06_extended_gui/qtdesigner.html#qtdesigner"><span class="std std-ref">Creating customized dialogs, windows and dock widgets</span></a>), you need to write the following
+command before importing any module of the package <strong>matplotlib</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;module://mpl_itom.backend_itomagg&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, you can always configure <strong>matplotlib</strong> to render its output in <strong>itom</strong> windows. Therefore, <strong>itom</strong> internally has an environment variable <strong>MPLCONFIGDIR</strong> that
+points to the directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">itom</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">mpl_itom</span>
+</pre></div>
+</div>
+<p>of your <strong>itom</strong> installation (or build-folder if self-compiled). Place a copy of the matplotlib config file <strong>matplotlibrc</strong> into
+this directory and modify the variable <strong>backend</strong> to <strong>module://mpl_itom.backend_itomagg</strong>.</p>
+<p>A template for the configuration file can be either found in the Python subfolder <strong>[PythonDir]/Lib/site-packages/matplotlib/mpl-data</strong> or under <a class="reference external" href="http://matplotlib.org/_static/matplotlibrc">http://matplotlib.org/_static/matplotlibrc</a>.</p>
+<p>This is the part you need to change:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># the default backend; one of GTK GTKAgg GTKCairo GTK3Agg GTK3Cairo</span>
+<span class="c1"># CocoaAgg MacOSX Qt4Agg TkAgg WX WXAgg Agg Cairo GDK PS PDF SVG</span>
+<span class="c1"># Template</span>
+<span class="c1"># You can also deploy your own backend outside of matplotlib by</span>
+<span class="c1"># referring to the module name (which must be in the PYTHONPATH) as</span>
+<span class="c1"># &#39;module://my_backend&#39;</span>
+<span class="n">backend</span>      <span class="p">:</span> <span class="n">module</span><span class="p">:</span><span class="o">//</span><span class="n">mpl_itom</span><span class="o">.</span><span class="n">backend_itomagg</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once you placed the config file, you don’t need to use the <strong>use</strong> command in any of your scripts.</p>
+<p>If you are not sure, whether your user defined config file is loaded, you can obtain the path to the loaded config file with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matplotlib</span><span class="o">.</span><span class="n">matplotlib_fname</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For more information about this, see <a class="reference external" href="http://matplotlib.org/users/customizing.html">http://matplotlib.org/users/customizing.html</a></p>
+</div>
+<p><strong>Matplotlib 1.5 or higher</strong></p>
+<p><strong>itom</strong> automatically sets the environment variable <strong>MPLBACKEND</strong> to <em>module://mpl_itom.backend_itomagg</em>. Then, matplotlib outputs
+are directly rendered in the itom backend without further modifications of the code. The <strong>matplotlib.use</strong> command is not necessary
+any more, however it can be used to set another backend.</p>
+</div>
+<div class="section" id="simple-matplotlib-example">
+<h2><span class="section-number">8.5.2. </span>Simple Matplotlib example<a class="headerlink" href="#simple-matplotlib-example" title="Permalink to this headline">¶</a></h2>
+<p>This example shows you that is possible to use any arbitrary matplotlib python script and execute it in <strong>itom</strong>. Therefore, the example <strong>hist2d_log_demo.py</strong> from the pylab examples
+on <a class="reference external" href="http://matplotlib.org">http://matplotlib.org</a> is taken.</p>
+<p>Its source code is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;module://mpl_itom.backend_itomagg&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">EllipseCollection</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">XY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">Y</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]))</span>
+
+<span class="n">ww</span> <span class="o">=</span> <span class="n">X</span><span class="o">/</span><span class="mf">10.0</span>
+<span class="n">hh</span> <span class="o">=</span> <span class="n">Y</span><span class="o">/</span><span class="mf">15.0</span>
+<span class="n">aa</span> <span class="o">=</span> <span class="n">X</span><span class="o">*</span><span class="mi">9</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ec</span> <span class="o">=</span> <span class="n">EllipseCollection</span><span class="p">(</span>
+                        <span class="n">ww</span><span class="p">,</span>
+                        <span class="n">hh</span><span class="p">,</span>
+                        <span class="n">aa</span><span class="p">,</span>
+                        <span class="n">units</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                        <span class="n">offsets</span><span class="o">=</span><span class="n">XY</span><span class="p">,</span>
+                        <span class="n">transOffset</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="p">)</span>
+<span class="n">ec</span><span class="o">.</span><span class="n">set_array</span><span class="p">((</span><span class="n">X</span><span class="o">+</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">ec</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">autoscale_view</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ec</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;X+Y&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s2">&quot;ellipse collection&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Please consider that the original source code has been changed such that the first two lines are prepended. After executing this script, the following figure is displayed in <strong>itom</strong>:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/matplotlib_ellipseCollection.png"><img alt="../_images/matplotlib_ellipseCollection.png" src="../_images/matplotlib_ellipseCollection.png" style="width: 484.0px; height: 405.0px;" /></a>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the figure does not appear, the matplotlib designer widget for <strong>itom</strong> is not available. This means, the library <strong>matplotlibPlot</strong> in the <strong>designer</strong> folder of <strong>itom</strong> is missing.</p>
+</div>
+<p>Further examples from the official matplotlib gallery are contained in the itom subfolder <strong>demo/matplotlib</strong>.</p>
+</div>
+<div class="section" id="embedding-a-matplotlib-figure-in-your-own-user-interface">
+<h2><span class="section-number">8.5.3. </span>Embedding a matplotlib figure in your own user interface<a class="headerlink" href="#embedding-a-matplotlib-figure-in-your-own-user-interface" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/matplotlib_gui.png"><img alt="../_images/matplotlib_gui.png" src="../_images/matplotlib_gui.png" style="width: 903.0px; height: 424.0px;" /></a>
+</div>
+<p><strong>itom</strong> not only provides stand-alone windows for showing the result of the <em>matplotlib</em>, but it is also possible to integrate a <em>matplotlib</em> canvas into own user interfaces created by the
+QtDesigner and scripted with <strong>Python</strong>. For more information how to do this, see <a class="reference internal" href="../06_extended_gui/qtdesigner.html#qtdesigner"><span class="std std-ref">Creating customized dialogs, windows and dock widgets</span></a>.</p>
+<p>In the widget library of QtDesigner there is the widget <strong>MatplotlibPlot</strong> in the section <strong>itom Plugins</strong> (under the consumption that the corresponding designer plugin library is contained in the folder <em>designer</em> of the root directory of <strong>itom</strong>). Drag&amp;Drop an instance of this widget onto your user interface.</p>
+<p>In the following example, a new main window is created where a <em>MatplotlibPlot</em> widget (name: <em>plot</em>) is placed on the left side while two buttons (name: <em>btnDroppedSpines</em> and <em>btnSine</em>) are placed on the right side:</p>
+<p>When any of the both buttons are pressed, the following example should be displayed in the figure <strong>plot</strong> on the left side.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;module://mpl_itom.backend_itomagg&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="k">def</span> <span class="nf">plotDroppedSpines</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    plot taken from matplotlib example &#39;spines_demo_dropped.py&#39;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">canvas</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">plot</span> <span class="c1">#reference to matplotlibPlot widget</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">canvas</span><span class="o">=</span><span class="n">canvas</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;dropped spines&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Move left and bottom spines outward by 10 points</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;outward&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;outward&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="c1"># Hide the right and top spines</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># Only show ticks on the left and bottom spines</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">plotSine</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    plots sine, taken from matplotlib gallery examples</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">canvas</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">plot</span> <span class="c1">#reference to matplotlibPlot widget</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">canvas</span><span class="o">=</span><span class="n">canvas</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">gui</span> <span class="o">=</span> <span class="n">ui</span><span class="p">(</span><span class="s2">&quot;matplotlibGui.ui&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">TYPEWINDOW</span><span class="p">)</span>
+<span class="n">gui</span><span class="o">.</span><span class="n">btnSine</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked()&quot;</span><span class="p">,</span> <span class="n">plotSine</span><span class="p">)</span>
+<span class="n">gui</span><span class="o">.</span><span class="n">btnDroppedSpines</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked()&quot;</span><span class="p">,</span> <span class="n">plotDroppedSpines</span><span class="p">)</span>
+<span class="n">gui</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># if you call this script for the second time, the given figure-num (3)</span>
+<span class="c1"># is already in used for the lastly closed figure. Therefore also tell</span>
+<span class="c1"># matplotlib to close this figure handle.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/matplotlib_gui_result.png"><img alt="../_images/matplotlib_gui_result.png" src="../_images/matplotlib_gui_result.png" style="width: 1144.0px; height: 436.0px;" /></a>
+</div>
+<p><strong>What happens here?</strong></p>
+<ul class="simple">
+<li><p>At the end of the script, the user interface <em>matplotlibGui.ui</em> is loaded and referenced by the variable <em>gui</em>.</p></li>
+<li><p>The click-events of both buttons is connected to the methods <em>plotSine</em> and <em>plotDroppedSpines</em> respectively.</p></li>
+<li><p>The gui is shown</p></li>
+</ul>
+<p>For both button clicks the following things have to be done:</p>
+<p>Once you added the <strong>itom</strong>-backend command as first, mandatory line to your script, the <em>figure</em>-class of <em>matplotlib</em>
+has got one further keyword-based parameter <em>canvas</em>. This needs to be used in order to tell the figure where the
+widget is to plot the content to. If you omit this parameter, a new window is opened with the corresponding output.
+If you set this parameter to the reference of the widget of type <em>MatplotlibPlot</em> (here: called canvas), the output is
+print there.</p>
+<p>The you have the reference to the figure-instance of <em>matplotlib</em> and can go one like usual.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once you created one figure that maps to a given widget using the canvas-keyword, this figure is not deleted when
+a new figure is created using the same keyword. Therefore it will happen that lots of invisible figures need to be handled.
+Therefore, the <em>num</em> keyword argument is used in the methods in the example in order to always tell <em>matplotlib</em> that a defined
+figure with the handle <em>3</em> should be instantiated. If this handle already exists, this existing figure is used. Therefore it is
+also necessary to clear the axes using <strong>ax.clear()</strong>.</p>
+<p>Furthermore, if you created a figure with a given <em>num</em> and <em>canvas</em>, deletes the user interface and creates a new one, a new figure
+with the handle of the old one is not able to plot in the new user interface since it still is connected with the old, deleted
+widget. Therefore, the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is used to firstly delete the matplotlib-figure with handle <em>3</em> once the script is re-executed.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usually, <em>matplotlib</em> is allowed changing the size of the output window. The window is then forced to have a new size that can afterwards
+be manually resized. If your output widget is embedded in an user interface, this behaviour might be undesired. Then disable it by setting
+the property <strong>forceWindowResize</strong> to <strong>False</strong>. In the example above this can be done by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gui</span><span class="o">.</span><span class="n">plot</span><span class="p">[</span><span class="s2">&quot;forceWindowResize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>or by directlly setting the corresponding property when designing the user interface in QtDesigner.</p>
+</div>
+<p>This example is contained in the <strong>demo/ui/embeddedMatplotlib</strong> folder.</p>
+</div>
+<div class="section" id="size-control-over-matplotlib-canvas">
+<h2><span class="section-number">8.5.4. </span>Size control over Matplotlib canvas<a class="headerlink" href="#size-control-over-matplotlib-canvas" title="Permalink to this headline">¶</a></h2>
+<p>Usually, it is possible to control the size and dpi of the matplotlib canvas using the commands</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">myfig</span><span class="o">.</span><span class="n">set_dpi</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+<span class="n">myfig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">forward</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, if the matplotlib canvas is embedded in an itom user interface or in general in the itom backend (hence window management of itom),
+the size of the canvas is usually given by the outer size of the parent window and the layout of the user interface. Only, if the size
+of the canvas is increased, the size of the window may also increase. In order to provide a better size control of the canvas, the matplotlib
+widget has the property <strong>keepSizeFixed</strong>. If this property is true (default: false), the canvas will always have the indicated size. If one
+enlarges the outer window, the canvas will be unchanged in size and still be centered in the available area. Vice-versa, it is not possible to make
+the window smaller than the allowed canvas area.</p>
+<p>In order to axes the property <strong>keepSizeFixed</strong> it is necessary, to obtain the corresponding instance of class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem" title="itom.uiItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">uiItem</span></code></a> from the given
+matplotlib figure handle. If the figure handle can be obtained by the current figure, the access might look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#get current figure</span>
+<span class="n">current_figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+<span class="c1">#set the keepSizeFixed property of the plot to true:</span>
+<span class="n">current_figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">itomUI</span><span class="p">[</span><span class="s2">&quot;keepSizeFixed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1">#alternative:</span>
+<span class="c1">#plt.get_current_fig_manager().itomUI[&quot;keepSizeFixed&quot;]</span>
+</pre></div>
+</div>
+<p>As an example see the script <strong>hist2d_size_control.py</strong> in the <strong>demo/matplotlib</strong> folder.</p>
+</div>
+<div class="section" id="font-not-found-in-matplotlib">
+<h2><span class="section-number">8.5.5. </span>Font not found in Matplotlib<a class="headerlink" href="#font-not-found-in-matplotlib" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it might occur that Matplotlib cannot found a desired font name, even if it is installed on the computer. The reason might be,
+that Matplotlib caches installed fonts for a faster access. If the font has been installed recently, it might be necessary to update the cache.
+Usually, the cache is located in the install or build directory of <strong>itom</strong>:</p>
+<p><strong>itom/itom-packages/mpl_itom/fontList.py3k.cache</strong></p>
+<p>Delete this file, re-open itom and try to load the Matplotlib script again. In order to verify the path, where Matplotlib is currently
+searching for a cache file, use the following snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">get_cachedir</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_cachedir</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>(See also: <a class="reference external" href="http://stackoverflow.com/questions/26085867/matplotlib-font-not-found">http://stackoverflow.com/questions/26085867/matplotlib-font-not-found</a>)</p>
+</div>
+<div class="section" id="creating-an-animation-via-matplotlib">
+<h2><span class="section-number">8.5.6. </span>Creating an animation via Matplotlib<a class="headerlink" href="#creating-an-animation-via-matplotlib" title="Permalink to this headline">¶</a></h2>
+<p>Matplotlib can be used to create animation and save it as a <em>mp4</em> file. The <strong>ffmpeg codec</strong> is required for this feature and needs to be installed on your computer. A detailed description for the installation of the ffmpeg codec can be found <a class="reference external" href="http://www.adaptivesamples.com/how-to-install-ffmpeg-on-windows">here</a>. The build version of the ffmpeg codec can be downloaded <a class="reference external" href="http://ffmpeg.zeranoe.com/builds">here</a>. Download and unzip the build files to your harddrive.</p>
+<p>Typically the folder is like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Program</span> <span class="n">files</span>\<span class="n">ffmpeg</span>
+</pre></div>
+</div>
+<p>The bin folder of ffmpeg must be added to the path variables of your system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Program</span> <span class="n">files</span>\<span class="n">ffmpeg</span>\<span class="nb">bin</span>
+</pre></div>
+</div>
+<p>Finally start the command prompt and run the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">Program</span> <span class="n">files</span>\<span class="n">ffmpeg</span>\<span class="nb">bin</span>\<span class="n">ffmpeg</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">codecs</span>
+</pre></div>
+</div>
+<p>or easier:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ffmpeg</span> <span class="o">-</span><span class="n">codecs</span>
+</pre></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default">
+<img alt="../_images/matplotlibAnimation1d.gif" src="../_images/matplotlibAnimation1d.gif" />
+</div>
+</td>
+<td><div class="figure align-default">
+<img alt="../_images/matplotlibAnimation2d.gif" src="../_images/matplotlibAnimation2d.gif" />
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>1d animation</p></td>
+<td><p>2d animation</p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/matplotlibAnimation1d.png"><img alt="../_images/matplotlibAnimation1d.png" src="../_images/matplotlibAnimation1d.png" style="width: 0.0px; height: 0.0px;" /></a>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="../_images/matplotlibAnimation2d.png"><img alt="../_images/matplotlibAnimation2d.png" src="../_images/matplotlibAnimation2d.png" style="width: 0.0px; height: 0.0px;" /></a>
+</div>
+<p>In the <strong>demo/matplotlib</strong> folder are two demo scripts (<strong>matplotlibAnimation1d.py, matplotlibAnimation2d.py</strong>), which show how to create animations.</p>
+</div>
+<div class="section" id="creating-figures-for-a-thesis-report">
+<h2><span class="section-number">8.5.7. </span>Creating figures for a thesis/report<a class="headerlink" href="#creating-figures-for-a-thesis-report" title="Permalink to this headline">¶</a></h2>
+<p>Matplotlib can be used to create figures with <strong>LaTeX</strong> for the text layout. This figures can be saved as <em>pdf</em> or <em>eps</em> files for your document. The figures then have the same text layout as the main document using <strong>LaTeX</strong>. Matplotlib with <strong>LaTeX</strong> support is slower.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Required installation: <a class="reference external" href="https://miktex.org/">LaTeX</a> , <a class="reference external" href="https://www.ctan.org/pkg/dvipng?lang=de/">dvipng</a> (may be included in LaTeX installation), <a class="reference external" href="https://www.ghostscript.com/">Ghostscript</a> . The executables of <strong>LaTeX</strong>, <strong>Ghostscript</strong> must all be located on your <strong>PATH</strong> variable.</p>
+</div>
+<p>The <strong>LaTeX</strong> options is actived by the setting <em>text.usedtex</em> in the <strong>rc</strong> settings of the Matplotlib:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fromt</span> <span class="n">matplotlib</span> <span class="kn">import</span> <span class="nn">rc</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some detailed documentation can be found on the Matplotlib website: <a class="reference external" href="http://matplotlib.org/users/usetex.html">http://matplotlib.org/users/usetex.html</a></p>
+<p>The mathmode of <strong>LaTeX</strong> ($ e = mc^1$) is not supported. The command <em>displaystyle</em> must be added or unicode must be used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.unicode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>All strings which are created ba <strong>LaTeX</strong> needs a <strong>r</strong> before the opening quote.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\textbf{time (s)}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If some special <strong>LaTeX</strong> packages are needed, you can included whose by adding the package to the matplotlib latex preamble:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.latex.preamble&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;\RequirePackage[T1]</span><span class="si">{fontenc}</span><span class="s1">&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In the <strong>demo/matplotlib</strong> folder is a demo scripts (<strong>tex_demo</strong>), which show how to create such a figure. In this demo three methods of matplotlib plots are included (default, latex, latex.unicode). Unicode must be used, if special characters are needed in the text. Here you see the example with the default text layout and the <strong>LaTeX</strong> text layout.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-default">
+<img alt="../_images/matplotlibDefaultText.png" src="../_images/matplotlibDefaultText.png" />
+</div>
+</td>
+<td><div class="figure align-default">
+<img alt="../_images/matplotlibLatexText.png" src="../_images/matplotlibLatexText.png" />
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="designer-plugin-matplotlibplot">
+<h2><span class="section-number">8.5.8. </span>Designer plugin MatplotlibPlot<a class="headerlink" href="#designer-plugin-matplotlibplot" title="Permalink to this headline">¶</a></h2>
+<p>If the itom backend is chosen for the Matplotlib, all matplotlib outputs are displayed in the itom designer plugin <strong>MatplotlibPlot</strong>.
+This widget plugin has the following properties, slots and signals that can be used to control and adjust the settings of the rendered image.
+Many of these features are also used in the documentations above:</p>
+<div class="section" id="properties">
+<h3><span class="section-number">8.5.8.1. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname"><span class="pre">keepSizeFixed</span> <span class="pre">:</span> <span class="pre">bool</span></code></dt>
+<dd><p>If you want to control the size of the canvas by python / matplotlib (e.g. set_size_inches), set this to true. The canvas will then have a fixed size, that is not affected by the window size.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname"><span class="pre">renderLegend</span> <span class="pre">:</span> <span class="pre">bool</span></code></dt>
+<dd><p>If this property is true, the legend are included in pixelmaps renderings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname"><span class="pre">forceWindowResize</span> <span class="pre">:</span> <span class="pre">bool</span></code></dt>
+<dd><p>If set, the plot widget / area is resized to the desired sizes given by matplotlib. Uncheck this option, if you want to keep the canvas unchanged e.g. in an user-defined GUI</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname"><span class="pre">toolbarVisible</span> <span class="pre">:</span> <span class="pre">bool</span></code></dt>
+<dd><p>Toggles the visibility of the toolbar of the plot.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname"><span class="pre">contextMenuEnabled</span> <span class="pre">:</span> <span class="pre">bool</span></code></dt>
+<dd><p>Defines whether the context menu of the plot should be enabled or not.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="slots">
+<h3><span class="section-number">8.5.8.2. </span>Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt>
+<code class="sig-name descname"><span class="pre">getPlotID()</span> <span class="pre">[slot]</span></code></dt>
+<dd><p>Return window ID of this plot {int}.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-name descname"><span class="pre">replot()</span> <span class="pre">[slot]</span></code></dt>
+<dd><p>forces a replot of the plot</p>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-name descname"><span class="pre">refreshPlot()</span> <span class="pre">[slot]</span></code></dt>
+<dd><p>Triggers an update of the current plot window.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-name descname"><span class="pre">showSubplotConfig(left,</span> <span class="pre">top,</span> <span class="pre">right,</span> <span class="pre">bottom,</span> <span class="pre">wSpace,</span> <span class="pre">hSpace)</span> <span class="pre">[slot]</span></code></dt>
+<dd><p>displays the subplot configuration dialog.</p>
+<p>This slot must usually not be used, since the dialog can be opened by the toolbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – left border of the current subplot configuration.</p></li>
+<li><p><strong>top</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – top border of the current subplot configuration.</p></li>
+<li><p><strong>right</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – right border of the current subplot configuration.</p></li>
+<li><p><strong>bottom</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – bottom border of the current subplot configuration.</p></li>
+<li><p><strong>wSpace</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – horizontal space between every subplot of the current configuration.</p></li>
+<li><p><strong>hSpace</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – vertical space between every subplot of the current configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt>
+<code class="sig-name descname"><span class="pre">setLabelText(text)</span> <span class="pre">[slot]</span></code></dt>
+<dd><p>displays a text in the toolbar</p>
+<p>The text is displayed in the label that is usually used for coordinates of the mouse cursor….</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3.8/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – text to display</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="signals">
+<h3><span class="section-number">8.5.8.3. </span>Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt>
+<code class="sig-name descname"><span class="pre">subplotConfigSliderChanged(type,</span> <span class="pre">value)</span> <span class="pre">[signal]</span></code></dt>
+<dd><p>interal use between MatplotlibPlot and the subplot configuration dialog.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To connect to this signal use the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yourItem</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;subplotConfigSliderChanged(int,int)&#39;</span><span class="p">,</span> <span class="n">yourMethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="pymod-matlab.html" class="btn btn-neutral float-right" title="8.6. Python-Module matlab" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pymod-popular-python-packages.html" class="btn btn-neutral float-left" title="8.4. Popular Python packages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7.8.20. Optional configuration dialog for hardware plugins &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.9. OpenCV matrices cv::Mat and cv::Mat_" href="openCVMat.html" />
+    <link rel="prev" title="7.8.19. Optional dock widget (toolbox) for hardware plugins" href="plugin-dockWidget.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../loading_plugins.html">7.2. Loading plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">7.3. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">7.4. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">7.5. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">7.6. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">7.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">7.8. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">7.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">7.8.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">7.8.3. DataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">7.8.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">7.8.5. Parameters - Meta Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">7.8.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">7.8.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">7.8.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">7.8.9. AddInBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">7.8.10. Plugin class - Basic information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">7.8.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-actuator.html">7.8.12. Plugin class - Actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">7.8.13. Plugin class - Algo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">7.8.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">7.8.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">7.8.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">7.8.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">7.8.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">7.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">7.8.20. Optional configuration dialog for hardware plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#base-idea-behind-the-config-dialog">7.8.20.1. Base idea behind the config dialog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-interface-design">7.8.20.2. User Interface Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#necessary-source-code">7.8.20.3. Necessary Source Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implement-the-config-dialog-in-the-plugin">7.8.20.4. Implement the config dialog in the plugin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">7.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../plugins.html"><span class="section-number">7. </span>Plugins</a> &raquo;</li>
+        
+          <li><a href="plugin-development.html"><span class="section-number">7.8. </span>Development under C++</a> &raquo;</li>
+        
+      <li><span class="section-number">7.8.20. </span>Optional configuration dialog for hardware plugins</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/07_plugins/development/plugin-configDialog.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optional-configuration-dialog-for-hardware-plugins">
+<span id="plugin-class-configdialog"></span><h1><span class="section-number">7.8.20. </span>Optional configuration dialog for hardware plugins<a class="headerlink" href="#optional-configuration-dialog-for-hardware-plugins" title="Permalink to this headline">¶</a></h1>
+<p>Every hardware plugin (actuator, dataIO) can provide one configuration dialog that can be shown as a modal dialog (if shown, the remaining application is blocked until the dialog is closed). Using this dialog the user can configure the plugin’s instance without need of scripting. An example for the configuration dialog of a USB camera device of the plugin <em>MSMediaFoundation</em> looks like:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/configurationDialog.png"><img alt="../../_images/configurationDialog.png" src="../../_images/configurationDialog.png" style="width: 347.0px; height: 228.0px;" /></a>
+</div>
+<p>In difference to the optional <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span class="std std-ref">toolboxes</span></a>, the parameter is not directly changed once the user changes the value of any widget, but the configuration dialog should provide an OK, cancel and optional apply button. By clicking OK, all currently changed values are applied and sent to the plugin via multiple calls to <strong>setParam</strong>. Apply has the same behaviour but the dialog is not closed. By clicking cancel or closing the dialog, no changes are applied.</p>
+<p>Usually, the configuration dialog can be opened by the menu or context menu of the plugin toolbox of <strong>itom</strong>. Alternatively, the plugin classes in Python provide the methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cam</span><span class="o">.</span><span class="n">showConfiguration</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This section describes a possibility to generate such a toolbox.</p>
+<div class="section" id="base-idea-behind-the-config-dialog">
+<h2><span class="section-number">7.8.20.1. </span>Base idea behind the config dialog<a class="headerlink" href="#base-idea-behind-the-config-dialog" title="Permalink to this headline">¶</a></h2>
+<p>Before you start programming the dialog, read the documentation about how to program a <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span class="std std-ref">toolbox</span></a> and consider the following specific hints:</p>
+<ul class="simple">
+<li><p>Although the plugin is always executed in its own thread, the configuration dialog always runs in the main thread of <strong>itom</strong>. Qt has a general restriction that GUI related things must always be executed in the main thread.</p></li>
+<li><p>Therefore the communication between config dialog and plugin must be implemented via a thread-safe signal/slot mechanism.</p></li>
+<li><p><strong>itom</strong> provides the base class <strong>ito::AbstractAddInConfigDialog</strong> in order to unify and simplify this process. This base class is contained in the SDK.</p></li>
+<li><p>Usually you will design the config dialog with the <strong>Qt Designer</strong> and implement the specific code within a class that is inherited from <strong>ito::AbstractAddInConfigDialog</strong>.</p></li>
+<li><p>As last step, you need to add some lines of code in the plugin class such that the plugin and itom know about the existence of the config dialog.</p></li>
+<li><p>Since the configuration dialog usually does not provide functionalities to move any actuator axes, the programming for dataIO and actuator devices is the same (in difference to the <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span class="std std-ref">toolboxes</span></a>).</p></li>
+</ul>
+</div>
+<div class="section" id="user-interface-design">
+<h2><span class="section-number">7.8.20.2. </span>User Interface Design<a class="headerlink" href="#user-interface-design" title="Permalink to this headline">¶</a></h2>
+<p>The base design of the config dialog is done in <strong>Qt Designer</strong>. The user is referred to the documentation about creating <a class="reference internal" href="plugin-dockWidget.html#plugin-class-dockwidget"><span class="std std-ref">toolboxes</span></a> in order to learn how to create the user interface. The dialog is not created as widget but as dialog. As you see in the following screenshot</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/configDialogQtDesigner.png"><img alt="../../_images/configDialogQtDesigner.png" src="../../_images/configDialogQtDesigner.png" style="width: 827.0px; height: 564.0px;" /></a>
+</div>
+<p>it is convenient to realize the OK, Cancel and Apply buttons as widget <strong>QDialogButtonBox</strong>. Click the Ok, Cancel and Apply items of the <strong>standardButtons</strong> property in order to show the desired buttons. It is also allowed to use single buttons for the same behaviour. However, in the following, the dialog button box is used.</p>
+</div>
+<div class="section" id="necessary-source-code">
+<h2><span class="section-number">7.8.20.3. </span>Necessary Source Code<a class="headerlink" href="#necessary-source-code" title="Permalink to this headline">¶</a></h2>
+<p>After having created the basic user interface in Qt Creator, the config consists of a header and source file. Create the two files in the source directory of the plugin and insert them in the list of header and source files in the plugin’s <strong>CMakeLists.txt</strong>. The header file should look like this:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef DIALOGYOURPLUGIN_H</span>
+<span class="cp">#define DIALOGYOURPLUGIN_H</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/param.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/retVal.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/sharedStructuresQt.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/abstractAddInConfigDialog.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;ui_nameOfTheDialogUiFile.h&quot;</span><span class="c1"> //TODO</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;qstring.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;qmap.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;qabstractbutton.h&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">ito</span>
+<span class="p">{</span>
+    <span class="k">class</span> <span class="nc">AddInBase</span><span class="p">;</span> <span class="c1">//forward declaration</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">DialogYourPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AbstractAddInConfigDialog</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">DialogYourPlugin</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">*</span><span class="n">pluginInstance</span><span class="p">);</span>
+        <span class="o">~</span><span class="n">DialogYourPlugin</span><span class="p">()</span> <span class="p">{};</span>
+
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">applyParameters</span><span class="p">();</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="kt">bool</span> <span class="n">m_firstRun</span><span class="p">;</span>
+        <span class="n">Ui</span><span class="o">::</span><span class="n">ObjectNameOfTheUIDialog</span> <span class="n">ui</span><span class="p">;</span> <span class="c1">//TODO</span>
+
+    <span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+        <span class="kt">void</span> <span class="n">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">);</span>
+
+    <span class="k">private</span> <span class="nl">slots</span><span class="p">:</span>
+        <span class="c1">//auto-connected slot called if ok, apply or cancel is clicked</span>
+        <span class="kt">void</span> <span class="n">on_buttonBox_clicked</span><span class="p">(</span><span class="n">QAbstractButton</span><span class="o">*</span> <span class="n">btn</span><span class="p">);</span>
+
+        <span class="cm">/*Since all parameters are only evaluated and sent</span>
+<span class="cm">          if one of the buttons are clicked, you usually don&#39;t</span>
+<span class="cm">          need to connect to the specific signals of all widgets.</span>
+<span class="cm">          However, if you need to implement special interactive</span>
+<span class="cm">          functionalities, define some further slots here.</span>
+<span class="cm">        */</span>
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>The header file has an easier structure than the class of a toolbox, since parameters are only evaluated and sent if one of the buttons
+are clicked. Some words about this header file:</p>
+<ul class="simple">
+<li><p>The constructors obtains the pointer to the plugin itself as argument.</p></li>
+<li><p>The member <strong>ui</strong> is a reference to the auto-created class of the <strong>ui</strong>-file. By this member you get access to all widgets added in Qt Creator.</p></li>
+<li><p>The member <strong>m_firstRun</strong> can be used to check if the parameters (m_params) of the plugin are send to the config dialog for the first time in order to initialize/configure some widgets at the first run.</p></li>
+<li><p>The slot <strong>parametersChanged</strong> is called if some parameters of the plugin are (externally) changed and is called after the creation of the config dialog (see <em>firstRun</em>).</p></li>
+<li><p>The method <strong>applyParameters()</strong> is responsible for sending all changed parameters to the plugin. This method is automatically called if the dialog is closed using the <strong>apply</strong>-signal (done by the plugin). If the apply button has been clicked, the programmer should call this method as well.</p></li>
+<li><p>adapt the lines marked with <strong>//TODO</strong>.</p></li>
+</ul>
+<p>Now, some hints about the implementation of the different methods in the source file.</p>
+<p>The constructor passes the pluginInstance pointer to the constructor of the super class <strong>AbstractAddInDockWidget</strong> and initializes the ui-file:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">DialogYourPlugin</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span> <span class="o">*</span><span class="n">pluginInstance</span><span class="p">)</span> <span class="o">:</span>
+    <span class="n">AbstractAddInConfigDialog</span><span class="p">(</span><span class="n">pluginInstance</span><span class="p">),</span>
+    <span class="n">m_firstRun</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ui</span><span class="p">.</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Initialize the widgets depending on the parameters of the plugin and change their current value if the parameters of the plugin changed (e.g. by a python script):</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">parametersChanged</span><span class="p">(</span><span class="n">QMap</span><span class="o">&lt;</span><span class="n">QString</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//use params (identical to m_params of the plugin)</span>
+    <span class="c1">//and initialize all widgets (e.g. min, max values, labels, enable some,...)</span>
+
+    <span class="c1">//if you use two range widgets (class RangeWidget from itomWidgets) for visualizing the ROI,</span>
+    <span class="c1">//you can directly pass the contraints of the width and height in terms of a ito::RectMeta structure, assigned</span>
+    <span class="c1">//to the plugin parameter &#39;roi&#39; to the RangeWidgets:</span>
+    <span class="cm">/*ito::RectMeta *rm = static_cast&lt;ito::RectMeta*&gt;(params[&quot;roi&quot;].getMeta());</span>
+<span class="cm">    ui.rangeX01-&gt;setLimitsFromIntervalMeta(rm-&gt;getWidthRangeMeta());</span>
+<span class="cm">    ui.rangeY01-&gt;setLimitsFromIntervalMeta(rm-&gt;getHeightRangeMeta());*/</span>
+
+    <span class="c1">//change the current value of all widgets to the value given in the params map</span>
+
+    <span class="n">m_currentParameters</span> <span class="o">=</span> <span class="n">params</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In difference to the <strong>parametersChanged</strong> method of the toolboxes, the current set of parameters is saved in the member <strong>m_currentParameters</strong>, defined in <strong>ito::AbstractAddInConfigDialog</strong>. This can then be used to check if a parameter has been changed or not. Only changed parameters should be sent back to the plugin in the <strong>applyParameters</strong> method.</p>
+</div>
+<p>Here is the code for a click on any button of the button box (the objectName of the button box in Qt Designer is <strong>buttonBox</strong>:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">on_buttonBox_clicked</span><span class="p">(</span><span class="n">QAbstractButton</span><span class="o">*</span> <span class="n">btn</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">);</span>
+
+    <span class="n">QDialogButtonBox</span><span class="o">::</span><span class="n">ButtonRole</span> <span class="n">role</span> <span class="o">=</span> <span class="n">ui</span><span class="p">.</span><span class="n">buttonBox</span><span class="o">-&gt;</span><span class="n">buttonRole</span><span class="p">(</span><span class="n">btn</span><span class="p">);</span>
+
+    <span class="c1">//cancel button, emit reject() -&gt; dialog is closed</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="n">QDialogButtonBox</span><span class="o">::</span><span class="n">RejectRole</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">reject</span><span class="p">();</span> <span class="c1">//close dialog with reject</span>
+    <span class="p">}</span>
+    <span class="c1">//ok button, emit accept() -&gt; dialog is closed</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">role</span> <span class="o">==</span> <span class="n">QDialogButtonBox</span><span class="o">::</span><span class="n">AcceptRole</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">accept</span><span class="p">();</span> <span class="c1">//AcceptRole</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="c1">//apply button, only call applyParameters</span>
+    <span class="p">{</span>
+        <span class="n">applyParameters</span><span class="p">();</span> <span class="c1">//ApplyRole</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The most important function of these configuration dialogs is the method <strong>applyParameters</strong>. In the following example, these things are mainly done:</p>
+<ul class="simple">
+<li><p>A vector of <strong>QSharedPointer&lt;ito::ParamBase&gt;</strong>, called <em>values</em> is created</p></li>
+<li><p>Every parameter that has been changed is added to this vector with its right name, type and new value</p></li>
+<li><p>The vector is sent to the plugins instance using the method <strong>setPluginParameters</strong>, defined in <strong>ito::AbstractAddInConfigDialog</strong>.</p></li>
+<li><p>The method usually shows a message box if an error or warning occurs during the <em>setParam</em> process (see value <em>msgLevelWarningAndError</em>).</p></li>
+</ul>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">DialogYourPlugin</span><span class="o">::</span><span class="n">applyParameters</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">retValue</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retOk</span><span class="p">);</span>
+    <span class="n">QVector</span><span class="o">&lt;</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">values</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">success</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="c1">//only send parameters which are changed</span>
+
+    <span class="c1">//example for &#39;colorMode&#39;, shown as comboBox in the configDialog</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">QString</span><span class="o">::</span><span class="n">compare</span><span class="p">(</span><span class="n">m_currentParameters</span><span class="p">[</span><span class="s">&quot;colorMode&quot;</span><span class="p">].</span><span class="n">getVal</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(),</span> <span class="n">ui</span><span class="p">.</span><span class="n">comboColorMode</span><span class="o">-&gt;</span><span class="n">currentText</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="p">(</span><span class="s">&quot;colorMode&quot;</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">ParamBase</span><span class="o">::</span><span class="n">String</span><span class="p">,</span> \
+            <span class="n">ui</span><span class="p">.</span><span class="n">comboColorMode</span><span class="o">-&gt;</span><span class="n">currentText</span><span class="p">().</span><span class="n">toLatin1</span><span class="p">().</span><span class="n">data</span><span class="p">())));</span>
+    <span class="p">}</span>
+
+    <span class="c1">//check further parameters...</span>
+
+    <span class="n">retValue</span> <span class="o">+=</span> <span class="n">setPluginParameters</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">msgLevelWarningAndError</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">retValue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implement-the-config-dialog-in-the-plugin">
+<h2><span class="section-number">7.8.20.4. </span>Implement the config dialog in the plugin<a class="headerlink" href="#implement-the-config-dialog-in-the-plugin" title="Permalink to this headline">¶</a></h2>
+<p>In order to add the configuration dialog in the plugin class, two things need to be done.</p>
+<ol class="arabic">
+<li><p>Overload the method <strong>hasConfDialog</strong> in the public domain of the plugin class (e.g. header file) and return 1 in order to indicate that this plugin has a configuration dialog and define the method <strong>showConfDialog</strong>:</p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YourPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="p">...</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Implement <strong>showConfDialog</strong> in the plugin’s source file:</p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">YourPlugin</span><span class="o">::</span><span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nf">apiShowConfigurationDialog</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span> <span class="n">DockWidgetYourPlugin</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>The api method in the <strong>showConfDialog</strong> method mainly connects the <strong>parametersChanged</strong> signal of the plugin with the same slot in the configuration dialog and sends the current set of parameters (<em>m_params</em>) of the plugin to the dialog. Next, the dialog is executed as modal dialog. The function waits until either the <strong>apply</strong> or <strong>reject</strong> signal of the dialog is sent and the dialog is closed. If the <strong>apply</strong> signal is sent, <strong>applyParametes</strong> of the dialog is called such that the parameters of the dialog are set in the plugin. Last but not least, the dialog is destroyed.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="openCVMat.html" class="btn btn-neutral float-right" title="7.9. OpenCV matrices cv::Mat and cv::Mat_" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plugin-dockWidget.html" class="btn btn-neutral float-left" title="7.8.19. Optional dock widget (toolbox) for hardware plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

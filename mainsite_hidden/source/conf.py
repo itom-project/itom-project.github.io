@@ -52,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'itom'
-copyright = '2018, Institut für Technische Optik, Universität Stuttgart'
+copyright = '2021, Institut für Technische Optik, Universität Stuttgart'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
