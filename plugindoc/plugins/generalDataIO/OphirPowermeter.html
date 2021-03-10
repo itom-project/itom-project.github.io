@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3.3. OphirPowermeter &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.4. SuperlumBL" href="SuperlumBL.html" />
+    <link rel="prev" title="3.2. LibModBus" href="LibModBus.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../GDIO.html">3. General Data IO</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CyUSB.html">3.1. CyUSB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LibModBus.html">3.2. LibModBus</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.3. OphirPowermeter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">3.3.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">3.3.2. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">3.3.3. Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemplary-usage-from-python">3.3.4. Exemplary usage from Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">3.3.5. Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SuperlumBL.html">3.4. SuperlumBL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SuperlumBS.html">3.5. SuperlumBS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThorlabsFF.html">3.6. ThorlabsFF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispWindow.html">3.7. DispWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glDisplay.html">3.8. GLDisplay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwInstekPSP.html">3.9. GWInstekPSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hidApi.html">3.10. HidApi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libUSB.html">3.11. LibUSB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialIO.html">3.12. SerialIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thorlabsPowerMeter.html">3.13. Thorlabs Power Meter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../GDIO.html"><span class="section-number">3. </span>General Data IO</a> &raquo;</li>
+        
+      <li><span class="section-number">3.3. </span>OphirPowermeter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/plugins/generalDataIO/OphirPowermeter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ophirpowermeter">
+<h1><span class="section-number">3.3. </span>OphirPowermeter<a class="headerlink" href="#ophirpowermeter" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><span>Plugin for Ophir Powermeter.</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><span>DataIO</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><span>licensed under LGPL</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Windows, (Linux possible but yet not implemented)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Devices</strong>:</p></td>
+<td><p>Powermeter VEGA from company <em>Ophir</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Author</strong>:</p></td>
+<td><p><span>J. Krauter, Trumpf Lasersystems For Semiconductor Manufacturing Gmbh</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2><span class="section-number">3.3.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The OphirPowermeter is an itom plugin which is used for Powermeters from Ophir.
+It supports the RS232 and USB connection types. To use the RS232 variante, you must initiate first a serialIO plugin and use it as an initParameter.</p>
+<p>Tested devices: 1-channel VEGA (USB, RS232) with a Thermopile head.For the USB type it is necessary to install the COM object which comes with StarLab form Ophir.Download page: <a class="reference external" href="https://www.ophiropt.com/laser--measurement/software/com-object">https://www.ophiropt.com/laser–measurement/software/com-object</a></p>
+</div>
+<div class="section" id="initialization">
+<h2><span class="section-number">3.3.2. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><strong>connection</strong>: {str} default: RS232</dt><dd><p>Type of the connection (‘RS232’, ‘USB’). For the RS232 connection a serialIO plugin instance is needed!</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>serial</strong>: {dataIO|actuator, optional}</dt><dd><p>An opened serial port (the right communication parameters will be set by this plugin).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>serialNo</strong>: {str, optional} default:</dt><dd><p>Serial number of the device to be connected. If empty, all found serial numbers will be printed and the first device that is detected will be opened.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="parameters">
+<h2><span class="section-number">3.3.3. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><strong>ROMVersion</strong>: {str}, read-only</dt><dd><p>Version of ROM software.</p>
+</dd>
+<dt><strong>battery</strong>: {int}, read-only</dt><dd><p>1 if battery is OK, 0 if battery is low.</p>
+</dd>
+<dt><strong>calibrationDueDate</strong>: {str}, read-only</dt><dd><p>Calibration due date.</p>
+</dd>
+<dt><strong>comPort</strong>: {int}, read-only</dt><dd><p>The current com-port ID of this specific device. -1 means undefined.</p>
+</dd>
+<dt><strong>connection</strong>: {str}, read-only</dt><dd><p>type of the connection (‘RS232’, ‘USB’).</p>
+</dd>
+<dt><strong>deviceType</strong>: {str}, read-only</dt><dd><p>Device type (NOVA, VEGA, LASERSTAR-S (single channel), LASERSTAR-D (dual channel), Nova-
+II).</p>
+</dd>
+<dt><strong>headName</strong>: {str}, read-only</dt><dd><p>Head name connected to the device.</p>
+</dd>
+<dt><strong>headSerialNumber</strong>: {str}, read-only</dt><dd><p>Head serial number connected to the device.</p>
+</dd>
+<dt><strong>headType</strong>: {str}, read-only</dt><dd><p>Head type (thermopile, BC20, temperature probe, photodiode, CIE head, RP head,
+pyroelectric, nanoJoule meter, no head connected.</p>
+</dd>
+<dt><strong>measurementType</strong>: {str}</dt><dd><p>Measurement type (energy or power).</p>
+</dd>
+<dt><strong>name</strong>: {str}, read-only</dt><dd><p>Name of plugin.</p>
+</dd>
+<dt><strong>range</strong>: {int}</dt><dd><p>Measurement range (0: AUTO, 1: 150W, 2: 50.0W, 3: 5.00W).</p>
+</dd>
+<dt><strong>serialNumber</strong>: {str}, read-only</dt><dd><p>Serial number of the device shown on display.</p>
+</dd>
+<dt><strong>timeout</strong>: {int}, read-only</dt><dd><p>Request timeout, default 1000 ms.</p>
+</dd>
+<dt><strong>unit</strong>: {str}</dt><dd><p>Unit of device</p>
+</dd>
+<dt><strong>wavelength</strong>: {str}</dt><dd><p>Available discrete wavelengths: 10.6 .8-6 &lt;.8u.</p>
+</dd>
+<dt><strong>wavelengthSet</strong>: {str}, read-only</dt><dd><p>Setting of the measurement wavelength (DISCRETE or CONTINUOUS).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="exemplary-usage-from-python">
+<h2><span class="section-number">3.3.4. </span>Exemplary usage from Python<a class="headerlink" href="#exemplary-usage-from-python" title="Permalink to this headline">¶</a></h2>
+<p>In the following script, the first detectable power meter is connected and a oscilloscope-like
+plot is opened that displays a moving graph of recent intensity values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">connectionType</span> <span class="o">=</span> <span class="s2">&quot;USB&quot;</span>
+
+<span class="k">if</span> <span class="n">connectionType</span> <span class="o">==</span> <span class="s2">&quot;USB&quot;</span><span class="p">:</span>  <span class="c1"># connects the USB powermeter type</span>
+    <span class="n">adda</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;OphirPowermeter&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="n">connectionType</span><span class="p">)</span>  <span class="c1"># connect a USB Powermeter</span>
+<span class="k">elif</span> <span class="n">connectionType</span> <span class="o">==</span> <span class="s2">&quot;RS232&quot;</span><span class="p">:</span>  <span class="c1"># connects the RS232 powermeter type with the additional SerialIO instance</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">baud</span> <span class="o">=</span> <span class="mi">9600</span>
+    <span class="n">endline</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\r</span><span class="s1">&#39;</span>
+    <span class="n">adda</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;OphirPowermeter&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="n">connectionType</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">baud</span><span class="p">,</span> <span class="n">endline</span><span class="p">))</span>
+
+<span class="n">numPoints</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">numPoints</span><span class="p">],</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">plotHandle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot1</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">timeout</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">timerId</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+    <span class="n">adda</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>  <span class="c1"># acquire new intensity value</span>
+
+    <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="n">numPoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>  <span class="c1"># shift pixels to the left by one...</span>
+
+    <span class="n">adda</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>  <span class="c1"># get the recently acquired value</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">copyMetaInfo</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">numPoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># ...append new value to the end of image</span>
+
+    <span class="k">if</span> <span class="n">plotHandle</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">plotHandle</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span>  <span class="c1"># update the displayed image</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure has been closed. Stop acquisition...&quot;</span><span class="p">)</span>
+        <span class="n">timerId</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">timerId</span>
+
+
+<span class="n">timerId</span> <span class="o">=</span> <span class="n">timer</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>  <span class="c1"># call timeout every 50ms</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="changelog">
+<h2><span class="section-number">3.3.5. </span>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>itom setup 4.1.0: This plugin has been compiled using the StarLab 3.60.0</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="SuperlumBL.html" class="btn btn-neutral float-right" title="3.4. SuperlumBL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="LibModBus.html" class="btn btn-neutral float-left" title="3.2. LibModBus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 10, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
