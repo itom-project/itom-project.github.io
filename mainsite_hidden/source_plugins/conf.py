@@ -17,6 +17,8 @@ import sphinx
 import itom as itomFuncs
 import __main__
 import inspect
+from datetime import date
+today = date.today().strftime("%Y")
 #import quark_sphinx_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -61,7 +63,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'itom Plugins'
-copyright = '2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues'
+copyright = f"2011-{today}, Institut fuer Technische Optik (ITO), University Stuttgart." \ "Bug report: https://bitbucket.org/itom/itom/issues"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

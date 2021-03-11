@@ -12,7 +12,10 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os, itom
+import sys, os, itom, sphinx
+from datetime import date
+today = date.today().strftime("%Y")
+
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.append(os.path.abspath('_ext'))
 
@@ -52,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'itom'
-copyright = '2021, Institut für Technische Optik, Universität Stuttgart'
+copyright = f"2011-{today}, Institut für Technische Optik, Universität Stuttgart"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -71,7 +74,7 @@ release = '2.1.0'
 # non-false value, then it is used:
 #today = ''
 # Else, today_fmt is used as the format for a strftime call.
-#today_fmt = '%B %d, %Y'
+#today_fmt = '%Y'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
