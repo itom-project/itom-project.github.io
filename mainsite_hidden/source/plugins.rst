@@ -95,11 +95,11 @@ The following plugins are contained in the open source `Plugins repository <http
 	hidApi, Any generic HID device
 	libUSB, Any generic USB devices
 	LibModBus, Modbus communication over TCP/IP and RTU
-	OphirPowermeter, Control Powermeters from Ophir/MKS
+
 	SerialIO, "COM-Ports (Windows), ttySx and ttyUSBx (Linux)"
 	SuperlumBL, Lightsource from company Superlum
 	SuperlumBS, Lightsource from company SuperlumBS
-	ThorlabsPowerMeter, Thorlabs Power and Energy Meter Consoles PM100x
+	
 	ThorlabsFF, 
 	
 .. csv-table:: 
@@ -109,6 +109,8 @@ The following plugins are contained in the open source `Plugins repository <http
 
 	MeasurementComputing, Access to USB digital to analog converter
 	NI-DAQmx, "NI-ADDA Converter (requires NI-DAQmx Lib and DLL)"
+	OphirPowermeter, Control Powermeters from Ophir/MKS
+	ThorlabsPowerMeter, Thorlabs Power and Energy Meter Consoles PM100x
 
 .. csv-table:: 
 	:header: Algorithm/Filter
