@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Parameters - Validation &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" />
+    <link rel="up" title="Development under C++" href="plugin-development.html" />
+    <link rel="next" title="Basic programming structure of any itom-plugin" href="pluginStructure.html" />
+    <link rel="prev" title="Parameters - Meta Information" href="plugin-paramsMeta.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginStructure.html" title="Basic programming structure of any itom-plugin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="plugin-paramsMeta.html" title="Parameters - Meta Information"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" accesskey="U">Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="parameters-validation">
+<span id="plugin-paramsvalidation"></span><h1>Parameters - Validation<a class="headerlink" href="#parameters-validation" title="Permalink to this headline">¶</a></h1>
+<p>If a default-parameter (or let&#8217;s say template) is given in form of an instance of class <strong>Param</strong> and have now a value in form of an instance
+of class <strong>ParamBase</strong>, you might be interested if the new value fits to the type and optionally the restrictions given by meta information of
+the template.</p>
+<p>Therefore, the class <strong>ParamHelper</strong> (folder <em>helper</em>) provide method to validate ParamBase-instances with respect to a given meta information
+struct or to compare the compatibility of two different parameters.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since <strong>ParamHelper</strong> is not directly available for plugins, the most important methods are also made available by the <strong>API</strong> functions
+(see <a class="reference internal" href="plugin-itomAPI.html#plugin-itomapi"><em>itom API</em></a>). Therefore the API-call for the validator functions is also indicated below.</p>
+</div>
+<div class="section" id="validate-with-meta-information">
+<h2>Validate with meta information<a class="headerlink" href="#validate-with-meta-information" title="Permalink to this headline">¶</a></h2>
+<p>If you have access to any meta information instance (derived from class <strong>ParamMeta</strong>), you can check whether the value of an instance of class
+<strong>ParamBase</strong> or its derived class <strong>Param</strong> fits to the given requirements. There are different validator functions depending on the type of
+meta information.</p>
+<dl class="function">
+<dt id="validateStringMeta">
+static ito::RetVal <tt class="descname">validateStringMeta</tt><big>(</big>const ito::StringMeta<em>&nbsp;*meta</em>, const char*<em>&nbsp;value</em>, bool mandatory =<em>&nbsp;false</em><big>)</big><a class="headerlink" href="#validateStringMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This methods checks whether the string, passed by argument <em>value</em>, fits to the requirements of the string meta information <em>meta</em>.
+If it does not fit, <em>retError</em> is returned with an appropriate error message. If argument <em>mandatory</em> is false, <em>retOk</em> is also returned
+if the string is not given, hence, value is an empty string.</p>
+<p><strong>API-Call:</strong> ito::RetVal ito::itoValidateStringMeta(-same arguments-)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="validateDoubleMeta">
+static ito::RetVal <tt class="descname">validateDoubleMeta</tt><big>(</big>const ito::DoubleMeta<em>&nbsp;*meta</em>, double<em>&nbsp;value</em><big>)</big><a class="headerlink" href="#validateDoubleMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This methods checks whether the number &#8216;value&#8217; does not exceed the boundaries given by the double meta information &#8216;meta&#8217;.
+If this is not the case <em>retError</em> with appropriate error message is returned, else <em>retOk</em>.</p>
+<p><strong>API-Call:</strong> ito::RetVal ito::itoValidateDoubleMeta(-same arguments-)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="validateIntMeta">
+static ito::RetVal <tt class="descname">validateIntMeta</tt><big>(</big>const ito::IntMeta<em>&nbsp;*meta</em>, int<em>&nbsp;value</em><big>)</big><a class="headerlink" href="#validateIntMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This methods checks whether the number &#8216;value&#8217; does not exceed the boundaries given by the integer meta information &#8216;meta&#8217;.
+If this is not the case <em>retError</em> with appropriate error message is returned, else <em>retOk</em>.</p>
+<p><strong>API-Call:</strong> ito::RetVal ito::itoValidateIntMeta(-same arguments-)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="validateCharMeta">
+static ito::RetVal <tt class="descname">validateCharMeta</tt><big>(</big>const ito::CharMeta<em>&nbsp;*meta</em>, double<em>&nbsp;value</em><big>)</big><a class="headerlink" href="#validateCharMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This methods checks whether the number &#8216;value&#8217; does not exceed the boundaries given by the char meta information &#8216;meta&#8217;.
+If this is not the case <em>retError</em> with appropriate error message is returned, else <em>retOk</em>.</p>
+<p><strong>API-Call:</strong> ito::RetVal ito::itoValidateCharMeta(-same arguments-)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="validateHWMeta">
+static ito::RetVal <tt class="descname">validateHWMeta</tt><big>(</big>const ito::HWMeta<em>&nbsp;*meta</em>, ito::AddInBase<em>&nbsp;*value</em>, bool mandatory =<em>&nbsp;false</em><big>)</big><a class="headerlink" href="#validateHWMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method checks whether the plugin given by &#8216;value&#8217; fits to the requirements possibily defined in the &#8216;meta&#8217;-plugin meta
+information struct. If this is the case <em>retOk</em> is returned, else <em>retError</em> with an appropriate error message. If &#8216;value&#8217;
+is NULL <em>retOk</em> is only returned if argument &#8216;mandatory&#8217; is <em>false</em>.</p>
+<p><strong>API-Call:</strong> ito::RetVal ito::itoValidateHWMeta(-same arguments-)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="validateParam">
+static ito::RetVal <tt class="descname">validateParam</tt><big>(</big>const ito::Param<em>&nbsp;&amp;templateParam</em>, const ito::ParamBase<em>&nbsp;&amp;param</em>, bool strict =<em>&nbsp;true</em>, bool mandatory =<em>&nbsp;false</em><big>)</big><a class="headerlink" href="#validateParam" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method uses the methods above to check whether the value of &#8216;param&#8217; is valid with respect to the type and meta information of &#8216;templateParam&#8217;.
+If &#8216;strict&#8217; is <em>false</em>, the type is tried to be converted to type of &#8216;templateParam&#8217; if possible. The &#8216;mandatory&#8217; parameter is redirected to
+the corresponding validation methods above as therefore has the same meaning.</p>
+<p><strong>API-Call:</strong> -not yet provided-</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Parameters - Validation</a><ul>
+<li><a class="reference internal" href="#validate-with-meta-information">Validate with meta information</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="plugin-paramsMeta.html"
+                        title="previous chapter">Parameters - Meta Information</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pluginStructure.html"
+                        title="next chapter">Basic programming structure of any itom-plugin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/plugin-paramsValidate.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pluginStructure.html" title="Basic programming structure of any itom-plugin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="plugin-paramsMeta.html" title="Parameters - Meta Information"
+             >previous</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li>
+          <li><a href="../../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="../plugins.html" >Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html" >Development under C++</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

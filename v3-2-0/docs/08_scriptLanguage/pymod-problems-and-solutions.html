@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>9.9. Python - common problems and solutions &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.10. Python tutorial" href="pytutorial.html" />
+    <link rel="prev" title="9.8. Python Limitations in itom" href="pymod-limitations.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="script-language.html">9. Python scripting language</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pymod-itom.html">9.1. Python-Module <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-dataObject.html">9.2. Array class DataObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-load-save-files.html">9.3. Save and load images and other files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-popular-python-packages.html">9.4. Popular Python packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-matplotlib.html">9.5. Python-Module matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-matlab.html">9.6. Python-Module matlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-reload-modules.html">9.7. Reload modified modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pymod-limitations.html">9.8. Python Limitations in <strong>itom</strong></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.9. Python - common problems and solutions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#re-assigning-a-variable">9.9.1. Re-Assigning a variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variable-deleted-but-referenced-object-is-not-closed">9.9.2. Variable deleted but referenced object is not closed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#codec-error">9.9.3. Codec error</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pytutorial.html">9.10. Python tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="script-language.html">9. Python scripting language</a> &raquo;</li>
+        
+      <li>9.9. Python - common problems and solutions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/08_scriptLanguage/pymod-problems-and-solutions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-common-problems-and-solutions">
+<span id="script-python-problems-solutions"></span><h1>9.9. Python - common problems and solutions<a class="headerlink" href="#python-common-problems-and-solutions" title="Permalink to this headline">¶</a></h1>
+<p>The following list state some common problems or known issues concerning <strong>Python</strong> (partially in combination with <strong>itom</strong>):</p>
+<div class="section" id="re-assigning-a-variable">
+<h2>9.9.1. Re-Assigning a variable<a class="headerlink" href="#re-assigning-a-variable" title="Permalink to this headline">¶</a></h2>
+<p><strong>Problem:</strong> If you assign an object with a limited access to anything (like a single camera) to a variable in a script, an access error might occur if you try to re-run the script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cam</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;IDSuEye&quot;</span><span class="p">,</span> <span class="n">camera_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you re-execute the same command, an error like the following one might be raised:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">load</span> <span class="n">plugin</span> <span class="n">IDSuEye</span> <span class="k">with</span> <span class="n">error</span> <span class="n">message</span><span class="p">:</span>
+<span class="n">Camera</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">opened</span>
+</pre></div>
+</div>
+<p>This is due to the fact, that the re-execution at first tries to create a new instance of class <em>dataIO</em> with the same camera than is already opened. Then, this instance
+is assigned to the existing variable <em>cam</em>. In this moment, the recent content of <em>cam</em> is not longer in use and hence destroyed.</p>
+<p><strong>Solution:</strong> At first assign <em>None</em> or any other low-level value to <em>cam</em> and then re-assign the object that requires access to a limited structure. In some rare cases this
+is even not enough, since <strong>Python</strong> uses the concept of a garbage collector. Therefore, an object is only marked for deleted if it is not longer in use. The garbage collector is
+regularly called and finally deletes all marked objects. In this case, force the garbage collector to be executed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gc</span> <span class="c1">#import garbage collector</span>
+
+<span class="n">cam</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span> <span class="c1">#start the garbage collector</span>
+<span class="n">cam</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;IDSuEye&quot;</span><span class="p">,</span> <span class="n">camera_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="variable-deleted-but-referenced-object-is-not-closed">
+<h2>9.9.2. Variable deleted but referenced object is not closed<a class="headerlink" href="#variable-deleted-but-referenced-object-is-not-closed" title="Permalink to this headline">¶</a></h2>
+<p><strong>Problem:</strong> I delete a variable in <strong>Python</strong> but the value (e.g. a hardware instance - dataIO or actuator) is not closed.</p>
+<p><strong>Solution:</strong> At first, you should check if the variable you deleted is really the last variable that referenced to the underlying value. If you opened a hardware instance by
+the GUI you need to know that the GUI also holds a reference to the hardware. Therefore, the hardware must additionally be closed via a mouse click in the GUI. If the value is nevertheless
+not immediately destroyed, the last raised exception or the garbage collector of <strong>Python</strong> can be the reason.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;MyClass destroyed&quot;</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+<span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p>In this example, an instance of class <em>MyClass</em> is created (variable <em>m</em>). Afterwards, a runtime error is raised with <em>m</em> as single argument. Finally, <em>m</em> is deleted, but the destructor
+of <em>MyClass</em> is not called (no text <em>MyClass destroyed</em> is printed out). However, if you raise another runtime error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>the class is destroyed and the text appears. This is due to the fact, that the last exception that has been raised is still in memory and holds a reference to the passed argument, here, the
+instance <em>m</em> of class <em>MyClass</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>This behaviour changes in itom version &gt; 1.4.0. Then, the last exception is not stored any more in the variables <a class="reference external" href="https://docs.python.org/3.6/library/sys.html#sys.last_type" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_type</span></code></a>,</p>
+</div></blockquote>
+<p><a class="reference external" href="https://docs.python.org/3.6/library/sys.html#sys.last_value" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_value</span></code></a> and <a class="reference external" href="https://docs.python.org/3.6/library/sys.html#sys.last_traceback" title="(in Python v3.6)"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.last_traceback</span></code></a>.</p>
+</div>
+<p>Nevertheless, it might happen, that the object referenced by a variable (like a camera) is not immediately destroyed even if the last referencing variable is deleted. In <strong>Python</strong> objects are not directly deleted if they are not used any more, but they are only marked for deletion. Then, regularly, a garbage collector is executed that finally deletes all values marked for deletion. The reason is that deleting objects might be complicated and it is therefore better to execute this if the interpreter is idle or many objects have been marked. In order to directly force the garbage collector to delete marked objects, use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gc</span> <span class="c1">#import garbage collector</span>
+<span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span> <span class="c1">#start the garbage collector</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="codec-error">
+<h2>9.9.3. Codec error<a class="headerlink" href="#codec-error" title="Permalink to this headline">¶</a></h2>
+<p><strong>Problem:</strong> When executing a <strong>Python</strong> script, a syntax error with an error message similar to the following one appears:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;C:</span><span class="se">\t</span><span class="s2">est.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">10</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="p">(</span><span class="nb">unicode</span> <span class="n">error</span><span class="p">)</span> <span class="s1">&#39;utf-8&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte oxe4 in position 0: unexpected end of data</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong> You used any special character (even in comments) in your code. Per default and if not otherwise state, a document is always parsed using the ‘utf-8’ codec.
+This codec does not support special characters (like German ‘Umlaute’ or the greek letter Âµ). If you want to use such characters, you need to indicate the codec of your file,
+e.g. by adding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># -- coding: iso-8859-15 --</span>
+</pre></div>
+</div>
+<p>at the first line of your script file (iso-8859-15 represents the Western Europe charset). You can also choose <strong>insert codec…</strong> from the context menu or the edit menu of the editor.
+Choose then the codec you want to use and the corresponding line is automatically prepended to your script. The list of default codec is only a small subset of
+possible codecs, you can also insert another codec into the editable drop-down box. For more information see <a class="reference external" href="https://www.python.org/dev/peps/pep-0263/">https://www.python.org/dev/peps/pep-0263/</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pytutorial.html" class="btn btn-neutral float-right" title="9.10. Python tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pymod-limitations.html" class="btn btn-neutral float-left" title="9.8. Python Limitations in itom" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

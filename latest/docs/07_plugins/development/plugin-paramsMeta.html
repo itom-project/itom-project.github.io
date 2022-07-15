@@ -1,0 +1,1336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7.8.5. Parameters - Meta Information &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.8.6. Parameters - Validation" href="plugin-paramsValidate.html" />
+    <link rel="prev" title="7.8.4.6.2. Param - Reference" href="plugin-param-Ref.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../loading_plugins.html">7.2. Loading plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">7.3. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">7.4. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">7.5. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">7.6. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">7.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">7.8. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">7.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">7.8.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">7.8.3. DataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">7.8.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">7.8.5. Parameters - Meta Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#class-parammeta">7.8.5.1. Class ParamMeta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-charmeta-intmeta-and-doublemeta">7.8.5.2. Class CharMeta, IntMeta and DoubleMeta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-chararraymeta-intarraymeta-and-doublearraymeta">7.8.5.3. Class CharArrayMeta, IntArrayMeta and DoubleArrayMeta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-stringmeta">7.8.5.4. Class StringMeta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-dobjmeta">7.8.5.5. Class DObjMeta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#class-hwmeta">7.8.5.6. Class HWMeta</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">7.8.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">7.8.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">7.8.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">7.8.9. AddInBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">7.8.10. Plugin class - Basic information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">7.8.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-actuator.html">7.8.12. Plugin class - Actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">7.8.13. Plugin class - Algo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">7.8.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">7.8.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">7.8.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">7.8.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">7.8.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">7.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">7.8.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">7.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../plugins.html"><span class="section-number">7. </span>Plugins</a> &raquo;</li>
+        
+          <li><a href="plugin-development.html"><span class="section-number">7.8. </span>Development under C++</a> &raquo;</li>
+        
+      <li><span class="section-number">7.8.5. </span>Parameters - Meta Information</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/07_plugins/development/plugin-paramsMeta.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parameters-meta-information">
+<span id="plugin-paramsmeta"></span><h1><span class="section-number">7.8.5. </span>Parameters - Meta Information<a class="headerlink" href="#parameters-meta-information" title="Permalink to this headline">¶</a></h1>
+<p>Every parameter of type ito::Param can contain meta information that describe some boundary values, value ranges, allowed values… of the
+parameter. Once a parameter has its valid meta information, itom is able to check given input values with respect to the meta information as well
+as adapt any auto-created input masks to simplify the input with respect to the given constraints.</p>
+<p>Most possible types of class ito::Param have their respective meta information structure.</p>
+<div class="figure align-center" id="plugin-parammeta-scheme">
+<a class="reference internal image-reference" href="../../_images/paramMeta.png"><img alt="../../_images/paramMeta.png" src="../../_images/paramMeta.png" style="width: 783.0px; height: 654.0px;" /></a>
+</div>
+<p>The base class of all kind of meta information classes is the class <a class="reference internal" href="#classparammeta"><span class="std std-ref">ito::ParamMeta</span></a>. Any instance of class <a class="reference internal" href="#classparammeta"><span class="std std-ref">ito::ParamMeta</span></a> can
+contain a pointer to an instance of this base class. If you know the type of parameter (e.g. char, string or int), you can savely cast this <a class="reference internal" href="#classparammeta"><span class="std std-ref">ito::ParamMeta</span></a>
+base instance to the right meta information class that fits to the type.</p>
+<div class="section" id="class-parammeta">
+<span id="classparammeta"></span><h2><span class="section-number">7.8.5.1. </span>Class ParamMeta<a class="headerlink" href="#class-parammeta" title="Permalink to this headline">¶</a></h2>
+<p>The class <strong>ParamMeta</strong> is the base class for all meta information classes. Parameters of class <strong>Param</strong> may
+contain pointers of that class, which then must be cast to the final implementation.</p>
+<dl class="cpp class">
+<dt id="_CPPv4N3ito9ParamMetaE">
+<span id="_CPPv3N3ito9ParamMetaE"></span><span id="_CPPv2N3ito9ParamMetaE"></span><span id="ito::ParamMeta"></span><span class="target" id="classito_1_1_param_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">ParamMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Base class for all meta-information classes. </p>
+<p>Parameters of type <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a> can have a pointer to this class. Consider this base class to be abstract, such that it is only allowed to pass the right implementation (derived from this class) that fits to the type of the parameter. The runtime type information value m_type indicates the real type of this pointer, such that a direct cast can be executed.</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="#classito_1_1_char_meta"><span class="std std-ref">ito::CharMeta</span></a>, <a class="reference internal" href="#classito_1_1_int_meta"><span class="std std-ref">ito::IntMeta</span></a>, <a class="reference internal" href="#classito_1_1_double_meta"><span class="std std-ref">ito::DoubleMeta</span></a>, <a class="reference internal" href="#classito_1_1_string_meta"><span class="std std-ref">ito::StringMeta</span></a>, <a class="reference internal" href="#classito_1_1_h_w_meta"><span class="std std-ref">ito::HWMeta</span></a>, <a class="reference internal" href="#classito_1_1_d_obj_meta"><span class="std std-ref">ito::DObjMeta</span></a>, <a class="reference internal" href="#classito_1_1_char_array_meta"><span class="std std-ref">ito::CharArrayMeta</span></a>, <a class="reference internal" href="#classito_1_1_int_array_meta"><span class="std std-ref">ito::IntArrayMeta</span></a>, <a class="reference internal" href="#classito_1_1_double_array_meta"><span class="std std-ref">ito::DoubleArrayMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<p>Subclassed by <a class="reference internal" href="#classito_1_1_char_meta"><span class="std std-ref">ito::CharMeta</span></a>, <a class="reference internal" href="#classito_1_1_d_obj_meta"><span class="std std-ref">ito::DObjMeta</span></a>, <a class="reference internal" href="#classito_1_1_double_meta"><span class="std std-ref">ito::DoubleMeta</span></a>, <a class="reference internal" href="#classito_1_1_h_w_meta"><span class="std std-ref">ito::HWMeta</span></a>, <a class="reference internal" href="#classito_1_1_int_meta"><span class="std std-ref">ito::IntMeta</span></a>, ito::RectMeta, <a class="reference internal" href="#classito_1_1_string_meta"><span class="std std-ref">ito::StringMeta</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRttiE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRttiE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRttiE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069"></span><em class="property"><span class="pre">enum</span> </em><code class="sig-name descname"><span class="pre">MetaRtti</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRttiE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Runtime type information. </p>
+<p>MetaRtti is used to cast param meta objects, without having to enable runtime type information of the compiler. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti11rttiUnknownE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti11rttiUnknownE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti11rttiUnknownE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069ae3af95a23721bcec8fed12019a9d109e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiUnknown</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti11rttiUnknownE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>unknown parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti12rttiCharMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti12rttiCharMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti12rttiCharMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069af8caa77368c73126b14af8236fff35f4"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiCharMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti12rttiCharMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a char parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti11rttiIntMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti11rttiIntMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti11rttiIntMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069a681092b25be5d52e7b0eed477aaacb07"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiIntMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti11rttiIntMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for an integer parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti14rttiDoubleMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti14rttiDoubleMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti14rttiDoubleMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069a1ef99029949547672029e3a5e751f461"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiDoubleMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti14rttiDoubleMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a double parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti14rttiStringMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti14rttiStringMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti14rttiStringMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069a567c2bd5a4ddc4e0dd0b2db9c03b02f4"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiStringMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti14rttiStringMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a string parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti10rttiHWMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti10rttiHWMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti10rttiHWMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069af3ad60efcf4e1262497c4c2e11777a4b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiHWMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti10rttiHWMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a hardware plugin parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti12rttiDObjMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti12rttiDObjMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti12rttiDObjMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069a67599626db3a24175170eb8555790e72"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiDObjMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti12rttiDObjMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a data object parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti16rttiIntArrayMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti16rttiIntArrayMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti16rttiIntArrayMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069a56d86c3127b723887f188aab4371f60d"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiIntArrayMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti16rttiIntArrayMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for an integer array parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti19rttiDoubleArrayMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti19rttiDoubleArrayMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti19rttiDoubleArrayMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069ae214f8df12588265bf8d407e050ead5c"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiDoubleArrayMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti19rttiDoubleArrayMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a double array parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti17rttiCharArrayMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti17rttiCharArrayMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti17rttiCharArrayMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069ad61d2a6770bb9fb251e480c35367930b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiCharArrayMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti17rttiCharArrayMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a char array parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti16rttiIntervalMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti16rttiIntervalMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti16rttiIntervalMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069a115af90eebaa3207728a836808685b2e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiIntervalMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti16rttiIntervalMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for an integer array with two values that represent an interval [value1, value2] parameter </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti22rttiDoubleIntervalMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti22rttiDoubleIntervalMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti22rttiDoubleIntervalMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069af321a9cbe346dadfb39b74533c0325bc"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiDoubleIntervalMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti22rttiDoubleIntervalMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for a double array with two values that represent an interval [value1, value2] parameter (size of the interval is value2-value1) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti13rttiRangeMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti13rttiRangeMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti13rttiRangeMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069ac72669d21a8dff5be1b38f11f2c7121b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiRangeMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti13rttiRangeMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for an integer array with two values that represent a range [value1, value2] parameter (size of a range is 1+value2-value1) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta8MetaRtti12rttiRectMetaE">
+<span id="_CPPv3N3ito9ParamMeta8MetaRtti12rttiRectMetaE"></span><span id="_CPPv2N3ito9ParamMeta8MetaRtti12rttiRectMetaE"></span><span class="target" id="classito_1_1_param_meta_1a58b89769afcccb920b31261493127069afe18dd5d8fa115d935227488fcb495f2"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">rttiRectMeta</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta8MetaRtti12rttiRectMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta for an integer array with four values that consists of two ranges (vertical and horizontal, e.g. for ROIs of cameras) </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentationE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentationE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentationE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29"></span><em class="property"><span class="pre">enum</span> </em><code class="sig-name descname"><span class="pre">tRepresentation</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The representation of number types indicates the type of widget that is suited best to display and change the value. </p>
+<p>Not all representations can be applied to all types of number values, e.g. IPV4 can not be used for char-types. e.g. - Char, CharArray: Linear, Boolean, Logarithmic, PureNumber<ul class="simple">
+<li><p>IntegerArray, Range, Interval: Linear, Boolean, Logarithmic, PureNumber</p></li>
+<li><p>Integer: Linear, Boolean, Logarithmic, PureNumber, HexNumber, IPV4Address, MACAddress</p></li>
+<li><p>Double, DoubleArray: Linear, Boolean, Logarithmic, PureNumber </p></li>
+</ul>
+</p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation6LinearE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation6LinearE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation6LinearE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29aa88870dabd4bd275fe23a29e908c5b1b"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">Linear</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation6LinearE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Slider with linear behavior. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation11LogarithmicE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation11LogarithmicE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation11LogarithmicE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29a2daec810c75a25be1b34b62accbb9902"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">Logarithmic</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation11LogarithmicE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Slider with logarithmic behaviour. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation7BooleanE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation7BooleanE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation7BooleanE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29a631e7244691a679a01782a33a2e85880"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">Boolean</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation7BooleanE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check box. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation10PureNumberE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation10PureNumberE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation10PureNumberE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29ac0f9769dba406872dce8e752c5e1679e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">PureNumber</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation10PureNumberE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Decimal number in an edit control. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation9HexNumberE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation9HexNumberE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation9HexNumberE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29a258e9438a152ea7ea842ff187747d47e"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">HexNumber</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation9HexNumberE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Hex number in an edit control. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation11IPV4AddressE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation11IPV4AddressE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation11IPV4AddressE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29aed7747465bd3e4864d2b7daa03b4162c"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">IPV4Address</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation11IPV4AddressE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>IP-Address. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation10MACAddressE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation10MACAddressE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation10MACAddressE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29abe7824678b6ae352471bbb4cfa96eba4"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">MACAddress</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation10MACAddressE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MAC-Address. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito9ParamMeta15tRepresentation21UnknownRepresentationE">
+<span id="_CPPv3N3ito9ParamMeta15tRepresentation21UnknownRepresentationE"></span><span id="_CPPv2N3ito9ParamMeta15tRepresentation21UnknownRepresentationE"></span><span class="target" id="classito_1_1_param_meta_1a927362b43732d65219501dc5a593ec29acb0acf06684eda34a0527b88b355f527"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">UnknownRepresentation</span></code><a class="headerlink" href="#_CPPv4N3ito9ParamMeta15tRepresentation21UnknownRepresentationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito9ParamMeta9ParamMetaEN3ito9ByteArrayE">
+<span id="_CPPv3N3ito9ParamMeta9ParamMetaEN3ito9ByteArrayE"></span><span id="_CPPv2N3ito9ParamMeta9ParamMetaEN3ito9ByteArrayE"></span><span id="ito::ParamMeta::ParamMeta__ito::ByteArray"></span><span class="target" id="classito_1_1_param_meta_1a8226932dcb42866e0cce03e88c938fa7"></span><code class="sig-name descname"><span class="pre">ParamMeta</span></code><span class="sig-paren">(</span><span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito9ParamMeta9ParamMetaEN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>default constructor with an unknown meta information type </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito9ParamMeta9ParamMetaE8MetaRttiN3ito9ByteArrayE">
+<span id="_CPPv3N3ito9ParamMeta9ParamMetaE8MetaRttiN3ito9ByteArrayE"></span><span id="_CPPv2N3ito9ParamMeta9ParamMetaE8MetaRttiN3ito9ByteArrayE"></span><span id="ito::ParamMeta::ParamMeta__MetaRtti.ito::ByteArray"></span><span class="target" id="classito_1_1_param_meta_1a2f8a3ebcedcd063c58bc911f2d701e21"></span><code class="sig-name descname"><span class="pre">ParamMeta</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta8MetaRttiE" title="ito::ParamMeta::MetaRtti"><span class="pre">MetaRtti</span></a> <em><span class="pre">type</span></em>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito9ParamMeta9ParamMetaE8MetaRttiN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor used by derived classes to indicate their real type </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito9ParamMetaD0Ev">
+<span id="_CPPv3N3ito9ParamMetaD0Ev"></span><span id="_CPPv2N3ito9ParamMetaD0Ev"></span><span id="ito::ParamMeta::~ParamMeta"></span><span class="target" id="classito_1_1_param_meta_1a0e4c11c7514b4416d07782a9b55866d3"></span><em class="property"><span class="pre">inline</span></em> <em class="property"><span class="pre">virtual</span></em> <code class="sig-name descname"><span class="pre">~ParamMeta</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito9ParamMetaD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>destructor </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito9ParamMeta7getTypeEv">
+<span id="_CPPv3NK3ito9ParamMeta7getTypeEv"></span><span id="_CPPv2NK3ito9ParamMeta7getTypeEv"></span><span id="ito::ParamMeta::getTypeC"></span><span class="target" id="classito_1_1_param_meta_1af295ee481d465463b99365d65ff8cfbc"></span><em class="property"><span class="pre">inline</span></em> <a class="reference internal" href="#_CPPv4N3ito9ParamMeta8MetaRttiE" title="ito::ParamMeta::MetaRtti"><span class="pre">MetaRtti</span></a> <code class="sig-name descname"><span class="pre">getType</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito9ParamMeta7getTypeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns runtime type information value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito9ParamMeta11getCategoryEv">
+<span id="_CPPv3NK3ito9ParamMeta11getCategoryEv"></span><span id="_CPPv2NK3ito9ParamMeta11getCategoryEv"></span><span id="ito::ParamMeta::getCategoryC"></span><span class="target" id="classito_1_1_param_meta_1a029a64168b2824605562d2d1268e1a79"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <code class="sig-name descname"><span class="pre">getCategory</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito9ParamMeta11getCategoryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns category name of this parameter (default: empty ByteArray) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="class-charmeta-intmeta-and-doublemeta">
+<h2><span class="section-number">7.8.5.2. </span>Class CharMeta, IntMeta and DoubleMeta<a class="headerlink" href="#class-charmeta-intmeta-and-doublemeta" title="Permalink to this headline">¶</a></h2>
+<p>The classes <strong>CharMeta</strong>, <strong>IntMeta</strong> and <strong>DoubleMeta</strong> provide meta information for parameters of single numeric types.</p>
+<dl class="cpp class">
+<dt id="_CPPv4N3ito8CharMetaE">
+<span id="_CPPv3N3ito8CharMetaE"></span><span id="_CPPv2N3ito8CharMetaE"></span><span id="ito::CharMeta"></span><span class="target" id="classito_1_1_char_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">CharMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><a class="headerlink" href="#_CPPv4N3ito8CharMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type Char. </p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::Char. If set, the given char number can be limited with respect to given minimum and maximum values as well as an optional step size (default: 1).</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<p>Subclassed by <a class="reference internal" href="#classito_1_1_char_array_meta"><span class="std std-ref">ito::CharArrayMeta</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta8CharMetaEcccN3ito9ByteArrayE">
+<span id="_CPPv3N3ito8CharMeta8CharMetaEcccN3ito9ByteArrayE"></span><span id="_CPPv2N3ito8CharMeta8CharMetaEcccN3ito9ByteArrayE"></span><span id="ito::CharMeta::CharMeta__c.c.c.ito::ByteArray"></span><span class="target" id="classito_1_1_char_meta_1a10a216ef157ec7610acdd79b0789eada"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">CharMeta</span></code><span class="sig-paren">(</span><span class="pre">char</span> <em><span class="pre">minVal</span></em>, <span class="pre">char</span> <em><span class="pre">maxVal</span></em>, <span class="pre">char</span> <em><span class="pre">stepSize</span></em> <span class="pre">=</span> <span class="pre">1</span>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta8CharMetaEcccN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor with minimum and maximum value </p>
+<p>constructor with minimum and maximum value as well as optional step size (default: 1) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8CharMeta6getMinEv">
+<span id="_CPPv3NK3ito8CharMeta6getMinEv"></span><span id="_CPPv2NK3ito8CharMeta6getMinEv"></span><span id="ito::CharMeta::getMinC"></span><span class="target" id="classito_1_1_char_meta_1a3beaf700d22198e0a96331588c03334c"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">char</span> <code class="sig-name descname"><span class="pre">getMin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8CharMeta6getMinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8CharMeta6getMaxEv">
+<span id="_CPPv3NK3ito8CharMeta6getMaxEv"></span><span id="_CPPv2NK3ito8CharMeta6getMaxEv"></span><span id="ito::CharMeta::getMaxC"></span><span class="target" id="classito_1_1_char_meta_1a0470ec77d461262260587a9b8aec95f9"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">char</span> <code class="sig-name descname"><span class="pre">getMax</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8CharMeta6getMaxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8CharMeta11getStepSizeEv">
+<span id="_CPPv3NK3ito8CharMeta11getStepSizeEv"></span><span id="_CPPv2NK3ito8CharMeta11getStepSizeEv"></span><span id="ito::CharMeta::getStepSizeC"></span><span class="target" id="classito_1_1_char_meta_1a627a434cef04c0ce45e55d8589d59d17"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">char</span> <code class="sig-name descname"><span class="pre">getStepSize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8CharMeta11getStepSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns step size </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8CharMeta7getUnitEv">
+<span id="_CPPv3NK3ito8CharMeta7getUnitEv"></span><span id="_CPPv2NK3ito8CharMeta7getUnitEv"></span><span id="ito::CharMeta::getUnitC"></span><span class="target" id="classito_1_1_char_meta_1a9e21c8e33164a216bba67c1cef626f51"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <code class="sig-name descname"><span class="pre">getUnit</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8CharMeta7getUnitEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns unit </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta7setUnitERKN3ito9ByteArrayE">
+<span id="_CPPv3N3ito8CharMeta7setUnitERKN3ito9ByteArrayE"></span><span id="_CPPv2N3ito8CharMeta7setUnitERKN3ito9ByteArrayE"></span><span id="ito::CharMeta::setUnit__ito::ByteArrayCR"></span><span class="target" id="classito_1_1_char_meta_1abc8f1bbd7f50df09ec5521d09312668f"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">setUnit</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <span class="pre">&amp;</span><em><span class="pre">unit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta7setUnitERKN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets unit string of this parameter </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8CharMeta17getRepresentationEv">
+<span id="_CPPv3NK3ito8CharMeta17getRepresentationEv"></span><span id="_CPPv2NK3ito8CharMeta17getRepresentationEv"></span><span id="ito::CharMeta::getRepresentationC"></span><span class="target" id="classito_1_1_char_meta_1a0e41b5f36b1a7c4b18a1293dba712a11"></span><em class="property"><span class="pre">inline</span></em> <a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="ito::ParamMeta::tRepresentation"><span class="pre">tRepresentation</span></a> <code class="sig-name descname"><span class="pre">getRepresentation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8CharMeta17getRepresentationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns display representation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta17setRepresentationEN9ParamMeta15tRepresentationE">
+<span id="_CPPv3N3ito8CharMeta17setRepresentationEN9ParamMeta15tRepresentationE"></span><span id="_CPPv2N3ito8CharMeta17setRepresentationEN9ParamMeta15tRepresentationE"></span><span id="ito::CharMeta::setRepresentation__ParamMeta::tRepresentation"></span><span class="target" id="classito_1_1_char_meta_1a5600fe4741d61ec2f6f8f2d57a518787"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setRepresentation</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="ito::ParamMeta::tRepresentation"><span class="pre">tRepresentation</span></a> <em><span class="pre">representation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta17setRepresentationEN9ParamMeta15tRepresentationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets display representation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta6setMinEc">
+<span id="_CPPv3N3ito8CharMeta6setMinEc"></span><span id="_CPPv2N3ito8CharMeta6setMinEc"></span><span id="ito::CharMeta::setMin__c"></span><span class="target" id="classito_1_1_char_meta_1a47cb733fc79fdca6d6e24e465aa324d3"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setMin</span></code><span class="sig-paren">(</span><span class="pre">char</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta6setMinEc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the minimum value </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta6setMaxEc">
+<span id="_CPPv3N3ito8CharMeta6setMaxEc"></span><span id="_CPPv2N3ito8CharMeta6setMaxEc"></span><span id="ito::CharMeta::setMax__c"></span><span class="target" id="classito_1_1_char_meta_1a06d085b6bcb7397dd3f719c1f8dc39c1"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setMax</span></code><span class="sig-paren">(</span><span class="pre">char</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta6setMaxEc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the maximum value </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta11setStepSizeEc">
+<span id="_CPPv3N3ito8CharMeta11setStepSizeEc"></span><span id="_CPPv2N3ito8CharMeta11setStepSizeEc"></span><span id="ito::CharMeta::setStepSize__c"></span><span class="target" id="classito_1_1_char_meta_1a14f2365548aab6df1518e0afc7c9bd05"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setStepSize</span></code><span class="sig-paren">(</span><span class="pre">char</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta11setStepSizeEc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the step size </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize…,maxVal] are allowed </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito8CharMeta3allEN3ito9ByteArrayE">
+<span id="_CPPv3N3ito8CharMeta3allEN3ito9ByteArrayE"></span><span id="_CPPv2N3ito8CharMeta3allEN3ito9ByteArrayE"></span><span id="ito::CharMeta::all__ito::ByteArray"></span><span class="target" id="classito_1_1_char_meta_1af29758b912feaefcc2c5180e43332c1c"></span><em class="property"><span class="pre">static</span></em> <a class="reference internal" href="#_CPPv4N3ito8CharMetaE" title="ito::CharMeta"><span class="pre">CharMeta</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">all</span></code><span class="sig-paren">(</span><span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito8CharMeta3allEN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns a new instance of <a class="reference internal" href="#classito_1_1_char_meta"><span class="std std-ref">CharMeta</span></a>, where the min and max are set to the full range available for char. The caller has to take care of memory. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3ito7IntMetaE">
+<span id="_CPPv3N3ito7IntMetaE"></span><span id="_CPPv2N3ito7IntMetaE"></span><span id="ito::IntMeta"></span><span class="target" id="classito_1_1_int_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">IntMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><a class="headerlink" href="#_CPPv4N3ito7IntMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type Int. </p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::Int. If set, the given integer number can be limited with respect to given minimum and maximum values as well as an optional step size (default: 1).</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<p>Subclassed by <a class="reference internal" href="#classito_1_1_int_array_meta"><span class="std std-ref">ito::IntArrayMeta</span></a>, ito::IntervalMeta</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta7IntMetaE5int325int325int32N3ito9ByteArrayE">
+<span id="_CPPv3N3ito7IntMeta7IntMetaE5int325int325int32N3ito9ByteArrayE"></span><span id="_CPPv2N3ito7IntMeta7IntMetaE5int325int325int32N3ito9ByteArrayE"></span><span id="ito::IntMeta::IntMeta__int32.int32.int32.ito::ByteArray"></span><span class="target" id="classito_1_1_int_meta_1a8e5bbb2bdf08da44ddaa8d1940b64437"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">IntMeta</span></code><span class="sig-paren">(</span><span class="pre">int32</span> <em><span class="pre">minVal</span></em>, <span class="pre">int32</span> <em><span class="pre">maxVal</span></em>, <span class="pre">int32</span> <em><span class="pre">stepSize</span></em> <span class="pre">=</span> <span class="pre">1</span>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta7IntMetaE5int325int325int32N3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor with minimum and maximum value as well as optional step size (default: 1) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito7IntMeta6getMinEv">
+<span id="_CPPv3NK3ito7IntMeta6getMinEv"></span><span id="_CPPv2NK3ito7IntMeta6getMinEv"></span><span id="ito::IntMeta::getMinC"></span><span class="target" id="classito_1_1_int_meta_1abc111e5bddfed2a02a04c9b09661c6a5"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">int32</span> <code class="sig-name descname"><span class="pre">getMin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito7IntMeta6getMinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito7IntMeta6getMaxEv">
+<span id="_CPPv3NK3ito7IntMeta6getMaxEv"></span><span id="_CPPv2NK3ito7IntMeta6getMaxEv"></span><span id="ito::IntMeta::getMaxC"></span><span class="target" id="classito_1_1_int_meta_1aaceb407862c82d87dba1a6912bf92f70"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">int32</span> <code class="sig-name descname"><span class="pre">getMax</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito7IntMeta6getMaxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito7IntMeta11getStepSizeEv">
+<span id="_CPPv3NK3ito7IntMeta11getStepSizeEv"></span><span id="_CPPv2NK3ito7IntMeta11getStepSizeEv"></span><span id="ito::IntMeta::getStepSizeC"></span><span class="target" id="classito_1_1_int_meta_1ac16f5c4d1c68ce5a08c87f90b4094fcf"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">int32</span> <code class="sig-name descname"><span class="pre">getStepSize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito7IntMeta11getStepSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns step size </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito7IntMeta7getUnitEv">
+<span id="_CPPv3NK3ito7IntMeta7getUnitEv"></span><span id="_CPPv2NK3ito7IntMeta7getUnitEv"></span><span id="ito::IntMeta::getUnitC"></span><span class="target" id="classito_1_1_int_meta_1a6cfd70cfdfc29e1a6afc8c83bead4c34"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <code class="sig-name descname"><span class="pre">getUnit</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito7IntMeta7getUnitEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns unit </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta7setUnitERKN3ito9ByteArrayE">
+<span id="_CPPv3N3ito7IntMeta7setUnitERKN3ito9ByteArrayE"></span><span id="_CPPv2N3ito7IntMeta7setUnitERKN3ito9ByteArrayE"></span><span id="ito::IntMeta::setUnit__ito::ByteArrayCR"></span><span class="target" id="classito_1_1_int_meta_1aa35767c814a457eb14ffdbd8cdde1eeb"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">setUnit</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <span class="pre">&amp;</span><em><span class="pre">unit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta7setUnitERKN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets unit string of this parameter </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito7IntMeta17getRepresentationEv">
+<span id="_CPPv3NK3ito7IntMeta17getRepresentationEv"></span><span id="_CPPv2NK3ito7IntMeta17getRepresentationEv"></span><span id="ito::IntMeta::getRepresentationC"></span><span class="target" id="classito_1_1_int_meta_1a2af743058ad77d0bb4ab7f1af8e993da"></span><em class="property"><span class="pre">inline</span></em> <a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="ito::ParamMeta::tRepresentation"><span class="pre">tRepresentation</span></a> <code class="sig-name descname"><span class="pre">getRepresentation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito7IntMeta17getRepresentationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns display representation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta17setRepresentationEN9ParamMeta15tRepresentationE">
+<span id="_CPPv3N3ito7IntMeta17setRepresentationEN9ParamMeta15tRepresentationE"></span><span id="_CPPv2N3ito7IntMeta17setRepresentationEN9ParamMeta15tRepresentationE"></span><span id="ito::IntMeta::setRepresentation__ParamMeta::tRepresentation"></span><span class="target" id="classito_1_1_int_meta_1a3c92abbab89305afe22c95f76be805df"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setRepresentation</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="ito::ParamMeta::tRepresentation"><span class="pre">tRepresentation</span></a> <em><span class="pre">behaviour</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta17setRepresentationEN9ParamMeta15tRepresentationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets display representation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta6setMinE5int32">
+<span id="_CPPv3N3ito7IntMeta6setMinE5int32"></span><span id="_CPPv2N3ito7IntMeta6setMinE5int32"></span><span id="ito::IntMeta::setMin__int32"></span><span class="target" id="classito_1_1_int_meta_1aeb1ba3d6cbb47b613a4fabf591f04e63"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setMin</span></code><span class="sig-paren">(</span><span class="pre">int32</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta6setMinE5int32" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the minimum value </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta6setMaxE5int32">
+<span id="_CPPv3N3ito7IntMeta6setMaxE5int32"></span><span id="_CPPv2N3ito7IntMeta6setMaxE5int32"></span><span id="ito::IntMeta::setMax__int32"></span><span class="target" id="classito_1_1_int_meta_1add5f439d5f0ee8c5b157f3e79d40e591"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setMax</span></code><span class="sig-paren">(</span><span class="pre">int32</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta6setMaxE5int32" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the maximum value </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta11setStepSizeE5int32">
+<span id="_CPPv3N3ito7IntMeta11setStepSizeE5int32"></span><span id="_CPPv2N3ito7IntMeta11setStepSizeE5int32"></span><span id="ito::IntMeta::setStepSize__int32"></span><span class="target" id="classito_1_1_int_meta_1ad649dd946e238b9727e008338ccb5331"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setStepSize</span></code><span class="sig-paren">(</span><span class="pre">int32</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta11setStepSizeE5int32" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the step size </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize…,maxVal] are allowed </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito7IntMeta3allEN3ito9ByteArrayE">
+<span id="_CPPv3N3ito7IntMeta3allEN3ito9ByteArrayE"></span><span id="_CPPv2N3ito7IntMeta3allEN3ito9ByteArrayE"></span><span id="ito::IntMeta::all__ito::ByteArray"></span><span class="target" id="classito_1_1_int_meta_1a18a8e7465281e62854f5d031861d6ebd"></span><em class="property"><span class="pre">static</span></em> <a class="reference internal" href="#_CPPv4N3ito7IntMetaE" title="ito::IntMeta"><span class="pre">IntMeta</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">all</span></code><span class="sig-paren">(</span><span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito7IntMeta3allEN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns a new instance of <a class="reference internal" href="#classito_1_1_int_meta"><span class="std std-ref">IntMeta</span></a>, where the min and max are set to the full range available for integers. The caller has to take care of memory. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3ito10DoubleMetaE">
+<span id="_CPPv3N3ito10DoubleMetaE"></span><span id="_CPPv2N3ito10DoubleMetaE"></span><span id="ito::DoubleMeta"></span><span class="target" id="classito_1_1_double_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">DoubleMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><a class="headerlink" href="#_CPPv4N3ito10DoubleMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a> of type Double. </p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::Double. If set, the given double number can be limited with respect to given minimum and maximum values as well as an optional step size (default: 0.0 -&gt; no step size).</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<p>Subclassed by <a class="reference internal" href="#classito_1_1_double_array_meta"><span class="std std-ref">ito::DoubleArrayMeta</span></a>, ito::DoubleIntervalMeta</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3ito10DoubleMeta16tDisplayNotationE">
+<span id="_CPPv3N3ito10DoubleMeta16tDisplayNotationE"></span><span id="_CPPv2N3ito10DoubleMeta16tDisplayNotationE"></span><span class="target" id="classito_1_1_double_meta_1adb546d11eb1033d6d098edbd914ad005"></span><em class="property"><span class="pre">enum</span> </em><code class="sig-name descname"><span class="pre">tDisplayNotation</span></code><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta16tDisplayNotationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Display notation style if the related parameters is displayed in any widget. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito10DoubleMeta16tDisplayNotation9AutomaticE">
+<span id="_CPPv3N3ito10DoubleMeta16tDisplayNotation9AutomaticE"></span><span id="_CPPv2N3ito10DoubleMeta16tDisplayNotation9AutomaticE"></span><span class="target" id="classito_1_1_double_meta_1adb546d11eb1033d6d098edbd914ad005a3f879106791fc4e8c8b4fb4ef19887b1"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">Automatic</span></code><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta16tDisplayNotation9AutomaticE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>double number is automatically rendered in any GUI element </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito10DoubleMeta16tDisplayNotation5FixedE">
+<span id="_CPPv3N3ito10DoubleMeta16tDisplayNotation5FixedE"></span><span id="_CPPv2N3ito10DoubleMeta16tDisplayNotation5FixedE"></span><span class="target" id="classito_1_1_double_meta_1adb546d11eb1033d6d098edbd914ad005a9532ad25c313c7e9d8269704e4adbb76"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">Fixed</span></code><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta16tDisplayNotation5FixedE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>if possible, the double number should be shown as fixed number, e.g. 1000.00 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3ito10DoubleMeta16tDisplayNotation10ScientificE">
+<span id="_CPPv3N3ito10DoubleMeta16tDisplayNotation10ScientificE"></span><span id="_CPPv2N3ito10DoubleMeta16tDisplayNotation10ScientificE"></span><span class="target" id="classito_1_1_double_meta_1adb546d11eb1033d6d098edbd914ad005aa885c741feda81ca710f924156031bd9"></span><em class="property"><span class="pre">enumerator</span> </em><code class="sig-name descname"><span class="pre">Scientific</span></code><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta16tDisplayNotation10ScientificE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>if possible, the double number should be rendered in a scientific notation, e.g. 1.0E3 </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta10DoubleMetaE7float647float647float64N3ito9ByteArrayE">
+<span id="_CPPv3N3ito10DoubleMeta10DoubleMetaE7float647float647float64N3ito9ByteArrayE"></span><span id="_CPPv2N3ito10DoubleMeta10DoubleMetaE7float647float647float64N3ito9ByteArrayE"></span><span id="ito::DoubleMeta::DoubleMeta__float64.float64.float64.ito::ByteArray"></span><span class="target" id="classito_1_1_double_meta_1aaf34418fa56d2c59b305ae826ba3b2ef"></span><em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">DoubleMeta</span></code><span class="sig-paren">(</span><span class="pre">float64</span> <em><span class="pre">minVal</span></em>, <span class="pre">float64</span> <em><span class="pre">maxVal</span></em>, <span class="pre">float64</span> <em><span class="pre">stepSize</span></em> <span class="pre">=</span> <span class="pre">0.0</span>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta10DoubleMetaE7float647float647float64N3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor with minimum and maximum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta6getMinEv">
+<span id="_CPPv3NK3ito10DoubleMeta6getMinEv"></span><span id="_CPPv2NK3ito10DoubleMeta6getMinEv"></span><span id="ito::DoubleMeta::getMinC"></span><span class="target" id="classito_1_1_double_meta_1ad31f76e98d9f6b46cabfedf6c5913c77"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">float64</span> <code class="sig-name descname"><span class="pre">getMin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta6getMinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta6getMaxEv">
+<span id="_CPPv3NK3ito10DoubleMeta6getMaxEv"></span><span id="_CPPv2NK3ito10DoubleMeta6getMaxEv"></span><span id="ito::DoubleMeta::getMaxC"></span><span class="target" id="classito_1_1_double_meta_1a55200efeb8273e9c156783f25940c8b1"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">float64</span> <code class="sig-name descname"><span class="pre">getMax</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta6getMaxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum value </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta11getStepSizeEv">
+<span id="_CPPv3NK3ito10DoubleMeta11getStepSizeEv"></span><span id="_CPPv2NK3ito10DoubleMeta11getStepSizeEv"></span><span id="ito::DoubleMeta::getStepSizeC"></span><span class="target" id="classito_1_1_double_meta_1af5a256364b41b71836bc9f6783daa05d"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">float64</span> <code class="sig-name descname"><span class="pre">getStepSize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta11getStepSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns step size </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta7getUnitEv">
+<span id="_CPPv3NK3ito10DoubleMeta7getUnitEv"></span><span id="_CPPv2NK3ito10DoubleMeta7getUnitEv"></span><span id="ito::DoubleMeta::getUnitC"></span><span class="target" id="classito_1_1_double_meta_1a011aa15e96496844033ff7cbfa6be3a1"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <code class="sig-name descname"><span class="pre">getUnit</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta7getUnitEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns unit </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta7setUnitERKN3ito9ByteArrayE">
+<span id="_CPPv3N3ito10DoubleMeta7setUnitERKN3ito9ByteArrayE"></span><span id="_CPPv2N3ito10DoubleMeta7setUnitERKN3ito9ByteArrayE"></span><span id="ito::DoubleMeta::setUnit__ito::ByteArrayCR"></span><span class="target" id="classito_1_1_double_meta_1af697a996b700198004163f4f4b960e42"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">setUnit</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <span class="pre">&amp;</span><em><span class="pre">unit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta7setUnitERKN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets unit string of this parameter </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta19getDisplayPrecisionEv">
+<span id="_CPPv3NK3ito10DoubleMeta19getDisplayPrecisionEv"></span><span id="_CPPv2NK3ito10DoubleMeta19getDisplayPrecisionEv"></span><span id="ito::DoubleMeta::getDisplayPrecisionC"></span><span class="target" id="classito_1_1_double_meta_1a41273af58e1473ab1845b721bc2f1ece"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">int</span> <code class="sig-name descname"><span class="pre">getDisplayPrecision</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta19getDisplayPrecisionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns display precision </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta19setDisplayPrecisionEi">
+<span id="_CPPv3N3ito10DoubleMeta19setDisplayPrecisionEi"></span><span id="_CPPv2N3ito10DoubleMeta19setDisplayPrecisionEi"></span><span id="ito::DoubleMeta::setDisplayPrecision__i"></span><span class="target" id="classito_1_1_double_meta_1a0d8075d1f65446c108ce027e700a5115"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">setDisplayPrecision</span></code><span class="sig-paren">(</span><span class="pre">int</span> <em><span class="pre">displayPrecision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta19setDisplayPrecisionEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets display precision </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta18getDisplayNotationEv">
+<span id="_CPPv3NK3ito10DoubleMeta18getDisplayNotationEv"></span><span id="_CPPv2NK3ito10DoubleMeta18getDisplayNotationEv"></span><span id="ito::DoubleMeta::getDisplayNotationC"></span><span class="target" id="classito_1_1_double_meta_1ad76bd6f572929fbeba37fb99c890d596"></span><em class="property"><span class="pre">inline</span></em> <a class="reference internal" href="#_CPPv4N3ito10DoubleMetaE" title="ito::DoubleMeta"><span class="pre">DoubleMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito10DoubleMeta16tDisplayNotationE" title="ito::DoubleMeta::tDisplayNotation"><span class="pre">tDisplayNotation</span></a> <code class="sig-name descname"><span class="pre">getDisplayNotation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta18getDisplayNotationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns display notation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta18setDisplayNotationEN10DoubleMeta16tDisplayNotationE">
+<span id="_CPPv3N3ito10DoubleMeta18setDisplayNotationEN10DoubleMeta16tDisplayNotationE"></span><span id="_CPPv2N3ito10DoubleMeta18setDisplayNotationEN10DoubleMeta16tDisplayNotationE"></span><span id="ito::DoubleMeta::setDisplayNotation__DoubleMeta::tDisplayNotation"></span><span class="target" id="classito_1_1_double_meta_1af94606a8d3afd138bb67f0c7d05a23af"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">void</span> <code class="sig-name descname"><span class="pre">setDisplayNotation</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3ito10DoubleMetaE" title="ito::DoubleMeta"><span class="pre">DoubleMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito10DoubleMeta16tDisplayNotationE" title="ito::DoubleMeta::tDisplayNotation"><span class="pre">tDisplayNotation</span></a> <em><span class="pre">displayNotation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta18setDisplayNotationEN10DoubleMeta16tDisplayNotationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets display notation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10DoubleMeta17getRepresentationEv">
+<span id="_CPPv3NK3ito10DoubleMeta17getRepresentationEv"></span><span id="_CPPv2NK3ito10DoubleMeta17getRepresentationEv"></span><span id="ito::DoubleMeta::getRepresentationC"></span><span class="target" id="classito_1_1_double_meta_1ae3a9306c3a9e49c035ea4f29d036f1c5"></span><em class="property"><span class="pre">inline</span></em> <a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="ito::ParamMeta::tRepresentation"><span class="pre">tRepresentation</span></a> <code class="sig-name descname"><span class="pre">getRepresentation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10DoubleMeta17getRepresentationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns display representation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta17setRepresentationEN9ParamMeta15tRepresentationE">
+<span id="_CPPv3N3ito10DoubleMeta17setRepresentationEN9ParamMeta15tRepresentationE"></span><span id="_CPPv2N3ito10DoubleMeta17setRepresentationEN9ParamMeta15tRepresentationE"></span><span id="ito::DoubleMeta::setRepresentation__ParamMeta::tRepresentation"></span><span class="target" id="classito_1_1_double_meta_1ab2cdc0cb7acbf2bca171eef954d40047"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setRepresentation</span></code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMeta15tRepresentationE" title="ito::ParamMeta::tRepresentation"><span class="pre">tRepresentation</span></a> <em><span class="pre">representation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta17setRepresentationEN9ParamMeta15tRepresentationE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets display representation </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta6setMinE7float64">
+<span id="_CPPv3N3ito10DoubleMeta6setMinE7float64"></span><span id="_CPPv2N3ito10DoubleMeta6setMinE7float64"></span><span id="ito::DoubleMeta::setMin__float64"></span><span class="target" id="classito_1_1_double_meta_1a4674de3a18f088427ca7ecb2b0d7773c"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setMin</span></code><span class="sig-paren">(</span><span class="pre">float64</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta6setMinE7float64" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the minimum value </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta6setMaxE7float64">
+<span id="_CPPv3N3ito10DoubleMeta6setMaxE7float64"></span><span id="_CPPv2N3ito10DoubleMeta6setMaxE7float64"></span><span id="ito::DoubleMeta::setMax__float64"></span><span class="target" id="classito_1_1_double_meta_1ade8a81db4b6c0b9c9f9dca134417eb05"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setMax</span></code><span class="sig-paren">(</span><span class="pre">float64</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta6setMaxE7float64" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the maximum value </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta11setStepSizeE7float64">
+<span id="_CPPv3N3ito10DoubleMeta11setStepSizeE7float64"></span><span id="_CPPv2N3ito10DoubleMeta11setStepSizeE7float64"></span><span id="ito::DoubleMeta::setStepSize__float64"></span><span class="target" id="classito_1_1_double_meta_1a11f54ec068475727de1974a1531a0998"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setStepSize</span></code><span class="sig-paren">(</span><span class="pre">float64</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta11setStepSizeE7float64" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the step size </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize…,maxVal] are allowed </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10DoubleMeta3allEN3ito9ByteArrayE">
+<span id="_CPPv3N3ito10DoubleMeta3allEN3ito9ByteArrayE"></span><span id="_CPPv2N3ito10DoubleMeta3allEN3ito9ByteArrayE"></span><span id="ito::DoubleMeta::all__ito::ByteArray"></span><span class="target" id="classito_1_1_double_meta_1a1f7658bf011160407fe9a8d2b23dd3a0"></span><em class="property"><span class="pre">static</span></em> <a class="reference internal" href="#_CPPv4N3ito10DoubleMetaE" title="ito::DoubleMeta"><span class="pre">DoubleMeta</span></a> <span class="pre">*</span><code class="sig-name descname"><span class="pre">all</span></code><span class="sig-paren">(</span><span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10DoubleMeta3allEN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns a new instance of <a class="reference internal" href="#classito_1_1_double_meta"><span class="std std-ref">DoubleMeta</span></a>, where the min and max are set to the full range available for double. The caller has to take care of memory. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="class-chararraymeta-intarraymeta-and-doublearraymeta">
+<h2><span class="section-number">7.8.5.3. </span>Class CharArrayMeta, IntArrayMeta and DoubleArrayMeta<a class="headerlink" href="#class-chararraymeta-intarraymeta-and-doublearraymeta" title="Permalink to this headline">¶</a></h2>
+<p>The classes <strong>CharArrayMeta</strong>, <strong>IntArrayMeta</strong> and <strong>DoubleArrayMeta</strong> provide meta information for array-based parameters of numeric types.
+These classes are derived from <strong>CharArray</strong>, <strong>IntArray</strong> or <strong>DoubleArray</strong>, such that the minimum and maximum value as well as the step size
+for each single value is given by the features of their base class. Additionally, it is possible to set a min, max and stepSize constraint concerning
+the number of elements of the arrays.</p>
+<dl class="cpp class">
+<dt id="_CPPv4N3ito13CharArrayMetaE">
+<span id="_CPPv3N3ito13CharArrayMetaE"></span><span id="_CPPv2N3ito13CharArrayMetaE"></span><span id="ito::CharArrayMeta"></span><span class="target" id="classito_1_1_char_array_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">CharArrayMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito8CharMetaE" title="ito::CharMeta"><span class="pre">CharMeta</span></a><a class="headerlink" href="#_CPPv4N3ito13CharArrayMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type <a class="reference internal" href="#classito_1_1_char_array_meta"><span class="std std-ref">CharArrayMeta</span></a>. </p>
+<p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type <a class="reference internal" href="#classito_1_1_int_array_meta"><span class="std std-ref">IntArrayMeta</span></a>.</p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::CharArray. Since this meta information class is derived from <a class="reference internal" href="#classito_1_1_char_meta"><span class="std std-ref">ito::CharMeta</span></a>, it is possible to restrict each value to the single value contraints of <a class="reference internal" href="#classito_1_1_char_meta"><span class="std std-ref">ito::CharMeta</span></a>. Furthermore, this class allows restricting the minimum and maximum length of the array as well as the optional step size of the array’s length.</p>
+<p><p>An object of this class can be used to parametrize a parameter whose type is </p>
+ito::ParamBase::IntArray. Since this meta information class is derived from <a class="reference internal" href="#classito_1_1_int_meta"><span class="std std-ref">ito::IntMeta</span></a>, it is possible to restrict each value to the single value contraints of <a class="reference internal" href="#classito_1_1_int_meta"><span class="std std-ref">ito::IntMeta</span></a>. Furthermore, this class allows restricting the minimum and maximum length of the array as well as the optional step size of the array’s length.<dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a>, <a class="reference internal" href="#classito_1_1_char_meta"><span class="std std-ref">ito::CharMeta</span></a></p>
+</dd>
+</dl>
+</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a>, ito::IntArray </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito13CharArrayMeta9getNumMinEv">
+<span id="_CPPv3NK3ito13CharArrayMeta9getNumMinEv"></span><span id="_CPPv2NK3ito13CharArrayMeta9getNumMinEv"></span><span id="ito::CharArrayMeta::getNumMinC"></span><span class="target" id="classito_1_1_char_array_meta_1a7f5fbebfcd4defab007bc1aac6acbc88"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumMin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito13CharArrayMeta9getNumMinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito13CharArrayMeta9getNumMaxEv">
+<span id="_CPPv3NK3ito13CharArrayMeta9getNumMaxEv"></span><span id="_CPPv2NK3ito13CharArrayMeta9getNumMaxEv"></span><span id="ito::CharArrayMeta::getNumMaxC"></span><span class="target" id="classito_1_1_char_array_meta_1aeb82d6febb2d9bb5b043f92ea5f3dcd1"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumMax</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito13CharArrayMeta9getNumMaxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito13CharArrayMeta14getNumStepSizeEv">
+<span id="_CPPv3NK3ito13CharArrayMeta14getNumStepSizeEv"></span><span id="_CPPv2NK3ito13CharArrayMeta14getNumStepSizeEv"></span><span id="ito::CharArrayMeta::getNumStepSizeC"></span><span class="target" id="classito_1_1_char_array_meta_1a7e22fd5908ebcde27515b0bbb627ac84"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumStepSize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito13CharArrayMeta14getNumStepSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns step size of number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito13CharArrayMeta9setNumMinE6size_t">
+<span id="_CPPv3N3ito13CharArrayMeta9setNumMinE6size_t"></span><span id="_CPPv2N3ito13CharArrayMeta9setNumMinE6size_t"></span><span id="ito::CharArrayMeta::setNumMin__s"></span><span class="target" id="classito_1_1_char_array_meta_1aba394f9821116f3f8908aad1120f3aba"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumMin</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito13CharArrayMeta9setNumMinE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the minimum number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito13CharArrayMeta9setNumMaxE6size_t">
+<span id="_CPPv3N3ito13CharArrayMeta9setNumMaxE6size_t"></span><span id="_CPPv2N3ito13CharArrayMeta9setNumMaxE6size_t"></span><span id="ito::CharArrayMeta::setNumMax__s"></span><span class="target" id="classito_1_1_char_array_meta_1a7cc7bfb046b1c498f21d96309ce64be5"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumMax</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito13CharArrayMeta9setNumMaxE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the maximum number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito13CharArrayMeta14setNumStepSizeE6size_t">
+<span id="_CPPv3N3ito13CharArrayMeta14setNumStepSizeE6size_t"></span><span id="_CPPv2N3ito13CharArrayMeta14setNumStepSizeE6size_t"></span><span id="ito::CharArrayMeta::setNumStepSize__s"></span><span class="target" id="classito_1_1_char_array_meta_1ad233ac846648440087ee26bd561281bf"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumStepSize</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito13CharArrayMeta14setNumStepSizeE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the step size of the number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize…,maxVal] are allowed </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3ito12IntArrayMetaE">
+<span id="_CPPv3N3ito12IntArrayMetaE"></span><span id="_CPPv2N3ito12IntArrayMetaE"></span><span id="ito::IntArrayMeta"></span><span class="target" id="classito_1_1_int_array_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">IntArrayMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito7IntMetaE" title="ito::IntMeta"><span class="pre">IntMeta</span></a><a class="headerlink" href="#_CPPv4N3ito12IntArrayMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito12IntArrayMeta9getNumMinEv">
+<span id="_CPPv3NK3ito12IntArrayMeta9getNumMinEv"></span><span id="_CPPv2NK3ito12IntArrayMeta9getNumMinEv"></span><span id="ito::IntArrayMeta::getNumMinC"></span><span class="target" id="classito_1_1_int_array_meta_1abf8e8a817a4e5b506f3f2c97446b0de3"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumMin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito12IntArrayMeta9getNumMinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito12IntArrayMeta9getNumMaxEv">
+<span id="_CPPv3NK3ito12IntArrayMeta9getNumMaxEv"></span><span id="_CPPv2NK3ito12IntArrayMeta9getNumMaxEv"></span><span id="ito::IntArrayMeta::getNumMaxC"></span><span class="target" id="classito_1_1_int_array_meta_1aee2365b84195eb78207dee46357657f1"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumMax</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito12IntArrayMeta9getNumMaxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito12IntArrayMeta14getNumStepSizeEv">
+<span id="_CPPv3NK3ito12IntArrayMeta14getNumStepSizeEv"></span><span id="_CPPv2NK3ito12IntArrayMeta14getNumStepSizeEv"></span><span id="ito::IntArrayMeta::getNumStepSizeC"></span><span class="target" id="classito_1_1_int_array_meta_1add8aab7a4e33667a273cbe9878d301b7"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumStepSize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito12IntArrayMeta14getNumStepSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns step size of number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito12IntArrayMeta9setNumMinE6size_t">
+<span id="_CPPv3N3ito12IntArrayMeta9setNumMinE6size_t"></span><span id="_CPPv2N3ito12IntArrayMeta9setNumMinE6size_t"></span><span id="ito::IntArrayMeta::setNumMin__s"></span><span class="target" id="classito_1_1_int_array_meta_1a344ae2c9ff44cf4b4b720c345f2c30b8"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumMin</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito12IntArrayMeta9setNumMinE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the minimum number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito12IntArrayMeta9setNumMaxE6size_t">
+<span id="_CPPv3N3ito12IntArrayMeta9setNumMaxE6size_t"></span><span id="_CPPv2N3ito12IntArrayMeta9setNumMaxE6size_t"></span><span id="ito::IntArrayMeta::setNumMax__s"></span><span class="target" id="classito_1_1_int_array_meta_1a5dc5e473915fe92a0d3f22902f4e4e39"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumMax</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito12IntArrayMeta9setNumMaxE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the maximum number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito12IntArrayMeta14setNumStepSizeE6size_t">
+<span id="_CPPv3N3ito12IntArrayMeta14setNumStepSizeE6size_t"></span><span id="_CPPv2N3ito12IntArrayMeta14setNumStepSizeE6size_t"></span><span id="ito::IntArrayMeta::setNumStepSize__s"></span><span class="target" id="classito_1_1_int_array_meta_1a48162698e4aed19cfbbc531a93b68adc"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumStepSize</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito12IntArrayMeta14setNumStepSizeE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the step size of the number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize…,maxVal] are allowed </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3ito15DoubleArrayMetaE">
+<span id="_CPPv3N3ito15DoubleArrayMetaE"></span><span id="_CPPv2N3ito15DoubleArrayMetaE"></span><span id="ito::DoubleArrayMeta"></span><span class="target" id="classito_1_1_double_array_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">DoubleArrayMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito10DoubleMetaE" title="ito::DoubleMeta"><span class="pre">DoubleMeta</span></a><a class="headerlink" href="#_CPPv4N3ito15DoubleArrayMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type <a class="reference internal" href="#classito_1_1_double_array_meta"><span class="std std-ref">DoubleArrayMeta</span></a>. </p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::DoubleArray. Since this meta information class is derived from ito::DoubleArray, it is possible to restrict each value to the single value contraints of ito::DoubleArray. Furthermore, this class allows restricting the minimum and maximum length of the array as well as the optional step size of the array’s length.</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a>, <a class="reference internal" href="#classito_1_1_double_meta"><span class="std std-ref">ito::DoubleMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito15DoubleArrayMeta9getNumMinEv">
+<span id="_CPPv3NK3ito15DoubleArrayMeta9getNumMinEv"></span><span id="_CPPv2NK3ito15DoubleArrayMeta9getNumMinEv"></span><span id="ito::DoubleArrayMeta::getNumMinC"></span><span class="target" id="classito_1_1_double_array_meta_1acd31a30716b3fe74454865337cece1a6"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumMin</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito15DoubleArrayMeta9getNumMinEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito15DoubleArrayMeta9getNumMaxEv">
+<span id="_CPPv3NK3ito15DoubleArrayMeta9getNumMaxEv"></span><span id="_CPPv2NK3ito15DoubleArrayMeta9getNumMaxEv"></span><span id="ito::DoubleArrayMeta::getNumMaxC"></span><span class="target" id="classito_1_1_double_array_meta_1a941fa4b3740f138c9bd8f4f131bbe53f"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumMax</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito15DoubleArrayMeta9getNumMaxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito15DoubleArrayMeta14getNumStepSizeEv">
+<span id="_CPPv3NK3ito15DoubleArrayMeta14getNumStepSizeEv"></span><span id="_CPPv2NK3ito15DoubleArrayMeta14getNumStepSizeEv"></span><span id="ito::DoubleArrayMeta::getNumStepSizeC"></span><span class="target" id="classito_1_1_double_array_meta_1a90f353644dff168b03bfd556adfc4fc3"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">size_t</span> <code class="sig-name descname"><span class="pre">getNumStepSize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito15DoubleArrayMeta14getNumStepSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns step size of number of values </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito15DoubleArrayMeta9setNumMinE6size_t">
+<span id="_CPPv3N3ito15DoubleArrayMeta9setNumMinE6size_t"></span><span id="_CPPv2N3ito15DoubleArrayMeta9setNumMinE6size_t"></span><span id="ito::DoubleArrayMeta::setNumMin__s"></span><span class="target" id="classito_1_1_double_array_meta_1a79c25c8a33c0bf4b4b277acb1182e332"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumMin</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito15DoubleArrayMeta9setNumMinE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the minimum number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new minimum value, if this is bigger than the current maximum value, the maximum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito15DoubleArrayMeta9setNumMaxE6size_t">
+<span id="_CPPv3N3ito15DoubleArrayMeta9setNumMaxE6size_t"></span><span id="_CPPv2N3ito15DoubleArrayMeta9setNumMaxE6size_t"></span><span id="ito::DoubleArrayMeta::setNumMax__s"></span><span class="target" id="classito_1_1_double_array_meta_1a5a119801be44adeb49b7e8070cab9d15"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumMax</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito15DoubleArrayMeta9setNumMaxE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the maximum number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new maximum value, if this is smaller than the current minimum value, the minimum value is changed to val, too </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito15DoubleArrayMeta14setNumStepSizeE6size_t">
+<span id="_CPPv3N3ito15DoubleArrayMeta14setNumStepSizeE6size_t"></span><span id="_CPPv2N3ito15DoubleArrayMeta14setNumStepSizeE6size_t"></span><span id="ito::DoubleArrayMeta::setNumStepSize__s"></span><span class="target" id="classito_1_1_double_array_meta_1a2a7123157dc634a9b5b1c00863d87fb3"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setNumStepSize</span></code><span class="sig-paren">(</span><span class="pre">size_t</span> <em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito15DoubleArrayMeta14setNumStepSizeE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the step size of the number of values </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: is the new step size, hence only discrete values [minVal, minVal+stepSize, minVal+2*stepSize…,maxVal] are allowed </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="class-stringmeta">
+<h2><span class="section-number">7.8.5.4. </span>Class StringMeta<a class="headerlink" href="#class-stringmeta" title="Permalink to this headline">¶</a></h2>
+<p>By this meta information you can give information about restrictions of strings to different strings. These strings can be interpreted as pure
+strings, as wildcard-expressions or regular expressions. The corresponding checks must be defined manually. If a string-parameter has an enumeration defined,
+where the strings are interpreted as strings, and if this parameter will automatically be parsed by any input mask in the GUI, the corresponding input text
+box becomes a drop-down menu with the given enumeration elements.</p>
+<dl class="cpp class">
+<dt id="_CPPv4N3ito10StringMetaE">
+<span id="_CPPv3N3ito10StringMetaE"></span><span id="_CPPv2N3ito10StringMetaE"></span><span id="ito::StringMeta"></span><span class="target" id="classito_1_1_string_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">StringMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><a class="headerlink" href="#_CPPv4N3ito10StringMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type String. </p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::String. If set, it is possible to restrict the a given string to fit to a given list of strings. This list of strings might be interpreted in an exact way (tType::String), as wildcard expressions (tType::Wildcard) or as regular expressions (tType::RegExp).</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta10StringMetaE5tTypeN3ito9ByteArrayE">
+<span id="_CPPv3N3ito10StringMeta10StringMetaE5tTypeN3ito9ByteArrayE"></span><span id="_CPPv2N3ito10StringMeta10StringMetaE5tTypeN3ito9ByteArrayE"></span><span id="ito::StringMeta::StringMeta__tType.ito::ByteArray"></span><span class="target" id="classito_1_1_string_meta_1a1fce9209b9a57239498dd5ea0d01fd76"></span><code class="sig-name descname"><span class="pre">StringMeta</span></code><span class="sig-paren">(</span><span class="pre">tType</span> <em><span class="pre">type</span></em>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta10StringMetaE5tTypeN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor </p>
+<p>Returns a meta information class for string-types. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>tType </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: indicates how the string elements should be considered </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta10StringMetaE5tTypePKcN3ito9ByteArrayE">
+<span id="_CPPv3N3ito10StringMeta10StringMetaE5tTypePKcN3ito9ByteArrayE"></span><span id="_CPPv2N3ito10StringMeta10StringMetaE5tTypePKcN3ito9ByteArrayE"></span><span id="ito::StringMeta::StringMeta__tType.cCP.ito::ByteArray"></span><span class="target" id="classito_1_1_string_meta_1af5b1f2171c3a90930e7583d407b846e3"></span><code class="sig-name descname"><span class="pre">StringMeta</span></code><span class="sig-paren">(</span><span class="pre">tType</span> <em><span class="pre">type</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">val</span></em>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta10StringMetaE5tTypePKcN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor </p>
+<p>Returns a meta information class for string-types. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>tType </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: indicates how the string elements should be considered </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: adds a first string to the element list </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta10StringMetaE5tTypeRKN3ito9ByteArrayEN3ito9ByteArrayE">
+<span id="_CPPv3N3ito10StringMeta10StringMetaE5tTypeRKN3ito9ByteArrayEN3ito9ByteArrayE"></span><span id="_CPPv2N3ito10StringMeta10StringMetaE5tTypeRKN3ito9ByteArrayEN3ito9ByteArrayE"></span><span id="ito::StringMeta::StringMeta__tType.ito::ByteArrayCR.ito::ByteArray"></span><span class="target" id="classito_1_1_string_meta_1ac41e083135dac010eac6943b35ea8210"></span><code class="sig-name descname"><span class="pre">StringMeta</span></code><span class="sig-paren">(</span><span class="pre">tType</span> <em><span class="pre">type</span></em>, <em class="property"><span class="pre">const</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <span class="pre">&amp;</span><em><span class="pre">val</span></em>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta10StringMetaE5tTypeRKN3ito9ByteArrayEN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor </p>
+<p>Returns a meta information class for string-types. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>tType </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: indicates how the string elements should be considered </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">val</span></code>: adds a first string to the element list </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta10StringMetaERK10StringMeta">
+<span id="_CPPv3N3ito10StringMeta10StringMetaERK10StringMeta"></span><span id="_CPPv2N3ito10StringMeta10StringMetaERK10StringMeta"></span><span id="ito::StringMeta::StringMeta__StringMetaCR"></span><span class="target" id="classito_1_1_string_meta_1afc91bd151bde1d848c90586c80a835e8"></span><code class="sig-name descname"><span class="pre">StringMeta</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <a class="reference internal" href="#_CPPv4N3ito10StringMeta10StringMetaERK10StringMeta" title="ito::StringMeta::StringMeta"><span class="pre">StringMeta</span></a> <span class="pre">&amp;</span><em><span class="pre">cpy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta10StringMetaERK10StringMeta" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>copy constructor </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMetaD0Ev">
+<span id="_CPPv3N3ito10StringMetaD0Ev"></span><span id="_CPPv2N3ito10StringMetaD0Ev"></span><span id="ito::StringMeta::~StringMeta"></span><span class="target" id="classito_1_1_string_meta_1a50b47912b2ee1072fc7401fcbed7a127"></span><em class="property"><span class="pre">virtual</span></em> <code class="sig-name descname"><span class="pre">~StringMeta</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMetaD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>destructor </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10StringMeta13getStringTypeEv">
+<span id="_CPPv3NK3ito10StringMeta13getStringTypeEv"></span><span id="_CPPv2NK3ito10StringMeta13getStringTypeEv"></span><span id="ito::StringMeta::getStringTypeC"></span><span class="target" id="classito_1_1_string_meta_1a823b8895afc093f97749ae50548f6a79"></span><span class="pre">tType</span> <code class="sig-name descname"><span class="pre">getStringType</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10StringMeta13getStringTypeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns the type how strings in list should be considered. </p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p>tType </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta13setStringTypeE5tType">
+<span id="_CPPv3N3ito10StringMeta13setStringTypeE5tType"></span><span id="_CPPv2N3ito10StringMeta13setStringTypeE5tType"></span><span id="ito::StringMeta::setStringType__tType"></span><span class="target" id="classito_1_1_string_meta_1a1611e157fe45091f72764bcde5b9cf1a"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">setStringType</span></code><span class="sig-paren">(</span><span class="pre">tType</span> <em><span class="pre">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta13setStringTypeE5tType" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sets the type how strings in pattern list should be considered. </p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p>tType </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10StringMeta6getLenEv">
+<span id="_CPPv3NK3ito10StringMeta6getLenEv"></span><span id="_CPPv2NK3ito10StringMeta6getLenEv"></span><span id="ito::StringMeta::getLenC"></span><span class="target" id="classito_1_1_string_meta_1a8fed2e9214ac7703bee9451f7b4d1d63"></span><span class="pre">int</span> <code class="sig-name descname"><span class="pre">getLen</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10StringMeta6getLenEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns the number of string elements in meta information class. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito10StringMeta9getStringEi">
+<span id="_CPPv3NK3ito10StringMeta9getStringEi"></span><span id="_CPPv2NK3ito10StringMeta9getStringEi"></span><span id="ito::StringMeta::getString__iC"></span><span class="target" id="classito_1_1_string_meta_1aa05c1aac0cda7f61618a5368a2f25db6"></span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><code class="sig-name descname"><span class="pre">getString</span></code><span class="sig-paren">(</span><span class="pre">int</span> <em><span class="pre">idx</span></em> <span class="pre">=</span> <span class="pre">0</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito10StringMeta9getStringEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns string from list at index position or NULL, if index is out of range. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta7addItemEPKc">
+<span id="_CPPv3N3ito10StringMeta7addItemEPKc"></span><span id="_CPPv2N3ito10StringMeta7addItemEPKc"></span><span id="ito::StringMeta::addItem__cCP"></span><span class="target" id="classito_1_1_string_meta_1a8f47569a605543736531e39f268d3490"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">addItem</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta7addItemEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>adds another element to the list of patterns. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta7addItemERKN3ito9ByteArrayE">
+<span id="_CPPv3N3ito10StringMeta7addItemERKN3ito9ByteArrayE"></span><span id="_CPPv2N3ito10StringMeta7addItemERKN3ito9ByteArrayE"></span><span id="ito::StringMeta::addItem__ito::ByteArrayCR"></span><span class="target" id="classito_1_1_string_meta_1aecb4f8e20765a5be6f511f8bfb576239"></span><span class="pre">bool</span> <code class="sig-name descname"><span class="pre">addItem</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <span class="pre">&amp;</span><em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta7addItemERKN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>adds another element to the list of patterns. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMeta10clearItemsEv">
+<span id="_CPPv3N3ito10StringMeta10clearItemsEv"></span><span id="_CPPv2N3ito10StringMeta10clearItemsEv"></span><span id="ito::StringMeta::clearItems"></span><span class="target" id="classito_1_1_string_meta_1a4d4511c1b367d25192c0ae4a428350ef"></span><span class="pre">void</span> <code class="sig-name descname"><span class="pre">clearItems</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMeta10clearItemsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>clear all elements from the pattern list. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito10StringMetapLEPKc">
+<span id="_CPPv3N3ito10StringMetapLEPKc"></span><span id="_CPPv2N3ito10StringMetapLEPKc"></span><span id="ito::StringMeta::add-assign-operator__cCP"></span><span class="target" id="classito_1_1_string_meta_1aaa317ff61d3dc11c3da555ff3e192950"></span><a class="reference internal" href="#_CPPv4N3ito10StringMetaE" title="ito::StringMeta"><span class="pre">StringMeta</span></a> <span class="pre">&amp;</span><code class="sig-name descname"><span class="pre">operator+=</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito10StringMetapLEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>add another pattern string to the list of patterns. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="class-dobjmeta">
+<h2><span class="section-number">7.8.5.5. </span>Class DObjMeta<a class="headerlink" href="#class-dobjmeta" title="Permalink to this headline">¶</a></h2>
+<p>This meta information class provides further information about allowed types and boundaries concerning the dimension of a data object.</p>
+<dl class="cpp class">
+<dt id="_CPPv4N3ito8DObjMetaE">
+<span id="_CPPv3N3ito8DObjMetaE"></span><span id="_CPPv2N3ito8DObjMetaE"></span><span id="ito::DObjMeta"></span><span class="target" id="classito_1_1_d_obj_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">DObjMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><a class="headerlink" href="#_CPPv4N3ito8DObjMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type DObjPtr. </p>
+<p>(not used yet)</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8DObjMeta9getMinDimEv">
+<span id="_CPPv3NK3ito8DObjMeta9getMinDimEv"></span><span id="_CPPv2NK3ito8DObjMeta9getMinDimEv"></span><span id="ito::DObjMeta::getMinDimC"></span><span class="target" id="classito_1_1_d_obj_meta_1abcbc447b8cd9ac45a6cf3260b8ad8e45"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">int</span> <code class="sig-name descname"><span class="pre">getMinDim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8DObjMeta9getMinDimEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns maximum allowed dimensions of data object </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito8DObjMeta9getMaxDimEv">
+<span id="_CPPv3NK3ito8DObjMeta9getMaxDimEv"></span><span id="_CPPv2NK3ito8DObjMeta9getMaxDimEv"></span><span id="ito::DObjMeta::getMaxDimC"></span><span class="target" id="classito_1_1_d_obj_meta_1a1c33266b4811e4e653c4e17f6f210a02"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">int</span> <code class="sig-name descname"><span class="pre">getMaxDim</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito8DObjMeta9getMaxDimEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns minimum number of dimensions of data object </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="class-hwmeta">
+<h2><span class="section-number">7.8.5.6. </span>Class HWMeta<a class="headerlink" href="#class-hwmeta" title="Permalink to this headline">¶</a></h2>
+<p>By that implementation of a meta information class you can provide information about references to other instantiated plugins.
+Every plugin is defined by a bitmask of enumeration <strong>ito::tPluginType</strong> (defined in <strong>addInActuator.h</strong>). You can either add a minimum bitmask, that is required,
+to the <strong>HWMeta</strong>-instance or you can define an exact name of a plugin, which must be met.</p>
+<dl class="cpp class">
+<dt id="_CPPv4N3ito6HWMetaE">
+<span id="_CPPv3N3ito6HWMetaE"></span><span id="_CPPv2N3ito6HWMetaE"></span><span id="ito::HWMeta"></span><span class="target" id="classito_1_1_h_w_meta"></span><em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">ito</span><code class="sig-prename descclassname"><span class="pre">::</span></code></code><code class="sig-name descname"><span class="pre">HWMeta</span></code> <span class="pre">:</span> <em class="property"><span class="pre">public</span></em> <span class="pre">ito</span><span class="pre">::</span><a class="reference internal" href="#_CPPv4N3ito9ParamMetaE" title="ito::ParamMeta"><span class="pre">ParamMeta</span></a><a class="headerlink" href="#_CPPv4N3ito6HWMetaE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Meta-information for <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> of type HWPtr. </p>
+<p>An object of this class can be used to parametrize a parameter whose type is ito::ParamBase::HWPtr, that is an instance of another hardware plugin. If set, it is possible to restrict the given hardware plugin to a specific type (e.g. dataIO, dataIO + grabber, actuator…) and/or to limit it to a specific name of the plugin (e.g. SerialIO).</p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p><a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">ito::Param</span></a>, <a class="reference internal" href="#classito_1_1_param_meta"><span class="std std-ref">ito::ParamMeta</span></a> </p>
+</dd>
+</dl>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3ito6HWMeta6HWMetaE6uint32N3ito9ByteArrayE">
+<span id="_CPPv3N3ito6HWMeta6HWMetaE6uint32N3ito9ByteArrayE"></span><span id="_CPPv2N3ito6HWMeta6HWMetaE6uint32N3ito9ByteArrayE"></span><span id="ito::HWMeta::HWMeta__uint32.ito::ByteArray"></span><span class="target" id="classito_1_1_h_w_meta_1a612c2cd7d12c42195017529ddeeef724"></span><em class="property"><span class="pre">inline</span></em> <em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">HWMeta</span></code><span class="sig-paren">(</span><span class="pre">uint32</span> <em><span class="pre">minType</span></em>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito6HWMeta6HWMetaE6uint32N3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor </p>
+<p>creates HWMeta-information struct where you can pass a bitmask which consists of values of the enumeration ito::tPluginType. The plugin reference of the corresponding <a class="reference internal" href="plugin-param-Ref.html#classito_1_1_param"><span class="std std-ref">Param</span></a> should then only accept plugins, where all bits are set, too. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>ito::Plugin, ito::tPluginType </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3ito6HWMeta6HWMetaEPKcN3ito9ByteArrayE">
+<span id="_CPPv3N3ito6HWMeta6HWMetaEPKcN3ito9ByteArrayE"></span><span id="_CPPv2N3ito6HWMeta6HWMetaEPKcN3ito9ByteArrayE"></span><span id="ito::HWMeta::HWMeta__cCP.ito::ByteArray"></span><span class="target" id="classito_1_1_h_w_meta_1a9b98890a5d08992d0964b7f4c7317ed6"></span><em class="property"><span class="pre">inline</span></em> <em class="property"><span class="pre">explicit</span></em> <code class="sig-name descname"><span class="pre">HWMeta</span></code><span class="sig-paren">(</span><em class="property"><span class="pre">const</span></em> <span class="pre">char</span> <span class="pre">*</span><em><span class="pre">HWAddInName</span></em>, <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <em><span class="pre">category</span></em> <span class="pre">=</span> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span><span class="pre">(</span><span class="pre">)</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3ito6HWMeta6HWMetaEPKcN3ito9ByteArrayE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>constructor </p>
+<p>creates HWMeta-information struct where you can pass a specific name of a plugin, which only is allowed by the corresponding plugin-instance. <dl class="simple">
+<dt><strong>See</strong></dt><dd><p>ito::Plugin </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito6HWMeta10getMinTypeEv">
+<span id="_CPPv3NK3ito6HWMeta10getMinTypeEv"></span><span id="_CPPv2NK3ito6HWMeta10getMinTypeEv"></span><span id="ito::HWMeta::getMinTypeC"></span><span class="target" id="classito_1_1_h_w_meta_1ae6bc4771f9f7599d4c4833a57d126e8b"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">uint32</span> <code class="sig-name descname"><span class="pre">getMinType</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito6HWMeta10getMinTypeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns type-bitmask which is minimally required by plugin-reference. Default 0. </p>
+<p><dl class="simple">
+<dt><strong>See</strong></dt><dd><p>ito::tPluginType </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3ito6HWMeta14getHWAddInNameEv">
+<span id="_CPPv3NK3ito6HWMeta14getHWAddInNameEv"></span><span id="_CPPv2NK3ito6HWMeta14getHWAddInNameEv"></span><span id="ito::HWMeta::getHWAddInNameC"></span><span class="target" id="classito_1_1_h_w_meta_1a6600b1dc86948501427546292115c1ac"></span><em class="property"><span class="pre">inline</span></em> <span class="pre">ito</span><span class="pre">::</span><span class="pre">ByteArray</span> <code class="sig-name descname"><span class="pre">getHWAddInName</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property"><span class="pre">const</span></em><a class="headerlink" href="#_CPPv4NK3ito6HWMeta14getHWAddInNameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>returns name of specific hardware plugin </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plugin-paramsValidate.html" class="btn btn-neutral float-right" title="7.8.6. Parameters - Validation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plugin-param-Ref.html" class="btn btn-neutral float-left" title="7.8.4.6.2. Param - Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OpenCV matrices cv::Mat and cv::Mat_ &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="opencv-matrices-cv-mat-and-cv-mat">
+<span id="plugin-class"></span><h1>OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong><a class="headerlink" href="#opencv-matrices-cv-mat-and-cv-mat" title="Permalink to this headline">¶</a></h1>
+<p>In OpenCV the main matrix class is called <strong>Mat</strong> and is contained in the OpenCV-namespace <strong>cv</strong>. This matrix is not templated but nevertheless can contain
+different data types. These are idicated by a certain type-number. Additionally, OpenCV provides a templated class called <strong>Mat_</strong>, which is derived from
+<strong>Mat</strong>. Internally, the template-data type is analyzed and tried to convert to the corresponding type-number. If this is not possible the user-defined type-number
+is assumed.</p>
+<p>In the following section of the manual, a short introduction for the use of the class <strong>Mat</strong> is given.</p>
+<div class="section" id="creating-a-matrix-of-class-cv-mat">
+<h2>Creating a matrix of class <strong>cv::Mat</strong><a class="headerlink" href="#creating-a-matrix-of-class-cv-mat" title="Permalink to this headline">¶</a></h2>
+<p>//tell us something about the different possibilites how to construct a cv::Mat (different constructors, their parameters, examples...)</p>
+<p>To create and manipulate multidimensional matrices. You can create a Mat object in multiple ways:
+Lets start with two-dimensional matrices</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_32FC2</span><span class="p">);</span>
+
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="k">const</span> <span class="n">Scalar</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_32FC3</span><span class="p">,</span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">));</span>
+</pre></div>
+</td></tr></table></div>
+<p>For three dimensional and multichannel images we first define their size: row and column count wise.
+Then we need to specify the data type to use for storing the elements and the number of channels per matrix point.
+To do this we have multiple definitions made according to the following convention.
+CV_[The number of bits per item][Signed or Unsigned][Type Prefix]C[The channel number]
+For instance, CV_32FC3 means we use floating char types that are 32 bit long and each pixel has three items of this to form the three channels. This are predefined for up to four channel numbers. The Scalar is four element short vector. Specify this and you can initialize all matrix points with a custom value.</p>
+<p>Create a multi-dimensional array: create a 100x100x100 8-bit array</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">ndims</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">sizes</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+<span class="kt">int</span> <span class="n">Sz</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">};</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Sz</span><span class="p">,</span> <span class="n">CV_8U</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="o">::</span><span class="n">all</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</pre></div>
+</td></tr></table></div>
+<p>It passes the number of dimensions =1 to the Mat constructor but the created array will be 2-dimensional with the number of columns set to 1. So, Mat::dimsis always &gt;= 2 (can also be 0 when the array is empty).
+Use a copy constructor or assignment operator where there can be an array or expression on the right side (seebelow). As noted in the introduction, the array assignment is an O(1) operation because it only copies the headerand increases the reference counter. The Mat::clone() method can be used to get a full (deep) copy of the array when you need it.</p>
+<p>Another approach</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="k">const</span> <span class="n">Mat</span><span class="o">&amp;</span> <span class="n">m</span><span class="p">,</span> <span class="k">const</span> <span class="n">Range</span><span class="o">&amp;</span> <span class="n">rowRange</span><span class="p">,</span> <span class="k">const</span> <span class="n">Range</span><span class="o">&amp;</span> <span class="n">colRange</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="n">originalMatrix</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Range</span><span class="o">::</span><span class="n">all</span><span class="p">(),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">));</span>
+</pre></div>
+</td></tr></table></div>
+<p>rowRange - Range of the m rows to take. As usual, the range start is inclusive and the range end is exclusive. Use Range::all() to take all the rows.
+colRange - Range of the m columns to take. Use Range::all() to take all the columns.
+ranges - Array of selected ranges of m along each dimensionality.</p>
+</div>
+<div class="section" id="subsub-section-possible-parameter-names-for-matrix-cv-mat">
+<h2>subsub-section: Possible parameter names for matrix <strong>cv::Mat</strong><a class="headerlink" href="#subsub-section-possible-parameter-names-for-matrix-cv-mat" title="Permalink to this headline">¶</a></h2>
+<p>The parameters which you add to the <strong>cv::Mat</strong>, must have a name which fits to the following rules:</p>
+<ul>
+<li><p class="first">The name starts with a lower or upper case character, hence a value between <em>a-z</em> or <em>A-Z</em></p>
+</li>
+<li><p class="first">The first character of the name can be followed by an infinite number of alpha-numerical characters (including characters like <em>_</em> or <em>-</em>).</p>
+</li>
+<li><dl class="first docutils">
+<dt>To create Mat object.</dt>
+<dd><p class="first">using create (nrows, ncols, type)
+where</p>
+<ul class="simple">
+<li>nrows is number of rows</li>
+<li>ncols is number of columns</li>
+</ul>
+<p>type is specified value such as</p>
+<ol class="arabic simple">
+<li>CV_8UC1 means 8-bit single-channel array,</li>
+<li>CV_32FC2 means 2-channel(i.e. complex) floating-point array</li>
+<li>CV_8U - 8-bit unsigned integers ( 0..255 )</li>
+<li>CV_8S - 8-bit signed integers ( -128..127 )</li>
+<li>CV_16U - 16-bit unsigned integers ( 0..65535 )</li>
+<li>CV_16S - 16-bit signed integers ( -32768..32767 )</li>
+<li>CV_32S - 32-bit signed integers ( -2147483648..2147483647 )</li>
+<li>CV_32F - 32-bit floating-point numbers ( -FLT_MAX..FLT_MAX, INF, NAN )</li>
+<li>CV_64F - 64-bit floating-point numbers ( -DBL_MAX..DBL_MAX, INF, NAN )</li>
+</ol>
+<p class="last">The array type, use CV_8UC1, ..., CV_64FC4 to create 1-4 channel matrices, or CV_8UC(n), ..., CV_64FC(n) to create multi-channel (up to CV_MAX_CN channels) matrices</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// make 7x7 complex matrix having type of 2-channel floating point array.</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">M</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">CV_32FC2</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>If the user tries to type same rows and columns for multiplication then,</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_64FC1</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">B</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_64FC1</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">B</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>The above example&#8217;s answer will show in 3*3 matrix according to the types.
+But if the user types</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_64FC1</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">B</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_64FC1</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">B</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Then the mul operator or &#8216;*&#8217; performs elementwise multiplication. Note that it is not a matrix multiplication.
+The above example&#8217;s answer will show in 4*3 matrix according to the types.</p>
+<p>If the user tries to type different types like CV_64FC1 or CV_32FC1 in matrix then the value will be different. Also in these types values after C is kept for channels ie. 1,2,.....,n.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_64FC1</span> <span class="n">or</span> <span class="n">CV_32FC1</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>If the user tries to type different rows and columns for multiplication then the error:sizes of input arguments do not match and the multiplied matrix will have the same rows and columns of any matrix.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="kt">int</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">A</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">CV_64FC1</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">B</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_64FC1</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">C</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">mul</span><span class="p">(</span><span class="n">B</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>The above example&#8217;s answer will show in 4*3 matrix according to the types.
+Also if the user tries to type different types while performing multiplication then the error:the input arrays in functions have different types, the output array type must be explicitly specified.</p>
+<p>If the user uses ones command then all the elements of matrix will have value 1 and by multiplying it with any number the user will get the multiplied value.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">F</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">CV_32FC1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>If the user uses eye command then it will form identity matrix and by multiplying it with any number the user will get the multiplied value in identity matrix.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">F</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">CV_32FC1</span><span class="p">)</span><span class="o">*</span><span class="mi">6</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>If the user uses zeros command then all the elements of matrix will have value 0.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">F</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">CV_32FC1</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="adressing-values-in-a-matrix">
+<h2>Adressing values in a matrix<a class="headerlink" href="#adressing-values-in-a-matrix" title="Permalink to this headline">¶</a></h2>
+<p>Creating a big Matrix</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">W</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">CV_32FC1</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Creatiing another header for the same matrix, this is an instant operation regardless of the matrix size.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">X</span> <span class="o">=</span> <span class="n">W</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Create another header for the 3-rd row of W, no data is copied either and also created seperate matrix</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">Z</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+<p>Copying the 2-nd row of X to Y, that is, copy the 2-nd row of to the 3-rd row of W.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">X</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">copyTo</span><span class="p">(</span><span class="n">Y</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Now let W and Z share the data; after that the modified version of W is still referenced by X and Y. now make X an empty matrix (which references no memory buffers) but the modified version of W will still be referenced by Y, despite that Y is just a single row of the original W</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">W</span> <span class="o">=</span> <span class="n">Z</span><span class="p">;</span>
+<span class="n">X</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+<p>Finally, make a full copy of Y. As a result, the big modified matrix will be deallocated, since it is not referenced by anyone</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="shallow-copy-vs-deep-copy">
+<h2>Shallow copy vs. deep copy<a class="headerlink" href="#shallow-copy-vs-deep-copy" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="creating-region-of-interest">
+<h2>Creating Region Of Interest<a class="headerlink" href="#creating-region-of-interest" title="Permalink to this headline">¶</a></h2>
+<p>#. cv::Mat::locateROI
+Locates the matrix header within a parent matrix.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">locateROI</span><span class="p">(</span><span class="n">Size</span> <span class="o">&amp;</span><span class="n">wholeSize</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="o">&amp;</span><span class="n">ofs</span><span class="p">)</span> <span class="k">const</span>
+</pre></div>
+</td></tr></table></div>
+<dl class="docutils">
+<dt>Parameters: * wholeSize - Output parameter that contains the size of the whole matrix containing <a href="#id1"><span class="problematic" id="id2">*</span></a>this as a part.</dt>
+<dd><ul class="first last simple">
+<li>ofs - Output parameter that contains an offset of <a href="#id3"><span class="problematic" id="id4">*</span></a>this inside the whole matrix.</li>
+</ul>
+</dd>
+</dl>
+<p>After you extracted a submatrix from a matrix using Mat::row(), Mat::col(), Mat::rowRange(), Mat::colRange() , and others, the resultant submatrix points just to the part of the original big matrix. However, each submatrix contains information (represented by datastart and dataend fields) that helps reconstruct the original matrix size and the position of the extracted submatrix within the original matrix. The method locateROI does exactly that.</p>
+<p>#. cv::Mat::adjustROI
+Adjusts a submatrix size and position within the parent matrix.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">::</span><span class="n">adjustROI</span><span class="p">(</span><span class="kt">int</span> <span class="n">dtop</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dbottom</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dleft</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dright</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<dl class="docutils">
+<dt>Parameters: * dtop - Shift of the top submatrix boundary upwards.</dt>
+<dd><ul class="first last simple">
+<li>dbottom - Shift of the bottom submatrix boundary downwards.</li>
+<li>dleft - Shift of the left submatrix boundary to the left.</li>
+<li>dright - Shift of the right submatrix boundary to the right.</li>
+</ul>
+</dd>
+</dl>
+<p>The method is complimentary to Mat::locateROI() . The typical use of these functions is to determine the submatrix position within the parent matrix and then shift the position somehow. Typically, it can be required for filtering operations when pixels outside of the ROI should be taken into account. When all the method parameters are positive, the ROI needs to grow in all directions by the specified amount,
+for example:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">A</span><span class="p">.</span><span class="n">adjustROI</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this example, the matrix size is increased by 4 elements in each direction. The matrix is shifted by 2 elements to the left and 2 elements up, which brings in all the necessary pixels for the filtering with the 5x5 kernel.
+adjustROI forces the adjusted ROI to be inside of the parent matrix that is boundaries of the adjusted ROI are constrained by boundaries of the parent matrix.
+For example, if the submatrix A is located in the first row of a parent matrix and you called A.adjustROI(2, 2, 2, 2) then A will not be increased in the upward direction</p>
+<p>A = cv::Mat(3,3,CV_32FC1)
+B = A(cv::Range(0,1), cv::Range(0,2)) shallow copy</p>
+<p>locateROI
+adjustROI...</p>
+</div>
+<div class="section" id="simple-operators">
+<h2>Simple operators<a class="headerlink" href="#simple-operators" title="Permalink to this headline">¶</a></h2>
+<p>add, subtract, multiplication (element-wise, matrix-like), division, errors which can occur (different types, different sizes, wrong sizes...)</p>
+</div>
+<div class="section" id="advanced-operations-and-functions">
+<h2>Advanced operations and functions<a class="headerlink" href="#advanced-operations-and-functions" title="Permalink to this headline">¶</a></h2>
+<p>filtering (low-pass filter), mean-value, max-value, min-value, median-filter, fourier-transform</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a><ul>
+<li><a class="reference internal" href="#creating-a-matrix-of-class-cv-mat">Creating a matrix of class <strong>cv::Mat</strong></a></li>
+<li><a class="reference internal" href="#subsub-section-possible-parameter-names-for-matrix-cv-mat">subsub-section: Possible parameter names for matrix <strong>cv::Mat</strong></a></li>
+<li><a class="reference internal" href="#adressing-values-in-a-matrix">Adressing values in a matrix</a></li>
+<li><a class="reference internal" href="#shallow-copy-vs-deep-copy">Shallow copy vs. deep copy</a></li>
+<li><a class="reference internal" href="#creating-region-of-interest">Creating Region Of Interest</a></li>
+<li><a class="reference internal" href="#simple-operators">Simple operators</a></li>
+<li><a class="reference internal" href="#advanced-operations-and-functions">Advanced operations and functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/07_plugins/development/openCVMat.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

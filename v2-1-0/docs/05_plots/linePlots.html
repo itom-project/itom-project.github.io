@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.3. line plots (1D) &mdash; itom Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="itom Documentation" href="../index.html"/>
+        <link rel="up" title="6. Plots and Figures" href="plots.html"/>
+        <link rel="next" title="6.4. 2D image plots" href="imagePlots.html"/>
+        <link rel="prev" title="6.2.2. itom.figure.liveImage" href="generated/itom.figure.liveImage.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plots.html">6. Plots and Figures</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.3. line plots (1D)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#properties">6.3.1. Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signals">6.3.2. Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slots">6.3.3. Slots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecated-figures">6.3.4. Deprecated figures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imagePlots.html">6.4. 2D image plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">6.5. isometric Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives.html">6.6. Markers, user selections and geometric shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">6.7. Matplotlib</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+<ul class="simple">
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">itom Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="plots.html">6. Plots and Figures</a> &raquo;</li>
+      
+    <li>6.3. line plots (1D)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/05_plots/linePlots.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="line-plots-1d">
+<span id="itom1dqwtplot"></span><h1>6.3. line plots (1D)<a class="headerlink" href="#line-plots-1d" title="Permalink to this headline">¶</a></h1>
+<p>In order to plot a 1D line (1 x M or M x 1 DataObject) or multiple lines in a line plot, the designer plugin <strong>Itom1DQwtPlot</strong> is
+the recommended visualization tool. You can either add this class name (<em>itom1dqwtplot</em>) to any <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal"><span class="pre">plot()</span></code></a> or <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><code class="xref py py-meth docutils literal"><span class="pre">liveImage()</span></code></a>
+command in order to force the data to be plotted in this plot type and / or set this plugin to be the default plot for 1D static and live plots.</p>
+<p>The latter can be done in the property dialog or itom, tab <strong>Plots and Figures &gt;&gt; Default Plots</strong>. Set there the <em>default figure plot</em> to <em>Itom1DQwtPlot</em> for the
+categories</p>
+<ul class="simple">
+<li>DObjLiveLine</li>
+<li>DObjStaticLine</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/plot1d_2.png"><img alt="../_images/plot1d_2.png" src="../_images/plot1d_2.png" style="width: 796.0px; height: 428.0px;" /></a>
+</div>
+<p>This plot has been created by the following code snippet:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">className</span> <span class="o">=</span> <span class="s1">&#39;itom1dqwtplot&#39;</span><span class="p">,</span> \
+    <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;sin(X/20)&quot;</span><span class="p">,</span> <span class="s2">&quot;valueLabel&quot;</span><span class="p">:</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>If you choose <em>itom1dqwtplot</em> as className for the <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal"><span class="pre">plot()</span></code></a> command with a 2D data object as argument,
+is it also possible to plot multiple lines. The plot plugin accepts all available data types, including colors and complex values.</p>
+<p>Data is plotted as follows:</p>
+<ul class="simple">
+<li>Real data types: One or multiple lines are plotted where the horizontal axis corresponds to the grid of the data object considering possible scaling and offset values. The line(s) have different colours. The colour of one line can also be adjusted.</li>
+<li>Complex types: This is the same than for real data types, however you can choose whether the <em>absolute</em>, <em>phase</em>, <em>real</em> or <em>imaginary</em> part of the complex values is plotted.</li>
+<li>color type: Coloured data objects will be represented by either 3 or 4 lines (red, green and blue, alpha optional) that correspond to the three colour channels or by one line representing the converted gray values.</li>
+</ul>
+<p>Using Python or the properties toolbox (View &gt;&gt; properties or via right click on the toolbar), it is possible to adjust many properties like stated below.</p>
+<p>The plot allows value and min/max-picking via place-able marker.</p>
+<p>The plot supports geometric element and marker interaction via <strong>drawAndPickElements(...)</strong> and <strong>call(&#8220;userInteractionStart&#8221;,...)</strong>. See section <a class="reference internal" href="primitives.html#primitives"><span>Markers, user selections and geometric shapes</span></a> for a short introduction.</p>
+<p>You can also use the &#8220;matplotlib&#8221;-backend to plot slices or xy-coordinates. See section <a class="reference internal" href="../08_scriptLanguage/pymod-matplotlib.html#pymod-matplotlib"><span>Python-Module matplotlib</span></a> for more information about how to use &#8220;matplotlib&#8221;.</p>
+<p>The plot-canvas can be exported to vector and bitmap-graphics via button or menu entry or it can be exported to clipBoard via ctrl-c or a public slot.</p>
+<div class="section" id="properties">
+<h2>6.3.1. Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p><strong>selectedGeometry</strong> : <em>int</em>, get the currently selected geometric element within this plot</p>
+<p><strong>enablePlotting</strong> : <em>bool</em>, enable and disable internal plotting functions and GUI-elements for geometric elements.</p>
+<p><strong>keepAspectRatio</strong> : <em>bool</em>, enable and disable a fixed 1:1 aspect ratio between x and y axis.</p>
+<p><strong>geometricElementsCount</strong> : <em>int</em>, number of currently existing geometric elements.</p>
+<p><strong>geometricElements</strong> : <em>ito::DataObject</em>, geometric elements defined by a float32[11] array for each element.</p>
+<p><strong>axisFont</strong> : <em>QFont</em>, font for axes tick values.</p>
+<p><strong>labelFont</strong> : <em>QFont</em>, Font for axes descriptions.</p>
+<p><strong>titleFont</strong> : <em>QFont</em>, Font for title.</p>
+<p><strong>valueLabel</strong> : <em>QString</em>, Label of the value axis (y-axis) or &#8216;&lt;auto&gt;&#8217; if the description should be used from data object.</p>
+<p><strong>axisLabel</strong>: <em>QString</em>, Label of the direction (x/y) axis or &#8216;&lt;auto&gt;&#8217; if the descriptions from the data object should be used.</p>
+<p><strong>title</strong> : <em>QString</em>, Title of the plot or &#8216;&lt;auto&gt;&#8217; if the title of the data object should be used.</p>
+<p><strong>bounds</strong> : <em>QVector&lt;QPointF&gt;</em>,</p>
+<p><strong>colorMap</strong> : <em>QString</em>, Color map (string) that should be used to colorize a non-color data object.</p>
+<p><strong>yAxisInterval</strong> : If member <em>auto</em> of <em>autoInterval</em> is False, the visible range of the displayed y-axis is set to the given range (in coordinates of the data object); else the range is automatically determined and set [default].</p>
+<p><strong>xAxisInterval</strong> : If member <em>auto</em> of <em>autoInterval</em> is False, the visible range of the displayed x-axis is set to the given range (in coordinates of the data object); else the range is automatically determined and set [default].</p>
+<p><strong>camera</strong> : <em>ito::AddInDataIO</em>, Use this property to set a camera/grabber to this plot (live image).</p>
+<p><strong>displayed</strong> : <em>ito::DataObject</em>, This returns the currently displayed data object [read only].</p>
+<p><strong>source</strong> : <em>ito::DataObject</em>, Sets the input data object for this plot.</p>
+<p><strong>contextMenuEnabled</strong> : <em>bool</em>, Defines whether the context menu of the plot should be enabled or not.</p>
+<p><strong>toolbarVisible</strong> : <em>bool</em>, Toggles the visibility of the toolbar of the plot.</p>
+</div>
+<div class="section" id="signals">
+<h2>6.3.2. Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h2>
+<p><strong>plotItemsFinished(int,bool)</strong>: Signal emitted if plotting of n-elements if finished. Use this for non-blocking synchronisation.</p>
+<blockquote>
+<div><p><em>counts, int</em>: Number of plotted elements</p>
+<p><em>aborted, bool</em>: Flag showing if draw function was cancelled during plotting</p>
+</div></blockquote>
+<p><strong>plotItemsDeleted()</strong>:</p>
+<blockquote>
+<div>Signal emitted if geometric elements were deleted.</div></blockquote>
+<p><strong>plotItemDeleted(ito::int32)</strong>:</p>
+<blockquote>
+<div>Signal emitted if specified geometric element was deleted.</div></blockquote>
+<p><strong>plotItemChanged(ito::int32,ito::int32,QVector&lt;ito::float32&gt;)</strong>:</p>
+<blockquote>
+<div><p>Signal emitted if specified geometric element was changed.</p>
+<p><em>idx, ito::int32</em>: Index of changed element</p>
+<p><em>element, QVector&lt;ito::float32&gt;</em>: New geometric featured of changed element</p>
+</div></blockquote>
+<p><strong>userInteractionDone(int,bool,QPolygonF)</strong>:</p>
+<blockquote>
+<div>Signal emitted if user interaction is done. Internal function used for blocking synchronisation.</div></blockquote>
+</div>
+<div class="section" id="slots">
+<h2>6.3.3. Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h2>
+<p><strong>ito::DataObject getDisplayed( )</strong>:</p>
+<blockquote>
+<div>Retrieve currently displayed dataObject.</div></blockquote>
+<p><strong>ito::RetVal clearGeometricElements( )</strong>:</p>
+<blockquote>
+<div>Delete all geometric Elements</div></blockquote>
+<p><strong>void userInteractionStart( int type, bool start [, int maxNrOfPoints = -1] )</strong>:</p>
+<blockquote>
+<div><p>This slot should be called of non-blocking GUI-based drawing of geometric elements within this plot is necessary. See section <a class="reference internal" href="primitives.html#primitives"><span>Markers, user selections and geometric shapes</span></a> for a short introduction.</p>
+<p><em>type, int</em>: type to plot</p>
+<p><em>start, bool</em>: true if plotting should be started</p>
+<p><em>maxNrOfPoints, int</em>: number of elements to plot</p>
+</div></blockquote>
+<p><strong>ito::RetVal deleteMarkers( int id)</strong>:</p>
+<blockquote>
+<div><p>Delete geometric element</p>
+<p><em>id, int</em>: the 0-based index of specific geometric element</p>
+</div></blockquote>
+<p><strong>ito::RetVal plotMarkers( ito::DataObject coords, QString style [, QString id = &#8220;&#8221; [, int plane = -1]])</strong> :</p>
+<blockquote>
+<div><p>This slot is called to visualize markers and python-based plotting of geometric elements within this plot. See section <a class="reference internal" href="primitives.html#primitives"><span>Markers, user selections and geometric shapes</span></a> for a short introduction.</p>
+<p><em>coords, ito::DataObject</em>: an initialized dataObject with a column per element and a set of rows describing its geometric features</p>
+<p><em>style, QString</em>: Style for plotted markers, for geometric elements it is ignored</p>
+<p><em>id, QString</em>: Text based id for markers will be ignored for geometric elements.</p>
+</div></blockquote>
+<p><strong>ito::RetVal setLinePlot( double x0, double y0, double x1, double y1 [, int linePlotIdx = -1])</strong>:</p>
+<blockquote>
+<div><p>this can be invoked by python to trigger a line plot, inherited from <em>class AbstractDObjFigure</em></p>
+<p><em>x0, double</em>: first position of line plot in x-Direction</p>
+<p><em>y0, double</em>: first position of line plot in y-Direction</p>
+<p><em>x1, double</em>: second position of line plot in x-Direction</p>
+<p><em>y1, double</em>: second position of line plot in x-Direction</p>
+</div></blockquote>
+<p><strong>ito::RetVal setSource( ito::DataObject source, ItomSharedSemaphore* )</strong></p>
+<blockquote>
+<div><p>Set new source object to this plot. Usually invoked by any camera if used as a live image.</p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>source, ito::DataObject <a href="#id3"><span class="problematic" id="id4">*</span></a>: The new dataObject to display</p>
+<p><em>semaphore, ItomSharedSemaphore</em>: A semaphore to handle the multi-threading.</p>
+</div></blockquote>
+<p><strong>refreshPlot( )</strong>:</p>
+<blockquote>
+<div>Refresh / redraw current plot</div></blockquote>
+<p><strong>copyToClipBoard()</strong>:</p>
+<blockquote>
+<div>Copy current canvas with white background to clipBoard</div></blockquote>
+</div>
+<div class="section" id="deprecated-figures">
+<h2>6.3.4. Deprecated figures<a class="headerlink" href="#deprecated-figures" title="Permalink to this headline">¶</a></h2>
+<p>The plot-dll &#8220;itom1DQWTFigure&#8221;  is deprecated and has been replaced by  &#8220;Itom1DQwtPlot&#8221;.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="imagePlots.html" class="btn btn-neutral float-right" title="6.4. 2D image plots" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="generated/itom.figure.liveImage.html" class="btn btn-neutral" title="6.2.2. itom.figure.liveImage" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Mar 04, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'6bd7a70',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

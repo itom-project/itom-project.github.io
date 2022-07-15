@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['ramerdouglaspeuckerdata',['RamerDouglasPeuckerData',['../structito_1_1_ramer_douglas_peucker_data.html',1,'ito']]],
+  ['range',['Range',['../classito_1_1_range.html',1,'ito']]],
+  ['rangemeta',['RangeMeta',['../classito_1_1_range_meta.html',1,'ito']]],
+  ['rangeslider',['RangeSlider',['../class_range_slider.html',1,'']]],
+  ['rangesliderfactory',['RangeSliderFactory',['../class_range_slider_factory.html',1,'']]],
+  ['rangesliderprivate',['RangeSliderPrivate',['../class_range_slider_private.html',1,'']]],
+  ['rangewidget',['RangeWidget',['../class_range_widget.html',1,'']]],
+  ['rangewidgetfactory',['RangeWidgetFactory',['../class_range_widget_factory.html',1,'']]],
+  ['rangewidgetprivate',['RangeWidgetPrivate',['../class_range_widget_private.html',1,'']]],
+  ['rectmeta',['RectMeta',['../classito_1_1_rect_meta.html',1,'ito']]],
+  ['relation',['relation',['../classrelation.html',1,'']]],
+  ['retval',['RetVal',['../classito_1_1_ret_val.html',1,'ito']]],
+  ['rgba32',['Rgba32',['../classito_1_1_rgba32.html',1,'ito']]],
+  ['rgba32_5f',['rgba32_',['../structrgba32__.html',1,'']]],
+  ['rgbabase32',['RgbaBase32',['../classito_1_1_rgba_base32.html',1,'ito']]],
+  ['rgbchannel',['RGBChannel',['../classito_1_1_r_g_b_channel.html',1,'ito']]]
+];

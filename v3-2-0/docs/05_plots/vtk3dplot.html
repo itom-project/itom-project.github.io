@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6.7. 3D plot &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.8. Markers in plots" href="markers.html" />
+    <link rel="prev" title="6.6. isometric Plot" href="isometricPlot.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plots.html">6. Plots and Figures</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.7. 3D plot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtk3dvisualizer">6.7.1. Vtk3dVisualizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#properties">6.7.1.1. Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slots">6.7.1.2. Slots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signals">6.7.1.3. Signals</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="plots.html">6. Plots and Figures</a> &raquo;</li>
+        
+      <li>6.7. 3D plot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/05_plots/vtk3dplot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="d-plot">
+<span id="plot-3d"></span><h1>6.7. 3D plot<a class="headerlink" href="#d-plot" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="vtk3dvisualizer">
+<h2>6.7.1. Vtk3dVisualizer<a class="headerlink" href="#vtk3dvisualizer" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>Vtk3dVisualizer</strong> designer plugin can be used to display arbitrary point clouds, polygonal meshes or geometric shapes like
+cylinders, spheres, pyramids, lines or cubes in one 3D plot. The first point cloud or polygonal mesh is plotted using the
+default <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> command. Further items are added, updated or removed by several slots that are defined and can be
+called using the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code>.</p>
+<p>Every item on the canvas is listed in a tree view representation using the optional name of each item. Additionally, every item
+can be configured independently (for more information see the example <strong>demo/plot/demoVtk3dVisualizer.py</strong> or <strong>demo/plot/cloudAndMeshVisualization.py</strong>.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/vtk3dvisualizer.png"><img alt="../_images/vtk3dvisualizer.png" src="../_images/vtk3dvisualizer.png" style="width: 1156.0px; height: 582.0px;" /></a>
+</div>
+<p>Examples about the Vtk3dVisualizer plot can be found in the folder <strong>demo/plot</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Newer versions of VTK (compiled with OpenGL 2) might not work via a remote desktop connection under Windows, since newer OpenGL
+standards are not supported by remote desktop.</p>
+</div>
+<div class="section" id="properties">
+<h3>6.7.1.1. Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt>
+<code class="descname">cameraView : seq. of 3 floats</code></dt>
+<dd><p>view direction of the camera</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">backgroundColor : color str, rgba or hex</code></dt>
+<dd><p>background color of the canvas</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">toolbarVisible : bool</code></dt>
+<dd><p>Toggles the visibility of the toolbar of the plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">renderLegend : bool</code></dt>
+<dd><p>If this property is true, the legend are included in pixelmaps renderings.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">coordSysVisible : bool</code></dt>
+<dd><p>sets the visibility of a coordinate system</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pointCloud : QSharedPointer&lt;ito::PCLPointCloud&gt;</code></dt>
+<dd><p>Sets the input point cloud for this plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yAxisLabel : str</code></dt>
+<dd><p>Label of the y-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">propertiesSorted : bool</code></dt>
+<dd><p>sort the properties of one item in an alphabetical order or not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">enablePointPick : bool</code></dt>
+<dd><p>if True, a click to any point of the canvas emits the signal pointPicked that emits the currently clicked 3d coordinate and the index of the closest point of the cloud / mesh that has been given as pickPointCloud or pickMesh.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cameraFocalPoint : seq. of 3 floats</code></dt>
+<dd><p>focal point of the camera</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yAxisVisible : bool</code></dt>
+<dd><p>Sets the visibility of the y-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cubeAxesTickLocation : TickLocation</code></dt>
+<dd><p>defines the location of ticks for the cube axes</p>
+<p>The type ‘TickLocation’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘ticksInside’ (0)</p></li>
+<li><p>‘ticksOutside’ (1)</p></li>
+<li><p>‘ticksBoth’ (2)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">colorMap : str</code></dt>
+<dd><p>Color map (string) that should be used to colorize a non-color data object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">polygonMesh : QSharedPointer&lt;ito::PCLPolygonMesh&gt;</code></dt>
+<dd><p>Sets the input polygon mesh for this plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xDrawGridlines : bool</code></dt>
+<dd><p>Sets the visibility of gridlines along the x-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cameraPosition : seq. of 3 floats</code></dt>
+<dd><p>position of the camera</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">coordSysScale : float</code></dt>
+<dd><p>sets the length / scaling of the coordinate axes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zAxisLabel : str</code></dt>
+<dd><p>Label of the z-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xAxisInterval : autoInterval</code></dt>
+<dd><p>Sets the visible range of the displayed x-axis (in coordinates of the data object) or (0.0, 0.0) if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pointPickSphereRadius : float</code></dt>
+<dd><p>If &gt; 0, a sphere with the given radius is printed around the center point of the point pick event (if enabled)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cubeGridlinesColor : color str, rgba or hex</code></dt>
+<dd><p>sets the color of the cube gridlines</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">pointPickSphereColor : color str, rgba or hex</code></dt>
+<dd><p>Color of the possible sphere of the point pick event (see pointPickShereRadius and enablePointPick)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xAxisTickVisibility : bool</code></dt>
+<dd><p>Sets the visibility of major ticks along the x-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">stereoType : Stereo</code></dt>
+<dd><p>sets the stereo type of the canvas</p>
+<p>The type ‘Stereo’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘No’ (0)</p></li>
+<li><p>‘CrystalEyes’ (1)</p></li>
+<li><p>‘RedBlue’ (2)</p></li>
+<li><p>‘Interlaced’ (3)</p></li>
+<li><p>‘Left’ (4)</p></li>
+<li><p>‘Right’ (5)</p></li>
+<li><p>‘Dresden’ (6)</p></li>
+<li><p>‘Anaglyph’ (7)</p></li>
+<li><p>‘Checkerboard’ (8)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xAxisMinorTickVisibility : bool</code></dt>
+<dd><p>Sets the visibility of minor ticks along the x-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">enableDistanceLOD : bool</code></dt>
+<dd><p>If enabled the actor will not be visible at a certain distance from the camera</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zDrawGridlines : bool</code></dt>
+<dd><p>Sets the visibility of gridlines along the z-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yAxisInterval : autoInterval</code></dt>
+<dd><p>Sets the visible range of the displayed y-axis (in coordinates of the data object) or (0.0, 0.0) if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yDrawGridlines : bool</code></dt>
+<dd><p>Sets the visibility of gridlines along the y-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cubeAxesVisible : bool</code></dt>
+<dd><p>Overall visibility of the cube axes (must be set to True in order to see grids, labels, axes…)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cubeAxesColor : color str, rgba or hex</code></dt>
+<dd><p>sets the color of the cube axes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">parallelProjection : bool</code></dt>
+<dd><p>if true a parallel projection is used, else the perspective projection</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yAxisMinorTickVisibility : bool</code></dt>
+<dd><p>Sets the visibility of minor ticks along the y-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">contextMenuEnabled : bool</code></dt>
+<dd><p>Defines whether the context menu of the plot should be enabled or not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xAxisVisible : bool</code></dt>
+<dd><p>Sets the visibility of the x-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">showFPS : bool</code></dt>
+<dd><p>shows the FPS counter or not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">xAxisLabel : str</code></dt>
+<dd><p>Label of the x-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">cubeAxesFlyMode : FlyMode</code></dt>
+<dd><p>defines how the cube axes are positioned depending on the current camera</p>
+<p>The type ‘FlyMode’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘flyOuterEdges’ (0)</p></li>
+<li><p>‘flyClostestTriad’ (1)</p></li>
+<li><p>‘flyFurthestTriad’ (2)</p></li>
+<li><p>‘flyStaticTriad’ (3)</p></li>
+<li><p>‘flyStaticEdges’ (4)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">coordSysPos : seq. of 3 floats</code></dt>
+<dd><p>position of the coordinate system</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">dataObject : dataObject</code></dt>
+<dd><p>Sets the input data object for this plot.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zAxisVisible : bool</code></dt>
+<dd><p>Sets the visibility of the z-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zAxisInterval : autoInterval</code></dt>
+<dd><p>Sets the visible range of the displayed z-axis (in coordinates of the data object) or (0.0, 0.0) if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zAxisMinorTickVisibility : bool</code></dt>
+<dd><p>Sets the visibility of minor ticks along the z-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">enableViewAngleLOD : bool</code></dt>
+<dd><p>If enabled the actor will not be visible at a certain view angle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">zAxisTickVisibility : bool</code></dt>
+<dd><p>Sets the visibility of major ticks along the z-axis.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">yAxisTickVisibility : bool</code></dt>
+<dd><p>Sets the visibility of major ticks along the y-axis.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="slots">
+<h3>6.7.1.2. Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt>
+<code class="descname">addCuboid(points, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add cube. The 8 corner points are given in a 3x8 data object (arguments: points, key, color=white)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setPickPointCloud(pcl) [slot]</code></dt>
+<dd><p>set cloud for pick point event. Nearest point from the position of the cursor (x,y,z) position is searched (arguments: cloud)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setGeometriesPosition(names, positions) [slot]</code></dt>
+<dd><p>changes the position of various geometries (arguments: list of keys, list of (pos_x, pos_y, pos_z)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setLinePlot(x0, y0, x1, y1, destID) [slot]</code></dt>
+<dd><p>This (virtual) slot can be invoked by python to trigger a lineplot.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addText(text, x, y, fontsize, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add a 2d text to a specific position (arguments: text, x, y, fontsize, key, color = white)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addPyramid(points, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add pyramid. The 5 corner points are given in a 3x5 data object (arguments: points, key, color=white)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addSphere(point, radius, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add a sphere (arguments: [center_x, center_y, center_z], radius, key, color = red]).</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">getPlotID() [slot]</code></dt>
+<dd><p>Return window ID of this plot {int}.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">updateText(text, x, y, fontsize, name, color, rgba or hex, createIfNotExists) [slot]</code></dt>
+<dd><p>updates or creates new 2d text (arguments: text, x, y, fontsize, key, color = white, createIfNotExists = false)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setPickPointMesh(mesh) [slot]</code></dt>
+<dd><p>set mesh for pick point event. The cloud of the mesh is used only (arguments: mesh)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">updatePointCloud(pcl, name, createIfNotExists) [slot]</code></dt>
+<dd><p>updates an existing cloud (arguments: cloud, key, createIfNotExists=false)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addMesh(mesh, fullname) [slot]</code></dt>
+<dd><p>add the given mesh to the tree with a key name (arguments: mesh, key)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">registerModel(mesh, modelName) [slot]</code></dt>
+<dd><p>see addMesh</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">deletePointCloud(name) [slot]</code></dt>
+<dd><p>delete the cloud with key</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">deleteGeometry(name) [slot]</code></dt>
+<dd><p>delete the geometry with key</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addPolygon(points, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>adds a 2d polygon (arguments: points, key, color = white) where points is a Mx3 data object where each line is the (x,y,z) coordinate of a point of the polygon. The point values will internally be converted to float32.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addCylinder(point, orientation, radius, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add a cylinder (arguments: (center_x, center_y, center_y), (orientation_x, orientation_y, orientation_z), radius, key, color=white)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addLines(points, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add m lines to the canvas. The coordintates are given by a float32 data object [m x 6] where one row is (x0,y0,z0,x1,y1,z1) (arguments: points, key, color=red).</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setItemProperty(name, property, value) [slot]</code></dt>
+<dd><p>set the property of an item (arguments: key, property-name, value)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">refreshPlot() [slot]</code></dt>
+<dd><p>Triggers an update of the current plot window.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addCube(size, translation, rotation, fullname, color, rgba or hex) [slot]</code></dt>
+<dd><p>add cube (arguments: [size_x, size_y, size_z], [t_x, t_y, t_z], [r_x, r_y, r_z], key, color=white)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">deleteMesh(name) [slot]</code></dt>
+<dd><p>delete the mesh with key</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addPointCloud(pcl, name) [slot]</code></dt>
+<dd><p>add the given cloud to the tree with a key name (arguments: cloud, key)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">setGeometryPose(name, translation, rotation) [slot]</code></dt>
+<dd><p>moves and/or rotates a given geometry (arguments: key, (t_x, t_y, t_z), (r_x, r_y, r_z)</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">addPointCloudNormal(pcl, fullname) [slot]</code></dt>
+<dd><p>add the given cloud with normal vectors to the tree with a key name (arguments: cloud, key)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="signals">
+<h3>6.7.1.3. Signals<a class="headerlink" href="#signals" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt>
+<code class="descname">pointPicked(x, y, z, pointIndex) [signal]</code></dt>
+<dd><p>signature for connection to this signal: pointPicked(float,float,float,int)</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="markers.html" class="btn btn-neutral float-right" title="6.8. Markers in plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="isometricPlot.html" class="btn btn-neutral float-left" title="6.6. isometric Plot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

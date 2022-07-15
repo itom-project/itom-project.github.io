@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7.8.14. Create a new plugin via CMake &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.8.15. Automatic loading and saving of plugin parameters" href="pluginAutoLoadSavePolicy.html" />
+    <link rel="prev" title="7.8.13.8.1. FilterDef" href="plugin-algo-Ref.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../loading_plugins.html">7.2. Loading plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">7.3. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">7.4. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">7.5. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">7.6. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">7.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">7.8. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">7.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">7.8.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">7.8.3. DataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">7.8.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">7.8.5. Parameters - Meta Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">7.8.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">7.8.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">7.8.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">7.8.9. AddInBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">7.8.10. Plugin class - Basic information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">7.8.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-actuator.html">7.8.12. Plugin class - Actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">7.8.13. Plugin class - Algo</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">7.8.14. Create a new plugin via CMake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#templates">7.8.14.1. Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-project">7.8.14.2. Generate project</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">7.8.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">7.8.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">7.8.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">7.8.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">7.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">7.8.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">7.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../plugins.html"><span class="section-number">7. </span>Plugins</a> &raquo;</li>
+        
+          <li><a href="plugin-development.html"><span class="section-number">7.8. </span>Development under C++</a> &raquo;</li>
+        
+      <li><span class="section-number">7.8.14. </span>Create a new plugin via CMake</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/07_plugins/development/pluginCreateCMake.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="create-a-new-plugin-via-cmake">
+<h1><span class="section-number">7.8.14. </span>Create a new plugin via CMake<a class="headerlink" href="#create-a-new-plugin-via-cmake" title="Permalink to this headline">¶</a></h1>
+<p>Plugins for <strong>itom</strong> are also created using <strong>CMake</strong>. Therefore the sources and the project files of the plugins will also be separated, like it is also the case for <strong>itom</strong>, the designer plugins
+and all other plugins. You can either put your source files in any subfolder of the location where all sources of your plugins lie or you can put it at any arbitrary location on your harddrive.</p>
+<p>The source folder of your plugin mainly consists of these files:</p>
+<ol class="arabic simple">
+<li><p><strong>CMakeLists.txt</strong>. This is the project file of your plugin, where you insert the files that are included in your plugin or libraries, the plugin should link with. This file is finally interpreted by <strong>CMake</strong> in order to create the real project files, adapted to your generator (e.g. Visual Studio).</p></li>
+<li><p><strong>yourPlugin.h</strong> and <strong>yourPlugin.cpp</strong>. This are the main header and source files of your plugin.</p></li>
+<li><p><strong>dialogYourPlugin.h</strong> and <strong>dialogYourPlugin.cpp</strong> (optional, not for algorithms). Use these files if you want to provide a configuration dialog for your plugin (can also be added later).</p></li>
+<li><p><strong>dockWidgetYourPlugin.h</strong> and <strong>dockWidgetYourPlugin.cpp</strong> (optional, not for algorithms). Use these files if you want to provide a dock widget of your plugin that is inserted into <strong>itom</strong>’s main window (can also be added later).</p></li>
+<li><p><strong>pluginVersion.h</strong> (optional). This header contains some defines for your current plugin version. It sould be included in <strong>yourPlugin.cpp</strong> and under MSVC / windows in <strong>version.rc</strong>.</p></li>
+<li><p><strong>version.rc</strong> (optional, only under MSVC / windows). Under windows the content of this file will be automatically added to the meta-Data of your DLL.</p></li>
+</ol>
+<div class="section" id="templates">
+<h2><span class="section-number">7.8.14.1. </span>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>You will find templates for the most important files needed for creating a new plugin in the folder <strong>pluginTemplates</strong> of the SDK-directory of <strong>itom</strong>.</p>
+<p>Copy the file <strong>CMakeLists.txt</strong> from this template-directory and copy it to the source directory of your plugin. Open this file with an arbitrary editor. The commands, starting with #, give you hints where you need to adapt this file. Further details about the syntax of these files can be found under <a class="reference external" href="http://www.cmake.org/cmake/help/documentation.html">http://www.cmake.org/cmake/help/documentation.html</a>.</p>
+<p>Furthermore, you will find template implementations of an actuator, algorithm and camera plugin in the <strong>pluginTemplates</strong> folder. Copy the corresponding header and source file of your type into your source directory and start replacing the template strings by your versions, e.g. you need to change the name of your plugin hence the class names.</p>
+</div>
+<div class="section" id="generate-project">
+<h2><span class="section-number">7.8.14.2. </span>Generate project<a class="headerlink" href="#generate-project" title="Permalink to this headline">¶</a></h2>
+<p>If you placed the source files of your plugin into a subdirectory of an existing multi-plugin project, then you need to add the subfolder of your plugin into the file <strong>CMakeLists.txt</strong> of the parent-folder.
+This file usually already contains a lot of subdirectories, added by the CMake-command <strong>ADD_SUBDIRECTORY</strong> and has the following form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="p">(</span><span class="n">itom_plugins</span><span class="p">)</span> <span class="c1">#name of the overall project</span>
+
+<span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span> <span class="mf">3.1</span><span class="o">...</span><span class="mf">3.15</span><span class="p">)</span>
+
+<span class="n">option</span><span class="p">(</span><span class="n">BUILD_TARGET64</span> <span class="s2">&quot;Build for 64 bit target if set to ON or 32 bit if set to OFF.&quot;</span> <span class="n">ON</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">ITOM_SDK_DIR</span> <span class="n">NOTFOUND</span> <span class="n">CACHE</span> <span class="n">PATH</span> <span class="s2">&quot;path of SDK subfolder of itom root (build) directory&quot;</span><span class="p">)</span>
+
+<span class="c1">#this is to automatically detect the SDK subfolder of the itom build directory.</span>
+<span class="k">if</span><span class="p">(</span><span class="n">NOT</span> <span class="n">ITOM_SDK_DIR</span><span class="p">)</span>
+    <span class="n">find_path</span><span class="p">(</span><span class="n">ITOM_SDK_DIR</span> <span class="s2">&quot;cmake/itom_sdk.cmake&quot;</span>
+        <span class="n">HINTS</span> <span class="s2">&quot;C:/itom/build/itom/SDK&quot;</span>
+              <span class="s2">&quot;$</span><span class="si">{CMAKE_CURRENT_BINARY_DIR}</span><span class="s2">/../itom/SDK&quot;</span>
+        <span class="n">DOC</span> <span class="s2">&quot;path of SDK subfolder of itom root (build) directory&quot;</span><span class="p">)</span>
+<span class="n">endif</span><span class="p">()</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">NOT</span> <span class="n">ITOM_SDK_DIR</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">(</span><span class="n">SEND_ERROR</span> <span class="s2">&quot;ITOM_SDK_DIR is invalid. Provide itom SDK directory path first&quot;</span><span class="p">)</span>
+<span class="n">endif</span><span class="p">()</span>
+
+<span class="c1"># Insert the following section for your plugin</span>
+
+<span class="c1"># by this option, the plugin can be unchecked in order to</span>
+<span class="c1"># avoid its generation in cmake.</span>
+<span class="n">OPTION</span><span class="p">(</span><span class="n">PLUGIN_YOURNAME</span> <span class="s2">&quot;Build with this plugin.&quot;</span> <span class="n">ON</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">PLUGIN_YOURNAME</span><span class="p">)</span>
+    <span class="n">ADD_SUBDIRECTORY</span><span class="p">(</span><span class="n">YOURSUBDIRECTORY</span><span class="p">)</span>
+<span class="n">endif</span> <span class="p">(</span><span class="n">PLUGIN_YOURNAME</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, reconfigure and regenerate the overall plugin project or simply run the project <strong>ZERO_CHECK</strong> of your overall plugin solution such that the new plugin is generated and added to the overall solution.
+If you have no idea about configuring and generating a <strong>CMake</strong> project, continue reading or check the big <a class="reference internal" href="../../02_installation/build_cmake.html#install-cmake"><span class="std std-ref">CMake-section</span></a> about generating <strong>itom</strong> itself.</p>
+<p>In order to generate your plugin as single solution, open the <strong>CMake GUI</strong> and choose the source directory of your plugin as source directory and any arbitrary folder as build directory. The solution
+and project files are then generated in this build directory.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin.png"><img alt="../../_images/CMakePlugin.png" src="../../_images/CMakePlugin.png" style="width: 578.0px; height: 523.0px;" /></a>
+</div>
+<p>Then click the configure button to start the configuration. At first, you will be asked for a generator. See <a class="reference internal" href="../../02_installation/build_cmake.html#install-cmake"><span class="std std-ref">Build with CMake</span></a> for more information about generators.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin2.png"><img alt="../../_images/CMakePlugin2.png" src="../../_images/CMakePlugin2.png" style="width: 500.0px; height: 390.0px;" /></a>
+</div>
+<p>Then, another configuration process is started. Usually, it is now necessary to set the variable <strong>ITOM_SDK_DIR</strong> to the directory of <strong>itom</strong>’s SDK, usually located in <strong>itom</strong>’s build directory. Then click <strong>configure</strong>
+again.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin3.png"><img alt="../../_images/CMakePlugin3.png" src="../../_images/CMakePlugin3.png" style="width: 578.0px; height: 523.0px;" /></a>
+</div>
+<p>Next, you probably need to indicate the location of the build-directory of <strong>OpenCV</strong> on your harddrive (variable <strong>OpenCV_DIR</strong> in the group <strong>OpenCV</strong> or <strong>Ungrouped Entries</strong> if you activated the <strong>Grouped</strong> checkbox).</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../_images/CMakePlugin4.png"><img alt="../../_images/CMakePlugin4.png" src="../../_images/CMakePlugin4.png" style="width: 578.0px; height: 484.0px;" /></a>
+</div>
+<p>Continue clicking <strong>configure</strong> until there are no more warnings. Then you can press <strong>Generate</strong> in order to build the project files.
+Change then to the build-directory and open the recently build solution file. In you afterwards change the <strong>CMakeLists.txt</strong>-file, you don’t need to explicitly run the CMake-GUI again, since Visual Studio is also
+able to directly run CMake and update its project files.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="pluginAutoLoadSavePolicy.html" class="btn btn-neutral float-right" title="7.8.15. Automatic loading and saving of plugin parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plugin-algo-Ref.html" class="btn btn-neutral float-left" title="7.8.13.8.1. FilterDef" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

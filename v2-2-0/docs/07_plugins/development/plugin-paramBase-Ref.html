@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7.7.4.6.1. ParamBase - Reference &mdash; itom Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="itom Documentation" href="../../index.html"/>
+        <link rel="up" title="7.7.4. Parameter-Container class of itom" href="plugin-params.html"/>
+        <link rel="next" title="7.7.4.6.2. Param - Reference" href="plugin-param-Ref.html"/>
+        <link rel="prev" title="7.7.4. Parameter-Container class of itom" href="plugin-params.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">7.2. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">7.3. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">7.4. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">7.5. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">7.6. Getting started with algorithm plugins a.k.a. filters</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">7.7. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">7.7.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">7.7.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">7.7.3. DataObject</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="plugin-params.html">7.7.4. Parameter-Container class of <strong>itom</strong></a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="plugin-params.html#introduction">7.7.4.1. Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-params.html#parambase-and-param-and-the-meta-classes">7.7.4.2. <em>ParamBase</em> and <em>Param</em> and the <em>Meta</em>-classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-params.html#usage-and-differences-of-the-classes-parambase-and-param">7.7.4.3. Usage and differences of the classes <em>ParamBase</em> and <em>Param</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-params.html#types-and-flags">7.7.4.4. Types and flags</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-params.html#class-parambase">7.7.4.5. Class <em>ParamBase</em></a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="plugin-params.html#class-param">7.7.4.6. Class <em>Param</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">7.7.5. Parameters - Meta Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">7.7.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">7.7.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">7.7.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">7.7.9. AddInBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">7.7.10. Plugin class - Basic information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">7.7.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-actuator.html">7.7.12. Plugin class - Actuator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">7.7.13. Plugin class - Algo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">7.7.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">7.7.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">7.7.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">7.7.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">7.7.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">7.7.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">7.7.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">7.8. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+</ul>
+<ul class="simple">
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">itom Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../plugins.html">7. Plugins</a> &raquo;</li>
+      
+          <li><a href="plugin-development.html">7.7. Development under C++</a> &raquo;</li>
+      
+          <li><a href="plugin-params.html">7.7.4. Parameter-Container class of <strong>itom</strong></a> &raquo;</li>
+      
+    <li>7.7.4.6.1. ParamBase - Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/07_plugins/development/plugin-paramBase-Ref.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parambase-reference">
+<span id="plugin-parambase-ref"></span><h1>7.7.4.6.1. ParamBase - Reference<a class="headerlink" href="#parambase-reference" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base"></span><em>class</em> <code class="descname">ito::ParamBase</code></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1abbf1dacce700c4e22be21fcadda4c68c"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>default constructor, creates &#8220;empty&#8221; <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1ac4d46eb322c8076f41760187918932c1"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const ByteArray &amp; <em>name</em><span class="sig-paren">)</span></dt>
+<dd><p>constructor with name only 
+creates a new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name &#8220;name&#8221;, string is copied <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> name &#8220;name&#8221;</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a278853d62981bba7b2d69ab5a4ac2b62"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const ByteArray &amp; <em>name</em>, const uint32 <em>type</em><span class="sig-paren">)</span></dt>
+<dd><p>constructor with name and type 
+creates a new <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a> with name and type, string is copied <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a> with name and type</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">type</span></code> - <p>type of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> for possible types see Type </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1af039633063ba03a831b12f7614c56e85"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const ByteArray &amp; <em>name</em>, const uint32 <em>type</em>, const char * <em>val</em><span class="sig-paren">)</span></dt>
+<dd><p>constructor with name and type, char val and optional info 
+creates a new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type, string value. Strings are copied <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type, string value</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">type</span></code> - <p>type of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> for possible types see Type </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>character pointer to string pointer </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">info</span></code> - <p>character pointer to string pointer holding information about this <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1af7cfd7eec2fe97aca6e72c2291422fe4"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const ByteArray &amp; <em>name</em>, const uint32 <em>type</em>, const float64 <em>val</em><span class="sig-paren">)</span></dt>
+<dd><p>constructor with name and type, float64 val 
+creates a new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type and val. Strings are copied. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type and val</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">type</span></code> - <p>type of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> for possible types see Type </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>actual value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a8b8ea4fb6f4196b1310dacfd5c89e1b9"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const ByteArray &amp; <em>name</em>, const uint32 <em>type</em>, const int32 <em>val</em><span class="sig-paren">)</span></dt>
+<dd><p>constructor with name and type and int val 
+creates a new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type and val <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type andval.</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">type</span></code> - <p>type of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> for possible types see Type </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>actual value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a20bb13af32e1181ed3aa526d23c1a633"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const ByteArray &amp; <em>name</em>, const uint32 <em>type</em>, const complex128 <em>val</em><span class="sig-paren">)</span></dt>
+<dd><p>constructor with name and type, double val 
+creates a new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type and val. Strings are copied. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with name, type and val</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">type</span></code> - <p>type of new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> for possible types see Type </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>actual value </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a44b1b663cd109cb0f4f42dbc28a3490a"></span>virtual <code class="descname">~ParamBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>destructor</p>
+<p>clear (frees) the name and in case a string value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a4a36cf3cb10a720d45ffbf60617f3b7b"></span><code class="descname">ParamBase</code><span class="sig-paren">(</span>const <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> &amp; <em>copyConstr</em><span class="sig-paren">)</span></dt>
+<dd><p>copy constructor 
+creates <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> according to passed <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a>, strings are copied <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with copied values</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">copyConstr</span></code> - <p><a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> to copy from </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1aa5948d6f265b9622f38c38d01746c524"></span>const <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> <code class="descname">operator[]</code><span class="sig-paren">(</span>const int <em>num</em><span class="sig-paren">)</span> const</dt>
+<dd><p>braces operator for element-wise access in arrays </p>
+<p>braces operator 
+returns the value of the index num from the array <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new tParam with values of <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a>[num] in the array</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">num</span></code> - <p>array index for which the value should be returned </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a3cd1b8af5db0d8e4823dd523f0fb74bd"></span><a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> &amp; <code class="descname">operator=</code><span class="sig-paren">(</span>const <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> &amp; <em>rhs</em><span class="sig-paren">)</span></dt>
+<dd><p>assignment operator (sets values of lhs to values of rhs <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a>, strings are copied) </p>
+<p>assignment operator 
+sets values of lhs to values of rhs <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a>, strings are copied <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>new <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> with copied values</dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">rhs</span></code> - <p><a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ParamBase</span></a> to copy from </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a62cefd5eb272c4f03c36c429e321d2c2"></span><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><span class="std std-ref">ito::RetVal</span></a> <code class="descname">copyValueFrom</code><span class="sig-paren">(</span>const <a class="reference internal" href="#itomclassito_1_1_param_base"><span class="std std-ref">ito::ParamBase</span></a> * <em>rhs</em><span class="sig-paren">)</span></dt>
+<dd><p>just copies the value from the right-hand-side tParam (rhs) to this tParam. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1ad6cf4551dd5e549d8b956dece74301ae"></span>bool <code class="descname">isNumeric</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns true if <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a> is of type char, int, double or complex </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1aa69e7d2b2eb708237e05feb685cb1d4b"></span>bool <code class="descname">isNumericArray</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns true if <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a> is of type char array, int array, double array or complex array </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a82eb2aefcbdc055235391daafa2b1d0a"></span>bool <code class="descname">isValid</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns whether <a class="reference internal" href="plugin-param-Ref.html#itomclassito_1_1_param"><span class="std std-ref">Param</span></a> contains a valid type (true) or is an empty parameter (false, type == 0). The default tParam-constructor is always an invalid tParam. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a5fb4da5606df31f317372bf247837655"></span>uint32 <code class="descname">getType</code><span class="sig-paren">(</span>bool <em>filterFlags</em> = true<span class="sig-paren">)</span> const</dt>
+<dd><p>returns parameter type (autosave flag and other flags (like in, out or readonly) are only included if filterFlags is set false) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a5da19c5b31db536a4fc49e749d5607ab"></span>uint32 <code class="descname">getFlags</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns parameter flags </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1acb0d36656808ceaeb3fd3d598b9d8e32"></span>void <code class="descname">setFlags</code><span class="sig-paren">(</span>const uint32 <em>flags</em><span class="sig-paren">)</span></dt>
+<dd><p>sets parameter flagsfor possible flags see tParamType </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1ab1e082e77f2a4a2ecbde3440bc7e9ff7"></span>const char * <code class="descname">getName</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns parameter name (returned string is no copy, do not delete it) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a99f388b745b1e8b03194eae7c091ab9c"></span>bool <code class="descname">getAutosave</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns content of autosave flag - this flag determines whether the parameter value gets automagically saved to xml file when an instance of a plugin class is deleted (closed) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a39f8a5c099d0926d166b8567636e145b"></span>void <code class="descname">setAutosave</code><span class="sig-paren">(</span>const bool <em>autosave</em><span class="sig-paren">)</span></dt>
+<dd><p>sets content of autosave flag - this flag determines whether the parameter value gets automagically saved to xml file when an instance of a plugin class is deleted (closed) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a62120984dff9b49c01f727c6a91ffcf4"></span>int <code class="descname">getLen</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>returns length of array parameters or -1 if no array is given. For string parameter returns length of string or 0 if not given, for number parameters return 1. In all other cases -1. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1ae22dc83069391f94cea79e26cbc455ba"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+<a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><span class="std std-ref">ito::RetVal</span></a> <code class="descname">setVal</code><span class="sig-paren">(</span>_Tp <em>val</em><span class="sig-paren">)</span></dt>
+<dd><p>setVal set parameter value - templated version <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><span class="std std-ref">RetVal</span></a> with operation status sets the parameter value to the passed value, if the parameter type is inadequate it is set to the maximum value of template type </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>value to set to </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a495d1918610e4742b48d727d5e886a78"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+<a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><span class="std std-ref">ito::RetVal</span></a> <code class="descname">setVal</code><span class="sig-paren">(</span>_Tp <em>val</em>, int <em>len</em><span class="sig-paren">)</span></dt>
+<dd><p>setVal set parameter value - templated version for arrays <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="plugin-RetVal-Ref.html#itomclassito_1_1_ret_val"><span class="std std-ref">RetVal</span></a> with operation status sets the parameter value to the passed value, if the length is below 1 or a Null pointer is passed an error is returned </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">val</span></code> - <p>value to set to </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">len</span></code> - <p>length of array </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1afa0989f3f40bc08653c63215a0e3bba0"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp <code class="descname">getVal</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span> const</dt>
+<dd><p>getVal read parameter value - templated version 
+returns the actual parameter value casted to the template parameter type. If the tParam has a non numeric type the largest value for the template type is passed. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>parameter value (numeric, casted)</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="itomclassito_1_1_param_base_1a71c41419f101bad04e788ab05366767a"></span>template &lt;typename _Tp&gt; </dt>
+<dt>
+_Tp <code class="descname">getVal</code><span class="sig-paren">(</span>int &amp; <em>len</em><span class="sig-paren">)</span> const</dt>
+<dd><p>getVal read parameter value - templated version for arrays 
+returns the actual parameter value casted to the template parameter type. In &#8216;len&#8217; is returned what is supposed to be the length of the array. As only array references are used within tParam the actual size may differ. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">len</span></code> - <p>length of array</p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plugin-param-Ref.html" class="btn btn-neutral float-right" title="7.7.4.6.2. Param - Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plugin-params.html" class="btn btn-neutral" title="7.7.4. Parameter-Container class of itom" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Oct 11, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'f520b48',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

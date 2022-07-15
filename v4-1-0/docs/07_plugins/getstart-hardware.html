@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7.3. How to use hardware plugins &mdash; itom Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.4. Getting started with grabbers" href="getstart-grabber.html" />
+    <link rel="prev" title="7.2. Loading plugins" href="loading_plugins.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading_plugins.html">7.2. Loading plugins</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.3. How to use hardware plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">7.3.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-informations-on-plugins">7.3.2. Getting informations on plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initializing-hardware-plugins">7.3.3. Initializing hardware plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-pythonic-way">7.3.3.1. The pythonic way</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-gui-way">7.3.3.2. The GUI way</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deleting-a-plugin-instance">7.3.3.3. Deleting a plugin instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-dialog-and-dock-widget">7.3.4. Configuration dialog and dock widget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-of-hardware-plugins">7.3.5. Usage of hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-grabber.html">7.4. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-adda.html">7.5. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-actuator.html">7.6. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-filter.html">7.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/plugin-development.html">7.8. Development under C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/openCVMat.html">7.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="plugins.html"><span class="section-number">7. </span>Plugins</a> &raquo;</li>
+        
+      <li><span class="section-number">7.3. </span>How to use hardware plugins</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/07_plugins/getstart-hardware.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-hardware-plugins">
+<span id="getstarthardware"></span><h1><span class="section-number">7.3. </span>How to use hardware plugins<a class="headerlink" href="#how-to-use-hardware-plugins" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2><span class="section-number">7.3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this section you will learn how to create one instance of any hardware plugin (actuator, dataIO…) by a python script or the GUI of <strong>itom</strong>.</p>
+<p>Hardware plugins are mainly divided into the following main categories:</p>
+<ul>
+<li><p><a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.dataIO</span></code></a> contains all plugins that are related with any data input/output operation. Short, these are mainly</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>cameras and framegrabbers (organized in the subcategory <strong>Grabber</strong>),</p></li>
+<li><p>AD or DA converters (subcategory <strong>ADDA</strong>) or</p></li>
+<li><p>further input / output devices (subcategory <strong>Raw IO</strong>) like the serial port plugin</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.actuator</span></code></a> contains all motor stages, piezo actuators or further actuator devices</p></li>
+</ul>
+<p>All valid plugins are listed in the plugin toolbox of <strong>itom</strong></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/pluginToolbox.png"><img alt="../_images/pluginToolbox.png" src="../_images/pluginToolbox.png" style="width: 328.0px; height: 408.0px;" /></a>
+</div>
+<p>Many steps below can be done via <strong>Python</strong> scripting, or by GUI interaction.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial is similar to the corresponding sections of the <a class="reference internal" href="../03_gettingStarted/getting-started.html#gettingstarted"><span class="std std-ref">getting started tutorial</span></a>, but describes the use of hardware plugins (<a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal notranslate"><span class="pre">actuator</span></code></a> and <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a>) in more detail.</p>
+</div>
+</div>
+<div class="section" id="getting-informations-on-plugins">
+<h2><span class="section-number">7.3.2. </span>Getting informations on plugins<a class="headerlink" href="#getting-informations-on-plugins" title="Permalink to this headline">¶</a></h2>
+<p>In order to start a new instance of any hardware plugin using the python scripting language, search the plugin toolbox for the desired plugin and remember its plugin-name (case insensitive).
+Before we can start using a hardware plugin, we need to know how to use it.
+You can use the <a class="reference internal" href="../09_reference/itom_general.html#itom.pluginHelp" title="itom.pluginHelp"><code class="xref py py-func docutils literal notranslate"><span class="pre">itom.pluginHelp()</span></code></a> command in <strong>Python</strong> to get the neccessary information:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pluginHelp</span><span class="p">(</span><span class="s2">&quot;[your plugin name]&quot;</span><span class="p">)</span> <span class="c1"># e.g. &quot;dummyGrabber&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Or you can use the GUI. Therefore, select <strong>Info…</strong> from the context menu of your plugin in order to show the help page about the plugin:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dummyGrabberHelp1.png"><img alt="../_images/dummyGrabberHelp1.png" src="../_images/dummyGrabberHelp1.png" style="width: 372.0px; height: 472.0px;" /></a>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you don’t see the help page, go to the properties dialog of <strong>itom</strong> (menu <strong>File &gt;&gt; Properties</strong>) and select the checkbox <strong>Show DataIO and Actuator</strong> in the tab <strong>General &gt;&gt; Help Viewer</strong>.</p>
+</div>
+<p>Here, most important for us is to learn about the init paramaters, especially the mandatory ones.
+A more detailed description of the plugin may be found in the plugin documentation.
+The fastest way to obtain the command used for initialisation is to drag the plugin into the command line or into the script editor.</p>
+<p>Once you got an instance of your plugin running, you can get an even more detailed class description including all member functions via <strong>Python</strong>:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">help</span><span class="p">(</span><span class="n">mygrabber</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="initializing-hardware-plugins">
+<span id="inithardware"></span><h2><span class="section-number">7.3.3. </span>Initializing hardware plugins<a class="headerlink" href="#initializing-hardware-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Instances of <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> or <a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal notranslate"><span class="pre">actuator</span></code></a> can be initialized either by calling the constructor in <strong>Python</strong> or through GUI interaction. You may have multiple instances of the same plugin running.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to access an instance in <strong>Python</strong>, you have to assign a handle. This can be done later, too.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most plugins can be initialized with paramaters, some of them may be mandatory (just place one value after the other one separated by commas).
+Optional parameter follow after the mandatory ones. Parameters can be assigned in designated order or using keyword notation.</p>
+</div>
+<div class="section" id="the-pythonic-way">
+<h3><span class="section-number">7.3.3.1. </span>The pythonic way<a class="headerlink" href="#the-pythonic-way" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">firstgrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">,</span> <span class="n">bpp</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>   <span class="c1"># open first instance of plugin, bpp is assigned using keyword notation</span>
+<span class="n">secondgrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>  <span class="c1"># open second instance of same plugin using all mandatory parameters in designated order</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="the-gui-way">
+<h3><span class="section-number">7.3.3.2. </span>The GUI way<a class="headerlink" href="#the-gui-way" title="Permalink to this headline">¶</a></h3>
+<p>First, select <strong>New Instance</strong> from the context menu of your plugin.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/openDummyGrabber.png"><img alt="../_images/openDummyGrabber.png" src="../_images/openDummyGrabber.png" style="width: 367.0px; height: 372.0px;" /></a>
+</div>
+<p>Now, decide if and how your instance should be known to <strong>Python</strong>:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/openDummyGrabber21.png"><img alt="../_images/openDummyGrabber21.png" src="../_images/openDummyGrabber21.png" style="width: 376.0px; height: 381.0px;" /></a>
+</div>
+<p>This window also gains access to the mandatory and optional parameters. Detailed information on the parameters and their value range are obtained by mouse hovering over the spinboxes or the blue info symbols.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/openDummyGrabber3.png"><img alt="../_images/openDummyGrabber3.png" src="../_images/openDummyGrabber3.png" style="width: 380.0px; height: 385.0px;" /></a>
+</div>
+<p>If you first initialised your plugin without assigning a <strong>Python</strong> handle, but decide to do so later, select <em>Send to Python</em> from the context menu and choose the variable name.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/sendtopython.png"><img alt="../_images/sendtopython.png" src="../_images/sendtopython.png" style="width: 380.0px; height: 442.0px;" /></a>
+</div>
+</div>
+<div class="section" id="deleting-a-plugin-instance">
+<h3><span class="section-number">7.3.3.3. </span>Deleting a plugin instance<a class="headerlink" href="#deleting-a-plugin-instance" title="Permalink to this headline">¶</a></h3>
+<p>Once an instance of a plugin is created, the corresponding entry in the plugin toolbox obtains a new child item. In <strong>Python</strong>, the variable you used for creating the plugin, is created and
+can now be used for controlling the plugin. As long as any variable(s) in <strong>Python</strong> still hold a reference to this plugin, its background color in the plugin toolbox is yellow.</p>
+<p>In order to close or delete an instance of a plugin, you have to known by which way this instance has been created, namely by the GUI-based approach or a script command. Even if you
+created the instance by the GUI and sent this instance to a Python handle, this instance has originally be created by the GUI. If the instance has been created by the GUI, the background
+color of its entry in the plugins toolbox is gray, however, if at least one python handle (variable) is still referencing to this instance, the background color turns to yellow.</p>
+<p>In order to close/delete an instance of a plugin you need to delete all variables in <strong>Python</strong> that are referencing this plugin, using the command <code class="xref py py-func docutils literal notranslate"><span class="pre">del()</span></code>:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">serial</span>
+</pre></div>
+</td></tr></table></div>
+<p>Additionally, if the instance has been created by the GUI, you need to call the <strong>Close Instance</strong> option from the context menu of the instance entry in the plugins toolbox.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since <strong>Python</strong> has a garbage collection mechanism it is not assured that any object is immediately deleted once you delete the corresponding variable(s) in the <strong>Python</strong> workspace. It is
+really done if the garbage collection process is started which happens in periodical steps. You can force it using the method <a class="reference external" href="https://docs.python.org/3.8/library/gc.html#gc.collect" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gc.collect()</span></code></a> from the builtin module <a class="reference external" href="https://docs.python.org/3.8/library/gc.html#module-gc" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gc</span></code></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="configuration-dialog-and-dock-widget">
+<h2><span class="section-number">7.3.4. </span>Configuration dialog and dock widget<a class="headerlink" href="#configuration-dialog-and-dock-widget" title="Permalink to this headline">¶</a></h2>
+<p>Most plugins should provide configuration dialogs. The modal dialogs give access to the most important parameters of a plugin. Also, most plugins come with a dock widget named plugin toolbox, which is non-modal and allows not only for parameter tuning (as the config dialog does), but also live monitoring (for example motor position). Which parameters are actually available in the config dialog and/or the toolbox, is strongly dependent on the actual hardware and its implementation in the plugin.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/openconfigdialog2.png"><img alt="../_images/openconfigdialog2.png" src="../_images/openconfigdialog2.png" style="width: 802.0px; height: 447.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/showtoolbox2.png"><img alt="../_images/showtoolbox2.png" src="../_images/showtoolbox2.png" style="width: 733.0px; height: 446.0px;" /></a>
+</div>
+</div>
+<div class="section" id="usage-of-hardware-plugins">
+<span id="hardwareparameters"></span><h2><span class="section-number">7.3.5. </span>Usage of hardware plugins<a class="headerlink" href="#usage-of-hardware-plugins" title="Permalink to this headline">¶</a></h2>
+<p>As a major advantage of the plugin concept, different actual devices can be interchanged easily. The class <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> can be of type <strong>rawIO</strong>, <strong>grabber</strong> and <strong>adda</strong>.
+You can get the type of the plugin by the command <strong>getType()</strong>, which returns the c++ enumeration value. If different types are true at the same time, their enum vaule is linked via bitwise and:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 31%" />
+<col style="width: 22%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>plugin type</p></th>
+<th class="head"><p>return value {int}</p></th>
+<th class="head"><p>c++ enum</p></th>
+<th class="head"><p>remark</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dataIO</p></td>
+<td><p>1</p></td>
+<td><p>0x1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>actuator</p></td>
+<td><p>2</p></td>
+<td><p>0x2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>algorithm</p></td>
+<td><p>4</p></td>
+<td><p>0x4</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>grabber</p></td>
+<td><p>129 = (128+1)</p></td>
+<td><p>0x80 + 0x1</p></td>
+<td><p>also dataIO</p></td>
+</tr>
+<tr class="row-even"><td><p>adda</p></td>
+<td><p>257 = (256+1)</p></td>
+<td><p>0x100 + 0x1</p></td>
+<td><p>also dataIO</p></td>
+</tr>
+<tr class="row-odd"><td><p>rawIO</p></td>
+<td><p>513 = (512+1)</p></td>
+<td><p>0x200 + 0x1</p></td>
+<td><p>also dataIO</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal notranslate"><span class="pre">actuator</span></code></a> is the class to use actuator plugins. Each provides a destinctive set of member functions and parameters, which are described in the respective sections below.
+Special hardware funtionality that is not easily mapped to these member functions and parameters, may be called by the <strong>exec()</strong> member functions.</p>
+<p>While you get a detailed class description using the <strong>help()</strong> command (see above), the functions <strong>getParamList()</strong> and <strong>getParamListInfo()</strong> give access to a detailed description of the plugin’s parameters.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">getParamListInfo</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Once you know the name of the desired parameter, the function <strong>getParam()</strong> tells you the actual state and <strong>setParam()</strong> changes it.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s1">&#39;integration_time&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s1">&#39;integration_time&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>For more information about possible additional functions, call the member method <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.getExecFuncsInfo" title="itom.dataIO.getExecFuncsInfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getExecFuncsInfo()</span></code></a> or <a class="reference internal" href="../09_reference/actuator.html#itom.actuator.getExecFuncsInfo" title="itom.actuator.getExecFuncsInfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getExecFuncsInfo()</span></code></a> and optionally pass
+the name or a part of the name of an <strong>exec</strong>-function. These functions are then called based on mandatory and optional parameters using the methods <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.exec" title="itom.dataIO.exec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec()</span></code></a> or <a class="reference internal" href="../09_reference/actuator.html#itom.actuator.exec" title="itom.actuator.exec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec()</span></code></a>.</p>
+<p>The most important functions and parameters of <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> grabber, adda and <a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal notranslate"><span class="pre">actuator</span></code></a> are described in the sections below:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="getstart-grabber.html#getstartgrabber"><span class="std std-ref">Getting started with grabbers</span></a></p></li>
+<li><p><a class="reference internal" href="getstart-adda.html#getstartadda"><span class="std std-ref">Getting started with A/D converters</span></a></p></li>
+<li><p><a class="reference internal" href="getstart-actuator.html#getstartactuator"><span class="std std-ref">Getting started with actuators</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="getstart-grabber.html" class="btn btn-neutral float-right" title="7.4. Getting started with grabbers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="loading_plugins.html" class="btn btn-neutral float-left" title="7.2. Loading plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2011-2021, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

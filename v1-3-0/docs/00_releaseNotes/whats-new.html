@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Changelog &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'da482c7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="next" title="Introduction" href="../01_introduction/introduction.html" />
+    <link rel="prev" title="itom documentation for v. 1.3.0" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../01_introduction/introduction.html" title="Introduction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="itom documentation for v. 1.3.0"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<p>This changelog only contains the most important changes taken from the commit-messages of the git.</p>
+<div class="section" id="itom">
+<h2>itom<a class="headerlink" href="#itom" title="Permalink to this headline">¶</a></h2>
+<p><strong>Version 1.3.0 (2014-10-07)</strong></p>
+<p>(more than 150 commits in itom repository)</p>
+<ul class="simple">
+<li>fixes big bug in assignment operator of dataObjects if d2=d1 and d1 shares its data with an external object (owndata=0). In the fixed version, d2 also has the owndata flag set to 0 (before 1 in any cases!)</li>
+<li>replace dialog for replacing text within a selection fixed</li>
+<li>API function apiValidateAndCastParam added. This is an enhanced version of apiValidateParam used in setParam of plugins. The enhanced version is able to modify possible double parameters in order to fit to possibly given step sizes.</li>
+<li>support of PyMatlab integrated into CMake system (check BUILD_WITH_PYMATLAB to enable the python module &#8216;matlab&#8217; and indicate the include directory and some libraries of Matlab)</li>
+<li>Add twipOGL-Plugin (from twip Optical Solutions GmbH) to plotToolBar if present</li>
+<li>dataObject: axisUnits, axisDescriptions, valueUnit and valueDescription can now handle encoded strings (different than UTF8)</li>
+<li>QDate, QDateTime and QTime are now marshalled to python datetime.date, datetime.datetime and datetime.time (useful for QDateTimeEdit or QDateEdit widgets)</li>
+<li>text from console widget is never deleted when drag&amp;dropping it to any script widget</li>
+<li>state of python reloader is stored and restored using the settings</li>
+<li>warning is displayed if figure class could not be found and default fallback is applied</li>
+<li><tt class="xref py py-func docutils literal"><span class="pre">itom.plotLoaded()</span></tt> and <tt class="xref py py-func docutils literal"><span class="pre">plotHelp()</span></tt> added</li>
+<li>Improved protocol functionality for dataObject related python functions</li>
+<li>Fixed missing copy of rotationMatrix metadata for squeeze() function in dataobj.cpp</li>
+<li>Added copyAxisTagsTo and copyTagMapTo to ito::absFunc, ito::realFunc, ito::imagFunc, ito::argFunc to keep dataTags</li>
+<li>example about modal property dialogs added to demo folder</li>
+<li>QScintilla version string added to version helper and about dialog</li>
+<li><a class="reference internal" href="../09_reference/itom_general.html#itom.clc" title="itom.clc"><tt class="xref py py-func docutils literal"><span class="pre">itom.clc()</span></tt></a> added to clear the command line from a script (useful for overfull command line output)</li>
+<li>AutoInterval class published in common-SDK. This class can be used as datatype for an min/max-interval (floats) with an additional auto-flag.</li>
+<li>public methods <strong>selectedRows</strong>, <strong>selectedTexts</strong> and <strong>selectRows</strong> of QListWidget can now be called via <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem.call" title="itom.uiItem.call"><tt class="xref py py-meth docutils literal"><span class="pre">itom.uiItem.call()</span></tt></a></li>
+<li>itom.dataObject operator / and /= for scalar operand implemented (via inverse multiplication operator) fixed casting issue in multiplication operator for double scalar (multiply with double precision -&gt; then cast)</li>
+<li>configured QPropertyEditor as shared library (dll) instead of static library. This was the last library that was not shared yet.</li>
+<li>reduced size of error messages during live image grab</li>
+<li>fix when reloading module, that contains syntax or other errors: these errors are displayed for better handling</li>
+<li>If an instance of QtDesigner is opened and then an ui-file is loaded, this file was opened in a new instance of QtDesigner. This is fixed now.</li>
+<li>some crashes when not starting with full user rights are fixed</li>
+<li>Added demofile for data fitting</li>
+<li>if last tab in script window is closed, the entire window is closed as well</li>
+<li>types ito::DataObject, QMap&lt;QString, ito::Param&gt;... are no registered for signal/slot in addInManager such that this needs not to be done in plugins any more.</li>
+<li>class <strong>enum</strong> in <em>itomPackages</em> renamed to <strong>itomEnum</strong> since Python 3.3 introduces its own class <strong>enum</strong>.</li>
+<li>check for AMD-CPUs and adjust environment variable for these processors in order to avoid a KMP_AFFINITY error using Matplotlib (and OpenMP).</li>
+<li>enhanced output for class function <tt class="xref py py-meth docutils literal"><span class="pre">itom.ui.info()</span></tt>.</li>
+<li>optional properties argument added to commands <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><tt class="xref py py-func docutils literal"><span class="pre">itom.plot()</span></tt></a> and <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><tt class="xref py py-func docutils literal"><span class="pre">itom.liveImage()</span></tt></a>. Pass a dictionary with properties that are directly applied to the plot widget at startup.</li>
+<li>recently opened file menu added to itom main window and script windows</li>
+<li>improved loaded plugins dialog</li>
+<li>some fixes in data object: fixed constructor for existing cv::Mat and type RGBA32, fixed bug in assignment operator for rhs-dataObjects that do not own their data block.</li>
+<li>property dialog documented</li>
+<li>improved python module auto reloader integrated into itom (based on iPython implementation). This reloader can be enabled by the menu script &gt;&gt; reload modules.</li>
+<li>some examples from the matplotlib gallery added to the demo scripts</li>
+<li>bugfix when changing the visibility of undocked plots</li>
+<li>the designer plugin <em>matplotlib</em> has now the same behaviour than other plot widgets (can be docked into main window, property toolbox available...)</li>
+<li>some improvements with tooltip texts displaying optional python syntax bugs (python module frosted required)</li>
+<li>unified signatures passed to Q_ARG-macro of Qt.</li>
+<li>the search bar is not hidden again if Ctrl-F is pressed another time.</li>
+<li>detailed descriptions of plugins are now also displayed in help toolbox</li>
+<li>improvements to reject the insertion of breakpoints in commented or empty lines</li>
+<li>improved breakpoint toolbox that allows en-/disabling single or all breakpoints, deleting breakpoints... Breakpoints are reloaded at new startup.</li>
+<li>unused or duplicated code removed and cleaned</li>
+<li>project <em>itomWidgets</em> synchronized to changes in mother project commonCTK</li>
+<li>german translations improved</li>
+<li>itom and the plugins now support a build with Qt5. The setup is still compiled with Qt4.8.</li>
+<li>support for CMake 3.0 added</li>
+</ul>
+<p><strong>Version 1.2.0 (2014-05-18)</strong></p>
+<p>(more than 300 commits in itom repository)</p>
+<ul class="simple">
+<li><a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.toGray" title="itom.dataObject.toGray"><tt class="xref py py-meth docutils literal"><span class="pre">itom.dataObject.toGray()</span></tt></a> added in order to return a grayscale dataObject from type rgba32.</li>
+<li>Drag&amp;drop python files to command line in order to open them</li>
+<li><a class="reference internal" href="../09_reference/actuator.html#itom.actuator.setInterrupt" title="itom.actuator.setInterrupt"><tt class="xref py py-meth docutils literal"><span class="pre">itom.actuator.setInterrupt()</span></tt></a> added in order to interrupt the current movement of an actuator (async-mode only, general interrupt must be implemented by plugin)</li>
+<li>Window bugfix (improper appearance) in Qt5 (windows) as well as some linux distributions (Qt4/Qt5)</li>
+<li>Breakpoint toolbox improved.</li>
+<li>Open scripts and current set of breakpoints is saved at shutdown and restored at new startup.</li>
+<li>Python, Numpy, Scipy, Matplotlib and itom script references can be automatically downloaded and updated from an itom online repository. These references can then be shown in the itom help toolbox.</li>
+<li>CMake: Improvements in find_package(ITOM_SDK...) COMPONENTS dataObject, pointCloud, itomWidgets, itomCommonLib and itomCommonQtLib can be chosen. Since dataObject and pointCloud require the core components of OpenCV and PCL respectively, these depending libraries are detected as well and automatically added to ITOM_SDK_LIBRARIES and ITOM_SDK_INCLUDE_DIRS.</li>
+<li><a class="reference internal" href="../09_reference/npDataObject.html#itom.npDataObject" title="itom.npDataObject"><tt class="xref py py-class docutils literal"><span class="pre">itom.npDataObject</span></tt></a> removed (reasons see: <a class="reference external" href="http://itom.58578.x6.nabble.com/itom-discussions-deprecated-class-itom-npDataObject-td3.html">http://itom.58578.x6.nabble.com/itom-discussions-deprecated-class-itom-npDataObject-td3.html</a>)</li>
+<li>Designer plugins can now display point clouds and polygon meshes (itomIsoGLFigurePlugin displays pointClouds)</li>
+<li>improved codec handling. Default codec is latin1 (ISO 8859-1) now, Python&#8217;s codec is synchronized to Qt codec.</li>
+<li>Modified / new templates added for creating a grabber, actuator and algorithm plugin.</li>
+<li>ito::DataObject registered as meta type in itom. Plugins do not need to do this any more.</li>
+<li>Styles in property editor can be reset to default, size of all styles can be globally increased or decreased</li>
+<li>C-Api: new base classes for plugin configuration dialogs and dock widgets added to SDK: ito::AbstractAddInDockWidget and ito::AbstractAddInConfigDialog</li>
+<li>modified and improved user documentation</li>
+<li>itom extension added for sphinx for semi-automatic plugin documentation</li>
+<li>More CMake macros added for easier implementation of plugins: FIND_PACKAGE_QT, PLUGIN_TRANSLATION, PLUGIN_DOCUMENTATION</li>
+<li>Python commands <a class="reference internal" href="../09_reference/itom_general.html#itom.pluginHelp" title="itom.pluginHelp"><tt class="xref py py-func docutils literal"><span class="pre">itom.pluginHelp()</span></tt></a> and <a class="reference internal" href="../09_reference/itom_general.html#itom.filterHelp" title="itom.filterHelp"><tt class="xref py py-func docutils literal"><span class="pre">itom.filterHelp()</span></tt></a> either return dict with information or print information (depending on arguments)</li>
+<li>Plugin can provide a rst-based documentation file. The documentation of all available plugins is then integrated in the itom help system.</li>
+<li>Python syntax check in script editors introduced. Install the python package <strong>frosted</strong> in order to obtain the syntax check (can be disabled in property dialog)</li>
+<li>meta information stepSize introduced for ito::IntMeta and ito::DoubleMeta</li>
+<li>glew is not necessary if building against Qt5 with OpenGL.</li>
+<li>New shared library <strong>itomWidgets</strong> added to SDK. itom, user defined GUIs and plugins have now access to further widgets. These widgets are mainly taken from the CTK project (the common toolkit).</li>
+<li>Python class <strong>enum</strong> in itom-packages renamed to <strong>itomEnum</strong> since a class enum (with similar functionality is introduced with Python &gt;= 3.4)</li>
+<li>All signaling_NaNs replace by quiet_NaNs (signaling_NaNs raise C exception under certain build settings)</li>
+<li>Unittests for ito::ByteArray, ito::RetVal and ito::Param added</li>
+<li>User management partially available via Python.</li>
+<li>itom can now be build and run using Qt4 or Qt5. Usually the Qt-version installed on the computer is automatically detected, if both versions are available use the CMake variable BUILD_QTVERSION and set it to Qt4 or Qt5 for manual choice.</li>
+<li>Help toolbox also shows information about all loaded hardware plugins (actuator, dataIO)</li>
+<li>Help toolbox in itom shows information about filters and widgets provided by algorithm plugins. Exemplary code snippet for all filters added.</li>
+<li>itom can be build without PCL support, hence the point cloud library is not required. The library <em>pointCloud</em> is not available then (see BUILD_WITH_PCL in CMake)</li>
+<li>C-Api: New shared libraries created: itomCommon (RetVal, Param,...), itomCommonQt (ItomSharedSemaphore, AddInInterface,...), dataObject, pointCloud, itomWidgets. Plugins link agains these shared libraries. This allows an improved bugfix in these components. Additionally, many changes in these libraries don&#8217;t require a new version number for the plugin interface (unless the binary compatibility is not destroyed).</li>
+<li>C-Api: error message in ito::RetVal, name and info string of ito::Param are now stored as ito::ByteArray class that is based on a shared memory concept. Less memory copy operations are required.</li>
+<li>crash fixed if itom is closed with user defined buttons and menus</li>
+<li>fixes if some components are disabled by user management</li>
+<li>C-Api: DesignerPlugins can now be used within other plugins (e.g. widgets in algorithm plugins)</li>
+<li>many bugfixes</li>
+</ul>
+<p><strong>Version 1.1.0 (2014-01-27)</strong></p>
+<ul class="simple">
+<li>help dock widget to show a searchable, online help for the script reference of several python packages, the itom module as well as a detailed overview of algorithms and widgets contained in plugins</li>
+<li>revised documentation and python docstrings</li>
+<li>optimization due to tool <em>cppCheck</em></li>
+<li>method <em>apiGetParam</em> added to api-functions</li>
+<li>timeouts changeable by ini-file</li>
+<li>size, position... of native dock widgets and toolbars is saved and reloaded at restart</li>
+<li>further demos added</li>
+<li>property editor for plots added</li>
+<li>compilation without PointCloudLibrary possible (CMake setting)</li>
+<li>easier compilation for linux</li>
+<li>2DQwtPlot enhanced within a code sprint to support geometric primitives that can be painted onto the plotted image. The parameters of the geometries can then be obtained via python and for instance be evaluated in the designer widget &#8216;evaluateGeometries&#8217;. Demo script added for demonstrating this functionality (<em>uiMeasureToolMain demo</em>)</li>
+<li>many methods of dataObject now have int-parameters or return values instead of size_t -&gt; better compatibility with respect to OpenCV</li>
+<li>In <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem" title="itom.uiItem"><tt class="xref py py-class docutils literal"><span class="pre">itom.uiItem</span></tt></a> it is now possible to also assign a string (or an integer) to enumeration based properties of widgets.</li>
+<li><a class="reference internal" href="../09_reference/itom_general.html#itom.openScript" title="itom.openScript"><tt class="xref py py-meth docutils literal"><span class="pre">itom.openScript()</span></tt></a> enhanced to also open the script where any object (class, method...) is defined in (if it exists)</li>
+<li><a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><tt class="xref py py-class docutils literal"><span class="pre">itom.dataObject</span></tt></a> have the attributes &#8216;ndim&#8217; and &#8216;shape&#8217; for a better compliance to &#8216;numpy.ndarray&#8217;</li>
+<li>color type &#8216;rgba32&#8217; added for data objects. See also <a class="reference internal" href="../09_reference/rgba.html#itom.rgba" title="itom.rgba"><tt class="xref py py-class docutils literal"><span class="pre">itom.rgba</span></tt></a>. The color class in C++ is contained in color.h. 2dgraphicview plot also supports color cameras. OpenCVGrabber can grab in color as well. Unittest of data object adapted to this.</li>
+<li>better exception handling of any exception occurring in plugin algorithms.</li>
+<li>type &#8216;ui.DOCKWIDGET&#8217; now possible for <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><tt class="xref py py-class docutils literal"><span class="pre">itom.ui</span></tt></a> in order to dock any user defined window into the main window</li>
+<li>drag&amp;drop from last-command dock widget to console or script window</li>
+<li>modified python debugger</li>
+<li>added <tt class="xref py py-meth docutils literal"><span class="pre">itom.compressData()</span></tt> and <tt class="xref py py-meth docutils literal"><span class="pre">itom.uncompressData()</span></tt> in <a class="reference internal" href="../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a></li>
+<li>normalize method for data objects added</li>
+<li>many bugfixes</li>
+</ul>
+<p><strong>Version 1.0.14 (2014-09-02)</strong></p>
+<p>there is no continuous changelog for these version</p>
+</div>
+<div class="section" id="plugins">
+<h2>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h2>
+<p><strong>Version 1.3.0 (2014-10-07)</strong></p>
+<p>(more than 100 commits in plugins repository)</p>
+<ul class="simple">
+<li>plugin <em>Thorlabs CCS</em> for spectrometers from Thorlabs added (dataIO plugin). This plugin requires further drivers from the Thorlabs device.</li>
+<li>plugin <em>AerotechA3200</em> added to support the deprecated A3200 interface from company Aerotech.</li>
+<li>fixes in plugin <em>PIPiezoCtrl</em>: parameters delayOffset, delayProp and async are now really transmitted to the device (did nothing before)</li>
+<li>fixes in <em>PCOCamera</em> plugin with camera <em>PCO.1200s</em> that does not support the setPoint temperature.</li>
+<li>all plugins adapted for Qt4 and Qt5.</li>
+<li>plugin <em>dispWindow</em> adapted to OpenGL 3.1 and 4.0. Deprecated shader commands replaced. Parameters &#8216;lut&#8217; and &#8216;gamma&#8217; are now working and the gamma correction is enabled if parameter <a href="#id1"><span class="problematic" id="id2">*</span></a>gamma*=1</li>
+<li>filter <em>cvUndistort</em> in <em>OpenCVFilters</em> can now handle every data type as input.</li>
+<li>fixes some bugs when importing csv files</li>
+<li>filter <em>cvFlipFilter</em> also supports multi plane flipping for 3D data objects.</li>
+<li>plugin <em>GLDisplay</em> added that allows displaying one or multiple arrays on the screen using OpenGL to provide a very fast flip between several images.</li>
+<li>many enhancements and improvments in plugin <em>pclTools</em> (mainly done by company twip optical solutions GmbH): filter for fitting spheres to point clouds added, filter to calculate distances to a given model added, filter to prepare a display of these distances added, methods partially OpenMP parallelized, filter for fitting cones to point clouds added, filter for projecting point clouds to models added.</li>
+<li>plugin <em>PGRFlyCapture</em> now runs under linux, general changes to support Grasshopper3 cameras (color supported as well).</li>
+<li>some fixes in plugin <em>cmu1394</em> and optional byte swapping for 16bit camera added</li>
+<li>improvements in camera plugin <em>Vistek</em></li>
+<li>improved error handling when trying to load unsupported tiff formats</li>
+<li>filters <em>gaussianFilter</em> and <em>gaussianFilterEpsilon</em> added to plugin <em>BasicFilters</em></li>
+<li>filters <em>cvRotate180</em>, <em>cvRotateM90</em> and <em>cvRotateP90</em> added to <em>OpenCVFilters</em></li>
+<li>improvements and better synchronization to camera in plugin <em>Ximea</em>. Experimental shading correction added.</li>
+<li>bugfix when loading a x3p file -&gt; yscale has not been loaded correctly</li>
+<li>camera plugin <em>IDS uEye</em> added to support cameras from company IDS Imaging (based on their driver 4.41)</li>
+</ul>
+<p><strong>Version 1.2.0 (2014-05-18)</strong></p>
+<p>(more than 200 commits in plugins repository)</p>
+<ul class="simple">
+<li>PCOCamera: improved plugin with renew config dialog and toolbox. Tested with PCO.1300 and PCO.2000.</li>
+<li>DataObjectIO: Added importfilter for ascii based images or point lists</li>
+<li>PCLTools released under LGPL</li>
+<li>PGRFlyCapture: extended shutter added for longer integration times, frame rate is not used if extended shutter is one since images are acquired as fast as possible.</li>
+<li>AerotechEnsemble: bugfixes: avoid timeout for long-time operations corrected status message when all axes are in-target position</li>
+<li>fixes for PCOPixelFly: some board IO errors are handled</li>
+<li>DispWindow adapted to OpenGL 3.x specification as well as Qt5</li>
+<li>Initial release of video 4 linux (V4L2)</li>
+<li>Improved SDF-Export function with invalid handling for MountainsMaps (plugin DataObjectIO)</li>
+<li>exec-function for ramp-trajectory added to GwInstek plugin (power supply controller with RS232 connection)</li>
+<li>Plugin FireGrabber supported under linux. FirePackage driver used under Windows, Fire4Linux under linux</li>
+<li>Plugin SerialIO under linux: both tty and usb ports supported</li>
+<li>Plugin x3pio released under LGPL (wrapper for data format x3p, see opengps.eu)</li>
+<li>Added clipping-Filters and history-filter to BasicFilters</li>
+<li>Many documentations for plugins added</li>
+<li>Plugin MSMediaFoundation released under LGPL (requires at least Windows Vista, successor of DirectShow for accessing basic cameras)</li>
+<li>Parameters sharpness and gamma added to Ximea plugin.</li>
+<li>Plugin LibUSB released.</li>
+<li>Fixed big-endian, little-endian bug in PointGrey plugin, parameters sharpness, gamma and auto_exposure added</li>
+<li>Plugin for PointGrey cameras released under LGPL.</li>
+<li>Plugin for XIMEA cameras released under LGPL.</li>
+<li>FFTW plugin added that is a wrapper to the FFTW library (GPL license!)</li>
+<li>overall modification of Vistek camera plugin: Toolbox, configuration dialog based on new base classes of itom SDK, better parameter handling, improved image grabbing...</li>
+</ul>
+<p><strong>Version 1.1.0 (2014-01-27)</strong></p>
+<p>there is no continuous changelog for these version</p>
+</div>
+<div class="section" id="designer-plugins">
+<h2>Designer Plugins<a class="headerlink" href="#designer-plugins" title="Permalink to this headline">¶</a></h2>
+<p><strong>Version 1.3.0 (2014-10-07)</strong></p>
+<p>(more than 40 commits in designerPlugins repository)</p>
+<ul class="simple">
+<li>The properties <em>xAxisInterval</em> and <em>yAxisInterval</em> return the currently visible or set interval (bugfix)</li>
+<li>overlay image of <em>itom2dqwtplot</em> can now be read out by the property <em>overlayImage</em></li>
+<li>Firsts steps for an auto-documentation of designer plugins</li>
+<li>Linecut of <em>itom2dqwtplot</em> can now also be set to the horizontal / vertical line containing the global minimum or maximum</li>
+<li>Some bugfixes concerning the display of dataObjects that are shallow copies from numpy arrays</li>
+<li>Fixes a bug that showed errors when a linecut and a z-stack-cut of <em>itom2dqwtplot</em> and a 3d data object is visible at the same time</li>
+<li>Mode for single and multi row or column display of <em>itom1dqwtplot</em> for 2d data objects as input</li>
+<li>Center marker in <em>itom2dqwtplot</em> can be adjusted in size and pen using the general style settings for designer plugins (itom.ini setting file only)</li>
+<li>improvements and rework of zoomer, panner and magnifier with or without fixed aspect ratio for <em>itom2dqwtplot</em> and <em>itom1dqwtplot</em></li>
+<li>magnifier of <em>itom2dqwtplot</em> and <em>itom1dqwtplot</em> now also works with Ctrl+mousewheel</li>
+<li>pickPoints event now also works in <em>itom2dqwtplot</em> if the zoomed rectangle or the magnification is changed during interaction</li>
+<li>improved unit switches in GUI in <em>motorController</em></li>
+<li>slots added for saving and rendering to pixmap for <em>itom2dqwtplot</em></li>
+<li>property <em>grid</em> added to <em>itom1dqwtplot</em> to show/hide a grid</li>
+<li>some problems fixed with point selectors in <em>itom1dqwtplot</em></li>
+<li>matplotlib is now a designer plugin based on AbstractFigure like other plots as well. It can then be docked into the main window.</li>
+</ul>
+<p><strong>Version 1.2.0 (2014-05-18)</strong></p>
+<p>(more than 80 commits in designerPlugins repository)</p>
+<ul class="simple">
+<li><em>itom2DQwtPlot</em> is able to display color data objects and cameras.</li>
+<li>Press Ctrl+C to copy the currently displayed plot in <em>itom1DQwtPlot</em> and <em>itom2DQwtPlot</em> to clipboard. Also available via menu.</li>
+<li>display of pointClouds in <em>itomIsoGLFigurePlugin</em></li>
+<li>fix in autoColor mode (<em>itom2DGraphicView</em>) with rgba32 data objects or cameras</li>
+<li>save dialog remembers last directory</li>
+<li>secondary dataObject can be plotted as semi-transparent overlay (alpha value adjustable) in <em>itom2DQwtPlot</em> (Python access via property <em>overlayImage</em>)</li>
+<li>many bugfixes</li>
+<li>multiline plotting in <em>itom1DQwtPlot</em> improved</li>
+<li>designer plugins are now ready for inclusion in GUIs of other plugins</li>
+</ul>
+<p><strong>Version 1.1.0 (2014-01-27)</strong></p>
+<p>there is no continuous changelog for these version</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#itom">itom</a></li>
+<li><a class="reference internal" href="#plugins">Plugins</a></li>
+<li><a class="reference internal" href="#designer-plugins">Designer Plugins</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter"> itom documentation for v. 1.3.0</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../01_introduction/introduction.html"
+                        title="next chapter">Introduction</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/00_releaseNotes/whats-new.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../01_introduction/introduction.html" title="Introduction"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="itom documentation for v. 1.3.0"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Oct 08, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

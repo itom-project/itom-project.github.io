@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>8.7.12. Plugin class - Actuator &mdash; itom Documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/breathe.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8.7.13. Plugin class - Algo" href="plugin-algo.html" />
+    <link rel="prev" title="8.7.11. Plugin class - DataIO" href="plugin-dataIO.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">8. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">8.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">8.2. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">8.3. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">8.4. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">8.5. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">8.6. Getting started with algorithm plugins a.k.a. filters</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">8.7. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">8.7.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">8.7.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">8.7.3. DataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">8.7.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">8.7.5. Parameters - Meta Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">8.7.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">8.7.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">8.7.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">8.7.9. AddInBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">8.7.10. Plugin class - Basic information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">8.7.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">8.7.12. Plugin class - Actuator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#base-idea-of-any-actuator">8.7.12.1. Base idea of any actuator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#programming-steps">8.7.12.2. Programming steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#actuator-plugin-class">8.7.12.3. Actuator plugin class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signalling-the-current-position-and-status-of-any-axes">8.7.12.4. Signalling the current position and status of any axes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interruption-of-movement">8.7.12.5. Interruption of movement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameters-and-unit-conventions">8.7.12.6. Parameters and Unit Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">8.7.13. Plugin class - Algo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">8.7.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">8.7.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">8.7.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">8.7.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">8.7.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">8.7.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">8.7.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">8.8. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">9. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_test-scripts/test-scripts.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_tutorials/tutorials.html">13. Python tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Documentation</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../plugins.html">8. Plugins</a> &raquo;</li>
+        
+          <li><a href="plugin-development.html">8.7. Development under C++</a> &raquo;</li>
+        
+      <li>8.7.12. Plugin class - Actuator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/07_plugins/development/plugin-actuator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="plugin-class-actuator">
+<span id="id1"></span><h1>8.7.12. Plugin class - Actuator<a class="headerlink" href="#plugin-class-actuator" title="Permalink to this headline">¶</a></h1>
+<p>If you want to create a plugin in order to access piezo- or motor-stages, multi-axes-machines,… it is intended to derive your plugin class from <strong>ito::AddInActuator</strong>.</p>
+<div class="section" id="base-idea-of-any-actuator">
+<h2>8.7.12.1. Base idea of any actuator<a class="headerlink" href="#base-idea-of-any-actuator" title="Permalink to this headline">¶</a></h2>
+<p>The actuator interface has been developed with the following base ideas:</p>
+<ul class="simple">
+<li><p>The actuator can consist of different axes. The first axis is indexed with the number 0. Create the read-only, integer parameter <strong>numAxis</strong> for the number of connected axes.</p></li>
+<li><p>The plugin contains a set of parameters (like every other plugin), which can be set or get using the public methods <strong>setParam</strong> or <strong>getParam</strong> or the appropriate methods in Python.</p></li>
+<li><p>emit the signal <strong>parametersChanged(m_params)</strong> if any parameter has been changed in order to inform the GUI about these changes.</p></li>
+<li><p>Some of those parameters must be available, others are optional, but if you implement them, you should follow some rules concerning name and type of the parameter, and of course you can add an infinite list of further parameters (see below).</p></li>
+<li><p>Every actuator is executed in its own thread.</p></li>
+<li><p>Every actuator can have one configuration dialog and one dockable toolbox, that is directly included in the GUI of <strong>itom</strong>.</p></li>
+<li><p>The current position of all axes should be stored in the vector <strong>m_currentPos</strong>, that is a member of class <strong>AddInActuator</strong> (bitmask of enumeration <strong>ito::tActuatorStatus</strong>.</p></li>
+<li><p>The new target position for all axes must be stored in the vector <strong>m_targetPos</strong>, that is also a member of class <strong>AddInActuator</strong>.</p></li>
+<li><p>The current status of all axes should be stored in the vector <strong>m_currentStatus</strong> (member of class <strong>AddInActuator</strong>).</p></li>
+<li><p>Make sure at the initialization of your plugin that all three member vectors are initialized with the size of the numbers of axes.</p></li>
+<li><p>Changes to the current status or position are signalled by the signal <strong>actuatorStatusChanged</strong> (class <strong>AddInActuator</strong>). This is usually emitted by calling <strong>sendStatusUpdate(…)</strong>.</p></li>
+<li><p>Changes to the target position vector is signalled by the signal <strong>targetChanged</strong> (class <strong>AddInActuator</strong>). This is usually emitted by calling <strong>sendTargetUpdate()</strong>. Connected toolboxes as well as further GUI elements are then informed about the changes.</p></li>
+<li><p>Any GUI elements should only get live information about the position and status of the actuator by connecting to these signals (<strong>actuatorStatusChanged</strong> or <strong>targetChanged</strong>), since the communication to GUI elements must be executed across multiple threads.</p></li>
+<li><p>Try to only connect to these signals if you really need this information, since the request of live-status and -position-information is time-consuming for certain motors. For example, a dock widget should only connect to these signals, if it is visible. This can be done by overwriting the slot <strong>dockWidgetVisibilityChanged</strong> of class <strong>AddInBase</strong>.</p></li>
+<li><p>Methods like <strong>setPosAbs</strong>, <strong>setPosRel</strong>, <strong>setParam</strong>, <strong>calib</strong> or <strong>setOrigin</strong> should only execute their given task if the motor is not moving at this moment. This can be checked using the method <strong>isMotorMoving()</strong>, defined in <strong>AddInActuator</strong> by simply checking the appropriate status flags.</p></li>
+<li><p>The method <strong>waitForDone</strong> (pure virtual method of class <strong>AddInActuator</strong>) <strong>has to be overwritten</strong>. This method continuously checks the moving status of all (moving) axes are returns if all requested axes reached their target position, reached a switch or if a time-out occurred. User interrupts are also checked within this function. In case of such an interrupt the axes status are set to <em>interrupt</em> as well and the method returns. If the hardware is able to give sophisticated live information about the current status and position of each axis, you can continuously adapt the values in the members <strong>m_currentStatus</strong> or <strong>m_currentPos</strong>; else you can to guess these values. Signal changes to these vectors using the methods <strong>sendStatusUpdate()</strong> or <strong>sendStatusUpdate(…)</strong>. If the axes are asynchronously moved, the semaphore <strong>waitCond</strong> has to be released immediately before the loop waiting for the target position starts. Then the caller can directly continue working. In synchronous mode (default behaviour), <strong>waitCond</strong> is only released, if no requested axis is moving any more.</p></li>
+<li><p>There is a slot <strong>requestStatusAndPosition(bool sendActPosition, bool sendTargetPos)</strong>, defined in <strong>ito::AddInActuator</strong>. This slot is invoked e.g. by a toolbox or configuration dialog in order to force the actuator to directly emit the signals <strong>actuatorStatusChanged</strong> and/or <strong>targetChanged</strong>. The original caller is then immediately informed about the current status and position values. Overload this function if you want to update <strong>m_currentStatus</strong>, <strong>m_currentPos</strong> or <strong>m_targetPos</strong> before they are emitted to the caller. In the default implementation, they are emitted as they are.</p></li>
+</ul>
+</div>
+<div class="section" id="programming-steps">
+<h2>8.7.12.2. Programming steps<a class="headerlink" href="#programming-steps" title="Permalink to this headline">¶</a></h2>
+<p>In order to program the actuator plugin, follow these steps:</p>
+<ol class="arabic">
+<li><p>Create the header and source file for your plugin “MyActuatorPlugin”.</p></li>
+<li><p>Create the interface (or factory) class “MyActuatorPluginInterface”. For details about how to create such an interface class, see <a class="reference internal" href="pluginInterfaceClass.html#plugin-interface-class"><span class="std std-ref">Plugin interface class</span></a>.</p></li>
+<li><p>Create the plugin class “MyActuatorPlugin” with respect to the exemplary implementation, given in the next section.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Consider which internal parameters, that can be read and/or written by the user, your plugin has. Add these parameters in the constructor of your plugin to the <strong>m_params</strong>-vector.</p></li>
+<li><p>Implement the <strong>init</strong>-method that gets the initial parameters, defined in the interface class.</p></li>
+<li><p>Implement the methods <strong>getParam</strong> and <strong>setParam</strong>, which are the getter- and setter-methods for the internal parameters.</p></li>
+<li><p>Implement the motor-specific methods, including <strong>waitForDone</strong></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="actuator-plugin-class">
+<h2>8.7.12.3. Actuator plugin class<a class="headerlink" href="#actuator-plugin-class" title="Permalink to this headline">¶</a></h2>
+<p>A sample header file of the actuator’s plugin class is illustrated in the following code snippet:</p>
+<div class="highlight-c++ notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#define ITOM_IMPORT_API</span>
+<span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;../../common/addInInterface.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;dialogMyMotor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;dockWidgetMyMotor.h&quot;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">MyMotor</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ito</span><span class="o">::</span><span class="n">AddInActuator</span>
+<span class="p">{</span>
+    <span class="n">Q_OBJECT</span>
+
+    <span class="k">protected</span><span class="o">:</span>
+        <span class="o">~</span><span class="n">MyMotor</span><span class="p">()</span> <span class="p">{};</span>  <span class="cm">/*! &lt; Destructor*/</span>
+        <span class="n">MyMotor</span><span class="p">();</span><span class="cm">/*! &lt; Constructor*/</span>
+
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">waitForDone</span><span class="p">(</span><span class="kt">int</span> <span class="n">timeoutMS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span> <span class="cm">/*if empty -&gt; all axis*/</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span> <span class="cm">/*for your use*/</span><span class="p">);</span>
+
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">friend</span> <span class="k">class</span> <span class="nc">MyMotorInterface</span><span class="p">;</span>
+        <span class="k">const</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="cm">/*!&lt; Opens the modal configuration dialog (called from main thread) */</span>
+        <span class="kt">int</span> <span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span> <span class="cm">/*!&lt; indicates that this plugin has got a configuration dialog */</span>
+
+    <span class="k">public</span> <span class="nl">slots</span><span class="p">:</span>
+        <span class="c1">//! get/set parameters</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! init/close method</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="c1">//! calibration for single or multiple axis</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">calib</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">calib</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! current axis position is new zero-position</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setOrigin</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setOrigin</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! Reads out status request answer and gives back ito::retOk or ito::retError</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getStatus</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">status</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="c1">//! get current position of single or multiple axis (in mm or degree)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getPos</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">getPos</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+
+        <span class="c1">//! move one or more axis to certain absolute positions (in mm or degree)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosAbs</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosAbs</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! move one or more axis by certain relative distances (in mm or degree)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosRel</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">setPosRel</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">,</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ItomSharedSemaphore</span> <span class="o">*</span><span class="n">waitCond</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">);</span>
+
+        <span class="c1">//! if this slot is triggered, the current status and position is emitted (e.g. for actualizing a dock widget)</span>
+        <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span> <span class="n">RequestStatusAndPosition</span><span class="p">(</span><span class="kt">bool</span> <span class="n">sendActPosition</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">sendTargetPos</span><span class="p">);</span>
+
+        <span class="c1">//ito::RetVal requestStatusAndPosition(bool sendCurrentPos, bool sendTargetPos); //!see notes above</span>
+
+    <span class="k">private</span> <span class="nl">slots</span><span class="p">:</span>
+        <span class="kt">void</span> <span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">visible</span> <span class="p">);</span> <span class="cm">/*!&lt; this slot is invoked if the visibility of the dock widget has changed */</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>The corresponding source file should start with something like this:</p>
+<div class="highlight-c++ notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#define ITOM_IMPORT_API</span>
+<span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;yourHeaderFile.h&quot;</span><span class="cp"></span>
+
+<span class="c1">//implement your code here</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="signalling-the-current-position-and-status-of-any-axes">
+<h2>8.7.12.4. Signalling the current position and status of any axes<a class="headerlink" href="#signalling-the-current-position-and-status-of-any-axes" title="Permalink to this headline">¶</a></h2>
+<p>Each actuator has the possibility to signalize the target position, the current position and the current status of each axis. Then its own toolbox or other widgets or slots (general: listeners) can be connected to the corresponding signals in order to be informed about the current activity. The base class <strong>ito::AddInActuator</strong> provides the necessary structures for this:</p>
+<p>1. The vector <strong>m_currentPos</strong> must be initialized to a length corresponding to the number of axes and contains the current position of every axis using the units stated below. Whenever
+the actuator registers a change of any current position, the corresponding value should be changed as well. Listeners are finally informed about this change by calling the method</p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sendStatusUpdate</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The argument <strong>false</strong> means that not only a change of the current status happened, but also a change of any current position. This method internally emits the signal <strong>actuatorStatusChanged</strong>.</p>
+</div></blockquote>
+<ol class="arabic" start="2">
+<li><p>The vector <strong>m_targetPos</strong> must also be initialized to a length corresponding to the number of axes. Whenever a positioning operation starts, set the target value of specific axes to the new target value and call</p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sendTargetUpdate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>that finally emits the signal <strong>targetChanged</strong>.</p>
+</div></blockquote>
+</li>
+<li><p>The status of every axis is stored in the vector <strong>m_currentStatus</strong>. Each item in this vector with a length corresponding to the number of axes, contains an OR combination of the enumeration <strong>ito::tActuatorStatus</strong>. Whenever the status of any axis changes, change its status value, too and use <strong>sendStatusUpdate(true/false)</strong> in order to also emit the signal <strong>actuatorStatusChanged</strong>.</p></li>
+</ol>
+<p>The enumeration <strong>ito::tActuatorStatus</strong> contains the following values that are grouped by specific mask values:</p>
+<p>The <strong>moving flags</strong> contain flags about the current moving status of any axis (bits containing to this group are contained in the mask <strong>ito::actMovingMask</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ito::actuatorUnknown: The current status of this axis is unknown</p></li>
+<li><p>ito::actuatorInterrupted: The movement of this axis has been interrupted and no further commands followed</p></li>
+<li><p>ito::actuatorMoving: The axis is currently moving (or is supposed to move)</p></li>
+<li><p>ito::actuatorAtTarget: The axis reached its target position (this is the default value)</p></li>
+<li><p>ito::actuatorTimeout: A timeout occurred during the movement of this axis</p></li>
+</ul>
+</div></blockquote>
+<p>The <strong>status flags</strong> inform about the general status of any axis (bits containing to this group are set in the mask <strong>ito::actStatusMask</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ito::actuatorAvailable: This axis is available (usually set)</p></li>
+<li><p>ito::actuatorEnabled: This axis is enabled and can be driven (usually set, but there are drivers that allowing disabling selected axis)</p></li>
+</ul>
+</div></blockquote>
+<p>Axes that have got any reference or end switches can signal related status information using the <strong>switches flags</strong>. All bits belonging to this group are set in the mask <strong>ito::actSwitchesMask</strong> divided into <strong>ito::actEndSwitchMask</strong> and <strong>ito::actRefSwitchMask</strong>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ito::actuatorEndSwitch: This bit is set if any (unknown) end switch was reached</p></li>
+<li><p>ito::actuatorLeftEndSwitch: This bit is additionally set if the left end switch was reached</p></li>
+<li><p>ito::actuatorRightEndSwitch: This bit is additionally set if the right end switch was reached</p></li>
+<li><p>ito::actuatorRefSwitch: This bit is set if any (unknown) reference switch was reached</p></li>
+<li><p>ito::actuatorLeftRefSwitch: This bit is additionally set if the left reference switch was reached</p></li>
+<li><p>ito::actuatorRightRefSwitch: This bit is additionally set if the right reference switch was reached</p></li>
+</ul>
+</div></blockquote>
+<p>You can either manually set the necessary bit-combination of moving, status and switch flags for signalling the right status of the axis. There are three methods defined in <strong>ito::AddInActuator</strong> that simplify this process:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">setStatus</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">newFlags</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">keepMask</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">setStatus</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">newFlags</span><span class="p">,</span> <span class="k">const</span> <span class="n">in</span> <span class="n">keepMask</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this methods to the set the status of one or multiple axis. The parameter <strong>newFlags</strong> should contain an or-combination of all flags that should be set. The status flags are then set to this value (hence, old values are overwritten). If you want to keep the current bit values of a certain group, pass the specific mask as argument <strong>keepMask</strong>. For instance, if you want to the status of the second axis to <strong>actuatorMoving</strong> without changing the <strong>status flags</strong>, use the following command:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">setStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span>
+<span class="cp"># this command will set all bits of the switches mask to 0!</span>
+</pre></div>
+</div>
+<p>The equivalent command for multiple axis, requires a vector with axes-indices as first argument. This example does the same for the first and third axis:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axis</span><span class="p">;</span>
+<span class="n">axis</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">setStatus</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The similar commands <strong>replaceStatus</strong></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">replaceStatus</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">existingFlag</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">replaceFlag</span><span class="p">)</span>
+<span class="n">replaceStatus</span><span class="p">(</span><span class="k">const</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">existingFlag</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">replaceFlag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>can be used to replace one status flag by another one without changing the other bits. If the bit corresponding to the <strong>existingFlag</strong> is set, it is set to zero and the bit of the <strong>replaceFlag</strong> is set to 1. In the following example, the flag of the first axis is set from moving to atTarget:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">replaceStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span> <span class="n">ito</span><span class="o">::</span><span class="n">actuatorAtTarget</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After using one of these functions to set the current status, call <strong>sendStatusUpdate</strong> to emit the signal <strong>actuatorStatusChanged</strong> such that connected listeners can for instance visualize the current status.</p>
+</div>
+<div class="section" id="interruption-of-movement">
+<h2>8.7.12.5. Interruption of movement<a class="headerlink" href="#interruption-of-movement" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to implement an interrupt button in the toolbox of the actuator that becomes active once at least one axis is moving. Once the button is clicked it must <strong>directly</strong> call the thread-safe function <strong>setInterrupt()</strong> of the actuator plugin (If the toolbox inherits from <strong>ito::AbstractAddInDockWidget</strong> call its method <strong>setActuatorInterrupt()</strong>.</p>
+<p>In the method <strong>waitForDone</strong> regularly check if the interrupt flag has been set, using the actuator’s method <strong>isInterrupted()</strong>. If this method
+returns true, set the moving state of all moving axes to <strong>ito::actuatorInterrupted</strong> and return with an appropriate return value, like:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retError</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;movement interrupted&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once <strong>isInterrupted()</strong> returns true, the internal interrupt flag is reset to false. Therefore consider to call this function to reset the interrupt flag if desired (e.g. at the begin of the next movement).</p>
+</div>
+</div>
+<div class="section" id="parameters-and-unit-conventions">
+<h2>8.7.12.6. Parameters and Unit Conventions<a class="headerlink" href="#parameters-and-unit-conventions" title="Permalink to this headline">¶</a></h2>
+<p>In order to have a unified behaviour of all actuator plugins, respect the following unit conventions. That means, the plugin should store related parameters using these conventions, such that <strong>getParam</strong> and <strong>setParam</strong> returns and obtains values using these units. Internally, it is sometimes
+necessary to convert these units to the units required by the interface of the real actuator device.</p>
+<ul class="simple">
+<li><p>Length values in <strong>mm</strong></p></li>
+<li><p>Angles in <strong>degree</strong></p></li>
+<li><p>Velocity in <strong>mm/sec</strong> or <strong>degree/sec</strong></p></li>
+<li><p>Acceleration, deceleration in <strong>mm/sec^2</strong> or <strong>degree/sec^2</strong></p></li>
+</ul>
+<p>Implement the following mandatory parameters in the map <strong>m_params</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>“name”: {string | readonly}</dt><dd><p>name of the plugin</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“numaxis”: {int | readonly}</dt><dd><p>number of connected axes</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“async”: {int, [0,1]}</dt><dd><p>If 1: asynchronous movement. Methods like <strong>setPosAbs</strong> or <strong>setPosRel</strong> only start the movement and immediately return. Hence, the <em>waitCond</em> in <strong>waitForDone</strong> is directly released before the loop waiting for the end of the movement is executed. If 0: synchronous movement (default). <strong>setPosAbs</strong> and <strong>setPosRel</strong> block until the end of the movement, hence, <em>waitCond</em> in <strong>waitForDone</strong> is only released at the end of the movement. Since <strong>waitForDone</strong> always is running during the movement, the plugin thread is blocked and no further commands can be executed, even in asynchronous mode.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If desired implement the following optional parameters in the map <strong>m_params</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>“speed”: {double or doubleArray}</dt><dd><p>Desired speed for the axes. If <em>double</em>, the speed holds for all axes, else the <em>doubleArray</em> must have the same length than the number of axes, holding the axis specific speed values. Make sure, that it is not possible to set an array of another length in <strong>setParam</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“accel”: {double or doubleArray}</dt><dd><p>Acceleration values (similar to <em>speed</em>)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“decel”: {double or doubleArray}</dt><dd><p>Deceleration values (similar to <em>speed</em>)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plugin-algo.html" class="btn btn-neutral float-right" title="8.7.13. Plugin class - Algo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plugin-dataIO.html" class="btn btn-neutral float-left" title="8.7.11. Plugin class - DataIO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues
+      <span class="lastupdated">
+        Last updated on May 28, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

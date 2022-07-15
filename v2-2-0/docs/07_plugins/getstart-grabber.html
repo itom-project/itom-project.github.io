@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>7.3. Getting started with grabbers &mdash; itom Documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="itom Documentation" href="../index.html"/>
+        <link rel="up" title="7. Plugins" href="plugins.html"/>
+        <link rel="next" title="7.4. Getting started with A/D converters" href="getstart-adda.html"/>
+        <link rel="prev" title="7.2. How to use hardware plugins" href="getstart-hardware.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">3. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">4. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">5. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">6. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plugins.html">7. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_concept.html">7.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-hardware.html">7.2. How to use hardware plugins</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.3. Getting started with grabbers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">7.3.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">7.3.2. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#start-stop-device">7.3.2.1. Start/Stop device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autograbbing">7.3.2.2. Autograbbing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#liveimage">7.3.2.3. LiveImage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#taking-pictures">7.3.2.4. Taking pictures</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">7.3.3. Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#integration-time">7.3.3.1. integration_time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#roi">7.3.3.2. roi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bpp">7.3.3.3. bpp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gain">7.3.3.4. gain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#binning">7.3.3.5. binning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#use-grabbers-in-your-own-gui">7.3.4. Use grabbers in your own GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo-script-camerawindow-py">7.3.5. Demo script cameraWindow.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-adda.html">7.4. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-actuator.html">7.5. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getstart-filter.html">7.6. Getting started with algorithm plugins a.k.a. filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/plugin-development.html">7.7. Development under C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/openCVMat.html">7.8. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">8. Python scripting language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">9. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">10. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_test-scripts/test-scripts.html">11. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_tutorials/tutorials.html">12. Python tutorials</a></li>
+</ul>
+<ul class="simple">
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">itom Documentation</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="plugins.html">7. Plugins</a> &raquo;</li>
+      
+    <li>7.3. Getting started with grabbers</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/07_plugins/getstart-grabber.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started-with-grabbers">
+<span id="getstartgrabber"></span><h1>7.3. Getting started with grabbers<a class="headerlink" href="#getting-started-with-grabbers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>7.3.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial gives a short introduction to the use of cameras. Cameras, RawIO and A/D converters (adda) are subtypes of the class <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal"><span class="pre">dataIO</span></code></a>.</p>
+<p>Similar tutorials are available for <a class="reference internal" href="getstart-actuator.html#getstartactuator"><span class="std std-ref">actuators</span></a> and <a class="reference internal" href="getstart-adda.html#getstartadda"><span class="std std-ref">A/D converters</span></a>.</p>
+<p>Initialisation and common properties of <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal"><span class="pre">dataIO</span></code></a> and <a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal"><span class="pre">actuator</span></code></a> are described <a class="reference internal" href="getstart-hardware.html#getstarthardware"><span class="std std-ref">getting here</span></a>.</p>
+</div>
+<div class="section" id="functions">
+<h2>7.3.2. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, we will focus on the standard application of grabbers: observe stuff, take images and retrieve them.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As one of the major advatages of the plugin concept, all grabbers shall behave in the same manner when given the same command.
+There may however be some special properties of some devices, which cause slightly different behavior in very specialised cases. For further information read the plugin documentation of your device.</p>
+</div>
+<div class="section" id="start-stop-device">
+<h3>7.3.2.1. Start/Stop device<a class="headerlink" href="#start-stop-device" title="Permalink to this headline">¶</a></h3>
+<p>Before using a grabber, we have to start it. For easy use, most plugins start the device at initialization. We recommend manual starting to be sure. After usage, the device may be stopped. This is done with the functions <strong>startDevice()</strong> and <strong>stopDevice()</strong>:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">stopDevice</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>It is possible to call <strong>startDevice</strong> or <strong>stopDevice</strong> more than one time, since for instance live images always call <strong>startDevice</strong> when they are started and <strong>stopDevice</strong>
+at shutdown. Internally, grabbers count the current number of starts and stops and only really start the device, if the count increases from zero to one and vice-versa.</p>
+</div>
+<div class="section" id="autograbbing">
+<h3>7.3.2.2. Autograbbing<a class="headerlink" href="#autograbbing" title="Permalink to this headline">¶</a></h3>
+<p>The autograbbing feature enables a continuous image acquisition of a grabber once at least one live image is shown for the grabber. Per default, an auto-acquisition is enabled
+with up to 20 frames per second. However, this behaviour can be very counterproductive, if you want to acquire images by a script at defined points in time. It can even happen,
+that you call the <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.acquire" title="itom.dataIO.acquire"><code class="xref py py-meth docutils literal"><span class="pre">acquire()</span></code></a> command, but before you call <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal"><span class="pre">getVal()</span></code></a> or <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-meth docutils literal"><span class="pre">copyVal()</span></code></a> to get the acquired image,
+the auto-grabbing feature caught your image. Therefore, it is possible to enable or disable the auto-grabbing functionality. Nevertheless, if it is disabled and you acquire
+image per script command, these images are always delivered to connected live images. The auto-grabbing feature status can be read or written by <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.getAutoGrabbing" title="itom.dataIO.getAutoGrabbing"><code class="xref py py-meth docutils literal"><span class="pre">getAutoGrabbing()</span></code></a>
+or <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.setAutoGrabbing" title="itom.dataIO.setAutoGrabbing"><code class="xref py py-meth docutils literal"><span class="pre">setAutoGrabbing()</span></code></a>:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>  <span class="c1">#should be already started</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;current status&quot;</span><span class="p">,</span> <span class="n">mygrabber</span><span class="o">.</span><span class="n">getAutoGrabbing</span><span class="p">())</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setAutoGrabbing</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Enabling and disabling autograbbing is also possible through functions <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.enableAutoGrabbing" title="itom.dataIO.enableAutoGrabbing"><code class="xref py py-meth docutils literal"><span class="pre">enableAutoGrabbing()</span></code></a> and <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.disableAutoGrabbing" title="itom.dataIO.disableAutoGrabbing"><code class="xref py py-meth docutils literal"><span class="pre">disableAutoGrabbing()</span></code></a> :</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>  <span class="c1">#should be already started</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">enableAutoGrabbing</span><span class="p">()</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">disableAutoGrabbing</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>The auto-grabbing feature can also be enabled by the context menu of the grabber instance in the plugin toolbox.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you experience problems when taking pictures manually/scripted, ensure that autograbbing is off</p>
+</div>
+</div>
+<div class="section" id="liveimage">
+<h3>7.3.2.3. LiveImage<a class="headerlink" href="#liveimage" title="Permalink to this headline">¶</a></h3>
+<p>A grabber can provide a live image using the <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><code class="xref py py-meth docutils literal"><span class="pre">itom.liveImage()</span></code></a> command (it is only live if auto-grabbing is enabled):</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">liveImage</span><span class="p">(</span><span class="n">mygrabber</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calling <a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><code class="xref py py-meth docutils literal"><span class="pre">itom.liveImage()</span></code></a> always calls <strong>startDevice</strong> at startup and <strong>stopDevice</strong> at shutdown of the live image connection, but does not enable autograbbing.</p>
+</div>
+</div>
+<div class="section" id="taking-pictures">
+<h3>7.3.2.4. Taking pictures<a class="headerlink" href="#taking-pictures" title="Permalink to this headline">¶</a></h3>
+<p>Most times a grabber is used, one would like to acquire and store pictures. The procedure is fairly easy: once you have a running instance of your grabber,
+calling <strong>acquire()</strong> triggers an image to be acquired. The image is then retrieved either by the <strong>getVal()</strong> or the <strong>copyVal()</strong> command. Here, <strong>getVal()</strong>
+makes a shallow copy, and <strong>copyVal()</strong> gives you a deep copy. Both methods take a dataObject as argument, which has to have suitable size and data type.</p>
+<p>Most times a grabber is used, one would like to acquire and store pictures. The procedure is fairly easy: once you have a running instance of your grabber,
+calling <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.acquire" title="itom.dataIO.acquire"><code class="xref py py-meth docutils literal"><span class="pre">acquire()</span></code></a> triggers an image to be acquired. The image is then retrieved either by the <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal"><span class="pre">getVal()</span></code></a> or
+the <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-meth docutils literal"><span class="pre">copyVal()</span></code></a> command. Here, <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal"><span class="pre">getVal()</span></code></a> makes a shallow
+copy, and <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-meth docutils literal"><span class="pre">copyVal()</span></code></a> gives you a deep copy. In the case of the shallow copy, pass an arbitrary initialized dataObject to <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal"><span class="pre">getVal()</span></code></a>. This
+object is then reconfigured to the right type and size and will contain a shallow copy of the recently acquired data. However, once the device acquires new data, it is possible
+that the content of the dataObject will be changed, too, since it is only a shallow copy (however: this is a fast method to get the data). In the latter case of the method
+<a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-class docutils literal"><span class="pre">copyVal</span></code></a> you have to either pass an empty dataObject or a dataObject whose type and current region of interest fits to the expected output of the recent
+acquisition. Then, you will obtain a deep copy of the acquired data array into the allocated dataObject or a newly allocated dataObject with the deeply copied data if it has been empty before.</p>
+<p>Simple example:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">dObj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span> <span class="c1"># no need for fixed size or data type here, will be defined by getVal command</span>
+<span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span> <span class="c1"># use standard init values</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>
+<span class="n">currentStatus</span> <span class="o">=</span> <span class="n">mygrabber</span><span class="o">.</span><span class="n">getAutoGrabbing</span><span class="p">()</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setAutoGrabbing</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">dObj</span><span class="p">)</span> <span class="c1"># this is a shallow copy. Use mygrabber.copyVal(dObj) for a deep</span>
+                       <span class="c1"># copy alternatively or call dObj.copy() to get the deep copy afterwards.</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setAutoGrabbing</span><span class="p">(</span><span class="n">currentStatus</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">stopDevice</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Most measurement controls afford multiple acquisitions. In this case, the dataObject to contain the picture stack has to be initialised using correct size and data type.</p>
+<p>Multi-shot example:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">dObj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+<span class="c1"># Here we need fixed size and data type, because we will assign layer by layer.</span>
+<span class="c1"># Note inversed dimensions compared to grabber init!</span>
+<span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>
+<span class="n">currentStatus</span> <span class="o">=</span> <span class="n">mygrabber</span><span class="o">.</span><span class="n">getAutoGrabbing</span><span class="p">()</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setAutoGrabbing</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cnt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">mygrabber</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="n">mygrabber</span><span class="o">.</span><span class="n">copyVal</span><span class="p">(</span><span class="n">dObj</span><span class="p">[</span><span class="n">cnt</span><span class="p">,:,:])</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setAutoGrabbing</span><span class="p">(</span><span class="n">currentStatus</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">stopDevice</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you experience problems when taking pictures manually/scripted, ensure that autograbbing is off</p>
+</div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>7.3.3. Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>Most grabber plugins let you control the device&#8217;s settings through a set of parameters. Common parameters are <strong>integration_time</strong>, <strong>roi</strong>, <strong>bpp</strong>, or <strong>binning</strong>. Some are read only. Parameters are checked and set by <strong>getParam()</strong> and <strong>setParam()</strong> as seen in the section <a class="reference internal" href="getstart-hardware.html#hardwareparameters"><span class="std std-ref">Usage of hardware plugins</span></a> before.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don&#8217;t know the name of the parameter you want to check, try <strong>getParamListInfo()</strong>.</p>
+</div>
+<div class="section" id="integration-time">
+<h3>7.3.3.1. integration_time<a class="headerlink" href="#integration-time" title="Permalink to this headline">¶</a></h3>
+<p>Integration time is probably the most often changed parameter of a grabber. And also the simplest. This parameter changes the time over which each triggered frame is integrated.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;integration_time&quot;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span> <span class="c1"># integration time is set to 10ms</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="roi">
+<h3>7.3.3.2. roi<a class="headerlink" href="#roi" title="Permalink to this headline">¶</a></h3>
+<p>Many grabbers support changing of the region of interest (ROI). This property is set by the parameter <strong>roi</strong> which contains four values: x0, y0, width, height. All four values have to be defined:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;dummyGrabber&quot;</span><span class="p">)</span>
+<span class="n">mygrabber</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;roi&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Though it is unlikely, you may possibly come across older plugin versions that use an outdated notation, where the ROI is set via parameters <strong>x0</strong>, <strong>x1</strong>, <strong>y0</strong>, <strong>y1</strong> defining starting end ending pixels rather than starting pixel and length.</p>
+</div>
+</div>
+<div class="section" id="bpp">
+<h3>7.3.3.3. bpp<a class="headerlink" href="#bpp" title="Permalink to this headline">¶</a></h3>
+<p>If a grabber provides control over the bitdepth of the output, it is set by the parameter <strong>bpp</strong> (bits per pixel).</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;bpp&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># bpp is set to 10</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="gain">
+<h3>7.3.3.4. gain<a class="headerlink" href="#gain" title="Permalink to this headline">¶</a></h3>
+<p>This parameter gives access to a gain factor, if it is provided by the grabber. This factor may be arbitrarily changed, or be a binary value (for example for IR-mode on PCO PixelFlys).</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;gain&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># gain is set to 100%</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="binning">
+<h3>7.3.3.5. binning<a class="headerlink" href="#binning" title="Permalink to this headline">¶</a></h3>
+<p>For means of noise reduction and/or speed-up, some grabbers support binning of pixels.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mygrabber</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;binning&quot;</span><span class="p">,</span> <span class="mi">202</span><span class="p">)</span> <span class="c1"># binning is set to 2x2</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="use-grabbers-in-your-own-gui">
+<h2>7.3.4. Use grabbers in your own GUI<a class="headerlink" href="#use-grabbers-in-your-own-gui" title="Permalink to this headline">¶</a></h2>
+<p>If you are developing your own GUI and want wo use live images from a grabber, you can assign the grabber as a source for your designer widget, just like you can display dataObjects.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># be gui.myplot a designer widget of type Itom2dQwtPlot or Itom1dQwtPlot</span>
+<span class="n">gui</span><span class="o">.</span><span class="n">myplot</span><span class="p">[</span><span class="s2">&quot;camera&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mygrabber</span> <span class="c1"># liveImage of grabber, if autograbbing in enabled</span>
+<span class="n">gui</span><span class="o">.</span><span class="n">myplot</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mydataobject</span> <span class="c1"># diplaying dataObject</span>
+                                    <span class="c1">#(any previous camera is disconnected from the live image)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="demo-script-camerawindow-py">
+<h2>7.3.5. Demo script cameraWindow.py<a class="headerlink" href="#demo-script-camerawindow-py" title="Permalink to this headline">¶</a></h2>
+<p>A demo script named <strong>cameraWindow.py</strong> is provided, which demonstrates basic grabber use. Detailed discussion of this script is <a class="reference internal" href="../11_test-scripts/demoCameraWindow.html#democamerawindow"><span class="std std-ref">available</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="getstart-adda.html" class="btn btn-neutral float-right" title="7.4. Getting started with A/D converters" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getstart-hardware.html" class="btn btn-neutral" title="7.2. How to use hardware plugins" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2011-2016, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Oct 11, 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'f520b48',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

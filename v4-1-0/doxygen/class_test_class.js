@@ -1,0 +1,37 @@
+var class_test_class =
+[
+    [ "Simpson", "class_test_class.html#a233dc0e81a55c061b34b3e36c6db6b85", [
+      [ "HOMER", "class_test_class.html#a233dc0e81a55c061b34b3e36c6db6b85abc1d1d0e7b3c81eb7175475ba914bd63", null ],
+      [ "MARGE", "class_test_class.html#a233dc0e81a55c061b34b3e36c6db6b85aa176401b656309d0937f20a24ed73de5", null ],
+      [ "BART", "class_test_class.html#a233dc0e81a55c061b34b3e36c6db6b85ae05713f218375497811fda7ff6a12280", null ],
+      [ "LISA", "class_test_class.html#a233dc0e81a55c061b34b3e36c6db6b85a5f5a6953bd0e8390ac0c855c615c1e0f", null ],
+      [ "MAGGIE", "class_test_class.html#a233dc0e81a55c061b34b3e36c6db6b85ae935f594d80690ccbe8731e84eb2b5ca", null ]
+    ] ],
+    [ "TestClass", "class_test_class.html#aa1b11153c048dcd9fde267a7ad0ef403", null ],
+    [ "~TestClass", "class_test_class.html#af3070e5a3118cb8ccf59c73a5c85468d", null ],
+    [ "color", "class_test_class.html#aeaff18ea754a26ae379f7d6b22ead5bd", null ],
+    [ "name", "class_test_class.html#a46a3f2b440f7b75dd3abc24fb9cdb6ae", null ],
+    [ "position", "class_test_class.html#a5dc20624f77b3ead800efdda10ad40b5", null ],
+    [ "Q_CLASSINFO", "class_test_class.html#a76cb3c642638a453c0da0bfbcc64d8a9", null ],
+    [ "Q_CLASSINFO", "class_test_class.html#ad74b7d28178d5b1b62ba792359f474ae", null ],
+    [ "radius", "class_test_class.html#aaed85af46f0bd24db1f12c8a2d63fec1", null ],
+    [ "setColor", "class_test_class.html#a73cc1ccddc90f5866d5e796a5b2bd9cc", null ],
+    [ "setName", "class_test_class.html#aea4eeec43a8b7f43ae02fd596fa9122f", null ],
+    [ "setPosition", "class_test_class.html#a561a8999c34c226417f123fe0f7623cd", null ],
+    [ "setRadius", "class_test_class.html#af49e5487c13805c23688e8435f356682", null ],
+    [ "setSimpson", "class_test_class.html#ab667fbb8cd669735b0e9e1b131433efc", null ],
+    [ "simpson", "class_test_class.html#a327d811c0c3492a4c705848154775c7a", null ],
+    [ "someNumber", "class_test_class.html#a1e728e92d49d36a5172eb412cc0e597c", null ],
+    [ "m_color", "class_test_class.html#ad971f6261c9bac56fe8b3c15974e7c28", null ],
+    [ "m_name", "class_test_class.html#a0e6a3285c152334537ecfd3429fadcf3", null ],
+    [ "m_position", "class_test_class.html#aada68f159cd2f8dd53b16dc1d7cffb4f", null ],
+    [ "m_radius", "class_test_class.html#aa9934d4c7fd17c587c6ef9f2a0bf258b", null ],
+    [ "m_simpson", "class_test_class.html#afa8ccd0e44258fa38326996dd4e36d54", null ],
+    [ "m_someNumber", "class_test_class.html#a7dc6245975a54bfd56ab99ccaf1dde06", null ],
+    [ "Color", "class_test_class.html#af158cdff9f051aac0d32025682618176", null ],
+    [ "Name", "class_test_class.html#ab3e2a3f5d5bf03270eb9d00daa347d8b", null ],
+    [ "Position", "class_test_class.html#a42c4c89f255fa20f17e2e642557412e1", null ],
+    [ "Radius", "class_test_class.html#a14ae02bc3d8fbdd936bc99859db128e5", null ],
+    [ "SimpsonsCharacter", "class_test_class.html#a194cccafb3b348d8a7c28f088adc6854", null ],
+    [ "SomeNumber", "class_test_class.html#a9db36044d18df4119a2b5972fe6c8266", null ]
+];

@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Customize the menu and toolbars of itom &mdash; itom Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5f9a611',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="itom Documentation" href="../index.html" />
+    <link rel="up" title="Extending the user interface of itom" href="extended_gui.html" />
+    <link rel="next" title="Show messages, input boxes and default dialogs" href="method-itom.html" />
+    <link rel="prev" title="Extending the user interface of itom" href="extended_gui.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="method-itom.html" title="Show messages, input boxes and default dialogs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="extended_gui.html" title="Extending the user interface of itom"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="extended_gui.html" accesskey="U">Extending the user interface of <strong>itom</strong></a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="customize-the-menu-and-toolbars-of-itom">
+<span id="toolbar-start"></span><h1>Customize the menu and toolbars of <strong>itom</strong><a class="headerlink" href="#customize-the-menu-and-toolbars-of-itom" title="Permalink to this headline">¶</a></h1>
+<p>In this section, it is shown how you can add your user-defined toolbars and menus to the main window of <strong>itom</strong>. Clicks to these
+execute arbitrary python code or methods. The creation of the toolbars, buttons and menus is done using python code, too.</p>
+<div class="section" id="add-toolbars-and-buttons">
+<span id="toolbar-addtoolbar"></span><h2>Add toolbars and buttons<a class="headerlink" href="#add-toolbars-and-buttons" title="Permalink to this headline">¶</a></h2>
+<p>Using the embedded scripting language in <strong>itom</strong>, you can add your own toolbars and buttons in order to automatically execute specific
+<strong>Python</strong>-commands or -methods. Every button that is created is related to a toolbar defined by its toolbar-name. If a toolbar-name
+does not already exist, a new toolbar with this name is created and the button is added to this toolbar. Every toolbar can be arbitrarily
+positioned in <strong>itom</strong> or undocked to any floating position on your screen.</p>
+<p>A single button in a toolbar is created using the command <a class="reference internal" href="../09_reference/itom_general.html#itom.addButton" title="itom.addButton"><tt class="xref py py-func docutils literal"><span class="pre">addButton()</span></tt></a>, vice-versa the button is removed with <a class="reference internal" href="../09_reference/itom_general.html#itom.removeButton" title="itom.removeButton"><tt class="xref py py-func docutils literal"><span class="pre">removeButton()</span></tt></a>. The syntax for both is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">addButton</span><span class="p">(</span><span class="n">toolbarName</span><span class="p">,</span> <span class="n">buttonName</span><span class="p">,</span> <span class="n">code</span> <span class="p">[,</span> <span class="n">icon</span><span class="p">,</span> <span class="n">argtuple</span><span class="p">])</span>
+<span class="n">removeButton</span><span class="p">(</span><span class="n">toolbarName</span><span class="p">,</span> <span class="n">buttonName</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your button is accessed by its name <strong>buttonName</strong>, which also is printed on the button if no icon is defined. The toolbar, where the button
+is displayed, is defined by its name <strong>toolbarName</strong>. You can either provide a python code snippet as string or a reference to any method or function.
+If this method requires parameters, you can add these parameters as tuple to the keyword-parameter <em>argtuple</em>. Additionally, it is possible to
+assign an icon to the button. Therefore you give the absolute path of the icon to the parameter <em>icon</em>. See the <a class="reference internal" href="#toolbar-icons"><em>icon section</em></a> below about the different possibilities how to assign a valid filename.</p>
+<p>In the following example, three different buttons linking to both python code and some functions are created:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test1</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;The button test1 has been clicked&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;The result of a+b is&quot;</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">addButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;HelloWorld&quot;</span><span class="p">,</span><span class="s">&quot;print(&#39;Hello World&#39;)&quot;</span><span class="p">)</span>
+<span class="n">addButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;BtnTest1&quot;</span><span class="p">,</span><span class="n">test1</span><span class="p">,</span> <span class="s">&quot;:/application/icons/itomicon/curAppIcon.png&quot;</span><span class="p">)</span>
+<span class="n">addButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;BtnTest2&quot;</span><span class="p">,</span><span class="n">test2</span><span class="p">,</span> <span class="n">argtuple</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In this example, it is assumed that the module <a class="reference internal" href="../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a> has been globally and totally imported by:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>If this is not the case, you can also import <a class="reference internal" href="../09_reference/itom_general.html#module-itom" title="itom"><tt class="xref py py-mod docutils literal"><span class="pre">itom</span></tt></a> and call <em>itom.addButton(...)</em>.
+Additionally, if you create a button in a toolbar, whose name already exists, the previous button will be deleted first.
+If you assign a code-snippet to the <strong>code</strong>-parameter that includes quotation marks, make sure that the quotation mark around
+the code-snippet is different to the quotation marks within the code snippet or escape your inner quotation marks by a backslash.</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">addButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;QuotExample&quot;</span><span class="p">,</span><span class="s">&quot;print(&#39;different quotation mark&#39;)&quot;</span><span class="p">)</span>
+<span class="n">addButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;QuotExample&quot;</span><span class="p">,</span><span class="s">&quot;print(</span><span class="se">\&quot;</span><span class="s">escaped quotation mark</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>All these buttons are removed by the following lines of code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">removeButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;HelloWorld&quot;</span><span class="p">)</span>
+<span class="n">removeButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;BtnTest1&quot;</span><span class="p">)</span>
+<span class="n">removeButton</span><span class="p">(</span><span class="s">&quot;myToolbar&quot;</span><span class="p">,</span><span class="s">&quot;BtnTest2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the last button of a toolbar has been removed, the toolbar is removed as well.</p>
+</div>
+</div>
+<div class="section" id="create-menus">
+<span id="toolbar-createmenu"></span><h2>Create menus<a class="headerlink" href="#create-menus" title="Permalink to this headline">¶</a></h2>
+<p>You can not only add buttons to the toolbar of <strong>itom</strong>&#8216;s main window but also create your menu and sub-menu structure. Therefore the commands
+<tt class="xref py py-func docutils literal"><span class="pre">removeMenu()</span></tt> are available.</p>
+<p>There are three types of menu items, that can be created:</p>
+<ul class="simple">
+<li>MENU (<em>itom.MENU</em> [2]) creates a menu-item, having any possible sub-item. This item cannot be connected to any code. Every menu always starts with an item of this type.</li>
+<li>BUTTON (<em>itom.BUTTON</em> [0]) creates a real menu-item, that is the mode of the menu-tree. Only a click to these items can execute code.</li>
+<li>SEPARATOR (<em>itom.SEPARATOR</em> [1]) creates a separater-item in the menu or submenu. It is also not connected to any code.</li>
+</ul>
+<p>Any menu-item is defined by its key. The key is a slash-separated list, where the single items stand for the path one has to walk through the menu-tree in order to access the desired item. If an item with a complex-tree structure is created where some of the parent-nodes do not already
+exist, they are iteratively created (type MENU) in order to finally create the desired node-element.</p>
+<p>The call to <a class="reference internal" href="../09_reference/itom_general.html#itom.addMenu" title="itom.addMenu"><tt class="xref py py-func docutils literal"><span class="pre">addMenu()</span></tt></a> is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">addMenu</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">key</span> <span class="p">[,</span><span class="n">name</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">icon</span><span class="p">,</span> <span class="n">argtuple</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Hereby <em>type</em> is the item&#8217;s type like stated above and <em>key</em> denotes the absolute key to the item, which also indicates the tree-structure, where the
+item should be added. The name of your item is given by <em>name</em>, while <em>code</em>, <em>icon</em> and <em>argtuple</em> have the same meaning like in the case of adding
+a button to the toolbar (<a class="reference internal" href="#toolbar-addtoolbar"><em>see above</em></a>).</p>
+<p>Here are some examples for creating a menu:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">btn2</span><span class="p">(</span><span class="n">arg</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;button 2 clicked:&quot;</span><span class="p">,</span><span class="n">arg</span><span class="p">)</span>
+
+<span class="n">addMenu</span><span class="p">(</span><span class="n">itom</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">,</span> <span class="s">&quot;Menu1/Button1&quot;</span><span class="p">,</span><span class="s">&quot;Button1&quot;</span><span class="p">,</span><span class="s">&quot;print(&#39;button1 pressed&#39;)&quot;</span><span class="p">)</span>
+<span class="n">addMenu</span><span class="p">(</span><span class="n">itom</span><span class="o">.</span><span class="n">SEPARATOR</span><span class="p">,</span> <span class="s">&quot;Menu1/Sep&quot;</span><span class="p">)</span>
+<span class="n">addMenu</span><span class="p">(</span><span class="n">itom</span><span class="o">.</span><span class="n">MENU</span><span class="p">,</span> <span class="s">&quot;Menu1/Menu1_1&quot;</span><span class="p">)</span>
+<span class="n">addMenu</span><span class="p">(</span><span class="n">itom</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">,</span> <span class="s">&quot;Menu1/Menu1_1/Button2&quot;</span><span class="p">,</span><span class="s">&quot;Button2&quot;</span><span class="p">,</span><span class="n">btn2</span><span class="p">)</span>
+<span class="n">addMenu</span><span class="p">(</span><span class="n">itom</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">,</span> <span class="s">&quot;Menu1/Menu1_2/Button3&quot;</span><span class="p">,</span><span class="s">&quot;Button3&quot;</span><span class="p">,</span><span class="n">btn2</span><span class="p">,</span><span class="n">argtuple</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<p>In line 4, the <em>Button1</em> is created. Since its parent node <em>Menu1</em> does not exist, it will be created (type <em>MENU</em>). Next, in line 5 a separator
+is added as subitem of <em>Menu1</em>. Hence, it is appended to <em>Button1</em>. Afterwards two sub-nodes <em>Menu1_1</em> and <em>Menu1_2</em> are added which both have
+a children respectively, called <em>Button2</em> and <em>Button3</em>.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/menu.png"><img alt="../_images/menu.png" src="../_images/menu.png" /></a>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please consider, that in line 8 an <em>argtuple</em> is appended to the function-call to <em>btn2</em>.
+Altough only one argument is passed it must be included in a tuple. Usually a tuple is created by the bace operator <em>(2)</em>. However, since only
+one argument is given, python is interpreting this brace-operator as mathematical expression and it is reduced to <em>2</em> only. Therefore, we use the square bracket in order to create a list, that is implicitely converted to a tuple.</p>
+</div>
+<p>In order to remove any menu item including its subitem, call <a class="reference internal" href="../09_reference/itom_general.html#itom.removeMenu" title="itom.removeMenu"><tt class="xref py py-func docutils literal"><span class="pre">removeMenu()</span></tt></a> with the key-word of the specific item. For instance, the
+removal of all menus created above, is done by:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">removeMenu</span><span class="p">(</span><span class="s">&quot;Menu1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The only argument of the command <a class="reference internal" href="../09_reference/itom_general.html#itom.removeMenu" title="itom.removeMenu"><tt class="xref py py-func docutils literal"><span class="pre">removeMenu()</span></tt></a> is only the key of the menu-item to delete.</p>
+</div>
+<div class="section" id="icons-in-user-defined-toolbars-and-menus">
+<span id="toolbar-icons"></span><h2>Icons in user-defined toolbars and menus<a class="headerlink" href="#icons-in-user-defined-toolbars-and-menus" title="Permalink to this headline">¶</a></h2>
+<p>Both for toolbar-buttons as well for menu-entries you can assign an arbitrary icon. Usually it is recommended to have an icon file with a size
+of 24x24 Px or below (will be automatically resized) in any image format (<em>png</em> recommended, available is <em>bmp</em>, <em>gif</em>, <em>jpg</em>, <em>tiff</em>...). The
+argument <strong>icon</strong> of the commands <a class="reference internal" href="../09_reference/itom_general.html#itom.addButton" title="itom.addButton"><tt class="xref py py-func docutils literal"><span class="pre">addButton()</span></tt></a> and <a class="reference internal" href="../09_reference/itom_general.html#itom.addMenu" title="itom.addMenu"><tt class="xref py py-func docutils literal"><span class="pre">addMenu()</span></tt></a> must be a string with the absolute or relative filename
+of the icon-file. The relative filename is always considered to be relative with respect to the current working directory, as it is printed at the
+right bottom side of <strong>itom</strong>&#8216;s main window (or use the command <a class="reference internal" href="../09_reference/itom_general.html#itom.getCurrentPath" title="itom.getCurrentPath"><tt class="xref py py-func docutils literal"><span class="pre">getCurrentPath()</span></tt></a>). Besides that, you can also pass an absolute path
+to your icon-file. The command <a class="reference internal" href="../09_reference/itom_general.html#itom.getAppPath" title="itom.getAppPath"><tt class="xref py py-func docutils literal"><span class="pre">getAppPath()</span></tt></a> returns the absolute path of the <strong>itom</strong>-application. Additionally you can use methods
+from the <strong>Python</strong>-module <a class="reference external" href="http://docs.python.org/3.2/library/os.path.html#os.path" title="(in Python v3.2)"><tt class="xref py py-mod docutils literal"><span class="pre">os.path</span></tt></a> in order to create valid absolute paths.</p>
+<p>Besides assigning an external icon-file to the <strong>icon</strong> parameter, <strong>itom</strong> also gives you access to any icons that are compiled as resources within
+the <strong>itom</strong> application. All icons, that are included in these resources are listed in the <strong>icon browser</strong>:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/iconBrowser.png"><img alt="../_images/iconBrowser.png" src="../_images/iconBrowser.png" /></a>
+</div>
+<p>The icon browser is accessible in any script window by its menu <strong>edit &gt;&gt; icon browser</strong> (or Ctrl+B). If you found your desired icon, double click
+on the entry in order to copy the appropriate string to the clipboard and paste it afterwards into your script. Resource locations always start witha colon (:) sign.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Customize the menu and toolbars of <strong>itom</strong></a><ul>
+<li><a class="reference internal" href="#add-toolbars-and-buttons">Add toolbars and buttons</a></li>
+<li><a class="reference internal" href="#create-menus">Create menus</a></li>
+<li><a class="reference internal" href="#icons-in-user-defined-toolbars-and-menus">Icons in user-defined toolbars and menus</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="extended_gui.html"
+                        title="previous chapter">Extending the user interface of <strong>itom</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="method-itom.html"
+                        title="next chapter">Show messages, input boxes and default dialogs</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/06_extended_gui/toolbar.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="method-itom.html" title="Show messages, input boxes and default dialogs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="extended_gui.html" title="Extending the user interface of itom"
+             >previous</a> |</li>
+        <li><a href="../index.html">itom</a> &raquo;</li>
+          <li><a href="../structure.html" >Structure of the manual</a> &raquo;</li>
+          <li><a href="extended_gui.html" >Extending the user interface of <strong>itom</strong></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2013, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      Last updated on Aug 22, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
