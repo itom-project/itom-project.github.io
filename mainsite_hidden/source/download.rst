@@ -15,7 +15,7 @@ that provide the plot and figure widgets of **itom**.
 	 :link: https://sourceforge.net/projects/itom/files/latest/download
 
 	.. button:: :text: ITOM 4.2.0 Portable ZIP
-	 :link: https://sourceforge.net/projects/itom/files/latest/itom4.2.0_portable_x64.zip
+	 :link: https://sourceforge.net/projects/itom/files/v4.2.0/itom4.2.0_portable.zip/download
 
 **Developer/Source Repository**
 
