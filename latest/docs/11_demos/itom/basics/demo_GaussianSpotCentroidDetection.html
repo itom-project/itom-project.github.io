@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12.1.1.5. Gaussian spot centroid detection &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="12.1.1.6. DataObject" href="demo_DataObject.html" />
+    <link rel="prev" title="12.1.1.4. Load and save dataObject" href="demo_LoadSaveDataObjects.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../demos.html">12. Demo scripts</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">12.1. itom</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#basics">12.1.1. Basics</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="demo_timerExample.html">12.1.1.1. Timer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_convertFalseColor.html">12.1.1.2. Convert falseColor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_CameraAndImages.html">12.1.1.3. Cameras and images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_LoadSaveDataObjects.html">12.1.1.4. Load and save dataObject</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">12.1.1.5. Gaussian spot centroid detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_DataObject.html">12.1.1.6. DataObject</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_measurement.html">12.1.1.7. Measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#data-processing">12.1.2. Data processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#matplotlib-embedded">12.1.3. Matplotlib embedded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#itom-apps">12.1.4. itom apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#plots">12.1.5. Plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#plugins">12.1.6. Plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pointcloud">12.1.7. PointCloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#user-interface">12.1.8. User interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#customize-itom-gui">12.1.9. Customize itom GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#user-interface-dynamic-layouts">12.1.10. User interface dynamic layouts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_packages/index.html">12.3. Python packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../demos.html"><span class="section-number">12. </span>Demo scripts</a> &raquo;</li>
+          <li><a href="../index.html"><span class="section-number">12.1. </span>itom</a> &raquo;</li>
+      <li><span class="section-number">12.1.1.5. </span>Gaussian spot centroid detection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/11_demos/itom/basics/demo_GaussianSpotCentroidDetection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-11-demos-itom-basics-demo-gaussianspotcentroiddetection-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="gaussian-spot-centroid-detection">
+<span id="sphx-glr-11-demos-itom-basics-demo-gaussianspotcentroiddetection-py"></span><h1><span class="section-number">12.1.1.5. </span>Gaussian spot centroid detection<a class="headerlink" href="#gaussian-spot-centroid-detection" title="Permalink to this heading">¶</a></h1>
+<p>This demo shows how the <code class="docutils literal notranslate"><span class="pre">itom.algorithms</span></code> can be used.
+In this example a camera <code class="docutils literal notranslate"><span class="pre">DummyGrabber</span></code> is used to acquire a moving gaussian spot.
+For the centroid detection the <code class="docutils literal notranslate"><span class="pre">itom.algorithms.centroidxy</span></code> function is used.
+Finally, this examples shows how a centroid position marker is added to the gaussian spot image.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For older <code class="docutils literal notranslate"><span class="pre">itom</span></code> versions the <code class="docutils literal notranslate"><span class="pre">itom.filter</span></code> function is used for the centroidXY algorithm.
+By using the itom.algorithms you will get the algorithms information by a pop-up during typing.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">dataIO</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">dataObject</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">plot2</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">timer</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">algorithms</span>
+
+    <span class="n">hasItomAlgo</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="nb">filter</span>
+
+    <span class="n">hasItomAlgo</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;The itom.algorithms module cannot be used because&quot;</span> <span class="s2">&quot;of an older itom version. Use the itom.filter functions.&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Constructor of the live gaussianSpot centroid detection.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GaussianSpotCentroidDetection</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor function of the class.&quot;&quot;&quot;</span>
+        <span class="c1"># first initialize the DummyGrabber with a gaussianSpot as private member</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cam</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;DummyGrabber&quot;</span><span class="p">,</span> <span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;gaussianSpot&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cam</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>
+
+        <span class="c1"># define a dataobject for the gaussienSpot image as a public member</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dObj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cam</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cam</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dObj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__defineDObj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="p">)</span>
+
+        <span class="c1"># plot index and handle as private member</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__plotIndex</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># define timer to update live image</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__liveTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__updateTimerCallBack</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;liveTimer&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="c1">###############################################################################</span>
+    <span class="c1"># Callback function to update the live image.</span>
+
+    <span class="k">def</span> <span class="nf">__updateTimerCallBack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Callback function to update the live image.&quot;&quot;&quot;</span>
+        <span class="c1"># stop live time if plot window is closed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__liveTimer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                <span class="k">return</span>
+
+        <span class="c1"># acquire and get image</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cam</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cam</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="p">)</span>
+
+        <span class="c1"># calculate the centroid of the gaussianSpot</span>
+        <span class="k">if</span> <span class="n">hasItomAlgo</span><span class="p">:</span>  <span class="c1"># new itom.algorithms with auto completion and docstring in pop-up</span>
+            <span class="p">[</span><span class="n">intensityX</span><span class="p">,</span> <span class="n">intensityY</span><span class="p">,</span> <span class="n">centroidX</span><span class="p">,</span> <span class="n">centroidY</span><span class="p">]</span> <span class="o">=</span> <span class="n">algorithms</span><span class="o">.</span><span class="n">centroidXY</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># old itom.filter</span>
+            <span class="p">[</span><span class="n">intensityX</span><span class="p">,</span> <span class="n">intensityY</span><span class="p">,</span> <span class="n">centroidX</span><span class="p">,</span> <span class="n">centroidY</span><span class="p">]</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="s2">&quot;centroidXY&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Centroid (x, y) position: </span><span class="si">{:.3f}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">, </span><span class="si">{:.3f}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">centroidX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="o">.</span><span class="n">axisUnits</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">centroidY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="o">.</span><span class="n">axisUnits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># create the centroid xy marker</span>
+        <span class="n">centroidMarker</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="n">centroidMarker</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">centroidY</span>
+        <span class="n">centroidMarker</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">centroidX</span>
+
+        <span class="c1"># plot the camera image with marked centroid position</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="p">:</span>  <span class="c1"># open figure window by first time</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__plotIndex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot2</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dObj</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;keepAspectRatio&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;colorBarVisible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;colorMap&quot;</span><span class="p">:</span> <span class="s2">&quot;viridis&quot;</span><span class="p">}</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># replot the figure</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;replot&quot;</span><span class="p">)</span>
+
+        <span class="c1"># delete markers and plot the new one</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;deleteMarkers&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">centroidMarker</span><span class="p">,</span> <span class="s2">&quot;r+25;2&quot;</span><span class="p">,</span> <span class="s2">&quot;centroid&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="c1">###############################################################################</span>
+    <span class="c1"># Function to defines the dataObject by meta information.</span>
+
+    <span class="k">def</span> <span class="nf">__defineDObj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dObj</span><span class="p">:</span> <span class="n">dataObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dataObject</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Private function to define the meta information of the image dataObject.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            image (dataObject): 2D image</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dataObject: 2D image with define meta information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># define dataobject</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">setAxisDescription</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;y axis&quot;</span><span class="p">)</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">setAxisDescription</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;x axis&quot;</span><span class="p">)</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">setAxisUnit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\xb5</span><span class="s2">m&quot;</span><span class="p">)</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">setAxisUnit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\xb5</span><span class="s2">m&quot;</span><span class="p">)</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">setAxisScale</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">10e-3</span><span class="p">)</span>  <span class="c1"># pixel pitch of 10 \xb5m</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">setAxisScale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10e-3</span><span class="p">)</span>  <span class="c1"># pixel pitch of 10 \xb5m</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">valueDescription</span> <span class="o">=</span> <span class="s2">&quot;intensity&quot;</span>
+        <span class="n">dObj</span><span class="o">.</span><span class="n">valueUnit</span> <span class="o">=</span> <span class="s2">&quot;counts&quot;</span>
+
+        <span class="k">return</span> <span class="n">dObj</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">gaussianSpotCentroid</span> <span class="o">=</span> <span class="n">GaussianSpotCentroidDetection</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../../_images/demoGaussianSpotCentroidDetection_1.png"><img alt="../../../_images/demoGaussianSpotCentroidDetection_1.png" src="../../../_images/demoGaussianSpotCentroidDetection_1.png" style="width: 100%;" /></a>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.040 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-itom-basics-demo-gaussianspotcentroiddetection-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/9c7fd77086553c53b8334da03730ca9f/demo_GaussianSpotCentroidDetection.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">demo_GaussianSpotCentroidDetection.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/17d2ae87031a58c3e46beb1607db91bc/demo_GaussianSpotCentroidDetection.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_GaussianSpotCentroidDetection.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demo_LoadSaveDataObjects.html" class="btn btn-neutral float-left" title="12.1.1.4. Load and save dataObject" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demo_DataObject.html" class="btn btn-neutral float-right" title="12.1.1.6. DataObject" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

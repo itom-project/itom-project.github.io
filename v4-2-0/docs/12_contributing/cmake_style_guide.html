@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>13.1. CMake Style Guide &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13.2. Translations" href="translations.html" />
+    <link rel="prev" title="13. Contributing" href="contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_demos/demos.html">12. Demo scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contributing.html">13. Contributing</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">13.1. CMake Style Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">13.1.1. General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#indentation">13.1.2. Indentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#naming">13.1.3. Naming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#end-commands">13.1.4. End commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">13.1.5. Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">13.1.6. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="translations.html">13.2. Translations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_docstrings.html">13.3. Python Docstrings</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="contributing.html"><span class="section-number">13. </span>Contributing</a> &raquo;</li>
+      <li><span class="section-number">13.1. </span>CMake Style Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/12_contributing/cmake_style_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cmake-style-guide">
+<span id="id1"></span><h1><span class="section-number">13.1. </span>CMake Style Guide<a class="headerlink" href="#cmake-style-guide" title="Permalink to this heading">¶</a></h1>
+<section id="general">
+<h2><span class="section-number">13.1.1. </span>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h2>
+<p>To put in in one sentence: be as careful when writing the CMake files as when you are writing C++ code.</p>
+</section>
+<section id="indentation">
+<h2><span class="section-number">13.1.2. </span>Indentation<a class="headerlink" href="#indentation" title="Permalink to this heading">¶</a></h2>
+<p>Indent all code correctly, i.e. the body of</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if/else/endif</p></li>
+<li><p>foreach/endforeach</p></li>
+<li><p>while/endwhile</p></li>
+<li><p>macro/endmacro</p></li>
+<li><p>function/endfunction</p></li>
+</ul>
+</div></blockquote>
+<p>Use spaces for indenting, 4 spaces preferably. Use the same amount of spaces for indenting as is used in the rest of the file. Do not use tabs.</p>
+</section>
+<section id="naming">
+<h2><span class="section-number">13.1.3. </span>Naming<a class="headerlink" href="#naming" title="Permalink to this heading">¶</a></h2>
+<p><strong>Functions</strong>: <em>lower_case</em> name. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">do_something(</span><span class="p">...</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Local variables</strong>: <em>lower_case</em> name. Local variables are used exclusively inside the file that contained them, and their values were simply passed as parameters to CMake functions. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">set(</span><span class="nb">some_variable</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Global variables</strong>: <em>UPPER_CASE</em> name. Global variables (can also be called “export variables”) are intended for exporting up/down-stream via the environment variable mechanism. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">set(</span><span class="no">SOME_VARIABLE</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="w"> </span><span class="no">CACHE</span><span class="w"> </span><span class="p">...</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Control statements</strong>: <em>lower_case</em> name without repeat the condition in the closing brackets. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">if(</span><span class="nb">condition</span><span class="nf">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="nf">else()</span><span class="w"> </span><span class="c"># not repeat condition</span>
+<span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="nf">endif()</span><span class="w"> </span><span class="c"># not repeat condition</span>
+</pre></div>
+</div>
+<p><strong>Operators</strong>: <em>UPPER_CASE</em> name. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">if(</span><span class="nb">condition</span><span class="w"> </span><span class="no">STREQUAL</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Directives and/or extra options</strong>:  <em>UPPER_CASE</em> name. Ex:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">do_something(</span><span class="p">...</span><span class="w"> </span><span class="no">USE_THIS</span><span class="nf">)</span><span class="w"></span>
+<span class="nf">file(</span><span class="no">COPY</span><span class="w"> </span><span class="p">...</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="end-commands">
+<h2><span class="section-number">13.1.4. </span>End commands<a class="headerlink" href="#end-commands" title="Permalink to this heading">¶</a></h2>
+<p>To make the code easier to read, use empty commands for endforeach(), endif(), endfunction(), endmacro() and endwhile(). Also, use empty else() commands.</p>
+<p>For example, do this:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">if(</span><span class="no">FOOVAR</span><span class="nf">)</span><span class="w"></span>
+<span class="w">   </span><span class="nf">some_command(</span><span class="p">...</span><span class="nf">)</span><span class="w"></span>
+<span class="nf">else()</span><span class="w"></span>
+<span class="w">   </span><span class="nf">another_command(</span><span class="p">...</span><span class="nf">)</span><span class="w"></span>
+<span class="nf">endif()</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and not this:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">if(</span><span class="no">BARVAR</span><span class="nf">)</span><span class="w"></span>
+<span class="w">   </span><span class="nf">some_other_command(</span><span class="p">...</span><span class="nf">)</span><span class="w"></span>
+<span class="nf">endif(</span><span class="no">BARVAR</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2><span class="section-number">13.1.5. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
+<p>An real-world example:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nf">function(</span><span class="nb">set_platform</span><span class="w"> </span><span class="nb">system_name</span><span class="nf">)</span><span class="w"></span>
+<span class="w">  </span><span class="nf">if(</span><span class="o">${</span><span class="nt">system_name</span><span class="o">}</span><span class="w"> </span><span class="no">MATCHES</span><span class="w"> </span><span class="s">&quot;Darwin&quot;</span><span class="nf">)</span><span class="w"></span>
+<span class="w">    </span><span class="nf">set(</span><span class="no">PLATFORM</span><span class="w"> </span><span class="s">&quot;darwin&quot;</span><span class="nf">)</span><span class="w"></span>
+<span class="w">  </span><span class="nf">elseif(</span><span class="o">${</span><span class="nt">system_name</span><span class="o">}</span><span class="w"> </span><span class="no">MATCHES</span><span class="w"> </span><span class="s">&quot;Linux&quot;</span><span class="nf">)</span><span class="w"></span>
+<span class="w">    </span><span class="nf">set(</span><span class="no">PLATFORM</span><span class="w"> </span><span class="s">&quot;linux&quot;</span><span class="nf">)</span><span class="w"></span>
+<span class="w">  </span><span class="nf">else()</span><span class="w"></span>
+<span class="w">    </span><span class="nf">set(</span><span class="no">PLATFORM</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="nf">)</span><span class="w"></span>
+<span class="w">  </span><span class="nf">endif()</span><span class="w"></span>
+<span class="nf">endfunction()</span><span class="w"></span>
+
+<span class="nf">cmake_minimum_required(</span><span class="no">VERSION</span><span class="w"> </span><span class="m">3.0</span><span class="nf">)</span><span class="w"></span>
+<span class="nf">set_platform(</span><span class="o">${</span><span class="nt">CMAKE_SYSTEM_NAME</span><span class="o">}</span><span class="nf">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2><span class="section-number">13.1.6. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<p>This style guide is mainly taken from</p>
+<ul class="simple">
+<li><p>NuPic (<a class="reference external" href="http://nupic.docs.numenta.org/1.0.2/contributing/cmake-style-guide.html">http://nupic.docs.numenta.org/1.0.2/contributing/cmake-style-guide.html</a>)</p></li>
+<li><p>KDE (<a class="reference external" href="https://community.kde.org/Policies/CMake_Coding_Style">https://community.kde.org/Policies/CMake_Coding_Style</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="contributing.html" class="btn btn-neutral float-left" title="13. Contributing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="translations.html" class="btn btn-neutral float-right" title="13.2. Translations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

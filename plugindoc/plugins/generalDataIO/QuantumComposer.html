@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.3. QuantumComposer &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.4. SuperlumBL" href="SuperlumBL.html" />
+    <link rel="prev" title="3.2. LibModBus" href="LibModBus.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../GDIO.html">3. General Data IO</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CyUSB.html">3.1. CyUSB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LibModBus.html">3.2. LibModBus</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.3. QuantumComposer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">3.3.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">3.3.2. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">3.3.3. Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-functions-exec-functions">3.3.4. Additional functions (exec functions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemplary-usage-from-python">3.3.5. Exemplary usage from Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">3.3.6. Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SuperlumBL.html">3.4. SuperlumBL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SuperlumBS.html">3.5. SuperlumBS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThorlabsFF.html">3.6. ThorlabsFF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThorlabsTCubeTEC.html">3.7. ThorlabsTCubeTEC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dispWindow.html">3.8. DispWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glDisplay.html">3.9. GLDisplay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gwInstekPSP.html">3.10. GWInstekPSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hidApi.html">3.11. HidApi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libUSB.html">3.12. LibUSB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialIO.html">3.13. SerialIO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../GDIO.html"><span class="section-number">3. </span>General Data IO</a> &raquo;</li>
+      <li><span class="section-number">3.3. </span>QuantumComposer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/plugins/generalDataIO/QuantumComposer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quantumcomposer">
+<h1><span class="section-number">3.3. </span>QuantumComposer<a class="headerlink" href="#quantumcomposer" title="Permalink to this heading"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><span>QuantumComposer</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><span>DataIO</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><span>licensed under LGPL</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Some words about supported operating systems</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Devices</strong>:</p></td>
+<td><p>Some words about supported devices</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Author</strong>:</p></td>
+<td><p><span>Johann Krauter</span></p></td>
+</tr>
+</tbody>
+</table>
+<section id="overview">
+<h2><span class="section-number">3.3.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>QuantumComposer is an itom-plugin to communicate with the pulse generator 9520 series.</p>
+<p>This plugin has been developed for the 9520 series via a RS232 interface. So you first have to create an instance of the SerialIO plugin
+which is a mandatory input argument of the QuantumComposer plugin.
+The plugin sets the right RS232 parameter during initialization.</p>
+<p>The default parameters are:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 84%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Baud Rate</p></td>
+<td><p>38400 (default for USB), 115200 (default for RS232)</p></td>
+</tr>
+<tr class="row-even"><td><p>Data Bits</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>Stop bits</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>endline</p></td>
+<td><p>rn</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Disable <strong>Echo</strong> of the system settings!</p>
+</div>
+</section>
+<section id="initialization">
+<h2><span class="section-number">3.3.2. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt><strong>serialIOInstance</strong>: Union[itom.dataIO, itom.actuator]</dt><dd><p>An opened serial port.</p>
+<p><em>Only plugin “SerialIO” is allowed</em></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>connection</strong>: str, optional</dt><dd><p>Type of connection (‘USB’, ‘RS232’). The Baud Rate for the USB connection will be set to 38400 and for RS232 to 115200.</p>
+<p><em>Match: [“USB”, “RS232”], Default: “USB”</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="parameters">
+<h2><span class="section-number">3.3.3. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<p>These parameters are available and can be used to configure the <strong>QuantumComposer</strong> instance. Many of them are directly initialized by the parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable parameters can be changed using <em>setParam</em>.</p>
+<dl>
+<dt><strong>amplitudesList</strong>: Sequence[float]</dt><dd><p>List of amplitude levels to set to the channels listed in the parameter
+channelIndexList. List must have the same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [2:0.01:20], Default: [-1000, -1000,
+-1000, -1000, -1000, -1000, -1000, -1000]</em></p>
+</dd>
+<dt><strong>burstCounter</strong>: int</dt><dd><p>Number of pulses to generate in the burst mode.</p>
+<p><em>Value range: [1, 9999999], Default: 4</em></p>
+</dd>
+<dt><strong>channelBurstCounterList</strong>: Sequence[int]</dt><dd><p>List of burst counter values for the given channels (1 - 9999999). List must have the
+same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [1, 9999999], Default: [1, 2, 3, 4, 5, 6,
+7, 8]</em></p>
+</dd>
+<dt><strong>channelGateLogicList</strong>: Sequence[str]</dt><dd><p>List of channel gate logic level (LOW, HIGH).</p>
+<p><em>Allowed number of values: 1 - 8, Value rules: Match: [“LOW”, “HIGH”], Default: [LOW,
+HIGH]</em></p>
+</dd>
+<dt><strong>channelGateModeList</strong>: Sequence[str]</dt><dd><p>List of channel gate modes (DIS = disable, PULS = pulse inhibit, OUTP = output inhibit).</p>
+<p><em>Allowed number of values: 1 - 8, Value rules: Match: [“DIS”, “PULS”, “OUTP”], Default:
+[DIS, PULS, OUTP]</em></p>
+</dd>
+<dt><strong>channelModesList</strong>: Sequence[str]</dt><dd><p>List of channel modes which are set to the output for the given channels (NORM = normal,
+SING = single shot, BURS = burst, DCYC = duty cycle).</p>
+<p><em>Allowed number of values: 1 - 8, Value rules: Match: [“NORM”, “SING”, “BURS”, “DCYC”],
+Default: [NORM, SING, BURS, DCYC]</em></p>
+</dd>
+<dt><strong>channelOffCounterList</strong>: Sequence[int]</dt><dd><p>List of pulse counter values to inhibit during the OFF cycle of the duty cycle mode for
+the given channels (1 - 9999999). List must have the same length as the parameter
+channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [1, 9999999], Default: [1, 2, 3, 4, 5, 6,
+7, 8]</em></p>
+</dd>
+<dt><strong>channelPulseCounterList</strong>: Sequence[int]</dt><dd><p>List of pulse counter values to generate during the ON cycle of the duty cycle mode for
+the given channels (1 - 9999999). List must have the same length as the parameter
+channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [1, 9999999], Default: [1, 2, 3, 4, 5, 6,
+7, 8]</em></p>
+</dd>
+<dt><strong>channelPulseWaitCounterList</strong>: Sequence[int]</dt><dd><p>List of pulse counter values to wait until enabling output of the duty cycle mode for
+the given channels (0 - 9999999). List must have the same length as the parameter
+channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [0, 9999999], Default: [1, 2, 3, 4, 5, 6,
+7, 8]</em></p>
+</dd>
+<dt><strong>counterCounts</strong>: int, read-only</dt><dd><p>Number of counts.</p>
+<p><em>Value range: [0, inf], Default: 4</em></p>
+</dd>
+<dt><strong>counterState</strong>: int</dt><dd><p>Enables (1), disables(0) the counter function.</p>
+<p><em>Value range: [0, 1], Default: 0</em></p>
+</dd>
+<dt><strong>delaysList</strong>: Sequence[float]</dt><dd><p>List of delays to set to the channels listed in the parameter channelIndexList. List
+must have the same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [-1000, 1000], Default: [-1000, -1000,
+-1000, -1000, -1000, -1000, -1000, -1000]</em></p>
+</dd>
+<dt><strong>gateLevel</strong>: float</dt><dd><p>Gate threshold in units of V with a range of 0.20V to 15.0V.</p>
+<p><em>Value range: [0.2:0.01:15], Default: 2.5</em></p>
+</dd>
+<dt><strong>gateLogic</strong>: str</dt><dd><p>Gate logic level (LOW, HIGH).</p>
+<p><em>Match: [“LOW”, “HIGH”], Default: “LOW”</em></p>
+</dd>
+<dt><strong>gateMode</strong>: str</dt><dd><p>Global gate mode of the system output. (DIS: diabled, PULS: pulse inhibit, OUTP: output
+inhibit, CHAN: channel).cycle).</p>
+<p><em>Match: [“DIS”, “PULS”, “OUTP”, “CHAN”], Default: “DIS”</em></p>
+</dd>
+<dt><strong>icLock</strong>: str</dt><dd><p>Source for the internal rate generator. System clock or external source ranging from
+10MHz to 100MHz (SYS, EXT10, EXT20, EXT25, EXT40, EXT50, EXT80, EXT100).</p>
+<p><em>Match: [“SYS”, “EXT10”, “EXT20”, “EXT25”, “EXT40”, “EXT50”, “EXT80”, “EXT100”], Default:
+“SYS”</em></p>
+</dd>
+<dt><strong>manufacturer</strong>: str, read-only</dt><dd><p>Manufacturer identification.</p>
+<p><em>Match: “Device parameter”, Default: “QC”</em></p>
+</dd>
+<dt><strong>mode</strong>: str</dt><dd><p>Mode of the system output. (NORM: normal, SING: single shot, BURS: burst, DCYC: duty
+cycle).</p>
+<p><em>Match: [“NORM”, “SING”, “BURS”, “DCYC”], Default: “NORM”</em></p>
+</dd>
+<dt><strong>model</strong>: str, read-only</dt><dd><p>Model identification.</p>
+<p><em>Match: “Device parameter”, Default: “9528”</em></p>
+</dd>
+<dt><strong>muxsList</strong>: Sequence[int]</dt><dd><p>List of timers which are enabled as output for the given channel. List must have the
+same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [0, 255], Default: [1, 2, 3, 4, 5, 6, 7,
+8]</em></p>
+</dd>
+<dt><strong>name</strong>: str, read-only</dt><dd><p>Plugin name.</p>
+<p><em>Match: “General”, Default: “QuantumComposer”</em></p>
+</dd>
+<dt><strong>ocLock</strong>: str</dt><dd><p>External clock output. T0 pulse or 50% duty cycle TTL output from 10MHz to 100MHz (T0,
+10, 11, 12, 14, 16, 20, 25, 33, 50, 100).</p>
+<p><em>Match: [“T0”, “10”, “11”, “12”, “14”, “16”, “20”, “25”, “33”, “50”, “100”], Default:
+“T0”</em></p>
+</dd>
+<dt><strong>offCounter</strong>: int</dt><dd><p>Number of pulses to inhibit output during the off cycle of the Duty Cycle mode.</p>
+<p><em>Value range: [1, 9999999], Default: 2</em></p>
+</dd>
+<dt><strong>outputModesList</strong>: Sequence[str]</dt><dd><p>List of output modes which are set to the output for the given channels (TTL = TTL/CMOS,
+ADJ = adjustable).</p>
+<p><em>Allowed number of values: 1 - 8, Value rules: Match: [“TTL”, “ADJ”], Default: [TTL, ADJ]</em></p>
+</dd>
+<dt><strong>period</strong>: float</dt><dd><p>T0 period in units of seconds (100ns - 5000s).</p>
+<p><em>Value range: [6e-08:1e-08:5000], Default: 0.0001</em></p>
+</dd>
+<dt><strong>polaritiesList</strong>: Sequence[str]</dt><dd><p>List of polarities which are set to the output for the given channels (NORM = normal,
+COMP = complement, INV = inverted).</p>
+<p><em>Allowed number of values: 1 - 8, Value rules: Match: [“NORM”, “COMP”, “INV”], Default:
+[NORM, COMP, INV]</em></p>
+</dd>
+<dt><strong>pulseCounter</strong>: int</dt><dd><p>Number of pulses to inhibit output during the off cycle of the Duty Cycle mode.</p>
+<p><em>Value range: [1, 9999999], Default: 3</em></p>
+</dd>
+<dt><strong>requestTimeout</strong>: int</dt><dd><p>Request timeout in ms for the SerialIO interface.</p>
+<p><em>Value range: [0, inf], Default: 500</em></p>
+</dd>
+<dt><strong>serialNumber</strong>: str, read-only</dt><dd><p>Serial number.</p>
+<p><em>Match: “Device parameter”, Default: “06312”</em></p>
+</dd>
+<dt><strong>state</strong>: int</dt><dd><p>Enables (1), disables (0) the output for all channels. Command is the same as pressing
+the RUN/STOP button.</p>
+<p><em>Value range: [0, 1], Default: 1</em></p>
+</dd>
+<dt><strong>statesList</strong>: Sequence[int]</dt><dd><p>List of states to enalbe/disable channels listed in the parameter channelIndexList. List
+must have the same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [0, 1], Default: [0, 0, 1, 1, 1, 1, 1, 1]</em></p>
+</dd>
+<dt><strong>syncsList</strong>: Sequence[int]</dt><dd><p>List of channels to sync with the channels listed in the parameter channelIndexList.
+List must have the same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [1, 8], Default: [1, 2, 3, 4, 5, 6, 7, 8]</em></p>
+</dd>
+<dt><strong>triggerEdge</strong>: str</dt><dd><p>Trigger edge to use as the trigger signal (RIS: rising, FALL: falling).</p>
+<p><em>Match: [“RIS”, “FALL”], Default: “RIS”</em></p>
+</dd>
+<dt><strong>triggerLevel</strong>: float</dt><dd><p>Trigger threshold in units of V with a range of 0.20V to 15.0V.</p>
+<p><em>Value range: [0.2:0.01:15], Default: 2.5</em></p>
+</dd>
+<dt><strong>triggerMode</strong>: str</dt><dd><p>Trigger mode (DIS: disabled, TRIG: triggered, enabled).</p>
+<p><em>Match: [“DIS”, “TRIG”], Default: “DIS”</em></p>
+</dd>
+<dt><strong>version</strong>: str, read-only</dt><dd><p>Version number.</p>
+<p><em>Match: “Device parameter”, Default: “2.4.3-2.0.11”</em></p>
+</dd>
+<dt><strong>widthsList</strong>: Sequence[float]</dt><dd><p>List of widths to set to the channels listed in the parameter channelIndexList. List
+must have the same length as the parameter channelIndexList.</p>
+<p><em>Allowed number of values: 1 - 8, Value range: [2e-09, 1000], Default: [2e-09, 2e-09,
+2e-09, 2e-09, 2e-09, 2e-09, 2e-09, 2e-09]</em></p>
+</dd>
+</dl>
+</section>
+<section id="additional-functions-exec-functions">
+<h2><span class="section-number">3.3.4. </span>Additional functions (exec functions)<a class="headerlink" href="#additional-functions-exec-functions" title="Permalink to this heading"></a></h2>
+<p>By using the following execFunctions you set the channels parameter by giving a list of channel number and a list of parameter values of same list length.
+The plugin execFunctions are:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="instance.exec">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelAdjustableAmplitude'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitudesList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#instance.exec" title="Permalink to this definition"></a></dt>
+<dd><p>Set the adjustable amplitude of channel output level of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>amplitudesList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>]</em>) – List of amplitude levels to set to the channels listed in the parameter channelIndexList. List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelBurstCounter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelBurstCounterList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel burst counter for the burst mode of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelBurstCounterList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of burst counter values for the given channels (1 - 9999999). List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelDelays'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delaysList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
+<dd><p>Set the pulse delays of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>delaysList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>]</em>) – List of delays to set to the channels listed in the parameter channelIndexList. List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelGatesLogicLevel'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelGateLogicList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel gates logic level of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelGateLogicList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>]</em>) – List of channel gate logic level (LOW, HIGH).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelGatesModes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelGateModeList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel gates mode of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelGateModeList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>]</em>) – List of channel gate modes (DIS = disable, PULS = pulse inhibit, OUTP = output inhibit).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelModes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelModesList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel mode of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelModesList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>]</em>) – List of channel modes which are set to the output for the given channels (NORM = normal, SING = single shot, BURS = burst, DCYC = duty cycle).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelMuxs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muxsList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id5" title="Permalink to this definition"></a></dt>
+<dd><p>Set which timers are enabled as output for the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>muxsList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of timers which are enabled as output for the given channel. List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelOffCounter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelOffCounterList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id6" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel pulse counter during the OFF cycles for the duty cycle modes of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelOffCounterList</strong> – List of pulse counter values to inhibit during the OFF cycle of the duty cycle mode for the given channels (1 - 9999999). List must have the same length as the parame</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="simple">
+<dt>… ter channelIndexList.</dt><dd><dl class="field-list simple">
+<dt class="field-odd">type channelOffCounterList</dt>
+<dd class="field-odd"><p>Sequence[int]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelOutputModes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputModesList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id7" title="Permalink to this definition"></a></dt>
+<dd><p>Set the output amplitude mode of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>outputModesList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>]</em>) – List of output modes which are set to the output for the given channels (TTL = TTL/CMOS, ADJ = adjustable).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelOutputState'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statesList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id8" title="Permalink to this definition"></a></dt>
+<dd><p>Enables/Disables the output state of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>statesList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of states to enalbe/disable channels listed in the parameter channelIndexList. List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelPolarities'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polaritiesList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id9" title="Permalink to this definition"></a></dt>
+<dd><p>Set the polarity of the pulse for the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>polaritiesList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>]</em>) – List of polarities which are set to the output for the given channels (NORM = normal, COMP = complement, INV = inverted).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelPulseCounter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelPulseCounterList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id10" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel pulse counter during the ON cycles for the duty cycle modes of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelPulseCounterList</strong> – List of pulse counter values to generate during the ON cycle of the duty cycle mode for the given channels (1 - 9999999). List must have the same length as the para</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="simple">
+<dt>… meter channelIndexList.</dt><dd><dl class="field-list simple">
+<dt class="field-odd">type channelPulseCounterList</dt>
+<dd class="field-odd"><p>Sequence[int]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelSyncs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">syncsList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id11" title="Permalink to this definition"></a></dt>
+<dd><p>Set the sync channels of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>syncsList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channels to sync with the channels listed in the parameter channelIndexList. List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelWaitCounter'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelPulseWaitCounterList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id12" title="Permalink to this definition"></a></dt>
+<dd><p>Set the channel pulse counter to wait until enabling output for the duty cycle modes of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>channelPulseWaitCounterList</strong> – List of pulse counter values to wait until enabling output of the duty cycle mode for the given channels (0 - 9999999). List must have the same length as the pa</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="simple">
+<dt>… rameter channelIndexList.</dt><dd><dl class="field-list simple">
+<dt class="field-odd">type channelPulseWaitCounterList</dt>
+<dd class="field-odd"><p>Sequence[int]</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'setChannelWidths'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channelIndexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widthsList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id13" title="Permalink to this definition"></a></dt>
+<dd><p>Set the pulse width of the given channels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channelIndexList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>]</em>) – List of channel indices which output should be enabled/disabled (ChA = 1, ChB = 2, …).</p></li>
+<li><p><strong>widthsList</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>]</em>) – List of widths to set to the channels listed in the parameter channelIndexList. List must have the same length as the parameter channelIndexList.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="exemplary-usage-from-python">
+<h2><span class="section-number">3.3.5. </span>Exemplary usage from Python<a class="headerlink" href="#exemplary-usage-from-python" title="Permalink to this heading"></a></h2>
+<p>In the following examples, it is shown how to use this Plugin.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">dataIO</span>
+
+<span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">38400</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># first create a &quot;SerialIO&quot; instance</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;QuantumComposer&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">,</span> <span class="s2">&quot;USB&quot;</span><span class="p">)</span>  <span class="c1"># give it the &quot;QuantumComposer&quot; plugin</span>
+</pre></div>
+</div>
+<p>The system parameter are set/get by the default <code class="docutils literal notranslate"><span class="pre">setParam</span></code> and <code class="docutils literal notranslate"><span class="pre">getParam</span></code> methods.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="s2">&quot;BURS&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;gateMode&quot;</span><span class="p">,</span> <span class="s2">&quot;PULS&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;triggerEdge&quot;</span><span class="p">,</span> <span class="s2">&quot;RIS&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;triggerLevel&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;gateLogic&quot;</span><span class="p">,</span> <span class="s2">&quot;LOW&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;gateLevel&quot;</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;triggerMode&quot;</span><span class="p">,</span> <span class="s2">&quot;DIS&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;burstCounter&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;pulseCounter&quot;</span><span class="p">,</span> <span class="mi">3453</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;offCounter&quot;</span><span class="p">,</span> <span class="mi">75645</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;icLock&quot;</span><span class="p">,</span> <span class="s2">&quot;SYS&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;ocLock&quot;</span><span class="p">,</span> <span class="s2">&quot;16&quot;</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="mf">6e-7</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;counterState&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;counterCounts&quot;</span><span class="p">)</span>
+
+<span class="c1"># get</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">)</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>The channel specific parameter are set by the <code class="docutils literal notranslate"><span class="pre">exec</span></code> method of the plugin.
+For each parameter you must give the method a list of <code class="docutils literal notranslate"><span class="pre">channels</span></code> you want to change
+and a list of values of same list length.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelWidths&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.000000002</span><span class="p">,</span> <span class="mf">0.000000002</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelDelays&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.000002</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelSyncs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelMuxs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelPolarities&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;NORM&quot;</span><span class="p">,</span><span class="s2">&quot;COMP&quot;</span><span class="p">,</span> <span class="s2">&quot;INV&quot;</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelOutputModes&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;TTL&quot;</span><span class="p">,</span> <span class="s2">&quot;ADJ&quot;</span><span class="p">,</span> <span class="s2">&quot;TTL&quot;</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelAdjustableAmplitude&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">13.8</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelModes&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;SING&quot;</span><span class="p">,</span> <span class="s2">&quot;BURS&quot;</span><span class="p">,</span> <span class="s2">&quot;DCYC&quot;</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelBurstCounter&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span><span class="mi">99</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelPulseCounter&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span><span class="mi">99</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelOffCounter&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span><span class="mi">99</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelWaitCounter&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span><span class="mi">99</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelGatesModes&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;DIS&quot;</span><span class="p">,</span> <span class="s2">&quot;PULS&quot;</span><span class="p">,</span> <span class="s2">&quot;OUTP&quot;</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;setChannelGatesLogicLevel&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;LOW&quot;</span><span class="p">,</span> <span class="s2">&quot;HIGH&quot;</span><span class="p">,</span> <span class="s2">&quot;LOW&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The channel specific parameter are get by the <code class="docutils literal notranslate"><span class="pre">getParam</span></code> method, too.</p>
+</section>
+<section id="changelog">
+<h2><span class="section-number">3.3.6. </span>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LibModBus.html" class="btn btn-neutral float-left" title="3.2. LibModBus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SuperlumBL.html" class="btn btn-neutral float-right" title="3.4. SuperlumBL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

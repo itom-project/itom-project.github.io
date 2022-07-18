@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12.3. Python packages &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="12.3.1.1. Fill features" href="matplotlib/demo_fill_features.html" />
+    <link rel="prev" title="12.2.6. Basic operations" href="../python/demo_operations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../demos.html">12. Demo scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../itom/index.html">12.1. itom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/index.html">12.2. Python</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">12.3. Python packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matplotlib">12.3.1. Matplotlib</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_fill_features.html">12.3.1.1. Fill features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_multicursor.html">12.3.1.2. Multi cursor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_matplotlibAnimation1d.html">12.3.1.3. 1D animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_polar.html">12.3.1.4. Polar axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_streamplot_features.html">12.3.1.5. Streamplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_surface3d.html">12.3.1.6. Surface 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_scatter3d.html">12.3.1.7. Scatter 3D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_text_fontdict.html">12.3.1.8. Text fontdict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_func_animation.html">12.3.1.9. Function animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_hist2d_size_control.html">12.3.1.10. Histogram 2D size control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_errorbar_demo_features.html">12.3.1.11. Errorbar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_matplotlib_events.html">12.3.1.12. Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_matplotlibAnimation2d.html">12.3.1.13. 2D animation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_buttons.html">12.3.1.14. Buttons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_colorbar_tick_labelling_demo.html">12.3.1.15. Colorbar tick labelling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_log.html">12.3.1.16. Logarithmus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_dateaxis.html">12.3.1.17. Date axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_ggplot.html">12.3.1.18. GGPlot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_slider.html">12.3.1.19. Slider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_oscilloscope.html">12.3.1.20. Oscilloscope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_tex.html">12.3.1.21. Tex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/toolmanager.html">12.3.1.22. Toolmanager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matplotlib/demo_path_editor.html">12.3.1.23. Path editor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numpy">12.3.2. Numpy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_shape.html">12.3.2.1. Shape manipulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_splitting.html">12.3.2.2. Splitting array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_indexing.html">12.3.2.3. Indexing, Slicing and Iterating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_copy.html">12.3.2.4. Copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_stacking.html">12.3.2.5. Stacking arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_create.html">12.3.2.6. Create array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_operations.html">12.3.2.7. Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_NpFFT_PyFFTW.html">12.3.2.8. Numpy FFT, PyFFTW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="numpy/demo_rank_nullspace.html">12.3.2.9. Rank and nullspace demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#others">12.3.3. others</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="others/demoPyro4.html">12.3.3.1. Pyro4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="others/demoMatlabEngine.html">12.3.3.2. Matlab engine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pandas">12.3.4. Pandas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_plotting.html">12.3.4.1. Plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_missing.html">12.3.4.2. Missing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_categoricals.html">12.3.4.3. Categoricals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_in_out.html">12.3.4.4. Getting data in/out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_operations.html">12.3.4.5. Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_grouping.html">12.3.4.6. Grouping data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_merge.html">12.3.4.7. Merge data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_create.html">12.3.4.8. Create and view an object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_selection.html">12.3.4.9. Selection of data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas/demo_reshaping.html">12.3.4.10. Reshaping data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parallelization-and-threading">12.3.5. Parallelization and Threading</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="parallelization_threading/demoworkerThread.html">12.3.5.1. Worker thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parallelization_threading/demo_ThreadPoolExecutor.html">12.3.5.2. Thread pool executor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="parallelization_threading/demoMultiProcessing.html">12.3.5.3. Multi processing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#plotly">12.3.6. Plotly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plotly/demo_bar.html">12.3.6.1. Simple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plotly/itomGUI.html">12.3.6.2. GUI integrated</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pytest">12.3.7. PyTest</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyTest/runPyTest.html">12.3.7.1. Pytest</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scikit-learn">12.3.8. Scikit-learn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scikit-learn/demo_featureSelection.html">12.3.8.1. Recursive feature elimination</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scikit-learn/demo_kMeansClustering.html">12.3.8.2. K-Means clustering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scikit-learn/demo_componentRegression.html">12.3.8.3. Principal Component Regression vs Partial Least Squares Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scipy">12.3.9. Scipy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="scipy/demo_scipy-signal-correlate.html">12.3.9.1. Signal correlation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scipy/demo_nearest_neighbors.html">12.3.9.2. Nearest neighbors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="scipy/demo_Scipy.html">12.3.9.3. Scipy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#seaborn">12.3.10. Seaborn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="seaborn/demo_timeseries.html">12.3.10.1. Timerseries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seaborn/demo_jointKernel.html">12.3.10.2. Joint kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seaborn/demo_scatterplot.html">12.3.10.3. Scatterplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seaborn/demo_violinplots.html">12.3.10.4. Violinplots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seaborn/demo_linearRegression.html">12.3.10.5. Linear regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="seaborn/demo_bivariate.html">12.3.10.6. Bivariate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../demos.html"><span class="section-number">12. </span>Demo scripts</a> &raquo;</li>
+      <li><span class="section-number">12.3. </span>Python packages</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/11_demos/python_packages/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-packages">
+<span id="gallery-python-packages-label"></span><span id="sphx-glr-11-demos-python-packages"></span><h1><span class="section-number">12.3. </span>Python packages<a class="headerlink" href="#python-packages" title="Permalink to this heading">¶</a></h1>
+<p>This chapter contains further <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">packages</span></code> demos to show how <code class="docutils literal notranslate"><span class="pre">itom</span></code> is used as a general python <code class="docutils literal notranslate"><span class="pre">IDE</span></code>. Click on any image to see the full script documentation.</p>
+<div class="sphx-glr-clear"></div><section id="matplotlib">
+<span id="gallery-matplotlib-label"></span><span id="sphx-glr-11-demos-python-packages-matplotlib"></span><h2><span class="section-number">12.3.1. </span>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Demo of the fill function with a few features."><figure class="align-default" id="id1">
+<img alt="Fill features" src="../../_images/sphx_glr_demo_fill_features_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_fill_features.html#sphx-glr-11-demos-python-packages-matplotlib-demo-fill-features-py"><span class="std std-ref">Fill features</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Multi cursor"><figure class="align-default" id="id2">
+<img alt="Multi cursor" src="../../_images/sphx_glr_demo_multicursor_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_multicursor.html#sphx-glr-11-demos-python-packages-matplotlib-demo-multicursor-py"><span class="std std-ref">Multi cursor</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how matplotlib can be used to create  animated movie and export these..."><figure class="align-default" id="id3">
+<img alt="1D animation" src="../../_images/sphx_glr_demo_matplotlibAnimation1d_thumb.gif" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_matplotlibAnimation1d.html#sphx-glr-11-demos-python-packages-matplotlib-demo-matplotlibanimation1d-py"><span class="std std-ref">1D animation</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Demo of a line plot on a polar axis."><figure class="align-default" id="id4">
+<img alt="Polar axis" src="../../_images/sphx_glr_demo_polar_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_polar.html#sphx-glr-11-demos-python-packages-matplotlib-demo-polar-py"><span class="std std-ref">Polar axis</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Demo of the streamplot function."><figure class="align-default" id="id5">
+<img alt="Streamplot" src="../../_images/sphx_glr_demo_streamplot_features_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_streamplot_features.html#sphx-glr-11-demos-python-packages-matplotlib-demo-streamplot-features-py"><span class="std std-ref">Streamplot</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Surface 3D"><figure class="align-default" id="id6">
+<img alt="Surface 3D" src="../../_images/sphx_glr_demo_surface3d_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_surface3d.html#sphx-glr-11-demos-python-packages-matplotlib-demo-surface3d-py"><span class="std std-ref">Surface 3D</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Scatter 3D"><figure class="align-default" id="id7">
+<img alt="Scatter 3D" src="../../_images/sphx_glr_demo_scatter3d_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_scatter3d.html#sphx-glr-11-demos-python-packages-matplotlib-demo-scatter3d-py"><span class="std std-ref">Scatter 3D</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Demo using fontdict to control style of text and labels."><figure class="align-default" id="id8">
+<img alt="Text fontdict" src="../../_images/sphx_glr_demo_text_fontdict_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_text_fontdict.html#sphx-glr-11-demos-python-packages-matplotlib-demo-text-fontdict-py"><span class="std std-ref">Text fontdict</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Function animation"><figure class="align-default" id="id9">
+<img alt="Function animation" src="../../_images/sphx_glr_demo_func_animation_thumb.gif" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_func_animation.html#sphx-glr-11-demos-python-packages-matplotlib-demo-func-animation-py"><span class="std std-ref">Function animation</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Histogram 2D size control"><figure class="align-default" id="id10">
+<img alt="Histogram 2D size control" src="../../_images/sphx_glr_demo_hist2d_size_control_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_hist2d_size_control.html#sphx-glr-11-demos-python-packages-matplotlib-demo-hist2d-size-control-py"><span class="std std-ref">Histogram 2D size control</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Demo of errorbar function with different ways of specifying error bars."><figure class="align-default" id="id11">
+<img alt="Errorbar" src="../../_images/sphx_glr_demo_errorbar_demo_features_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_errorbar_demo_features.html#sphx-glr-11-demos-python-packages-matplotlib-demo-errorbar-demo-features-py"><span class="std std-ref">Errorbar</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Events"><figure class="align-default" id="id12">
+<img alt="Events" src="../../_images/sphx_glr_demo_matplotlib_events_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_matplotlib_events.html#sphx-glr-11-demos-python-packages-matplotlib-demo-matplotlib-events-py"><span class="std std-ref">Events</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how matplotlib can be used to create  animated movie and export these..."><figure class="align-default" id="id13">
+<img alt="2D animation" src="../../_images/sphx_glr_demo_matplotlibAnimation2d_thumb.gif" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_matplotlibAnimation2d.html#sphx-glr-11-demos-python-packages-matplotlib-demo-matplotlibanimation2d-py"><span class="std std-ref">2D animation</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Buttons"><figure class="align-default" id="id14">
+<img alt="Buttons" src="../../_images/sphx_glr_demo_buttons_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_buttons.html#sphx-glr-11-demos-python-packages-matplotlib-demo-buttons-py"><span class="std std-ref">Buttons</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Produce custom labelling for a colorbar."><figure class="align-default" id="id15">
+<img alt="Colorbar tick labelling" src="../../_images/sphx_glr_demo_colorbar_tick_labelling_demo_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_colorbar_tick_labelling_demo.html#sphx-glr-11-demos-python-packages-matplotlib-demo-colorbar-tick-labelling-demo-py"><span class="std std-ref">Colorbar tick labelling</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Logarithmus"><figure class="align-default" id="id16">
+<img alt="Logarithmus" src="../../_images/sphx_glr_demo_log_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_log.html#sphx-glr-11-demos-python-packages-matplotlib-demo-log-py"><span class="std std-ref">Logarithmus</span></a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Load a numpy record array from yahoo csv data with fields date, open, close, volume, adj_close ..."><figure class="align-default" id="id17">
+<img alt="Date axis" src="../../_images/sphx_glr_demo_dateaxis_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_dateaxis.html#sphx-glr-11-demos-python-packages-matplotlib-demo-dateaxis-py"><span class="std std-ref">Date axis</span></a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the ggplot style, which adjusts the style to emulate ggplot_ (a popul..."><figure class="align-default" id="id18">
+<img alt="GGPlot" src="../../_images/sphx_glr_demo_ggplot_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_ggplot.html#sphx-glr-11-demos-python-packages-matplotlib-demo-ggplot-py"><span class="std std-ref">GGPlot</span></a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Slider"><figure class="align-default" id="id19">
+<img alt="Slider" src="../../_images/sphx_glr_demo_slider_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_slider.html#sphx-glr-11-demos-python-packages-matplotlib-demo-slider-py"><span class="std std-ref">Slider</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Oscilloscope"><figure class="align-default" id="id20">
+<img alt="Oscilloscope" src="../../_images/sphx_glr_demo_oscilloscope_thumb.gif" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_oscilloscope.html#sphx-glr-11-demos-python-packages-matplotlib-demo-oscilloscope-py"><span class="std std-ref">Oscilloscope</span></a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Tex"><figure class="align-default" id="id21">
+<img alt="Tex" src="../../_images/sphx_glr_demo_tex_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_tex.html#sphx-glr-11-demos-python-packages-matplotlib-demo-tex-py"><span class="std std-ref">Tex</span></a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Toolmanager"><figure class="align-default" id="id22">
+<img alt="Toolmanager" src="../../_images/sphx_glr_toolmanager_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/toolmanager.html#sphx-glr-11-demos-python-packages-matplotlib-toolmanager-py"><span class="std std-ref">Toolmanager</span></a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Path editor"><figure class="align-default" id="id23">
+<img alt="Path editor" src="../../_images/sphx_glr_demo_path_editor_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="matplotlib/demo_path_editor.html#sphx-glr-11-demos-python-packages-matplotlib-demo-path-editor-py"><span class="std std-ref">Path editor</span></a></span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="numpy">
+<span id="gallery-numpy-label"></span><span id="sphx-glr-11-demos-python-packages-numpy"></span><h2><span class="section-number">12.3.2. </span>Numpy<a class="headerlink" href="#numpy" title="Permalink to this heading">¶</a></h2>
+<p>This demos shows the features of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> (<a class="reference external" href="https://numpy.org/doc/stable/user/quickstart.html">https://numpy.org/doc/stable/user/quickstart.html</a>).</p>
+<div class="sphx-glr-thumbcontainer" tooltip="Shape manipulation"><figure class="align-default" id="id24">
+<img alt="Shape manipulation" src="../../_images/sphx_glr_demo_shape_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_shape.html#sphx-glr-11-demos-python-packages-numpy-demo-shape-py"><span class="std std-ref">Shape manipulation</span></a></span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Splitting array"><figure class="align-default" id="id25">
+<img alt="Splitting array" src="../../_images/sphx_glr_demo_splitting_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_splitting.html#sphx-glr-11-demos-python-packages-numpy-demo-splitting-py"><span class="std std-ref">Splitting array</span></a></span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Indexing, Slicing and Iterating"><figure class="align-default" id="id26">
+<img alt="Indexing, Slicing and Iterating" src="../../_images/sphx_glr_demo_indexing_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_indexing.html#sphx-glr-11-demos-python-packages-numpy-demo-indexing-py"><span class="std std-ref">Indexing, Slicing and Iterating</span></a></span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Copy"><figure class="align-default" id="id27">
+<img alt="Copy" src="../../_images/sphx_glr_demo_copy_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_copy.html#sphx-glr-11-demos-python-packages-numpy-demo-copy-py"><span class="std std-ref">Copy</span></a></span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Stacking arrays"><figure class="align-default" id="id28">
+<img alt="Stacking arrays" src="../../_images/sphx_glr_demo_stacking_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_stacking.html#sphx-glr-11-demos-python-packages-numpy-demo-stacking-py"><span class="std std-ref">Stacking arrays</span></a></span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This demo shows the features of numpy (https://numpy.org/doc/stable/user/quickstart.html). "><figure class="align-default" id="id29">
+<img alt="Create array" src="../../_images/sphx_glr_demo_create_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_create.html#sphx-glr-11-demos-python-packages-numpy-demo-create-py"><span class="std std-ref">Create array</span></a></span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Operations"><figure class="align-default" id="id30">
+<img alt="Operations" src="../../_images/sphx_glr_demo_operations_thumb1.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_operations.html#sphx-glr-11-demos-python-packages-numpy-demo-operations-py"><span class="std std-ref">Operations</span></a></span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the FFT or IFFT from Numpy. If possible the package PyFFTW is sea..."><figure class="align-default" id="id31">
+<img alt="Numpy FFT, PyFFTW" src="../../_images/sphx_glr_demo_NpFFT_PyFFTW_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_NpFFT_PyFFTW.html#sphx-glr-11-demos-python-packages-numpy-demo-npfft-pyfftw-py"><span class="std std-ref">Numpy FFT, PyFFTW</span></a></span><a class="headerlink" href="#id31" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This demo shows an example on how to use numpy in itom."><figure class="align-default" id="id32">
+<img alt="Rank and nullspace demo" src="../../_images/sphx_glr_demo_rank_nullspace_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="numpy/demo_rank_nullspace.html#sphx-glr-11-demos-python-packages-numpy-demo-rank-nullspace-py"><span class="std std-ref">Rank and nullspace demo</span></a></span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="others">
+<span id="gallery-others-label"></span><span id="sphx-glr-11-demos-python-packages-others"></span><h2><span class="section-number">12.3.3. </span>others<a class="headerlink" href="#others" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This demo shows an example on how to the Pyro4 package."><figure class="align-default" id="id33">
+<img alt="Pyro4" src="../../_images/sphx_glr_demoPyro4_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="others/demoPyro4.html#sphx-glr-11-demos-python-packages-others-demopyro4-py"><span class="std std-ref">Pyro4</span></a></span><a class="headerlink" href="#id33" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This demo shows how to communicate with the Matlab engine."><figure class="align-default" id="id34">
+<img alt="Matlab engine" src="../../_images/sphx_glr_demoMatlabEngine_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="others/demoMatlabEngine.html#sphx-glr-11-demos-python-packages-others-demomatlabengine-py"><span class="std std-ref">Matlab engine</span></a></span><a class="headerlink" href="#id34" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="pandas">
+<span id="gallery-pandas-label"></span><span id="sphx-glr-11-demos-python-packages-pandas"></span><h2><span class="section-number">12.3.4. </span>Pandas<a class="headerlink" href="#pandas" title="Permalink to this heading">¶</a></h2>
+<p>This demos show the basics feature of <code class="docutils literal notranslate"><span class="pre">pandas</span></code> (copied from <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/10min.html">https://pandas.pydata.org/docs/user_guide/10min.html</a>).</p>
+<div class="sphx-glr-thumbcontainer" tooltip="Plotting"><figure class="align-default" id="id35">
+<img alt="Plotting" src="../../_images/sphx_glr_demo_plotting_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_plotting.html#sphx-glr-11-demos-python-packages-pandas-demo-plotting-py"><span class="std std-ref">Plotting</span></a></span><a class="headerlink" href="#id35" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Missing data"><figure class="align-default" id="id36">
+<img alt="Missing data" src="../../_images/sphx_glr_demo_missing_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_missing.html#sphx-glr-11-demos-python-packages-pandas-demo-missing-py"><span class="std std-ref">Missing data</span></a></span><a class="headerlink" href="#id36" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Categoricals"><figure class="align-default" id="id37">
+<img alt="Categoricals" src="../../_images/sphx_glr_demo_categoricals_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_categoricals.html#sphx-glr-11-demos-python-packages-pandas-demo-categoricals-py"><span class="std std-ref">Categoricals</span></a></span><a class="headerlink" href="#id37" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Getting data in/out"><figure class="align-default" id="id38">
+<img alt="Getting data in/out" src="../../_images/sphx_glr_demo_in_out_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_in_out.html#sphx-glr-11-demos-python-packages-pandas-demo-in-out-py"><span class="std std-ref">Getting data in/out</span></a></span><a class="headerlink" href="#id38" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Operations"><figure class="align-default" id="id39">
+<img alt="Operations" src="../../_images/sphx_glr_demo_operations_thumb2.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_operations.html#sphx-glr-11-demos-python-packages-pandas-demo-operations-py"><span class="std std-ref">Operations</span></a></span><a class="headerlink" href="#id39" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Grouping data"><figure class="align-default" id="id40">
+<img alt="Grouping data" src="../../_images/sphx_glr_demo_grouping_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_grouping.html#sphx-glr-11-demos-python-packages-pandas-demo-grouping-py"><span class="std std-ref">Grouping data</span></a></span><a class="headerlink" href="#id40" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Merge data"><figure class="align-default" id="id41">
+<img alt="Merge data" src="../../_images/sphx_glr_demo_merge_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_merge.html#sphx-glr-11-demos-python-packages-pandas-demo-merge-py"><span class="std std-ref">Merge data</span></a></span><a class="headerlink" href="#id41" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Create and view an object"><figure class="align-default" id="id42">
+<img alt="Create and view an object" src="../../_images/sphx_glr_demo_create_thumb1.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_create.html#sphx-glr-11-demos-python-packages-pandas-demo-create-py"><span class="std std-ref">Create and view an object</span></a></span><a class="headerlink" href="#id42" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Selection of data"><figure class="align-default" id="id43">
+<img alt="Selection of data" src="../../_images/sphx_glr_demo_selection_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_selection.html#sphx-glr-11-demos-python-packages-pandas-demo-selection-py"><span class="std std-ref">Selection of data</span></a></span><a class="headerlink" href="#id43" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Reshaping data"><figure class="align-default" id="id44">
+<img alt="Reshaping data" src="../../_images/sphx_glr_demo_reshaping_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pandas/demo_reshaping.html#sphx-glr-11-demos-python-packages-pandas-demo-reshaping-py"><span class="std std-ref">Reshaping data</span></a></span><a class="headerlink" href="#id44" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="parallelization-and-threading">
+<span id="gallery-parallelization-label"></span><span id="sphx-glr-11-demos-python-packages-parallelization-threading"></span><h2><span class="section-number">12.3.5. </span>Parallelization and Threading<a class="headerlink" href="#parallelization-and-threading" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This example shows how to use the Python threading package."><figure class="align-default" id="id45">
+<img alt="Worker thread" src="../../_images/sphx_glr_demoworkerThread_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="parallelization_threading/demoworkerThread.html#sphx-glr-11-demos-python-packages-parallelization-threading-demoworkerthread-py"><span class="std std-ref">Worker thread</span></a></span><a class="headerlink" href="#id45" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Asyncio/``concurrent`` heavily changed from python 3.4 to 3.7, better read the docs and do some..."><figure class="align-default" id="id46">
+<img alt="Thread pool executor" src="../../_images/sphx_glr_demo_ThreadPoolExecutor_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="parallelization_threading/demo_ThreadPoolExecutor.html#sphx-glr-11-demos-python-packages-parallelization-threading-demo-threadpoolexecutor-py"><span class="std std-ref">Thread pool executor</span></a></span><a class="headerlink" href="#id46" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is a modified example from the python documentation. The only difference is the set_execut..."><figure class="align-default" id="id47">
+<img alt="Multi processing" src="../../_images/sphx_glr_demoMultiProcessing_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="parallelization_threading/demoMultiProcessing.html#sphx-glr-11-demos-python-packages-parallelization-threading-demomultiprocessing-py"><span class="std std-ref">Multi processing</span></a></span><a class="headerlink" href="#id47" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="plotly">
+<span id="gallery-plotly-label"></span><span id="sphx-glr-11-demos-python-packages-plotly"></span><h2><span class="section-number">12.3.6. </span>Plotly<a class="headerlink" href="#plotly" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This demo shows how to use the Python plotly package under itom."><figure class="align-default" id="id48">
+<img alt="Simple" src="../../_images/sphx_glr_demo_bar_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plotly/demo_bar.html#sphx-glr-11-demos-python-packages-plotly-demo-bar-py"><span class="std std-ref">Simple</span></a></span><a class="headerlink" href="#id48" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This demo shows how to render to output of the Python plotly library in custom user interfaces."><figure class="align-default" id="id49">
+<img alt="GUI integrated" src="../../_images/sphx_glr_itomGUI_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="plotly/itomGUI.html#sphx-glr-11-demos-python-packages-plotly-itomgui-py"><span class="std std-ref">GUI integrated</span></a></span><a class="headerlink" href="#id49" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="pytest">
+<span id="gallery-pytest-label"></span><span id="sphx-glr-11-demos-python-packages-pytest"></span><h2><span class="section-number">12.3.7. </span>PyTest<a class="headerlink" href="#pytest" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Execute lines from this file from demo folder to run all subsequent pytest scripts."><figure class="align-default" id="id50">
+<img alt="Pytest" src="../../_images/sphx_glr_runPyTest_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="pyTest/runPyTest.html#sphx-glr-11-demos-python-packages-pytest-runpytest-py"><span class="std std-ref">Pytest</span></a></span><a class="headerlink" href="#id50" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="scikit-learn">
+<span id="gallery-scikit-label"></span><span id="sphx-glr-11-demos-python-packages-scikit-learn"></span><h2><span class="section-number">12.3.8. </span>Scikit-learn<a class="headerlink" href="#scikit-learn" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="An example of scikit-learn, copied from `scikit-learn.org &lt;https://scikit-learn.org/stable/auto..."><figure class="align-default" id="id51">
+<img alt="Recursive feature elimination" src="../../_images/sphx_glr_demo_featureSelection_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="scikit-learn/demo_featureSelection.html#sphx-glr-11-demos-python-packages-scikit-learn-demo-featureselection-py"><span class="std std-ref">Recursive feature elimination</span></a></span><a class="headerlink" href="#id51" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="An example of scikit-learn, copied from `scikit-learn.org &lt;https://scikit-learn.org/stable/auto..."><figure class="align-default" id="id52">
+<img alt="K-Means clustering" src="../../_images/sphx_glr_demo_kMeansClustering_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="scikit-learn/demo_kMeansClustering.html#sphx-glr-11-demos-python-packages-scikit-learn-demo-kmeansclustering-py"><span class="std std-ref">K-Means clustering</span></a></span><a class="headerlink" href="#id52" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="An example of scikit-learn, copied from `scikit-learn.org &lt;https://scikit-learn.org/stable/auto..."><figure class="align-default" id="id53">
+<img alt="Principal Component Regression vs Partial Least Squares Regression" src="../../_images/sphx_glr_demo_componentRegression_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="scikit-learn/demo_componentRegression.html#sphx-glr-11-demos-python-packages-scikit-learn-demo-componentregression-py"><span class="std std-ref">Principal Component Regression vs Partial Least Squares Regression</span></a></span><a class="headerlink" href="#id53" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="scipy">
+<span id="gallery-scipy-label"></span><span id="sphx-glr-11-demos-python-packages-scipy"></span><h2><span class="section-number">12.3.9. </span>Scipy<a class="headerlink" href="#scipy" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Implement a matched filter using cross-correlation, to recover a signal that has passed through..."><figure class="align-default" id="id54">
+<img alt="Signal correlation" src="../../_images/sphx_glr_demo_scipy-signal-correlate_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="scipy/demo_scipy-signal-correlate.html#sphx-glr-11-demos-python-packages-scipy-demo-scipy-signal-correlate-py"><span class="std std-ref">Signal correlation</span></a></span><a class="headerlink" href="#id54" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Nearest neighbors"><figure class="align-default" id="id55">
+<img alt="Nearest neighbors" src="../../_images/sphx_glr_demo_nearest_neighbors_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="scipy/demo_nearest_neighbors.html#sphx-glr-11-demos-python-packages-scipy-demo-nearest-neighbors-py"><span class="std std-ref">Nearest neighbors</span></a></span><a class="headerlink" href="#id55" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Opens the ascent image from scipy.misc and shifts the image. Finally, the shift offsets are det..."><figure class="align-default" id="id56">
+<img alt="Scipy" src="../../_images/sphx_glr_demo_Scipy_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="scipy/demo_Scipy.html#sphx-glr-11-demos-python-packages-scipy-demo-scipy-py"><span class="std std-ref">Scipy</span></a></span><a class="headerlink" href="#id56" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="seaborn">
+<span id="gallery-seaborn-label"></span><span id="sphx-glr-11-demos-python-packages-seaborn"></span><h2><span class="section-number">12.3.10. </span>Seaborn<a class="headerlink" href="#seaborn" title="Permalink to this heading">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Timerseries"><figure class="align-default" id="id57">
+<img alt="Timerseries" src="../../_images/sphx_glr_demo_timeseries_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="seaborn/demo_timeseries.html#sphx-glr-11-demos-python-packages-seaborn-demo-timeseries-py"><span class="std std-ref">Timerseries</span></a></span><a class="headerlink" href="#id57" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Joint kernel"><figure class="align-default" id="id58">
+<img alt="Joint kernel" src="../../_images/sphx_glr_demo_jointKernel_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="seaborn/demo_jointKernel.html#sphx-glr-11-demos-python-packages-seaborn-demo-jointkernel-py"><span class="std std-ref">Joint kernel</span></a></span><a class="headerlink" href="#id58" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Scatterplot"><figure class="align-default" id="id59">
+<img alt="Scatterplot" src="../../_images/sphx_glr_demo_scatterplot_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="seaborn/demo_scatterplot.html#sphx-glr-11-demos-python-packages-seaborn-demo-scatterplot-py"><span class="std std-ref">Scatterplot</span></a></span><a class="headerlink" href="#id59" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Violinplots"><figure class="align-default" id="id60">
+<img alt="Violinplots" src="../../_images/sphx_glr_demo_violinplots_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="seaborn/demo_violinplots.html#sphx-glr-11-demos-python-packages-seaborn-demo-violinplots-py"><span class="std std-ref">Violinplots</span></a></span><a class="headerlink" href="#id60" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Linear regression"><figure class="align-default" id="id61">
+<img alt="Linear regression" src="../../_images/sphx_glr_demo_linearRegression_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="seaborn/demo_linearRegression.html#sphx-glr-11-demos-python-packages-seaborn-demo-linearregression-py"><span class="std std-ref">Linear regression</span></a></span><a class="headerlink" href="#id61" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Bivariate"><figure class="align-default" id="id62">
+<img alt="Bivariate" src="../../_images/sphx_glr_demo_bivariate_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="seaborn/demo_bivariate.html#sphx-glr-11-demos-python-packages-seaborn-demo-bivariate-py"><span class="std std-ref">Bivariate</span></a></span><a class="headerlink" href="#id62" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../python/demo_operations.html" class="btn btn-neutral float-left" title="12.2.6. Basic operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matplotlib/demo_fill_features.html" class="btn btn-neutral float-right" title="12.3.1.1. Fill features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

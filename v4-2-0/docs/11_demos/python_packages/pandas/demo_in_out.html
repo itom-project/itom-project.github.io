@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12.3.4.4. Getting data in/out &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="12.3.4.5. Operations" href="demo_operations.html" />
+    <link rel="prev" title="12.3.4.3. Categoricals" href="demo_categoricals.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../demos.html">12. Demo scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../itom/index.html">12.1. itom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">12.3. Python packages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#matplotlib">12.3.1. Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#numpy">12.3.2. Numpy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#others">12.3.3. others</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#pandas">12.3.4. Pandas</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="demo_plotting.html">12.3.4.1. Plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_missing.html">12.3.4.2. Missing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_categoricals.html">12.3.4.3. Categoricals</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">12.3.4.4. Getting data in/out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_operations.html">12.3.4.5. Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_grouping.html">12.3.4.6. Grouping data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_merge.html">12.3.4.7. Merge data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_create.html">12.3.4.8. Create and view an object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_selection.html">12.3.4.9. Selection of data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_reshaping.html">12.3.4.10. Reshaping data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#parallelization-and-threading">12.3.5. Parallelization and Threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#plotly">12.3.6. Plotly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pytest">12.3.7. PyTest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#scikit-learn">12.3.8. Scikit-learn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#scipy">12.3.9. Scipy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#seaborn">12.3.10. Seaborn</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../demos.html"><span class="section-number">12. </span>Demo scripts</a> &raquo;</li>
+          <li><a href="../index.html"><span class="section-number">12.3. </span>Python packages</a> &raquo;</li>
+      <li><span class="section-number">12.3.4.4. </span>Getting data in/out</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/11_demos/python_packages/pandas/demo_in_out.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-11-demos-python-packages-pandas-demo-in-out-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="getting-data-in-out">
+<span id="sphx-glr-11-demos-python-packages-pandas-demo-in-out-py"></span><h1><span class="section-number">12.3.4.4. </span>Getting data in/out<a class="headerlink" href="#getting-data-in-out" title="Permalink to this heading">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">timeStemps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1/1/2000&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="n">timeStemps</span> <span class="o">=</span> <span class="n">timeStemps</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">dataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">timeStemps</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">])</span>
+<span class="n">dataFrame</span> <span class="o">=</span> <span class="n">dataFrame</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="n">dataFrame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;foo.csv&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;foo.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-01-01</td>
+      <td>0.418110</td>
+      <td>0.366351</td>
+      <td>0.473109</td>
+      <td>-0.352655</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-01-02</td>
+      <td>-0.631330</td>
+      <td>-0.173469</td>
+      <td>0.557222</td>
+      <td>1.387474</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-01-03</td>
+      <td>-0.421107</td>
+      <td>-1.151853</td>
+      <td>2.593595</td>
+      <td>1.111929</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-01-04</td>
+      <td>1.324083</td>
+      <td>-1.102667</td>
+      <td>1.817537</td>
+      <td>2.116006</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-01-05</td>
+      <td>0.774212</td>
+      <td>-2.180582</td>
+      <td>0.760603</td>
+      <td>0.237013</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>2002-09-22</td>
+      <td>-39.840543</td>
+      <td>-95.197822</td>
+      <td>-1.654499</td>
+      <td>-21.103295</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>2002-09-23</td>
+      <td>-39.293954</td>
+      <td>-96.238753</td>
+      <td>-2.964618</td>
+      <td>-21.372347</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>2002-09-24</td>
+      <td>-38.738313</td>
+      <td>-97.868524</td>
+      <td>-1.633344</td>
+      <td>-21.844188</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>2002-09-25</td>
+      <td>-38.197848</td>
+      <td>-97.978507</td>
+      <td>-0.521138</td>
+      <td>-23.049658</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>2002-09-26</td>
+      <td>-37.619244</td>
+      <td>-96.471295</td>
+      <td>-0.867457</td>
+      <td>-21.697188</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 5 columns</p>
+</div>
+</div>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s2">&quot;foo.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;df&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s2">&quot;foo.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;df&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-01</th>
+      <td>0.418110</td>
+      <td>0.366351</td>
+      <td>0.473109</td>
+      <td>-0.352655</td>
+    </tr>
+    <tr>
+      <th>2000-01-02</th>
+      <td>-0.631330</td>
+      <td>-0.173469</td>
+      <td>0.557222</td>
+      <td>1.387474</td>
+    </tr>
+    <tr>
+      <th>2000-01-03</th>
+      <td>-0.421107</td>
+      <td>-1.151853</td>
+      <td>2.593595</td>
+      <td>1.111929</td>
+    </tr>
+    <tr>
+      <th>2000-01-04</th>
+      <td>1.324083</td>
+      <td>-1.102667</td>
+      <td>1.817537</td>
+      <td>2.116006</td>
+    </tr>
+    <tr>
+      <th>2000-01-05</th>
+      <td>0.774212</td>
+      <td>-2.180582</td>
+      <td>0.760603</td>
+      <td>0.237013</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2002-09-22</th>
+      <td>-39.840543</td>
+      <td>-95.197822</td>
+      <td>-1.654499</td>
+      <td>-21.103295</td>
+    </tr>
+    <tr>
+      <th>2002-09-23</th>
+      <td>-39.293954</td>
+      <td>-96.238753</td>
+      <td>-2.964618</td>
+      <td>-21.372347</td>
+    </tr>
+    <tr>
+      <th>2002-09-24</th>
+      <td>-38.738313</td>
+      <td>-97.868524</td>
+      <td>-1.633344</td>
+      <td>-21.844188</td>
+    </tr>
+    <tr>
+      <th>2002-09-25</th>
+      <td>-38.197848</td>
+      <td>-97.978507</td>
+      <td>-0.521138</td>
+      <td>-23.049658</td>
+    </tr>
+    <tr>
+      <th>2002-09-26</th>
+      <td>-37.619244</td>
+      <td>-96.471295</td>
+      <td>-0.867457</td>
+      <td>-21.697188</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 4 columns</p>
+</div>
+</div>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&quot;foo.xlsx&quot;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Sheet1&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;foo.xlsx&quot;</span><span class="p">,</span> <span class="s2">&quot;Sheet1&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NA&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-01-01</td>
+      <td>0.418110</td>
+      <td>0.366351</td>
+      <td>0.473109</td>
+      <td>-0.352655</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-01-02</td>
+      <td>-0.631330</td>
+      <td>-0.173469</td>
+      <td>0.557222</td>
+      <td>1.387474</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-01-03</td>
+      <td>-0.421107</td>
+      <td>-1.151853</td>
+      <td>2.593595</td>
+      <td>1.111929</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-01-04</td>
+      <td>1.324083</td>
+      <td>-1.102667</td>
+      <td>1.817537</td>
+      <td>2.116006</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-01-05</td>
+      <td>0.774212</td>
+      <td>-2.180582</td>
+      <td>0.760603</td>
+      <td>0.237013</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>2002-09-22</td>
+      <td>-39.840543</td>
+      <td>-95.197822</td>
+      <td>-1.654499</td>
+      <td>-21.103295</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>2002-09-23</td>
+      <td>-39.293954</td>
+      <td>-96.238753</td>
+      <td>-2.964618</td>
+      <td>-21.372347</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>2002-09-24</td>
+      <td>-38.738313</td>
+      <td>-97.868524</td>
+      <td>-1.633344</td>
+      <td>-21.844188</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>2002-09-25</td>
+      <td>-38.197848</td>
+      <td>-97.978507</td>
+      <td>-0.521138</td>
+      <td>-23.049658</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>2002-09-26</td>
+      <td>-37.619244</td>
+      <td>-96.471295</td>
+      <td>-0.867457</td>
+      <td>-21.697188</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 5 columns</p>
+</div>
+</div>
+<br />
+<br /><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.647 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-python-packages-pandas-demo-in-out-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/d80be8e78880104746721e569b06a84f/demo_in_out.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">demo_in_out.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/1d78e9cbc729292ad0a328482857f356/demo_in_out.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_in_out.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demo_categoricals.html" class="btn btn-neutral float-left" title="12.3.4.3. Categoricals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demo_operations.html" class="btn btn-neutral float-right" title="12.3.4.5. Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

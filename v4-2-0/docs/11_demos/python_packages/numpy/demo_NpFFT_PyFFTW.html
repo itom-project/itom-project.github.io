@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12.3.2.8. Numpy FFT, PyFFTW &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="12.3.2.9. Rank and nullspace demo" href="demo_rank_nullspace.html" />
+    <link rel="prev" title="12.3.2.7. Operations" href="demo_operations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../demos.html">12. Demo scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../itom/index.html">12.1. itom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">12.3. Python packages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#matplotlib">12.3.1. Matplotlib</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#numpy">12.3.2. Numpy</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="demo_shape.html">12.3.2.1. Shape manipulation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_splitting.html">12.3.2.2. Splitting array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_indexing.html">12.3.2.3. Indexing, Slicing and Iterating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_copy.html">12.3.2.4. Copy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_stacking.html">12.3.2.5. Stacking arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_create.html">12.3.2.6. Create array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_operations.html">12.3.2.7. Operations</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">12.3.2.8. Numpy FFT, PyFFTW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_rank_nullspace.html">12.3.2.9. Rank and nullspace demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#others">12.3.3. others</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pandas">12.3.4. Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#parallelization-and-threading">12.3.5. Parallelization and Threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#plotly">12.3.6. Plotly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pytest">12.3.7. PyTest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#scikit-learn">12.3.8. Scikit-learn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#scipy">12.3.9. Scipy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#seaborn">12.3.10. Seaborn</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../demos.html"><span class="section-number">12. </span>Demo scripts</a> &raquo;</li>
+          <li><a href="../index.html"><span class="section-number">12.3. </span>Python packages</a> &raquo;</li>
+      <li><span class="section-number">12.3.2.8. </span>Numpy FFT, PyFFTW</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/11_demos/python_packages/numpy/demo_NpFFT_PyFFTW.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-11-demos-python-packages-numpy-demo-npfft-pyfftw-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="numpy-fft-pyfftw">
+<span id="sphx-glr-11-demos-python-packages-numpy-demo-npfft-pyfftw-py"></span><h1><span class="section-number">12.3.2.8. </span>Numpy FFT, PyFFTW<a class="headerlink" href="#numpy-fft-pyfftw" title="Permalink to this heading">¶</a></h1>
+<p>This example shows how to use the FFT or IFFT from <code class="docutils literal notranslate"><span class="pre">Numpy</span></code>.
+If possible the package PyFFTW is searched. If it is avaible,
+the fast implementation of FFT and IFFT is used from this package (GPL license!!!).</p>
+<p>In order to have the fast version of the fourier transform
+in <code class="docutils literal notranslate"><span class="pre">pyfftw</span></code>, align your input data using <code class="docutils literal notranslate"><span class="pre">getAlignNdArray</span></code>. This is
+an idle operation if PyFFTW is not available. Either <code class="docutils literal notranslate"><span class="pre">np.fft.fft2</span></code>
+or <code class="docutils literal notranslate"><span class="pre">pyfftw.interfaces.numpy_fft.fft2</span></code> are mapped to <code class="docutils literal notranslate"><span class="pre">myfft2</span></code>, such the
+overall call can be done by using <code class="docutils literal notranslate"><span class="pre">myfft2(...)</span></code>. The same holds for <code class="docutils literal notranslate"><span class="pre">myifft2(...)</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">myfft2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span>  <span class="c1"># default: fft2 from numpy</span>
+<span class="n">myifft2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft2</span>  <span class="c1"># default: ifft2 from numpy</span>
+</pre></div>
+</div>
+<p>Define function and overwrite it when <code class="docutils literal notranslate"><span class="pre">pyfftw</span></code> is available.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getAlignNdArray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pyfftw</span>
+
+    <span class="n">myfft2</span> <span class="o">=</span> <span class="n">pyfftw</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">numpy_fft</span><span class="o">.</span><span class="n">fft2</span>  <span class="c1"># if PyFFTW: use fft2 from this package</span>
+    <span class="n">myifft2</span> <span class="o">=</span> <span class="n">pyfftw</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">numpy_fft</span><span class="o">.</span><span class="n">ifft2</span>
+    <span class="n">alignSize</span> <span class="o">=</span> <span class="n">pyfftw</span><span class="o">.</span><span class="n">simd_alignment</span>
+
+    <span class="k">def</span> <span class="nf">getAlignNdArray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pyfftw</span><span class="o">.</span><span class="n">n_byte_align</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="n">alignSize</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyfftw could not be found. Numpy fft is used instead&quot;</span><span class="p">)</span>
+
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">getAlignNdArray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">I1</span> <span class="o">=</span> <span class="n">myfft2</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="n">I2</span> <span class="o">=</span> <span class="n">myifft2</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="n">I2</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyfftw could not be found. Numpy fft is used instead
+
+array([[-3.55202387e-04+0.00000000e+00j,  1.95369202e-03-8.83751122e-05j,
+        -3.59279470e-04+4.21002312e-04j, ...,
+        -1.80124856e-04-8.93321842e-04j, -3.59279470e-04-4.21002312e-04j,
+         1.95369202e-03+8.83751122e-05j],
+       [-2.05986089e-03+5.56528310e-04j, -2.08907601e-04-1.97809059e-03j,
+        -3.00418534e-04-6.35550290e-04j, ...,
+        -4.81585480e-04-2.49123098e-04j, -6.05407010e-04-1.00364005e-03j,
+         1.13092943e-03+9.50158517e-04j],
+       [-1.00728063e-03-6.25107360e-04j,  3.42311095e-05-6.61853805e-04j,
+         1.45686745e-03-7.00583442e-04j, ...,
+         3.49437711e-04-1.14649274e-03j, -4.47257219e-04+8.05294598e-04j,
+         4.01986340e-04+1.37499214e-03j],
+       ...,
+       [-4.59561253e-04+1.69884542e-03j,  1.24844349e-03+1.56901498e-04j,
+         4.50678848e-04+2.29446020e-04j, ...,
+         1.12273701e-03-8.57928888e-04j, -1.49030703e-03-3.36220816e-04j,
+        -1.06182221e-03-7.96829061e-04j],
+       [-1.00728063e-03+6.25107360e-04j,  4.01986340e-04-1.37499214e-03j,
+        -4.47257219e-04-8.05294598e-04j, ...,
+         1.16845375e-03+6.71883933e-04j,  1.45686745e-03+7.00583442e-04j,
+         3.42311095e-05+6.61853805e-04j],
+       [-2.05986089e-03-5.56528310e-04j,  1.13092943e-03-9.50158517e-04j,
+        -6.05407010e-04+1.00364005e-03j, ...,
+        -2.09194733e-04-6.52091807e-04j, -3.00418534e-04+6.35550290e-04j,
+        -2.08907601e-04+1.97809059e-03j]])
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.075 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-python-packages-numpy-demo-npfft-pyfftw-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/8dde71d7f39657b8e9ca0fe1841ded5f/demo_NpFFT_PyFFTW.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">demo_NpFFT_PyFFTW.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/458d147533ad7ca1d378dfe6b788df65/demo_NpFFT_PyFFTW.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_NpFFT_PyFFTW.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demo_operations.html" class="btn btn-neutral float-left" title="12.3.2.7. Operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demo_rank_nullspace.html" class="btn btn-neutral float-right" title="12.3.2.9. Rank and nullspace demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>13.3. Python Docstrings &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="13.2. Translations" href="translations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_demos/demos.html">12. Demo scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contributing.html">13. Contributing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cmake_style_guide.html">13.1. CMake Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translations.html">13.2. Translations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">13.3. Python Docstrings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general">13.3.1. General</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docstrings-for-itom-and-its-methods-and-classes">13.3.2. Docstrings for <code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code> and its methods and classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-rules">13.3.2.1. General rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#method-docstrings">13.3.2.2. Method docstrings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overloaded-methods">13.3.2.3. Overloaded methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#classes-and-constructor">13.3.2.4. Classes and constructor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#properties">13.3.2.5. Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">13.3.3. References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="contributing.html"><span class="section-number">13. </span>Contributing</a> &raquo;</li>
+      <li><span class="section-number">13.3. </span>Python Docstrings</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/12_contributing/python_docstrings.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-docstrings">
+<span id="id1"></span><h1><span class="section-number">13.3. </span>Python Docstrings<a class="headerlink" href="#python-docstrings" title="Permalink to this heading">¶</a></h1>
+<section id="general">
+<h2><span class="section-number">13.3.1. </span>General<a class="headerlink" href="#general" title="Permalink to this heading">¶</a></h2>
+<p>For Python docstrings, we have to differentiate between docstrings in real Python script files (.py) or
+docstrings in <strong>C-Extensions</strong>, like it is the case for the entire <strong>itom</strong> module.</p>
+</section>
+<section id="docstrings-for-itom-and-its-methods-and-classes">
+<h2><span class="section-number">13.3.2. </span>Docstrings for <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> and its methods and classes<a class="headerlink" href="#docstrings-for-itom-and-its-methods-and-classes" title="Permalink to this heading">¶</a></h2>
+<p>Before we start with the style guide for the docstrings, a short introduction about the workflow
+and usage of these docstrings is given.</p>
+<p>The docstrings are mainly used for three different use cases:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Text, that appears if one wants to get help using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">help()</span></code> command of python
+or if the <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> attribute is manually requested by the user.</p></li>
+<li><p>The script reference of the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> is automatically parsed by the <code class="docutils literal notranslate"><span class="pre">autodoc</span></code>
+feature of <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code>. Autodoc directly parses the docstrings and must be able to
+parse the entire signature, including type hints, the docstring as well as the description
+of parameters and return values from the docstring. For this, itom docstrings should be
+based on the Sphinx extension <strong>numpydoc</strong> (see below). Sphinx is not able to parse any
+further stubs files (.pyi).</p></li>
+<li><p>For calltips, auto completion etc. the optional package <strong>Jedi</strong> is used. It also tries
+to parse the signature, arguments, their types, the return types etc. from the docstring.
+However, since the source of the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module is only available as compiled code,
+Jedi has trouble to get all these information. Therefore, itom helps <strong>Jedi</strong> by providing
+a pseudo-code stubs file, located in the file <code class="docutils literal notranslate"><span class="pre">itom-packages/itom-stubs/__init__.pyi</span></code>.
+This file is automatically parsed from the original docstrings of all methods and classes
+of the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module.</p></li>
+</ol>
+</div></blockquote>
+<p>In order to support these three use cases (mainly no 2 and 3), this guide shows how to
+write docstrings in the <strong>C/C++</strong> source code for methods and classes, that belong
+to the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module.</p>
+<section id="general-rules">
+<h3><span class="section-number">13.3.2.1. </span>General rules<a class="headerlink" href="#general-rules" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Always use the macro <code class="docutils literal notranslate"><span class="pre">PyDoc_STRVAR</span></code> to generate the docstring</p></li>
+<li><p>Do not indent multiline docstrings in <strong>C/C++</strong>, since this identation is kept in the docstring.
+Therefore, always start these multiline docstrings in the first column of the source file!</p></li>
+<li><p>Avoid long lines in the docstrings. Wrap them with an explicit newline character (n) after a
+maximum number of 88 characters.</p></li>
+<li><p>Use four spaces as indentation level</p></li>
+<li><p>Most parts of the docstrings should follow the rules of
+<a class="reference external" href="https://pypi.org/project/numpydoc/">Numpydoc</a>. For more information see
+<a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a>
+(The Numpydoc package must only be installed if you want to rebuild the Sphinx user documentation).</p></li>
+</ol>
+</section>
+<section id="method-docstrings">
+<h3><span class="section-number">13.3.2.2. </span>Method docstrings<a class="headerlink" href="#method-docstrings" title="Permalink to this heading">¶</a></h3>
+<p>The docstring of an unbounded method looks like this</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">varname_doc</span><span class="p">,</span><span class="w"></span>
+<span class="s">&quot;myMethod(arg1, arg2 = -2, arg3 = None) -&gt; List[int] </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">short description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">longer multiline description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">Emphasize some word like ``this``. Or make a </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">reference to another method like :meth:`openScript`. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Parameters </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">---------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">arg1 : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    description of arg1. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">arg2 : int, optional </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    description of the optional argument 2. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">arg3 : str or None, optional </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    longer description of ``arg3``. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    Maybe go to a 2nd line. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Returns </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">list of int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    description of the return value, </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    that can also be multiline. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Raises </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">------ </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">RuntimeError </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    if a certain situation occurs. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">See Also </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">-------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">openScript, newScript, ...&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the first line, the signature of the method should be given. Write
+this signature, like you would do it in an ordinary python script. It is
+possible to add type hints there for the arguments, however this can also
+be done within the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section below, where the parameters are
+described further.</p>
+<p>If the method has no return value, omit the <code class="docutils literal notranslate"><span class="pre">-&gt;</span> <span class="pre">ret-type</span></code> at the end of
+the signature line. Else, it is allowed to write the return type here, following
+the rules of the <a class="reference external" href="https://docs.python.org/3/library/typing.html#module-typing" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">typing</span></code></a> module of Python. The type hint is recommended, but
+optional. It can also be obtained from the <code class="docutils literal notranslate"><span class="pre">Returns</span></code> section. We recommend both.</p>
+<p>After the signature line, write a short description of the method after a separate and empty
+new line. Then, insert another new line and continue with a multiline long
+description of the method. This long description can also consist of further
+sections, following the rules of Numpydoc. If the method has at least one
+argument, it is recommend to describe it in a <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section. If the
+method has a return value, use the <code class="docutils literal notranslate"><span class="pre">Returns</span></code> section. If you want to add a
+reference to other methods, use the <code class="docutils literal notranslate"><span class="pre">See</span> <span class="pre">Also</span></code> section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please consider, that the underline of the sections must be at least as long as
+the name of the section. Hence, a <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section must be followed by
+the underline line with at least 10 <code class="docutils literal notranslate"><span class="pre">-</span></code> characters.</p>
+</div>
+<p>Please consider the following rules for type hints:</p>
+<ul class="simple">
+<li><p>If you write any type hints in the signature line, always use the type hints as
+given by the <a class="reference external" href="https://docs.python.org/3/library/typing.html#module-typing" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">typing</span></code></a> module of Python. Examples are: <code class="docutils literal notranslate"><span class="pre">Optional[int]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">Union[Tuple[int,</span> <span class="pre">str]]</span></code> among others.</p></li>
+<li><p>If you write any type hints in the docstrings section, follow the rules of
+<strong>Numpydoc</strong>. Examples are then: <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span> <span class="pre">of</span> <span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></code>.
+Values like <code class="docutils literal notranslate"><span class="pre">tuple</span> <span class="pre">of</span> <span class="pre">int</span></code> will be transformed to a type hint <code class="docutils literal notranslate"><span class="pre">Tuple[int]</span></code>,
+hence, the first value before the <code class="docutils literal notranslate"><span class="pre">of</span></code> literal will be written with a capital
+letter, the 2nd argument will be put into square brackets. Several type
+possibilities, separated by the <code class="docutils literal notranslate"><span class="pre">or</span></code> literal in Numpydoc will be transformed
+to <code class="docutils literal notranslate"><span class="pre">Union[a,</span> <span class="pre">b]</span></code> if the Numpydoc typehint was <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span></code>. If the Numpydoc
+typestring ends with <code class="docutils literal notranslate"><span class="pre">abc,</span> <span class="pre">optional</span></code>, its typing equivalent is <code class="docutils literal notranslate"><span class="pre">Optional[abc]</span></code>.
+If you want to use the type <code class="docutils literal notranslate"><span class="pre">Any</span></code> from typing, you also have to write <code class="docutils literal notranslate"><span class="pre">Any</span></code>
+in the Numpydoc section.</p></li>
+</ul>
+</section>
+<section id="overloaded-methods">
+<h3><span class="section-number">13.3.2.3. </span>Overloaded methods<a class="headerlink" href="#overloaded-methods" title="Permalink to this heading">¶</a></h3>
+<p>It is also possible to support overloaded methods, that accept different
+sets of parameters. If this is the case, write all possible signatures in
+the first lines and write a backslash as last character (no spaces afterwards)
+of the first signature lines (all signature lines beside the last one).
+Please be aware, that this backslash must be written in the C-code by two
+backslashes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If overloaded methods are added, every signature needs to have a return type.
+This is maybe a bug in Sphinx, however with Sphinx 3.3 this was the case.</p>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section to explain all arguments, even if they are
+only used in one of the signatures.</p>
+<p>Here is an example for this:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">varname_doc</span><span class="p">,</span><span class="w"></span>
+<span class="s">&quot;myMethod() -&gt; int </span><span class="se">\\\n</span><span class="s">\</span>
+<span class="s">myMethod(number) -&gt; int </span><span class="se">\\\n</span><span class="s">\</span>
+<span class="s">myMethod(text) -&gt; int </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">short description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">longer multiline description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Parameters </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">---------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">number : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    docstring for ``number``. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">text : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    docstring for ``text``. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Returns </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">name : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    a return value can also have a name (optional).&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="classes-and-constructor">
+<h3><span class="section-number">13.3.2.4. </span>Classes and constructor<a class="headerlink" href="#classes-and-constructor" title="Permalink to this heading">¶</a></h3>
+<p>The C-Extension does not provide a simple possibility to add
+a docstring to the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method only. Therefore, the
+general class docstring, passed to the <code class="docutils literal notranslate"><span class="pre">tp_doc</span></code> member of
+the <code class="docutils literal notranslate"><span class="pre">PyTypeObject</span></code> struct should contain both a description of
+the entire class as well as the signature of its constructor and
+the parameters (exceptions, …).</p>
+<p>The following example shows the docstring for the class <a class="reference internal" href="../09_reference/region.html#itom.region" title="itom.region"><code class="xref py py-class docutils literal notranslate"><span class="pre">region</span></code></a>,
+whose signature has three different overloads (see again the backslash at the
+end of the first signatures). The method name of the signature is the class
+name, not the literal <code class="docutils literal notranslate"><span class="pre">__init__</span></code>:</p>
+</section>
+<section id="properties">
+<h3><span class="section-number">13.3.2.5. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">¶</a></h3>
+<p>The docstring for the properties (&#64;property decorator) is usually
+related to the getter method. If a setter is available, try to
+consider this in the longer description part of the docstring.</p>
+<p>The return type of the getter property must be written in the
+Numpydoc style, e.g. <code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">of</span> <span class="pre">tuple</span> <span class="pre">of</span> <span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></code>.</p>
+<p>The following examples show, that no signature is contained in
+the docstrings. The docstring start with the return type hint,
+followed by a colon, a space character and a short
+description of the property. An optional longer, multiline description
+can be added after a newline.</p>
+<p>Examples are:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">property1_doc</span><span class="p">,</span><span class="w"></span>
+<span class="s">&quot;list of list of int: Short description comes here. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Optional longer description (can be multiline)&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">property1_doc</span><span class="p">,</span><span class="w"></span>
+<span class="s">&quot;str or None: Short description comes here.&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">13.3.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<p>This style guide is mainly taken from</p>
+<ul class="simple">
+<li><p>Numpydoc (<a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a>)</p></li>
+<li><p>Napoleon extension of Sphinx (<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html</a>)</p></li>
+<li><p>Numpydoc example of Napoleon extension (<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/example_numpy.html#example-numpy">https://www.sphinx-doc.org/en/master/usage/extensions/example_numpy.html#example-numpy</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="translations.html" class="btn btn-neutral float-left" title="13.2. Translations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

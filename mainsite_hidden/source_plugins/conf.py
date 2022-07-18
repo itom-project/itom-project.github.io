@@ -63,7 +63,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'itom Plugins'
-copyright = f"2011-{today}, Institut fuer Technische Optik (ITO), University Stuttgart." \ "Bug report: https://bitbucket.org/itom/itom/issues"
+copyright = f"2011-{today}, Institut fuer Technische Optik (ITO), University Stuttgart. " "Bug report: https://bitbucket.org/itom/itom/issues"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

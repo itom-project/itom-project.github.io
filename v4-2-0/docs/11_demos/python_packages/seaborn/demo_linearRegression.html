@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12.3.10.5. Linear regression &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="12.3.10.6. Bivariate" href="demo_bivariate.html" />
+    <link rel="prev" title="12.3.10.4. Violinplots" href="demo_violinplots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../demos.html">12. Demo scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../itom/index.html">12.1. itom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">12.3. Python packages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#matplotlib">12.3.1. Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#numpy">12.3.2. Numpy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#others">12.3.3. others</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pandas">12.3.4. Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#parallelization-and-threading">12.3.5. Parallelization and Threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#plotly">12.3.6. Plotly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#pytest">12.3.7. PyTest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#scikit-learn">12.3.8. Scikit-learn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#scipy">12.3.9. Scipy</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#seaborn">12.3.10. Seaborn</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="demo_timeseries.html">12.3.10.1. Timerseries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_jointKernel.html">12.3.10.2. Joint kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_scatterplot.html">12.3.10.3. Scatterplot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_violinplots.html">12.3.10.4. Violinplots</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">12.3.10.5. Linear regression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="demo_bivariate.html">12.3.10.6. Bivariate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">itom Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../demos.html"><span class="section-number">12. </span>Demo scripts</a> &raquo;</li>
+          <li><a href="../index.html"><span class="section-number">12.3. </span>Python packages</a> &raquo;</li>
+      <li><span class="section-number">12.3.10.5. </span>Linear regression</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/11_demos/python_packages/seaborn/demo_linearRegression.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-11-demos-python-packages-seaborn-demo-linearregression-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="linear-regression">
+<span id="sphx-glr-11-demos-python-packages-seaborn-demo-linearregression-py"></span><h1><span class="section-number">12.3.10.5. </span>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">¶</a></h1>
+<img src="../../../_images/sphx_glr_demo_linearRegression_001.png" srcset="../../../_images/sphx_glr_demo_linearRegression_001.png" alt="demo linearRegression" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1582: UserWarning:
+
+Trying to register the cmap &#39;rocket&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1583: UserWarning:
+
+Trying to register the cmap &#39;rocket_r&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1582: UserWarning:
+
+Trying to register the cmap &#39;mako&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1583: UserWarning:
+
+Trying to register the cmap &#39;mako_r&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1582: UserWarning:
+
+Trying to register the cmap &#39;icefire&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1583: UserWarning:
+
+Trying to register the cmap &#39;icefire_r&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1582: UserWarning:
+
+Trying to register the cmap &#39;vlag&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1583: UserWarning:
+
+Trying to register the cmap &#39;vlag_r&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1582: UserWarning:
+
+Trying to register the cmap &#39;flare&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1583: UserWarning:
+
+Trying to register the cmap &#39;flare_r&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1582: UserWarning:
+
+Trying to register the cmap &#39;crest&#39; which already exists.
+
+C:\itom_vs2017_x64_Qt5.12.6_setup4.0\3rdParty\Python\lib\site-packages\seaborn\cm.py:1583: UserWarning:
+
+Trying to register the cmap &#39;crest_r&#39; which already exists.
+
+
+&lt;seaborn.axisgrid.FacetGrid object at 0x00000203B3BA2220&gt;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+
+<span class="c1"># Load the penguins dataset</span>
+<span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;penguins&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot sepal width as a function of sepal_length across days</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+
+<span class="c1"># Use more informative axis labels than are provided by default</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s2">&quot;Snoot length (mm)&quot;</span><span class="p">,</span> <span class="s2">&quot;Snoot depth (mm)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.834 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-python-packages-seaborn-demo-linearregression-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/55bcc208daa23aacdd18402cbfb6ede6/demo_linearRegression.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">demo_linearRegression.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/7b06485d97863fdf0476ee3674a222e3/demo_linearRegression.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_linearRegression.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demo_violinplots.html" class="btn btn-neutral float-left" title="12.3.10.4. Violinplots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demo_bivariate.html" class="btn btn-neutral float-right" title="12.3.10.6. Bivariate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Jul 15, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
