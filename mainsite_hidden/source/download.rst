@@ -7,15 +7,15 @@ Besides compiling **itom** from the sources, there are binaries for the Windows 
 These binaries contain the core application of **itom** together with a small selection of plugins and most designer plugins
 that provide the plot and figure widgets of **itom**.
 
-**End-User Installer & Portable (x64)**
+**Latest End-User Installer & Portable (x64)**
 
 .. container:: mdl-grid--no-spacing
 
-	.. button:: :text: ITOM 4.2.0 Setup EXE
+	.. button:: :text: ITOM Setup EXE
 	 :link: https://sourceforge.net/projects/itom/files/latest/download
 
-	.. button:: :text: ITOM 4.2.0 Portable ZIP
-	 :link: https://sourceforge.net/projects/itom/files/v4.2.0/itom4.2.0_portable.zip/download
+	.. button:: :text: ITOM Portable ZIP
+	 :link: https://sourceforge.net/projects/itom/files/v4.2.2/itom4.2.2_portable.zip/download
 
 **Developer/Source Repository**
 
@@ -36,7 +36,7 @@ that provide the plot and figure widgets of **itom**.
 | The End-User Setup version includes **itom** and the following components:
 
 
-**Version 4.2.0** compiled using:
+**Version 4.2.2** compiled using:
 
 * Qt 5.12.6
 * OpenCV 4.2.0
@@ -64,7 +64,7 @@ that provide the plot and figure widgets of **itom**.
 
 Other packages can easily be downloaded and installed using the integrated Python package manager.
 
-The current version 4.2.0 is available from
+The current version 4.2.2 is available from
 
 * `<https://bitbucket.org/itom/itom/downloads>`_ or
 * `<http://sourceforge.net/projects/itom/files/latest/>`_
@@ -90,6 +90,7 @@ The current version 4.2.0 is available from
 	<button class="accordion" style="font-family:Roboto">Old versions</button>
 	<div class="panel">
 
+* `itom 4.2.0 <http://sourceforge.net/projects/itom/files/v4.2.0/>`_
 * `itom 4.1.0 <http://sourceforge.net/projects/itom/files/v4.1.0/>`_
 * `itom 4.0.0 <http://sourceforge.net/projects/itom/files/v4.0.0/>`_
 * `itom 3.2.1 <http://sourceforge.net/projects/itom/files/v3.2.1/>`_
@@ -117,7 +118,30 @@ The current version 4.2.0 is available from
 	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
 	<div class="panel">
 	
-	
+**Version 4.2.0** compiled using:
+
+* Qt 5.12.6
+* OpenCV 4.2.0
+* PCL 1.10.0
+* VTK 8.2.0
+* Boost 1.72.0
+* Eigen 3.3.7
+* Flann 1.9.1
+* Pip 20.1.1
+* Python 3.8.10
+* Numpy 1.23.1
+* Jedi 0.18.1
+* SciPy 1.8.1
+* Matplotlib 3.5.2
+* Scikit-image 0.19.3
+* Scikit-learn 1.1.1
+* OpenCV-Python 4.6.0.66
+* Pandas 1.4.3
+* Plotly 5.9.0
+* Openpyxl 3.0.10
+* Tables 3.7.0
+* Seaborn 0.11.2
+
 **Version 4.1.0** compiled using:
 
 * Qt 5.12.6

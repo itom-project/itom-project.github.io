@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.5. Thorlabs DCx cameras &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.6. ThorlabsFF" href="ThorlabsFF.html" />
+    <link rel="prev" title="1.4. OceanOptics Spectrometers" href="OceanOpticsSpec.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> itom Plugins
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="AndorSDK3.html">1.1. Andor SDK3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IDSuEyeCamera.html">1.2. IDS uEye</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NITWidySWIR.html">1.3. NITWidySWIR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OceanOpticsSpec.html">1.4. OceanOptics Spectrometers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.5. Thorlabs DCx cameras</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">1.5.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">1.5.2. Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initialization">1.5.3. Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compilation">1.5.4. Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-problems">1.5.5. Known problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">1.5.6. Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ThorlabsFF.html">1.6. ThorlabsFF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VRMagic.html">1.7. VRMagic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avantesAvaSpec.html">1.8. Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avtVimba.html">1.9. AVT Vimba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmu1394.html">1.10. CMU1394</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commonVisionBlox.html">1.11. GenICam cameras via Common Vision Blox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dummyGrabber.html">1.12. DummyGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileGrabber.html">1.13. FileGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fireGrabber.html">1.14. FireGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="genicam.html">1.15. GenICam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="msMediaFoundation.html">1.16. MSMediaFoundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openCVGrabber.html">1.17. OpenCVGrabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoCamera.html">1.18. PCOCamera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoPixelFly.html">1.19. PCOPixelFly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pcoSensicam.html">1.20. PCOSensicam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgrFlyCapture.html">1.21. PGRFlyCapture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pmdPico.html">1.22. PmdPico</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qCam.html">1.23. QCam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thorlabsCCS.html">1.24. Thorlabs CCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v4l2.html">1.25. V4L2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vistek.html">1.26. Vistek</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ximea.html">1.27. Ximea</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Plugins</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../grabbers.html"><span class="section-number">1. </span>Camera/ Grabber</a> &raquo;</li>
+      <li><span class="section-number">1.5. </span>Thorlabs DCx cameras</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/plugins/grabber/ThorlabsDCxCam.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="thorlabs-dcx-cameras">
+<h1><span class="section-number">1.5. </span>Thorlabs DCx cameras<a class="headerlink" href="#thorlabs-dcx-cameras" title="Permalink to this heading"></a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><a href="#id1"><span class="problematic" id="id2">:pluginsummary:`ThorlabsDCxCam`</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><a href="#id3"><span class="problematic" id="id4">:plugintype:`ThorlabsDCxCam`</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><a href="#id5"><span class="problematic" id="id6">:pluginlicense:`ThorlabsDCxCam`</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Windows</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Devices</strong>:</p></td>
+<td><p>Thorlabs DCx cameras</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Author</strong>:</p></td>
+<td><p><a href="#id7"><span class="problematic" id="id8">:pluginauthor:`ThorlabsDCxCam`</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<section id="overview">
+<h2><span class="section-number">1.5.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+</section>
+<section id="parameters">
+<h2><span class="section-number">1.5.2. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<p>An instance of this plugin has the following internal parameters:</p>
+<dl class="simple">
+<dt><strong>auto_blacklevel_enabled</strong>: {int}, read-only</dt><dd><p>If the camera supports an auto blacklevel correction (auto offset in addition to offset), this feature can be enabled / disabled by this parameter.</p>
+</dd>
+<dt><strong>binning</strong>: {int}</dt><dd><p>Horizontal and vertical binning, depending on camera ability. 104 means a 1x binning in horizontal and 4x binning in vertical direction. (values up to 1x, 2x, 3x, 4x, 5x, 6x, 8x, 12x are valid; if read-only binning is not supported; some cameras only support certain combinations of binnings.)</p>
+</dd>
+<dt><strong>bpp</strong>: {int}</dt><dd><p>Bitdepth of each pixel</p>
+</dd>
+<dt><strong>cam_id</strong>: {int}, read-only</dt><dd><p>ID of the camera</p>
+</dd>
+<dt><strong>cam_model</strong>: {str}, read-only</dt><dd><p>Model identifier of the attached camera</p>
+</dd>
+<dt><strong>color_mode</strong>: {str}</dt><dd><p>color_mode: ‘gray’ (default) or ‘color’ if color camera</p>
+</dd>
+<dt><strong>fps</strong>: {float}, read-only</dt><dd><p>current fps reported by camera</p>
+</dd>
+<dt><strong>frame_rate</strong>: {float}</dt><dd><p>frame rate in fps (will affect the allowed range of the integration_time, this frame_rate is only considered if trigger_mode == ‘off’.</p>
+</dd>
+<dt><strong>gain</strong>: {float}</dt><dd><p>Gain (normalized value 0..1)</p>
+</dd>
+<dt><strong>gain_boost_enabled</strong>: {int}</dt><dd><p>enables / disables an additional analog hardware gain (gain boost). Readonly if not supported.</p>
+</dd>
+<dt><strong>gain_rgb</strong>: {seq. of float}, read-only</dt><dd><p>RGB-gain values (normalized value 0..1)</p>
+</dd>
+<dt><strong>integration_time</strong>: {float}</dt><dd><p>Exposure time of chip (in seconds).</p>
+</dd>
+<dt><strong>long_integration_time_enabled</strong>: {int}, read-only</dt><dd><p>If long exposure time is available, this parameter let you enable this. If this value is changed, the range and value of integration_time might change, too.</p>
+</dd>
+<dt><strong>name</strong>: {str}, read-only</dt><dd><p>GrabberName</p>
+</dd>
+<dt><strong>offset</strong>: {float}</dt><dd><p>Offset (leads to blacklevel offset) (normalized value 0..1). Readonly if not adjustable.</p>
+</dd>
+<dt><strong>pixel_clock</strong>: {int}</dt><dd><p>Pixel clock in MHz. If the pixel clock is too high, data packages might be lost. A change of the pixel clock might influence the exposure time.</p>
+</dd>
+<dt><strong>roi</strong>: {int rect [x0,y0,width,height]}</dt><dd><p>ROI (x,y,width,height) [this replaces the values x0,x1,y0,y1]</p>
+</dd>
+<dt><strong>sensor_type</strong>: {str}, read-only</dt><dd><p>Sensor type of the attached camera</p>
+</dd>
+<dt><strong>serial_number</strong>: {str}, read-only</dt><dd><p>Serial number of camera</p>
+</dd>
+<dt><strong>sizex</strong>: {int}, read-only</dt><dd><p>Pixelsize in x (cols)</p>
+</dd>
+<dt><strong>sizey</strong>: {int}, read-only</dt><dd><p>Pixelsize in y (rows)</p>
+</dd>
+<dt><strong>timeout</strong>: {float}</dt><dd><p>Timeout for acquiring images in seconds</p>
+</dd>
+<dt><strong>trigger_mode</strong>: {str}</dt><dd><p>trigger modes for starting a new image acquisition, depending on the camera the following modes are supported: ‘off’ (fixed frame_rate), without fixed frame_rate: ‘software’, ‘hi_lo’, ‘lo_hi’, ‘pre_hi_lo’, ‘pre_lo_hi’</p>
+</dd>
+</dl>
+</section>
+<section id="initialization">
+<h2><span class="section-number">1.5.3. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div></div></blockquote>
+</section>
+<section id="compilation">
+<h2><span class="section-number">1.5.4. </span>Compilation<a class="headerlink" href="#compilation" title="Permalink to this heading"></a></h2>
+<p>Please install the ThorCam software package from <a class="reference external" href="http://www.thorlabs.de/software_pages/ViewSoftwarePage.cfm?Code=ThorCam">http://www.thorlabs.de/software_pages/ViewSoftwarePage.cfm?Code=ThorCam</a> and install it. Then set the CMAKE
+variable THORLABS_DCxCAMERASUPPORT_DEVELOP_DIRECTORY to the <strong>Develop</strong> subdirectory of the Thorlabs installation path (e.g. C:Program FilesThorlabsScientific ImagingDCx Camera SupportDevelop).
+At runtime of itom, the Thorlabs drivers must be installed for the DCx camera series such that the library <strong>uc480_64.dll</strong> or <strong>uc480.dll</strong> can be found in the
+Windows System32 directory.</p>
+</section>
+<section id="known-problems">
+<h2><span class="section-number">1.5.5. </span>Known problems<a class="headerlink" href="#known-problems" title="Permalink to this heading"></a></h2>
+<p>Sometimes, the camera raises an acquisition error right after a change of the trigger mode. In this case, make an idle-grab (with a possible try-except) before starting
+with the right acquisition parameters.</p>
+</section>
+<section id="changelog">
+<h2><span class="section-number">1.5.6. </span>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>itom setup 2.2.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 4.20</p></li>
+<li><p>itom setup 3.0.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 4.20</p></li>
+<li><p>itom setup 3.1.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 4.20</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="OceanOpticsSpec.html" class="btn btn-neutral float-left" title="1.4. OceanOptics Spectrometers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ThorlabsFF.html" class="btn btn-neutral float-right" title="1.6. ThorlabsFF" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Sep 19, 2022.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
