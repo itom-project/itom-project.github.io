@@ -37,7 +37,7 @@ Introduction
 Installation
 ------------------
 
-Currently the Setup-Version is only available for WINDOWS OS. MacOS and Linux Distros need to compile source from `Git <https://bitbucket.org/itom/itom/overview>`_
+Currently the Setup-Version is only available for WINDOWS OS. MacOS and Linux Distros need to compile source from `Git <https://github.com/itom-project>`_
 
 | Get the latest version from :ref:`sec-downloads` page or see the link below.
 
@@ -104,8 +104,8 @@ How to start using ITOM
 
 First of all, let's introduce you to the IDE and your first steps using itom.
 
-* Visit the `Getting Started <https://itom.bitbucket.io/latest/docs/03_gettingStarted/getting-started-lvl2.html>`_ part of our documentation to get an overview.
+* Visit the `Getting Started <https://itom-project.github.io/latest/docs/03_gettingStarted/getting-started.html>`_ part of our documentation to get an overview.
 
 * Use our `Cheatsheet for Python with itom <documents/itom_cheatsheet.pdf>`_ to learn some basics
 
-*	See `Documentation <https://itom.bitbucket.io/latest/docs>`_ for information on itom details and functions
+*	See `Documentation <https://itom-project.github.io/latest/docs/index.html>`_ for information on itom details and functions
