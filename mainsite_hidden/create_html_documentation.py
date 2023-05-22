@@ -1,5 +1,3 @@
-# coding=utf8
-
 # this file requires the python package: sphinxcontrib-fulltoc (obtain via pip)
 
 import distutils.dir_util
