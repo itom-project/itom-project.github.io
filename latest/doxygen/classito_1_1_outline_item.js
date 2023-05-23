@@ -10,17 +10,6 @@ var classito_1_1_outline_item =
       [ "typeStaticMethod", "classito_1_1_outline_item.html#a85341e469e71a5f73828d1225e2d1d52a73b10015997a4b45cbf7570f7b718171", null ],
       [ "typeClassMethod", "classito_1_1_outline_item.html#a85341e469e71a5f73828d1225e2d1d52aec61c5b4331b98dae821cefe627973ef", null ]
     ] ],
-    [ "OutlineItem", "classito_1_1_outline_item.html#a6dca7209f456f9bce1a5302dd016aed5", null ],
-    [ "~OutlineItem", "classito_1_1_outline_item.html#a1ae73fdb0f669b5b0213fea0ea97cdc6", null ],
-    [ "icon", "classito_1_1_outline_item.html#afdfc3bd1070e4e48ff9451c392addf58", null ],
-    [ "m_args", "classito_1_1_outline_item.html#a77882441c0f1637a75350c87a7a238a3", null ],
-    [ "m_async", "classito_1_1_outline_item.html#ad8f93e88ffef72926f9151552ef23c12", null ],
-    [ "m_childs", "classito_1_1_outline_item.html#a1f36bc14d5567407da8d44ba595db5e7", null ],
     [ "m_endLineIdx", "classito_1_1_outline_item.html#a02c2dab36405523f2e565b6c318563ae", null ],
-    [ "m_name", "classito_1_1_outline_item.html#a17dddce02d98892f2524e7fab1ab09e5", null ],
-    [ "m_parent", "classito_1_1_outline_item.html#a497685e61bb0728cb380702724aaca81", null ],
-    [ "m_private", "classito_1_1_outline_item.html#afba51cba8fac26421140ee1fa36b1429", null ],
-    [ "m_returnType", "classito_1_1_outline_item.html#a8859a69fe57a191a0d03f884644aaf89", null ],
-    [ "m_startLineIdx", "classito_1_1_outline_item.html#ae0febc86a58ce8b5a72d5fd4684b4bc6", null ],
-    [ "m_type", "classito_1_1_outline_item.html#a4d5bccee8b90cde26e772f7bc98f83ba", null ]
+    [ "m_startLineIdx", "classito_1_1_outline_item.html#ae0febc86a58ce8b5a72d5fd4684b4bc6", null ]
 ];

@@ -7,6 +7,5 @@ var class_qt_char_property_manager =
     [ "uninitializeProperty", "class_qt_char_property_manager.html#aed6afc266cd6120391f29b0747124d56", null ],
     [ "value", "class_qt_char_property_manager.html#aa2012f98f36dc09cc08f7bdeb9a37b24", null ],
     [ "valueChanged", "class_qt_char_property_manager.html#af2e821059dd0826dd0449bf9d0f9259e", null ],
-    [ "valueText", "class_qt_char_property_manager.html#a8221bf1aa88917047048e82fab951db0", null ],
-    [ "d_ptr", "class_qt_char_property_manager.html#a370d929d8ebcdde241b0f49966f56394", null ]
+    [ "valueText", "class_qt_char_property_manager.html#a8221bf1aa88917047048e82fab951db0", null ]
 ];

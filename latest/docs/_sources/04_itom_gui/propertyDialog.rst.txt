@@ -168,6 +168,14 @@ General
   It uses the SystemEnvironment's variables. You can test the command using the
   cmd shell. win10: use setx instead of set for setting environment variables.
 
+* The default charset encoding, used to open a Python script can be selected in the
+  **File** section of this property page. Officially supported encodings are **Latin1**,
+  **UTF-8** and **UTF-8 with byte-order-mark (BOM)**, where **UTF-8** is the Python
+  standard encoding, if not otherwise stated in the script. It is further possible to
+  allow itom to automatically guess the encoding of a newly loaded script, if possible.
+  For further information about this, see the section :ref:`charset encoding <gui-editor-charset-encoding>`
+  of the script editor documentation page.
+
 Startup
 --------------------
 
@@ -528,6 +536,22 @@ It is recommended to set this value to the same value that is also set to
 optionally display a vertical line or different background color in the itom
 editor (see :ref:`gui-prop-script-editors`) as well as the maximum line 
 length used in the :ref:`code checker <gui-prop-py-code-checkers>`.
+
+Before starting the auto code formatter, it is also possible to execute a
+previous step, that is designed to sort the import statements in a script.
+For this, the package `isort <https://pypi.org/project/isort/>`_ can be used.
+You can enable to start this pre-step by activating the group box in the 
+corresponding tab. Additionally, you can configure the command. This time,
+the current script is copied to a temporary python script, whose path is
+passed at last statement to the user-defined command::
+
+    python -m <cmd> <filename>
+
+where **<cmd>** can be fully configured. An example is **isort --py 3 --profile black**,
+which prepares **isort** to be compatible with any Python 3 version and
+configure itself to be compatible with the auto formatter **black**. If you
+want to use another auto code formatter, it might be useful to change the profile
+accordingly.
 
 
 .. _gui-prop-py-styles:

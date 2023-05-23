@@ -8,8 +8,5 @@ var class_qt_button_property_browser =
     [ "itemChanged", "class_qt_button_property_browser.html#a5c20f41ccb4f29accad290b5e8aa157c", null ],
     [ "itemInserted", "class_qt_button_property_browser.html#a5a48b5ba05d3294ca11055141755d64e", null ],
     [ "itemRemoved", "class_qt_button_property_browser.html#a9cb389d81d647869465037d96f8710c4", null ],
-    [ "Q_PRIVATE_SLOT", "class_qt_button_property_browser.html#ab8bc99cf9cdf5676bfe85c8c0d6bf170", null ],
-    [ "setExpanded", "class_qt_button_property_browser.html#aea1d6f65a2843b4a8653ed099a95858e", null ],
-    [ "slotEditorDestroyed", "class_qt_button_property_browser.html#a63a9e0892d620b5203646bcddfea835f", null ],
-    [ "d_ptr", "class_qt_button_property_browser.html#a2516f7609e04430a9362247393c2dada", null ]
+    [ "setExpanded", "class_qt_button_property_browser.html#aea1d6f65a2843b4a8653ed099a95858e", null ]
 ];

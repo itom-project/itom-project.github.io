@@ -7,6 +7,5 @@ var class_qt_date_time_property_manager =
     [ "uninitializeProperty", "class_qt_date_time_property_manager.html#a359a346d314784221c2c7e64137bdffc", null ],
     [ "value", "class_qt_date_time_property_manager.html#a1dfac94a5abd3652fb64278ad6a97532", null ],
     [ "valueChanged", "class_qt_date_time_property_manager.html#ad9b2fdd107e0ec207110762a7f62e53d", null ],
-    [ "valueText", "class_qt_date_time_property_manager.html#a072c8ec1b02b82c77db4ee10b2ece5c9", null ],
-    [ "d_ptr", "class_qt_date_time_property_manager.html#a91f0c8c66b7be12b5805067c70638cf2", null ]
+    [ "valueText", "class_qt_date_time_property_manager.html#a072c8ec1b02b82c77db4ee10b2ece5c9", null ]
 ];

@@ -1,27 +1,4 @@
 var classito_1_1_python_progress_observer =
 [
-    [ "PyProgressObserver", "structito_1_1_python_progress_observer_1_1_py_progress_observer.html", "structito_1_1_python_progress_observer_1_1_py_progress_observer" ],
-    [ "PyProgressObserver_addTpDict", "classito_1_1_python_progress_observer.html#ae49145c8e99b69b1899f40668e7e0034", null ],
-    [ "PyProgressObserver_connect", "classito_1_1_python_progress_observer.html#ad300be3db199585c7bf81b6a44f2fbed", null ],
-    [ "PyProgressObserver_dealloc", "classito_1_1_python_progress_observer.html#a05738619b4a0d36b9bf9cc5365155eae", null ],
-    [ "PyProgressObserver_disconnect", "classito_1_1_python_progress_observer.html#af46ae776b158bcfde79e4c141927f2a0", null ],
-    [ "PyProgressObserver_getProgressMaximum", "classito_1_1_python_progress_observer.html#a76394f8a642c87d0563a0f05a3b69b83", null ],
-    [ "PyProgressObserver_getProgressMinimum", "classito_1_1_python_progress_observer.html#a222e89efcde6197576530dc1306de104", null ],
-    [ "PyProgressObserver_getProgressText", "classito_1_1_python_progress_observer.html#a05d73c0a7374a57ef5332f3348b34af2", null ],
-    [ "PyProgressObserver_getProgressValue", "classito_1_1_python_progress_observer.html#a5f73a380fa84b3e1004da6970a5cd9f3", null ],
-    [ "PyProgressObserver_info", "classito_1_1_python_progress_observer.html#a8b086e7b3fc9ec9ea805ff84313338e1", null ],
-    [ "PyProgressObserver_init", "classito_1_1_python_progress_observer.html#ad9b51d659805ff66a73afa13ab7da42f", null ],
-    [ "PyProgressObserver_isCancelled", "classito_1_1_python_progress_observer.html#a9bd3d049ff076c3f45942470bce42824", null ],
-    [ "PyProgressObserver_new", "classito_1_1_python_progress_observer.html#a0109fd1c6761a2e969011260063704df", null ],
-    [ "PyProgressObserver_repr", "classito_1_1_python_progress_observer.html#a5b00a6c7537aa1c7280941b31f1c5251", null ],
-    [ "PyProgressObserver_requestCancellation", "classito_1_1_python_progress_observer.html#a99ad423eee88aaf86a08cfa68118edc9", null ],
-    [ "PyProgressObserver_reset", "classito_1_1_python_progress_observer.html#a9d742b5f1c4cb87fc7839f20ea1c798a", null ],
-    [ "PyProgressObserver_setProgressMaximum", "classito_1_1_python_progress_observer.html#a58808fad504b8232fbabcc4787bd96ed", null ],
-    [ "PyProgressObserver_setProgressMinimum", "classito_1_1_python_progress_observer.html#a1559a8d24bc963eb2c022adc6f17a48a", null ],
-    [ "PyProgressObserver_setProgressText", "classito_1_1_python_progress_observer.html#a413c558646ff86002ad7f20acd7f4c19", null ],
-    [ "PyProgressObserver_setProgressValue", "classito_1_1_python_progress_observer.html#a8e78028830d071f33415eda05c151bda", null ],
-    [ "PyProgressObserver_getseters", "classito_1_1_python_progress_observer.html#ae1c25e632dd076ae0f7085b93d2da06b", null ],
-    [ "PyProgressObserver_methods", "classito_1_1_python_progress_observer.html#a3fff3b87ea5b46e91e3a72504f80a689", null ],
-    [ "PyProgressObserverModule", "classito_1_1_python_progress_observer.html#a383eba7760fae9c60b58b0add3beff67", null ],
-    [ "PyProgressObserverType", "classito_1_1_python_progress_observer.html#a4c7be7cfe7c79d08bea47133829fac16", null ]
+    [ "PyProgressObserver", "structito_1_1_python_progress_observer_1_1_py_progress_observer.html", null ]
 ];

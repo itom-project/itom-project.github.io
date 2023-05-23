@@ -8,6 +8,5 @@ var class_qt_cursor_property_manager =
     [ "value", "class_qt_cursor_property_manager.html#aaf636f967fbf2cc8f9b9fa17e0369b6a", null ],
     [ "valueChanged", "class_qt_cursor_property_manager.html#aa770949898717977040fc1bebde78719", null ],
     [ "valueIcon", "class_qt_cursor_property_manager.html#a5ab52dee6e0ad2d121313f2694bafed7", null ],
-    [ "valueText", "class_qt_cursor_property_manager.html#a12af294e50572779af391d113dde2516", null ],
-    [ "d_ptr", "class_qt_cursor_property_manager.html#a9cfd885173cfce88e2361ed96361f598", null ]
+    [ "valueText", "class_qt_cursor_property_manager.html#a12af294e50572779af391d113dde2516", null ]
 ];
