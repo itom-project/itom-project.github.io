@@ -1,0 +1,1336 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5.2. Basic Filters &#8212; itom Plugins</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/algorithms/basicFilters';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.3. DataObject Arithmetic" href="dataObjectArithmetic.html" />
+    <link rel="prev" title="5.1. Basic GPL Filters" href="BasicGPLFilters.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">itom Plugins</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../grabbers.html">
+                        Camera/ Grabber
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../actuators.html">
+                        Motors/ Actuators
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../GDIO.html">
+                        General Data IO
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../adconv.html">
+                        AD-Converters
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../algorithms.html">
+                        Algorithms/ Filters
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../grabbers.html">
+                        Camera/ Grabber
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../actuators.html">
+                        Motors/ Actuators
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../GDIO.html">
+                        General Data IO
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../adconv.html">
+                        AD-Converters
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../algorithms.html">
+                        Algorithms/ Filters
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BasicGPLFilters.html">5.1. Basic GPL Filters</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.2. Basic Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataObjectArithmetic.html">5.3. DataObject Arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataObjectIO.html">5.4. DataObjectIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fftwFilters.html">5.5. FFTW-Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fittingFilters.html">5.6. Fitting Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fringeProj.html">5.7. Fringe Proj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openCVFilters.html">5.8. OpenCV Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pclTools.html">5.9. PclTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rawImport.html">5.10. RawImport filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roughness.html">5.11. Roughness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="x3pio.html">5.12. X3P Input Output</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../algorithms.html" class="nav-link"><span class="section-number">5. </span>Algorithms/ Filters</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">5.2. </span>Basic Filters</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="basic-filters">
+<h1><span class="section-number">5.2. </span>Basic Filters<a class="headerlink" href="#basic-filters" title="Permalink to this heading">#</a></h1>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><span>ITO developed filter-functions for data objects</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><span>Algorithm</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><span>LGPL</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Windows, Linux</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Author</strong>:</p></td>
+<td><p><span>W. Lyda, T. Boettcher, University Stuttgart</span></p></td>
+</tr>
+</tbody>
+</table>
+<section id="overview">
+<h2><span class="section-number">5.2.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>This plugin provides several basic filter calculations for itom::dataObject. These are for instance:</p>
+<ul class="simple">
+<li><p>merging of planes</p></li>
+<li><p>swap byte order of objects</p></li>
+<li><p>resample slices from dataObjects</p></li>
+<li><p>mean value filter along axis</p></li>
+</ul>
+<p>This plugin does not have any unusual dependencies.</p>
+<p>These filters are defined in the plugin:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#itom.algorithms.calcHist" title="itom.algorithms.calcHist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calcHist()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.calcMeanZ" title="itom.algorithms.calcMeanZ"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calcMeanZ()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.calcObjSlice" title="itom.algorithms.calcObjSlice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calcObjSlice()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.calcRadialMean" title="itom.algorithms.calcRadialMean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calcRadialMean()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.clipAbyB" title="itom.algorithms.clipAbyB"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clipAbyB()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.clipValues" title="itom.algorithms.clipValues"><code class="xref py py-meth docutils literal notranslate"><span class="pre">clipValues()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.fillObject" title="itom.algorithms.fillObject"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fillObject()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.findEllipses" title="itom.algorithms.findEllipses"><code class="xref py py-meth docutils literal notranslate"><span class="pre">findEllipses()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.flatten3Dto2D" title="itom.algorithms.flatten3Dto2D"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flatten3Dto2D()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.gaussianFilter" title="itom.algorithms.gaussianFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gaussianFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.gaussianFilterEpsilon" title="itom.algorithms.gaussianFilterEpsilon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gaussianFilterEpsilon()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.highValueFilter" title="itom.algorithms.highValueFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">highValueFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.labeling" title="itom.algorithms.labeling"><code class="xref py py-meth docutils literal notranslate"><span class="pre">labeling()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.lowPassFilter" title="itom.algorithms.lowPassFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lowPassFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.lowValueFilter" title="itom.algorithms.lowValueFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lowValueFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.medianFilter" title="itom.algorithms.medianFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">medianFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.mergeColorPlane" title="itom.algorithms.mergeColorPlane"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mergeColorPlane()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.replaceInfAndNaN" title="itom.algorithms.replaceInfAndNaN"><code class="xref py py-meth docutils literal notranslate"><span class="pre">replaceInfAndNaN()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.sobelOpt" title="itom.algorithms.sobelOpt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sobelOpt()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.spikeMeanFilter" title="itom.algorithms.spikeMeanFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spikeMeanFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.spikeMedianFilter" title="itom.algorithms.spikeMedianFilter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spikeMedianFilter()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#itom.algorithms.swapByteOrder" title="itom.algorithms.swapByteOrder"><code class="xref py py-meth docutils literal notranslate"><span class="pre">swapByteOrder()</span></code></a></p></li>
+</ol>
+</section>
+<section id="filters">
+<h2><span class="section-number">5.2.2. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this heading">#</a></h2>
+<p>Detailed overview about all defined filters:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.calcHist">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">calcHist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoInterval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.calcHist" title="Permalink to this definition">#</a></dt>
+<dd><p>calculates histgram of real input data object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – 2D or multidimensional source data object ((u)int8, (u)int16, (u)int32, float32, float64 or rgba32)</p></li>
+<li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – histogram data object (will be int32, [higher-dimensions x 1 x bins] where higher-dimensions corresponds to the dimensions higher than x and y of the source object. A source object of type rgba32 will lead to [higher-dimensions x 4 x bins] where the 4-sized dimension is the histogram if the [r,g,b,gray] value channels. If the given object already fits to the type and size requirements, it is used without allocating a new object.</p></li>
+<li><p><strong>bins</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Number of bins ((u)int16, (u)int32, float32 and float64 only, default: 0 leads to 1024 bins), for (u)int8 and rgba32 the number of bins is given by the total number of values represented by the data type.</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 4096], Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>autoInterval</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Defines how to determine the interval of the histogram: -1 (default) use the limits of (u)int8 and rgba32 and auto-calculate the min/max values for floating point data types, 0: use the values given by interval, 1: automatically calculate the min/max values for all data types.</p>
+<div class="line-block">
+<div class="line"><em>Value range: [-1, 1], Default: -1</em></div>
+</div>
+</p></li>
+<li><p><strong>interval</strong> (<em>Tuple</em><em>[</em><em>float</em><em>,</em><em>float</em><em>] </em><em>(</em><em>interval</em><em> [</em><em>v1</em><em>,</em><em>v2</em><em>]</em><em>)</em><em>, </em><em>optional</em>) – <p>Interval of the histogram (depending on parameter ‘autoInterval’). The first value is included in the first bin, the last value is included in the last bin.</p>
+<div class="line-block">
+<div class="line"><em>, All values allowed, Default: [-inf, inf]</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.calcMeanZ">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">calcMeanZ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srcImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImg</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">ignoreInf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calcStd</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.calcMeanZ" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate mean value (and optional standard deviation) of a 3D data object in z-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – 3D input object of dimension [ZxMxN] with Z different planes.</p></li>
+<li><p><strong>destImg</strong> (<em>itom.dataObject</em>) – Output image of same type than input object and dimension [1xMxN] or [2xMxN] depending on parameter ‘calcStd’.</p></li>
+<li><p><strong>ignoreInf</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, Inf or NaN values will not be taken into account when calculating the mean value (default, only important for floating point data types).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 1</em></div>
+</div>
+</p></li>
+<li><p><strong>calcStd</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, the standard deviation is also calculated and put into the second plane of ‘destImg’.</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 1</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.calcObjSlice">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">calcObjSlice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srcImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dstSlice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">interpolationMode</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.calcObjSlice" title="Permalink to this definition">#</a></dt>
+<dd><p>Interpolate 1D-slice from along the defined line from a 2D-Object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – 2D image or single plane n-D object</p></li>
+<li><p><strong>dstSlice</strong> (<em>itom.dataObject</em>) – Slice with output data</p></li>
+<li><p><strong>x0</strong> (<em>float</em>) – <p>x0-coordinate for slice</p>
+<div class="line-block">
+<div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>y0</strong> (<em>float</em>) – <p>y0-coordinate for slice</p>
+<div class="line-block">
+<div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 1</em></div>
+</div>
+</p></li>
+<li><p><strong>x1</strong> (<em>float</em>) – <p>x1-coordinate for slice</p>
+<div class="line-block">
+<div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>y1</strong> (<em>float</em>) – <p>y1-coordinate for slice</p>
+<div class="line-block">
+<div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 1</em></div>
+</div>
+</p></li>
+<li><p><strong>interpolationMode</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>0: Bresenham or Nearest Neighbour, 1: weighted (not implemented, yet).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 0], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.calcRadialMean">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">calcRadialMean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scrImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radiusStep</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">centerX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centerY</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.calcRadialMean" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculates the mean value for radial circles with a given center point an a radius step size</p>
+<p>The radiuses are the distances from the given center point to the physical coordinates of each pixel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scrImage</strong> (<em>itom.dataObject</em>) – Input image</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Output image (1xN) of the same type than the input image, where N corresponds to different radiuses.</p></li>
+<li><p><strong>radiusStep</strong> (<em>float</em>) – <p>step size of the radius for the discretization</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1e-09, inf], Default: 0.01</em></div>
+</div>
+</p></li>
+<li><p><strong>centerX</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>x-coordinate of radial center</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>centerY</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>y-coordinate of radial center</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.clipAbyB">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">clipAbyB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparisonImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxValue</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">newValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insideFlag</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.clipAbyB" title="Permalink to this definition">#</a></dt>
+<dd><p>clip values of image A to newValue (default = 0) outside or inside of minValue and maxValue in image B</p>
+<p>Depending on the parameter ‘insideFlag’, this filter sets all values in image A depending on image B within (1) or outside (0) of the range (minValue, maxValue) to the value given by ‘newValue’. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – input image [real typed data object]</p></li>
+<li><p><strong>comparisonImage</strong> (<em>itom.dataObject</em>) – input image [real typed data object] for comparision</p></li>
+<li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – destination image (inplace possible)</p></li>
+<li><p><strong>minValue</strong> (<em>float</em>) – <p>lowest value in range</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>maxValue</strong> (<em>float</em>) – <p>highest value in range</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>newValue</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>value set to clipped values (default: 0.0)</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>insideFlag</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>0: clip values outside of given range (default), 1: clip inside</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.clipValues">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">clipValues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxValue</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">newValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">insideFlag</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.clipValues" title="Permalink to this definition">#</a></dt>
+<dd><p>clip values outside or inside of minValue and maxValue to newValue (default = 0)</p>
+<p>Depending on the parameter ‘insideFlag’, this filter sets all values within (1) or outside (0) of the range (minValue, maxValue) to the value given by ‘newValue’. In both cases the range boundaries are not clipped and replaced. If clipping is executed outside of range, NaN and Inf values are replaced as well (floating point data objects only). This filter supports only real value data types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – input image [real typed data object]</p></li>
+<li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – destination image (inplace possible)</p></li>
+<li><p><strong>minValue</strong> (<em>float</em>) – <p>lowest value in range</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>maxValue</strong> (<em>float</em>) – <p>highest value in range</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>newValue</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>value set to clipped values (default: 0.0)</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>insideFlag</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>0: clip values outside of given range (default), 1: clip inside</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.fillObject">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">fillObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometricElement</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">insideFlag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgeFlag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newValueInside</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newValueOutside</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.fillObject" title="Permalink to this definition">#</a></dt>
+<dd><p>fills a ROI, which defined by a geometric primitive, of the given dataObject with a defined value</p>
+<p>Depending on the parameter ‘insideFlag’, this filter sets all values of the dataObject depending on the geometric primitiv within (1) or outside (2) or both (3) to the value given by ‘newValueInside’ and ‘newValueOutside’. The ‘edgeFlag’ is currently not used but shall manage the edge handling of primitive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – Preallocated dataObject to be filled</p></li>
+<li><p><strong>geometricElement</strong> (<em>itom.dataObject</em>) – Geometric primitiv according to definition</p></li>
+<li><p><strong>insideFlag</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Switch between fill inside, outside or both</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 3], Default: 1</em></div>
+</div>
+</p></li>
+<li><p><strong>edgeFlag</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Edge-Flag, currently not used</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 0], Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>newValueInside</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>New value for pixels inside the geometric element</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 1</em></div>
+</div>
+</p></li>
+<li><p><strong>newValueOutside</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>New value for pixels outside the geometric element</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.findEllipses">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">findEllipses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labelList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contourPts</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">numBorderPix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresBorder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minPixEllCenter</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.findEllipses" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter for detecting the centers of ellipses with subpixel accuracy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>itom.dataObject</em>) – image</p></li>
+<li><p><strong>labelList</strong> (<em>itom.dataObject</em>) – list of found labels</p></li>
+<li><p><strong>centers</strong> (<em>itom.dataObject</em>) – detected ellipses’ centers</p></li>
+<li><p><strong>contourPts</strong> (<em>itom.dataObject</em>) – ellipses’ contour points</p></li>
+<li><p><strong>numBorderPix</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>number of pixels for border detection</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1000], Default: 6</em></div>
+</div>
+</p></li>
+<li><p><strong>thresBorder</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>threshold for identifying a border after differentation</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 100], Default: 0.04</em></div>
+</div>
+</p></li>
+<li><p><strong>minPixEllCenter</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>minimum number of pixels for ellipses center detection in x and y direction</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 100], Default: 6</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.flatten3Dto2D">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">flatten3Dto2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scrImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.flatten3Dto2D" title="Permalink to this definition">#</a></dt>
+<dd><p>Flattens a z-Stack of Mx1xN or MxNx1 matrixes to NxM or MxN.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scrImage</strong> (<em>itom.dataObject</em>) – Input image</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Output image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.gaussianFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">gaussianFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.gaussianFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>2D gaussian blur filter that convolves the source image with a Gaussian kernel.</p>
+<p>The convolution kernel is rectangular with a side length of (kernely, kernelx). The gaussian kernel for a pixel (x0,y0) is defined by:</p>
+<p>f(x,y) = A * exp(-[(x-x0)^2/(2*sigma_x^2) + (y-y0)^2/(2*sigma_y^2)])</p>
+<p>with</p>
+<p>A = 1 / (2 * pi * sigmaX * sigmaY))</p>
+<p>Invalid pixels within the kernel are excluded from the convolution. It is possible to fill the invalid values
+by the Gaussian blurred value of the surrounding kernel, too, if the parameter ‘replaceNaN’ is set to 1. If the kernel only contains invalid values,
+no replacement is possible and the corresponding pixel in the destination image remains invalid.</p>
+<p>This filter can be applied inplace, hence, the source and destination image can be the same. This filter is implemented for all
+real data types. 3 or higher dimensional dataObjects are processed plane-by-plane, such that the destination image has always the same size
+and type than the input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Size of kernel in x-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Size of kernel in y-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>sigmaX</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Standard deviation in x direction</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
+</div>
+</p></li>
+<li><p><strong>sigmaY</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Standard deviation in y direction</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.gaussianFilterEpsilon">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">gaussianFilterEpsilon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilonX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigmaY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilonY</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.gaussianFilterEpsilon" title="Permalink to this definition">#</a></dt>
+<dd><p>2D gaussian blur filter that convolves the source image with a Gaussian kernel.</p>
+<p>The convolution kernel is rectangular with a side length that is determined by the epsilon values epsilonX and epsilonY.
+The gaussian kernel for a pixel (x0,y0) is defined by:</p>
+<p>f(x,y) = A * exp(-[(x-x0)^2/(2*sigmaX^2) + (y-y0)^2/(2*sigmaY^2)])</p>
+<p>with</p>
+<p>A = 1 / (2 * pi * sigmaX * sigmaY))</p>
+<p>The size of the kernel is adjusted such that the limit values in x- and y-direction fullfill the following inequation:</p>
+<p>f(x,y=0) = exp(-[(x-x0)^2/(2*sigmaX^2)]) / sqrt(2 * pi * sigmaX^2) &gt;= epsilonX
+f(x=0,y) = exp(-[(y-y0)^2/(2*sigmaY^2)]) / sqrt(2 * pi * sigmaY^2) &gt;= epsilonY</p>
+<p>Invalid pixels within the kernel are excluded from the convolution. It is possible to fill the invalid values
+by the Gaussian blurred value of the surrounding kernel, too, if the parameter ‘replaceNaN’ is set to 1. If the kernel only contains invalid values,
+no replacement is possible and the corresponding pixel in the destination image remains invalid.</p>
+<p>This filter can be applied inplace, hence, the source and destination image can be the same. This filter is implemented for all
+real data types. 3 or higher dimensional dataObjects are processed plane-by-plane, such that the destination image has always the same size
+and type than the input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
+<li><p><strong>sigmaX</strong> (<em>float</em>) – <p>Standard deviation in x direction</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
+</div>
+</p></li>
+<li><p><strong>epsilonX</strong> (<em>float</em>) – <p>Stop condition in x-direction, the kernel in x-direction is cropped for Gaussian values below this limit</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1e-05, 1], Default: 0.001</em></div>
+</div>
+</p></li>
+<li><p><strong>sigmaY</strong> (<em>float</em>) – <p>Standard deviation in y direction</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
+</div>
+</p></li>
+<li><p><strong>epsilonY</strong> (<em>float</em>) – <p>Stop condition in y-direction, the kernel in y-direction is cropped for Gaussian values below this limit</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1e-05, 1], Default: 0.001</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.highValueFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">highValueFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.highValueFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>2D maximum filter that set a pixel to the highest value within the surrounding kernel.</p>
+<p>The rectangular kernel of size (kernely, kernelx) is centered at each pixel of the source image. The same pixel in the destination image
+is then set to the maximum value within the kernel. Invalid values within the kernel are ignored. It is possible to fill these invalid values
+by the maximum of the surrounding kernel, too, if the parameter ‘replaceNaN’ is set to 1.</p>
+<p>This filter can be applied inplace, hence, the source and destination image can be the same. This filter is implemented for all
+real data types. 3 or higher dimensional dataObjects are processed plane-by-plane, such that the destination image has always the same size
+and type than the input image</p>
+<p>See also: lowValueFilter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em>) – <p>Size of kernel in x-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em>) – <p>Size of kernel in y-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.labeling">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">labeling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labelList</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">invalids</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.labeling" title="Permalink to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Finds connected areas in an image an assigns a label to them.</dt><dd><p>In the input image according found regions get painted with the according label.
+The returned list has the format x0,y0,x1,y1 for each label.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>itom.dataObject</em>) – image</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – <p>threshold for labeling</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 65535], Default: 50</em></div>
+</div>
+</p></li>
+<li><p><strong>labelList</strong> (<em>itom.dataObject</em>) – list of found labels</p></li>
+<li><p><strong>invalids</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>inavlid pixels</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 65535], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.lowPassFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">lowPassFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.lowPassFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>2D lowpass (blurring) filter that set a pixel to the mean value of all valid pixels within the kernel.</p>
+<p>The rectangular kernel of size (kernely, kernelx) is centered at each pixel of the source image. The same pixel in the destination image
+is then set to the mean value of all valid pixels within the kernel. It is possible to fill the invalid values
+by the mean value of the surrounding kernel, too, if the parameter ‘replaceNaN’ is set to 1. If the kernel only contains invalid values,
+no replacement is possible and the corresponding pixel in the destination image remains invalid.</p>
+<p>This filter can be applied inplace, hence, the source and destination image can be the same. This filter is implemented for all
+real data types. 3 or higher dimensional dataObjects are processed plane-by-plane, such that the destination image has always the same size
+and type than the input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em>) – <p>Size of kernel in x-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em>) – <p>Size of kernel in y-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.lowValueFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">lowValueFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.lowValueFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>2D minimum filter that set a pixel to the lowest value within the surrounding kernel.</p>
+<p>The rectangular kernel of size (kernely, kernelx) is centered at each pixel of the source image. The same pixel in the destination image
+is then set to the minimum value within the kernel. Invalid values within the kernel are ignored. It is possible to fill these invalid values
+by the minimum of the surrounding kernel, too, if the parameter ‘replaceNaN’ is set to 1.</p>
+<p>This filter can be applied inplace, hence, the source and destination image can be the same. This filter is implemented for all
+real data types. 3 or higher dimensional dataObjects are processed plane-by-plane, such that the destination image has always the same size
+and type than the input image.</p>
+<p>See also: highValueFilter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em>) – <p>Size of kernel in x-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em>) – <p>Size of kernel in y-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.medianFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">medianFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.medianFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>2D median filter that set a pixel to the median value of all valid pixels within the kernel.</p>
+<p>The rectangular kernel of size (kernely, kernelx) is centered at each pixel of the source image. The same pixel in the destination image
+is then set to the median value of all valid pixels within the kernel. Invalid values within the kernel are ignored. It is possible to fill these invalid values
+by the median value of the surrounding kernel, too, if the parameter ‘replaceNaN’ is set to 1.</p>
+<p>This filter can be applied inplace, hence, the source and destination image can be the same. This filter is implemented for all
+real data types. 3 or higher dimensional dataObjects are processed plane-by-plane, such that the destination image has always the same size
+and type than the input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em>) – <p>Size of kernel in x-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em>) – <p>Size of kernel in y-direction (odd values only)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.mergeColorPlane">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">mergeColorPlane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srcImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImg</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">toggleByteOrder</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.mergeColorPlane" title="Permalink to this definition">#</a></dt>
+<dd><p>Merge 3 or 4 color planes to a single tRGBA32 or tInt32-plane.</p>
+<p>If second object is tInt32 and of right size in x and y, the stack object will be convertet to tInt32. In all other cases the object will be tRGBA32</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – Input image with 3 or 4 uint8 planes</p></li>
+<li><p><strong>destImg</strong> (<em>itom.dataObject</em>) – Output image with of type rgba32</p></li>
+<li><p><strong>toggleByteOrder</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Switch between RGBA = 0, BGRA = 1, ARGB = 2, ABGR = 3</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 3], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.replaceInfAndNaN">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">replaceInfAndNaN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srcImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.replaceInfAndNaN" title="Permalink to this definition">#</a></dt>
+<dd><p>replaces infinite and/or nan-values by values of second matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – Input object of type float32 or float64 whose non-finite values will be replaced with the values in replaceImg.</p></li>
+<li><p><strong>replaceImg</strong> (<em>itom.dataObject</em>) – replacement data object of same type and shape than srcImg.</p></li>
+<li><p><strong>destImg</strong> (<em>itom.dataObject</em>) – Output object of same type and shape than srcImg (inplace possible).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>nrOfReplacements - number of values that have been replaced.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.sobelOpt">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">sobelOpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceNaN</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.sobelOpt" title="Permalink to this definition">#</a></dt>
+<dd><p>Performs a Sobel filtering with kernelsize (3 ,3) using the generic mcpp filter engine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – n-dim DataObject</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – n-dim DataObject of type sourceImage</p></li>
+<li><p><strong>dir</strong> (<em>int</em>) – <p>derivative in x: 0, y: 1 direction or 2: 2D magnitude sqrt(dx*dx + dy*dy)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 2], Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>if 0 NaN values in input image will be copied to output image (default)</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 0</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.spikeMeanFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">spikeMeanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newValue</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceSpikeByNewValue</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.spikeMeanFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>Performs a linear mean filter with kernelsize (kernelx, kernely) and pixelwise comparison of
+filtered image and original image to remove spikes according to delta value.</p>
+<p>At first the input image is filtered by a linear mean filter (filter: ‘lowPassFilter’) using the given kernel size. The output
+image then contains the input image, where every pixel is replaced ‘newValue’ if the absolute distance between the median
+filtered and the input image at the specific pixel is bigger than ‘delta’.</p>
+<p>This filter also works inplace (same source and destination).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source dataObject of any real data type.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – destination dataObject (can be the same than source)</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em>) – <p>Odd kernelsize in x</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em>) – <p>Odd kernelsize in y</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – <p>Delta value for comparison</p>
+<div class="line-block">
+<div class="line"><em>Value range: [2.22045e-15, inf], Default: 0.05</em></div>
+</div>
+</p></li>
+<li><p><strong>newValue</strong> (<em>float</em>) – <p>value set to clipped values</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceSpikeByNewValue</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>if 1 (default), a spike value is replaced by the parameter ‘newValue’, else it is replaced by the value from the filtered object.</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 1</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.spikeMedianFilter">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">spikeMedianFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernelx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernely</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newValue</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">replaceSpikeByNewValue</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.spikeMedianFilter" title="Permalink to this definition">#</a></dt>
+<dd><p>Performs a median filter with kernelsize (kernelx, kernely) and pixelwise comparison of
+filtered image and original image to remove spikes according to delta value.</p>
+<p>At first the input image is filtered by a median filter (filter: ‘medianFilter’) using the given kernel size. The output
+image then contains the input image, where every pixel is replaced ‘newValue’ if the absolute distance between the median
+filtered and the input image at the specific pixel is bigger than ‘delta’.</p>
+<p>This filter also works inplace (same source and destination).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source dataObject of any real data type.</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – destination dataObject (can be the same than source)</p></li>
+<li><p><strong>kernelx</strong> (<em>int</em>) – <p>Odd kernelsize in x</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>kernely</strong> (<em>int</em>) – <p>Odd kernelsize in y</p>
+<div class="line-block">
+<div class="line"><em>Value range: [1, 101], Default: 3</em></div>
+</div>
+</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – <p>Delta value for comparison</p>
+<div class="line-block">
+<div class="line"><em>Value range: [2.22045e-15, inf], Default: 0.05</em></div>
+</div>
+</p></li>
+<li><p><strong>newValue</strong> (<em>float</em>) – <p>value set to clipped values</p>
+<div class="line-block">
+<div class="line"><em>All values allowed, Default: 0</em></div>
+</div>
+</p></li>
+<li><p><strong>replaceSpikeByNewValue</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>if 1 (default), a spike value is replaced by the parameter ‘newValue’, else it is replaced by the value from the filtered object.</p>
+<div class="line-block">
+<div class="line"><em>Value range: [0, 1], Default: 1</em></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="itom.algorithms.swapByteOrder">
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">swapByteOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scrImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destImage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.swapByteOrder" title="Permalink to this definition">#</a></dt>
+<dd><p>Swap byte order for input image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scrImage</strong> (<em>itom.dataObject</em>) – Input image</p></li>
+<li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Output image</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="BasicGPLFilters.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.1. </span>Basic GPL Filters</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dataObjectArithmetic.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>DataObject Arithmetic</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">5.2.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filters">5.2.2. Filters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.calcHist"><code class="docutils literal notranslate"><span class="pre">calcHist()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.calcMeanZ"><code class="docutils literal notranslate"><span class="pre">calcMeanZ()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.calcObjSlice"><code class="docutils literal notranslate"><span class="pre">calcObjSlice()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.calcRadialMean"><code class="docutils literal notranslate"><span class="pre">calcRadialMean()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.clipAbyB"><code class="docutils literal notranslate"><span class="pre">clipAbyB()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.clipValues"><code class="docutils literal notranslate"><span class="pre">clipValues()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.fillObject"><code class="docutils literal notranslate"><span class="pre">fillObject()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.findEllipses"><code class="docutils literal notranslate"><span class="pre">findEllipses()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.flatten3Dto2D"><code class="docutils literal notranslate"><span class="pre">flatten3Dto2D()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.gaussianFilter"><code class="docutils literal notranslate"><span class="pre">gaussianFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.gaussianFilterEpsilon"><code class="docutils literal notranslate"><span class="pre">gaussianFilterEpsilon()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.highValueFilter"><code class="docutils literal notranslate"><span class="pre">highValueFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.labeling"><code class="docutils literal notranslate"><span class="pre">labeling()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.lowPassFilter"><code class="docutils literal notranslate"><span class="pre">lowPassFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.lowValueFilter"><code class="docutils literal notranslate"><span class="pre">lowValueFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.medianFilter"><code class="docutils literal notranslate"><span class="pre">medianFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.mergeColorPlane"><code class="docutils literal notranslate"><span class="pre">mergeColorPlane()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.replaceInfAndNaN"><code class="docutils literal notranslate"><span class="pre">replaceInfAndNaN()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.sobelOpt"><code class="docutils literal notranslate"><span class="pre">sobelOpt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.spikeMeanFilter"><code class="docutils literal notranslate"><span class="pre">spikeMeanFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.spikeMedianFilter"><code class="docutils literal notranslate"><span class="pre">spikeMedianFilter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.swapByteOrder"><code class="docutils literal notranslate"><span class="pre">swapByteOrder()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/plugins/algorithms/basicFilters.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2011-2023, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

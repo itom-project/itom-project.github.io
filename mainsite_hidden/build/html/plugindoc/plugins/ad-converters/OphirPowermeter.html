@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4.3. OphirPowermeter &#8212; itom Plugins</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/ad-converters/OphirPowermeter';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.4. Thorlabs KCube Position Aligner" href="ThorlabsKCubePA.html" />
+    <link rel="prev" title="4.2. MeasurementComputing" href="MeasurementComputing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">itom Plugins</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../grabbers.html">
+                        Camera/ Grabber
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../actuators.html">
+                        Motors/ Actuators
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../GDIO.html">
+                        General Data IO
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../adconv.html">
+                        AD-Converters
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../algorithms.html">
+                        Algorithms/ Filters
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../grabbers.html">
+                        Camera/ Grabber
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../actuators.html">
+                        Motors/ Actuators
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../GDIO.html">
+                        General Data IO
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../adconv.html">
+                        AD-Converters
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../algorithms.html">
+                        Algorithms/ Filters
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HBMSpider8.html">4.1. HBMSpider8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MeasurementComputing.html">4.2. MeasurementComputing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.3. OphirPowermeter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThorlabsKCubePA.html">4.4. Thorlabs KCube Position Aligner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="niDAQmx.html">4.5. NI-DAQmx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thorlabsPowerMeter.html">4.6. Thorlabs Power Meter</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../adconv.html" class="nav-link"><span class="section-number">4. </span>AD-Converters</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">4.3. </span>OphirPowermeter</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="ophirpowermeter">
+<h1><span class="section-number">4.3. </span>OphirPowermeter<a class="headerlink" href="#ophirpowermeter" title="Permalink to this heading">#</a></h1>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><span>Plugin for Ophir Powermeter.</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><span>DataIO</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><span>licensed under LGPL</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Windows, (Linux possible but yet not implemented)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Devices</strong>:</p></td>
+<td><p>Powermeter VEGA from company <em>Ophir</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Author</strong>:</p></td>
+<td><p><span>J. Krauter, TRUMPF SE + Co. KG</span></p></td>
+</tr>
+</tbody>
+</table>
+<section id="overview">
+<h2><span class="section-number">4.3.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>The OphirPowermeter is an itom plugin which is used for Powermeters from Ophir.
+It supports the RS232 and USB connection types. To use the RS232 variante, you must initiate first a serialIO plugin and use it as an initParameter.</p>
+<p>Tested devices: 1-channel VEGA (USB, RS232) with a Thermopile head.For the USB type it is necessary to install the COM object which comes with StarLab form Ophir.Download page: <a class="reference external" href="https://www.ophiropt.com/laser--measurement/software/com-object">https://www.ophiropt.com/laser–measurement/software/com-object</a></p>
+</section>
+<section id="initialization">
+<h2><span class="section-number">4.3.2. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading">#</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt><strong>connection</strong>: str</dt><dd><p>Type of the connection (‘RS232’, ‘USB’). For the RS232 connection a serialIO plugin instance is needed!</p>
+<p><em>Match: [“RS232”, “USB”], Default: “RS232”</em></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>serial</strong>: Union[itom.dataIO, itom.actuator], optional</dt><dd><p>An opened serial port (the right communication parameters will be set by this plugin).</p>
+<p><em>Only plugin “SerialIO” is allowed</em></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>serialNo</strong>: str, optional</dt><dd><p>Serial number of the device to be connected. If empty, all found serial numbers will be printed and the first device that is detected will be opened.</p>
+<p><em>default: “”</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="instruction">
+<h2><span class="section-number">4.3.3. </span>Instruction<a class="headerlink" href="#instruction" title="Permalink to this heading">#</a></h2>
+<p>Download the Starlab SDK from Ophir: <a class="reference external" href="https://www.ophiropt.com/laser--measurement/de/software/starlab-for-usb">https://www.ophiropt.com/laser–measurement/de/software/starlab-for-usb</a>.
+Set the Windows Environment Variable OPHIR_STARLAB_ROOT to the installation directory (e.g. C:Program FilesOphir OptronicsStarLab 3.80).</p>
+</section>
+<section id="parameters">
+<h2><span class="section-number">4.3.4. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
+<dl class="simple">
+<dt><strong>ROMVersion</strong>: {str}, read-only</dt><dd><p>Version of ROM software.</p>
+</dd>
+<dt><strong>battery</strong>: {int}, read-only</dt><dd><p>1 if battery is OK, 0 if battery is low.</p>
+</dd>
+<dt><strong>calibrationDueDate</strong>: {str}, read-only</dt><dd><p>Calibration due date.</p>
+</dd>
+<dt><strong>comPort</strong>: {int}, read-only</dt><dd><p>The current com-port ID of this specific device. -1 means undefined.</p>
+</dd>
+<dt><strong>connection</strong>: {str}, read-only</dt><dd><p>type of the connection (‘RS232’, ‘USB’).</p>
+</dd>
+<dt><strong>deviceType</strong>: {str}, read-only</dt><dd><p>Device type (NOVA, VEGA, LASERSTAR-S (single channel), LASERSTAR-D (dual channel), Nova-
+II).</p>
+</dd>
+<dt><strong>headName</strong>: {str}, read-only</dt><dd><p>Head name connected to the device.</p>
+</dd>
+<dt><strong>headSerialNumber</strong>: {str}, read-only</dt><dd><p>Head serial number connected to the device.</p>
+</dd>
+<dt><strong>headType</strong>: {str}, read-only</dt><dd><p>Head type (thermopile, BC20, temperature probe, photodiode, CIE head, RP head,
+pyroelectric, nanoJoule meter, no head connected.</p>
+</dd>
+<dt><strong>measurementType</strong>: {str}</dt><dd><p>Measurement type (energy or power).</p>
+</dd>
+<dt><strong>name</strong>: {str}, read-only</dt><dd><p>Name of plugin.</p>
+</dd>
+<dt><strong>range</strong>: {int}</dt><dd><p>Measurement range (0: AUTO, 1: 150W, 2: 50.0W, 3: 5.00W).</p>
+</dd>
+<dt><strong>serialNumber</strong>: {str}, read-only</dt><dd><p>Serial number of the device shown on display.</p>
+</dd>
+<dt><strong>timeout</strong>: {int}, read-only</dt><dd><p>Request timeout, default 1000 ms.</p>
+</dd>
+<dt><strong>unit</strong>: {str}</dt><dd><p>Unit of device</p>
+</dd>
+<dt><strong>wavelength</strong>: {str}</dt><dd><p>Available discrete wavelengths: 10.6 .8-6 &lt;.8u.</p>
+</dd>
+<dt><strong>wavelengthSet</strong>: {str}, read-only</dt><dd><p>Setting of the measurement wavelength (DISCRETE or CONTINUOUS).</p>
+</dd>
+</dl>
+</section>
+<section id="exemplary-usage-from-python">
+<h2><span class="section-number">4.3.5. </span>Exemplary usage from Python<a class="headerlink" href="#exemplary-usage-from-python" title="Permalink to this heading">#</a></h2>
+<p>In the following script, the first detectable power meter is connected and a oscilloscope-like
+plot is opened that displays a moving graph of recent intensity values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">connectionType</span> <span class="o">=</span> <span class="s2">&quot;USB&quot;</span>
+
+<span class="k">if</span> <span class="n">connectionType</span> <span class="o">==</span> <span class="s2">&quot;USB&quot;</span><span class="p">:</span>  <span class="c1"># connects the USB powermeter type</span>
+    <span class="n">adda</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;OphirPowermeter&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="n">connectionType</span><span class="p">)</span>  <span class="c1"># connect a USB Powermeter</span>
+<span class="k">elif</span> <span class="n">connectionType</span> <span class="o">==</span> <span class="s2">&quot;RS232&quot;</span><span class="p">:</span>  <span class="c1"># connects the RS232 powermeter type with the additional SerialIO instance</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">baud</span> <span class="o">=</span> <span class="mi">9600</span>
+    <span class="n">endline</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\r</span><span class="s1">&#39;</span>
+    <span class="n">adda</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;OphirPowermeter&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="n">connectionType</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">baud</span><span class="p">,</span> <span class="n">endline</span><span class="p">))</span>
+
+<span class="n">numPoints</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">numPoints</span><span class="p">],</span> <span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">plotHandle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot1</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">timeout</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">timerId</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+    <span class="n">adda</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>  <span class="c1"># acquire new intensity value</span>
+
+    <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="n">numPoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span>  <span class="c1"># shift pixels to the left by one...</span>
+
+    <span class="n">adda</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>  <span class="c1"># get the recently acquired value</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">copyMetaInfo</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">numPoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># ...append new value to the end of image</span>
+
+    <span class="k">if</span> <span class="n">plotHandle</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">plotHandle</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span>  <span class="c1"># update the displayed image</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure has been closed. Stop acquisition...&quot;</span><span class="p">)</span>
+        <span class="n">timerId</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">timerId</span>
+
+
+<span class="n">timerId</span> <span class="o">=</span> <span class="n">timer</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>  <span class="c1"># call timeout every 50ms</span>
+</pre></div>
+</div>
+</section>
+<section id="changelog">
+<h2><span class="section-number">4.3.6. </span>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>itom setup 4.1.0: This plugin has been compiled using the StarLab 3.60.0</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MeasurementComputing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>MeasurementComputing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ThorlabsKCubePA.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Thorlabs KCube Position Aligner</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">4.3.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">4.3.2. Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instruction">4.3.3. Instruction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">4.3.4. Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemplary-usage-from-python">4.3.5. Exemplary usage from Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changelog">4.3.6. Changelog</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/plugins/ad-converters/OphirPowermeter.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2011-2023, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
