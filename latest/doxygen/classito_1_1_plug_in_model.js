@@ -1,24 +1,7 @@
 var classito_1_1_plug_in_model =
 [
-    [ "tItemType", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819", [
-      [ "itemUnknown", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a1b3c9ecc02a9ba0cdbd9ca0e66d02edf", null ],
-      [ "itemCatDataIO", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819ac1500156a1a76b42c3a7c452048902e9", null ],
-      [ "itemCatActuator", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a4eabe6a3d47f4c8a2eff992355ff8802", null ],
-      [ "itemCatAlgo", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a7632f7d0273e190a4aa9038b9eb8ebe7", null ],
-      [ "itemSubCategoryDataIO_Grabber", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a762c7aae45c90414a921ca56c308efe4", null ],
-      [ "itemSubCategoryDataIO_ADDA", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a41679c932ad2419fcb7a182a92832b97", null ],
-      [ "itemSubCategoryDataIO_RawIO", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a1d3fa4a44c09fb907c86f28bea12ff83", null ],
-      [ "itemPlugin", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a0e60c6be821757257ff17cfbc7b7258b", null ],
-      [ "itemInstance", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a155be9e7707bf37388bf4421eac7a279", null ],
-      [ "itemFilter", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819aee12d9455dc0b3e8ee7867329401dee8", null ],
-      [ "itemWidget", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819ad5b12d0abf82a8d009a5b121ddeb17d2", null ],
-      [ "itemCatMainAll", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819aeefd0775a1e28518508f81e45db9ddba", null ],
-      [ "itemCatSubAll", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819a9ec64b2891b75448c2f25efcf18e0922", null ],
-      [ "itemCatAll", "classito_1_1_plug_in_model.html#a07221927c76fd6fe87e5b2db8456c819abe435aa846e9f4310bb5efe3dcb8cc47", null ]
-    ] ],
     [ "PlugInModel", "classito_1_1_plug_in_model.html#a424bc4eb696132c110de84ce9b8c781c", null ],
     [ "~PlugInModel", "classito_1_1_plug_in_model.html#ab1cc678ad364862ecb98f5e30d9a6552", null ],
-    [ "backgroundColorInstancesWithPythonRef", "classito_1_1_plug_in_model.html#ab036e15157b1bbe22fc4cf0b75f5d059", null ],
     [ "columnCount", "classito_1_1_plug_in_model.html#a6d233d2c32beeb7b875e1b0f6bca0331", null ],
     [ "data", "classito_1_1_plug_in_model.html#a1fea650dc12fe69acaa3a848791abfe3", null ],
     [ "deleteInstance", "classito_1_1_plug_in_model.html#a0c0e48d4b8e2c20ee8b534d6fb946243", null ],
@@ -37,12 +20,7 @@ var classito_1_1_plug_in_model =
     [ "headerData", "classito_1_1_plug_in_model.html#a6dde7cdf02ffd2ad76d9a150af9c9752", null ],
     [ "index", "classito_1_1_plug_in_model.html#a9b75484ff8a1c0e1c3eb8db5a82d4bee", null ],
     [ "insertInstance", "classito_1_1_plug_in_model.html#a4918606f9056f57d7a7ead4ee9f1cc02", null ],
-    [ "mimeData", "classito_1_1_plug_in_model.html#a4097478e087270ca192f2e9b5986b1f4", null ],
     [ "parent", "classito_1_1_plug_in_model.html#a739e47df6b956f1786d633e2268a406b", null ],
-    [ "Q_DECLARE_PRIVATE", "classito_1_1_plug_in_model.html#acb91d30330ebddc564a79d796ed0fccb", null ],
     [ "resetModel", "classito_1_1_plug_in_model.html#a5e6459aa8af9cd1724636b0fe0e0e889", null ],
-    [ "rowCount", "classito_1_1_plug_in_model.html#ae56dfca90d201601dcd52a43c59ffec9", null ],
-    [ "setBackgroundColorInstancesWithPythonRef", "classito_1_1_plug_in_model.html#a93330f56761493ce2956e1b8bc3be265", null ],
-    [ "update", "classito_1_1_plug_in_model.html#a423f7b74a06547a824ce2661e468328f", null ],
-    [ "d_ptr", "classito_1_1_plug_in_model.html#ad0133983072d69c2aa0081976533542a", null ]
+    [ "rowCount", "classito_1_1_plug_in_model.html#ae56dfca90d201601dcd52a43c59ffec9", null ]
 ];

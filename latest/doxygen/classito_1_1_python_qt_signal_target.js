@@ -20,8 +20,6 @@ var classito_1_1_python_qt_signal_target =
     [ "m_boundedInstance", "classito_1_1_python_qt_signal_target.html#a4726eef7392fc326f0d789701f3a8cf1", null ],
     [ "m_callableType", "classito_1_1_python_qt_signal_target.html#a00febac51d5a7a6e80622a29bf74859b", null ],
     [ "m_elapsedTimer", "classito_1_1_python_qt_signal_target.html#acc11133b16a89cb9718d8ac5a5154b31", null ],
-    [ "m_function", "classito_1_1_python_qt_signal_target.html#a8cb068a434cd3b651abc7dd32fe70640", null ],
-    [ "m_minRepeatInterval", "classito_1_1_python_qt_signal_target.html#a04d2dc6882a98c92a5042c713c981d12", null ],
     [ "m_signalId", "classito_1_1_python_qt_signal_target.html#a4fbff90a60c24576e7782c7b1d12ce5d", null ],
     [ "m_signalName", "classito_1_1_python_qt_signal_target.html#a56c0368837f954f2f3883587df3dc023", null ],
     [ "m_slotId", "classito_1_1_python_qt_signal_target.html#a8659639e091305200d631d8d17eb1966", null ]

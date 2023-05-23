@@ -1,102 +1,429 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.4. DataObjectIO &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5.4. DataObjectIO &#8212; itom Plugins</title>
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/algorithms/dataObjectIO';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="5.5. FFTW-Filter" href="fftwFilters.html" />
-    <link rel="prev" title="5.3. DataObject Arithmetic" href="dataObjectArithmetic.html" /> 
-</head>
+    <link rel="prev" title="5.3. DataObject Arithmetic" href="dataObjectArithmetic.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> itom Plugins
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="BasicGPLFilters.html">5.1. Basic GPL Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basicFilters.html">5.2. Basic Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataObjectArithmetic.html">5.3. DataObject Arithmetic</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.4. DataObjectIO</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overview">5.4.1. Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#details">5.4.2. Details</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="fftwFilters.html">5.5. FFTW-Filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fittingFilters.html">5.6. Fitting Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fringeProj.html">5.7. Fringe Proj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="openCVFilters.html">5.8. OpenCV Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pclTools.html">5.9. PclTools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rawImport.html">5.10. RawImport filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="roughness.html">5.11. Roughness</a></li>
-<li class="toctree-l2"><a class="reference internal" href="x3pio.html">5.12. X3P Input Output</a></li>
-</ul>
-</li>
-</ul>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
 
-        </div>
-      </div>
-    </nav>
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">itom Plugins</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../grabbers.html">
+                        Camera/ Grabber
+                      </a>
+                    </li>
+                
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">itom Plugins</a>
-      </nav>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../actuators.html">
+                        Motors/ Actuators
+                      </a>
+                    </li>
+                
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../algorithms.html"><span class="section-number">5. </span>Algorithms/ Filters</a> &raquo;</li>
-      <li><span class="section-number">5.4. </span>DataObjectIO</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/plugins/algorithms/dataObjectIO.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../GDIO.html">
+                        General Data IO
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../adconv.html">
+                        AD-Converters
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../algorithms.html">
+                        Algorithms/ Filters
+                      </a>
+                    </li>
+                
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../grabbers.html">
+                        Camera/ Grabber
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../actuators.html">
+                        Motors/ Actuators
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../GDIO.html">
+                        General Data IO
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../adconv.html">
+                        AD-Converters
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../algorithms.html">
+                        Algorithms/ Filters
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="BasicGPLFilters.html">5.1. Basic GPL Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicFilters.html">5.2. Basic Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataObjectArithmetic.html">5.3. DataObject Arithmetic</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.4. DataObjectIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fftwFilters.html">5.5. FFTW-Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fittingFilters.html">5.6. Fitting Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fringeProj.html">5.7. Fringe Proj</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openCVFilters.html">5.8. OpenCV Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pclTools.html">5.9. PclTools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rawImport.html">5.10. RawImport filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roughness.html">5.11. Roughness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="x3pio.html">5.12. X3P Input Output</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../algorithms.html" class="nav-link"><span class="section-number">5. </span>Algorithms/ Filters</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">5.4. </span>DataObjectIO</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="dataobjectio">
-<h1><span class="section-number">5.4. </span>DataObjectIO<a class="headerlink" href="#dataobjectio" title="Permalink to this heading"></a></h1>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 87%" />
-</colgroup>
+<h1><span class="section-number">5.4. </span>DataObjectIO<a class="headerlink" href="#dataobjectio" title="Permalink to this heading">#</a></h1>
+<table class="table">
 <tbody>
 <tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
 <td><p><span>import or export dataObject from/to several file formats.</span></p></td>
@@ -116,7 +443,7 @@
 </tbody>
 </table>
 <section id="overview">
-<h2><span class="section-number">5.4.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">5.4.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This filter contains two different export- / import-functionalities for dataObjects, image or raw.</p>
 <p>Image-export functions converts dataObjects to image data and saves them as common image-formats.</p>
 <ul class="simple">
@@ -157,27 +484,27 @@ Basic import-filter definition: destination object, filename, channel-specificat
 </ol>
 <dl class="py function">
 <dt class="sig sig-object py" id="send_message">
-<span class="sig-name descname"><span class="pre">send_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_body</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">priority=1</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#send_message" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">send_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_body</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">priority=1</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#send_message" title="Permalink to this definition">#</a></dt>
 <dd><p>Send a message to a recipient</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sender</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The person sending the message</p></li>
-<li><p><strong>recipient</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The recipient of the message</p></li>
-<li><p><strong>message_body</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – The body of the message</p></li>
-<li><p><strong>priority</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em> or </em><em>None</em>) – The priority of the message, can be a number 1-5</p></li>
+<li><p><strong>sender</strong> (<em>str</em>) – The person sending the message</p></li>
+<li><p><strong>recipient</strong> (<em>str</em>) – The recipient of the message</p></li>
+<li><p><strong>message_body</strong> (<em>str</em>) – The body of the message</p></li>
+<li><p><strong>priority</strong> (<em>int</em><em> or </em><em>None</em>) – The priority of the message, can be a number 1-5</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the message id</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)">int</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3.6/library/exceptions.html#ValueError" title="(in Python v3.6)"><strong>ValueError</strong></a> – if the message_body exceeds 160 characters</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3.6/library/exceptions.html#TypeError" title="(in Python v3.6)"><strong>TypeError</strong></a> – if the message_body is not a basestring</p></li>
+<li><p><strong>ValueError</strong> – if the message_body exceeds 160 characters</p></li>
+<li><p><strong>TypeError</strong> – if the message_body is not a basestring</p></li>
 </ul>
 </dd>
 </dl>
@@ -185,11 +512,11 @@ Basic import-filter definition: destination object, filename, channel-specificat
 
 </section>
 <section id="details">
-<h2><span class="section-number">5.4.2. </span>Details<a class="headerlink" href="#details" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">5.4.2. </span>Details<a class="headerlink" href="#details" title="Permalink to this heading">#</a></h2>
 <p>Detailed overview about all defined algorithms:</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadAnyImage">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadAnyImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">colorElement</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadAnyImage" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadAnyImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">colorElement</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadAnyImage" title="Permalink to this definition">#</a></dt>
 <dd><p>load the following image formats from a file to a 2D data object:</p>
 <ul class="simple">
 <li><p>png: 8bit/16bit, color available, transparency available</p></li>
@@ -214,11 +541,11 @@ or a rgba32 data object (rgb and rgba only). <em class="xref py py-obj">GRAY</em
 to an uint8 or uint16 data object.</p>
 <p>All file formats are loaded using OpenCV, besides gif, xbm, xpm which are loaded via Qt.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – DataObject that will be filled with the loaded file content</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source file name</p></li>
-<li><p><strong>colorElement</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; ‘asIs’ ignores alpha channel from supported file types (use rgba instead).</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source file name</p></li>
+<li><p><strong>colorElement</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; ‘asIs’ ignores alpha channel from supported file types (use rgba instead).</p>
 <div class="line-block">
 <div class="line"><em>Match: [“asIs”, “alpha”, “R”, “G”, “B”, “RGB”, “RGBA”, “GRAY”], Default: “asIs”</em></div>
 </div>
@@ -230,15 +557,15 @@ to an uint8 or uint16 data object.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadAvantesRaw">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadAvantesRaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">dataType</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadAvantesRaw" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadAvantesRaw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">dataType</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadAvantesRaw" title="Permalink to this definition">#</a></dt>
 <dd><p>load binary files from Avantes devices. The destinationObject is a RxN float32 data object, where R is the number of spectas in the file and N the number of pixels. Use the optional parameter ‘dataType’ to decide which type of data should be loaded (including the calibration wavelength table of the grating).</p>
 <p>The description of the file format has been taken from ‘AvaSoft 8 File Formats.pdf’</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – Destination dataObject</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source filename</p></li>
-<li><p><strong>dataType</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>type of data to be loaded: 0 fully calculated array of wavelengths, 1 scopemode spectrum, 2 dark spectrum, 3 reference spectrum</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source filename</p></li>
+<li><p><strong>dataType</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>type of data to be loaded: 0 fully calculated array of wavelengths, 1 scopemode spectrum, 2 dark spectrum, 3 reference spectrum</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 3], Default: 1</em></div>
 </div>
@@ -250,15 +577,15 @@ to an uint8 or uint16 data object.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadDataObject">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadDataObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">colorElement</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadDataObject" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadDataObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">colorElement</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadDataObject" title="Permalink to this definition">#</a></dt>
 <dd><p>loads a 2D data object from image formats via QImage (<a href="#id1"><span class="problematic" id="id2">*</span></a>.gif <a href="#id3"><span class="problematic" id="id4">*</span></a>.xbm <a href="#id5"><span class="problematic" id="id6">*</span></a>.xpm).
 This filter is deprecated and can also be directly used via the filter ‘loadAnyImage’</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – Empty dataObjet</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source file name</p></li>
-<li><p><strong>colorElement</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; ‘asIs’ ignores alpha channel from supported file types (use rgba instead).</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source file name</p></li>
+<li><p><strong>colorElement</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Color element: asIs (default) | alpha | R | G | B | RGB | ARGB | GRAY; ‘asIs’ ignores alpha channel from supported file types (use rgba instead).</p>
 <div class="line-block">
 <div class="line"><em>Match: [“asIs”, “alpha”, “R”, “G”, “B”, “RGB”, “RGBA”, “GRAY”], Default: “asIs”</em></div>
 </div>
@@ -270,7 +597,7 @@ This filter is deprecated and can also be directly used via the filter ‘loadAn
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadFRT">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadFRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufferType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensorCounter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printAllBufferTypes</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadFRT" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadFRT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufferType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensorCounter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printAllBufferTypes</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadFRT" title="Permalink to this definition">#</a></dt>
 <dd><p>Loads MicroProf FRT data from profilometers (based on FRT File Format specification 4.0.1.0).</p>
 <p>The files are loaded in a unit16, int32 or float64 data format. The FRT file format provides further
 information about the measurement conditions and system settings. Several of these settings are saved
@@ -321,31 +648,31 @@ loaded to a 3D data object instead of a 2D one, the user can select the type and
 <p><strong>sensorCounter</strong></p>
 <p>Currently, only 0 (sensor 1 - top) and 1 (sensor 2 - bottom) seems to be implemented in files. In future sensor 3 and sensor 4 (indices 2 and 3) might follow.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – Destination dataObject</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source filename</p></li>
-<li><p><strong>xyUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source filename</p></li>
+<li><p><strong>xyUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
 <div class="line-block">
-<div class="line"><em>Match: [“m”, “cm”, “mm”, “µm”, “nm”], Default: “mm”</em></div>
+<div class="line"><em>Match: [“m”, “cm”, “mm”, “Âµm”, “nm”], Default: “mm”</em></div>
 </div>
 </p></li>
-<li><p><strong>valueUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
+<li><p><strong>valueUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
 <div class="line-block">
-<div class="line"><em>Match: [“m”, “cm”, “mm”, “µm”, “nm”], Default: “mm”</em></div>
+<div class="line"><em>Match: [“m”, “cm”, “mm”, “Âµm”, “nm”], Default: “mm”</em></div>
 </div>
 </p></li>
-<li><p><strong>bufferType</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>some files contain more than one dataset. Then pass the bufferType here (its mask is 0x0000ffdf), if 0 is given, the default buffer type is used.</p>
+<li><p><strong>bufferType</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>some files contain more than one dataset. Then pass the bufferType here (its mask is 0x0000ffdf), if 0 is given, the default buffer type is used.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 65503], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>sensorCounter</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>some files contain more than one dataset. Its type is selected by ‘bufferType’. Sometimes the result can come from different sensors, then select the sensor index here.</p>
+<li><p><strong>sensorCounter</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>some files contain more than one dataset. Its type is selected by ‘bufferType’. Sometimes the result can come from different sensors, then select the sensor index here.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 3], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>printAllBufferTypes</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1 and different buffer types are available, they are printed to the command line.</p>
+<li><p><strong>printAllBufferTypes</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 1 and different buffer types are available, they are printed to the command line.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -357,15 +684,15 @@ loaded to a 3D data object instead of a 2D one, the user can select the type and
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadIDO">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadIDO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadIDO" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadIDO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadIDO" title="Permalink to this definition">#</a></dt>
 <dd><p>Tries to load the given ido or idh-file as itom dataObject. Data in the given file
 must have been saved using <a class="reference internal" href="#itom.algorithms.saveIDO" title="itom.algorithms.saveIDO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveIDO</span></code></a> in a xml-compatible file format, whereas <a href="#id7"><span class="problematic" id="id8">*</span></a>.idh only
 contains meta information of a data object and <a href="#id9"><span class="problematic" id="id10">*</span></a>.ido contains the full object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – DataObject that will be filled with the loaded file content</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source file name</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Source file name</p></li>
 </ul>
 </dd>
 </dl>
@@ -373,26 +700,26 @@ contains meta information of a data object and <a href="#id9"><span class="probl
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadKeyenceVk4">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadKeyenceVk4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">setname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadKeyenceVk4" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadKeyenceVk4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">setname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadKeyenceVk4" title="Permalink to this definition">#</a></dt>
 <dd><p>This filter loads Keyence VK4 profilometry images from Keyence devices (e.g. laser scanning microscope).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – Destination dataObject</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source filename</p></li>
-<li><p><strong>setname</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>name of data set to load, empty string prints a list of all available dataset names. Possible values are: topo0, topo1, …, intensity0, intensity1, …, peak, color</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source filename</p></li>
+<li><p><strong>setname</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>name of data set to load, empty string prints a list of all available dataset names. Possible values are: topo0, topo1, …, intensity0, intensity1, …, peak, color</p>
 <div class="line-block">
 <div class="line"><em>Match: [“topo0”, “topo1”, “topo2”, “intensity0”, “intensity1”, “intensity2”, “peak”, “color”], Default: “topo0”</em></div>
 </div>
 </p></li>
-<li><p><strong>xyUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of x and y axes. VK4 assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
+<li><p><strong>xyUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of x and y axes. VK4 assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
 <div class="line-block">
-<div class="line"><em>Match: [“mm”, “cm”, “mm”, “µm”, “nm”], Default: “m”</em></div>
+<div class="line"><em>Match: [“mm”, “cm”, “mm”, “Âµm”, “nm”], Default: “m”</em></div>
 </div>
 </p></li>
-<li><p><strong>valueUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of value axis (only valid for topography data channels). VK4 assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
+<li><p><strong>valueUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of value axis (only valid for topography data channels). VK4 assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
 <div class="line-block">
-<div class="line"><em>Match: [“mm”, “cm”, “mm”, “µm”, “nm”], Default: “m”</em></div>
+<div class="line"><em>Match: [“mm”, “cm”, “mm”, “Âµm”, “nm”], Default: “m”</em></div>
 </div>
 </p></li>
 </ul>
@@ -402,14 +729,14 @@ contains meta information of a data object and <a href="#id9"><span class="probl
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadNanoscopeIII">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadNanoscopeIII</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">numberOfImage</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadNanoscopeIII" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadNanoscopeIII</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">numberOfImage</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadNanoscopeIII" title="Permalink to this definition">#</a></dt>
 <dd><p>This filter loads NanoscopeIII data from Veeco devices. This filter was tested with files from an AFM device ‘Dimension3100’ using the file format 0x05310001. If a file of a other version is used no guarantee about scaling can be given.If a file of Version 4.3 is loaded, no information about the value units are available.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – Empty dataObject where the image will be saved to. The destinationObject will be of type float32.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Absolute or relative path to the Veeco nanoscope file (suffix 001, 002, 003, …).</p></li>
-<li><p><strong>numberOfImage</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>defines the index of the image which will be loaded (default: 0). If the parameter is set to -1 a list of all images included in the file will be printed.</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Absolute or relative path to the Veeco nanoscope file (suffix 001, 002, 003, …).</p></li>
+<li><p><strong>numberOfImage</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>defines the index of the image which will be loaded (default: 0). If the parameter is set to -1 a list of all images included in the file will be printed.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, inf], Default: 0</em></div>
 </div>
@@ -421,24 +748,24 @@ contains meta information of a data object and <a href="#id9"><span class="probl
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadSDF">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadSDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nanValue</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadSDF" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadSDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nanValue</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadSDF" title="Permalink to this definition">#</a></dt>
 <dd><p>loads an ascii or binary-based surface data file to a 1D or 2D data object (sdf), versions aNIST-1.0, aISO-1.0, bISO-1.0 (ISO 25178-71) or aBCR-1.0 (e.g. Zygo export format) are supported.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – data object where the file data is loaded to. The type of destinationObject corresponds to the type of the data block in the sdf file (uint8, uint16, uint32, int8, int16, int32, float32, float64) or always float64 if the header value Zscale is != 1.0 or the valueUnit is != ‘m’</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – filename of the sdf file (aISO-1.0, aNIST-1.0, aBCR-1.0 or bISO-1.0 format)</p></li>
-<li><p><strong>xyUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
+<li><p><strong>filename</strong> (<em>str</em>) – filename of the sdf file (aISO-1.0, aNIST-1.0, aBCR-1.0 or bISO-1.0 format)</p></li>
+<li><p><strong>xyUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of x and y axes. Nist or BCR sdf files assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
 <div class="line-block">
-<div class="line"><em>Match: [“m”, “cm”, “mm”, “µm”, “nm”], Default: “mm”</em></div>
+<div class="line"><em>Match: [“m”, “cm”, “mm”, “Âµm”, “nm”], Default: “mm”</em></div>
 </div>
 </p></li>
-<li><p><strong>valueUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
+<li><p><strong>valueUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of value axis. x3p assumes to have m as default unit, this can be scaled using other values than m. Default: m (Be careful that other units than ‘m’ lead to a multiplication of all values that might exceed the data type limit.)</p>
 <div class="line-block">
-<div class="line"><em>Match: [“m”, “cm”, “mm”, “µm”, “nm”], Default: “mm”</em></div>
+<div class="line"><em>Match: [“m”, “cm”, “mm”, “Âµm”, “nm”], Default: “mm”</em></div>
 </div>
 </p></li>
-<li><p><strong>nanValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – If this string occurs in the data block, the value will be replaced by NaN if float32 or float64 as output format. If ‘&lt;minrange&gt;’ or &lt;maxrange&gt; the minimum or maximum value of the data type in the data block is assumed (e.g. &lt;maxrange&gt; is used by Zygo to describe NaN values). MountainsMap writes ‘BAD’ as invalid value (following ISO25178-71). This value is ignored for binary input since invalid values are directly encoded in floating point values.</p></li>
+<li><p><strong>nanValue</strong> (<em>str</em><em>, </em><em>optional</em>) – If this string occurs in the data block, the value will be replaced by NaN if float32 or float64 as output format. If ‘&lt;minrange&gt;’ or &lt;maxrange&gt; the minimum or maximum value of the data type in the data block is assumed (e.g. &lt;maxrange&gt; is used by Zygo to describe NaN values). MountainsMap writes ‘BAD’ as invalid value (following ISO25178-71). This value is ignored for binary input since invalid values are directly encoded in floating point values.</p></li>
 </ul>
 </dd>
 </dl>
@@ -446,35 +773,35 @@ contains meta information of a data object and <a href="#id9"><span class="probl
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadTXT">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadTXT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">ignoreLines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asMatrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimalSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrapSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadTXT" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadTXT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">ignoreLines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asMatrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimalSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrapSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadTXT" title="Permalink to this definition">#</a></dt>
 <dd><p>loads an ascii-based data file like txt, csv, tsv or space separated values.</p>
 <p>The text file is loaded line by line and tried to be interpreted as an array. It is possible to ignore the first n lines (optional parameter ignoreLines).
 The full content of these ignored lines is then saved in the tag ‘ignoredLines’ of the destinationObject.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – Empty dataObject</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source file name</p></li>
-<li><p><strong>ignoreLines</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Ignore the first n-lines.</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source file name</p></li>
+<li><p><strong>ignoreLines</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Ignore the first n-lines.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, inf], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>asMatrix</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <ol class="arabic simple">
+<li><p><strong>asMatrix</strong> (<em>int</em><em>, </em><em>optional</em>) – <ol class="arabic simple">
 <li><p>Try to interprete list elements with 3 elements per row as a matrix or (0) load as written.</p></li>
 </ol>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>separatorSign</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – Uses this as the separator between elements. If NULL, try to guess.</p></li>
-<li><p><strong>decimalSign</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Uses this as the sign for decimal numbers. If &lt;guess&gt;, try to guess if the decimal sign is a dot (.) or comma (,).</p>
+<li><p><strong>separatorSign</strong> (<em>str</em><em>, </em><em>optional</em>) – Uses this as the separator between elements. If NULL, try to guess.</p></li>
+<li><p><strong>decimalSign</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Uses this as the sign for decimal numbers. If &lt;guess&gt;, try to guess if the decimal sign is a dot (.) or comma (,).</p>
 <div class="line-block">
 <div class="line"><em>Match: [“&lt;guess&gt;”, “.”, “,”], Default: “&lt;guess&gt;”</em></div>
 </div>
 </p></li>
-<li><p><strong>wrapSign</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – Sometimes numbers are wrapped by a sign (.e.g ‘2.3’ or “4.5”). If so, indicate the character(s) that wrap the numbers.</p></li>
-<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – encoding of text file, e.g. UTF-8, UTF-16, ISO 8859-1… Default: empty string -&gt; the encoding is guessed due to a auto-detection of the first 64 bytes in the text file (using the BOM (Byte Order Mark)).</p></li>
+<li><p><strong>wrapSign</strong> (<em>str</em><em>, </em><em>optional</em>) – Sometimes numbers are wrapped by a sign (.e.g ‘2.3’ or “4.5”). If so, indicate the character(s) that wrap the numbers.</p></li>
+<li><p><strong>encoding</strong> (<em>str</em><em>, </em><em>optional</em>) – encoding of text file, e.g. UTF-8, UTF-16, ISO 8859-1… Default: empty string -&gt; the encoding is guessed due to a auto-detection of the first 64 bytes in the text file (using the BOM (Byte Order Mark)).</p></li>
 </ul>
 </dd>
 </dl>
@@ -482,7 +809,7 @@ The full content of these ignored lines is then saved in the tag ‘ignoredLines
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.loadZygoMetroPro">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadZygoMetroPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">topography</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadZygoMetroPro" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">loadZygoMetroPro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destinationObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">topography</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyUnit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valueUnit</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.loadZygoMetroPro" title="Permalink to this definition">#</a></dt>
 <dd><p>load binary MetroPro files from Zygo. This import filter is mainly tested with the first generation of MetroPro files.
 However, newer files should also be loaded with the limitation, that only the tags from the first generation are saved
 into the ‘destinationObject’.</p>
@@ -492,23 +819,23 @@ many tags that are directly obtained from the binary files.</p>
 <p>Use the optional parameters ‘xyUnit’ and ‘valueUnit’ to get the result in a desired unit. ‘valueUnit’ is ignored for intensity data.</p>
 <p>The file format has been implemented based on the MetroPro Reference Guide, version OMP-0347K.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationObject</strong> (<em>itom.dataObject</em>) – Destination dataObject</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Source filename</p></li>
-<li><p><strong>topography</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>load topography data (1, default), else intensity data (0)</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Source filename</p></li>
+<li><p><strong>topography</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>load topography data (1, default), else intensity data (0)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>xyUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of x and y axes. MetroPro assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
+<li><p><strong>xyUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of x and y axes. MetroPro assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
 <div class="line-block">
-<div class="line"><em>Match: [“mm”, “cm”, “mm”, “µm”, “nm”], Default: “m”</em></div>
+<div class="line"><em>Match: [“mm”, “cm”, “mm”, “Âµm”, “nm”], Default: “m”</em></div>
 </div>
 </p></li>
-<li><p><strong>valueUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Unit of value axis. MetroPro assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
+<li><p><strong>valueUnit</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Unit of value axis. MetroPro assumes to have m as default unit, this can be scaled using other values than m. Default: mm.</p>
 <div class="line-block">
-<div class="line"><em>Match: [“mm”, “cm”, “mm”, “µm”, “nm”], Default: “m”</em></div>
+<div class="line"><em>Match: [“mm”, “cm”, “mm”, “Âµm”, “nm”], Default: “m”</em></div>
 </div>
 </p></li>
 </ul>
@@ -518,7 +845,7 @@ many tags that are directly obtained from the binary files.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveBMP">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveBMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveBMP" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveBMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveBMP" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as bmp-file or dip-file (bitmap, 8bit only).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -546,11 +873,11 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, rgb, &lt;any-name-of-a-color-palette&gt;, …]</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, rgb, &lt;any-name-of-a-color-palette&gt;, …]</p></li>
 </ul>
 </dd>
 </dl>
@@ -558,30 +885,30 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveDataObject">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveDataObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bitscaling</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">lowLimit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highLimit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorFormat</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveDataObject" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveDataObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bitscaling</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">lowLimit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highLimit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorFormat</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveDataObject" title="Permalink to this definition">#</a></dt>
 <dd><p>saves 1D and 2D dataObject to image formats via QImage (for saving images it is recommended to use the specific saveABC (savePNG, saveGIF, saveBMP…) commands).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – 2D-DataObject of anytype or 3-planes DataObject of uint8</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Format of the Image according to QImage: [‘QImage::Format_Mono’, ‘QImage::Format_MonoLSB’, ‘QImage::Format_Indexed8’, ‘QImage::Format_RGB32’, ‘QImage::Format_ARGB32’</p></li>
-<li><p><strong>bitscaling</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Toggle bit-scaling, 0 = off, 1 = autoscale (default), 2 = userdefined ranges</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>format</strong> (<em>str</em>) – Format of the Image according to QImage: [‘QImage::Format_Mono’, ‘QImage::Format_MonoLSB’, ‘QImage::Format_Indexed8’, ‘QImage::Format_RGB32’, ‘QImage::Format_ARGB32’</p></li>
+<li><p><strong>bitscaling</strong> (<em>int</em>) – <p>Toggle bit-scaling, 0 = off, 1 = autoscale (default), 2 = userdefined ranges</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 2], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>lowLimit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>Lowest limit. Will become 0</p>
+<li><p><strong>lowLimit</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Lowest limit. Will become 0</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>highLimit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>Lowest limit. Will become max&lt;bitdepth&gt;</p>
+<li><p><strong>highLimit</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>Lowest limit. Will become max&lt;bitdepth&gt;</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>colorFormat</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – When DataObject of type float32, their format should be –&gt;Gray&lt;– or –&gt;RGB&lt;–</p></li>
+<li><p><strong>colorFormat</strong> (<em>str</em><em>, </em><em>optional</em>) – When DataObject of type float32, their format should be –&gt;Gray&lt;– or –&gt;RGB&lt;–</p></li>
 </ul>
 </dd>
 </dl>
@@ -589,23 +916,23 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveIDO">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveIDO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">headerOnly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags2Binary</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveIDO" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveIDO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">headerOnly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags2Binary</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveIDO" title="Permalink to this definition">#</a></dt>
 <dd><p>The given dataObject of any size and data format is saved in an itom-specific xml-file (suffix: ido, idh).</p>
 <p>It is possible to define if only meta information (tags, scaling, offset…) should be saved in the xml-file (suffix: idh, itom data header)
 or if the array and meta information should be saved (suffix: ido, itom data object). Data is always saved in a base64-encoded format while the header text
 is mostly written in plain, ascii text. Using this filter, the data object including all its meta information is saved and
 can be reload using <a class="reference internal" href="#itom.algorithms.loadIDO" title="itom.algorithms.loadIDO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadIDO</span></code></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceObject</strong> (<em>itom.dataObject</em>) – Any type of dataObject</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>headerOnly</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 0 the complete dataObject is saved (data + metadata) [default], else the filter saves only metadata</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>headerOnly</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 0 the complete dataObject is saved (data + metadata) [default], else the filter saves only metadata</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>tags2Binary</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 0 meta information are saved as clear text, else double tags are saved as binary</p>
+<li><p><strong>tags2Binary</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If 0 meta information are saved as clear text, else double tags are saved as binary</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -617,7 +944,7 @@ can be reload using <a class="reference internal" href="#itom.algorithms.loadIDO
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveJPG">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveJPG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveJPG" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveJPG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveJPG" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as jpg-file or jp2-file (only jp2 supports 16bit but is not much known).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -645,12 +972,12 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, gray16, rgb, rgba, &lt;any-name-of-a-color-palette&gt;]. ‘gray16’ supported for ‘.jp2’ only</p></li>
-<li><p><strong>compression</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Compression rate, 0: high, 100: low</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, gray16, rgb, rgba, &lt;any-name-of-a-color-palette&gt;]. ‘gray16’ supported for ‘.jp2’ only</p></li>
+<li><p><strong>compression</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Compression rate, 0: high, 100: low</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 100], Default: 90</em></div>
 </div>
@@ -662,7 +989,7 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.savePGM">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">binaryOut</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePGM" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePGM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">binaryOut</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePGM" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as pgm-file or pbm-file (portable gray map or portable bit map, 16bit only for pgm-format).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -681,12 +1008,12 @@ as uint8 or uint16 data type. Coloured images are not supported by this format.<
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, gray16]</p></li>
-<li><p><strong>binaryOut</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Enable binary coding</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, gray16]</p></li>
+<li><p><strong>binaryOut</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Enable binary coding</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
@@ -698,7 +1025,7 @@ as uint8 or uint16 data type. Coloured images are not supported by this format.<
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.savePNG">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePNG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addAlphaChannel</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePNG" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePNG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addAlphaChannel</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePNG" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as png-file (portable network graphic).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -727,17 +1054,17 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, gray16, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</p></li>
-<li><p><strong>compression</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Compression rate, 0: high, 9: low</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, gray16, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</p></li>
+<li><p><strong>compression</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Compression rate, 0: high, 9: low</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 9], Default: 9</em></div>
 </div>
 </p></li>
-<li><p><strong>addAlphaChannel</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If enabled and in case of floating point values, invalid values will we transparent (alpha=0), else full opacity.</p>
+<li><p><strong>addAlphaChannel</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>If enabled and in case of floating point values, invalid values will we transparent (alpha=0), else full opacity.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
@@ -749,7 +1076,7 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.savePPM">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePPM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">binaryOut</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePPM" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePPM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">binaryOut</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePPM" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as ppm-file (portable pixel map, 8bit only).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -777,12 +1104,12 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, &lt;any-name-of-a-color-palette&gt;, …]</p></li>
-<li><p><strong>binaryOut</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Enable binary coding</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, &lt;any-name-of-a-color-palette&gt;, …]</p></li>
+<li><p><strong>binaryOut</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Enable binary coding</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
@@ -794,22 +1121,22 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.savePtbPR">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePtbPR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">decimalSigns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordinateUnit</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePtbPR" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">savePtbPR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">decimalSigns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordinateUnit</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.savePtbPR" title="Permalink to this definition">#</a></dt>
 <dd><p>saves a 1D data object to the PR format used for the reference software for roughness metrology (<a class="reference external" href="https://www.ptb.de/rptb">https://www.ptb.de/rptb</a>) of PTB (Physikalisch Technische Bundesanstalt).</p>
 <p>The .pr format requires the lateral scaling values in mm. If another metric unit (m, cm, mm, µm, nm) is given in the axis unit tag, an automatic conversion is applied. Else a
 warning is returned. The same holds for the values (ordinate). You can choose if the .pr format should contain the ordinate values in nm or µm. An auto-conversion is implemented, too.</p>
 <p>This filter uses the hex-code DF for the german Umlaut ‘oe’ and F6 for ‘sz’ like required by the input file format description of the RPTB tool (since RPTB Version 2.01).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceObject</strong> (<em>itom.dataObject</em>) – 1D data object of any real data type. No invalid values are allowed.</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>decimalSigns</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Number of decimal signs (default: 6).</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>decimalSigns</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Number of decimal signs (default: 6).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 12], Default: 6</em></div>
 </div>
 </p></li>
-<li><p><strong>ordinateUnit</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>unit of ordinate (0: nm [default], 1: µm)</p>
+<li><p><strong>ordinateUnit</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>unit of ordinate (0: nm [default], 1: µm)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -821,7 +1148,7 @@ warning is returned. The same holds for the values (ordinate). You can choose if
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveRAS">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveRAS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveRAS" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveRAS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveRAS" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as sr-file or ras-file (Sun Raster, 8bit only).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -849,11 +1176,11 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – 2D-DataObject of anytype</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, …]</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, …]</p></li>
 </ul>
 </dd>
 </dl>
@@ -861,34 +1188,34 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveSDF">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveSDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">decimalSigns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verticalScale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalidHandling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalidValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveSDF" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveSDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">decimalSigns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verticalScale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalidHandling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalidValue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveSDF" title="Permalink to this definition">#</a></dt>
 <dd><p>saves 1D and 2D dataObject to the ascii surface data file format (sdf), version aNIST-1.0 (no official standard) or aISO-1.0 (in compliance with ISO 25178-71).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceObject</strong> (<em>itom.dataObject</em>) – 2D-DataObject of anytype or 3-planes DataObject of uint8</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>decimalSigns</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Number of decimal signs (default: 3). For MountainsMaps reduce total number of digits to 5</p>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>decimalSigns</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Number of decimal signs (default: 3). For MountainsMaps reduce total number of digits to 5</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 12], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>verticalScale</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Power of 10 for the zValue (Default: -3, micrometer), only for floating point objects.</p>
+<li><p><strong>verticalScale</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Power of 10 for the zValue (Default: -3, micrometer), only for floating point objects.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-12, 12], Default: -3</em></div>
 </div>
 </p></li>
-<li><p><strong>invalidHandling</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Toggles NaN handling if dataObject is floating-type. 0: Write NaN (Default); 1: Skip Value, 2: Substitute by InvalidValue, 3: Substitute by BAD for MountainsMaps.</p>
+<li><p><strong>invalidHandling</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Toggles NaN handling if dataObject is floating-type. 0: Write NaN (Default); 1: Skip Value, 2: Substitute by InvalidValue, 3: Substitute by BAD for MountainsMaps.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 3], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>invalidValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>New value for invalid substitution. Default is 0.0</p>
+<li><p><strong>invalidValue</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>New value for invalid substitution. Default is 0.0</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: -42</em></div>
 </div>
 </p></li>
-<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>File format version: ‘aNIST-1.0’ or ‘aISO-1.0’ for DIN EN ISO 25178-71</p>
+<li><p><strong>version</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>File format version: ‘aNIST-1.0’ or ‘aISO-1.0’ for DIN EN ISO 25178-71</p>
 <div class="line-block">
 <div class="line"><em>Match: [“aNIST-1.0”, “aISO-1.0”], Default: “aNIST-1.0”</em></div>
 </div>
@@ -900,41 +1227,41 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveTXT">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveTXT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">saveAsTuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noPhysicalValues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorLines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorPlanes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimalSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrapSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveTXT" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveTXT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceObject</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">saveAsTuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noPhysicalValues</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorLines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separatorPlanes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimalSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrapSign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveTXT" title="Permalink to this definition">#</a></dt>
 <dd><p>saves data to an ascii-based file like txt, csv, tsv or space separated values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceObject</strong> (<em>itom.dataObject</em>) – dataObject holding data to save</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination file name</p></li>
-<li><p><strong>saveAsTuple</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <ol class="arabic simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Destination file name</p></li>
+<li><p><strong>saveAsTuple</strong> (<em>int</em><em>, </em><em>optional</em>) – <ol class="arabic simple">
 <li><p>save values as list of points (x, y, z).</p></li>
 </ol>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>noPhysicalValues</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <ol class="arabic simple">
+<li><p><strong>noPhysicalValues</strong> (<em>int</em><em>, </em><em>optional</em>) – <ol class="arabic simple">
 <li><p>ignore scale and offset</p></li>
 </ol>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>separatorSign</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – Uses this as the separator between elements. Default is space ” “.</p></li>
-<li><p><strong>separatorLines</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – Uses this as the separator between lines of a matrix. Default is rn.</p></li>
-<li><p><strong>separatorPlanes</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – Uses this as the separator between matrix planes. Default is rn.</p></li>
-<li><p><strong>decimalSign</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Uses this as the sign for decimal numbers. If &lt;guess&gt;, default is system default.</p>
+<li><p><strong>separatorSign</strong> (<em>str</em><em>, </em><em>optional</em>) – Uses this as the separator between elements. Default is space ” “.</p></li>
+<li><p><strong>separatorLines</strong> (<em>str</em><em>, </em><em>optional</em>) – Uses this as the separator between lines of a matrix. Default is rn.</p></li>
+<li><p><strong>separatorPlanes</strong> (<em>str</em><em>, </em><em>optional</em>) – Uses this as the separator between matrix planes. Default is rn.</p></li>
+<li><p><strong>decimalSign</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Uses this as the sign for decimal numbers. If &lt;guess&gt;, default is system default.</p>
 <div class="line-block">
 <div class="line"><em>Match: [“&lt;guess&gt;”, “.”, “,”], Default: “&lt;guess&gt;”</em></div>
 </div>
 </p></li>
-<li><p><strong>wrapSign</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Sometimes numbers are wrapped by a sign (.e.g ‘2.3’ or “4.5”). If so, indicate the character(s) that wrap the numbers.</p>
+<li><p><strong>wrapSign</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Sometimes numbers are wrapped by a sign (.e.g ‘2.3’ or “4.5”). If so, indicate the character(s) that wrap the numbers.</p>
 <div class="line-block">
 <div class="line"><em>Match: [“&lt;guess&gt;”, “.”, “,”, “”], Default: &lt;empty str&gt;</em></div>
 </div>
 </p></li>
-<li><p><strong>encoding</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – encoding of text file, e.g. UTF-8, UTF-16, ISO 8859-1… Default: empty string -&gt; the encoding is guessed due to a auto-detection of the first 64 bytes in the text file (using the BOM (Byte Order Mark)).</p></li>
+<li><p><strong>encoding</strong> (<em>str</em><em>, </em><em>optional</em>) – encoding of text file, e.g. UTF-8, UTF-16, ISO 8859-1… Default: empty string -&gt; the encoding is guessed due to a auto-detection of the first 64 bytes in the text file (using the BOM (Byte Order Mark)).</p></li>
 </ul>
 </dd>
 </dl>
@@ -942,7 +1269,7 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveTiff">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveTiff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveTiff" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveTiff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveTiff" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as tiff-file (tagged image format, 8bit and 16bit supported).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -971,11 +1298,11 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses OpenCV to save the image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, gray16, …]</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, gray16, …]</p></li>
 </ul>
 </dd>
 </dl>
@@ -983,7 +1310,7 @@ as uint8 or uint16 data type.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="itom.algorithms.saveXPM">
-<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveXPM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveXPM" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">itom.algorithms.</span></span><span class="sig-name descname"><span class="pre">saveXPM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sourceImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">palette</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.algorithms.saveXPM" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves a real, 2D dataObject as xpm-file (X PixMap) or xbm (X BitMap, black-white only).</p>
 <p>The following conventions hold for saving the image:</p>
 <ul class="simple">
@@ -1011,11 +1338,11 @@ as uint8 or uint16 data type.</p></li>
 </ul>
 <p>This filters uses Qt to save the image. In the format xbm, a threshold at 128 is applied to separate black and white.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – Real, 2D data object</p></li>
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Destination filename</p></li>
-<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – Color palette name [gray, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Destination filename</p></li>
+<li><p><strong>palette</strong> (<em>str</em>) – Color palette name [gray, rgba, rgb, &lt;any-name-of-a-color-palette&gt;].</p></li>
 </ul>
 </dd>
 </dl>
@@ -1025,36 +1352,143 @@ as uint8 or uint16 data type.</p></li>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dataObjectArithmetic.html" class="btn btn-neutral float-left" title="5.3. DataObject Arithmetic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fftwFilters.html" class="btn btn-neutral float-right" title="5.5. FFTW-Filter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dataObjectArithmetic.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.3. </span>DataObject Arithmetic</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="fftwFilters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.5. </span>FFTW-Filter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
 
-</body>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">5.4.1. Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#send_message"><code class="docutils literal notranslate"><span class="pre">send_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#details">5.4.2. Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadAnyImage"><code class="docutils literal notranslate"><span class="pre">loadAnyImage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadAvantesRaw"><code class="docutils literal notranslate"><span class="pre">loadAvantesRaw()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadDataObject"><code class="docutils literal notranslate"><span class="pre">loadDataObject()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadFRT"><code class="docutils literal notranslate"><span class="pre">loadFRT()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadIDO"><code class="docutils literal notranslate"><span class="pre">loadIDO()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadKeyenceVk4"><code class="docutils literal notranslate"><span class="pre">loadKeyenceVk4()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadNanoscopeIII"><code class="docutils literal notranslate"><span class="pre">loadNanoscopeIII()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadSDF"><code class="docutils literal notranslate"><span class="pre">loadSDF()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadTXT"><code class="docutils literal notranslate"><span class="pre">loadTXT()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.loadZygoMetroPro"><code class="docutils literal notranslate"><span class="pre">loadZygoMetroPro()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveBMP"><code class="docutils literal notranslate"><span class="pre">saveBMP()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveDataObject"><code class="docutils literal notranslate"><span class="pre">saveDataObject()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveIDO"><code class="docutils literal notranslate"><span class="pre">saveIDO()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveJPG"><code class="docutils literal notranslate"><span class="pre">saveJPG()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.savePGM"><code class="docutils literal notranslate"><span class="pre">savePGM()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.savePNG"><code class="docutils literal notranslate"><span class="pre">savePNG()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.savePPM"><code class="docutils literal notranslate"><span class="pre">savePPM()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.savePtbPR"><code class="docutils literal notranslate"><span class="pre">savePtbPR()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveRAS"><code class="docutils literal notranslate"><span class="pre">saveRAS()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveSDF"><code class="docutils literal notranslate"><span class="pre">saveSDF()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveTXT"><code class="docutils literal notranslate"><span class="pre">saveTXT()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveTiff"><code class="docutils literal notranslate"><span class="pre">saveTiff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.algorithms.saveXPM"><code class="docutils literal notranslate"><span class="pre">saveXPM()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/plugins/algorithms/dataObjectIO.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2011-2023, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

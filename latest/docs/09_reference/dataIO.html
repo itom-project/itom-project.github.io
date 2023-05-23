@@ -1,124 +1,583 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10.5. dataIO &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/html.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>10.5. dataIO &#8212; itom Documentation</title>
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-    <script src="../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09_reference/dataIO';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="10.6. dataObject" href="dataObject.html" />
-    <link rel="prev" title="10.4. autoInterval" href="autoInterval.html" /> 
-</head>
+    <link rel="prev" title="10.4. autoInterval" href="autoInterval.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> itom Documentation
-          </a>
-              <div class="version">
-                4.2.2
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_plots/plots.html">6. Plots and Figures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="reference.html">10. itom Script Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="itom_general.html">10.1. itom methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="actuator.html">10.2. actuator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="algo.html">10.3. Algorithms and Widgets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoInterval.html">10.4. autoInterval</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">10.5. dataIO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dataObject.html">10.6. dataObject</a></li>
-<li class="toctree-l2"><a class="reference internal" href="figure.html">10.7. figure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="font.html">10.8. font</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plotItem.html">10.9. plotItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="point.html">10.10. point</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pointCloud.html">10.11. pointCloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="polygonMesh.html">10.12. polygonMesh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="progressObserver.html">10.13. progressObserver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="region.html">10.14. region</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rgba.html">10.15. rgba</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shape.html">10.16. shape</a></li>
-<li class="toctree-l2"><a class="reference internal" href="timer.html">10.17. timer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="itom_GUI.html">10.18. ui-elements (ui, uiItem)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11_demos/demos.html">12. Demo scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12_contributing/contributing.html">13. Contributing</a></li>
-</ul>
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
 
-        </div>
-      </div>
-    </nav>
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+                        Changelog
+                      </a>
+                    </li>
+                
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">itom Documentation</a>
-      </nav>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+                        Introduction
+                      </a>
+                    </li>
+                
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="reference.html"><span class="section-number">10. </span>itom Script Reference</a> &raquo;</li>
-      <li><span class="section-number">10.5. </span>dataIO</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/09_reference/dataIO.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../02_installation/install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+                        The itom User Interface
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_plots/plots.html">
+                        Plots and Figures
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+                        Extending the user interface of itom
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+                        Plugins
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+                        Python Scripting Language
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="reference.html">
+                        itom Script Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+                        Miscellaneous
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../11_demos/demos.html">
+                        Demo scripts
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+                        Changelog
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../02_installation/install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+                        The itom User Interface
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_plots/plots.html">
+                        Plots and Figures
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+                        Extending the user interface of itom
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+                        Plugins
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+                        Python Scripting Language
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="reference.html">
+                        itom Script Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+                        Miscellaneous
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../11_demos/demos.html">
+                        Demo scripts
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+                        Contributing
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="itom_general.html">10.1. itom methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuator.html">10.2. actuator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algo.html">10.3. Algorithms and Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoInterval.html">10.4. autoInterval</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10.5. dataIO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dataObject.html">10.6. dataObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figure.html">10.7. figure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="font.html">10.8. font</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotItem.html">10.9. plotItem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">10.10. point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pointCloud.html">10.11. pointCloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polygonMesh.html">10.12. polygonMesh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="progressObserver.html">10.13. progressObserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="region.html">10.14. region</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rgba.html">10.15. rgba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shape.html">10.16. shape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timer.html">10.17. timer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="itom_GUI.html">10.18. ui-elements (ui, uiItem)</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="reference.html" class="nav-link"><span class="section-number">10. </span>itom Script Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">10.5. </span>dataIO</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="dataio">
-<h1><span class="section-number">10.5. </span>dataIO<a class="headerlink" href="#dataio" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">10.5. </span>dataIO<a class="headerlink" href="#dataio" title="Permalink to this heading">#</a></h1>
 <p>This section contains the script reference to the class <em>dataIO</em>, used to access any dataIO hardware in itom (e.g.
 cameras, AD-converters or further data communcation plugins). Read the <a class="reference internal" href="../07_plugins/getstart-hardware.html#getstarthardware"><span class="std std-ref">overview document</span></a> for more
 details about the Python interface of the class <em>dataIO</em>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="itom.dataIO">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">itom.</span></span><span class="sig-name descname"><span class="pre">dataIO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">itom.</span></span><span class="sig-name descname"><span class="pre">dataIO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO" title="Permalink to this definition">#</a></dt>
 <dd><p>Creates a new instance of the dataIO plugin <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 <p>This is the constructor for an <a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> plugin. It initialises an new 
 instance of the plugin with the given <code class="docutils literal notranslate"><span class="pre">name</span></code>. The initialisation parameters are 
@@ -129,7 +588,7 @@ allowed after a keyword-based one.</p>
 <p>See <a class="reference internal" href="itom_general.html#itom.pluginHelp" title="itom.pluginHelp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pluginHelp()</span></code></a> for detailed information about the specific initialisation 
 parameters.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>name</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>is the fullname (case sensitive) of an <a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a>-plugin.</p>
 </dd>
@@ -143,7 +602,7 @@ given, else its default value is used.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference internal" href="actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">actuator</span></code></a></dt><dd><p>new instance of the desired dataIO plugin.</p>
 </dd>
@@ -152,7 +611,7 @@ given, else its default value is used.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.acquire">
-<span class="sig-name descname"><span class="pre">acquire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trigger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">dataIO.TRIGGER_SOFTWARE</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.acquire" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">acquire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trigger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">dataIO.TRIGGER_SOFTWARE</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.acquire" title="Permalink to this definition">#</a></dt>
 <dd><p>Triggers a new camera acquisition.</p>
 <p>This method triggers a new data acquisition. This method immediately returns even if 
 the acquisition is not finished yet. Use <a class="reference internal" href="#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getVal()</span></code></a> or <a class="reference internal" href="#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">copyVal()</span></code></a> to get the 
@@ -161,7 +620,7 @@ occurred.</p>
 <p>Before calling <a class="reference internal" href="#itom.dataIO.acquire" title="itom.dataIO.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code></a>, the device must have been started using 
 <a class="reference internal" href="#itom.dataIO.startDevice" title="itom.dataIO.startDevice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">startDevice()</span></code></a>.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>trigger</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Type of the trigger:</p>
 <ul class="simple">
@@ -179,7 +638,7 @@ the documentation of the specific device for possible values.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.connect">
-<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signalSignature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callableMethod</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minRepeatInterval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.connect" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signalSignature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callableMethod</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minRepeatInterval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.connect" title="Permalink to this definition">#</a></dt>
 <dd><p>Connects a signal of this dataIO device with the given callable Python method.</p>
 <p>Every <a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> object can emit different signals whenever a certain event 
 occurs. Use the method <a class="reference internal" href="#itom.dataIO.info" title="itom.dataIO.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> to get a print-out of a list of possible signals 
@@ -201,7 +660,7 @@ function with the same number of parameters than the signal has (besides the
 function to a certain minimum time interval. This can be given by the <code class="docutils literal notranslate"><span class="pre">minRepeatInterval</span></code> 
 parameter.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>signalSignature</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>This must be the valid signature, known from the Qt-method <em>connect</em> 
 (e.g. <code class="docutils literal notranslate"><span class="pre">targetChanged(QVector&lt;double&gt;)</span></code>)</p>
@@ -224,7 +683,7 @@ Default: 0 (all signals will invoke the callable python method.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.copyVal">
-<span class="sig-name descname"><span class="pre">copyVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destObject</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.copyVal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">copyVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">destObject</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.copyVal" title="Permalink to this definition">#</a></dt>
 <dd><p>Gets deep copy of data of this plugin, stored in the given data object.</p>
 <p>Returns a deep copy of the recently acquired data (for grabber and ADDA only) of the 
 camera or AD-converter device. The deep copy sometimes requires one copy operation 
@@ -235,7 +694,7 @@ another data acquisition is started.</p>
 acquisition is not finished yet, this method blocks and waits until the end of the 
 acquisition.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>destObject</strong><span class="classifier"><a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataObject</span></code></a></span></dt><dd><p><a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataObject</span></code></a> where the plugin data is copied to. Either provide an empty 
 <a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> or a <a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> whose shape exactly fits to the 
@@ -245,7 +704,7 @@ the plugin is copied into this plane.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>if the dataIO plugin is anything else than ADDA or grabber
 or if no acquisition has been triggered</p>
@@ -263,7 +722,7 @@ or if no acquisition has been triggered</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.disableAutoGrabbing">
-<span class="sig-name descname"><span class="pre">disableAutoGrabbing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.disableAutoGrabbing" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">disableAutoGrabbing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.disableAutoGrabbing" title="Permalink to this definition">#</a></dt>
 <dd><p>Disables auto grabbing for this grabber (camera…).</p>
 <p>If the auto grabbing flag is set, the camera acquisition is continuously triggered 
 if at least one live image is connected to the camera. The default and minimum interval 
@@ -286,10 +745,10 @@ All connected live images will then get new images only if <a class="reference i
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.disconnect">
-<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signalSignature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callableMethod</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.disconnect" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signalSignature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callableMethod</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.disconnect" title="Permalink to this definition">#</a></dt>
 <dd><p>Disconnects a connection which must have been established before with exactly the same parameters.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>signalSignature</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>This must be the valid signature, known from the Qt-method <em>connect</em> 
 (e.g. <code class="docutils literal notranslate"><span class="pre">clicked(bool)</span></code>)</p>
@@ -310,7 +769,7 @@ given signal is emitted.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.enableAutoGrabbing">
-<span class="sig-name descname"><span class="pre">enableAutoGrabbing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.enableAutoGrabbing" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">enableAutoGrabbing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.enableAutoGrabbing" title="Permalink to this definition">#</a></dt>
 <dd><p>Enables auto grabbing for the grabber (camera…).</p>
 <p>If the auto grabbing flag is set, the camera acquisition is continuously triggered 
 if at least one live image is connected to the camera. The default and minimum interval 
@@ -333,7 +792,7 @@ All connected live images will then get new images only if <a class="reference i
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.exec">
-<span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcName</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.exec" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcName</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.exec" title="Permalink to this definition">#</a></dt>
 <dd><p>Calls the additional function <code class="docutils literal notranslate"><span class="pre">funcName</span></code> of this plugin.</p>
 <p>Every plugin can define special, additional functions (denoted as <code class="docutils literal notranslate"><span class="pre">exec</span> <span class="pre">functions</span></code>) 
 that can for instance be used in order to call specific calibration routines 
@@ -346,7 +805,7 @@ this method.</p>
 <p>Additionally, every function can return one or multiple values. Either the single value 
 or a tuple of all returned values is returned by this method.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>funcName</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>The name of the additional function.</p>
 </dd>
@@ -358,7 +817,7 @@ function can also given as keyword arguments (see <code class="docutils literal 
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#any" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">any</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <a class="reference external" href="https://docs.python.org/3/library/functions.html#any" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">any</span></code></a></dt><dd><p>The returned values depend on the function itself.</p>
 </dd>
@@ -375,7 +834,7 @@ function can also given as keyword arguments (see <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getAutoGrabbing">
-<span class="sig-name descname"><span class="pre">getAutoGrabbing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#itom.dataIO.getAutoGrabbing" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getAutoGrabbing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#itom.dataIO.getAutoGrabbing" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns if the auto grabbing property of this grabber device is enabled or disabled.</p>
 <p>If the auto grabbing flag is set, the camera acquisition is continuously triggered 
 if at least one live image is connected to the camera.</p>
@@ -385,7 +844,7 @@ script or something similar. In this case, disable the auto grabbing property.
 All connected live images will then get new images only if <a class="reference internal" href="#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getVal()</span></code></a> or 
 <a class="reference internal" href="#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">copyVal()</span></code></a> is called.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.8)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the auto grabbing timer is currently active, otherwise <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd>
@@ -402,7 +861,7 @@ All connected live images will then get new images only if <a class="reference i
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getAutoGrabbingInterval">
-<span class="sig-name descname"><span class="pre">getAutoGrabbingInterval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#itom.dataIO.getAutoGrabbingInterval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getAutoGrabbingInterval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#itom.dataIO.getAutoGrabbingInterval" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the current auto grabbing interval (in ms), even if auto grabbing is disabled.</p>
 <p>If auto grabbing is enabled for a grabber device, a timer is set that continuously 
 acquires data or images from the devices and sends it to all connected plots or 
@@ -413,7 +872,7 @@ grabber device is in an idle state again. Hence, the interval is considered to b
 minimum value.</p>
 <p>The default interval of newly started grabber devices in 20 ms.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>the current auto grabbing timer interval in <em class="xref py py-obj">ms</em>.</p>
 </dd>
@@ -430,7 +889,7 @@ minimum value.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getExecFuncsInfo">
-<span class="sig-name descname"><span class="pre">getExecFuncsInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detailLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getExecFuncsInfo" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getExecFuncsInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detailLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.getExecFuncsInfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Lists all available additional functions of this plugin or gives a detailed description of one specific <code class="docutils literal notranslate"><span class="pre">funcName</span></code>.</p>
 <p>Every plugin can define further functions, that are called by the method <a class="reference internal" href="#itom.dataIO.exec" title="itom.dataIO.exec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec()</span></code></a>. 
 This can for instance be used in order to call specific calibration routines of 
@@ -438,7 +897,7 @@ cameras or actuators.</p>
 <p>This method either prints requested information in a readable form to the command line 
 or returns this information as nested dictionary.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>funcName</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>is the fullname or a part of any name of such an additional plugin function. 
 If <code class="docutils literal notranslate"><span class="pre">funcName</span></code> is an empty string or does not match any plugin function 
@@ -451,7 +910,7 @@ it is printed to the command line in a readable form (default).</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></dt><dd><p>The return value depends on the argument <code class="docutils literal notranslate"><span class="pre">detailLevel</span></code>.</p>
 </dd>
@@ -468,7 +927,7 @@ it is printed to the command line in a readable form (default).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getExecFuncsList">
-<span class="sig-name descname"><span class="pre">getExecFuncsList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getExecFuncsList" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getExecFuncsList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getExecFuncsList" title="Permalink to this definition">#</a></dt>
 <dd><p>Gets a list of the names of additional callable functions of this plugin.</p>
 <p>Each plugin may define a set of functions, extending the standard interface. 
 These functions are not common to plugins of the same type. They are 
@@ -479,7 +938,7 @@ executed using:</p>
 <p>To get more information about one specific function, call 
 <a class="reference internal" href="#itom.dataIO.getExecFuncsInfo" title="itom.dataIO.getExecFuncsInfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getExecFuncsInfo()</span></code></a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></dt><dd><p>is a list of additional, callable function names of this plugin object.</p>
 </dd>
@@ -490,7 +949,7 @@ executed using:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getParam">
-<span class="sig-name descname"><span class="pre">getParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><span class="pre">dataObject</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="polygonMesh.html#itom.polygonMesh" title="itom.polygonMesh"><span class="pre">polygonMesh</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pointCloud.html#itom.pointCloud" title="itom.pointCloud"><span class="pre">pointCloud</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><span class="pre">dataIO</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="actuator.html#itom.actuator" title="itom.actuator"><span class="pre">actuator</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getParam" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><span class="pre">dataObject</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="polygonMesh.html#itom.polygonMesh" title="itom.polygonMesh"><span class="pre">polygonMesh</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pointCloud.html#itom.pointCloud" title="itom.pointCloud"><span class="pre">pointCloud</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><span class="pre">dataIO</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="actuator.html#itom.actuator" title="itom.actuator"><span class="pre">actuator</span></a></span></span><a class="headerlink" href="#itom.dataIO.getParam" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the current value of the plugin parameter <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 <p>The type of the returned value depends on the real type of the internal plugin, 
 which can be:</p>
@@ -514,19 +973,19 @@ one single value, specified by the integer index <code class="docutils literal n
 <li><p><strong>name[index]:additionalTag</strong> (a combination of the two possibilies above)</p></li>
 </ul>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>name</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Name of the requested parameter.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a> or <a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataObject</span></code></a> or <a class="reference internal" href="polygonMesh.html#itom.polygonMesh" title="itom.polygonMesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polygonMesh</span></code></a> or <a class="reference internal" href="pointCloud.html#itom.pointCloud" title="itom.pointCloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pointCloud</span></code></a> or <a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataIO</span></code></a> or <a class="reference internal" href="actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">actuator</span></code></a></dt><dd><p>Current value of the parameter <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>if parameter does not exist</p>
 </dd>
@@ -543,7 +1002,7 @@ one single value, specified by the integer index <code class="docutils literal n
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getParamInfo">
-<span class="sig-name descname"><span class="pre">getParamInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#itom.dataIO.getParamInfo" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getParamInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#itom.dataIO.getParamInfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns a nested dictionary with meta information of the desired parameter.</p>
 <p>Plugin parameters in itom not only hold a value, but they can also be equipped 
 with further meta information, like the minimum or maximum value range, a certain 
@@ -551,13 +1010,13 @@ step size, allowed string values etc.</p>
 <p>These values are returned as nested dictionary (if available, else the dict is 
 more or less empty).</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>name</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Name of the plugin parameter.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></dt><dd><p>nested dictionary with meta information assigned to the plugin parameter <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
 </dd>
@@ -568,7 +1027,7 @@ more or less empty).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getParamList">
-<span class="sig-name descname"><span class="pre">getParamList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getParamList" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getParamList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getParamList" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns a list of the names of all available parameters of this plugin object.</p>
 <p>Each plugin defines a set of parameters. Each of these parameters maps its <code class="docutils literal notranslate"><span class="pre">name</span></code> 
 to a certain <code class="docutils literal notranslate"><span class="pre">value</span></code>. The value is represented by the C++ class 
@@ -594,7 +1053,7 @@ to a certain <code class="docutils literal notranslate"><span class="pre">value<
 conventions about certain parameters, that must be available and have a specific 
 meaning for a type of plugin object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> <code class="xref py py-obj docutils literal notranslate"><span class="pre">of</span></code> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></dt><dd><p>list of available parameter names in this plugin.</p>
 </dd>
@@ -611,7 +1070,7 @@ meaning for a type of plugin object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getParamListInfo">
-<span class="sig-name descname"><span class="pre">getParamListInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detailLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.getParamListInfo" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getParamListInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detailLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.getParamListInfo" title="Permalink to this definition">#</a></dt>
 <dd><p>Prints or returns detailed information about all parameters of this plugin object.</p>
 <p>Each plugin defines a set of parameters. Each of these parameters maps its <code class="docutils literal notranslate"><span class="pre">name</span></code> 
 to a certain <code class="docutils literal notranslate"><span class="pre">value</span></code>. The value is represented by the C++ class 
@@ -639,7 +1098,7 @@ Additionally, the column <code class="docutils literal notranslate"><span class=
 <p>Dependin`g on <code class="docutils literal notranslate"><span class="pre">detailLevel</span></code>, this method will not print the listing to the command line 
 but returns it using a nested <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>detailLevel</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>if <code class="docutils literal notranslate"><span class="pre">detailLevel</span></code> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>, this method returns a nested dictionary with all 
 information about all parameters of this plugin. Otherwise <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned and 
@@ -647,7 +1106,7 @@ the listing is printed in a readable form to the command line (default).</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">dict</span></code></a></dt><dd><p>See the parameter <code class="docutils literal notranslate"><span class="pre">detailLevel</span></code> for the difference in returned values.</p>
 </dd>
@@ -664,7 +1123,7 @@ the listing is printed in a readable form to the command line (default).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getType">
-<span class="sig-name descname"><span class="pre">getType</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#itom.dataIO.getType" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getType</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#itom.dataIO.getType" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the type value of this specific dataIO plugin.</p>
 <p>Possible values are:</p>
 <ul class="simple">
@@ -674,7 +1133,7 @@ the listing is printed in a readable form to the command line (default).</p>
 USB ports, … but also other devices like a power supply…).</p></li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>dataIO type indentifier.</p>
 </dd>
@@ -685,7 +1144,7 @@ USB ports, … but also other devices like a power supply…).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.getVal">
-<span class="sig-name descname"><span class="pre">getVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataObj</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.getVal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataObj</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.getVal" title="Permalink to this definition">#</a></dt>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">getVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">INT_MAX</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a></span></span></dt>
 <dd><p>Gets shallow copy of internal camera image if <em class="xref py py-obj">dataObj</em> is provided. Else values from the plugins are copied to given buffer.</p>
@@ -704,7 +1163,7 @@ data is copied into this buffer object and the size of the copied data is return
 the buffer is too small, only the data that fits into the buffer is copied. Another 
 call to <a class="reference internal" href="#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getVal()</span></code></a> will copy the rest.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>dataObj</strong><span class="classifier"><a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataObject</span></code></a></span></dt><dd><p>Usually for cameras and grabber: A reference (shallow copy) to the internal memory 
 of the camera plugin is set to the given data object. Therefore its content may 
@@ -721,7 +1180,7 @@ must not be given.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">None</span></code> if <code class="docutils literal notranslate"><span class="pre">dataObj</span></code> is given, else the size of the values filled into the given 
 <code class="docutils literal notranslate"><span class="pre">buffer</span></code>.</p>
@@ -739,10 +1198,10 @@ must not be given.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.hideToolbox">
-<span class="sig-name descname"><span class="pre">hideToolbox</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.hideToolbox" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">hideToolbox</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.hideToolbox" title="Permalink to this definition">#</a></dt>
 <dd><p>Hides the visible toolbox of this plugin object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>if this plugin does not provide a toolbox.</p>
 </dd>
@@ -759,10 +1218,10 @@ must not be given.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.info">
-<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.info" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.info" title="Permalink to this definition">#</a></dt>
 <dd><p>Prints out information about signal and callable slots of this actuator.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>verbose</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>0: only slots and signals from the plugin class are printed (default) 
 1: all slots and signals from all inherited classes are printed</p>
@@ -780,10 +1239,10 @@ must not be given.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.name">
-<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#itom.dataIO.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#itom.dataIO.name" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the name of this plugin object.</p>
 <dl class="field-list">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>name</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>name of the plugin, which corresponds to <code class="docutils literal notranslate"><span class="pre">getParam(&quot;name&quot;)</span></code></p>
 </dd>
@@ -800,7 +1259,7 @@ must not be given.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.setAutoGrabbing">
-<span class="sig-name descname"><span class="pre">setAutoGrabbing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.setAutoGrabbing" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setAutoGrabbing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.setAutoGrabbing" title="Permalink to this definition">#</a></dt>
 <dd><p>Enables or disables the auto grabbing property of this grabber device.</p>
 <p>If the auto grabbing flag is set, the camera acquisition is continuously triggered 
 if at least one live image is connected to the camera.</p>
@@ -810,7 +1269,7 @@ script or something similar. In this case, disable the auto grabbing property.
 All connected live images will then get new images only if <a class="reference internal" href="#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getVal()</span></code></a> or 
 <a class="reference internal" href="#itom.dataIO.copyVal" title="itom.dataIO.copyVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">copyVal()</span></code></a> is called.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>enable</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.8)"><span class="xref std std-ref">bool</span></a></span></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> will enable the auto grabbing timer, <code class="docutils literal notranslate"><span class="pre">False</span></code> disables it.</p>
 </dd>
@@ -827,7 +1286,7 @@ All connected live images will then get new images only if <a class="reference i
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.setAutoGrabbingInterval">
-<span class="sig-name descname"><span class="pre">setAutoGrabbingInterval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.setAutoGrabbingInterval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setAutoGrabbingInterval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.setAutoGrabbingInterval" title="Permalink to this definition">#</a></dt>
 <dd><p>Changes the minimum auto grabbing interval (in ms) between two auto-grabbed datasets.</p>
 <p>If auto grabbing is enabled for a grabber device, a timer is set that continuously 
 acquires data or images from the devices and sends it to all connected plots or 
@@ -840,7 +1299,7 @@ minimum value.</p>
 change this interval even if auto grabbing is currently disabled. The new interval 
 will be considered from the next activation on.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>interval</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>New minimum auto grabbing timer interval in <em class="xref py py-obj">ms</em>.</p>
 </dd>
@@ -857,7 +1316,7 @@ will be considered from the next activation on.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.setParam">
-<span class="sig-name descname"><span class="pre">setParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.setParam" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.setParam" title="Permalink to this definition">#</a></dt>
 <dd><p>Sets a writeable parameter <code class="docutils literal notranslate"><span class="pre">name</span></code> of this plugin object to <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
 <p>Sets the internal plugin parameter with ‘name’ to a new value. The plugin itsself 
 can decide whether the given value is accepted as new value. This may depend on the 
@@ -873,7 +1332,7 @@ one single value, specified by the integer index [0,nrOfArrayItems-1])</p></li>
 <li><p><strong>name[index]:additionalTag</strong> (a combination of the two possibilies above)</p></li>
 </ul>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>name</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">str</span></code></a></span></dt><dd><p>Name of the parameter.</p>
 </dd>
@@ -883,7 +1342,7 @@ limitations.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>if the new <code class="docutils literal notranslate"><span class="pre">value</span></code> is (currently) not accepted.</p>
 </dd>
@@ -900,7 +1359,7 @@ limitations.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.setVal">
-<span class="sig-name descname"><span class="pre">setVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataObj</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.setVal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataObj</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.setVal" title="Permalink to this definition">#</a></dt>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">setVal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buffer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span></dt>
 <dd><p>Transfers a dataObject to an ADDA plugin for write, or a bytearray to other dataIO plugins for general purposes.</p>
@@ -913,7 +1372,7 @@ a <a class="reference external" href="https://docs.python.org/3/library/stdtypes
 from this value. However it is also possible to define a user-defined size using the 
 <code class="docutils literal notranslate"><span class="pre">length</span></code> argument.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>dataObj</strong><span class="classifier"><a class="reference internal" href="dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dataObject</span></code></a></span></dt><dd><p>The array, that should be transmitted to the output of an analog-digital converter. 
 Usually, the shape of this array is <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">x</span> <span class="pre">N</span></code>, where <code class="docutils literal notranslate"><span class="pre">M</span></code> channels will obtain up 
@@ -932,10 +1391,10 @@ automatically extracted from the given object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.showConfiguration">
-<span class="sig-name descname"><span class="pre">showConfiguration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.showConfiguration" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">showConfiguration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.showConfiguration" title="Permalink to this definition">#</a></dt>
 <dd><p>Shows the (optional) configuration dialog of this plugin as modal dialog.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>if this plugin does not provide a configuration dialog.</p>
 </dd>
@@ -946,10 +1405,10 @@ automatically extracted from the given object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.showToolbox">
-<span class="sig-name descname"><span class="pre">showToolbox</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.showToolbox" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">showToolbox</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.showToolbox" title="Permalink to this definition">#</a></dt>
 <dd><p>Opens the (optional) toolbox of this plugin object in the itom main window.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>if this plugin does not provide a toolbox.</p>
 </dd>
@@ -966,7 +1425,7 @@ automatically extracted from the given object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.startDevice">
-<span class="sig-name descname"><span class="pre">startDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.startDevice" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">startDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.startDevice" title="Permalink to this definition">#</a></dt>
 <dd><p>Starts the given dataIO plugin object.</p>
 <p>This command starts the dataIO plugin such that it is ready for data acquisition. 
 Call this method before you start using commands like <a class="reference internal" href="#itom.dataIO.acquire" title="itom.dataIO.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code></a>, <a class="reference internal" href="#itom.dataIO.getVal" title="itom.dataIO.getVal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getVal()</span></code></a> 
@@ -978,7 +1437,7 @@ zero again.</p>
 without knownledge about any previous start. No acquisition is possible, if the device 
 has not been started, hence the counter is 0.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>count</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>Number of increments to the internal start-counter (default: 1).</p>
 </dd>
@@ -995,7 +1454,7 @@ has not been started, hence the counter is 0.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.stop">
-<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.stop" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.stop" title="Permalink to this definition">#</a></dt>
 <dd><p>Stops a started, continuous acquisition.</p>
 <p>This method stops a previously started, continuous data acquisition. This method is not 
 implemented in every plugin. A common example for its implementation is to stop an 
@@ -1010,7 +1469,7 @@ infinite, continuous acquisition job of an AD-converter plugin.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.stopDevice">
-<span class="sig-name descname"><span class="pre">stopDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#itom.dataIO.stopDevice" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stopDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#itom.dataIO.stopDevice" title="Permalink to this definition">#</a></dt>
 <dd><p>Stops the given dataIO plugin object.</p>
 <p>If this method is called as many times as he corresponding <a class="reference internal" href="#itom.dataIO.startDevice" title="itom.dataIO.startDevice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">startDevice()</span></code></a> method  
 (or if the <code class="docutils literal notranslate"><span class="pre">counts</span></code> are equal), the <a class="reference internal" href="#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> device is stopped (not deleted) 
@@ -1018,7 +1477,7 @@ and it is not possible to acquire further data.</p>
 <p>Once a live image is connected to a camera, <a class="reference internal" href="#itom.dataIO.startDevice" title="itom.dataIO.startDevice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">startDevice()</span></code></a> is automatically called 
 at start of the live acquisition and <a class="reference internal" href="#itom.dataIO.stopDevice" title="itom.dataIO.stopDevice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stopDevice()</span></code></a> at shutdown.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>count</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>if <code class="docutils literal notranslate"><span class="pre">count</span></code> &gt; 1, <a class="reference internal" href="#itom.dataIO.stopDevice" title="itom.dataIO.stopDevice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stopDevice()</span></code></a> is executed <code class="docutils literal notranslate"><span class="pre">count</span></code> times, in order to 
 decrement the grabber internal start counter. You can also set <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">=</span> <span class="pre">-1</span></code>, 
@@ -1027,7 +1486,7 @@ drops to 0. The number of effective counts is then returned.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl>
 <dt><strong>counts</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">None</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">=</span> <span class="pre">-1</span></code> the number of required calls to <code class="docutils literal notranslate"><span class="pre">stopDevice</span></code> to finally 
 stop the device is returned. For <code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
@@ -1045,7 +1504,7 @@ stop the device is returned. For <code class="docutils literal notranslate"><spa
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.userMutexTryLock">
-<span class="sig-name descname"><span class="pre">userMutexTryLock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.userMutexTryLock" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">userMutexTryLock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.userMutexTryLock" title="Permalink to this definition">#</a></dt>
 <dd><p>tryLock(timeout = 3000) -&gt; bool</p>
 <p>Tries to lock the user mutex of this plugin.</p>
 <p>Every plugin contains a user mutex, that can be used for arbitrary purposes. 
@@ -1062,7 +1521,7 @@ within a loop and wait for this method to return <code class="docutils literal n
 unlocking the mutex by another thread.</p>
 <p>This method is new for plugins that implement the AddInInterface &gt;= 4.2.</p>
 <dl class="field-list">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
 <dt><strong>timeout</strong><span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>This method will wait for at most <code class="docutils literal notranslate"><span class="pre">timeout</span></code> milliseconds for the 
 mutex to become available. If this value is negative, it will wait forever 
@@ -1070,7 +1529,7 @@ until the mutex become available.</p>
 </dd>
 </dl>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.8)"><span class="xref std std-ref">bool</span></a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the user defined mutex could be locked, else <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd>
@@ -1087,7 +1546,7 @@ until the mutex become available.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="itom.dataIO.userMutexUnlock">
-<span class="sig-name descname"><span class="pre">userMutexUnlock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.userMutexUnlock" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">userMutexUnlock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#itom.dataIO.userMutexUnlock" title="Permalink to this definition">#</a></dt>
 <dd><p>Tries to unlock the user mutex of this plugin.</p>
 <p>Every plugin contains a user mutex, that can be used for arbitrary purposes. 
 It is not used for any official purposes. You can for instance use this mutex 
@@ -1106,7 +1565,7 @@ This method is new for plugins that implement the AddInInterface &gt;= 4.2.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="itom.dataIO.TRIGGER_SOFTWARE">
-<span class="sig-name descname"><span class="pre">TRIGGER_SOFTWARE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#itom.dataIO.TRIGGER_SOFTWARE" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">TRIGGER_SOFTWARE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#itom.dataIO.TRIGGER_SOFTWARE" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1114,36 +1573,148 @@ This method is new for plugins that implement the AddInInterface &gt;= 4.2.</p>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="autoInterval.html" class="btn btn-neutral float-left" title="10.4. autoInterval" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dataObject.html" class="btn btn-neutral float-right" title="10.6. dataObject" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="autoInterval.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10.4. </span>autoInterval</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="dataObject.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10.6. </span>dataObject</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
 
-</body>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO"><code class="docutils literal notranslate"><span class="pre">dataIO</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.acquire"><code class="docutils literal notranslate"><span class="pre">dataIO.acquire()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.connect"><code class="docutils literal notranslate"><span class="pre">dataIO.connect()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.copyVal"><code class="docutils literal notranslate"><span class="pre">dataIO.copyVal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.disableAutoGrabbing"><code class="docutils literal notranslate"><span class="pre">dataIO.disableAutoGrabbing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.disconnect"><code class="docutils literal notranslate"><span class="pre">dataIO.disconnect()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.enableAutoGrabbing"><code class="docutils literal notranslate"><span class="pre">dataIO.enableAutoGrabbing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.exec"><code class="docutils literal notranslate"><span class="pre">dataIO.exec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getAutoGrabbing"><code class="docutils literal notranslate"><span class="pre">dataIO.getAutoGrabbing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getAutoGrabbingInterval"><code class="docutils literal notranslate"><span class="pre">dataIO.getAutoGrabbingInterval()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getExecFuncsInfo"><code class="docutils literal notranslate"><span class="pre">dataIO.getExecFuncsInfo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getExecFuncsList"><code class="docutils literal notranslate"><span class="pre">dataIO.getExecFuncsList()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getParam"><code class="docutils literal notranslate"><span class="pre">dataIO.getParam()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getParamInfo"><code class="docutils literal notranslate"><span class="pre">dataIO.getParamInfo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getParamList"><code class="docutils literal notranslate"><span class="pre">dataIO.getParamList()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getParamListInfo"><code class="docutils literal notranslate"><span class="pre">dataIO.getParamListInfo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getType"><code class="docutils literal notranslate"><span class="pre">dataIO.getType()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.getVal"><code class="docutils literal notranslate"><span class="pre">dataIO.getVal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.hideToolbox"><code class="docutils literal notranslate"><span class="pre">dataIO.hideToolbox()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.info"><code class="docutils literal notranslate"><span class="pre">dataIO.info()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.name"><code class="docutils literal notranslate"><span class="pre">dataIO.name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.setAutoGrabbing"><code class="docutils literal notranslate"><span class="pre">dataIO.setAutoGrabbing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.setAutoGrabbingInterval"><code class="docutils literal notranslate"><span class="pre">dataIO.setAutoGrabbingInterval()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.setParam"><code class="docutils literal notranslate"><span class="pre">dataIO.setParam()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.setVal"><code class="docutils literal notranslate"><span class="pre">dataIO.setVal()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.showConfiguration"><code class="docutils literal notranslate"><span class="pre">dataIO.showConfiguration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.showToolbox"><code class="docutils literal notranslate"><span class="pre">dataIO.showToolbox()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.startDevice"><code class="docutils literal notranslate"><span class="pre">dataIO.startDevice()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.stop"><code class="docutils literal notranslate"><span class="pre">dataIO.stop()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.stopDevice"><code class="docutils literal notranslate"><span class="pre">dataIO.stopDevice()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.userMutexTryLock"><code class="docutils literal notranslate"><span class="pre">dataIO.userMutexTryLock()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.userMutexUnlock"><code class="docutils literal notranslate"><span class="pre">dataIO.userMutexUnlock()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itom.dataIO.TRIGGER_SOFTWARE"><code class="docutils literal notranslate"><span class="pre">dataIO.TRIGGER_SOFTWARE</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/09_reference/dataIO.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2011-2023, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

@@ -1,9 +1,7 @@
 var classito_1_1_add_in_algo_1_1_algo_widget_def =
 [
     [ "AlgoWidgetDef", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#a64287c283c460b91ae4060d797312d53", null ],
-    [ "AlgoWidgetDef", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#a624bc7e028e45dfe9269efa102db0d23", null ],
     [ "~AlgoWidgetDef", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#ab8677a38b43aade6018d7b61ede6eb6f", null ],
-    [ "AlgoWidgetDef", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#aafcca3aff3e351840c62e4bfd27b9043", null ],
     [ "m_category", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#ab0d655f4ee3bf0c8c5e33a582b56a534", null ],
     [ "m_description", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#aa012446e7cd958261362b2f4d998d617", null ],
     [ "m_interface", "classito_1_1_add_in_algo_1_1_algo_widget_def.html#a61521c276c39056c0ee913766df2a951", null ],

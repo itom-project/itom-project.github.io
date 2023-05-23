@@ -17,8 +17,5 @@ var classito_1_1_string_meta =
     [ "getString", "classito_1_1_string_meta.html#a985ade3b95583de398a21736f9e08c4c", null ],
     [ "getStringType", "classito_1_1_string_meta.html#a32917ad784fe822a19beb082c679f745", null ],
     [ "operator+=", "classito_1_1_string_meta.html#aaa317ff61d3dc11c3da555ff3e192950", null ],
-    [ "operator=", "classito_1_1_string_meta.html#a33bbaf375ec72b64a57f6be865e60b0f", null ],
-    [ "operator==", "classito_1_1_string_meta.html#aa33c1e39f3e7facedfc9c8e99c81fda1", null ],
-    [ "setStringType", "classito_1_1_string_meta.html#a1611e157fe45091f72764bcde5b9cf1a", null ],
-    [ "p", "classito_1_1_string_meta.html#aa92b283ef03cc13379673f5859e428d3", null ]
+    [ "setStringType", "classito_1_1_string_meta.html#a1611e157fe45091f72764bcde5b9cf1a", null ]
 ];

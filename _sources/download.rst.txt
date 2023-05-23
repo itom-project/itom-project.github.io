@@ -25,12 +25,12 @@ that provide the plot and figure widgets of **itom**.
 	 :link: https://sourceforge.net/projects/itom/files/all-in-one-build-setup
 
 	.. button:: :text: Source Code Repo
-	 :link: https://bitbucket.org/itom/itom/overview
+	 :link: https://github.com/itom-project
 
 
 | **Windows:**	Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
-| **Linux:**	(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_debian.html>`_)
-| **Mac:**		(OS X) Clone git source code (`MacOS instructions <https://itom.bitbucket.io/latest/docs/02_installation/build_osx.html>`_)
+| **Linux:**	(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom-project.github.io/latest/docs/02_installation/build_debian.html>`_)
+| **Mac:**		(OS X) Clone git source code (`MacOS instructions <https://itom-project.github.io/latest/docs/02_installation/build_osx.html>`_)
 | **SDK:**		Includes all tools to build the software from source with instructions and automated script files.
 |
 | The End-User Setup version includes **itom** and the following components:
