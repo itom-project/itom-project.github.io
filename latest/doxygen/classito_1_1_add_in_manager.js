@@ -27,13 +27,14 @@ var classito_1_1_add_in_manager =
     [ "getPluginModel", "classito_1_1_add_in_manager.html#ae2d87b7622d9daead2d42bcb02af462a", null ],
     [ "getTotalNumAddIns", "classito_1_1_add_in_manager.html#a1f2b3ea5a060442bdd2f84394e448b5a", null ],
     [ "incRef", "classito_1_1_add_in_manager.html#a955ccbc067512e4292c300bf6c98b6ef", null ],
+    [ "initAddIn", "classito_1_1_add_in_manager.html#a4508a384f3bb2262f6bdd6aa9c919283", null ],
     [ "initAddIn", "classito_1_1_add_in_manager.html#a9ed52201de09851e5f4d68dc522d7d92", null ],
     [ "initAddIn", "classito_1_1_add_in_manager.html#a7edc631ffe23c1ac1464de30662f624d", null ],
-    [ "initAddIn", "classito_1_1_add_in_manager.html#a4508a384f3bb2262f6bdd6aa9c919283", null ],
-    [ "instance", "classito_1_1_add_in_manager.html#a1044597cd87c8e02dc1f833d42e5f204", null ],
+    [ "instance", "classito_1_1_add_in_manager.html#a55e65f9850a012d33d74fa71fd286ec5", null ],
     [ "interruptAllActuatorInstances", "classito_1_1_add_in_manager.html#a8d64fef138615c741536405b6db115d4", null ],
     [ "isPluginInstanceDead", "classito_1_1_add_in_manager.html#acaed73f90af73dcaece62c5e45ab27ae", null ],
     [ "Q_DECLARE_PRIVATE", "classito_1_1_add_in_manager.html#a57a37bb6c76d4205fa4fb67e5aa59434", null ],
+    [ "Q_DISABLE_COPY", "classito_1_1_add_in_manager.html#a888a1cd1618a4b674986bd1785e1bcfe", null ],
     [ "reloadAddIn", "classito_1_1_add_in_manager.html#a60e851ff42f54c87df3c4b1c91b05bc2", null ],
     [ "scanAddInDir", "classito_1_1_add_in_manager.html#a95fe93658d9d2e1c8f43ce5a9eb272e5", null ],
     [ "setMainWindow", "classito_1_1_add_in_manager.html#a13ab9a655f19344318af704308e94b74", null ],
@@ -42,5 +43,6 @@ var classito_1_1_add_in_manager =
     [ "showDockWidget", "classito_1_1_add_in_manager.html#a1d7bf559793a6b6a12767f61589c9949", null ],
     [ "splashLoadMessage", "classito_1_1_add_in_manager.html#a001ba0957b576456a480987eecd73427", null ],
     [ "updateModel", "classito_1_1_add_in_manager.html#a5770675ef7213458c791ad6a58b9ad8b", null ],
-    [ "d_ptr", "classito_1_1_add_in_manager.html#a8d4e3833001e6f58ff38e04aeb2b773e", null ]
+    [ "d_ptr", "classito_1_1_add_in_manager.html#a8d4e3833001e6f58ff38e04aeb2b773e", null ],
+    [ "staticInstance", "classito_1_1_add_in_manager.html#ade4d9cdd5f47d4a32d35d90843905b86", null ]
 ];

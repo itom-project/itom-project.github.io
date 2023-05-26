@@ -28,8 +28,15 @@ var classito_1_1_param_meta =
       [ "UnknownRepresentation", "classito_1_1_param_meta.html#a927362b43732d65219501dc5a593ec29acb0acf06684eda34a0527b88b355f527", null ]
     ] ],
     [ "ParamMeta", "classito_1_1_param_meta.html#a8226932dcb42866e0cce03e88c938fa7", null ],
+    [ "ParamMeta", "classito_1_1_param_meta.html#a2f8a3ebcedcd063c58bc911f2d701e21", null ],
+    [ "ParamMeta", "classito_1_1_param_meta.html#ac60cb8383b9fc9c76b6f048585ed647a", null ],
     [ "~ParamMeta", "classito_1_1_param_meta.html#aa9c137806d73d0bd7866278efe5283d4", null ],
+    [ "getCategory", "classito_1_1_param_meta.html#af06ac2d026ddae7819b1a816e38b3bf5", null ],
     [ "getType", "classito_1_1_param_meta.html#a9d27693c2ae53984bd054679ca67dc13", null ],
+    [ "operator!=", "classito_1_1_param_meta.html#a4a4d991ff4406a5ef67ee8fdf33ff38c", null ],
     [ "operator=", "classito_1_1_param_meta.html#ad743a7b4fbb83e06bbf69fbe3eedfe42", null ],
-    [ "m_category", "classito_1_1_param_meta.html#aa587ce4aea3d811b7460c93cb137de3b", null ]
+    [ "operator==", "classito_1_1_param_meta.html#a3c0798c014aa534610a0b69d05d30559", null ],
+    [ "setCategory", "classito_1_1_param_meta.html#a00b73d8ac4e26023b6a4d6d3dfd3057f", null ],
+    [ "m_category", "classito_1_1_param_meta.html#aa587ce4aea3d811b7460c93cb137de3b", null ],
+    [ "m_type", "classito_1_1_param_meta.html#a29f5bf61c9b266bcc59b3b39ea648ca9", null ]
 ];

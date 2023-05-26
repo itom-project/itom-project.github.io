@@ -1,5 +1,7 @@
 var classito_1_1_api_functions =
 [
+    [ "ApiFunctions", "classito_1_1_api_functions.html#a8a842de81fd97ad4821ae8b768df28db", null ],
+    [ "~ApiFunctions", "classito_1_1_api_functions.html#a8c2388e8ed03cddd3432daed572c7f9b", null ],
     [ "getCurrentWorkingDir", "classito_1_1_api_functions.html#acf4fc2223f8eb0f2ca95828bc7a0ee1d", null ],
     [ "getSettingsFile", "classito_1_1_api_functions.html#a7d85b3ae6553949e965c306b8bb03aec", null ],
     [ "maddInClose", "classito_1_1_api_functions.html#a85b89c45e852a438d49abe411697fb55", null ],
@@ -18,5 +20,7 @@ var classito_1_1_api_functions =
     [ "mfilterVersion", "classito_1_1_api_functions.html#a36ff482b70698c4be720b23947d0fd56", null ],
     [ "mshowConfigurationDialog", "classito_1_1_api_functions.html#a2bc14a72944ab85f43782cac80200100", null ],
     [ "removed", "classito_1_1_api_functions.html#afa5d11cd47ab80a237c12cf51142abb2", null ],
-    [ "setSettingsFile", "classito_1_1_api_functions.html#ad8a2cbd6c0c6cbbae7201e52d2a01344", null ]
+    [ "setSettingsFile", "classito_1_1_api_functions.html#ad8a2cbd6c0c6cbbae7201e52d2a01344", null ],
+    [ "m_loadFPointer", "classito_1_1_api_functions.html#a189e8b39bb13aa19b262cc8d95be3678", null ],
+    [ "m_settingsFile", "classito_1_1_api_functions.html#aa8159a59ad5167367928283ccab8d9a9", null ]
 ];

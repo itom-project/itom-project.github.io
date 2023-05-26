@@ -14,9 +14,10 @@ var classito_1_1_abstract_add_in_dock_widget =
     [ "parametersChanged", "classito_1_1_abstract_add_in_dock_widget.html#a3312f3b93988fabcf30e17861782c51d", null ],
     [ "requestActuatorStatusAndPositions", "classito_1_1_abstract_add_in_dock_widget.html#aa19fa2dc9c75add235de43fba0ab9bc7", null ],
     [ "setActuatorInterrupt", "classito_1_1_abstract_add_in_dock_widget.html#a1f4565a4c1c533fe653e61e755d76c06", null ],
-    [ "setActuatorPosition", "classito_1_1_abstract_add_in_dock_widget.html#aa91e0a206678129fe8cab5318aada8d0", null ],
     [ "setActuatorPosition", "classito_1_1_abstract_add_in_dock_widget.html#aef04b1f72aab0b53559062ce45dc2387", null ],
+    [ "setActuatorPosition", "classito_1_1_abstract_add_in_dock_widget.html#aa91e0a206678129fe8cab5318aada8d0", null ],
     [ "setPluginParameter", "classito_1_1_abstract_add_in_dock_widget.html#a4f7a855d8a12dd816a16f090bd21462d", null ],
     [ "setPluginParameters", "classito_1_1_abstract_add_in_dock_widget.html#a3a09b7ae3bb1a5bc2ca39dafcd9e97cf", null ],
-    [ "targetChanged", "classito_1_1_abstract_add_in_dock_widget.html#a215bfa7a06816e8103657b8fe7ede7aa", null ]
+    [ "targetChanged", "classito_1_1_abstract_add_in_dock_widget.html#a215bfa7a06816e8103657b8fe7ede7aa", null ],
+    [ "d", "classito_1_1_abstract_add_in_dock_widget.html#ab77be701b42db3a9fbcebec2722ca32c", null ]
 ];

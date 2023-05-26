@@ -7,5 +7,6 @@ var class_qt_time_property_manager =
     [ "uninitializeProperty", "class_qt_time_property_manager.html#a3219bae9a9c145e02adf21d0d5a5773e", null ],
     [ "value", "class_qt_time_property_manager.html#a517205aa297d2623fca6a55595fda2ed", null ],
     [ "valueChanged", "class_qt_time_property_manager.html#a124666acfe564a8ef3ce333b11108d8f", null ],
-    [ "valueText", "class_qt_time_property_manager.html#adf980bf1f09502b886d36d5be9ed08e8", null ]
+    [ "valueText", "class_qt_time_property_manager.html#adf980bf1f09502b886d36d5be9ed08e8", null ],
+    [ "d_ptr", "class_qt_time_property_manager.html#a9fdb0eae7612f03edc07f75e4118c8e9", null ]
 ];

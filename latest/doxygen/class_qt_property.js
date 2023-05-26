@@ -8,6 +8,7 @@ var class_qt_property =
     [ "insertSubProperty", "class_qt_property.html#a8e47b08ff4e980d46fb5a8ee71f347bd", null ],
     [ "isEnabled", "class_qt_property.html#a540f5f35bf96e041725f98f79a270c57", null ],
     [ "isModified", "class_qt_property.html#ad03dc307115c2ad9e1ae4e34fbc5629c", null ],
+    [ "propertyChanged", "class_qt_property.html#a1d1be84f7449034e9689a4de14d4e3d8", null ],
     [ "propertyManager", "class_qt_property.html#afbf9a7febbdb3461572aa5fc9e210245", null ],
     [ "propertyName", "class_qt_property.html#a4a99f1d7379bcc1ed0736d8b414a3040", null ],
     [ "removeSubProperty", "class_qt_property.html#aaed9046cdd44964eb859d7c41794a4b4", null ],
@@ -22,5 +23,7 @@ var class_qt_property =
     [ "toolTip", "class_qt_property.html#a76466eb9cfd062938544ef047695e006", null ],
     [ "valueIcon", "class_qt_property.html#ab85ecc87b86211a36ffe27d86bcf8509", null ],
     [ "valueText", "class_qt_property.html#ae3c358507bb97691b827c97f6ecb4c4b", null ],
-    [ "whatsThis", "class_qt_property.html#aa35b3607ad583b17199fa32c105089c3", null ]
+    [ "whatsThis", "class_qt_property.html#aa35b3607ad583b17199fa32c105089c3", null ],
+    [ "QtAbstractPropertyManager", "class_qt_property.html#adb0985c7054655501a632ceb012e227a", null ],
+    [ "d_ptr", "class_qt_property.html#a11862c770d5ed21fe5cfbd8cc3cb3371", null ]
 ];

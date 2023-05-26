@@ -13,5 +13,6 @@ var classito_1_1_abstract_add_in_config_dialog =
     [ "parametersChanged", "classito_1_1_abstract_add_in_config_dialog.html#a621dfef1bd8a900551afda450712f5d5", null ],
     [ "setPluginParameter", "classito_1_1_abstract_add_in_config_dialog.html#a72408c64d430079a20884e7316329d0d", null ],
     [ "setPluginParameters", "classito_1_1_abstract_add_in_config_dialog.html#a900a651ac56656c441ea43f45076d0a0", null ],
-    [ "d", "classito_1_1_abstract_add_in_config_dialog.html#a52a86829a872e248bd80646a919cbc51", null ]
+    [ "d", "classito_1_1_abstract_add_in_config_dialog.html#a52a86829a872e248bd80646a919cbc51", null ],
+    [ "m_currentParameters", "classito_1_1_abstract_add_in_config_dialog.html#a0ea8645a82a20918a99aa6377bb913d1", null ]
 ];

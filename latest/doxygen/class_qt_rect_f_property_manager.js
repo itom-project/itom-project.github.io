@@ -7,6 +7,7 @@ var class_qt_rect_f_property_manager =
     [ "decimals", "class_qt_rect_f_property_manager.html#a4badeecb38cdba50f9fb2f79154ad649", null ],
     [ "decimalsChanged", "class_qt_rect_f_property_manager.html#a811ce1d168d102a7450e0bd830bf124e", null ],
     [ "initializeProperty", "class_qt_rect_f_property_manager.html#afc07213056ce3d85b04155c9b4edbb12", null ],
+    [ "Q_PRIVATE_SLOT", "class_qt_rect_f_property_manager.html#a2ce33cf7df0c3ffd23234d927051b4b0", null ],
     [ "setConstraint", "class_qt_rect_f_property_manager.html#ad287f58f48260a00de5d29e7f6252c53", null ],
     [ "setDecimals", "class_qt_rect_f_property_manager.html#a9a420c1499f1d26d4449da3cc77a5e17", null ],
     [ "setValue", "class_qt_rect_f_property_manager.html#afa348e09778f9490586e13135b5843f1", null ],
@@ -14,5 +15,6 @@ var class_qt_rect_f_property_manager =
     [ "uninitializeProperty", "class_qt_rect_f_property_manager.html#a34a89c20404b3ebe23d6404d0c25268b", null ],
     [ "value", "class_qt_rect_f_property_manager.html#a07e0e252751e20abc43733e939168e23", null ],
     [ "valueChanged", "class_qt_rect_f_property_manager.html#a865fc49f5579fd737103dc3c7fd4ea48", null ],
-    [ "valueText", "class_qt_rect_f_property_manager.html#af22ded4656eea5c4f7ca15450ee055ce", null ]
+    [ "valueText", "class_qt_rect_f_property_manager.html#af22ded4656eea5c4f7ca15450ee055ce", null ],
+    [ "d_ptr", "class_qt_rect_f_property_manager.html#a0bed1f38329c862362a272f4b54f2759", null ]
 ];

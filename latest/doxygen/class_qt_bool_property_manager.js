@@ -8,5 +8,6 @@ var class_qt_bool_property_manager =
     [ "value", "class_qt_bool_property_manager.html#a82860dfedfbdb3de44a1efee3fb940c8", null ],
     [ "valueChanged", "class_qt_bool_property_manager.html#a9eeb24deb23452d7ad572abeeae1a455", null ],
     [ "valueIcon", "class_qt_bool_property_manager.html#a4419b047214cf49376046aabd9fcb319", null ],
-    [ "valueText", "class_qt_bool_property_manager.html#a812c14be5f7b0c5a797922ccf6df3ee3", null ]
+    [ "valueText", "class_qt_bool_property_manager.html#a812c14be5f7b0c5a797922ccf6df3ee3", null ],
+    [ "d_ptr", "class_qt_bool_property_manager.html#a642db64fd3605e950bce85898e250713", null ]
 ];

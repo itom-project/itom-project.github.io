@@ -1,606 +1,143 @@
-
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-
-<html lang="en" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>8.8.13.7.1. Algorithm Categories and Interfaces &#8212; itom Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8.8.13.7.1. Algorithm Categories and Interfaces &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-
-  
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
-
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '07_plugins/development/plugin-algo-CatInterfaces';</script>
-    <link rel="icon" href="../../_static/itomLogo3_128.png"/>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8.8.13.8.1. FilterDef" href="plugin-algo-Ref.html" />
-    <link rel="prev" title="8.8.13. Plugin class - Algo" href="plugin-algo.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+    <link rel="prev" title="8.8.13. Plugin class - Algo" href="plugin-algo.html" /> 
+</head>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-<div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
-    <span class="fa-solid fa-bars"></span>
-  </label>
-  
-  <div class="navbar-header-items__start">
-    
-      <div class="navbar-item">
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">6. Plots and Figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">8. Plugins</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">8.1. Basic concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../loading_plugins.html">8.2. Loading plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">8.3. How to use hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">8.4. Getting started with grabbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">8.5. Getting started with A/D converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">8.6. Getting started with actuators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">8.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">8.8. Development under C++</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">8.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">8.8.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">8.8.3. DataObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">8.8.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">8.8.5. Parameters - Meta Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">8.8.6. Parameters - Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">8.8.7. Introduction to plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">8.8.8. Plugin interface class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">8.8.9. AddInBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">8.8.10. Plugin class - Basic information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">8.8.11. Plugin class - DataIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-actuator.html">8.8.12. Plugin class - Actuator</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="plugin-algo.html">8.8.13. Plugin class - Algo</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#plugin-structure">8.8.13.1. Plugin-Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#factory-class">8.8.13.2. Factory-Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#plugin-class">8.8.13.3. Plugin-Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#filter-methods-without-status-information-and-or-cancellation-feature">8.8.13.4. Filter-Methods (Without status information and / or cancellation feature)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#filter-methods-2-with-status-information-and-or-cancellation-feature">8.8.13.5. Filter-Methods 2 (With status information and / or cancellation feature)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#widget-method-gui-extensions">8.8.13.6. Widget-Method (GUI-Extensions)</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="plugin-algo.html#publish-filter-and-widget-methods-at-initialization">8.8.13.7. Publish Filter- and Widget-Methods at Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plugin-algo.html#finish-and-close-plugin">8.8.13.8. Finish and close plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">8.8.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">8.8.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">8.8.16. itom API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">8.8.17. Link or load external libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">8.8.18. Project settings for plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">8.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">8.8.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">8.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../11_demos/demos.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
 
-<a class="navbar-brand logo" href="../../index.html">
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../../_static/itomLogo3_128.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../_static/itomLogo3_128.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-    
-  </div>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
-  <ul class="bd-navbar-elements navbar-nav">
-    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../00_releaseNotes/whats-new.html">
-                        Changelog
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../01_introduction/introduction.html">
-                        Introduction
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../02_installation/install.html">
-                        Installation
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../03_gettingStarted/getting-started.html">
-                        Getting Started
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../04_itom_gui/gui.html">
-                        The itom User Interface
-                      </a>
-                    </li>
-                
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
-                </button>
-                <div class="dropdown-menu">
-                    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../05_plots/plots.html">
-                        Plots and Figures
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../06_extended_gui/extended_gui.html">
-                        Extending the user interface of itom
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="../plugins.html">
-                        Plugins
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../08_scriptLanguage/script-language.html">
-                        Python Scripting Language
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../09_reference/reference.html">
-                        itom Script Reference
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../10_miscellaneous/miscellaneous.html">
-                        Miscellaneous
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../11_demos/demos.html">
-                        Demo scripts
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../12_contributing/contributing.html">
-                        Contributing
-                      </a>
-                    </li>
-                
-                </div>
-            </div>
-            
-  </ul>
-</nav></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
         </div>
-      
-      
-        <div class="navbar-item">
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/itom-project" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-    </div>
-  
-
-  
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
-      <span class="fa-solid fa-outdent"></span>
-    </label>
-  
-</div>
-
+      </div>
     </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
 
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
-  <ul class="bd-navbar-elements navbar-nav">
-    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../00_releaseNotes/whats-new.html">
-                        Changelog
-                      </a>
-                    </li>
-                
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">itom Documentation</a>
+      </nav>
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../01_introduction/introduction.html">
-                        Introduction
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../02_installation/install.html">
-                        Installation
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../03_gettingStarted/getting-started.html">
-                        Getting Started
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../04_itom_gui/gui.html">
-                        The itom User Interface
-                      </a>
-                    </li>
-                
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
-                </button>
-                <div class="dropdown-menu">
-                    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../05_plots/plots.html">
-                        Plots and Figures
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../06_extended_gui/extended_gui.html">
-                        Extending the user interface of itom
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="../plugins.html">
-                        Plugins
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../08_scriptLanguage/script-language.html">
-                        Python Scripting Language
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../09_reference/reference.html">
-                        itom Script Reference
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../10_miscellaneous/miscellaneous.html">
-                        Miscellaneous
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../11_demos/demos.html">
-                        Demo scripts
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../12_contributing/contributing.html">
-                        Contributing
-                      </a>
-                    </li>
-                
-                </div>
-            </div>
-            
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../plugins.html"><span class="section-number">8. </span>Plugins</a> &raquo;</li>
+          <li><a href="plugin-development.html"><span class="section-number">8.8. </span>Development under C++</a> &raquo;</li>
+          <li><a href="plugin-algo.html"><span class="section-number">8.8.13. </span>Plugin class - Algo</a> &raquo;</li>
+      <li><span class="section-number">8.8.13.7.1. </span>Algorithm Categories and Interfaces</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/07_plugins/development/plugin-algo-CatInterfaces.rst.txt" rel="nofollow"> View page source</a>
+      </li>
   </ul>
-</nav></div>
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/itom-project" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
-        </li>
-</ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../basic_concept.html">8.1. Basic concept</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../loading_plugins.html">8.2. Loading plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getstart-hardware.html">8.3. How to use hardware plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getstart-grabber.html">8.4. Getting started with grabbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getstart-adda.html">8.5. Getting started with A/D converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getstart-actuator.html">8.6. Getting started with actuators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getstart-filter.html">8.7. Getting started with algorithm plugins (denoted as filters)</a></li>
-</ul>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="plugin-development.html">8.8. Development under C++</a><input checked class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plugin-RetVal.html">8.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-sharedSemaphore.html">8.8.2. ItomSharedSemaphore</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-dataObject.html">8.8.3. DataObject</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-params.html">8.8.4. Parameter-Container class of <strong>itom</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-paramsMeta.html">8.8.5. Parameters - Meta Information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-paramsValidate.html">8.8.6. Parameters - Validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pluginStructure.html">8.8.7. Introduction to plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pluginInterfaceClass.html">8.8.8. Plugin interface class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-AddInBase-Ref.html">8.8.9. AddInBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pluginClass.html">8.8.10. Plugin class - Basic information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-dataIO.html">8.8.11. Plugin class - DataIO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-actuator.html">8.8.12. Plugin class - Actuator</a></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="plugin-algo.html">8.8.13. Plugin class - Algo</a><input checked class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">8.8.13.7.1. Algorithm Categories and Interfaces</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-algo-Ref.html">8.8.13.8.1. FilterDef</a></li>
-
-
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pluginCreateCMake.html">8.8.14. Create a new plugin via CMake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">8.8.15. Automatic loading and saving of plugin parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-itomAPI.html">8.8.16. itom API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-externalLibraries.html">8.8.17. Link or load external libraries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="projectSettings.html">8.8.18. Project settings for plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-dockWidget.html">8.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugin-configDialog.html">8.8.20. Optional configuration dialog for hardware plugins</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="openCVMat.html">8.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
-</ul>
+  <hr/>
 </div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
-
-
-
-
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../plugins.html" class="nav-link"><span class="section-number">8. </span>Plugins</a></li>
-    
-    
-    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
-    
-    
-    <li class="breadcrumb-item"><a href="plugin-algo.html" class="nav-link"><span class="section-number">8.8.13. </span>Plugin class - Algo</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">8.8.13.7.1. </span>Algorithm Categories and Interfaces</li>
-  </ul>
-</nav>
-</div>
-      
-    </div>
-  
-  
-</div>
-</div>
-              
-              
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="algorithm-categories-and-interfaces">
-<span id="plugin-algo-catinterfaces"></span><h1><span class="section-number">8.8.13.7.1. </span>Algorithm Categories and Interfaces<a class="headerlink" href="#algorithm-categories-and-interfaces" title="Permalink to this heading">#</a></h1>
+<span id="plugin-algo-catinterfaces"></span><h1><span class="section-number">8.8.13.7.1. </span>Algorithm Categories and Interfaces<a class="headerlink" href="#algorithm-categories-and-interfaces" title="Permalink to this heading">¶</a></h1>
 <p>You can assign to every filter- or widget-method a certain category and/or algorithm interface, the method belongs or fits to. This is useful such that <strong>itom</strong> can …</p>
 <ul class="simple">
 <li><p>categorize your filter or widget.</p></li>
@@ -609,10 +146,10 @@ document.write(`
 <li><p>…</p></li>
 </ul>
 <section id="algorithm-categories">
-<h2><span class="section-number">8.8.13.7.1.1. </span>Algorithm Categories<a class="headerlink" href="#algorithm-categories" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.8.13.7.1.1. </span>Algorithm Categories<a class="headerlink" href="#algorithm-categories" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="algorithm-interfaces">
-<h2><span class="section-number">8.8.13.7.1.2. </span>Algorithm Interfaces<a class="headerlink" href="#algorithm-interfaces" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.8.13.7.1.2. </span>Algorithm Interfaces<a class="headerlink" href="#algorithm-interfaces" title="Permalink to this heading">¶</a></h2>
 <p>A programmer who wants to implement a filter or widget-method that fits to a specific algorithm interface can be forced by the interface to consider a certain set of rules. These rules can be:</p>
 <ul class="simple">
 <li><p>The first <strong>n</strong> mandatory parameters can be determined. For each of these parameters the type and optionally some contraints by adding a meta information instance to the parameter are given.</p></li>
@@ -625,14 +162,18 @@ document.write(`
 <p>If a filter or widget-method pretends to implement a certain interface, <strong>itom</strong> checks at startup if the contraints are fullfilled are if this is not the case, the filter or widget-method is rejected and cannot be used within <strong>itom</strong>. The reason for the rejection can be seen by open the dialog <strong>loaded plugins…</strong> within the <strong>help</strong>-menu of <strong>itom</strong>.</p>
 <p>The following interfaces are available (in the enumeration <strong>tAlgoInterface</strong>, member of class <strong>ito::AddInAlgo</strong>:</p>
 <section id="inotspecified">
-<h3><span class="section-number">8.8.13.7.1.2.1. </span>iNotSpecified<a class="headerlink" href="#inotspecified" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.1. </span>iNotSpecified<a class="headerlink" href="#inotspecified" title="Permalink to this heading">¶</a></h3>
 <p>This is the default implementation and indicates that your filter or widget-method does not fit to any interface.</p>
 </section>
 <section id="ireaddataobject">
-<h3><span class="section-number">8.8.13.7.1.2.2. </span>iReadDataObject<a class="headerlink" href="#ireaddataobject" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.2. </span>iReadDataObject<a class="headerlink" href="#ireaddataobject" title="Permalink to this heading">¶</a></h3>
 <p>Filters fitting to this interface provide the functionality to read a certain file and load its content to an instance of dataObject.</p>
 <p><strong>Argument limitations</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter group</p></th>
 <th class="head"><p>Max. number of parameters</p></th>
@@ -651,7 +192,13 @@ document.write(`
 </tbody>
 </table>
 <p><strong>Mandatory parameters</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 37%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Type</p></th>
@@ -686,10 +233,14 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </ul>
 </section>
 <section id="iwritedataobject">
-<h3><span class="section-number">8.8.13.7.1.2.3. </span>iWriteDataObject<a class="headerlink" href="#iwritedataobject" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.3. </span>iWriteDataObject<a class="headerlink" href="#iwritedataobject" title="Permalink to this heading">¶</a></h3>
 <p>Filters fitting to this interface provide the functionality to export a dataObject with a specific file format.</p>
 <p><strong>Argument limitations</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter group</p></th>
 <th class="head"><p>Max. number of parameters</p></th>
@@ -708,7 +259,13 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </tbody>
 </table>
 <p><strong>Mandatory parameters</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 37%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Type</p></th>
@@ -743,10 +300,14 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </ul>
 </section>
 <section id="ireadpointcloud">
-<h3><span class="section-number">8.8.13.7.1.2.4. </span>iReadPointCloud<a class="headerlink" href="#ireadpointcloud" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.4. </span>iReadPointCloud<a class="headerlink" href="#ireadpointcloud" title="Permalink to this heading">¶</a></h3>
 <p>Filters fitting to this interface provide the functionality to read a certain file and load its content to an instance of pointCloud.</p>
 <p><strong>Argument limitations</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter group</p></th>
 <th class="head"><p>Max. number of parameters</p></th>
@@ -765,7 +326,13 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </tbody>
 </table>
 <p><strong>Mandatory parameters</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 15%" />
+<col style="width: 37%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Type</p></th>
@@ -800,10 +367,14 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </ul>
 </section>
 <section id="iwritepointcloud">
-<h3><span class="section-number">8.8.13.7.1.2.5. </span>iWritePointCloud<a class="headerlink" href="#iwritepointcloud" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.5. </span>iWritePointCloud<a class="headerlink" href="#iwritepointcloud" title="Permalink to this heading">¶</a></h3>
 <p>Filters fitting to this interface provide the functionality to export a pointCloud with a specific file format.</p>
 <p><strong>Argument limitations</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter group</p></th>
 <th class="head"><p>Max. number of parameters</p></th>
@@ -822,7 +393,13 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </tbody>
 </table>
 <p><strong>Mandatory parameters</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 37%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Type</p></th>
@@ -857,10 +434,14 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </ul>
 </section>
 <section id="ireadpolygonmesh">
-<h3><span class="section-number">8.8.13.7.1.2.6. </span>iReadPolygonMesh<a class="headerlink" href="#ireadpolygonmesh" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.6. </span>iReadPolygonMesh<a class="headerlink" href="#ireadpolygonmesh" title="Permalink to this heading">¶</a></h3>
 <p>Filters fitting to this interface provide the functionality to read a certain file and load its content to an instance of polygonMesh.</p>
 <p><strong>Argument limitations</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter group</p></th>
 <th class="head"><p>Max. number of parameters</p></th>
@@ -879,7 +460,13 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </tbody>
 </table>
 <p><strong>Mandatory parameters</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 15%" />
+<col style="width: 37%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Type</p></th>
@@ -914,10 +501,14 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </ul>
 </section>
 <section id="iwritepolygonmesh">
-<h3><span class="section-number">8.8.13.7.1.2.7. </span>iWritePolygonMesh<a class="headerlink" href="#iwritepolygonmesh" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.8.13.7.1.2.7. </span>iWritePolygonMesh<a class="headerlink" href="#iwritepolygonmesh" title="Permalink to this heading">¶</a></h3>
 <p>Filters fitting to this interface provide the functionality to export a polygonMesh with a specific file format.</p>
 <p><strong>Argument limitations</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter group</p></th>
 <th class="head"><p>Max. number of parameters</p></th>
@@ -936,7 +527,13 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </tbody>
 </table>
 <p><strong>Mandatory parameters</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 37%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameters</p></th>
 <th class="head"><p>Type</p></th>
@@ -972,132 +569,43 @@ filter begins with its name (arbitrary string), followed by a space and a sequen
 </section>
 </section>
 <section id="definition-of-new-algorithm-interfaces">
-<h2><span class="section-number">8.8.13.7.1.3. </span>Definition of new algorithm interfaces<a class="headerlink" href="#definition-of-new-algorithm-interfaces" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.8.13.7.1.3. </span>Definition of new algorithm interfaces<a class="headerlink" href="#definition-of-new-algorithm-interfaces" title="Permalink to this heading">¶</a></h2>
 <p>At first the categories and interfaces are determined as an enumeration value in the enumerations <strong>ito::AddInAlgo::tAlgoCategory</strong> and <strong>ito::AddInAlgo::tAlgoInterface</strong> (file <strong>addInInterface.h</strong>).</p>
 <p>The constraints and rules for every interface are implemented in the methods <strong>init</strong> and <strong>getTags</strong> of class <strong>AlgoInterfaceValidator</strong>. Besides the syntax of the meta information string all necessary information is given in the method <strong>init</strong>.</p>
 </section>
 </section>
 
 
-                </article>
-              
-              
-              
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="plugin-algo.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8.8.13. </span>Plugin class - Algo</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="plugin-algo-Ref.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8.8.13.8.1. </span>FilterDef</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div></div>
-  
-</div>
-
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-categories">8.8.13.7.1.1. Algorithm Categories</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-interfaces">8.8.13.7.1.2. Algorithm Interfaces</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inotspecified">8.8.13.7.1.2.1. iNotSpecified</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ireaddataobject">8.8.13.7.1.2.2. iReadDataObject</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iwritedataobject">8.8.13.7.1.2.3. iWriteDataObject</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ireadpointcloud">8.8.13.7.1.2.4. iReadPointCloud</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iwritepointcloud">8.8.13.7.1.2.5. iWritePointCloud</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ireadpolygonmesh">8.8.13.7.1.2.6. iReadPolygonMesh</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iwritepolygonmesh">8.8.13.7.1.2.7. iWritePolygonMesh</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-new-algorithm-interfaces">8.8.13.7.1.3. Definition of new algorithm interfaces</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
-  <div class="tocsection sourcelink">
-    <a href="../../_sources/07_plugins/development/plugin-algo-CatInterfaces.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
-
-</div></div>
-              
-            
+           </div>
           </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugin-algo.html" class="btn btn-neutral float-left" title="8.8.13. Plugin class - Algo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plugin-algo-Ref.html" class="btn btn-neutral float-right" title="8.8.13.8.1. FilterDef" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Sep 19, 2022.
+      </span></p>
   </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-  <footer class="bd-footer">
-<div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
-  <p class="copyright">
-    
-      © Copyright 2011-2023, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      <br/>
-    
-  </p>
-</div>
-      
-        <div class="footer-item">
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
-    <br/>
-  </p>
-</div>
-      
-    </div>
-  
-  
-    <div class="footer-items__end">
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
-      
-    </div>
-  
-</div>
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
-  </footer>
-  </body>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

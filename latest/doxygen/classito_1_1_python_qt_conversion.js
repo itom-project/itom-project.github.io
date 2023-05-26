@@ -1,13 +1,33 @@
 var classito_1_1_python_qt_conversion =
 [
+    [ "unicodeEncodings", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821", [
+      [ "utf_8", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a498ae8967bf9bbde640ecc919429c3cc", null ],
+      [ "latin_1", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a0950bb86b730d1dbd415a9bd8756f7ca", null ],
+      [ "iso_8859_1", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821ac38ef88ecd2331cc2724c4ae4ae49253", null ],
+      [ "mbcs", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821acd802634438694dbac78b2fda7734fe7", null ],
+      [ "ascii", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821aef5351749edd04524918ce7f4fb9bddb", null ],
+      [ "utf_16", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821ab5db719c7ca89a4effb808ecf84f76ba", null ],
+      [ "utf_16_LE", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a960ab26b0b709e3880fe412f1cbe880f", null ],
+      [ "utf_16_BE", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a183de0c4964407ad70030f9a4caeffa8", null ],
+      [ "utf_32", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821ace90b15b052e9f4e54de4b75a4252501", null ],
+      [ "utf_32_BE", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a07219d6764b932de8da6a4aaf59a29f3", null ],
+      [ "utf_32_LE", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a731e7b19ff44d90bebaf3cade71b0e65", null ],
+      [ "other", "classito_1_1_python_qt_conversion.html#a76e0ce6ca627749c8e3ccb891b6cc821a700248f45de40d148eeb3742cb8da9b6", null ]
+    ] ],
+    [ "AddInBaseToPyObject", "classito_1_1_python_qt_conversion.html#a5e52d847d9f7b65e86ade6082021aafd", null ],
+    [ "baseObjectDeleterDataObject", "classito_1_1_python_qt_conversion.html#a7359ff69246b6ef737edf745a5c518ea", null ],
+    [ "ByteArrayToPyUnicode", "classito_1_1_python_qt_conversion.html#a04e361232ad818964778002e4c81b497", null ],
     [ "ConvertQtValueToPythonInternal", "classito_1_1_python_qt_conversion.html#a14c7231c532e219b8d81f7348545cf2b", null ],
+    [ "DataObjectToPyObject", "classito_1_1_python_qt_conversion.html#a3eead282f5534792f7f6d5d20297e43c", null ],
     [ "GetPyBool", "classito_1_1_python_qt_conversion.html#adb82e9876502856840921ca890de53f6", null ],
+    [ "guessQMetaTypeFromPyObject", "classito_1_1_python_qt_conversion.html#a76f135450b4d8bc2819821958b8363be", null ],
     [ "PyObjGetBool", "classito_1_1_python_qt_conversion.html#a48418d129f860f96aa5f8b7eeb4edd6a", null ],
     [ "PyObjGetByteArrayList", "classito_1_1_python_qt_conversion.html#a3a0418c1897248fcda60cac352c23a55", null ],
     [ "PyObjGetBytes", "classito_1_1_python_qt_conversion.html#ab7f7873bad532c6d60f6e66cb9f8859f", null ],
     [ "PyObjGetBytesShared", "classito_1_1_python_qt_conversion.html#a9597bcec58a1c265380d38f6141fd20c", null ],
     [ "PyObjGetComplex", "classito_1_1_python_qt_conversion.html#a1facba9b2155924b1ab97c1521fbd214", null ],
     [ "PyObjGetComplexArray", "classito_1_1_python_qt_conversion.html#abb435a8ad2371a9dd2c33c16f35cda77", null ],
+    [ "PyObjGetDataObjectNewPtr", "classito_1_1_python_qt_conversion.html#abf12d676dd5a36f45899ab8ae4941f22", null ],
     [ "PyObjGetDouble", "classito_1_1_python_qt_conversion.html#a1df9a490981a19b3bf2d453c011e365c", null ],
     [ "PyObjGetDoubleArray", "classito_1_1_python_qt_conversion.html#a58ee178ae69c9e6dfdd4e77f5be6cac5", null ],
     [ "PyObjGetInt", "classito_1_1_python_qt_conversion.html#a323410fdb6e9d9a4d255f47be7cff772", null ],
@@ -24,6 +44,9 @@ var classito_1_1_python_qt_conversion =
     [ "PyObjToQVariant", "classito_1_1_python_qt_conversion.html#a0fe7d84573737ca540d43216e4fe2edf", null ],
     [ "PyObjToStringList", "classito_1_1_python_qt_conversion.html#a86fc72e0cb451c013aa5f0da9350a84e", null ],
     [ "PyObjToVoidPtr", "classito_1_1_python_qt_conversion.html#aba227a6bc65d89ce00021142388e81bd", null ],
+    [ "PyUnicodeToPyByteObject", "classito_1_1_python_qt_conversion.html#acd4d3f4a4f0225b4f7bf50488e220a9d", null ],
+    [ "QByteArrayToPyUnicode", "classito_1_1_python_qt_conversion.html#ac50a3bab4dd53d5e9bbac91f95f9c166", null ],
+    [ "QByteArrayToPyUnicodeSecure", "classito_1_1_python_qt_conversion.html#ae02f66471c8bac8c6d0f818da22345e4", null ],
     [ "QDateTimeToPyDateTime", "classito_1_1_python_qt_conversion.html#a3e5b193044ede6ef0763823b584a0132", null ],
     [ "QDateToPyDate", "classito_1_1_python_qt_conversion.html#a8737d1471075ef57f746a1e41d0d03c4", null ],
     [ "QStringListToPyList", "classito_1_1_python_qt_conversion.html#af53313a588ae0b157c9173a4d65667dc", null ],
@@ -33,5 +56,8 @@ var classito_1_1_python_qt_conversion =
     [ "QVariantListToPyObject", "classito_1_1_python_qt_conversion.html#ad2f83e4814a46e74326aed1886520a50", null ],
     [ "QVariantMapToPyObject", "classito_1_1_python_qt_conversion.html#a84b3c4234281744e9a3d6a93af2ca6b2", null ],
     [ "QVariantToPyObject", "classito_1_1_python_qt_conversion.html#afc8f3d1ccf563be5e63ac9ad7ecf431e", null ],
-    [ "m_pyBaseObjectStorage", "classito_1_1_python_qt_conversion.html#af7aed38d93a46b7a1db61b5769f1becd", null ]
+    [ "PythonEngine", "classito_1_1_python_qt_conversion.html#ae7673fa44a25ce56ed50e7c70678bacc", null ],
+    [ "m_pyBaseObjectStorage", "classito_1_1_python_qt_conversion.html#af7aed38d93a46b7a1db61b5769f1becd", null ],
+    [ "textEncoding", "classito_1_1_python_qt_conversion.html#a1379cc0e83fdb5d9a6c3b3a3f547f8f2", null ],
+    [ "textEncodingName", "classito_1_1_python_qt_conversion.html#a37c32f7ae5dcf10d72acd87e2cecfff7", null ]
 ];

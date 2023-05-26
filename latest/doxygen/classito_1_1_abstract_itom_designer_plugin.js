@@ -1,15 +1,26 @@
 var classito_1_1_abstract_itom_designer_plugin =
 [
+    [ "AbstractItomDesignerPlugin", "classito_1_1_abstract_itom_designer_plugin.html#a6d53e018f51c03ebd84812e7898273be", null ],
+    [ "~AbstractItomDesignerPlugin", "classito_1_1_abstract_itom_designer_plugin.html#a7ff329637f2ea2ace0dcc8d84629e8e3", null ],
+    [ "createWidgetWithMode", "classito_1_1_abstract_itom_designer_plugin.html#aba6b1ab21c0e1bf99d64eae53c5810ee", null ],
     [ "getAboutInfo", "classito_1_1_abstract_itom_designer_plugin.html#a0bd882d592d9d8a351e5d94f235645f4", null ],
     [ "getAuthor", "classito_1_1_abstract_itom_designer_plugin.html#abf20b9f5e1d639d8d865e013fbd8d4c1", null ],
     [ "getDescription", "classito_1_1_abstract_itom_designer_plugin.html#a7dfeb305ea3ef95d56fe51e9d3bf795d", null ],
     [ "getDetailDescription", "classito_1_1_abstract_itom_designer_plugin.html#ad86a94f894d443113258224910ffcffd", null ],
     [ "getLicenseInfo", "classito_1_1_abstract_itom_designer_plugin.html#a66bad751847b9bc2474ff5a94be73249", null ],
+    [ "getPlotDataFormats", "classito_1_1_abstract_itom_designer_plugin.html#ac1e879b83751793d2315cbbd234c405d", null ],
+    [ "getPlotDataTypes", "classito_1_1_abstract_itom_designer_plugin.html#a3a8a5d87c7490b602daa015a0633f632", null ],
+    [ "getPlotFeatures", "classito_1_1_abstract_itom_designer_plugin.html#af3336f128de031352bef136326f07f81", null ],
     [ "getVersion", "classito_1_1_abstract_itom_designer_plugin.html#ac65f7c581eec97f26a8c850fa6cae8d2", null ],
+    [ "setItomSettingsFile", "classito_1_1_abstract_itom_designer_plugin.html#af92025f53ac80ddcc5864481039ea15b", null ],
     [ "m_aboutThis", "classito_1_1_abstract_itom_designer_plugin.html#a2262efcf5d945cb618f5e2cf5d853fe3", null ],
     [ "m_author", "classito_1_1_abstract_itom_designer_plugin.html#a6b85331eb30a1a1e36265294cad34618", null ],
     [ "m_description", "classito_1_1_abstract_itom_designer_plugin.html#a5b05548ca8d6e33effee7cee466905fc", null ],
     [ "m_detaildescription", "classito_1_1_abstract_itom_designer_plugin.html#a764baf511bd1eb7b327e3a127b17cd23", null ],
+    [ "m_itomSettingsFile", "classito_1_1_abstract_itom_designer_plugin.html#a368545b036beea4d69f54950ff45599f", null ],
     [ "m_license", "classito_1_1_abstract_itom_designer_plugin.html#ac945dc0479005a234cbba35977cb683d", null ],
+    [ "m_plotDataFormats", "classito_1_1_abstract_itom_designer_plugin.html#abd3ca1b1f213494b3a8531a53da81ea4", null ],
+    [ "m_plotDataTypes", "classito_1_1_abstract_itom_designer_plugin.html#a8f8e011254b0eae29f0c4d4c9a358e37", null ],
+    [ "m_plotFeatures", "classito_1_1_abstract_itom_designer_plugin.html#ac62f0b0ce93731e389a99a8cc58b2544", null ],
     [ "m_version", "classito_1_1_abstract_itom_designer_plugin.html#ac1a4d74d739257749571e1779eec75cd", null ]
 ];

@@ -1,578 +1,128 @@
-
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-
-<html lang="en" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>6.5. image plots (2D) &#8212; itom Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6.5. image plots (2D) &mdash; itom Documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/html.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/html.css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '05_plots/imagePlots';</script>
-    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.6. isometric Plot" href="isometricPlot.html" />
-    <link rel="prev" title="6.4. line plots (1D)" href="linePlots.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+    <link rel="prev" title="6.4. line plots (1D)" href="linePlots.html" /> 
+</head>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-<div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
-    <span class="fa-solid fa-bars"></span>
-  </label>
-  
-  <div class="navbar-header-items__start">
-    
-      <div class="navbar-item">
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-    
-  </div>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
-  <ul class="bd-navbar-elements navbar-nav">
-    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
-                        Changelog
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
-                        Introduction
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../02_installation/install.html">
-                        Installation
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
-                        Getting Started
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
-                        The itom User Interface
-                      </a>
-                    </li>
-                
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
-                </button>
-                <div class="dropdown-menu">
-                    
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="plots.html">
-                        Plots and Figures
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
-                        Extending the user interface of itom
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
-                        Plugins
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
-                        Python Scripting Language
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../09_reference/reference.html">
-                        itom Script Reference
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
-                        Miscellaneous
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../11_demos/demos.html">
-                        Demo scripts
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
-                        Contributing
-                      </a>
-                    </li>
-                
-                </div>
-            </div>
-            
-  </ul>
-</nav></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-        </div>
-      
-      
-        <div class="navbar-item">
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/itom-project" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-    </div>
-  
-
-  
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
-      <span class="fa-solid fa-outdent"></span>
-    </label>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> itom Documentation
+          </a>
+              <div class="version">
+                4.2.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
-  <ul class="bd-navbar-elements navbar-nav">
-    
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
-                        Changelog
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
-                        Introduction
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../02_installation/install.html">
-                        Installation
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
-                        Getting Started
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
-                        The itom User Interface
-                      </a>
-                    </li>
-                
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
-                </button>
-                <div class="dropdown-menu">
-                    
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="plots.html">
-                        Plots and Figures
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
-                        Extending the user interface of itom
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
-                        Plugins
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
-                        Python Scripting Language
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../09_reference/reference.html">
-                        itom Script Reference
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
-                        Miscellaneous
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../11_demos/demos.html">
-                        Demo scripts
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
-                        Contributing
-                      </a>
-                    </li>
-                
-                </div>
-            </div>
-            
-  </ul>
-</nav></div>
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/itom-project" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
-        </li>
-</ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6.5. image plots (2D)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="designerPlugins.html">6.12. Programming plot designer plugins in C++</a></li>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plots.html">6. Plots and Figures</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.5. image plots (2D)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#itom2dqwtplot">6.5.1. Itom2dQwtPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#properties">6.5.1.1. Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slots">6.5.1.2. Slots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#signals">6.5.1.3. Signals</a></li>
 </ul>
-</div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecated-figures">6.5.2. Deprecated figures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="designerPlugins.html">6.12. Programming plot designer plugins in C++</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_demos/demos.html">12. Demo scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_contributing/contributing.html">13. Contributing</a></li>
+</ul>
 
-
+        </div>
       </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
+    </nav>
 
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">itom Documentation</a>
+      </nav>
 
-
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="plots.html" class="nav-link"><span class="section-number">6. </span>Plots and Figures</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">6.5. </span>image plots (2D)</li>
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="plots.html"><span class="section-number">6. </span>Plots and Figures</a> &raquo;</li>
+      <li><span class="section-number">6.5. </span>image plots (2D)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/05_plots/imagePlots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
   </ul>
-</nav>
+  <hr/>
 </div>
-      
-    </div>
-  
-  
-</div>
-</div>
-              
-              
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="image-plots-2d">
-<span id="plot-image"></span><h1><span class="section-number">6.5. </span>image plots (2D)<a class="headerlink" href="#image-plots-2d" title="Permalink to this heading">#</a></h1>
+<span id="plot-image"></span><h1><span class="section-number">6.5. </span>image plots (2D)<a class="headerlink" href="#image-plots-2d" title="Permalink to this heading">¶</a></h1>
 <p>“Itom2dQwtPlot” and “GraphicViewPlot” are the basic plots for visualization of images, dataObjects or other array-like objects.
 Both plots have a line-cut and point picker included. By pressing “Ctrl” during picker movement, the picker can only be moved
 horizontal or vertical according to the mouse movement.</p>
 <p>You can also use the “matplotlib”-backend to plot any data structures (lines, bars, statistical plots, images, contours, 3d plots…).
 See section <a class="reference internal" href="../08_scriptLanguage/pymod-matplotlib.html#pymod-matplotlib"><span class="std std-ref">Python package matplotlib</span></a> for more information about how to use “matplotlib”.</p>
 <section id="itom2dqwtplot">
-<span id="id1"></span><h2><span class="section-number">6.5.1. </span>Itom2dQwtPlot<a class="headerlink" href="#itom2dqwtplot" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2><span class="section-number">6.5.1. </span>Itom2dQwtPlot<a class="headerlink" href="#itom2dqwtplot" title="Permalink to this heading">¶</a></h2>
 <p>“Itom2dQwtPlot” is designed for visualizing metrical data, false color or topography measurements.
 It supports the axis-scaling / axis offset of <strong>dataObjects</strong>, offers axis-tags and meta-data handling.
 All data types are accepted except the plotting of real color objects (rgba). To plot complex objects, it is possible to choose
@@ -589,7 +139,12 @@ See section <a class="reference internal" href="primitives.html#primitives"><spa
 <li><p>Images are displayed either mathematically ([0,0] lower left) or in windows-style ([0,0] upper left) (Property: ‘yAxisFlipped’)</p></li>
 </ul>
 <p><strong>Available colorMaps:</strong></p>
-<table class="table">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
 <tbody>
 <tr class="row-odd"><td><figure class="align-default">
 <img alt="../_images/plot2d_colorMap_gray.png" src="../_images/plot2d_colorMap_gray.png" />
@@ -638,7 +193,7 @@ See section <a class="reference internal" href="primitives.html#primitives"><spa
 </pre></div>
 </div>
 <span class="target" id="itom2dqwtplot-ref"></span><section id="properties">
-<h3><span class="section-number">6.5.1.1. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.1.1. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">¶</a></h3>
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">volumeCutPlotItem</span> <span class="pre">:</span> <span class="pre">uiItem</span></span></dt>
@@ -1038,7 +593,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 
 </section>
 <section id="slots">
-<h3><span class="section-number">6.5.1.2. </span>Slots<a class="headerlink" href="#slots" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.1.2. </span>Slots<a class="headerlink" href="#slots" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">removeOverlayImage()</span> <span class="pre">[slot]</span></span></dt>
@@ -1050,7 +605,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 <span class="sig-name descname"><span class="pre">setLinePlot(x0,</span> <span class="pre">y0,</span> <span class="pre">x1,</span> <span class="pre">y1,</span> <span class="pre">destID)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>displays a line cut plot with the given bounds.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – x-coordinate (physical units) of the first end point of the line cut.</p></li>
 <li><p><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – y-coordinate (physical units) of the first end point of the line cut.</p></li>
@@ -1085,7 +640,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 <span class="sig-name descname"><span class="pre">deleteMarkers(id)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>Delete all sets of markers with the given id or all markers if no or an empty id is passed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – name of the marker set that should be removed (optional)</p>
 </dd>
 </dl>
@@ -1096,7 +651,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 <span class="sig-name descname"><span class="pre">plotMarkers(coordinates,</span> <span class="pre">style,</span> <span class="pre">id,</span> <span class="pre">plane)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>Draws sub-pixel wise markers to the canvas of the plot</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>coordinates</strong> (<a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><em>dataObject</em></a>) – 2xN data object with the 2D coordinates of the markers (first row: X, second row: Y coordinates in axis coordinates of the plot)</p></li>
 <li><p><strong>style</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Style string for the set of markers (e.g. ‘r+20’ for red crosses with a size of 20px)</p></li>
@@ -1112,7 +667,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 <span class="sig-name descname"><span class="pre">setGeometricShapeLabelVisible(idx,</span> <span class="pre">visible)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>Set the visibility of the label of a geometric shape with the given index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – index of the shape</p></li>
 <li><p><strong>visible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – True if the label should be displayed close to the shape, else False</p></li>
@@ -1126,7 +681,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 <span class="sig-name descname"><span class="pre">setGeometricShapeLabel(idx,</span> <span class="pre">label)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>Set the label of geometric shape with the index idx.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – index of the shape</p></li>
 <li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – new label of the shape</p></li>
@@ -1142,7 +697,7 @@ toolbox of the plot. If this property is false, this toolbox is not available (d
 <p>If the index of the new shape is -1 (default), the next free auto-incremented index will be set for this shape. (C++ only: this new index ist
 stored in the optional ‘newIndex’ parameter).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>geometricShape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new geometric shape</p>
 </dd>
 </dl>
@@ -1155,10 +710,10 @@ stored in the optional ‘newIndex’ parameter).</p>
 <p>If the index of the new shape is -1 (default), the next free auto-incremented index will be set for this shape. (C++ only: this new index ist
 stored in the optional ‘newIndex’ parameter).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>geometricShape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new geometric shape</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><strong>RuntimeError</strong></a> – if the index of the shape is != -1 and does already exist</p>
 </dd>
 </dl>
@@ -1169,8 +724,8 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">setGeometricShapes(geometricShapes)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>This slot is the same than assigning a sequence of shape to the property ‘geometricShapes’. It replaces all existing shapes by the new set of shapes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>geometricShapes</strong> (<em>seq.</em><em> of </em><em>shapes</em>) – Sequence (e.g tuple or list) of shapes that replace all existing shapes by this new set.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>geometricShapes</strong> (<em>seq. of shapes</em>) – Sequence (e.g tuple or list) of shapes that replace all existing shapes by this new set.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1180,7 +735,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">deleteGeometricShape(idx)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>deletes the geometric shape with the given index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – idx is the index of the shape to be removed. This is the index of the shape instance itself and must not always correspond to the index-position of the shape within the tuple of all shapes</p>
 </dd>
 </dl>
@@ -1197,7 +752,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">userInteractionStart(type,</span> <span class="pre">start,</span> <span class="pre">maxNrOfPoints)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>starts or aborts the process to let the user add a certain number of geometric shapes to the canvas.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – type of the geometric shape the user should add (e.g. shape.Line, shape.Point, shape.Rectangle, shape.Square…</p></li>
 <li><p><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – True if the interaction should be started, False if a running interaction process should be aborted</p></li>
@@ -1212,7 +767,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">renderToPixMap(xsize,</span> <span class="pre">ysize,</span> <span class="pre">resolution)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>returns a QPixmap with the content of the plot</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>xsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – width of the pixmap</p></li>
 <li><p><strong>ysize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – height of the pixmap</p></li>
@@ -1227,7 +782,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">savePlot(filename,</span> <span class="pre">xsize,</span> <span class="pre">ysize,</span> <span class="pre">resolution)</span> <span class="pre">[slot]</span></span></dt>
 <dd><p>saves the plot as image, pdf or svg file (the supported file formats are listed in the save dialog of the plot)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – absolute or relative filename whose suffix defines the file format</p></li>
 <li><p><strong>xsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – x-size of the canvas in mm. If 0.0 [default], the size of the canvas is determined by the current size of the figure</p></li>
@@ -1258,13 +813,13 @@ stored in the optional ‘newIndex’ parameter).</p>
 
 </section>
 <section id="signals">
-<h3><span class="section-number">6.5.1.3. </span>Signals<a class="headerlink" href="#signals" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.1.3. </span>Signals<a class="headerlink" href="#signals" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">planeIndexChanged(planeIndex)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever the displayed plane in a 3D dataObject is changed</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>plane</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – index of the displayed plane in the dataObject</p>
 </dd>
 </dl>
@@ -1282,7 +837,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">geometricShapeCurrentChanged(currentShape)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever the currently selected geometric has been changed</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>currentShape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new current shape or an invalid shape if the current shape has been deleted and no other shape is selected now</p>
 </dd>
 </dl>
@@ -1300,9 +855,9 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">geometricShapeFinished(shapes,</span> <span class="pre">aborted)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever one or multiple geometric shapes have been added, removed or modified</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>shapes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.8)"><em>tuple</em></a><em> of </em><a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – A tuple containing all shapes that have been modified</p></li>
+<li><p><strong>shapes</strong> (<em>tuple of shape</em>) – A tuple containing all shapes that have been modified</p></li>
 <li><p><strong>aborted</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – True if the modification process has been aborted, else False</p></li>
 </ul>
 </dd>
@@ -1334,7 +889,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">geometricShapeDeleted(idx)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever a geometric shape has been deleted</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – index of the deleted shape</p>
 </dd>
 </dl>
@@ -1352,7 +907,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">geometricShapeChanged(idx,</span> <span class="pre">shape)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever a geometric shape has been changed (e.g. its position or form has been changed)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – index of the changed shape (this is the index of the second parameter ‘shape’)</p></li>
 <li><p><strong>shape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – shape that has been changed</p></li>
@@ -1373,7 +928,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">geometricShapeAdded(idx,</span> <span class="pre">shape)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever a geometric shape has been added</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – index of the new shape (this is the index of the second parameter ‘shape’)</p></li>
 <li><p><strong>shape</strong> (<a class="reference internal" href="../09_reference/shape.html#itom.shape" title="itom.shape"><em>shape</em></a>) – new shape</p></li>
@@ -1395,7 +950,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <dd><p>This signal is emitted if the user finished adding the requested number of shapes or aborted the process by pressing the Esc key</p>
 <p>This signal is only emitted if the user interaction has been started by the slot <em>userInteractionStart</em> or by plotItem.drawAndPickElements.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – type of the shapes that have been recently added (e.g. shape.Line, shape.Point, shape.Rectangle, …)</p></li>
 <li><p><strong>aborted</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – True if the user aborted the process by pressing the Esc key before having added the total number of requested shapesshapes : {list of shape} list of shapes that have been added.</p></li>
@@ -1416,7 +971,7 @@ stored in the optional ‘newIndex’ parameter).</p>
 <span class="sig-name descname"><span class="pre">geometricShapeStartUserInput(type,</span> <span class="pre">userInteractionReason)</span> <span class="pre">[signal]</span></span></dt>
 <dd><p>This signal is emitted whenever the plot enters a mode where the user can add a new geometric shape using the mouse</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Type of the shape that could be added by the user, this is one of the constants shape.Circle, shape.Ellipse, shape.Line…</p></li>
 <li><p><strong>userInteractionReason</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – True if the process to add a new shape has been initialized by a script-base call, False if it has been started by a button in the toolbar or menu of the plot</p></li>
@@ -1441,126 +996,42 @@ stored in the optional ‘newIndex’ parameter).</p>
 </section>
 </section>
 <section id="deprecated-figures">
-<h2><span class="section-number">6.5.2. </span>Deprecated figures<a class="headerlink" href="#deprecated-figures" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.5.2. </span>Deprecated figures<a class="headerlink" href="#deprecated-figures" title="Permalink to this heading">¶</a></h2>
 <p>The plot-dll “itom2DQWTFigure” and “itom2DGVFigure” are deprecated and have been replaced by  “Itom2dQwtPlot” and “GraphicViewPlot”.</p>
 </section>
 </section>
 
 
-                </article>
-              
-              
-              
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="linePlots.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6.4. </span>line plots (1D)</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="isometricPlot.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6.6. </span>isometric Plot</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div></div>
-  
-</div>
-
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itom2dqwtplot">6.5.1. Itom2dQwtPlot</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">6.5.1.1. Properties</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slots">6.5.1.2. Slots</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signals">6.5.1.3. Signals</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deprecated-figures">6.5.2. Deprecated figures</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
-  <div class="tocsection sourcelink">
-    <a href="../_sources/05_plots/imagePlots.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
-
-</div></div>
-              
-            
+           </div>
           </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="linePlots.html" class="btn btn-neutral float-left" title="6.4. line plots (1D)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="isometricPlot.html" class="btn btn-neutral float-right" title="6.6. isometric Plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
+      <span class="lastupdated">Last updated on Sep 19, 2022.
+      </span></p>
   </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-  <footer class="bd-footer">
-<div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
-  <p class="copyright">
-    
-      © Copyright 2011-2023, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      <br/>
-    
-  </p>
-</div>
-      
-        <div class="footer-item">
-  <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
-    <br/>
-  </p>
-</div>
-      
-    </div>
-  
-  
-    <div class="footer-items__end">
-      
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
-</p></div>
-      
-    </div>
-  
-</div>
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
-  </footer>
-  </body>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

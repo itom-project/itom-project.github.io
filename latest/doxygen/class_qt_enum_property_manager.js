@@ -14,5 +14,6 @@ var class_qt_enum_property_manager =
     [ "value", "class_qt_enum_property_manager.html#afe3d820af367097cc630fa03a0cb31de", null ],
     [ "valueChanged", "class_qt_enum_property_manager.html#aa18c16533e9d538faa78411a4d1b3191", null ],
     [ "valueIcon", "class_qt_enum_property_manager.html#a01555bb5e65981b6f9fa19df0d6e30d4", null ],
-    [ "valueText", "class_qt_enum_property_manager.html#aaa87bc2aea3f30301f435633b4ec18b6", null ]
+    [ "valueText", "class_qt_enum_property_manager.html#aaa87bc2aea3f30301f435633b4ec18b6", null ],
+    [ "d_ptr", "class_qt_enum_property_manager.html#a0ba7821ef250f40bc022df8797e453fd", null ]
 ];

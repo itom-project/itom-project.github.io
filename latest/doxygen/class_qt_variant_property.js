@@ -7,5 +7,7 @@ var class_qt_variant_property =
     [ "setAttribute", "class_qt_variant_property.html#a906f63c5230a99ec0ccefc872ee83de8", null ],
     [ "setValue", "class_qt_variant_property.html#aec9dbb18fc48903f6c217a8c3b9a3e69", null ],
     [ "value", "class_qt_variant_property.html#a404d725d32ea0a3797054b9d412358de", null ],
-    [ "valueType", "class_qt_variant_property.html#af358a819a9ee05a413b05d9dc37df5a5", null ]
+    [ "valueType", "class_qt_variant_property.html#af358a819a9ee05a413b05d9dc37df5a5", null ],
+    [ "QtVariantPropertyManager", "class_qt_variant_property.html#aa0fc1a673dd49d198c221547897ed12f", null ],
+    [ "d_ptr", "class_qt_variant_property.html#af2ab5e46b0b0991d81cb0de9b4baf2ca", null ]
 ];
