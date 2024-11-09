@@ -11,7 +11,7 @@
 **Author**:     :pluginauthor:`GWInstekPSP`
 **Requires**:   Plugin SerialIO
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -20,9 +20,9 @@ Overview
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: GWInstekPSP
 
@@ -61,3 +61,9 @@ An instance of this plugin has the following internal parameters:
     Remote status 0: normal, 1: remote
 **lock**: {int}, read-only
     Lock status 0: lock, 1: unlock
+
+
+Changelog
+==========
+
+* itom setup 1.2.0: Release

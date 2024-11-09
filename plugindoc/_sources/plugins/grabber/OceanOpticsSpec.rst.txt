@@ -7,24 +7,28 @@
 **Type**:       :plugintype:`OceanOpticsSpec`
 **License**:    :pluginlicense:`OceanOpticsSpec`
 **Platforms**:  Windows, Linux ready but not tested
-**Devices**:    Ocean Optics Spectrometers
+**Devices**:    Ocean Optics Spectrometers remotely controlled via the Itom LibUSB Plugin.
 **Author**:     :pluginauthor:`OceanOpticsSpec`
 =============== ========================================================================================================
- 
+
 Overview
 ========
-
 
 .. pluginsummaryextended::
     :plugin: OceanOpticsSpec
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: OceanOpticsSpec
+
+Dependencies
+============
+
+OceanOptics Spectrometers plugin depends on LibUSB.
 
 Parameters
 ===========
@@ -57,16 +61,18 @@ An instance of this plugin has the following internal parameters:
     current width of ROI
 **sizey**: {int}, read-only
     current height
-    
+
 Timestamp
 =========
 
 Every acquired image will have a tag 'timestamp' defined. It contains the timestamp of the acquisition in seconds based on QDateTime::currentMSecsSinceEpoch(). If data is averaged, the timestamp of the latest acquisition is used.
 
 
-  
+
 Changelog
 =========
 
 * itom setup 4.1.0: This plugin has been compiled using the libUSB Plugin
+* itom setup 4.2.0: This plugin has been compiled using the libUSB Plugin
+* itom setup 4.3.0: This plugin has been compiled using the libUSB Plugin
 * ONLY fully implemented for STS series, other spectrometers using OBP won't fully work.

@@ -10,7 +10,7 @@
 **Devices**:    PCO Pixelfly qet cameras with frame grabber board
 **Author**:     :pluginauthor:`PCOPixelFly`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -19,9 +19,9 @@ Overview
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: PCOPixelFly
 
@@ -70,3 +70,4 @@ Changelog
 * itom setup 3.2.1: This plugin has been compiled using the pco pixelfly SDK 2.01.03
 * itom setup 4.0.0: This plugin has been compiled using the pco pixelfly SDK 2.01.03
 * itom setup 4.1.0: This plugin has been compiled using the pco pixelfly SDK 2.01.03
+* itom setup 4.3.0: This plugin has been compiled using the pco pixelfly SDK 2.01.03

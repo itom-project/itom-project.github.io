@@ -1,121 +1,443 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4.5. NI-DAQmx &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.5. NI-DAQmx &#8212; itom Plugins</title>
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/ad-converters/niDAQmx';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="4.6. Thorlabs Power Meter" href="thorlabsPowerMeter.html" />
-    <link rel="prev" title="4.4. Thorlabs KCube Position Aligner" href="ThorlabsKCubePA.html" /> 
-</head>
+    <link rel="prev" title="4.4. Thorlabs KCube Position Aligner" href="ThorlabsKCubePA.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 09, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> itom Plugins
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../adconv.html">4. AD-Converters</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="HBMSpider8.html">4.1. HBMSpider8</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MeasurementComputing.html">4.2. MeasurementComputing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="OphirPowermeter.html">4.3. OphirPowermeter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ThorlabsKCubePA.html">4.4. Thorlabs KCube Position Aligner</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4.5. NI-DAQmx</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overview">4.5.1. Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#driver-installation">4.5.2. Driver Installation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#windows">4.5.2.1. Windows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#linux">4.5.2.2. Linux</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#initialization">4.5.3. Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#parameters">4.5.4. Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#usage">4.5.5. Usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#channels">4.5.5.1. Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#data-types">4.5.5.2. Data Types</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#general">4.5.5.3. General</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#reference-trigger">4.5.5.4. Reference Trigger</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#tdms-logging">4.5.6. TDMS Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration-dialog-and-toolbox">4.5.7. Configuration Dialog and Toolbox</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compilation">4.5.8. Compilation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">4.5.9. Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#analog-input-tasks">4.5.9.1. Analog Input Tasks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#analog-output-tasks">4.5.9.2. Analog Output Tasks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digital-input-tasks">4.5.9.3. Digital Input Tasks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digital-output-tasks">4.5.9.4. Digital Output Tasks</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#known-issues">4.5.10. Known Issues</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#changelog">4.5.11. Changelog</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="thorlabsPowerMeter.html">4.6. Thorlabs Power Meter</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">itom Plugins</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../adconv.html"><span class="section-number">4. </span>AD-Converters</a> &raquo;</li>
-      <li><span class="section-number">4.5. </span>NI-DAQmx</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/plugins/ad-converters/niDAQmx.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">itom Plugins</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../grabbers.html">
+    Camera/ Grabber
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../actuators.html">
+    Motors/ Actuators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../GDIO.html">
+    General Data IO
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../adconv.html">
+    AD-Converters
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithms.html">
+    Algorithms/ Filters
+  </a>
+</li>
+
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../grabbers.html">
+    Camera/ Grabber
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../actuators.html">
+    Motors/ Actuators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../GDIO.html">
+    General Data IO
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../adconv.html">
+    AD-Converters
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithms.html">
+    Algorithms/ Filters
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="HBMSpider8.html">4.1. HBMSpider8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MeasurementComputing.html">4.2. MeasurementComputing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OphirPowermeter.html">4.3. OphirPowermeter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThorlabsKCubePA.html">4.4. Thorlabs KCube Position Aligner</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.5. NI-DAQmx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thorlabsPowerMeter.html">4.6. Thorlabs Power Meter</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../adconv.html" class="nav-link"><span class="section-number">4. </span>AD-Converters</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="ni-daqmx">
-<h1><span class="section-number">4.5. </span>NI-DAQmx<a class="headerlink" href="#ni-daqmx" title="Permalink to this heading"></a></h1>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 87%" />
-</colgroup>
+<h1><span class="section-number">4.5. </span>NI-DAQmx<a class="headerlink" href="#ni-daqmx" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
 <tbody>
 <tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
 <td><p><span>Analog and digital input and output tasks for National Instruments devices, based on NI DAQmx.</span></p></td>
@@ -124,7 +446,7 @@
 <td><p><span>DataIO</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>License</strong>:</p></td>
-<td><p><span>licensed under LGPL</span></p></td>
+<td><p><span>Licensed under LGPL.</span></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
 <td><p>Windows, Linux (NI officially only supports RRM installers for Red Hat, SUSE, CentOS)</p></td>
@@ -133,15 +455,16 @@
 <td><p>Nation Instruments Analog and digital I/O devices</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Author</strong>:</p></td>
-<td><p><span>Martin Hoppe, ITO, University Stuttgart; Dan Nessett, Unaffiliated; Marc Gronle, Unaffiliated</span></p></td>
+<td><p><span>Martin Hoppe, ITO, Universität Stuttgart; Dan Nessett, Unaffiliated; Marc Gronle, Unaffiliated</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Requires</strong>:</p></td>
 <td><p>NI-DAQmx driver from National Instruments</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <section id="overview">
-<h2><span class="section-number">4.5.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>The plugin implements the DAQmx functions for analog and digital I/O devices from National Instruments.
 The installation needs the NI-DAQmx Library that can be downloaded from the NI website
 (<a class="reference external" href="https://www.ni.com/en-us/support/downloads/drivers/download.ni-daqmx.html">https://www.ni.com/en-us/support/downloads/drivers/download.ni-daqmx.html</a>).</p>
@@ -150,24 +473,30 @@ Automation Explorer software - NI MAX). Simulated tested devices were: NI PCIe-6
 NI PCIe-6323 and NI PCI-6520.</p>
 </section>
 <section id="driver-installation">
-<h2><span class="section-number">4.5.2. </span>Driver Installation<a class="headerlink" href="#driver-installation" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.2. </span>Driver Installation<a class="headerlink" href="#driver-installation" title="Link to this heading">#</a></h2>
 <p>In order to run the <strong>NI-DAQmx</strong> plugin in <em>itom</em>, the <strong>NI-DAQmx</strong> driver from National Instruments
 has to be installed on the computer (considering the right bitness 32bit or 64bit).</p>
 <section id="windows">
-<h3><span class="section-number">4.5.2.1. </span>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.2.1. </span>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h3>
 <p>Download and install the latest NI-DAQmx driver from
 <a class="reference external" href="https://www.ni.com/en-us/support/downloads/drivers/download.ni-daqmx.html#346240">https://www.ni.com/en-us/support/downloads/drivers/download.ni-daqmx.html#346240</a></p>
 <p>The major part of this driver is usually installed under <strong>C:/Program Files/National Instruments</strong> and
 <strong>C:/Program Files (x86)/National Instruments</strong>. Some important libraries are also copied to the
 <strong>C:/Windows/System32</strong>, where they are found from the itom plugin.</p>
+<p>If you choose a different installation folder but the defaulft, please set the <strong>NIDAQMX_ROOT</strong>
+environment variable to the equivalent “C:/Program Files (x86)/National Instruments”
+folder.</p>
+<p>Please be aware that multiple driver versions exists, some of which lead to linker errors
+during the build process. For the latest build the binary and header files at
+<strong>[NiDAQmx-Foleder]/Shared/ExternalCompilerSupport/C</strong> are used.</p>
 <p>If you also want to compile the plugin, make sure that you enable the option
 <strong>Applications Development Supports / ANSI C Support</strong> in the installer. This can also be done
-by modifying the installation using the tab <strong>Progam and Features</strong> in the Windows Control Panel
+by modifying the installation using the tab <strong>Program and Features</strong> in the Windows Control Panel
 (see <a class="reference external" href="https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z000000P9udSAC">https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z000000P9udSAC</a> ).</p>
 <p>The itom <strong>niDAQmx</strong> plugin has mainly been developed and tested using <strong>NI-DAQmx 18.06.0</strong>.</p>
 </section>
 <section id="linux">
-<h3><span class="section-number">4.5.2.2. </span>Linux<a class="headerlink" href="#linux" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.2.2. </span>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h3>
 <p>National Instruments has only a limited support for Linux operating systems, such that
 the <strong>NI-DAQmx</strong> driver is only available as RPM-package for Red Hat, SUSE and CentOS.</p>
 <p>See this knowledge base entry (<a class="reference external" href="https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z00000159XISAY">https://knowledge.ni.com/KnowledgeArticleDetails?id=kA00Z00000159XISAY</a>)
@@ -175,7 +504,7 @@ and see the links, where to download the linux driver and how to install it.</p>
 </section>
 </section>
 <section id="initialization">
-<h2><span class="section-number">4.5.3. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.3. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h2>
 <p>The plugin is initialized with a set of mandatory and optional parameters:</p>
 <blockquote>
 <div><ul>
@@ -234,7 +563,7 @@ finite task behaves like a continuous task (see examples below) and acquires dat
 signal until all conditions of the reference trigger are fulfilled.</p>
 </section>
 <section id="parameters">
-<h2><span class="section-number">4.5.4. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.4. </span>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
 <p>These parameters are available and can be used to configure the <strong>NI-DAQmx</strong> instance.
 During the runtime of an instance, the values of these parameters are obtained by the method <em>getParam</em>,
 writeable parameters can be changed using <em>setParam</em>.</p>
@@ -358,9 +687,9 @@ accepted) or not (0).</p>
 </dl>
 </section>
 <section id="usage">
-<h2><span class="section-number">4.5.5. </span>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.5. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
 <section id="channels">
-<h3><span class="section-number">4.5.5.1. </span>Channels<a class="headerlink" href="#channels" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.5.1. </span>Channels<a class="headerlink" href="#channels" title="Link to this heading">#</a></h3>
 <p>Every task can consist of one or multiple channels, that are given as semicolon-separated list in the
 <strong>channels</strong> parameter. Please note, that a digital task can only consist of digital channels and analog tasks
 only of analog channels. Read the parameter <strong>supportedChannels</strong> to get all available channel names for
@@ -390,7 +719,7 @@ of the channel. Possible values are:</p>
 </ul>
 </section>
 <section id="data-types">
-<h3><span class="section-number">4.5.5.2. </span>Data Types<a class="headerlink" href="#data-types" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.5.2. </span>Data Types<a class="headerlink" href="#data-types" title="Link to this heading">#</a></h3>
 <p>Analog input or output tasks are always based on 2-dimensional dataObjects of dtype <strong>float64</strong>.
 The rows corresponds to the channels in the active task and the columns correspond to the acquired samples.</p>
 <p>Digital input or output tasks are always based on 2-dimensional dataObjects of dtypes <strong>uint8</strong>, <strong>uint16</strong> or
@@ -401,7 +730,7 @@ lines, that are covered by the port. If the wrong datatype is used, an appropria
 that indicates the desired bitdepth.</p>
 </section>
 <section id="general">
-<h3><span class="section-number">4.5.5.3. </span>General<a class="headerlink" href="#general" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.5.3. </span>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h3>
 <p>The general approach to use a NI I/O device can be seen in one of the examples below. In general, it is
 recommended to configure a plugin instance as far as possible. Then the task will be created and configured using
 the <strong>startDevice</strong> command. In case of invalid parameters, <strong>startDevice</strong> will raise an exception, whose
@@ -426,18 +755,18 @@ channels (using the sampling rate or sample clock). If <strong>samplesPerChannel
 operation restarts at the first column once the last column of the dataObject has been written.</p>
 <p>For <strong>finite output tasks</strong>, it is possible to block the call of <strong>setVal</strong> until all samples have been
 written by setting <strong>setValWaitForFinish</strong> to 1. Else <strong>setVal</strong> will return immediately. The end of the task
-can then be continously checked by getting the parameter <strong>taskStarted</strong> and check if it drops to 0 again.</p>
+can then be continuously checked by getting the parameter <strong>taskStarted</strong> and check if it drops to 0 again.</p>
 <p>Continuous output tasks will continuously write the columns and restart from the beginning until the task
 will be stopped via <strong>stop</strong>.</p>
 </section>
 <section id="reference-trigger">
-<h3><span class="section-number">4.5.5.4. </span>Reference Trigger<a class="headerlink" href="#reference-trigger" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.5.4. </span>Reference Trigger<a class="headerlink" href="#reference-trigger" title="Link to this heading">#</a></h3>
 <p>The reference trigger can be configured in order to stop a task upon a certain trigger signal. This
 reference trigger can only be applied to finite input tasks. Although the parameter <strong>refTriggerMode</strong> can
 only be set to something else than <strong>off</strong> for finite input tasks, such a task will then behave like a continuous
-input task. That means, that the task will be started via <strong>acquire</strong> and data will be continously recorded
+input task. That means, that the task will be started via <strong>acquire</strong> and data will be continuously recorded
 until the stop trigger condition is fulfilled (or the internal buffer overflows). To avoid the latter, it is
-again necessary to continously get intermediate data via <strong>getVal</strong> / <strong>copyVal</strong> or enable a fast TDMS logging.</p>
+again necessary to continuously get intermediate data via <strong>getVal</strong> / <strong>copyVal</strong> or enable a fast TDMS logging.</p>
 <p>The reference trigger listens to either a falling or raising edge of a digital line, or when an analog trigger
 input jumps over (or below) a certain threshold value. However the task is only stopped if three different conditions
 are met:</p>
@@ -450,7 +779,7 @@ This number is defined by <strong>samplesPerChannel</strong> - <strong>refTrigge
 </section>
 </section>
 <section id="tdms-logging">
-<h2><span class="section-number">4.5.6. </span>TDMS Logging<a class="headerlink" href="#tdms-logging" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.6. </span>TDMS Logging<a class="headerlink" href="#tdms-logging" title="Link to this heading">#</a></h2>
 <p>NI provides a possibility to record all acquired values from all <strong>input tasks</strong> in the NI file format <strong>TDMS</strong>
 (see <a class="reference external" href="https://www.ni.com/en-US/support/documentation/supplemental/07/tdms-file-format-internal-structure.html">https://www.ni.com/en-US/support/documentation/supplemental/07/tdms-file-format-internal-structure.html</a>).</p>
 <p>The filename of the tdms file, that should be used for the upcoming logging can be set by the parameter
@@ -510,7 +839,7 @@ reconfigured with the new logging properties.</p>
 </div>
 </section>
 <section id="configuration-dialog-and-toolbox">
-<h2><span class="section-number">4.5.7. </span>Configuration Dialog and Toolbox<a class="headerlink" href="#configuration-dialog-and-toolbox" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.7. </span>Configuration Dialog and Toolbox<a class="headerlink" href="#configuration-dialog-and-toolbox" title="Link to this heading">#</a></h2>
 <p>The plugin provides both a configuration dialog as well as a toolbox.</p>
 <p>The toolbox comes with an overview panel, that shows some basic information about connected channels
 and about the current run state of the task. In a 2nd tab, a general list of all parameters is displayed
@@ -519,7 +848,7 @@ by means of a generic parameter widget.</p>
 parameters, separated into different groups (like start trigger, reference trigger, sample clock etc.).</p>
 </section>
 <section id="compilation">
-<h2><span class="section-number">4.5.8. </span>Compilation<a class="headerlink" href="#compilation" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.8. </span>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h2>
 <p>To compile this plugin, make sure that the <strong>ANSI C Support</strong> of the NI-DAQmx driver
 has been installed, too (see <em>driver</em> section above).</p>
 <p>Then enable the option <strong>PLUGIN_niDAQmx</strong> in the CMake configuration of the plugins repository.
@@ -533,10 +862,10 @@ the directory, that contains the file <strong>NIDAQmx.h</strong> and <strong>NID
 linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p>
 </section>
 <section id="examples">
-<h2><span class="section-number">4.5.9. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.9. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <p>All these examples can also be found in the <strong>demo</strong> folder of the <strong>niDAQmx</strong> plugin sources:</p>
 <section id="analog-input-tasks">
-<h3><span class="section-number">4.5.9.1. </span>Analog Input Tasks<a class="headerlink" href="#analog-input-tasks" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.9.1. </span>Analog Input Tasks<a class="headerlink" href="#analog-input-tasks" title="Link to this heading">#</a></h3>
 <p><strong>demo_ai_finite.py</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding=utf8</span>
 
@@ -686,7 +1015,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 <span class="sd">integrating different devices into the same measurement</span>
 <span class="sd">task or not. Many devices do not allow this.</span>
 
-<span class="sd">Data from a continuous task can be obtained by regularily</span>
+<span class="sd">Data from a continuous task can be obtained by regularly</span>
 <span class="sd">calling getVal / copyVal or by enabling the TDMS file logging</span>
 <span class="sd">technique.</span>
 
@@ -792,7 +1121,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 <span class="c1">#    during a running task will be written into the TDMS file. It is</span>
 <span class="c1">#    also possible to get the values to python during logging (depending</span>
 <span class="c1">#    on the configuration). However, it is not necessary to continuously</span>
-<span class="c1">#    getVal/copyVal values in order to not raise a timeout / unsufficient</span>
+<span class="c1">#    getVal/copyVal values in order to not raise a timeout / insufficient</span>
 <span class="c1">#    buffer size error.</span>
 <span class="c1">#</span>
 <span class="c1">#    The logging is enabled via the parameters &#39;loggingMode&#39;,</span>
@@ -954,7 +1283,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 
 <span class="sd">The stop trigger is given by a so called reference trigger. This</span>
 <span class="sd">can only be enabled for finite, input tasks. However, such a trigger</span>
-<span class="sd">will implicitely let the finite task behave like a continuous task.</span>
+<span class="sd">will implicitly let the finite task behave like a continuous task.</span>
 <span class="sd">This means, that you have to continuously retrieve the newest data using</span>
 <span class="sd">&#39;getVal&#39; or &#39;copyVal&#39; such that the internal buffer does not overflow.</span>
 <span class="sd">The stop event for the task is defined by three conditions, that have</span>
@@ -1079,7 +1408,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 <span class="sd">integrating different devices into the same measurement</span>
 <span class="sd">task or not. Many devices do not allow this.</span>
 
-<span class="sd">Data from a continuous task can be obtained by regularily</span>
+<span class="sd">Data from a continuous task can be obtained by regularly</span>
 <span class="sd">calling getVal / copyVal or by enabling the TDMS file logging</span>
 <span class="sd">technique.</span>
 
@@ -1177,7 +1506,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 
 
 <span class="c1"># Step 2: choose another logging type. Usually it is recommended to</span>
-<span class="c1"># stop the device before chaning the logging modes. However,</span>
+<span class="c1"># stop the device before changing the logging modes. However,</span>
 <span class="c1"># it the device is still started if the logging parameters</span>
 <span class="c1"># will be changed, it will automatically be stopped and restarted</span>
 <span class="c1"># again.</span>
@@ -1218,7 +1547,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 </div>
 </section>
 <section id="analog-output-tasks">
-<h3><span class="section-number">4.5.9.2. </span>Analog Output Tasks<a class="headerlink" href="#analog-output-tasks" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.9.2. </span>Analog Output Tasks<a class="headerlink" href="#analog-output-tasks" title="Link to this heading">#</a></h3>
 <p><strong>demo_ao_finite.py</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding=utf8</span>
 
@@ -1531,7 +1860,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 </div>
 </section>
 <section id="digital-input-tasks">
-<h3><span class="section-number">4.5.9.3. </span>Digital Input Tasks<a class="headerlink" href="#digital-input-tasks" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.9.3. </span>Digital Input Tasks<a class="headerlink" href="#digital-input-tasks" title="Link to this heading">#</a></h3>
 <p><strong>demo_di_finite.py</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding=utf8</span>
 
@@ -1655,7 +1984,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 <span class="sd">in the scripts demo_di_finite.py and demo_ai_continuous.py. Together, they are</span>
 <span class="sd">very similar to this script.</span>
 
-<span class="sd">Data from a continuous task can be obtained by regularily</span>
+<span class="sd">Data from a continuous task can be obtained by regularly</span>
 <span class="sd">calling getVal / copyVal or by enabling the TDMS file logging</span>
 <span class="sd">technique.</span>
 
@@ -1704,7 +2033,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 <span class="c1">#    during a running task will be written into the TDMS file. It is</span>
 <span class="c1">#    also possible to get the values to python during logging (depending</span>
 <span class="c1">#    on the configuration). However, it is not necessary to continuously</span>
-<span class="c1">#    getVal/copyVal values in order to not raise a timeout / unsufficient</span>
+<span class="c1">#    getVal/copyVal values in order to not raise a timeout / insufficient</span>
 <span class="c1">#    buffer size error.</span>
 <span class="c1">#</span>
 <span class="c1">#    The logging is enabled via the parameters &#39;loggingMode&#39;,</span>
@@ -1895,7 +2224,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 </div>
 </section>
 <section id="digital-output-tasks">
-<h3><span class="section-number">4.5.9.4. </span>Digital Output Tasks<a class="headerlink" href="#digital-output-tasks" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">4.5.9.4. </span>Digital Output Tasks<a class="headerlink" href="#digital-output-tasks" title="Link to this heading">#</a></h3>
 <p><strong>demo_do_finite.py</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding=utf8</span>
 
@@ -2219,7 +2548,7 @@ linkable library of NIDAQmx, e.g. <strong>NIDAQmx.lib</strong> under Windows.</p
 </section>
 </section>
 <section id="known-issues">
-<h2><span class="section-number">4.5.10. </span>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.10. </span>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Counter tasks are not implemented yet.</p></li>
 <li><p>The development has only been tested based on simulated NI I/O devices. Therefore hardware-based start
@@ -2228,48 +2557,157 @@ emulated as software triggers.</p></li>
 </ul>
 </section>
 <section id="changelog">
-<h2><span class="section-number">4.5.11. </span>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5.11. </span>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>itom setup 3.1.0: This plugin has been compiled using the NI-DAQmx 18.1.0 (Linux)</p></li>
 <li><p>itom setup 3.1.0: This plugin has been compiled using the NI-DAQmx 18.6.0 (Windows)</p></li>
 <li><p>itom setup 4.0.0: Complete renewed plugin implementation. This plugin is incompatible to earlier version of
 this plugin and provides much more features. It has been compiled using NI-DAQmx 19.6.0 (Windows)</p></li>
 <li><p>itom setup 4.1.0: This plugin has been compiled using the NI-DAQmx 19.6.0 (Windows)</p></li>
+<li><p>itom setup 4.3.0: This plugin has been compiled using the NI-DAQmx 2024 Q1 (Windows)</p></li>
 </ul>
 </section>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ThorlabsKCubePA.html" class="btn btn-neutral float-left" title="4.4. Thorlabs KCube Position Aligner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="thorlabsPowerMeter.html" class="btn btn-neutral float-right" title="4.6. Thorlabs Power Meter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ThorlabsKCubePA.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Thorlabs KCube Position Aligner</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="thorlabsPowerMeter.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>Thorlabs Power Meter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">4.5.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#driver-installation">4.5.2. Driver Installation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">4.5.2.1. Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">4.5.2.2. Linux</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">4.5.3. Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">4.5.4. Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">4.5.5. Usage</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#channels">4.5.5.1. Channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">4.5.5.2. Data Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general">4.5.5.3. General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-trigger">4.5.5.4. Reference Trigger</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tdms-logging">4.5.6. TDMS Logging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-dialog-and-toolbox">4.5.7. Configuration Dialog and Toolbox</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">4.5.8. Compilation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">4.5.9. Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analog-input-tasks">4.5.9.1. Analog Input Tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analog-output-tasks">4.5.9.2. Analog Output Tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#digital-input-tasks">4.5.9.3. Digital Input Tasks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#digital-output-tasks">4.5.9.4. Digital Output Tasks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#known-issues">4.5.10. Known Issues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changelog">4.5.11. Changelog</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/plugins/ad-converters/niDAQmx.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

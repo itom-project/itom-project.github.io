@@ -1,122 +1,463 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1.11. GenICam cameras via Common Vision Blox &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.12. GenICam cameras via Common Vision Blox &#8212; itom Plugins</title>
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/grabber/commonVisionBlox';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1.12. DummyGrabber" href="dummyGrabber.html" />
-    <link rel="prev" title="1.10. CMU1394" href="cmu1394.html" /> 
-</head>
+    <link rel="next" title="1.13. DummyGrabber" href="dummyGrabber.html" />
+    <link rel="prev" title="1.11. CMU1394" href="cmu1394.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 09, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> itom Plugins
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../grabbers.html">1. Camera/ Grabber</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="AndorSDK3.html">1.1. Andor SDK3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="IDSuEyeCamera.html">1.2. IDS uEye</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NITWidySWIR.html">1.3. NITWidySWIR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="OceanOpticsSpec.html">1.4. OceanOptics Spectrometers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ThorlabsDCxCam.html">1.5. Thorlabs DCx cameras</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ThorlabsFF.html">1.6. ThorlabsFF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="VRMagic.html">1.7. VRMagic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="avantesAvaSpec.html">1.8. Avantes AvaSpec Spectrometer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="avtVimba.html">1.9. AVT Vimba</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmu1394.html">1.10. CMU1394</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1.11. GenICam cameras via Common Vision Blox</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overview">1.11.1. Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#initialization">1.11.2. Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#parameters">1.11.3. Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#usage">1.11.4. Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#acquisition">1.11.5. Acquisition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hints">1.11.6. Hints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#changelog">1.11.7. Changelog</a></li>
-</ul>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">itom Plugins</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../grabbers.html">
+    Camera/ Grabber
+  </a>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="dummyGrabber.html">1.12. DummyGrabber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fileGrabber.html">1.13. FileGrabber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fireGrabber.html">1.14. FireGrabber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="genicam.html">1.15. GenICam</a></li>
-<li class="toctree-l2"><a class="reference internal" href="msMediaFoundation.html">1.16. MSMediaFoundation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="openCVGrabber.html">1.17. OpenCVGrabber</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pcoCamera.html">1.18. PCOCamera</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pcoPixelFly.html">1.19. PCOPixelFly</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pcoSensicam.html">1.20. PCOSensicam</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pgrFlyCapture.html">1.21. PGRFlyCapture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pmdPico.html">1.22. PmdPico</a></li>
-<li class="toctree-l2"><a class="reference internal" href="qCam.html">1.23. QCam</a></li>
-<li class="toctree-l2"><a class="reference internal" href="thorlabsCCS.html">1.24. Thorlabs CCS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="v4l2.html">1.25. V4L2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vistek.html">1.26. Vistek</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ximea.html">1.27. Ximea</a></li>
-</ul>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../actuators.html">
+    Motors/ Actuators
+  </a>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../actuators.html">2. Motors/ Actuators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../GDIO.html">3. General Data IO</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../adconv.html">4. AD-Converters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">5. Algorithms/ Filters</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">itom Plugins</a>
-      </nav>
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../GDIO.html">
+    General Data IO
+  </a>
+</li>
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../grabbers.html"><span class="section-number">1. </span>Camera/ Grabber</a> &raquo;</li>
-      <li><span class="section-number">1.11. </span>GenICam cameras via Common Vision Blox</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/plugins/grabber/commonVisionBlox.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../adconv.html">
+    AD-Converters
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithms.html">
+    Algorithms/ Filters
+  </a>
+</li>
+
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../grabbers.html">
+    Camera/ Grabber
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../actuators.html">
+    Motors/ Actuators
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../GDIO.html">
+    General Data IO
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../adconv.html">
+    AD-Converters
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithms.html">
+    Algorithms/ Filters
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="AndorSDK3.html">1.1. Andor SDK3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IDSuEyeCamera.html">1.2. IDS uEye</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NITWidySWIR.html">1.3. NITWidySWIR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OceanOpticsSpec.html">1.4. OceanOptics Spectrometers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThorlabsDCxCam.html">1.5. Thorlabs DCx cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThorlabsFF.html">1.6. ThorlabsFF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VRMagic.html">1.7. VRMagic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="avantesAvaSpec.html">1.8. Avantes AvaSpec Spectrometer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="avtVimba.html">1.9. AVT Vimba</a></li>
+<li class="toctree-l1"><a class="reference internal" href="avtVimbaX.html">1.10. AVT Vimba X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmu1394.html">1.11. CMU1394</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.12. GenICam cameras via Common Vision Blox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dummyGrabber.html">1.13. DummyGrabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fileGrabber.html">1.14. FileGrabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fireGrabber.html">1.15. FireGrabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genicam.html">1.16. GenICam</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msMediaFoundation.html">1.17. MSMediaFoundation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openCVGrabber.html">1.18. OpenCVGrabber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pcoCamera.html">1.19. PCOCamera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pcoPixelFly.html">1.20. PCOPixelFly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pgrFlyCapture.html">1.21. PGRFlyCapture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pmdPico.html">1.22. PmdPico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thorlabsCCS.html">1.23. Thorlabs CCS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v4l2.html">1.24. V4L2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vistek.html">1.25. Vistek</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ximea.html">1.26. Ximea</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../grabbers.html" class="nav-link"><span class="section-number">1. </span>Camera/ Grabber</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="genicam-cameras-via-common-vision-blox">
-<h1><span class="section-number">1.11. </span>GenICam cameras via Common Vision Blox<a class="headerlink" href="#genicam-cameras-via-common-vision-blox" title="Permalink to this heading"></a></h1>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 87%" />
-</colgroup>
+<h1><span class="section-number">1.12. </span>GenICam cameras via Common Vision Blox<a class="headerlink" href="#genicam-cameras-via-common-vision-blox" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
 <tbody>
 <tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
 <td><p><span>GenICam cameras via Common Vision Blox from Stemmer</span></p></td>
@@ -138,8 +479,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <section id="overview">
-<h2><span class="section-number">1.11.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This plugin can connect to various cameras via the GenICam interface of the commercial tool Common Vision Blox from company Stemmer.</p>
 <blockquote>
 <div><p>Until now, the plugin is only implemented for monochrome pixel formats mono8, mono10, mono12, mono14 and mono16. Besides the ROI and
@@ -151,7 +493,7 @@ from Stemmer GenICam and don’t set the pixelFormat property to auto but Mono16
 </div></blockquote>
 </section>
 <section id="initialization">
-<h2><span class="section-number">1.11.2. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.2. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h2>
 <p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
 <blockquote>
 <div><ul>
@@ -170,8 +512,14 @@ from Stemmer GenICam and don’t set the pixelFormat property to auto but Mono16
 </ul>
 </div></blockquote>
 </section>
+<section id="compilation">
+<h2><span class="section-number">1.12.3. </span>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h2>
+<p>Download the latest CommonVisionBlox SDK from <a class="reference external" href="https://www.commonvisionblox.com/en/">https://www.commonvisionblox.com/en/</a>.</p>
+<p>Install this software and set the CMake variable <strong>CVB_DIR</strong> or the environment variable <strong>CVB_ROOT</strong>
+to the install directory of the CommonVisionBlox SDK (e.g. C:Program FilesSTEMMER IMAGINGCommon Vision Blox).</p>
+</section>
 <section id="parameters">
-<h2><span class="section-number">1.11.3. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.4. </span>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
 <p>An instance of this plugin has the following internal parameters:</p>
 <dl class="simple">
 <dt><strong>name</strong>: {str}, read-only</dt><dd><p>name of plugin</p>
@@ -201,7 +549,9 @@ from Stemmer GenICam and don’t set the pixelFormat property to auto but Mono16
 </dl>
 </section>
 <section id="usage">
-<h2><span class="section-number">1.11.4. </span>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.5. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<p>For Windows use open the command line interface with administrator privileges.
+Use <strong>setx</strong> to permanently change the System <strong>PATH</strong> Variable (eg. “setx / M PATH “%PATH;C:Program FilesSTEMMER IMAGINGCommon Vision Blox”).</p>
 <p>Until now, only monochrome cameras with pixel format Mono8, Mono10, .. Mono16 are supported. Only the parameter integration_time
 is created as plugin parameter (redirected to ExposureTime or ExposureTimeAbs with an assumed time base of micro seconds, integration_time
 is still in seconds). All other parameters can be directly accessed via the string parameter ‘raw’, e.g.</p>
@@ -211,14 +561,14 @@ cam.setParam(“raw:ExposureMode”, “Timed”)</p>
 are printed to the command line.</p>
 </section>
 <section id="acquisition">
-<h2><span class="section-number">1.11.5. </span>Acquisition<a class="headerlink" href="#acquisition" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.6. </span>Acquisition<a class="headerlink" href="#acquisition" title="Link to this heading">#</a></h2>
 <p>You can obtain images either by setting the camera in a continuous image acquisition mode (parameter <strong>acquisition_mode</strong> = <strong>grab</strong>) or by acquiring single
 images upon a call to acquire (<strong>acquisition_mode</strong> = <strong>snap</strong>). You should try the method which gives better performance for your camera. Try to decrease the acquisition
 rate if you have packet losts. In mode <strong>grab</strong> you can additionally trigger the next acquired image by setting <strong>trigger_mode</strong> to <strong>software</strong> instead of <strong>off</strong>. In the latter
 case, acquire decards all old images and obtains the next acquired image.</p>
 </section>
 <section id="hints">
-<h2><span class="section-number">1.11.6. </span>Hints<a class="headerlink" href="#hints" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.7. </span>Hints<a class="headerlink" href="#hints" title="Link to this heading">#</a></h2>
 <p>Try to enable jumbo frames in your network adapter and set the packet size in Common Vision Blox to the highest rate. Save the configuration before
 loading the camera in itom. If you want to operate the camera with more than 8bit, make sure to set the CVB Color Format to Mono16 in Common Vision Blox (not auto)
 and save the configuration as well.</p>
@@ -233,47 +583,138 @@ CommonVisionBlox will be forced to scan for newly connected cameras and the conf
 </ul>
 </section>
 <section id="changelog">
-<h2><span class="section-number">1.11.7. </span>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">1.12.8. </span>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>itom setup 3.1.0: This plugin has been compiled using the common vision blox 13.01.006</p></li>
 <li><p>itom setup 3.2.1: This plugin has been compiled using the common vision blox 13.01.006</p></li>
 <li><p>itom setup 4.0.0: This plugin has been compiled using the common vision blox 13.01.006</p></li>
 <li><p>itom setup 4.1.0: This plugin has been compiled using the common vision blox 13.01.006</p></li>
+<li><p>itom setup 4.2.0: This plugin has been compiled using the common vision blox 13.01.006</p></li>
+<li><p>itom setup 4.3.0: This plugin has been compiled using the common vision blox 14.00.010</p></li>
 </ul>
 </section>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cmu1394.html" class="btn btn-neutral float-left" title="1.10. CMU1394" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="dummyGrabber.html" class="btn btn-neutral float-right" title="1.12. DummyGrabber" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://bitbucket.org/itom/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cmu1394.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.11. </span>CMU1394</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="dummyGrabber.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.13. </span>DummyGrabber</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">1.12.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">1.12.2. Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">1.12.3. Compilation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">1.12.4. Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">1.12.5. Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#acquisition">1.12.6. Acquisition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hints">1.12.7. Hints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changelog">1.12.8. Changelog</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/plugins/grabber/commonVisionBlox.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

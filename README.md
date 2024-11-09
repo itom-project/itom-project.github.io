@@ -14,7 +14,7 @@ Install the Python Package **requirementsDocuBuild.txt** from [itom](https://git
 Update Plugin-Doc
 -----------------
 
-* Run script: ``../mainsite_hidden/update_plugindoc_source_plugins.py``. Skript will ask you for a folder. Select the ``itom/source`` folder. Script will update exsiting plugin's ``*.rst`` files.
+* Run script: ``../mainsite_hidden/update_plugindoc_source_plugins.py``. Skript will ask you for a folder. Select the ``itomProject/plugins`` folder. Script will update exsiting plugin's ``*.rst`` files.
 * Run Script: ``../mainsite_hidden/create_plugin_documentation.py``. This creates the plugin docu for the website. 
 
 Update Website

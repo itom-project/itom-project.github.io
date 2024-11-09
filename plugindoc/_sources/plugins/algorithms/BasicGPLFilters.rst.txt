@@ -9,7 +9,7 @@
 **Platforms**:  Windows, Linux
 **Author**:     :pluginauthor:`BasicGPLFilters`
 =============== ========================================================================================================
-  
+
 Overview
 ========
 
@@ -24,9 +24,13 @@ These filters are defined in the plugin:
 
 Filters
 ==============
-        
+
 Detailed overview about all defined filters:
-    
+
 .. pluginfilterlist::
     :plugin: BasicGPLFilters
 
+Changelog
+==========
+
+* itom setup 1.4.0: Release
