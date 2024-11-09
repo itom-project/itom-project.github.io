@@ -1,21 +1,21 @@
 ===================
- AVT Vimba
+ AVT Vimba X
 ===================
 
 =============== ========================================================================================================
-**Summary**:    :pluginsummary:`AVTVimba`
-**Type**:       :plugintype:`AVTVimba`
-**License**:    :pluginlicense:`AVTVimba`
-**Platforms**:  Windows (Firewire + GigE + USB3), Linux only supports GigE (not tested yet)
+**Summary**:    :pluginsummary:`AVTVimbaX`
+**Type**:       :plugintype:`AVTVimbaX`
+**License**:    :pluginlicense:`AVTVimbaX`
+**Platforms**:  Windows (GigE + USB3 [+CSI2]), Linux only supports GigE (not tested yet)
 **Devices**:    AVT Cameras driven by Vimba interface
-**Author**:     :pluginauthor:`AVTVimba`
+**Author**:     :pluginauthor:`AVTVimbaX`
 =============== ========================================================================================================
 
 Overview
 ========
 
 .. pluginsummaryextended::
-    :plugin: AVTVimba
+    :plugin: AVTVimbaX
 
 
 Initialization
@@ -24,7 +24,7 @@ Initialization
 The following parameters are mandatory or optional for initializing an instance of this plugin:
 
     .. plugininitparams::
-        :plugin: AVTVimba
+        :plugin: AVTVimbaX
 
 Parameters
 ===========
@@ -71,15 +71,15 @@ An instance of this plugin has the following internal parameters:
 Usage
 =============
 
-In order to use this plugin, please install the Vimba SDK from Allied Vision (see https://www.alliedvision.com/de/support/software-downloads/).
-During the installation, the necessary Vimba DLLs (VimbaC.dll and VimbaCPP.dll) should be copied into the system directory of Windows, such that no further steps need to be
-done using the AVT cameras within **itom**. If this is not the case, copy both libraries from the Vimba installation folder to the lib-folder of itom (make sure that you use
+In order to use this plugin, please install the VimbaX SDK from Allied Vision (see https://www.alliedvision.com/de/support/software-downloads/).
+During the installation, the necessary VimbaX DLLs (VmbC.dll and VmbCPP.dll) should be copied into the system directory of Windows, such that no further steps need to be
+done using the AVT cameras within **itom**. If this is not the case, copy both libraries from the VimbaX installation folder to the lib-folder of itom (make sure that you use
 the 64bit versions for 64bit itom and vice versa).
 
-If you want to build this plugin from the sources, you need to make sure that you installed the C++ component of the Vimba SDK (select this component during the install process).
-In CMake enable the checkbox of the variable **PLUGIN_AVTVimba** and re-configure CMake. Then set the variable **AVTVIMBA_INCLUDE_DIR** or the Environment Variable **AVTVIMBA_ROOT**
-to anything similar like **C:\Program Files\Allied Vision\Vimba_6.0\VimbaCPP\Include** (subfolder of the Vimba installation path) and generate your CMake project again.
-The variables **AVTVIMBA_API_DIR**, AVTVIMBA_LIBRARY**... should now be found automatically if you indicated a right Vimba installation directory in the step before.
+If you want to build this plugin from the sources, you need to make sure that you installed the C++ component of the VimbaX SDK (select this component during the install process).
+In CMake enable the checkbox of the variable **PLUGIN_AVTVimbaX** and re-configure CMake. Then set the variable **AVTVimbaX_INCLUDE_DIR** or the Environment Variable **AVTVimbaX_ROOT**
+to anything similar like **C:\Program Files\Allied Vision\Vimba X\api\include** (subfolder of the VimbaX installation path) and generate your CMake project again.
+The variables **AVTVimbaX_API_DIR**, **AVTVimbaX_LIBRARY**... should now be found automatically if you indicated a right VimbaX installation directory in the step before.
 
 Known issues
 ==============
@@ -91,13 +91,4 @@ Some cameras raise a timeout error when acquiring images. If so, try to set the 
 Changelog
 ==========
 
-* itom setup 1.4.0: This plugin has been compiled using AVT Vimba 1.3.0
-* itom setup 2.0.0: This plugin has been compiled using AVT Vimba 1.3.0
-* itom setup 2.1.0: This plugin has been compiled using AVT Vimba 1.4.0
-* itom setup 2.2.0: This plugin has been compiled using AVT Vimba 2.0
-* itom setup 3.0.0: This plugin has been compiled using AVT Vimba 2.0
-* itom setup 3.1.0: This plugin has been compiled using AVT Vimba 2.1
-* itom setup 3.2.1: This plugin has been compiled using AVT Vimba 2.1
-* itom setup 4.0.0: This plugin has been compiled using AVT Vimba 3.1.0
-* itom setup 4.1.0: This plugin has been compiled using AVT Vimba 3.1.0
-* itom setup 4.3.0: This plugin has been compiled using AVT Vimba 6.0.0
+* itom setup 4.3.0: This plugin has been compiled using AVT VimbaX v1.0.5

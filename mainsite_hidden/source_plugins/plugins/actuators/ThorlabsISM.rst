@@ -10,7 +10,7 @@
 **Devices**:    One axis motor controllers of type Thorlabs Integrated Stepper Motors, e.g. K10CR1 Rotation Stage
 **Author**:     :pluginauthor:`ThorlabsISM`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -21,9 +21,9 @@ ITOM Plugin to be used for interaction with the Thorlabs Integrated Stepper Moto
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: ThorlabsISM
 
@@ -37,7 +37,7 @@ parameters can be changed using *setParam*.
 **accel**: {float}
     Target acceleration in °/s^2 (travelMode == 2) or mm/s^2 (travelMode == 1)
 **async**: {int}
-    asychronous (1) or synchronous (0) mode
+    asynchronous (1) or synchronous (0) mode
 **deviceName**: {str}, read-only
     Description of the device
 **enabled**: {int}
@@ -75,7 +75,7 @@ Compilation
 
 To compile this plugin, install the Thorlabs KINESIS from
 https://www.thorlabs.com/software_pages/ViewSoftwarePage.cfm?Code=Motion_Control&viewtab=0
-driver package in the same bit-version than itom (32/64bit). 
+driver package in the same bit-version than itom (32/64bit).
 It has been implemented using KINESIS version 1.14.32.
 Then set the CMake variable **THORLABS_KINESIS_DIRECTORY** or the environment variable **THORLABS_KINESIS_ROOT**
 to the base directory of Kinesis (e.g. C:/Program Files/Thorlabs/Kinesis).
@@ -93,4 +93,5 @@ Changelog
 * itom setup 3.2.1: This plugin has been compiled with Thorlabs Kinesis 1.14.15; it requires the Microsoft C++ Redistributable 2012
 * itom setup 4.0.0: This plugin has been compiled with Thorlabs Kinesis 1.14.23;
 * itom setup 4.1.0: This plugin has been compiled with Thorlabs Kinesis 1.14.25.
-* itom setup 4.3.0: This plugin has been compiled with Thorlabs Kinesis 1.14.35.
+* itom setup 4.2.0: This plugin has been compiled with Thorlabs Kinesis 1.14.28.
+* itom setup 4.3.0: This plugin has been compiled with Thorlabs Kinesis 1.14.47.

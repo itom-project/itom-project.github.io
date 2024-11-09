@@ -10,7 +10,7 @@
 **Devices**:    Some words about supported devices
 **Author**:     :pluginauthor:`ThorlabsCCS`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -21,12 +21,12 @@ ITOM Plugin to be used for interaction with the Thorlabs Compact CCD Spectromete
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: ThorlabsCCS
-        
+
 Parameters
 ===========
 
@@ -56,7 +56,7 @@ An instance of this plugin has the following internal parameters:
     instrument driver revision
 **wavelength_data**: {float seq.}, read-only
     wavelength in nm (air) for each pixel
-	
+
 Compilation
 ===========
 
@@ -66,7 +66,7 @@ Select the archives tab to download the respective National Instruments Driver a
 They should be installed at: C:\Program Files\IVI Foundation\VISA\Win64
 Then Set the CMake variable **THORLABS_IVI_VISA_SDK** or the environment variable **NI_VISA_ROOT**
 
-	
+
 Changelog
 =========
 
@@ -74,3 +74,4 @@ Changelog
 * itom setup 3.2.1: This plugin has been compiled using the ThorlabsOSASW SDK 2.85
 * itom setup 4.0.0: This plugin has been compiled using the ThorlabsOSASW SDK 2.90
 * itom setup 4.1.0: This plugin has been compiled using the ThorlabsOSASW SDK 2.90
+* itom setup 4.3.0: This plugin has been compiled using the ThorlabsOSASW SDK 3.31

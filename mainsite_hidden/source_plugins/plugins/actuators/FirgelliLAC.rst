@@ -10,7 +10,7 @@
 **Devices**:    One axis motor controller FirgelliLAC
 **Author**:     :pluginauthor:`FirgelliLAC`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -22,9 +22,9 @@ tested with the product version PQ12-SS-GG-VV-P.
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: FirgelliLAC
 
@@ -38,7 +38,7 @@ parameters can be changed using *setParam*.
 **accuracy**: {float}
     Accuracy in %; range: 0.0..100.0 %
 **async**: {int}
-    asychronous (1) or sychronous (0) mode
+    asynchronous (1) or synchronous (0) mode
 **device_id**: {str}, read-only
     Name of controller
 **device_num**: {int}, read-only
@@ -63,3 +63,5 @@ Changelog
 * 2016-04-07: This plugin will be delivered with itom 2.2.0 for the first time
 * 2016-04-07: The required library MPUSBAPI is delivered with the sources of this plugin in version 1.1.0.
 * itom 4.1.0: This plugin has been compiled
+* itom 4.2.0: This plugin has been compiled
+* itom 4.3.0: This plugin has been compiled

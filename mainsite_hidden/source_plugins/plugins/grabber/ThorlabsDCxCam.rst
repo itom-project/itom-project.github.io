@@ -10,13 +10,13 @@
 **Devices**:    Thorlabs DCx cameras
 **Author**:     :pluginauthor:`ThorlabsDCxCam`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
 .. pluginsummaryextended::
     :plugin: ThorlabsDCxCam
-    
+
 Parameters
 ===========
 
@@ -71,12 +71,12 @@ An instance of this plugin has the following internal parameters:
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: ThorlabsDCxCam
-        
+
 Compilation
 ===========
 
@@ -98,4 +98,4 @@ Changelog
 * itom setup 2.2.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 4.20
 * itom setup 3.0.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 4.20
 * itom setup 3.1.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 4.20
-* itom setup 4.3.0: This plugin has been compiled using the Thorlabs DCx USB camera driver 3.70
+* itom setup 4.3.0: This plugin has been compiled using the ThorCamlabs Software 3.70

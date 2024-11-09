@@ -10,7 +10,7 @@
 **Devices**:    Thorlabs Power and Energy Meter Consoles PM100x
 **Author**:     :pluginauthor:`ThorlabsPowerMeter`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -22,18 +22,18 @@ ITOM Plugin to be used for interaction with the Thorlabs Power and Energy Meter 
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: ThorlabsPowerMeter
-     
+
 Parameters
 ==========
 **attenuation**: {float}
     attenuation [db]
 **auto_range**: {int}
-     shows if the auto power range is wether on (1) or off(2) 
+     shows if the auto power range is whether on (1) or off(2)
 **average_number**: {int}
     defines the number of measurements to be averaged
 **bandwidth**: {int}
@@ -41,7 +41,7 @@ Parameters
 **calibration_message**: {str}, read-only
     calibration message
 **dark_offset**: {float}, read-only
-    setted dark offset [unknown]
+    set dark offset [unknown]
 **device_name**: {str}, read-only
     device name
 **firmware_revision**: {str}, read-only
@@ -62,7 +62,7 @@ Parameters
     serial number
 **wavelength**: {float}
     wavelength [nm]
-    
+
 Additional functions (exec functions)
 =====================================
 
@@ -78,22 +78,24 @@ For using this plugin, please install the PM100x_Instrument_Driver that is shipp
 Compilation
 ===========
 
-It is possible to use the Thorlabs power meter with the legacy Thorlabs software **ThorlabsPowerMeter_1.0.2**
+It is possible to use the Thorlabs power meter with the legacy Thorlabs software **ThorlabsPowerMeter_v1.0.2**
 (see https://www.thorlabs.de/software_pages/ViewSoftwarePage.cfm?Code=PM100x).
 
-Alternatively you can use the Thorlabs Optical Power Meter Monitor Software **Thorlabs.OpticalPowerMonitor.1.1**
+Alternatively you can use the Thorlabs Optical Power Meter Monitor Software **Thorlabs.OpticalPowerMonitor_v1.1.0**
 (see https://www.thorlabs.de/software_pages/ViewSoftwarePage.cfm?Code=OPM).
+
+https://www.thorlabs.de/software_pages/ViewSoftwarePage.cfm?Code=OPM
 
 Install this software and set the CMake variable **THORLABS_PM100D_VISA_DIR** or the environment variable **NI_VISA_ROOT**
 to the install directory of Thorlabs PM100D Visa (e.g. C:/Program Files/IVI Foundation/VISA/Win64).
 
 Cmake should automatically detect the latest API Version installed and use it appropriately.
 
-The user can set legacy versions if neede by setting the Cmake variable **THORLABS_POWER_METER_API_VERSION** either to "1.0.2"
+The user can set legacy versions if needed by setting the Cmake variable **THORLABS_POWER_METER_API_VERSION** either to "1.0.2"
 or  "1.1.0" if needed.
 
 .. note::
-    
+
     If you want to change the version of an existing configuration, please remove all related THORLABS_PM100D... variables, set the
     new version and press configure.
 
@@ -117,13 +119,13 @@ plot is opened that displays a moving graph of recent intensity values:
         global timer_id
         d = dataObject()
         pmXXX.acquire() #acquire new intensity value
-        
+
         image[0,0:numPoints-1] = image[0,1:] #shift pixels to the left by one...
-        
+
         pmXXX.getVal(d) #get the recently acquired value
         image.copyMetaInfo(d)
         image[0,numPoints-1] = d[0,0] #...append new value to the end of image
-        
+
         if plot_handle.exists():
             try:
                 plot_handle["source"] = image #update the displayed image
@@ -142,8 +144,8 @@ Changelog
 
 * itom 3.0.0: plugin uses the driver PM100x_Instrument_Driver in version 3.0.2
 * itom 3.1.0: plugin uses the driver PM100x_Instrument_Driver in version 1.0.2 (Thorlabs has changed the major version number again)
-* Due to the chaotic version handling of Thorlabs PowerMeter, the source code is changed such that only version 3.0.2 is no longer supported. 
-* itom 3.2.1: plugin uses the driver PM100x_Instrument_Driver in version 1.1.2317.102 
+* Due to the chaotic version handling of Thorlabs PowerMeter, the source code is changed such that only version 3.0.2 is no longer supported.
+* itom 3.2.1: plugin uses the driver PM100x_Instrument_Driver in version 1.1.2317.102
 * itom 4.0.0: plugin uses the driver PM100x_Instrument_Driver in version 2.2
 * itom 4.1.0: plugin uses the driver in Optical Power Monitor in version 4.0.41
-* itom 4.3.0: plugin uses the driver in Optical Power Monitor in version 4.0.41
+* itom 4.3.0: plugin uses the driver in Optical Power Monitor in version 5.1.4

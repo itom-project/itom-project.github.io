@@ -10,7 +10,7 @@
 **Devices**:    GenICam via Common Vision Blox
 **Author**:     :pluginauthor:`CommonVisionBlox`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -19,12 +19,12 @@ Overview
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: CommonVisionBlox
-		
+
 Compilation
 ===========
 
@@ -33,7 +33,7 @@ Download the latest CommonVisionBlox SDK from https://www.commonvisionblox.com/e
 Install this software and set the CMake variable **CVB_DIR** or the environment variable **CVB_ROOT**
 to the install directory of the CommonVisionBlox SDK (e.g. C:\Program Files\STEMMER IMAGING\Common Vision Blox\).
 
-        
+
 Parameters
 ===========
 
@@ -63,9 +63,13 @@ An instance of this plugin has the following internal parameters:
     model name
 **roi**: {int seq.}
     ROI (x,y,width,height) [this replaces the values x0,x1,y0,y1]
-    
+
+
 Usage
 =====
+
+For Windows use open the command line interface with administrator privileges.
+Use **setx** to permanently change the System **PATH** Variable (eg. "setx / M PATH "%PATH;C:\Program Files\STEMMER IMAGING\Common Vision Blox").
 
 Until now, only monochrome cameras with pixel format Mono8, Mono10, .. Mono16 are supported. Only the parameter integration_time
 is created as plugin parameter (redirected to ExposureTime or ExposureTimeAbs with an assumed time base of micro seconds, integration_time
@@ -84,7 +88,7 @@ You can obtain images either by setting the camera in a continuous image acquisi
 images upon a call to acquire (**acquisition_mode** = **snap**). You should try the method which gives better performance for your camera. Try to decrease the acquisition
 rate if you have packet losts. In mode **grab** you can additionally trigger the next acquired image by setting **trigger_mode** to **software** instead of **off**. In the latter
 case, acquire decards all old images and obtains the next acquired image.
-        
+
 Hints
 ======
 Try to enable jumbo frames in your network adapter and set the packet size in Common Vision Blox to the highest rate. Save the configuration before
@@ -109,4 +113,5 @@ Changelog
 * itom setup 3.2.1: This plugin has been compiled using the common vision blox 13.01.006
 * itom setup 4.0.0: This plugin has been compiled using the common vision blox 13.01.006
 * itom setup 4.1.0: This plugin has been compiled using the common vision blox 13.01.006
-* itom setup 4.3.0: This plugin has been compiled using the common vision blox 13.04.006
+* itom setup 4.2.0: This plugin has been compiled using the common vision blox 13.01.006
+* itom setup 4.3.0: This plugin has been compiled using the common vision blox 14.00.010

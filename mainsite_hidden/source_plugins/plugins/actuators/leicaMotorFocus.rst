@@ -11,7 +11,7 @@
 **Author**:     :pluginauthor:`LeicaMotorFocus`
 **Requires**:   Plugin SerialIO
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
@@ -23,7 +23,7 @@ Parameters
 
 An instance of this plugin has the following internal parameters:
 
-**name**: {str} 
+**name**: {str}
     LeicaMotorFocus
 **speed**: {float}
     Speed in m/s (Default=Maximum: 23,33 mm/s)
@@ -38,9 +38,14 @@ An instance of this plugin has the following internal parameters:
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: LeicaMotorFocus
 
+
+Changelog
+==========
+
+* itom setup 2.1.0: Release

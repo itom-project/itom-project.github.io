@@ -9,7 +9,7 @@
 **Platforms**:  Windows, Linux
 **Author**:     :pluginauthor:`BasicFilters`
 =============== ========================================================================================================
-  
+
 Overview
 ========
 
@@ -24,9 +24,14 @@ These filters are defined in the plugin:
 
 Filters
 ==============
-        
+
 Detailed overview about all defined filters:
-    
+
 .. pluginfilterlist::
     :plugin: BasicFilters
 
+
+Changelog
+==========
+
+* itom setup 1.2.0: Release

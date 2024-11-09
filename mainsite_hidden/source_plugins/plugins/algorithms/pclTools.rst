@@ -9,7 +9,7 @@
 **Platforms**:  Windows, Linux
 **Author**:     :pluginauthor:`PclTools`
 =============== ========================================================================================================
-  
+
 Overview
 ========
 
@@ -24,9 +24,9 @@ These filters are defined in the plugin:
 
 Filters
 ==============
-        
+
 Detailed overview about all defined filters:
-    
+
 .. pluginfilterlist::
     :plugin: PclTools
 
@@ -42,3 +42,5 @@ Changelog
 * itom setup 3.2.1: This plugin has been compiled using the PCL 1.8.0
 * itom setup 4.0.0: This plugin has been compiled using the PCL 1.8.0
 * itom setup 4.1.0: This plugin has been compiled using the PCL 1.8.0
+* itom setup 4.1.0: This plugin has been compiled using the PCL 1.8.0
+* itom setup 4.3.0: This plugin has been compiled using the PCL 1.12.0
