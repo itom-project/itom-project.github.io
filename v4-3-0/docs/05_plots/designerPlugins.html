@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.12. Programming plot designer plugins in C++ &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_plots/designerPlugins';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Extending the user interface of itom" href="../06_extended_gui/extended_gui.html" />
+    <link rel="prev" title="6.11. Markers, user selections and geometric shapes" href="primitives.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6.12. Programming plot designer plugins in C++</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="plots.html" class="nav-link"><span class="section-number">6. </span>Plots and Figures</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="programming-plot-designer-plugins-in-c">
+<span id="plot-designer-plugins"></span><h1><span class="section-number">6.12. </span>Programming plot designer plugins in C++<a class="headerlink" href="#programming-plot-designer-plugins-in-c" title="Link to this heading">#</a></h1>
+<section id="general">
+<h2><span class="section-number">6.12.1. </span>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h2>
+<p>Plots in itom are single libraries, programmed in C++ and based on the concept of <strong>designer plugins</strong> in Qt.
+These designer plugins have the possibility to appear as widgets in the <strong>Qt Designer</strong>, if it is opened via itom
+and can therefore be integrated in user-defined user interfaces.</p>
+<p>itom designer plugins are located in the <strong>designer</strong> subfolder of itom. This folder will also be added as additional
+search directory, if the Qt Designer application is started from itom (only in this case). Then the Qt designer also
+scans this directory for compatible libraries, implemented the Qt designer plugin interface and - in the case of success -
+makes the contained widgets available in the list of available widgets.</p>
+</section>
+<section id="dependencies-and-versioning">
+<h2><span class="section-number">6.12.2. </span>Dependencies and Versioning<a class="headerlink" href="#dependencies-and-versioning" title="Link to this heading">#</a></h2>
+<p>All designer plugins of itom (plots or other designer plugins) can or have to link against some libraries, contained
+in the itom SDK. These libraries are (among others, see the folder <strong>SDK/lib/&lt;your compiler&gt;</strong>):</p>
+<ol class="arabic simple">
+<li><p><strong>itomCommonQtLib</strong>: This library contains many basic classes for plugins, designer plugins…</p></li>
+<li><p><strong>dataObject</strong>: Contains the basic matrix class of itom, the <a class="reference internal" href="../07_plugins/development/plugin-dataObject.html#plugin-dataobject"><span class="std std-ref">class dataObject</span></a></p></li>
+<li><p><strong>qpropertyeditor</strong>: This class contains the property editor widget, that is used by all plots to show the properties of the plot</p></li>
+<li><dl class="simple">
+<dt><strong>itomWidgets</strong>: This class is part of the itom core application and contains further smaller widgets, that can also be used in</dt><dd><p>other plugins</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>itomShapeLib</strong>: This library contains the C++ library <strong>ito::shape</strong>, used as container for shapes like lines,</dt><dd><p>rectangles, circles, squares, ellipses or polygons</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>itomCommonLib</strong>: This library contains further commonly used basic classes, which have no dependency to Qt (RetVal, Param…)</p></li>
+<li><p><strong>itomCommonPlotLib</strong>: This library contains further basic classes for plot plugins</p></li>
+</ol>
+<p>Whenever itom is using a plot or other widget from an itom designer plugin, the binary compatibility between itom
+and every plugin has to be assured (similar to other plugins of itom, see also <a class="reference internal" href="../07_plugins/loading_plugins.html#plugins-loading"><span class="std std-ref">this document</span></a>).</p>
+<p>This binary compatibility is defined by the following two main topics:</p>
+<ol class="arabic simple">
+<li><p>The plugin has to implement the correct interface, in accordance to its destination (plot plugin, further widget plugin, …)</p></li>
+<li><p>The plugin has to link against a binary compatible version of all libraries of the itom SDK, which are used by this plugin.</p></li>
+</ol>
+<p>To assure this, the basic interfaces to plot plugins, designer plugins as well as general itom plugins are subject to
+version numbers, that following the schematic of semantic versioning (semver.org). While the interface to general itom
+plugins is versioned by the <strong>addInInterface version number</strong> (see the file <strong>SDK/include/common/addInInterfaceVersion.h</strong>),
+the specific interface class to itom plot designer plugins, is versioned by the <strong>itom designerplugin interface number</strong>
+(see the file <strong>SDK/include/plot/designerPluginInterfaceVersion.h</strong>).</p>
+<p>In order to also cover the 2nd point of the binary compatibility list above, the <strong>addInInterface version number</strong> is
+also incremented (following semantic versioning), if one of the libraries of the SDK are changed. Plot specific things
+are covered by the <strong>itom designerplugin interface number</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>itom will only load a designer plugin, if the two version numbers, readout from the library, are compatible to the
+required version numbers of the core application of itom. However, problems might occur if an incompatible designer
+widget library is located in the designer folder. Therefore, a message will be shown at startup of itom, that informs
+the user to manually delete affected files. The reason is, that itom cannot prevent the Qt Designer application, started
+from itom, to load these incompatible libraries, which might crash the Qt Designer application. The same crash might
+happen if the user generates a user-defined GUI from a <em>ui</em>-file, that contains at least one widget from an incompatible
+library.</p>
+</div>
+</section>
+<section id="factory-class">
+<h2><span class="section-number">6.12.3. </span>Factory Class<a class="headerlink" href="#factory-class" title="Link to this heading">#</a></h2>
+<p>The factory class of a designer plugin is usually derived from <strong>QDesignerCustomWidgetInterface</strong>. However if an itom
+plot widget is implemented, its factory class has to be derived from the class <strong>ito::AbstractItomDesignerPlugin</strong>, which
+itself is derived from <strong>QDesignerCustomWidgetInterface</strong>.</p>
+<p>The header file of this factory class then looks like this:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;plot/AbstractItomDesignerPlugin.h&quot;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">YourPluginPlotFactory</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AbstractItomDesignerPlugin</span>
+<span class="linenos"> 4</span><span class="p">{</span>
+<span class="linenos"> 5</span><span class="w">    </span><span class="n">Q_OBJECT</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span><span class="w"> </span><span class="s">&quot;org.qt-project.Qt.QDesignerCustomWidgetInterface&quot;</span><span class="w"> </span><span class="kt">FILE</span><span class="w"> </span><span class="s">&quot;pluginMetaData.json&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">public</span><span class="o">:</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="n">YourPluginPlotFactory</span><span class="p">(</span><span class="n">QObject</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isContainer</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">12</span><span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isInitialized</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">13</span><span class="w">    </span><span class="n">QIcon</span><span class="w"> </span><span class="nf">icon</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">14</span><span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="nf">domXml</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">15</span><span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="nf">group</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">16</span><span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="nf">includeFile</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">17</span><span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="nf">name</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">18</span><span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="nf">toolTip</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">19</span><span class="w">    </span><span class="n">QString</span><span class="w"> </span><span class="nf">whatsThis</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+<span class="linenos">20</span><span class="w">    </span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="nf">createWidget</span><span class="p">(</span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="p">);</span>
+<span class="linenos">21</span><span class="w">    </span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="nf">createWidgetWithMode</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AbstractFigure</span><span class="o">::</span><span class="n">WindowMode</span><span class="w"> </span><span class="n">winMode</span><span class="p">,</span><span class="w"> </span><span class="n">QWidget</span><span class="o">*</span><span class="w"> </span><span class="n">parent</span><span class="p">);</span>
+<span class="linenos">22</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="n">QDesignerFormEditorInterface</span><span class="w"> </span><span class="o">*</span><span class="n">core</span><span class="p">);</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="k">private</span><span class="o">:</span>
+<span class="linenos">25</span><span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">initialized</span><span class="p">;</span>
+<span class="linenos">26</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>Most of the methods follow the rules of default classes, implementing the <strong>QDesignerCustomWidgetInterface</strong> (see
+<a class="reference external" href="https://doc.qt.io/qt-5/qdesignercustomwidgetinterface.html">https://doc.qt.io/qt-5/qdesignercustomwidgetinterface.html</a>). However, there are some itom specific additions:</p>
+<ol class="arabic simple">
+<li><p>From itom 3.3.0, use the macro <strong>Q_PLUGIN_METADATA</strong> as stated in the snippet above. The indicated json file
+is an auto-generated json file, contained in the itom subfolder <strong>SDK/include</strong> and contains the two
+version numbers of the <strong>itom addInInterface</strong> and <strong>itom designerplugin interface</strong> (see chapter above). This
+meta information can then be read-out by itom at startup without the need to create an instances of contained
+classes. Please also add this macro to any other designer plugins, that make use of any libraries of the itom SDK.</p></li>
+<li><p><strong>createWidgetWithMode</strong>: This specific factory method is called only if a plot designer widget is called by
+a default itom figure (no user-defined GUI but an ordinary itom figure window).</p></li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="primitives.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.11. </span>Markers, user selections and geometric shapes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../06_extended_gui/extended_gui.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Extending the user interface of <strong>itom</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">6.12.1. General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-and-versioning">6.12.2. Dependencies and Versioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factory-class">6.12.3. Factory Class</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/05_plots/designerPlugins.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

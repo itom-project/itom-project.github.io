@@ -1,0 +1,1385 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9.2. Array class DataObject &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_scriptLanguage/pymod-dataObject';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.3. Save and load images and other files" href="pymod-load-save-files.html" />
+    <link rel="prev" title="9.1. Python-Module itom" href="pymod-itom.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pymod-itom.html">9.1. Python-Module <strong>itom</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9.2. Array class DataObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-load-save-files.html">9.3. Save and load images and other files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-popular-python-packages.html">9.4. Popular Python packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-matplotlib.html">9.5. Python package matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-plotly.html">9.6. Python package plotly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-matlab.html">9.7. Python-Module matlab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-reload-modules.html">9.8. Reload modified modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-limitations.html">9.9. Python Limitations in <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-problems-and-solutions.html">9.10. Python - common problems and solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytutorial.html">9.11. Python tutorial</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="script-language.html" class="nav-link"><span class="section-number">9. </span>Python Scripting Language</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="array-class-dataobject">
+<span id="itomdataobject"></span><h1><span class="section-number">9.2. </span>Array class DataObject<a class="headerlink" href="#array-class-dataobject" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2><span class="section-number">9.2.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In <strong>itom</strong>, the class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> is the main array object. Arrays in <strong>itom</strong> can have the following properties:</p>
+<ul>
+<li><p>unlimited number of dimensions (a 1-dim object is always mapped to a [1xN] 2-dim object)</p></li>
+<li><p>each dimension can have an arbitrary size</p></li>
+<li><dl>
+<dt>possible data types:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;uint8&quot;</span>      <span class="c1"># unsigned integer, 8 bit [0,255]</span>
+<span class="s2">&quot;int8&quot;</span>       <span class="c1"># signed integer, 8 bit [-128,127]</span>
+<span class="s2">&quot;uint16&quot;</span>     <span class="c1"># unsigned integer, 16 bit [0,65536]</span>
+<span class="s2">&quot;int16&quot;</span>      <span class="c1"># signed integer, 16 bit [-32768,32767]</span>
+<span class="s2">&quot;uint32&quot;</span>     <span class="c1"># unsigned integer, 32 bit</span>
+<span class="s2">&quot;int32&quot;</span>      <span class="c1"># signed integer, 32 bit</span>
+<span class="s2">&quot;float32&quot;</span>    <span class="c1"># floating point, 32 bit single precision</span>
+<span class="s2">&quot;float64&quot;</span>    <span class="c1"># floating point, 64 bit double precision</span>
+<span class="s2">&quot;complex64&quot;</span>  <span class="c1"># complex number with two float32 components</span>
+<span class="s2">&quot;complex128&quot;</span> <span class="c1"># complex number with two float64 components</span>
+<span class="s2">&quot;rgba32&quot;</span>     <span class="c1"># color format, 4x uint8 values (alpha,r,g,b)</span>
+<span class="s2">&quot;datetime&quot;</span>   <span class="c1"># :py:class:`datetime.datetime` values with an optional time zone delta from UTC (resolution: microseconds)</span>
+<span class="s2">&quot;timedelta&quot;</span>  <span class="c1"># :py:class:`datetime.timedelta` values with a microseconds resolution</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Before giving a short tutorial about how to use the class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a>, the base idea and concept of
+the array structure should be explained. If you already now the huge <strong>Python</strong> module <strong>Numpy</strong> with its base array
+class <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, one will ask why another similar array class is provided by <strong>itom</strong>. The reasons for this
+are as follows:</p>
+<ul class="simple">
+<li><p>The python class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> is just a wrapper for the <strong>itom</strong> internal class <strong>DataObject</strong>, written in C++.
+This array structure is used all over <strong>itom</strong> and also passed to any plugin instances of <strong>itom</strong>. Internally, the C++ class
+<strong>DataObject</strong> is based on OpenCV matrices (cv::Mat), such that functionalities provided by the open-source
+Computer-Vision Library (OpenCV) can be used by <strong>itom</strong>, too.</p></li>
+<li><p>The class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> should also be used to store real measurement data. Therefore it is possible to
+add tags and other meta information to every dataObject (like axis descriptions, scale and offset values, protocol entries…).</p></li>
+<li><p>Usually, array classes (like the class <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>) store the whole matrix in one continuous block in memory.
+Due to the working principle of every operating system, it is sometimes difficult to allocate a huge block in memory.
+Therefore, <strong>dataObject</strong> only stores the sub-matrices of the last two-dimensions in single blocks in memory, while the
+first <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">-</span> <span class="pre">2</span></code> dimensions of the array are represented by one vector in memory, where every item points to its corresponding
+sub-matrix (called plane). Using this concept, huger arrays can be allocated without causing a memory error.</p></li>
+</ul>
+<p>The class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> is compatible to a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, however the dataObject does not support
+all data types of numpy. A <code class="docutils literal notranslate"><span class="pre">dataObject</span></code> supports the <code class="docutils literal notranslate"><span class="pre">array-like</span></code> interface of <code class="docutils literal notranslate"><span class="pre">Numpy</span></code>, such that it can be passed
+to methods, that expect an <code class="docutils literal notranslate"><span class="pre">array-like</span></code> object. In general a <code class="docutils literal notranslate"><span class="pre">dataObject</span></code> can be converted to a <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>
+by passing it to the constructor and vice-versa to convert a Numpy array to a dataObject. In the first case, data is deeply
+copied as default (set the argument <code class="docutils literal notranslate"><span class="pre">copy</span></code> to False to avoid this). In the latter case, a shallow copy is used as default
+(as long as the data types are compatible). For more information see <a class="reference internal" href="#itomdataobjectvsnumpyarray"><span class="std std-ref">DataObject vs. numpy.array</span></a>.</p>
+<p>For more information about the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> and <code class="docutils literal notranslate"><span class="pre">timedelta</span></code> data types, see <a class="reference internal" href="#itomdataobjectdatetime"><span class="std std-ref">Datetime and timedelta types</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to realize a compatible version with respect to <em>numpy</em>, <em>matlab</em>… data in a <strong>DataObject</strong> can also be stored <em>continuously</em>. The basic structure for
+the data object is the same than in the <em>non-continuous</em> (default) version, but the data of each 2dim-matrix is continuously aligned in memory and each data-pointer
+of each matrix just points to the first element of the corresponding matrix in this big data block in memory.</p>
+<p>The non-continuous representation has advantages especially in the case of huge data sets, since it is more difficult to allocate a free, big continuous block in memory without
+reorganizing it compared to multiple smaller blocks of memory, which can be distributed randomly in memory.</p>
+<p>Matrices with only one or two dimension are automatically stored continuously.</p>
+</div>
+</section>
+<section id="creating-a-dataobject">
+<h2><span class="section-number">9.2.2. </span>Creating a dataObject<a class="headerlink" href="#creating-a-dataobject" title="Link to this heading">#</a></h2>
+<p>In general, a <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> is created like any other class instance in <strong>Python</strong>, hence the constructor of class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> is called. For a full reference of the constructor of class <strong>dataObject</strong>, type</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">dataObject</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the following example, some dataObjects of different size and types are created. Using these constructors, the content of the created array is arbitrary at initialization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#1. empty dataObject, dimensions: 0, size: []</span>
+<span class="linenos"> 2</span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1">#2. one dimensional dataObject</span>
+<span class="linenos"> 5</span><span class="c1">#  a one dimensional dataObject already is</span>
+<span class="linenos"> 6</span><span class="c1">#  allocated as an array of size [1 x n]</span>
+<span class="linenos"> 7</span><span class="n">b</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">5</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="c1">#size [1x5]</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1">#3. 5 x 3 array, type: int8</span>
+<span class="linenos">10</span><span class="n">c</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;int8&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1">#4. 2 x 5 x 10 array, type: complex128</span>
+<span class="linenos">13</span><span class="c1">#  here two planes of size [5x10] are created and a vector with two items points to them</span>
+<span class="linenos">14</span><span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="s2">&quot;complex128&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1">#5. 2 x 5 x 10 array, type: complex128, continuous</span>
+<span class="linenos">17</span><span class="c1">#  This matrix has the same size and type than matrix</span>
+<span class="linenos">18</span><span class="c1">#  &#39;d&#39; above. However, the continuous keyword indicates,</span>
+<span class="linenos">19</span><span class="c1">#  that python should already allocate all planes in</span>
+<span class="linenos">20</span><span class="c1">#  one block. Then the data object can be converted in</span>
+<span class="linenos">21</span><span class="c1">#  a numpy.array without the need of copying the data block</span>
+<span class="linenos">22</span><span class="c1">#  in memory. It is useful to use this keyword, if you</span>
+<span class="linenos">23</span><span class="c1">#  often want to switch between dataObject and numpy.arrays.</span>
+<span class="linenos">24</span><span class="c1">#  However consider that this is not recommended for huge</span>
+<span class="linenos">25</span><span class="c1">#  matrices.</span>
+<span class="linenos">26</span><span class="n">e</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="s2">&quot;complex128&quot;</span><span class="p">,</span> <span class="n">continuous</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="c1">#6. create a 2x3, uint16 dataObject filled with [[1,2,3],[4,5,6]]</span>
+<span class="linenos">29</span><span class="n">f</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;uint16&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can also use the copy constructor of class <strong>dataObject</strong> in order to create
+a dataObject from another array-like object or a sequence of numbers (tuple, list…).
+In <strong>Python</strong> it is usual, that different objects share their memory (for arrays the memory
+is mainly the data block(s)) as long as possible, such that memory and execution time is saved. This is also the case when using the copy constructor. See the <strong>Numpy</strong> documentation for more information about this. The main thing you should know is, that if you change the value of any cell of an array, the corresponding value is also changed in all arrays, that share their memory with the dataObject.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">#1. create dataObject from any array-like object (e.g. Numpy array)</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 3</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="linenos"> 4</span><span class="n">b</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#b has the continuous flag set</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1">#2. create dataObject from a tuple of values</span>
+<span class="linenos"> 7</span><span class="c1">#  any object, that python can interpret as sequence can be used</span>
+<span class="linenos"> 8</span><span class="c1">#  in order to initialize the data object. The dataObject can have</span>
+<span class="linenos"> 9</span><span class="c1">#  an arbitrary size or number of dimensions, if the total number</span>
+<span class="linenos">10</span><span class="c1">#  of elements fits to the length of the given input sequence.</span>
+<span class="linenos">11</span><span class="c1">#  In this case, the sequence is totally copied into the data object.</span>
+<span class="linenos">12</span><span class="c1">#  The values are filled row-by-row into the array, also called as</span>
+<span class="linenos">13</span><span class="c1">#  c-continuous creation.</span>
+<span class="linenos">14</span><span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#8 values</span>
+<span class="linenos">15</span><span class="n">d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">data</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1">#3. create a dataObject as shallow copy of another dataObject</span>
+<span class="linenos">18</span><span class="n">e</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="static-constructors-for-dataobjects">
+<h2><span class="section-number">9.2.3. </span>Static constructors for dataObjects<a class="headerlink" href="#static-constructors-for-dataobjects" title="Link to this heading">#</a></h2>
+<p>If a <strong>dataObject</strong> is created using one of the default constructors (without keyword <em>data</em>), the matrix is allocated to the right
+side but the values usually have no defined content. The values are even not randomly distributed. In order to generate a pre-filled
+<strong>dataObject</strong>, there exist some special static methods. These are:</p>
+<ul class="simple">
+<li><p>Use <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.eye" title="itom.dataObject.eye"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eye()</span></code></a> to create a 2D, square, eye matrix.</p></li>
+<li><p><a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.ones" title="itom.dataObject.ones"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ones()</span></code></a> is used to created a n-dimensional dataObject filled with ones.</p></li>
+<li><p><a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.zeros" title="itom.dataObject.zeros"><code class="xref py py-meth docutils literal notranslate"><span class="pre">zeros()</span></code></a> is used to created a n-dimensional dataObject filled with zeros.</p></li>
+<li><p><a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.rand" title="itom.dataObject.rand"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rand()</span></code></a> is used to created a n-dimensional dataObject filled with uniformly distributed random values: range [0,1) for floating point values, else the values are taken from the entire value range of the data type.</p></li>
+<li><p><a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.randN" title="itom.dataObject.randN"><code class="xref py py-meth docutils literal notranslate"><span class="pre">randN()</span></code></a> is used to created a n-dimensional dataObject filled with gaussian distributed random values.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+<span class="c1">#returns:</span>
+<span class="c1">#dataObject(size=[3x4], dtype=&#39;uint8&#39;</span>
+<span class="c1">#    [[  1,   1,   1,   1],</span>
+<span class="c1">#     [  1,   1,   1,   1],</span>
+<span class="c1">#     [  1,   1,   1,   1]])</span>
+</pre></div>
+</div>
+</section>
+<section id="print-content-of-dataobject">
+<h2><span class="section-number">9.2.4. </span>Print content of dataObject<a class="headerlink" href="#print-content-of-dataobject" title="Link to this heading">#</a></h2>
+<p>If you type the variable name of a <strong>dataObject</strong> into the command line of <strong>itom</strong> and press return, the short string representation with all important
+facts of the dataObject are printed in one line. This is the same result than using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">print()</span></code> command of Python. If you want to obtain
+the full content of a <strong>dataObject</strong> in the command line, use the method <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.data" title="itom.dataObject.data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">data()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="c1">#returns:</span>
+<span class="c1">#dataObject(&#39;uint8&#39;, [3 x 4], continuous: 1, owndata: 1)</span>
+
+<span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+<span class="c1">#returns:</span>
+<span class="c1">#dataObject(size=[3x4], dtype=&#39;uint8&#39;</span>
+<span class="c1">#    [[  1,   1,   1,   1],</span>
+<span class="c1">#     [  1,   1,   1,   1],</span>
+<span class="c1">#     [  1,   1,   1,   1]])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The string representation (using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">print()</span></code> method) of a numpy array will print the full or cropped content of the numpy array
+to the command line (cropped if it is too big). For <strong>dataObjects</strong>, the content is only print using the <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.data" title="itom.dataObject.data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">data()</span></code></a> method.</p>
+</div>
+</section>
+<section id="accessing-values-in-a-dataobject">
+<h2><span class="section-number">9.2.5. </span>Accessing values in a dataObject<a class="headerlink" href="#accessing-values-in-a-dataobject" title="Link to this heading">#</a></h2>
+<p>In order to read or write single values of a dataObject, use the indexing operator:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first element&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;last line:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1">#write 5 to the first value:</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>The index operator obtains <em>n</em> comma separated arguments, one for each axis. Each index starts with <em>0</em>, the order of axes is <em>y,x</em>, <em>z,y,x</em>, …</p>
+<p>A dataObject is an iteratible object in Python, like lists, tuples, numpy.arrays, … Therefore, it is possible to iterate through all values of
+a dataObject, whereas the iterator at first goes along the last axis (x), then along the second axis (y) and so on:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+
+<span class="sd">&#39;&#39;&#39;returns:</span>
+<span class="sd">dataObject(size=[2x3x2], dtype=&#39;uint8&#39;</span>
+<span class="sd">[0,:,:]-&gt;([[  1,   2],</span>
+<span class="sd">       [  3,   4],</span>
+<span class="sd">       [  5,   6]])</span>
+<span class="sd">[1,:,:]-&gt;([[  7,   8],</span>
+<span class="sd">       [  9,  10],</span>
+<span class="sd">       [ 11,  12]])</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;returns:</span>
+<span class="sd">1,2,3,4,5,6,7,8,9,10,11,12</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>All fixed-point data types are represented by the python type <em>int</em>, all real floating point data types by <em>float</em>, the complex data types by <em>complex</em> and
+the color type by <a class="reference internal" href="../09_reference/rgba.html#itom.rgba" title="itom.rgba"><code class="xref py py-class docutils literal notranslate"><span class="pre">rgba</span></code></a>.</p>
+<p>It is not only possible to address single values within a dataObject, but the index (or mapping) operator also allows the usage of slices. Then, sub-regions
+of dataObjects can be returned in terms of another dataObject instance. However, it is very important to mention, that a slice or sub-region shares its data memory
+with the original object. Once you change one value in the original or sliced object, the corresponding value is also changed in all related objects. This is the
+main philosophy of Python and also holds for numpy.arrays.</p>
+<p>Considering slices, the index of any axis in the indexing or mapping operator can then have the following forms:</p>
+<ul class="simple">
+<li><p>single, zero-based integer value: Only the one value in the corresponding axis is addressed</p></li>
+<li><p>start:end: A range of values in the corresponding axis is addressed, where start is the first, zero-based index that is included in the range and end is the last value that is NOT part of the range (excluded).</p></li>
+<li><p>colon operator (:): All values in this axis are addressed.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">])</span>
+
+<span class="c1">#get subpart</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1">#b then has the size [5,20,1]</span>
+
+<span class="c1">#set all values in b to 0:</span>
+<span class="n">b</span><span class="p">[:,:,:]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#-&gt; 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#-&gt; 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#-&gt; 0</span>
+</pre></div>
+</div>
+</section>
+<section id="basic-attributes-of-a-dataobject">
+<h2><span class="section-number">9.2.6. </span>Basic attributes of a dataObject<a class="headerlink" href="#basic-attributes-of-a-dataobject" title="Link to this heading">#</a></h2>
+<p>Any created <strong>dataObject</strong> provides some basic attributes that describe the corresponding array:</p>
+<ul class="simple">
+<li><p>The attribute <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.ndim" title="itom.dataObject.ndim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ndim</span></code></a> or <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.dims" title="itom.dataObject.dims"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dims</span></code></a> return the number of dimensions of the  <strong>dataObject</strong>.</p></li>
+<li><p>The attribute <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.shape" title="itom.dataObject.shape"><code class="xref py py-attr docutils literal notranslate"><span class="pre">shape</span></code></a> returns a tuple with the size for every axis. The size of the tuple corresponds to the number of dimensions. Remember, that the order is always (y,x), (z,y,x)…</p></li>
+<li><p>The attribute <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.dtype" title="itom.dataObject.dtype"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dtype</span></code></a> returns a string with the type of the <strong>dataObject</strong> (e.g. uint8, float32 or complex64).</p></li>
+<li><p>The attribute <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.continuous" title="itom.dataObject.continuous"><code class="xref py py-attr docutils literal notranslate"><span class="pre">continuous</span></code></a> returns True if the data block lies continuously in memory or not (False). False is only possible for 3 or higher dimensional dataObjects. Then, the memory of the single planes lies distributed at different locations in the memory allowing to save bigger matrices in the available memory. While a continuous dataObject can share its memory with a numpy array, a non-continuous dataObject has to be converted in the continuous version before being transmitted to a numpy array (this is implicitly done).</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dims:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="s2">&quot;shape:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;type:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="c1">#returns:</span>
+<span class="c1">#dims: 4 shape: (5, 4, 3, 2) type: uint16</span>
+</pre></div>
+</div>
+</section>
+<section id="value-and-axes-descriptions-units-scaling-and-offset">
+<h2><span class="section-number">9.2.7. </span>Value and axes descriptions, units, scaling and offset<a class="headerlink" href="#value-and-axes-descriptions-units-scaling-and-offset" title="Link to this heading">#</a></h2>
+<p>Usually, <strong>dataObjects</strong> and numpy arrays are quite similar and very compatible to each other. They can even share memory (if continuous) and dataObjects can usually be
+used whenever a function requires an <strong>array-like</strong> input type (the class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> implements the <strong>array-like</strong> interface definitions). However, the
+<strong>dataObject</strong> has been made in order to also save protocol information, meta information as well as the physical meaning of the matrix. As one powerful feature, it is possible
+to set an arbitrary description, unit, scaling and offset to all axes as well as a description and unit to the values. If a <strong>dataObject</strong> is plot (e.g. by <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.plot()</span></code></a>),
+these properties are read and considered in the plot.</p>
+<p>In detail:</p>
+<ul class="simple">
+<li><p>Every axis as well as the value axis can have a description (e.g. ‘length’)</p></li>
+<li><p>Every axis as well as the value axis can have a unit (e.g. ‘mm’, ‘m’, ‘nm’…). Some algorithms consider these units for special calculations.</p></li>
+<li><p>Every axis (but not the value axis) can have a scaling (default: 1.0)</p></li>
+<li><p>Every axis (but not the value axis) can have an offset (default: 0.0)</p></li>
+</ul>
+<p>Scaling and offset transform the pixel coordinate in the matrix (beginning with 0 in all axes) into a physical coordinate. While the values in a matrix are always addressed
+by their pixel coordinate (in integer values), the physical units are displayed in the plots (e.g. designer widget type <em>itom1dqwtplot</em> or <em>itom2dqwtplot</em>). The following
+example should explain the advantage of the scaling and offset values:</p>
+<p>Lets assume that a white-light interferometer records a 2.5D topography of an object. The distance between two adjacent pixels in 2.5 µm in both directions. Additionally, the
+start position of the x-y-stage is (20.5 mm and 47.7 mm in x and y direction, respectively). These values can then be considered in the obtained <strong>dataObject</strong> by the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding=iso-8859-15</span>
+<span class="c1"># the coding is important due to the micron sign below</span>
+
+<span class="n">record</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">768</span><span class="p">,</span> <span class="mi">1024</span><span class="p">],</span> <span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="c1">#record is assumed to be a dataObject</span>
+<span class="n">record</span><span class="o">.</span><span class="n">axisScales</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0025</span><span class="p">,</span> <span class="mf">0.0025</span><span class="p">)</span>
+<span class="n">record</span><span class="o">.</span><span class="n">axisOffsets</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">47.7</span> <span class="o">/</span> <span class="mf">0.0025</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.5</span> <span class="o">/</span> <span class="mf">0.0025</span><span class="p">)</span> <span class="c1">#offset is given in pixel</span>
+<span class="n">record</span><span class="o">.</span><span class="n">axisUnits</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">,</span> <span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+<span class="n">record</span><span class="o">.</span><span class="n">axisDescriptions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">record</span><span class="o">.</span><span class="n">valueUnit</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;µm&#39;</span><span class="p">)</span>
+<span class="n">record</span><span class="o">.</span><span class="n">valueDescription</span> <span class="o">=</span> <span class="s1">&#39;height&#39;</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output is then:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/plotDataObjectScaleOffset.png"><img alt="../_images/plotDataObjectScaleOffset.png" src="../_images/plotDataObjectScaleOffset.png" style="width: 591.0px; height: 295.0px;" />
+</a>
+</figure>
+<p>The relation between pixel coordinates and the physical coordinates is:</p>
+<p>phys = (pix - offset) * scaling</p>
+<p>pix = phys / scaling + offset</p>
+<p>These transformations can be done using the methods <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.physToPix" title="itom.dataObject.physToPix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">physToPix()</span></code></a> and <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.pixToPhys" title="itom.dataObject.pixToPhys"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pixToPhys()</span></code></a>.</p>
+</section>
+<section id="meta-tags-and-protocol">
+<h2><span class="section-number">9.2.8. </span>Meta tags and protocol<a class="headerlink" href="#meta-tags-and-protocol" title="Link to this heading">#</a></h2>
+<p>It is often required to store further meta information together with a dataObject. For this purpose, the dataObject provides arbitrary meta tags (either string or double values) or a
+string based protocol list. While the first can be used to store timestamps, system configurations, calibration states, … the latter can be used to document filter chains that have
+already be executed.</p>
+<p>Tags are always a mapping between a string-keyword and either a double or string value. The class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.dataObject</span></code></a> provides several functions and attributes in order
+to set or read tags:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="c1">#add new tags:</span>
+<span class="linenos"> 3</span><span class="n">obj</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;sensor&quot;</span><span class="p">,</span> <span class="s2">&quot;confocal sensor v1.0&quot;</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="n">obj</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;aperture&quot;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1">#get tags:</span>
+<span class="linenos"> 7</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aperture:&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s2">&quot;aperture&quot;</span><span class="p">])</span>
+<span class="linenos"> 8</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sensor:&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s2">&quot;sensor&quot;</span><span class="p">])</span>
+<span class="linenos"> 9</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;num tags:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">tags</span><span class="p">))</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">existTag</span><span class="p">(</span><span class="s2">&quot;manufacturer&quot;</span><span class="p">):</span>
+<span class="linenos">12</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The tag &#39;manufacturer&#39; exists&quot;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">14</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The tag &#39;manufacturer&#39; does not exist&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1">#delete tag</span>
+<span class="linenos">17</span><span class="n">success</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">deleteTag</span><span class="p">(</span><span class="s2">&quot;aperture&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;success:&quot;</span><span class="p">,</span> <span class="n">success</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output will be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">aperture</span><span class="p">:</span> <span class="mf">0.6</span>
+<span class="n">sensor</span><span class="p">:</span> <span class="n">confocal</span> <span class="n">sensor</span> <span class="n">v1</span><span class="mf">.0</span>
+<span class="n">num</span> <span class="n">tags</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">success</span><span class="p">:</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>One special tag is the ‘title’-tag. If you plot a dataObject with a string-based ‘title’-tag (e.g. with <em>itom1dqwtplot</em> or <em>itom2dqwtplot</em>), the title tag
+will be used as title for the plot (if the property <em>title</em> of the plot is set to <strong>&lt;auto&gt;</strong>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">obj</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;User-defined title&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">plot</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;2D&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code will lead to the following plot (under the assumption, that the designer plugin <strong>itom2dqwtplot</strong> is set as default 2D plot in the <a class="reference internal" href="../04_itom_gui/propertyDialog.html#gui-default-plots"><span class="std std-ref">properties dialog</span></a>
+of <strong>itom</strong>):</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/plotDataObjectTitle.png"><img alt="../_images/plotDataObjectTitle.png" src="../_images/plotDataObjectTitle.png" style="width: 712.0px; height: 266.0px;" />
+</a>
+</figure>
+<p>Another special tag is only important for 1D-plots (using the designer plugin <strong>itom1dqwtplot</strong>). You can then set the legend titles for every single curve.
+This is done by the tag <strong>legendTitleX</strong> where X is a continuous line index starting with 0. The following example shows how to create a 2D dataObject
+with two rows and 100 columns. In the first line (row 0), a sine with an amplitude of 127 is created, in the second line (row 1), a sine with an amplitude of 60.
+Then, the dataObject is plot as 1D plot (indicated by “1D”) and the property <strong>legendPosition</strong> is set to <strong>Right</strong> (per default, no legend is shown):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span><span class="s1">&#39;int8&#39;</span><span class="p">)</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">127</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">20</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">60</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">15</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;legendTitle0&quot;</span><span class="p">,</span> <span class="s2">&quot;first line&quot;</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;legendTitle1&quot;</span><span class="p">,</span> <span class="s2">&quot;second line&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s2">&quot;1D&quot;</span><span class="p">,</span> <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;legendPosition&quot;</span><span class="p">:</span><span class="s2">&quot;Right&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The result looks like this:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/plotDataObjectLegend.png"><img alt="../_images/plotDataObjectLegend.png" src="../_images/plotDataObjectLegend.png" style="width: 605.0px; height: 351.0px;" />
+</a>
+</figure>
+<p>The attribute <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.tags" title="itom.dataObject.tags"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tags</span></code></a> returns a mapping object to a dictionary. This has to be considered to be a read-only dictionary, where no item can be deleted, appended
+or changed. However, it is possible to assign a new dictionary to this attribute. Then, all current tags are deleted and the new dictionary items are considered to be the new tags.</p>
+<p>The protocol of a dataObject is a list of strings. Use the method <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject.addToProtocol" title="itom.dataObject.addToProtocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addToProtocol()</span></code></a> in order to add a new entry to the protocol. If the dataObject is
+a slice of another object, the string <strong>ROI[…]</strong> with the current slice parameters is prepended to each new protocol entry. Finally, the protocol is stored as tag <strong>protocol</strong>
+and can be requested and deleted using the methods described above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is not possible to set tags or protocol entries for empty dataObjects. Tags and the protocol is shared between two shallow copies, hence, if two dataObjects share the same
+data, they also share their tags and protocol.</p>
+</div>
+</section>
+<section id="dataobject-vs-numpy-array">
+<span id="itomdataobjectvsnumpyarray"></span><h2><span class="section-number">9.2.9. </span>DataObject vs. numpy.array<a class="headerlink" href="#dataobject-vs-numpy-array" title="Link to this heading">#</a></h2>
+<p>The most common Python package that is used for numeric calculations is <strong>Numpy</strong>. <strong>Numpy</strong> is one of the most famous and used Python packages and is the basis
+for other packages, like Scipy, Matplotlib, Scikit-image, … Numpy is directly included in <strong>itom</strong> and also connected to some features of the GUI. Nevertheless,
+the main array structure of <strong>itom</strong> is the class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> and not <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>. The main reason for this is, that the basis of <strong>dataObject</strong>
+is a C++ class with the same name that can be used in all plugins. Further points for the class <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> are:</p>
+<ul class="simple">
+<li><p>Numpy arrays are always stored in one continuous block in memory. This is a compact and fast structure, however huge matrices can easily run into memory errors, since the computer may have free memory, however probably not in one single block in memory. Therefore, a dataObject usually stores every plane (this is every 2d array of the last two dimensions (x-y-plane)) in one block, whereas all planes lie at arbitrary positions in memory. This is only the case, if the dataObject is created as non-continuous object (see constructor of <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a>). 2D dataObjects are always continuous.</p></li>
+<li><p>DataObjects are also created with respect to measurement data. Therefore, dataObjects have further meta information, like stated in the sections above.</p></li>
+<li><p>Internally, every plane in a DataObject is based on OpenCV matrices (in the C++ code). Therefore, it is directly possible to apply OpenCV methods to DataObjects. Furthermore, a direct
+use of dataObjects, created in Python, in algorithms or hardware plugins is possible.</p></li>
+</ul>
+<p>Despite the stated differences, the good is, that the classes <code class="docutils literal notranslate"><span class="pre">dataObject</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> are compatible to each other. This is especially the case for continuous dataObjects.
+They can directly be converted to and from <code class="docutils literal notranslate"><span class="pre">numpy.arrays</span></code> even as shallow copy, such that both objects share the same matrix memory. If a 3- or higher dimensional dataObject is converted to a numpy-array, it is implicitly converted to a continuous form (such that all planes lie in adjacent blocks in the memory).</p>
+<p>Examples for these conversions are:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">dobj2d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="n">np2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dobj2d</span><span class="p">)</span> <span class="c1">#deep copy</span>
+<span class="n">np2d_v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dobj2d</span><span class="p">,</span> <span class="n">copy</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">#shallow copy</span>
+<span class="n">dobj2d_v2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">np2d</span><span class="p">)</span> <span class="c1">#shallow copy</span>
+
+<span class="n">dobj3d</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">)</span> <span class="c1">#non-continuous</span>
+<span class="n">np3d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dobj3d</span><span class="p">,</span> <span class="n">copy</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">#deep copy, since implicit continuous conversion</span>
+<span class="n">dobj3d_v2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">np3d</span><span class="p">)</span> <span class="c1">#shallow copy of np3d</span>
+
+<span class="n">dobj3d2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;uint8&#39;</span><span class="p">,</span> <span class="n">continuous</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">np3d2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dobj3d2</span><span class="p">,</span> <span class="n">copy</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1">#shallow copy</span>
+<span class="n">dobj3d2_v2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">np3d2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to understand these examples, the following things have to be mentioned or repeated: Per default, a <em>dataObject</em> with more than two dimensions is created as non-continuous
+dataObject, hence various planes (the 2d matrix spanned by the last two axes) are distributed at different locations in memory. If passing a dataObject to the constructor of a numpy.array
+a deep copy is created per default. Deep copy means, that the array data is entirely copied to another location in memory, such that both arrays are completely de-coupled. This is
+not the case if the optional parameter <em>copy</em> of the <em>np.array</em> constructor is set to <em>False</em>. If possible, a so called shallow copy is then created such that as little as
+memory has to be copied. This is the default for most python operations! If both objects are a shallow copy of each other, a change of one value in the one object also changes the other object. However, only values are changed, never types or sizes. A shallow copy is therefore only possible if no change in type or memory structure is required. If a sub-region of an object
+is copied, a shallow copy is possible. However, this is not the case if the type is changed or if a non-continuous dataObject has to be converted to a numpy.array.</p>
+<p>While the copy constructor of a <em>np.array</em> usually creates a deep copy (default setting), the copy constructor of a dataObject always tries to make a shallow copy if possible.</p>
+<p>Usually, all methods of Numpy not only work with <em>np.arrays</em> but also with <strong>array-like</strong> objects. These are python objects that provide a specific interface such that Numpy
+can implicitly obtain a Numpy array out of them. This is also what <em>dataObject</em> provides. Therefore you can pass every dataObject to a numpy function without a previous conversion to
+a numpy array.</p>
+<p>On the other side, <strong>itom</strong> often supports numpy arrays without conversion to dataObject. This is for instance the case for the method <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.plot()</span></code></a>. Only, when passing arrays
+to algorithm or hardware plugins (classes <a class="reference internal" href="../09_reference/dataIO.html#itom.dataIO" title="itom.dataIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataIO</span></code></a> or <a class="reference internal" href="../09_reference/actuator.html#itom.actuator" title="itom.actuator"><code class="xref py py-class docutils literal notranslate"><span class="pre">actuator</span></code></a>, method <a class="reference internal" href="../09_reference/algo.html#itom.filter" title="itom.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a>), usually numpy.arrays have to be converted to
+dataObjects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="n">a</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">itom</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<span class="n">itom</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">#works</span>
+<span class="n">itom</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;minValue&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="c1">#raises an error</span>
+<span class="n">itom</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;minValue&quot;</span><span class="p">,</span> <span class="n">itom</span><span class="o">.</span><span class="n">dataObject</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="c1">#works</span>
+</pre></div>
+</div>
+</section>
+<section id="datetime-and-timedelta-types">
+<span id="itomdataobjectdatetime"></span><h2><span class="section-number">9.2.10. </span>Datetime and timedelta types<a class="headerlink" href="#datetime-and-timedelta-types" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">dataObject</span></code> can also contain values, that represent either a certain date and time (<code class="docutils literal notranslate"><span class="pre">datetime</span></code>)
+or a time span, denoted as <code class="docutils literal notranslate"><span class="pre">timedelta</span></code>. Both the Python core implementation and Numpy have their own
+data types to represent datetimes and time spans and both representations are slightly different. The
+data types used in <code class="docutils literal notranslate"><span class="pre">dataObject</span></code> are fully compatible to the Python core types and compatible as close
+as possible to the Numpy data types:</p>
+<p><strong>datetime</strong></p>
+<p>The Python core type <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> allows indicating any date and times with a minimum
+resolution of microseconds. This is equal to the itom internal type used as value for dataObjects. Additionally,
+it is possible to define a timezone. The itom data type allows indicating a timezone as a delta in seconds
+to the UTC time. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code> if not otherwise stated. The numpy data type <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.datetime64" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.datetime64</span></code></a>
+has a variable resolution, that can also be in the attoseconds range. However, the allowed value range depend
+on the chosen resolution. If such values are converted to the itom datetime values, they will always be rounded
+to the next microsecond value. The Numpy values do not support any timezone information.</p>
+<p>Internally, itom stores a <code class="docutils literal notranslate"><span class="pre">datetime</span></code> value as 64bit value, where 0 is equal to the date <code class="docutils literal notranslate"><span class="pre">1970-01-01</span> <span class="pre">00:00:00.0000</span></code> (epoch).</p>
+<p>A time zone support (different than the UTC default timezone) is only supported from Python 3.7 on.</p>
+<p><strong>timedelta</strong></p>
+<p>Similar to <code class="docutils literal notranslate"><span class="pre">datetime</span></code>. The itom internal value has a microseconds resolution, too, equal to the Python core
+class <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code></a>. The Numpy class <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.timedelta64" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.timedelta64</span></code></a> can have different resolutions,
+directly connected to the minimum relative and absolute time spans.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A numpy <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (not a time) value is not supported by the itom date and time data types.</p>
+</div>
+<p>Examples for constructing such <code class="docutils literal notranslate"><span class="pre">dataObjects</span></code> are:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="c1"># constructs an arbitrarily filled 2x3 datetime dataObject</span>
+<span class="n">dt1</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+
+<span class="c1"># constructs a 2x3 datetime dataObject, where</span>
+<span class="c1"># are values are set to 1970-01-01 00:00 (epoch)</span>
+<span class="n">td2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+
+<span class="c1"># constructs a 1x2 datetime dataObject with two dates</span>
+<span class="c1"># one value is in UTC time, the other one +1h from UTC</span>
+<span class="n">tz</span> <span class="o">=</span> <span class="n">timezone</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3600</span><span class="p">))</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">datetime</span><span class="p">(</span><span class="mi">1999</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span> <span class="n">tzinfo</span> <span class="o">=</span> <span class="n">tz</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">td3</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1"># constructs an arbitrarily filled 2x3 timedelta dataObject</span>
+<span class="n">td1</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;timedelta&#39;</span><span class="p">)</span>
+
+<span class="c1"># constructs a 2x3 timedelta dataObject, where</span>
+<span class="c1"># are values are set to a 0 time span.</span>
+<span class="n">td2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;timedelta&#39;</span><span class="p">)</span>
+
+<span class="c1"># constructs a 1x2 timedelta dataObject with two time spans</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">microseconds</span><span class="o">=</span><span class="mi">44000</span><span class="p">),</span>
+    <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">td3</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;timedelta&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Many mathematical operators are defined for <code class="docutils literal notranslate"><span class="pre">datetime</span></code> and <code class="docutils literal notranslate"><span class="pre">timedelta</span></code> objects, however only, if possible.
+For instance it is possible to add or subtract a <code class="docutils literal notranslate"><span class="pre">timedelta</span></code> dataObject to or from a <code class="docutils literal notranslate"><span class="pre">datetime</span></code> dataObject,
+as long as their shapes are equal. The result is a <code class="docutils literal notranslate"><span class="pre">datetime</span></code> dataObject. The difference of two <code class="docutils literal notranslate"><span class="pre">datetime</span></code>
+objects is a <code class="docutils literal notranslate"><span class="pre">timedelta</span></code> dataObject. However, it is not possible to multiply such objects or to add two
+<code class="docutils literal notranslate"><span class="pre">datetime</span></code> objects.</p>
+<p>For scalar operations (e.g. add, subtract or setting a value), it is possible to use both the
+Python class <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code></a> as well as the Numpy
+classes <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.datetime64" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.datetime64</span></code></a> or <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.timedelta64" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.timedelta64</span></code></a> (as long as the operations is
+valid at all):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">td1</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;datetime&#39;</span><span class="p">)</span>
+<span class="n">td1</span> <span class="o">+=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">td1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># &gt;&gt; 1970-01-03 00:00:00</span>
+
+<span class="n">td1</span><span class="p">[:,:]</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">td1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># &gt;&gt; 2023-04-05 23:04:05</span>
+
+<span class="n">td1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2005-02-25T03:30&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">td1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># &gt;&gt; 2005-02-25 03:30:00</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">datetime</span></code> dataObject can be used as x-axis for a line plot. See <a class="reference internal" href="../05_plots/linePlots.html#itom1dqwtplotdatetime"><span class="std std-ref">DateTime x-axis</span></a> for more details.
+If you want to create a linearly distributed datetime x-axis, the numpy method <code class="docutils literal notranslate"><span class="pre">arange</span></code> can help, e.g.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># pass this numpy ndarray as xData property to a 1d plot</span>
+<span class="c1"># here, a range with a step size of 1 day is created</span>
+<span class="n">dateScale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="s1">&#39;2005-02&#39;</span><span class="p">,</span> <span class="s1">&#39;2005-03&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[D]&#39;</span><span class="p">)</span>
+
+<span class="c1"># or convert it to a dataObject</span>
+<span class="n">dateScale2</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">dateScale</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="main-operations-on-numpy-arrays-and-itom-dataobjects">
+<h2><span class="section-number">9.2.11. </span>Main operations on numpy.arrays and itom.dataObjects<a class="headerlink" href="#main-operations-on-numpy-arrays-and-itom-dataobjects" title="Link to this heading">#</a></h2>
+<p>The following list in an extract of the itom cheatsheet (<a class="reference external" href="https://itom.bitbucket.io/documents/itom_cheatsheet.pdf">https://itom.bitbucket.io/documents/itom_cheatsheet.pdf</a>) and shows major operations on numpy.arrays and itom.dataObjects:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>np.array (import numpy as np)</p></th>
+<th class="head"><p>itom.dataObject (import itom)</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>arr=np.ndarray([2,3],’uint8’)</p></td>
+<td><p>dObj = dataObject([2,3],’uint8’)</p></td>
+<td><p>create a randomly filled 2x3 array with type uint8</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr=np.array([[1,2,3],[4,5,6]])</p></td>
+<td><p>dObj =dataObject([2,3],data=(1,2,3,4,5,6))</p></td>
+<td><p>create the 2x3 array [1,2,3 ; 4,5,6]</p></td>
+</tr>
+<tr class="row-even"><td><p>arr=np.array(dObj, copy = False)</p></td>
+<td><p>dObj =dataObject(arr)</p></td>
+<td><p>convert np.array &lt;-&gt; dataObject (shallow copy if possible)</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.ndim</p></td>
+<td><p>dObj.ndim</p></td>
+<td><p>Returns number of dimensions (here: 2)</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.shape</p></td>
+<td><p>dObj.shape</p></td>
+<td><p>Returns size tuple (here: [2,3])</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr.shape[0]</p></td>
+<td><p>dObj.shape[0]</p></td>
+<td><p>Returns size of first dimensions (here: y-axis)</p></td>
+</tr>
+<tr class="row-even"><td><p>c=arr[0,1]; arr[0,1]=7</p></td>
+<td><p>dObj[0,1]; b[0,1]=7</p></td>
+<td><p>Gets or sets the element in the 1st row, 2nd col</p></td>
+</tr>
+<tr class="row-odd"><td><p>c=arr[:,1:3] or</p></td>
+<td><p>c=dObj[:,1:3] or</p></td>
+<td><p>Returns shallow copy of array containing the 2nd and 3rd columns</p></td>
+</tr>
+<tr class="row-even"><td><p>c=arr[0:2,1:3]</p></td>
+<td><p>c= dObj [0:2,1:3]</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>arr[:,:]=7</p></td>
+<td><p>dObj[:,:]=7</p></td>
+<td><p>sets all values of array to value 7</p></td>
+</tr>
+<tr class="row-even"><td><p>arr.transpose() (shallow copy)</p></td>
+<td><p>dObj.trans() (deep copy)</p></td>
+<td><p>transpose of array</p></td>
+</tr>
+<tr class="row-odd"><td><p>np.dot(arr1,arr2)</p></td>
+<td><p>dObj1 * dObj2 (float only)</p></td>
+<td><p>matrix multiplication</p></td>
+</tr>
+<tr class="row-even"><td><p>arr1 * arr2</p></td>
+<td><p>dObj1.mul(dObj2)</p></td>
+<td><p>element-wise multiply</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr1 / arr2</p></td>
+<td><p>dObj1.div(dObj2)</p></td>
+<td><p>element-wise divide</p></td>
+</tr>
+<tr class="row-even"><td><p>arr1 +,- arr2</p></td>
+<td><p>dObj1 +,- dObj2</p></td>
+<td><p>sum/difference of elements</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr1 +,- scalar</p></td>
+<td><p>dObj1 +,- scalar</p></td>
+<td><p>adds/subtracts scalar from every element in array</p></td>
+</tr>
+<tr class="row-even"><td><p>arr1 &amp;,| arr2</p></td>
+<td><p>dObj1 &amp;,| dObj2</p></td>
+<td><p>element-wise, bitwise AND/OR operator</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr2 = arr1</p></td>
+<td><p>dObj2 = dObj1</p></td>
+<td><p>referencing (both still point to the same array)</p></td>
+</tr>
+<tr class="row-even"><td><p>arr2 = arr1.copy()</p></td>
+<td><p>dObj2 = dObj1.copy()</p></td>
+<td><p>deep copy (entire data is copied)</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr2 = arr1.astype(newtype)</p></td>
+<td><p>dObj2 = dObj1.astype(‘newtypestring’)</p></td>
+<td><p>type conversion</p></td>
+</tr>
+<tr class="row-even"><td><p>arr = np.zeros([3,4],’float32’)</p></td>
+<td><p>dObj = dataObject.zeros([3,4], ‘float32’)</p></td>
+<td><p>3x4 array filled with zeros of type float32</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr = np.ones([3,4],’float32’)</p></td>
+<td><p>dObj = dataObject.ones([3,4], ‘float32’)</p></td>
+<td><p>3x4 array filled with ones of type float32</p></td>
+</tr>
+<tr class="row-even"><td><p>arr = np.eye(3,dtype=’float32’)</p></td>
+<td><p>dObj = dataObject.eye(3, ‘float32’)</p></td>
+<td><p>3x3 identity matrix (type: float32)</p></td>
+</tr>
+<tr class="row-odd"><td><p>arr2 = arr1.squeeze()</p></td>
+<td><p>dObj2 = dObj1.squeeze()</p></td>
+<td><p>converts array to an array where dims of size 1 are eliminated (deep copy if necessary)</p></td>
+</tr>
+<tr class="row-even"><td><p>np.linspace(1,3,4)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>4 equally spaced samples between 1 and 3, inclusive</p></td>
+</tr>
+<tr class="row-odd"><td><p>[x,y] = np.meshgrid(0:2,1:5)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>two 2D arrays: one of x values, the other of y values</p></td>
+</tr>
+<tr class="row-even"><td><p>np.linalg.inv(a)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>inverse of square matrix a</p></td>
+</tr>
+<tr class="row-odd"><td><p>x=np.linalg.solve(a,b)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>solution of ax=b (using pseudo inverse)</p></td>
+</tr>
+<tr class="row-even"><td><p>[U,S,V] = np.linalg.svd(a)</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>singular value decomposition of a (V is transposed!)</p></td>
+</tr>
+<tr class="row-odd"><td><p>np.fft.fft2(a), np.fft.ifft2(a)</p></td>
+<td></td>
+<td><p>filter available (Inverse) 2D fourier transform of a</p></td>
+</tr>
+<tr class="row-even"><td><p>a[a&gt;0]=5</p></td>
+<td><p>a[a&gt;0] = 5</p></td>
+<td><p>sets all elements &gt; 0 of a to 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>a[np.isnan(a)]=0</p></td>
+<td><p>a[np.isnan(a)]=5</p></td>
+<td><p>sets all NaN values of a to 5</p></td>
+</tr>
+<tr class="row-even"><td><p>arr2 = arr1.reshape([3,2])</p></td>
+<td><p>dObj2 = dObj1.reshape([3,2])</p></td>
+<td><p>reshapes arr1 to new size (equal number of items)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For a detailed methods-summery of the <em>dataObject</em> see <a class="reference internal" href="../09_reference/reference.html#itom-script-reference"><span class="std std-ref">itom Script Reference</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pymod-itom.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9.1. </span>Python-Module <strong>itom</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pymod-load-save-files.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.3. </span>Save and load images and other files</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">9.2.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dataobject">9.2.2. Creating a dataObject</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#static-constructors-for-dataobjects">9.2.3. Static constructors for dataObjects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-content-of-dataobject">9.2.4. Print content of dataObject</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-values-in-a-dataobject">9.2.5. Accessing values in a dataObject</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-attributes-of-a-dataobject">9.2.6. Basic attributes of a dataObject</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-and-axes-descriptions-units-scaling-and-offset">9.2.7. Value and axes descriptions, units, scaling and offset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meta-tags-and-protocol">9.2.8. Meta tags and protocol</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataobject-vs-numpy-array">9.2.9. DataObject vs. numpy.array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime-and-timedelta-types">9.2.10. Datetime and timedelta types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-operations-on-numpy-arrays-and-itom-dataobjects">9.2.11. Main operations on numpy.arrays and itom.dataObjects</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/08_scriptLanguage/pymod-dataObject.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

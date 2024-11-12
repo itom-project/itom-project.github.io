@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.3. NewportConexLDS &#8212; itom Plugins</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/generalDataIO/NewportConexLDS';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.4. QuantumComposer" href="QuantumComposer.html" />
+    <link rel="prev" title="3.2. LibModBus" href="LibModBus.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">itom Plugins</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../grabbers.html">
+    Camera/ Grabber
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../actuators.html">
+    Motors/ Actuators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../GDIO.html">
+    General Data IO
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../adconv.html">
+    AD-Converters
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithms.html">
+    Algorithms/ Filters
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../grabbers.html">
+    Camera/ Grabber
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../actuators.html">
+    Motors/ Actuators
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../GDIO.html">
+    General Data IO
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../adconv.html">
+    AD-Converters
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../algorithms.html">
+    Algorithms/ Filters
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="CyUSB.html">3.1. CyUSB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibModBus.html">3.2. LibModBus</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3.3. NewportConexLDS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="QuantumComposer.html">3.4. QuantumComposer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SuperlumBL.html">3.5. SuperlumBL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SuperlumBS.html">3.6. SuperlumBS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThorlabsFF.html">3.7. ThorlabsFF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThorlabsTCubeTEC.html">3.8. ThorlabsTCubeTEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dispWindow.html">3.9. DispWindow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glDisplay.html">3.10. GLDisplay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gwInstekPSP.html">3.11. GWInstekPSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hidApi.html">3.12. HidApi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libUSB.html">3.13. LibUSB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serialIO.html">3.14. SerialIO</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../GDIO.html" class="nav-link"><span class="section-number">3. </span>General Data IO</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="newportconexlds">
+<h1><span class="section-number">3.3. </span>NewportConexLDS<a class="headerlink" href="#newportconexlds" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>Summary</strong>:</p></td>
+<td><p><span>NewportConexLDS</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type</strong>:</p></td>
+<td><p><span>DataIO</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>License</strong>:</p></td>
+<td><p><span>Licensed under LGPL, uses Newport USB Driver software and driver (not covered by LPGL).</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Platforms</strong>:</p></td>
+<td><p>Windows, Linux</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Devices</strong>:</p></td>
+<td><p>Newport Conex-LDS</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Author</strong>:</p></td>
+<td><p><span>J. Krauter, ITO Universität Stuttgart</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="overview">
+<h2><span class="section-number">3.3.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>NewportConexLDS is an itom-plugin to use the Newport Conex-LDS autocollimator.
+For further information go to: <a class="reference external" href="https://www.newport.com/p/CONEX-LDS">https://www.newport.com/p/CONEX-LDS</a></p>
+<p>This plugin has been developed using SerialIO interface with following default parameters:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Baud Rate</p></td>
+<td><p>921600 (default for RS232)</p></td>
+</tr>
+<tr class="row-even"><td><p>Data Bits</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Parity</p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p>Stop bits</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>endline</p></td>
+<td><p>rn</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="initialization">
+<h2><span class="section-number">3.3.2. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading">#</a></h2>
+<p>The following parameters are mandatory or optional for initializing an instance of this plugin:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt><strong>serialIOInstance</strong>: Union[itom.dataIO, itom.actuator]</dt><dd><p>An opened serial port.</p>
+<p><em>Only plugin “SerialIO” is allowed</em></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>controllerAddress</strong>: int, optional</dt><dd><p>Controller address.</p>
+<p><em>Value range: [0, inf], Default: 1</em></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="parameters">
+<h2><span class="section-number">3.3.3. </span>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
+<p>These parameters are available and can be used to configure the <code class="docutils literal notranslate"><span class="pre">NewportConexLDS</span></code> instance. Many of them are directly initialized by the parameters of the constructor. During the runtime of an instance, the value of these parameters is obtained by the method <em>getParam</em>, writeable parameters can be changed using <em>setParam</em>.</p>
+<dl>
+<dt><strong>calibrationCoefficients</strong>: Sequence[float]</dt><dd><p>Calibration coefficients of x and y axis.</p>
+<p><em>Allowed number of values: 0 - 2, step: 2, Value range: [0, inf], Default: [5325.69,
+5393]</em></p>
+</dd>
+<dt><strong>commandError</strong>: str, read-only</dt><dd><p>Command error string.</p>
+<p><em>Match: “”, Default: “No error”</em></p>
+</dd>
+<dt><strong>configurationState</strong>: str, read-only</dt><dd><p>Configuration state (MEASURE, READY, CONFIGURATION).</p>
+<p><em>Match: [“”, “MEASURE”, “READY”, “CONFIGURATION”], Default: “MEASURE”</em></p>
+</dd>
+<dt><strong>deviceName</strong>: str, read-only</dt><dd><p>Device name.</p>
+<p><em>Match: “”, Default: “CONEX-LDS”</em></p>
+</dd>
+<dt><strong>enableConfiguration</strong>: int</dt><dd><p>Enable/Disable configuration (0==OFF, 1==ON). Laser is disabled when it is on.</p>
+<p><em>Value range: [0, 1], Default: 0</em></p>
+</dd>
+<dt><strong>factoryCalibrationState</strong>: str, read-only</dt><dd><p>Factory calibration information.</p>
+<p><em>Match: “”, Default: “14-214-
+009;02/05/2022;02/05/2023;5325.69;5393.00;16.0;19.0;31.0;29.0;-62.00;26.00;2000.0”</em></p>
+</dd>
+<dt><strong>frequency</strong>: float</dt><dd><p>Low pass filter frequency as response time before ouputing measurement that is inversely
+proportional to the low pass filter frequency. Following frequencies [Hz] corresponds to
+a resolution [Âµrad] (RMS noise): 1 == 0.03, 20 == 0.013, 50 == 0.021, 100 == 0.030, 200
+== 0.042, 500 == 0.067, 1000 == 0.095, 2000 == 0.134.</p>
+<p><em>Value range: [0:0.2:inf], Default: 0.2</em></p>
+</dd>
+<dt><strong>gain</strong>: Sequence[float]</dt><dd><p>Gain of x and y axis.</p>
+<p><em>Allowed number of values: 0 - 2, step: 2, Value range: [0, 200], Default: [1, 1]</em></p>
+</dd>
+<dt><strong>highLevelPowerThreshold</strong>: int</dt><dd><p>High level power threshold for valid measurement.</p>
+<p><em>Value range: [0, 2000], Default: 100</em></p>
+</dd>
+<dt><strong>laserPowerState</strong>: int</dt><dd><p>Enable/Disable laser power (0==OFF, 1==ON).</p>
+<p><em>Value range: [0, 1], Default: 1</em></p>
+</dd>
+<dt><strong>lowLevelPowerThreshold</strong>: int</dt><dd><p>Low level power threshold for valid measurement.</p>
+<p><em>Value range: [0, 2000], Default: 10</em></p>
+</dd>
+<dt><strong>name</strong>: str, read-only</dt><dd><p>Plugin name.</p>
+</dd>
+<dt><strong>offset</strong>: Sequence[float]</dt><dd><p>Offset values of x and y axis.</p>
+<p><em>Allowed number of values: 0 - 2, step: 2, All values allowed, Default: [-4.3, 5.4]</em></p>
+</dd>
+<dt><strong>range</strong>: int</dt><dd><p>Value range.</p>
+<p><em>Value range: [0, inf], Default: 2000</em></p>
+</dd>
+<dt><strong>requestTimeout</strong>: int</dt><dd><p>Request timeout in ms for the SerialIO interface.</p>
+<p><em>Value range: [0, inf], Default: 5000</em></p>
+</dd>
+<dt><strong>unit</strong>: str</dt><dd><p>Measurement unit.</p>
+<p><em>Match: “”, Default: “URAD”</em></p>
+</dd>
+<dt><strong>version</strong>: str, read-only</dt><dd><p>Controller version.</p>
+<p><em>Match: “”, Default: “1.1.1”</em></p>
+</dd>
+</dl>
+</section>
+<section id="additional-functions-exec-functions">
+<h2><span class="section-number">3.3.4. </span>Additional functions (exec functions)<a class="headerlink" href="#additional-functions-exec-functions" title="Link to this heading">#</a></h2>
+<p>By using the following execFunctions you set the channels parameter by giving a list of channel number and a list of parameter values of same list length.
+The plugin execFunctions are:</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="instance.exec">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'getPositionAndPower'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#instance.exec" title="Link to this definition">#</a></dt>
+<dd><p>Measure the position and laser power.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>positionAndPower - Positions of x and y axis.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>timeStamp - Timestamp of measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">instance.</span></span><span class="sig-name descname"><span class="pre">exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">'getPositionAndPowerMeasurement'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Measure the position and laser power. It will fill the input dataObject with positions, laser power and timestamps.
+… Please note that this function blocks itom until the entire measurement has been carried out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>itom.dataObject</em>) – Measruement data X, Y, position and laser power.</p></li>
+<li><p><strong>interval</strong> (<em>int - optional</em>) – Interval between measruement points in ms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>timestamps - Timestamps corresponding to the measruement data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="exemplary-usage-from-python">
+<h2><span class="section-number">3.3.5. </span>Exemplary usage from Python<a class="headerlink" href="#exemplary-usage-from-python" title="Link to this heading">#</a></h2>
+<p>In the following examples, it is shown how to use this Plugin.
+First an instance must be initialized using the <code class="docutils literal notranslate"><span class="pre">SerialIO</span></code> Plugin.
+COM port must be adapted.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">dataIO</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">comPort</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">conex</span>
+<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+    <span class="n">serial</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;SerialIO&quot;</span><span class="p">,</span> <span class="n">comPort</span><span class="p">,</span> <span class="mi">921600</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">conex</span> <span class="o">=</span> <span class="n">dataIO</span><span class="p">(</span><span class="s2">&quot;NewportConexLDS&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">)</span>
+
+<span class="n">conex</span><span class="o">.</span><span class="n">getParamListInfo</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Laser must be disabled before parameter can be set using <code class="docutils literal notranslate"><span class="pre">setParam</span></code>.
+Before changing parameter the <code class="docutils literal notranslate"><span class="pre">configurationState</span></code> must be enabled using <code class="docutils literal notranslate"><span class="pre">enableConfiguration</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disable laser</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;laserPowerState&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># To set parameter the configuration state must be &#39;CONFIGURATION&#39;</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;enableConfiguration&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">4.3</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">))</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;gain&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;lowLevelPowerThreshold&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;highLevelPowerThreshold&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;range&quot;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+
+<span class="c1"># get parameters</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;configurationState&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;gain&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;lowLevelPowerThreshold&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;highLevelPowerThreshold&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;range&quot;</span><span class="p">)</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;unit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Before the laser can be turn ON <code class="docutils literal notranslate"><span class="pre">configurationState</span></code> must be disabled.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leave configuration mode. Configuration must be OFF before laser can be set ON.</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;enableConfiguration&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Get all parameter information</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">getParamListInfo</span><span class="p">()</span>
+
+<span class="c1"># Enable laser</span>
+<span class="n">conex</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s2">&quot;laserPowerState&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A measurement is performed using the execFunction <code class="docutils literal notranslate"><span class="pre">getPositionAndPower</span></code>.
+In this example 100 data points are acquired.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform a measurement of 10 data points</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">timeStamps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">timeStamp</span> <span class="o">=</span> <span class="n">conex</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="s2">&quot;getPositionAndPower&quot;</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">timeStamps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create plot with measured data over time.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert to dataObject and set metainformation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+<span class="n">data</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;legendTitle0&quot;</span><span class="p">,</span> <span class="s2">&quot;x axis&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;legendTitle1&quot;</span><span class="p">,</span> <span class="s2">&quot;y axis&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">setTag</span><span class="p">(</span><span class="s2">&quot;legendTitle2&quot;</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">)</span>
+
+<span class="c1"># convert timeStamps string into datetime</span>
+<span class="n">timeStamps</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">timeStamps</span><span class="p">]</span>
+<span class="n">dateScale</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">timeStamps</span><span class="p">)],</span> <span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">timeStamps</span><span class="p">)</span>
+
+<span class="c1"># plot Measurement over time</span>
+<span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dateScale</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;legendPosition&quot;</span><span class="p">:</span> <span class="s2">&quot;Right&quot;</span><span class="p">,</span> <span class="s2">&quot;lineWidth&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span> <span class="s2">&quot;GridMajorXY&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Create 2 dimensional plot of data. First data points below a laser power level of 10% are deleted which are no valid.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># filter data by laser levels below 1%</span>
+<span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+<span class="n">columsToRemove</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">position</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">columsToRemove</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">plot1</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lineSymbol&quot;</span><span class="p">:</span> <span class="s2">&quot;Ellipse&quot;</span><span class="p">,</span> <span class="s2">&quot;lineStyle&quot;</span><span class="p">:</span> <span class="s2">&quot;NoPen&quot;</span><span class="p">,</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span> <span class="s2">&quot;GridMajorXY&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="changelog">
+<h2><span class="section-number">3.3.6. </span>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>itom setup 4.3.0 release - v1.1.0: Renamed timeStemp to timeStamp</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="LibModBus.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.2. </span>LibModBus</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="QuantumComposer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.4. </span>QuantumComposer</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">3.3.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization">3.3.2. Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">3.3.3. Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-functions-exec-functions">3.3.4. Additional functions (exec functions)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instance.exec"><code class="docutils literal notranslate"><span class="pre">instance.exec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">instance.exec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exemplary-usage-from-python">3.3.5. Exemplary usage from Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changelog">3.3.6. Changelog</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/plugins/generalDataIO/NewportConexLDS.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,823 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9.8. Reload modified modules &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_scriptLanguage/pymod-reload-modules';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.9. Python Limitations in itom" href="pymod-limitations.html" />
+    <link rel="prev" title="9.7. Python-Module matlab" href="pymod-matlab.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pymod-itom.html">9.1. Python-Module <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-dataObject.html">9.2. Array class DataObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-load-save-files.html">9.3. Save and load images and other files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-popular-python-packages.html">9.4. Popular Python packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-matplotlib.html">9.5. Python package matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-plotly.html">9.6. Python package plotly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-matlab.html">9.7. Python-Module matlab</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9.8. Reload modified modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-limitations.html">9.9. Python Limitations in <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="pymod-problems-and-solutions.html">9.10. Python - common problems and solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pytutorial.html">9.11. Python tutorial</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="script-language.html" class="nav-link"><span class="section-number">9. </span>Python Scripting Language</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="reload-modified-modules">
+<span id="script-language-reload-modules"></span><h1><span class="section-number">9.8. </span>Reload modified modules<a class="headerlink" href="#reload-modified-modules" title="Link to this heading">#</a></h1>
+<p>Usually, script files (hence <em>modules</em>) that are imported by another script in python are pre-compiled and cached for a faster execution once the script is loaded or imported another time.
+These cached files are always stored in a sub-folder <strong>__pycache__</strong> (file suffix .pyc). The advantage of this feature is a faster code execution once the pre-compiled and cached file is
+available. On the other hand, this feature can bring some drawbacks during the development process if the content of modules or packages may change. Then, these changes will not become active.</p>
+<p>There are different possibilities to force Python to reload such a changed module:</p>
+<ol class="arabic simple">
+<li><p>Restart <strong>itom</strong>: The date of creation of all cached files (pyc) is compared with the change date of the corresponding py-files and they are recompiled if the scripts are newer.</p></li>
+<li><p>The Python builtin-module <strong>imp</strong> provides mechanisms like the method <strong>reload</strong> to force Python to reload a specific module.</p></li>
+<li><p>The mechanisms provided by the <strong>imp</strong> module are covered by the dialog <strong>reload modules…</strong> that is available in the menu <strong>Script &gt;&gt; reload modules</strong> of the main window of <strong>itom</strong>.</p></li>
+<li><p><strong>itom</strong> consists of a powerful auto-reload tool that can check all modules are their dependencies whether they have changed since the last check and reloads them. This tool is discussed in the
+course of this section.</p></li>
+</ol>
+<p>At first, let us denote several issues that may happen due to the caching mechanism of <strong>itom</strong>. Consider the following three script files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#script1.py</span>
+<span class="kn">import</span> <span class="nn">mod2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;version 1&quot;</span><span class="p">)</span>
+<span class="n">mod2</span><span class="o">.</span><span class="n">func2</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#mod2.py</span>
+<span class="kn">import</span> <span class="nn">mod3</span>
+
+<span class="k">def</span> <span class="nf">func2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;func2, version 1&quot;</span><span class="p">)</span>
+    <span class="n">mod3</span><span class="o">.</span><span class="n">func3</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#mod3.py</span>
+
+<span class="k">def</span> <span class="nf">func3</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;func3, version 1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <em>script1.py</em> is now executed, the modules <em>mod2</em> and <em>mod3</em> are imported and cached. The output at the first run is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 1&#39;</span>
+<span class="s1">&#39;func2, version 1&#39;</span>
+<span class="s1">&#39;func3, version 1&#39;</span>
+</pre></div>
+</div>
+<p>If we change now the strings ‘version 1’ to ‘version 2’ in all three files and execute <em>script1.py</em> again, the output will be as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 2&#39;</span>
+<span class="s1">&#39;func2, version 1&#39;</span>
+<span class="s1">&#39;func3, version 1&#39;</span>
+</pre></div>
+</div>
+<p>Only the first line changed, the other two stayed unchanged since <em>mod2</em> and <em>mod3</em> are still cached. Of course a restart of <strong>itom</strong> would lead to the
+right result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 2&#39;</span>
+<span class="s1">&#39;func2, version 2&#39;</span>
+<span class="s1">&#39;func3, version 2&#39;</span>
+</pre></div>
+</div>
+<p>Another possibility would be to reload <em>mod2</em> using the Python builtin-module <em>imp</em>, since <em>mod2</em> is imported by <em>script1.py</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">imp</span>
+<span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">mod2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another execution of <em>script1.py</em> will now lead to the following result:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 2&#39;</span>
+<span class="s1">&#39;func2, version 2&#39;</span>
+<span class="s1">&#39;func3, version 1&#39;</span>
+</pre></div>
+</div>
+<p>The last result, coming from <em>mod3</em> is still unchanged. This comes due to the fact that the <em>imp.reload</em> command does not resolve any dependencies but
+only tries to reload one single module, corresponding to the content of one single py-file. Therefore, you always need to know where exactly code changes
+have occurred and reload all related modules. To simplify this mechanism, you can use the dialog <strong>Reload modules…</strong> that is reachable via the <strong>itom</strong> menu
+<strong>Script &gt;&gt; reload modules &gt;&gt; reload modules…</strong>. Sometimes, the reload may fail. Reasons for this and further limitations of the reload process are discussed later.</p>
+<p>In order to provide an easy way to automatically reload all modules that have been changed since the last execution, <strong>itom</strong> provides an auto-reload tool.
+This tool has been inspired by the autoreload module of <em>IPython</em> (<a class="reference external" href="http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html">http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html</a>) and is fully integrated into
+<strong>itom</strong>. Enable the tool by the menu <strong>Script &gt;&gt; reload modules &gt;&gt; autoreload modules</strong>. Depending on further settings, the currently executed script file, code command or
+function is checked (including all its dependencies) for changes are reloaded if necessary. You have full control in which cases you want that check being executed.
+This is controlled by the further options in the submenu <strong>Script &gt;&gt; reload modules</strong>:</p>
+<ul class="simple">
+<li><p>autoreload before script execution: The check is executed whenever you run or debug a script file</p></li>
+<li><p>autoreload before single command: The check is executed before you execute a string command from the command line of <strong>itom</strong></p></li>
+<li><p>autoreload before events and function calls: The check is executed if any python code or function is executed due to an event or signal (e.g. button click in a GUI)</p></li>
+</ul>
+<p>Try to enable the autoreload tool and enable at least the option <em>autoreload before script execution</em>. Then change the version strings in all files to ‘version 3’ and execute script3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;version 3&#39;</span>
+<span class="s1">&#39;func2, version 3&#39;</span>
+<span class="s1">&#39;func3, version 3&#39;</span>
+</pre></div>
+</div>
+<p>Using this tool, you do not need to worry about reloading any changed modules. This gives you a powerful tool for developing more complex scripts that are divided into multiple files.
+The autoreload tool can also be enabled and configured using the command <a class="reference internal" href="../09_reference/itom_general.html#itom.autoReloader" title="itom.autoReloader"><code class="xref py py-func docutils literal notranslate"><span class="pre">itom.autoReloader()</span></code></a>.</p>
+<p>Sometimes, you will notice that reloading a module using the <em>imp</em> module will fail or not work. Consider the following script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#mod4.py</span>
+
+<span class="k">class</span> <span class="nc">MyRect</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getSizes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;size of MyRect&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now type into the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mod4</span>
+<span class="n">rect</span> <span class="o">=</span> <span class="n">mod4</span><span class="o">.</span><span class="n">MyRect</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">rect</span><span class="o">.</span><span class="n">getSizes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will obtain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;size of MyRect: [4,5]&#39;</span>
+</pre></div>
+</div>
+<p>If you change now the print-command in the method ‘getSizes’ of class ‘MyRect’ to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;width:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;,height:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>and call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">mod4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>in order to reload <em>mod4.py</em> again, a call to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rect</span><span class="o">.</span><span class="n">getSizes</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>in the command line will still lead to the old result. This is due to the fact, that the <em>imp</em> module cannot reload objects that are still referenced by another variable. In this case,
+the global variable <strong>rect</strong> is an instance of the class <strong>MyRect</strong>. Therefore, it is not possible to reload this class before deleting the variable <strong>rect</strong>. However, if you enable the
+autoreload tool and enable the option <strong>autoreload before single command</strong> before changing the print command, you will see that this still is also able to replace the code of a class method
+even if there are already active instances of this class.</p>
+<p>The autoreload tool is a way more powerful than the native <em>imp</em> implementation. However there are still some limitations:</p>
+<p>Reloading Python modules in a reliable way is in general difficult, and unexpected things may occur. ‘autoreload’ tries to work
+around common pitfalls by replacing function code objects and parts of classes previously in the module with new versions. This makes the following things to work:</p>
+<ul class="simple">
+<li><p>Functions and classes imported via ‘from xxx import foo’ are upgraded to new versions when ‘xxx’ is reloaded.</p></li>
+<li><p>Methods and properties of classes are upgraded on reload, so that calling ‘c.foo()’ on an object ‘c’ created before the reload causes the new code for ‘foo’ to be executed.</p></li>
+</ul>
+<p>Some of the known remaining caveats are:</p>
+<ul>
+<li><p>Replacing code objects does not always succeed: changing a &#64;property in a class to an ordinary method or a method to a member variable can cause problems (but in old objects only).</p></li>
+<li><p>Functions that are removed (eg. via monkey-patching) from a module before it is reloaded are not upgraded.</p></li>
+<li><p>C extension modules cannot be reloaded, and so cannot be autoreloaded.</p>
+<blockquote>
+<div><p>(taken from <a class="reference external" href="http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html">http://ipython.org/ipython-doc/dev/config/extensions/autoreload.html</a>)</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="pymod-matlab.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9.7. </span>Python-Module matlab</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pymod-limitations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.9. </span>Python Limitations in <strong>itom</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/08_scriptLanguage/pymod-reload-modules.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

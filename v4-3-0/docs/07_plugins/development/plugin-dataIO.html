@@ -1,0 +1,983 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8.8.11. Plugin class - DataIO &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_plugins/development/plugin-dataIO';</script>
+    <link rel="icon" href="../../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8.8.12. Plugin class - Actuator" href="plugin-actuator.html" />
+    <link rel="prev" title="8.8.9. AddInBase" href="plugin-AddInBase-Ref.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic_concept.html">8.1. Basic concept</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loading_plugins.html">8.2. Loading plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-hardware.html">8.3. How to use hardware plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-grabber.html">8.4. Getting started with grabbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-adda.html">8.5. Getting started with A/D converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-actuator.html">8.6. Getting started with actuators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-filter.html">8.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="plugin-development.html">8.8. Development under C++</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plugin-RetVal.html">8.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-sharedSemaphore.html">8.8.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-dataObject.html">8.8.3. DataObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-params.html">8.8.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-paramsMeta.html">8.8.5. Parameters - Meta Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-paramsValidate.html">8.8.6. Parameters - Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginStructure.html">8.8.7. Introduction to plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginInterfaceClass.html">8.8.8. Plugin interface class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-AddInBase-Ref.html">8.8.9. AddInBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginClass.html">8.8.10. Plugin class - Basic information</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.8.11. Plugin class - DataIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-actuator.html">8.8.12. Plugin class - Actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-algo.html">8.8.13. Plugin class - Algo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginCreateCMake.html">8.8.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">8.8.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-itomAPI.html">8.8.16. itom API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-externalLibraries.html">8.8.17. Link or load external libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projectSettings.html">8.8.18. Project settings for plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-dockWidget.html">8.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-configDialog.html">8.8.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="openCVMat.html">8.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../plugins.html" class="nav-link"><span class="section-number">8. </span>Plugins</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="plugin-development.html" class="nav-link"><span class="section-number">8.8. </span>Development under C++</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="plugin-class-dataio">
+<span id="id1"></span><h1><span class="section-number">8.8.11. </span>Plugin class - DataIO<a class="headerlink" href="#plugin-class-dataio" title="Link to this heading">#</a></h1>
+<section id="base-idea-behind-any-dataio">
+<h2><span class="section-number">8.8.11.1. </span>Base idea behind any DataIO<a class="headerlink" href="#base-idea-behind-any-dataio" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Plugins of class <strong>dataIO</strong> operate systems that have input or output data, e.g. frame grabbers, cameras, serial ports, AD-DA-converters…</p></li>
+<li><p>Every single instance of class <em>dataIO</em> has an exclusive communication with one connected device. More cameras or ADDA-converter of the same type should be managed with a corresponding number of instances.</p></li>
+<li><p>Depending on the plugin, more than one DataIO can be separately controlled by the plug-number or the vendor/camera-ID.</p></li>
+<li><p>Like any other plugin, every DataIO has a set of parameters, which can be set/get using python by the commands <strong>setParam</strong> and <strong>getParam</strong>.</p></li>
+<li><p>Every DataIO is executed in its own thread.</p></li>
+<li><p>Every DataIO can have one configuration dialog and one toolbox (dockWidget).</p></li>
+<li><p>All parameters are stored in the member <strong>m_params</strong> of type QMap. They can be read or changed by methods <strong>getParam</strong> and <strong>setParam</strong>. Some parameters are read only!</p></li>
+<li><p>If parameters of DataIO change, they also must be updated in the <strong>m_params</strong>-map and the signal <strong>parametersChanged</strong> must be emitted.</p></li>
+<li><p>The data acquisition is performed according to the grabber subtype. These subtypes are ‘typeGrabber’, ‘typeADDA’ and ‘typeRawIO’.</p></li>
+</ul>
+</section>
+<section id="grabber-plugin">
+<h2><span class="section-number">8.8.11.2. </span>Grabber plugin<a class="headerlink" href="#grabber-plugin" title="Link to this heading">#</a></h2>
+<p>This is a subtype of DataIO for camera / framegrabber communication. Plugins of this type are inherited from <strong>ito::AddInGrabber</strong>. The data acquisition is managed as follows:</p>
+<ul class="simple">
+<li><p>The methods <strong>startDevice</strong> and <strong>stopDevice</strong> open and close the capture logic of the devices to reduce CPU-load. For serial ports these functions are unnecessary.</p></li>
+<li><p>The method <strong>acquire</strong> starts the DataIO grabbing a frame with the current parameters. The function returns after sending the trigger. The function should be callable several times without calling get-/copyVal().</p></li>
+<li><p>The methods <strong>getVal</strong> and <strong>copyVal</strong> are the external interfaces for data grabbing. They call <strong>retrieveData</strong>. The function should not be callable without a previous call of <strong>acquire</strong> and than only once.</p></li>
+<li><p>In <strong>retrieveData</strong> the data transfer is done and frame has to copied. The function blocks until the triggered data is copied. In case retrieveData is called by getVal the frame has to be copied to <strong>m_data</strong>, an internal <strong>dataObject</strong>.</p></li>
+<li><p>The function <strong>getVal</strong> overwrites the IO-<strong>dataObject</strong> by a shallow copy of the internal <strong>dataObject</strong>. Empty objects are allowed. Warning read shallow copy of dataObject before usage.</p></li>
+<li><p>The function <strong>copyVal</strong> deeply copies data to the externally given <strong>dataObject</strong>. The <strong>dataObject</strong> must have the right size and type. <strong>dataObject</strong> with ROI must not be overwritten. The ROI should be filled. Empty objects are allowed. In case of empty <strong>dataObject</strong> a new object with right size and type must be allocated.</p></li>
+<li><p>The internal <strong>dataObject</strong> is checked after parameter changes by <strong>checkData</strong> (sizex, sizey and bpp) and, if necessary, reallocated.</p></li>
+</ul>
+<p>A typical sequence in python is</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">device</span><span class="o">.</span><span class="n">startDevice</span><span class="p">()</span>
+<span class="linenos">2</span><span class="n">device</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="linenos">3</span><span class="n">device</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">dObj</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">device</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="linenos">5</span><span class="n">device</span><span class="o">.</span><span class="n">getVal</span><span class="p">(</span><span class="n">dObj</span><span class="p">)</span>
+<span class="linenos">6</span><span class="n">device</span><span class="o">.</span><span class="n">stopDevice</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A sample header file of the DataIO’s plugin class might look like the following snippet:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/addInGrabber.h&quot;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;qsharedpointer.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">class</span><span class="w"> </span><span class="nc">MyCamera</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AddInGrabber</span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="n">Q_OBJECT</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="o">~</span><span class="n">MyDataIO</span><span class="p">();</span><span class="w"> </span><span class="cm">/*! &lt; Destructor*/</span>
+<span class="linenos">10</span><span class="w">        </span><span class="n">MyDataIO</span><span class="p">();</span><span class="w">    </span><span class="cm">/*! &lt; Constructor*/</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">retrieveData</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">DataObject</span><span class="w"> </span><span class="o">*</span><span class="n">externalDataObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"> </span><span class="cm">/*!&lt; Wait for acquired picture */</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">15</span><span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyDataIOInterface</span><span class="p">;</span>
+<span class="linenos">16</span><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w">    </span><span class="c1">//! Open the config nonmodal dialog to set camera parameters</span>
+<span class="linenos">17</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">//!&lt; indicates that this plugin has got a configuration dialog</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span>
+<span class="linenos">22</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">23</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">26</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">startDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">29</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">stopDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">acquire</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">trigger</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getVal</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">34</span>
+<span class="linenos">35</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">copyVal</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span>
+<span class="linenos">38</span><span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">visible</span><span class="p">);</span>
+<span class="linenos">39</span><span class="p">};</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="k">class</span><span class="w"> </span><span class="nc">MyCameraInterface</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
+<span class="linenos">42</span><span class="p">{</span>
+<span class="linenos">43</span><span class="w">    </span><span class="n">Q_OBJECT</span>
+<span class="linenos">44</span><span class="cp">#if QT_VERSION &gt;=  QT_VERSION_CHECK(5, 0, 0)</span>
+<span class="linenos">45</span><span class="w">    </span><span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span><span class="w"> </span><span class="s">&quot;ito.AddInInterfaceBase&quot;</span><span class="w"> </span><span class="p">)</span>
+<span class="linenos">46</span><span class="cp">#endif</span>
+<span class="linenos">47</span><span class="w">    </span><span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span><span class="p">)</span>
+<span class="linenos">48</span><span class="w">    </span><span class="n">PLUGIN_ITOM_API</span>
+<span class="linenos">49</span>
+<span class="linenos">50</span><span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="linenos">51</span>
+<span class="linenos">52</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">53</span><span class="w">        </span><span class="n">MyCameraInterface</span><span class="p">();</span>
+<span class="linenos">54</span><span class="w">        </span><span class="o">~</span><span class="n">MyCameraInterface</span><span class="p">();</span>
+<span class="linenos">55</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span><span class="w"> </span><span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+<span class="linenos">56</span>
+<span class="linenos">57</span><span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="linenos">58</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span><span class="w"> </span><span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+<span class="linenos">59</span><span class="p">};</span>
+</pre></div>
+</div>
+<section id="parameters-and-unit-conventions">
+<h3><span class="section-number">8.8.11.2.1. </span>Parameters and Unit Conventions<a class="headerlink" href="#parameters-and-unit-conventions" title="Link to this heading">#</a></h3>
+<p>In order to have a unified behaviour of all camera plugins, respect the following unit conventions. That means, the plugin should store related parameters using these conventions, such that <strong>getParam</strong> and <strong>setParam</strong> returns and obtains values using these units. Internally, it is sometimes
+necessary to convert these units to the units required by the interface of the real camera device.</p>
+<ul class="simple">
+<li><p>Integration time, frame time… in <strong>sec</strong></p></li>
+<li><p>bit depth / resolution in bit [8, 10, 12, 14, 16, 24]</p></li>
+</ul>
+<p>Implement the following mandatory parameters in the map <strong>m_params</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>“name”: {string | readonly}</dt><dd><p>name of the plugin</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“bpp”: {int}</dt><dd><p>current bit depth (will be read e.g. when opening a live window)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“sizex”: {int | readonly}</dt><dd><p>current width of the camera image (considering a possible ROI). This parameter is always read-only and needs to be changed if the optional
+parameters <em>x0</em> or <em>x1</em> change. This parameter is read e.g. when a live window is opened.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“sizey”: {int | readonly}</dt><dd><p>current height of the camera image (considering a possible ROI). This parameter is always read-only and needs to be changed if the optional
+parameters <em>y0</em> or <em>y1</em> change. This parameter is read e.g. when a live window is opened.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If desired implement the following optional parameters in the map <strong>m_params</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>“integration_time”: {double}</dt><dd><p>Exposure or integration time in seconds</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“frame_time”: {double}</dt><dd><p>The time between two frames (in seconds, often read-only)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“gain”: {double}</dt><dd><p>Normalized gain in the range [0.0,1.0]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“offset”: {double}</dt><dd><p>Normalized offset in the range [0.0,1.0]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“x0”, “y0”: {int, deprecated (see roi)}</dt><dd><p>pixel coordinate of the left top corner of the image or ROI [0..width-1/height-1]
+If this changes, “sizex” or “sizey” must be changed, too.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“x1”, “y1”: {int, deprecated (see roi)}</dt><dd><p>pixel coordinate of the right bottom corner of the image or ROI [x0+1/y0+1..width-1/height-1]
+If this changes, “sizex” or “sizey” must be changed, too.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>“roi”: {int-array}</dt><dd><p>Since itom AddIn Interface version 1.3.1 (itom 1.4.0 or higher), it is recommended to replace <em>x0</em> <em>y0</em>, <em>x1</em> and <em>y1</em> by the integer array based
+parameter <strong>roi</strong> which expects an array [left, top, width, height]. This parameter can easily be parametrized using the meta information ito::RectMeta
+and allows the direct configuration of the entire ROI or a single access to one of the four components, by passing the parametername <em>roi[0]</em>, <em>roi[1]</em>….</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="ad-converters">
+<h2><span class="section-number">8.8.11.3. </span>AD-Converters<a class="headerlink" href="#ad-converters" title="Link to this heading">#</a></h2>
+<p>AD-Converter plugins are directly inherited from <strong>ito::AddInDataIO</strong>. An AD-DA-converter plugin has the following characteristics:</p>
+<ul>
+<li><p>It can communicate with 1 or multiple input and/or output channels. To set the number of total channels and to define if a channel is an incoming or outgoing channel, the plugin’s parameters or initialization parameters should be used. Sometimes it is not possible to change the direction after initialization, this depends on the device.</p></li>
+<li><p>The method <strong>startDevice</strong> must be called like in a camera before the first usage of the device in order to establish the connection. Create a no-operation method, if this is not necessary for your device. It is possible, that startDevice is called multiple time, therefore count the number of starts and only establish the connection upon the first call.</p></li>
+<li><p>As counterpart to <strong>startDevice</strong>, the method <strong>stopDevice</strong> disconnects the device. For every call of <strong>startDevice</strong>, <strong>stopDevice</strong> must be called and at the last call, the connection should be interrupted.</p></li>
+<li><p>In difference to a camera dataIO plugin, the method <strong>acquire</strong> can be used to start the acquisition of a series of input data values at all previously selected input channels. It is also possible to create an empty function here. Then the reading-process of new single data values for each input channel is totally executed in the method <strong>getVal</strong>.</p></li>
+<li><p>The method <strong>copyVal</strong> needs not to be implemented for AD-DA-converters.</p></li>
+<li><p>Method <strong>getVal</strong>: This method registers input values from all previously selected input channels (depending on your implementation and parametrization it is also possible to register multiple values per channel) and returns these values to the user.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If you have one or multiple input channels, use the definition <strong>getVal(void *dObj, ItomSharedSemaphore *waitCond)</strong>. The parameter dObj is then a pointer to ito::DataObject and can be cast to this class. Return an MxN data object, where M corresponds to the number of read input channels and N corresponds to the data samples per channel. If you want to, you can also force the user to previously allocate the given data object such that you can get a hint how many samples should be registered.</p></li>
+<li><p>For only one input channel, it is also possible to implement the definition <strong>getVal(QSharedPointer&lt;char&gt; data, QSharedPointer&lt;int&gt; length, ItomSharedSemaphore *waitCond = NULL)</strong> where an allocated char-buffer whose size is defined by <em>length</em> is given. Fill in the data samples into the buffer (considering the given length) or use the length value to see how many samples are requested.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Method <strong>setVal</strong>: This method is called if the user wants the plugin to set data to all selected output channels. The definition is <strong>setVal(const char *data, const int length, ItomSharedSemaphore *waitCond = NULL)</strong>. In case of AD-DA-converter plugins, length is always 1 and <em>data</em> must be cast to <strong>ito::DataObject*</strong>. The given data object must then have a size of MxN where M denotes the number of output channels (must correspond to the number of channels to write data) and N is the number of samples. You can then send all samples to each channel either as fast as possible or using a timer, using the timer of the device. This depends on its abilities.</p></li>
+</ul>
+<p>A sample header file of the DataIO’s plugin class for AD-converters might look like the following snippet:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/addInInterface.h&quot;</span>
+<span class="linenos"> 2</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;qsharedpointer.h&gt;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">class</span><span class="w"> </span><span class="nc">MyADConverter</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AddInDataIO</span>
+<span class="linenos"> 5</span><span class="p">{</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="n">Q_OBJECT</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="linenos"> 9</span><span class="w">        </span><span class="o">~</span><span class="n">MyADConverter</span><span class="p">();</span><span class="w"> </span><span class="cm">/*! &lt; Destructor*/</span>
+<span class="linenos">10</span><span class="w">        </span><span class="n">MyADConverter</span><span class="p">();</span><span class="w">    </span><span class="cm">/*! &lt; Constructor*/</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">13</span><span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyADConverterInterface</span><span class="p">;</span>
+<span class="linenos">14</span><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w">    </span><span class="c1">//! Open the config nonmodal dialog to set camera parameters</span>
+<span class="linenos">15</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">//!&lt; indicates that this plugin has got a configuration dialog</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span>
+<span class="linenos">20</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">21</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">24</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">startDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">27</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">stopDevice</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getVal</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">vpdObj</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">30</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getVal</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">31</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setVal</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span>
+<span class="linenos">34</span><span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">visible</span><span class="p">);</span>
+<span class="linenos">35</span><span class="p">};</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="k">class</span><span class="w"> </span><span class="nc">MyADConverterInterface</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span>
+<span class="linenos">38</span><span class="p">{</span>
+<span class="linenos">39</span><span class="w">    </span><span class="n">Q_OBJECT</span>
+<span class="linenos">40</span><span class="cp">#if QT_VERSION &gt;=  QT_VERSION_CHECK(5, 0, 0)</span>
+<span class="linenos">41</span><span class="w">    </span><span class="n">Q_PLUGIN_METADATA</span><span class="p">(</span><span class="n">IID</span><span class="w"> </span><span class="s">&quot;ito.AddInInterfaceBase&quot;</span><span class="w"> </span><span class="p">)</span>
+<span class="linenos">42</span><span class="cp">#endif</span>
+<span class="linenos">43</span><span class="w">    </span><span class="n">Q_INTERFACES</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInInterfaceBase</span><span class="p">)</span>
+<span class="linenos">44</span><span class="w">    </span><span class="n">PLUGIN_ITOM_API</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">49</span><span class="w">        </span><span class="n">MyADConverterInterface</span><span class="p">();</span>
+<span class="linenos">50</span><span class="w">        </span><span class="o">~</span><span class="n">MyADConverterInterface</span><span class="p">();</span>
+<span class="linenos">51</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getAddInInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span><span class="w"> </span><span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+<span class="linenos">52</span>
+<span class="linenos">53</span><span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="linenos">54</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">closeThisInst</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">AddInBase</span><span class="w"> </span><span class="o">**</span><span class="n">addInInst</span><span class="p">);</span>
+<span class="linenos">55</span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="rawio-plugins">
+<h2><span class="section-number">8.8.11.4. </span>RawIO-Plugins<a class="headerlink" href="#rawio-plugins" title="Link to this heading">#</a></h2>
+<p>Further IO plugins are directly inherited from <strong>ito::AddInDataIO</strong>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plugin-AddInBase-Ref.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8.8.9. </span>AddInBase</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plugin-actuator.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.8.12. </span>Plugin class - Actuator</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-idea-behind-any-dataio">8.8.11.1. Base idea behind any DataIO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grabber-plugin">8.8.11.2. Grabber plugin</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-and-unit-conventions">8.8.11.2.1. Parameters and Unit Conventions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ad-converters">8.8.11.3. AD-Converters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rawio-plugins">8.8.11.4. RawIO-Plugins</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/07_plugins/development/plugin-dataIO.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

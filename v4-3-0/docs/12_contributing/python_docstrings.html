@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>13.4. Python Docstrings &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '12_contributing/python_docstrings';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="13.3. Translations" href="translations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cmake_style_guide.html">13.1. CMake Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git_pre_commit_hooks.html">13.2. Git Pre-Commit Hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="translations.html">13.3. Translations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13.4. Python Docstrings</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="contributing.html" class="nav-link"><span class="section-number">13. </span>Contributing</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="python-docstrings">
+<span id="id1"></span><h1><span class="section-number">13.4. </span>Python Docstrings<a class="headerlink" href="#python-docstrings" title="Link to this heading">#</a></h1>
+<section id="general">
+<h2><span class="section-number">13.4.1. </span>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h2>
+<p>For Python docstrings, we have to differentiate between docstrings in real Python script files (.py) or
+docstrings in <strong>C-Extensions</strong>, like it is the case for the entire <strong>itom</strong> module.</p>
+</section>
+<section id="docstrings-for-itom-and-its-methods-and-classes">
+<h2><span class="section-number">13.4.2. </span>Docstrings for <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> and its methods and classes<a class="headerlink" href="#docstrings-for-itom-and-its-methods-and-classes" title="Link to this heading">#</a></h2>
+<p>Before we start with the style guide for the docstrings, a short introduction about the workflow
+and usage of these docstrings is given.</p>
+<p>The docstrings are mainly used for three different use cases:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Text, that appears if one wants to get help using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">help()</span></code> command of python
+or if the <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> attribute is manually requested by the user.</p></li>
+<li><p>The script reference of the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> is automatically parsed by the <code class="docutils literal notranslate"><span class="pre">autodoc</span></code>
+feature of <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code>. Autodoc directly parses the docstrings and must be able to
+parse the entire signature, including type hints, the docstring as well as the description
+of parameters and return values from the docstring. For this, itom docstrings should be
+based on the Sphinx extension <strong>numpydoc</strong> (see below). Sphinx is not able to parse any
+further stubs files (.pyi).</p></li>
+<li><p>For calltips, auto completion etc. the optional package <strong>Jedi</strong> is used. It also tries
+to parse the signature, arguments, their types, the return types etc. from the docstring.
+However, since the source of the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module is only available as compiled code,
+Jedi has trouble to get all these information. Therefore, itom helps <strong>Jedi</strong> by providing
+a pseudo-code stubs file, located in the file <code class="docutils literal notranslate"><span class="pre">itom-packages/itom-stubs/__init__.pyi</span></code>.
+This file is automatically parsed from the original docstrings of all methods and classes
+of the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module.</p></li>
+</ol>
+</div></blockquote>
+<p>In order to support these three use cases (mainly no 2 and 3), this guide shows how to
+write docstrings in the <strong>C/C++</strong> source code for methods and classes, that belong
+to the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module.</p>
+<section id="general-rules">
+<h3><span class="section-number">13.4.2.1. </span>General rules<a class="headerlink" href="#general-rules" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Always use the macro <code class="docutils literal notranslate"><span class="pre">PyDoc_STRVAR</span></code> to generate the docstring</p></li>
+<li><p>Do not indent multiline docstrings in <strong>C/C++</strong>, since this indentation is kept in the docstring.
+Therefore, always start these multiline docstrings in the first column of the source file!</p></li>
+<li><p>Avoid long lines in the docstrings. Wrap them with an explicit newline character (n) after a
+maximum number of 88 characters.</p></li>
+<li><p>Use four spaces as indentation level</p></li>
+<li><p>Most parts of the docstrings should follow the rules of
+<a class="reference external" href="https://pypi.org/project/numpydoc/">Numpydoc</a>. For more information see
+<a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a>
+(The Numpydoc package must only be installed if you want to rebuild the Sphinx user documentation).</p></li>
+</ol>
+</section>
+<section id="method-docstrings">
+<h3><span class="section-number">13.4.2.2. </span>Method docstrings<a class="headerlink" href="#method-docstrings" title="Link to this heading">#</a></h3>
+<p>The docstring of an unbounded method looks like this</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">varname_doc</span><span class="p">,</span>
+<span class="s">&quot;myMethod(arg1, arg2 = -2, arg3 = None) -&gt; List[int] </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">short description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">longer multiline description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">Emphasize some word like ``this``. Or make a </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">reference to another method like :meth:`openScript`. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Parameters </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">---------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">arg1 : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    description of arg1. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">arg2 : int, optional </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    description of the optional argument 2. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">arg3 : str or None, optional </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    longer description of ``arg3``. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    Maybe go to a 2nd line. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Returns </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">list of int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    description of the return value, </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    that can also be multiline. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Raises </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">------ </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">RuntimeError </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    if a certain situation occurs. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">See Also </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">-------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">openScript, newScript, ...&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the first line, the signature of the method should be given. Write
+this signature, like you would do it in an ordinary python script. It is
+possible to add type hints there for the arguments, however this can also
+be done within the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section below, where the parameters are
+described further.</p>
+<p>If the method has no return value, omit the <code class="docutils literal notranslate"><span class="pre">-&gt;</span> <span class="pre">ret-type</span></code> at the end of
+the signature line. Else, it is allowed to write the return type here, following
+the rules of the <a class="reference external" href="https://docs.python.org/3/library/typing.html#module-typing" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">typing</span></code></a> module of Python. The type hint is recommended, but
+optional. It can also be obtained from the <code class="docutils literal notranslate"><span class="pre">Returns</span></code> section. We recommend both.</p>
+<p>After the signature line, write a short description of the method after a separate and empty
+new line. Then, insert another new line and continue with a multiline long
+description of the method. This long description can also consist of further
+sections, following the rules of Numpydoc. If the method has at least one
+argument, it is recommend to describe it in a <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section. If the
+method has a return value, use the <code class="docutils literal notranslate"><span class="pre">Returns</span></code> section. If you want to add a
+reference to other methods, use the <code class="docutils literal notranslate"><span class="pre">See</span> <span class="pre">Also</span></code> section.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please consider, that the underline of the sections must be at least as long as
+the name of the section. Hence, a <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section must be followed by
+the underline line with at least 10 <code class="docutils literal notranslate"><span class="pre">-</span></code> characters.</p>
+</div>
+<p>Please consider the following rules for type hints:</p>
+<ul class="simple">
+<li><p>If you write any type hints in the signature line, always use the type hints as
+given by the <a class="reference external" href="https://docs.python.org/3/library/typing.html#module-typing" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">typing</span></code></a> module of Python. Examples are: <code class="docutils literal notranslate"><span class="pre">Optional[int]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">Union[Tuple[int,</span> <span class="pre">str]]</span></code> among others.</p></li>
+<li><p>If you write any type hints in the docstrings section, follow the rules of
+<strong>Numpydoc</strong>. Examples are then: <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span> <span class="pre">of</span> <span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></code>.
+Values like <code class="docutils literal notranslate"><span class="pre">tuple</span> <span class="pre">of</span> <span class="pre">int</span></code> will be transformed to a type hint <code class="docutils literal notranslate"><span class="pre">Tuple[int]</span></code>,
+hence, the first value before the <code class="docutils literal notranslate"><span class="pre">of</span></code> literal will be written with a capital
+letter, the 2nd argument will be put into square brackets. Several type
+possibilities, separated by the <code class="docutils literal notranslate"><span class="pre">or</span></code> literal in Numpydoc will be transformed
+to <code class="docutils literal notranslate"><span class="pre">Union[a,</span> <span class="pre">b]</span></code> if the Numpydoc typehint was <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span></code>. If the Numpydoc
+typestring ends with <code class="docutils literal notranslate"><span class="pre">abc,</span> <span class="pre">optional</span></code>, its typing equivalent is <code class="docutils literal notranslate"><span class="pre">Optional[abc]</span></code>.
+If you want to use the type <code class="docutils literal notranslate"><span class="pre">Any</span></code> from typing, you also have to write <code class="docutils literal notranslate"><span class="pre">Any</span></code>
+in the Numpydoc section.</p></li>
+</ul>
+</section>
+<section id="overloaded-methods">
+<h3><span class="section-number">13.4.2.3. </span>Overloaded methods<a class="headerlink" href="#overloaded-methods" title="Link to this heading">#</a></h3>
+<p>It is also possible to support overloaded methods, that accept different
+sets of parameters. If this is the case, write all possible signatures in
+the first lines and write a backslash as last character (no spaces afterwards)
+of the first signature lines (all signature lines beside the last one).
+Please be aware, that this backslash must be written in the C-code by two
+backslashes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If overloaded methods are added, every signature needs to have a return type.
+This is maybe a bug in Sphinx, however with Sphinx 3.3 this was the case.</p>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> section to explain all arguments, even if they are
+only used in one of the signatures.</p>
+<p>Here is an example for this:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">varname_doc</span><span class="p">,</span>
+<span class="s">&quot;myMethod() -&gt; int </span><span class="se">\\\n</span><span class="s">\</span>
+<span class="s">myMethod(number) -&gt; int </span><span class="se">\\\n</span><span class="s">\</span>
+<span class="s">myMethod(text) -&gt; int </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">short description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">longer multiline description of this method. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Parameters </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">---------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">number : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    docstring for ``number``. </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">text : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    docstring for ``text``. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Returns </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">------- </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">name : int </span><span class="se">\n</span><span class="s">\</span>
+<span class="s">    a return value can also have a name (optional).&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="classes-and-constructor">
+<h3><span class="section-number">13.4.2.4. </span>Classes and constructor<a class="headerlink" href="#classes-and-constructor" title="Link to this heading">#</a></h3>
+<p>The C-Extension does not provide a simple possibility to add
+a docstring to the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method only. Therefore, the
+general class docstring, passed to the <code class="docutils literal notranslate"><span class="pre">tp_doc</span></code> member of
+the <code class="docutils literal notranslate"><span class="pre">PyTypeObject</span></code> struct should contain both a description of
+the entire class as well as the signature of its constructor and
+the parameters (exceptions, …).</p>
+<p>The following example shows the docstring for the class <a class="reference internal" href="../09_reference/region.html#itom.region" title="itom.region"><code class="xref py py-class docutils literal notranslate"><span class="pre">region</span></code></a>,
+whose signature has three different overloads (see again the backslash at the
+end of the first signatures). The method name of the signature is the class
+name, not the literal <code class="docutils literal notranslate"><span class="pre">__init__</span></code>:</p>
+</section>
+<section id="properties">
+<h3><span class="section-number">13.4.2.5. </span>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
+<p>The docstring for the properties (&#64;property decorator) is usually
+related to the getter method. If a setter is available, try to
+consider this in the longer description part of the docstring.</p>
+<p>The return type of the getter property must be written in the
+Numpydoc style, e.g. <code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">of</span> <span class="pre">tuple</span> <span class="pre">of</span> <span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></code>.</p>
+<p>The following examples show, that no signature is contained in
+the docstrings. The docstring start with the return type hint,
+followed by a colon, a space character and a short
+description of the property. An optional longer, multiline description
+can be added after a newline.</p>
+<p>Examples are:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">property1_doc</span><span class="p">,</span>
+<span class="s">&quot;list of list of int: Short description comes here. </span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">Optional longer description (can be multiline)&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">property1_doc</span><span class="p">,</span>
+<span class="s">&quot;str or None: Short description comes here.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">13.4.3. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>This style guide is mainly taken from</p>
+<ul class="simple">
+<li><p>Numpydoc (<a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">https://numpydoc.readthedocs.io/en/latest/format.html</a>)</p></li>
+<li><p>Napoleon extension of Sphinx (<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html</a>)</p></li>
+<li><p>Numpydoc example of Napoleon extension (<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/example_numpy.html#example-numpy">https://www.sphinx-doc.org/en/master/usage/extensions/example_numpy.html#example-numpy</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="translations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">13.3. </span>Translations</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">13.4.1. General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings-for-itom-and-its-methods-and-classes">13.4.2. Docstrings for <code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code> and its methods and classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rules">13.4.2.1. General rules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-docstrings">13.4.2.2. Method docstrings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overloaded-methods">13.4.2.3. Overloaded methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes-and-constructor">13.4.2.4. Classes and constructor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">13.4.2.5. Properties</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">13.4.3. References</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/12_contributing/python_docstrings.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

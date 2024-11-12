@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.8. Markers in plots &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_plots/markers';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.9. Geometric shapes in 1D and 2D plots" href="shapes.html" />
+    <link rel="prev" title="6.7. 3D plot" href="vtk3dplot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6.8. Markers in plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="designerPlugins.html">6.12. Programming plot designer plugins in C++</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="plots.html" class="nav-link"><span class="section-number">6. </span>Plots and Figures</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="markers-in-plots">
+<span id="plot-markers"></span><h1><span class="section-number">6.8. </span>Markers in plots<a class="headerlink" href="#markers-in-plots" title="Link to this heading">#</a></h1>
+<p>Sometimes, it is required to place marker symbols in a plot canvas with subpixel
+precision. This can for instance be the case, if detected features or calibration
+marks should be indicated in the plot. Currently, the Qwt-based plot plugins
+<a class="reference internal" href="linePlots.html#plot-line"><span class="std std-ref">itom1dqwtplot (1D)</span></a> and <a class="reference internal" href="imagePlots.html#plot-image"><span class="std std-ref">itom2dqwtplot</span></a>
+support drawing markers.</p>
+<p>It is possible to group one or multiple markers in one set that can be
+assigned a set name. Afterwards it is possible to also delete single sets
+based on their name or to show the name of the set next to each marker. All
+markers in one set can have a certain color, shape and size (in pixels).
+These three properties are given by one style-string of the following form:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">styleString</span> <span class="o">=</span> <span class="s2">&quot;CFS&quot;</span>
+<span class="linenos">2</span><span class="c1">#where C is the color character,</span>
+<span class="linenos">3</span><span class="c1">#F is the form or shape character and</span>
+<span class="linenos">4</span><span class="c1">#S is the size as pixel value (optional, default: 5px)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="c1">#Additionally, the line width W can be set by</span>
+<span class="linenos">7</span><span class="n">styleString2</span> <span class="o">=</span> <span class="s2">&quot;CFS;W&quot;</span> <span class="c1">#default W = 1px</span>
+</pre></div>
+</div>
+<p>Colors can be:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Color</p></th>
+<th class="head"><p>character</p></th>
+<th class="head"><p>Color</p></th>
+<th class="head"><p>character</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Blue</p></td>
+<td><p>b</p></td>
+<td><p>Magenta</p></td>
+<td><p>m</p></td>
+</tr>
+<tr class="row-odd"><td><p>Green</p></td>
+<td><p>g</p></td>
+<td><p>Yellow</p></td>
+<td><p>y</p></td>
+</tr>
+<tr class="row-even"><td><p>Red</p></td>
+<td><p>r</p></td>
+<td><p>Black</p></td>
+<td><p>k</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cyan</p></td>
+<td><p>c</p></td>
+<td><p>White</p></td>
+<td><p>w</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The shapes can be:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>character</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>character</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dot</p></td>
+<td><p>.</p></td>
+<td><p>Hexagon</p></td>
+<td><p>h</p></td>
+</tr>
+<tr class="row-odd"><td><p>Circle</p></td>
+<td><p>o</p></td>
+<td><p>Plus</p></td>
+<td><p>+</p></td>
+</tr>
+<tr class="row-even"><td><p>Square</p></td>
+<td><p>s</p></td>
+<td><p>Star</p></td>
+<td><p>*</p></td>
+</tr>
+<tr class="row-odd"><td><p>Diamond</p></td>
+<td><p>d</p></td>
+<td><p>Cross</p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-even"><td><p>Triangle right</p></td>
+<td><p>&gt;</p></td>
+<td><p>Triangle left</p></td>
+<td><p>&lt;</p></td>
+</tr>
+<tr class="row-odd"><td><p>Triangle up</p></td>
+<td><p>^</p></td>
+<td><p>Triangle down</p></td>
+<td><p>v</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To put a set of markers to an existing plot handle, call the slot
+<strong>plotMarkers</strong> of the Qwt designer plugins:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">styleString</span> <span class="p">[,</span> <span class="n">setName</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Hereby, <em>points</em> is a <em>2xN</em>, float32, dataObject where the first row are the
+x-coordinates of the markers (in physical or scale coordinates of the plot),
+and the second row are the y-coordinates. <em>setName</em> is an optional string as
+name for the added set of points.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the origin of the variable <em>plotHandle</em> in the examples does not tell
+you something, just a reminder:     The commands <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.plot()</span></code></a> and
+<a class="reference internal" href="../09_reference/itom_general.html#itom.liveImage" title="itom.liveImage"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.liveImage()</span></code></a> return a tuple (index, plotHandle), where
+<em>index</em> is the figure index of the opened plot window and <em>plotHandle</em> is
+an instance of <a class="reference internal" href="../09_reference/plotItem.html#itom.plotItem" title="itom.plotItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.plotItem</span></code></a> that     is used to set
+properties of the plot, connect to its signals or call slots of the plot.
+Dedicated information about the features     of a plot can be obtained by
+typing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plotHandle</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>To delete an existing set of markers, use the slot <strong>deleteMarkers</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;deleteMarkers&quot;</span><span class="p">,</span> <span class="n">setName</span><span class="p">)</span> <span class="c1">#delete markers within given set</span>
+<span class="linenos">2</span><span class="c1">#or</span>
+<span class="linenos">3</span><span class="n">plotHandle</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;deleteMarkers&quot;</span><span class="p">)</span> <span class="c1">#delete all markers</span>
+</pre></div>
+</div>
+<p>An example with different style strings can be found in the demo script
+<strong>demo/demoMarkers.py</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">obj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+<span class="linenos"> 4</span><span class="p">[</span><span class="n">nr</span><span class="p">,</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;itom2dqwtplot&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">circles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="mi">50</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">),</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">)])</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">centerX</span><span class="p">,</span> <span class="n">centerY</span><span class="p">):</span>
+<span class="linenos"> 9</span>    <span class="n">output</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="linenos">10</span>    <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">+=</span> <span class="n">centerX</span>
+<span class="linenos">11</span>    <span class="n">output</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">+=</span> <span class="n">centerY</span>
+<span class="linenos">12</span>    <span class="k">return</span> <span class="n">output</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1">#create various markers of different shapes. All markers sets represent a circle whose center is set to different positions.</span>
+<span class="linenos">15</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="s2">&quot;blue, dot, default size: 5, default line width: 1&quot;</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="s2">&quot;go10&quot;</span><span class="p">,</span> <span class="s2">&quot;green, circle&quot;</span><span class="p">)</span> <span class="c1">#equal to dot</span>
+<span class="linenos">17</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="s2">&quot;rs10&quot;</span><span class="p">,</span> <span class="s2">&quot;red, square&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">300</span><span class="p">),</span> <span class="s2">&quot;cd10;5&quot;</span><span class="p">,</span> <span class="s2">&quot;cyan, diamond, line width: 5&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s2">&quot;m&gt;10&quot;</span><span class="p">,</span> <span class="s2">&quot;magenta, triangle right&quot;</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s2">&quot;yv10&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow, triangle down&quot;</span><span class="p">)</span>
+<span class="linenos">22</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s2">&quot;k^10&quot;</span><span class="p">,</span> <span class="s2">&quot;black, triangle up&quot;</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span> <span class="s2">&quot;w&lt;10&quot;</span><span class="p">,</span> <span class="s2">&quot;white, triangle left&quot;</span><span class="p">)</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">700</span><span class="p">),</span> <span class="s2">&quot;bx10&quot;</span><span class="p">,</span> <span class="s2">&quot;blue, x&quot;</span><span class="p">)</span>
+<span class="linenos">26</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">700</span><span class="p">),</span> <span class="s2">&quot;g*10&quot;</span><span class="p">,</span> <span class="s2">&quot;green, star&quot;</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="mi">700</span><span class="p">),</span> <span class="s2">&quot;r+10&quot;</span><span class="p">,</span> <span class="s2">&quot;red, plus&quot;</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;plotMarkers&quot;</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">circles</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">700</span><span class="p">),</span> <span class="s2">&quot;ch20&quot;</span><span class="p">,</span> <span class="s2">&quot;cyan, hexagon, size: 20&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1">#delete the marker set with the name &#39;green, circle&#39;:</span>
+<span class="linenos">31</span><span class="n">h</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;deleteMarkers&quot;</span><span class="p">,</span> <span class="s2">&quot;green, circle&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result is as follows:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/markers.png"><img alt="../_images/markers.png" src="../_images/markers.png" style="width: 752.0px; height: 482.0px;" />
+</a>
+</figure>
+<p>If you want to display the set-name next to each marker, set the property
+<strong>markerLabelsVisible</strong> to True:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plotHandle</span><span class="p">[</span><span class="s2">&quot;markerLabelsVisible&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>If a 2D plot visualizes a multi-plane array or dataObject (&gt;= 3 dimensions), one can switch the displayed plane by a
+spin box in the toolbar of the plot of via the property <strong>planeIndex</strong>. Per default, marker sets are displayed for all
+planes. However it is also possible to set different marker sets for different planes, by adding a last optional
+argument <strong>plane</strong> to the <strong>plotMarkers</strong> slot:</p>
+<p>The argument <strong>plane</strong> must be set after the optional name of the marker set. <strong>-1</strong> indicates, that the marker set
+should be displayed in all planes, a value of 0 or above shows the respective marker set only in the first, 2nd, …
+plane.</p>
+<p>Please remember that the plane for a 3D array or dataObject is the first dimension, hence the z-dimension for the
+shape <strong>[z, y, x]</strong>, which is the shape interpretation everywhere in itom.</p>
+<p>For an array with more than three dimensions, all first dimensions, besides the last two ones (x, y), are interpreted
+as 1d-list of planes (jumping between adjacent indices in the first dimension can then mean, that there is a plane offset
+bigger than 1).</p>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="vtk3dplot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.7. </span>3D plot</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="shapes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.9. </span>Geometric shapes in 1D and 2D plots</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/05_plots/markers.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

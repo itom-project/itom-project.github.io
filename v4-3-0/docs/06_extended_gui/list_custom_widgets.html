@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7.4. Custom Designer Widgets &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_extended_gui/list_custom_widgets';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.5. Implement a more complex GUI in a plugin (C/C++)" href="algo-plugin.html" />
+    <link rel="prev" title="7.3. Creating customized dialogs, windows and dock widgets" href="qtdesigner.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="toolbar.html">7.1. Customize the menu bar and toolbars of <strong>itom</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="method-itom.html">7.2. Show messages, input boxes and default dialogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtdesigner.html">7.3. Creating customized dialogs, windows and dock widgets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7.4. Custom Designer Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algo-plugin.html">7.5. Implement a  more complex GUI in a plugin (C/C++)</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="extended_gui.html" class="nav-link"><span class="section-number">7. </span>Extending the user interface of <strong>itom</strong></a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="custom-designer-widgets">
+<span id="listcustomdesignerwidgets"></span><h1><span class="section-number">7.4. </span>Custom Designer Widgets<a class="headerlink" href="#custom-designer-widgets" title="Link to this heading">#</a></h1>
+<p>Beside QtDesginer-Widgets for plots and figures (see  <a class="reference internal" href="../05_plots/plots.html#plotsandfigures"><span class="std std-ref">Plots and Figures</span></a>) some further designer plugin widgets
+have been develop to enable access to useful or itom specific objects and functions in individual GUIs.</p>
+<p>These widgets can be used like any other type of widget within an ui-dialog with two exceptions:</p>
+<ol class="arabic simple">
+<li><p>The user interface in terms of an <strong>ui</strong>-file must be loaded and initialized within an itom-python context (e.g. script in itom).</p></li>
+<li><p>Some properties are not accessible in the QtDesigner (e.g. actuator-handles or dataObjects) and must be set or read in the script. (They are marked with <strong>DESIGNABLE false</strong> in the <strong>Q_PROPERTY</strong> macro in their header file).</p></li>
+</ol>
+<p>To add such a widget to your ui-file, you can drag&amp;drop them in the QtDesigner like any other widget.</p>
+<p>The following sub-sections give an overview about some additional itom widgets:</p>
+<section id="dataobjecttable">
+<h2><span class="section-number">7.4.1. </span>DataObjectTable<a class="headerlink" href="#dataobjecttable" title="Link to this heading">#</a></h2>
+<p>The designer plugin <strong>DataObjectTable</strong> is used to display a <a class="reference internal" href="../09_reference/dataObject.html#itom.dataObject" title="itom.dataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">dataObject</span></code></a> in
+an user interface as a table. The displayed content of a dataObject is thereby a shallow copy.
+If the read-only property of the table is not set, the user can modify the content which leads
+to a direct modification of the values in the origin object. It is not possible to change the
+size or type of the displayed dataObject.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/dataObjectTable.png"><img alt="../_images/dataObjectTable.png" src="../_images/dataObjectTable.png" style="width: 481.0px; height: 316.0px;" />
+</a>
+</figure>
+<p>The figure is taken from the example <strong>dataObjectTableDemo</strong> (demo subfolder <strong>ui/customItomWidgets</strong>).
+In this example, the <strong>dataObjectTable</strong> widget has the object name <strong>table</strong>. You can then assign an
+arbitrary data object to the widget using the following code snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">myGui</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;complex64&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Vice-versa, the current dataObject is also obtained by the property <strong>data</strong>.</p>
+<section id="properties">
+<h3><span class="section-number">7.4.1.1. </span>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
+<p>The widget <strong>dataObjectTable</strong> has many options for the parameterization. The entire list can be obtained using the
+method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem.info" title="itom.uiItem.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a>. Most properties can be directly changed in the QtDesigner editor. Only the <strong>data</strong>
+property is only accessible via the script.</p>
+<p>The following properties are often used properties of <strong>dataObjectTable</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>alternatingRowColors<span class="classifier">{bool}</span></dt><dd><p>if true, the background of rows is alternated (e.g. between white and grey)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>readOnly<span class="classifier">{bool}</span></dt><dd><p>enable write protection</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>min<span class="classifier">{float}</span></dt><dd><p>minimum acceptable value (if editing is allowed)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>max<span class="classifier">{float}</span></dt><dd><p>maximum acceptable value (if editing is allowed)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>alignment<span class="classifier">{enumeration: int or str}</span></dt><dd><p>changes the alignment of the text cells (e.g. “AlignLeft”, “AlignCenter”, “AlignTop” - see Qt::Alignment)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>verticalResizeMode<span class="classifier">{enumeration: int or str}</span></dt><dd><p>defines the mode how the columns can be resized or are stretched over the available space (ResizeToContents, Interactive, Stretch, Fixed, Custom -&gt; see QHeaderView::ResizeMode).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>horizontalResizeMode<span class="classifier">{seq. of str}</span></dt><dd><p>defines the mode how the rows can be resized or are stretched over the available space (ResizeToContents, Interactive, Stretch, Fixed, Custom -&gt; see QHeaderView::ResizeMode).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>suffixes<span class="classifier">{seq. of str}</span></dt><dd><p>list with suffixes for each column. If less suffixes than columns are indicated, the last suffix is repeated.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>verticalLabels<span class="classifier">{seq. of str}</span></dt><dd><p>list with labels for each shown row (if more rows are shown than labels, a default numbering is used for additional rows)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>horizontalLabels<span class="classifier">{seq. of str}</span></dt><dd><p>list with labels for each shown column (if more columns are shown than labels, a default numbering is used for additional columns)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>defaultRows<span class="classifier">{int}</span></dt><dd><p>number of rows to be shown</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>defaultCols<span class="classifier">{int}</span></dt><dd><p>number of column to be shown</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>editorDecimals<span class="classifier">{int}</span></dt><dd><p>number of possible decimals during the edit of floating point numbers</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>decimals<span class="classifier">{int}</span></dt><dd><p>number of visible decimals for floating point numbers</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>data<span class="classifier">{dataObject}</span></dt><dd><p>dataObject that is displaye in the table view</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="signals">
+<h3><span class="section-number">7.4.1.2. </span>Signals<a class="headerlink" href="#signals" title="Link to this heading">#</a></h3>
+<p>It is possible to connect to various signals emitted from the widget <strong>dataObjectTable</strong>. Most of them are derived
+from the base classes and can for instance be requested using the method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem.info" title="itom.uiItem.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> as member of the
+instance of the widget (e.g. <strong>myGui.table.info(1)</strong>). Nevertheless, <strong>dataObjectTable</strong> comes with some specific
+signals which can be used:</p>
+<p>Besides the default signals from the base classes of the widget <strong>dataObjectTable</strong>, there are some more signals defined:</p>
+<ul class="simple">
+<li><p>pressed(int,int) : signal emitted if a cell if the mouse is pressed on a cell. Arguments are (row,column) of the cell.</p></li>
+<li><p>entered(int,int) : signal emitted if a cell is entered by the mouse cursor. Arguments are (row,column) of the cell. Property ‘mouseTracking’ needs to be enabled for this feature to work.</p></li>
+<li><p>doubleClicked(int,int) : signal emitted if a cell is double clicked by the mouse. Arguments are (row,column) of the cell.</p></li>
+<li><p>clicked(int,int) : signal emitted if a cell is clicked by the mouse. Arguments are (row,column) of the cell.</p></li>
+<li><p>activated(int,int) : signal emitted if a cell is activated. Arguments are (row,column) of the cell.</p></li>
+</ul>
+<p>In the following example, a python method is connected to the clicked signal such that the coordinates of the current cell
+all printed to the command line (see also example <strong>dataObjectTableDemo</strong>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cellClicked</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cell clicked. row:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;, col:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">column</span><span class="p">))</span>
+
+<span class="n">myGui</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked(int,int)&quot;</span><span class="p">,</span> <span class="n">cellClicked</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="copy-the-table-to-the-clipboard">
+<h3><span class="section-number">7.4.1.3. </span>Copy the table to the clipboard<a class="headerlink" href="#copy-the-table-to-the-clipboard" title="Link to this heading">#</a></h3>
+<p>It is possible to copy a subpart or the entire table to the clipboard in a csv-ready format. In order to do this
+select a part or the entire table and choose <strong>copy selection</strong> or <strong>copy all</strong> from the context menu (right click
+on the table).</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/dataObjectTableClipboard.png"><img alt="../_images/dataObjectTableClipboard.png" src="../_images/dataObjectTableClipboard.png" style="width: 268.0px; height: 167.0px;" />
+</a>
+</figure>
+<p>The result will look like this (copy selection):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">72</span><span class="p">;</span><span class="mi">113</span><span class="p">;</span><span class="mi">157</span><span class="p">;</span><span class="mi">75</span><span class="p">;</span><span class="mi">78</span><span class="p">;</span><span class="mi">150</span><span class="p">;</span><span class="mi">75</span>
+<span class="mi">143</span><span class="p">;</span><span class="mi">83</span><span class="p">;</span><span class="mi">98</span><span class="p">;</span><span class="mi">99</span><span class="p">;</span><span class="mi">170</span><span class="p">;</span><span class="mi">128</span><span class="p">;</span><span class="mi">175</span>
+<span class="mi">78</span><span class="p">;</span><span class="mi">89</span><span class="p">;</span><span class="mi">111</span><span class="p">;</span><span class="mi">138</span><span class="p">;</span><span class="mi">73</span><span class="p">;</span><span class="mi">193</span><span class="p">;</span><span class="mi">194</span>
+<span class="mi">123</span><span class="p">;</span><span class="mi">137</span><span class="p">;</span><span class="mi">56</span><span class="p">;</span><span class="mi">189</span><span class="p">;</span><span class="mi">15</span><span class="p">;</span><span class="mi">144</span><span class="p">;</span><span class="mi">136</span>
+<span class="mi">132</span><span class="p">;</span><span class="mi">137</span><span class="p">;</span><span class="mi">146</span><span class="p">;</span><span class="mi">42</span><span class="p">;</span><span class="mi">235</span><span class="p">;</span><span class="mi">181</span><span class="p">;</span><span class="mi">97</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="slider2d">
+<h2><span class="section-number">7.4.2. </span>Slider2D<a class="headerlink" href="#slider2d" title="Link to this heading">#</a></h2>
+<p>The designer plugin <strong>Slider2D</strong> shows a 2D slider panel, where you can choose a x- and y-value using
+the mouse. The demo script <strong>slider2DDemo</strong> in the demo subfolder <strong>ui/customItomWidgets</strong> shows an
+example. In the example, changes in any position and directly connected to two spin boxes, while changes
+in the spin box will call the <strong>setX</strong> or <strong>setY</strong> slot of the Slider2D. These connections are directly
+configured in the QtDesigner.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/slider2D.png"><img alt="../_images/slider2D.png" src="../_images/slider2D.png" style="width: 190.0px; height: 187.0px;" />
+</a>
+</figure>
+<p>To manually change the x-value or y-value from a script, use the following snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">myGui</span><span class="o">.</span><span class="n">slider</span><span class="p">[</span><span class="s2">&quot;xVal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">myGui</span><span class="o">.</span><span class="n">slider</span><span class="p">[</span><span class="s2">&quot;yVal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10.5</span>
+</pre></div>
+</div>
+<p>The value of one axis can be bound to a certain min/max value (using the xRange or yRange property). Additionally,
+an optional step size value can be adjusted. If it is bigger than zero, the step size based on the minimum value
+is automatically considered and values are rounded to the next possible value.</p>
+<section id="id1">
+<h3><span class="section-number">7.4.2.1. </span>Properties<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The widget <strong>Slider2D</strong> has many options for the parameterization. The entire list can be obtained using the
+method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.uiItem.info" title="itom.uiItem.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a>. Most properties can be directly changed in the QtDesigner editor.</p>
+<p>The following properties are often used properties of <strong>Slider2D</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>decimals<span class="classifier">{int}</span></dt><dd><p>get/set the number of decimals</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>yVal<span class="classifier">{float}</span></dt><dd><p>get/set current vertical value (y-value) of the slider</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xVal<span class="classifier">{float}</span></dt><dd><p>get/set current horizontal value (x-value) of the slider</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>yStepSize<span class="classifier">{float}</span></dt><dd><p>get/set the step size of the y-value (default: 0.0, no step size constraints)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xStepSize<span class="classifier">{float}</span></dt><dd><p>get/set the step size of the x-value (default: 0.0, no step size constraints)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>yRange<span class="classifier">{seq. of two floats}</span></dt><dd><p>get/set the range of the y-value</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>xRange<span class="classifier">{seq. of two floats}</span></dt><dd><p>get/set the range of the x-value</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h3><span class="section-number">7.4.2.2. </span>Signals<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>It is possible to connect to various signals emitted from the widget <strong>Slider2D</strong>:</p>
+<ul class="simple">
+<li><p>valuesChanged(double,double) : signal is emitted if the hoirzontal and/or vertical value of the slider changed.</p></li>
+<li><p>yValChanged(double) : signal is emitted if the y-value of the slider changed.</p></li>
+<li><p>xValChanged(double) : signal is emitted if the x-value of the slider changed.</p></li>
+</ul>
+</section>
+</section>
+<section id="dobmetadatatable">
+<h2><span class="section-number">7.4.3. </span>dObMetaDataTable<a class="headerlink" href="#dobmetadatatable" title="Link to this heading">#</a></h2>
+<p>The “dObMetaDataTable” can be used to visualize the metaData of a dataObject, e.g. to realize a measurement protocol. The widget is not inherited from a AbstractDObject and can not be used for a live plot.</p>
+<section id="id3">
+<h3><span class="section-number">7.4.3.1. </span>Properties<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>data</strong>: <em>ito::DataObject</em>, the dataObject to be shown, not accessible in QtDesigner.</p>
+<p><strong>readOnlyEnabled</strong>: <em>bool, DESIGNABLE</em>, enable write protection</p>
+<p><strong>detailedInfo</strong>: <em>bool, DESIGNABLE</em>, Toggle between basic and detailed metaData</p>
+<p><strong>previewEnabled</strong>: <em>bool, DESIGNABLE</em>, Add a small quadratic image downsampled from the dataObject as a preview to the meta data.</p>
+<p><strong>previewSize</strong>: <em>int, DESIGNABLE</em>, Set the preview size in pixels,</p>
+<p><strong>decimals</strong>: <em>int, DESIGNABLE</em>, number of decimals to be shown within each cell</p>
+<p><strong>colorBar</strong>: <em>QString, DESIGNABLE</em>, the name of the color bar for the preview, <em>not implemented yet</em></p>
+</section>
+</section>
+<section id="evaluategeometricsfigure">
+<h2><span class="section-number">7.4.4. </span>EvaluateGeometricsFigure<a class="headerlink" href="#evaluategeometricsfigure" title="Link to this heading">#</a></h2>
+<p>The evaluateGeomtrics-widget is designed to load geometric definition stored in a float32 dataObject with a column-size of &gt;10 elements and a row for each geometric element to display.
+Further more it allows the evaluation of geometric relations between the geometric primitives. It contains a tableView and although is is inherited by AbstractDObject it should not be used for “liveVisualisation of dataObject”.</p>
+<section id="id4">
+<h3><span class="section-number">7.4.4.1. </span>Properties<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><strong>title</strong>: <em>QString, DESIGNABLE</em>, Title of the plot or ‘&lt;auto&gt;’ if the title of the data object should be used. <em>Not implemented yet</em>
+<strong>valueUnit</strong>: <em>QString, DESIGNABLE</em>, The value unit for the metrical calculations that is used within the plot.
+<strong>titleFont</strong>: <em>QFont, DESIGNABLE</em>, Font for title. <em>Not implemented yet</em>
+<strong>labelFont</strong>: <em>QFont, DESIGNABLE</em>, Font for labels. <em>Not implemented yet</em>
+<strong>relations</strong>: <em>ito::DataObject</em>, Get or set N geometric elements via N x 11 dataObject of type float32.
+<strong>relationNames</strong>: <em>QStringList, DESIGNABLE</em>, A string list with the names of possible relation. The first elements [N.A., radius, angle to, distance to, intersection with, length and area] are read only and are calculated with these widget. For external calculated values you can define custom names e.g. roughness..
+<strong>destinationFolder</strong>: <em>QString, DESIGNABLE</em>, Set a default export directory.
+<strong>lastAddedRelation</strong>: <em>int, DESIGNABLE</em>, Get the index of the last added relation.
+<strong>considerOnly2D</strong>: <em>bool, DESIGNABLE</em>, If true, only the x &amp; y coordinates are considered.</p>
+</section>
+<section id="slots">
+<h3><span class="section-number">7.4.4.2. </span>Slots<a class="headerlink" href="#slots" title="Link to this heading">#</a></h3>
+<p><strong>ito::RetVal addRelation(ito::DataObject importedData)</strong></p>
+<blockquote>
+<div><p>Add a relation to the current context. The relation must be</p>
+<p><em>importedData, ito::DataObject</em>: geometric element expressed by 1 x 4 dataObject of type float32.</p>
+</div></blockquote>
+<p><strong>ito::RetVal modifyRelation(const int idx, ito::DataObject relation)</strong></p>
+<blockquote>
+<div><p>Modify an existing relation addressed by the idx.</p>
+<p><em>idx, int</em>: Index of relation to modify</p>
+<p><em>relation, ito::DataObject</em>: geometric element expressed by 1 x 4 dataObject of type float32.</p>
+</div></blockquote>
+<p><strong>ito::RetVal addRelationName(const QString newName)</strong></p>
+<blockquote>
+<div><p>Add a new relation name to the relationNameList.</p>
+<p><em>newName, QString</em>: new relation name to be appended</p>
+</div></blockquote>
+<p><strong>ito::RetVal exportData(QString fileName, ito::uint8 exportFlag)</strong></p>
+<blockquote>
+<div><p>Export data to csv or xml</p>
+<p><em>fileName, QString</em>: Destination file name</p>
+<p><em>exportFlag, int</em>: Export flag, exportCSVTree  = 0x00, exportCSVTable = 0x01, exportXMLTree  = 0x02, exportCSVList  = 0x03, showExportWindow = 0x10</p>
+</div></blockquote>
+<p><strong>ito::RetVal plotItemChanged(ito::int32 idx, ito::int32 flags, QVector&lt;ito::float32&gt; values)</strong></p>
+<blockquote>
+<div><p>Slot for direct connection between this widget and a plot (e.g. itom2dQwtPlot) to notify changes within the plotted geometry. Internal relations are automatically updated. External relation values (e.g. roughness) can not be updated automatically.</p>
+<p><em>idx, int</em>: Index of the modified geometric element</p>
+<p><em>flags, int</em>: Type (and meta properties) of geometric elements which was changed. If type differs from original type clear and refill is necessary.</p>
+<p><em>values, QVector&lt;ito::float32&gt;</em>: Geometric parameters of the modified geometric item.</p>
+</div></blockquote>
+<p><strong>ito::RetVal clearAll(void)</strong></p>
+<blockquote>
+<div><p>Clear all elements and relations in this plot.</p>
+</div></blockquote>
+</section>
+<section id="id5">
+<h3><span class="section-number">7.4.4.3. </span>Signals<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>None</p>
+</section>
+</section>
+<section id="motorcontroller">
+<h2><span class="section-number">7.4.5. </span>MotorController<a class="headerlink" href="#motorcontroller" title="Link to this heading">#</a></h2>
+<p>The “MotorController”-widget gives the user the some basic functions for generic motor positioning and position reporting within a complex GUI. The widget can be used for 1 to 6 axis and can be used readOnly or as a type of software control panel.
+The widget updated in a fixed interval (can be deactivated). During measurements the widget should be disabled to avoid user errors. A support for the 3DConnexion-Mouse is planned but <em>Not implemented yet</em>.</p>
+<p>The motor should support up <em>slot: RequestStatusAndPosition</em> and <em>signal: actuatorStatusChanged</em> for semaphore free communication, but this is not necessary.</p>
+<section id="id6">
+<h3><span class="section-number">7.4.5.1. </span>Properties<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p><strong>actuator</strong>: <em>ito::AddInActuator</em>, Handle to the actuator to be used, not DESIGNABLE</p>
+<p><strong>numberOfAxis</strong>: <em>int, DESIGNABLE</em>, Number of axis to be visible</p>
+<p><strong>unit</strong>: <em>QString, DESIGNABLE</em>, Base unit for spinboxes and movements, e.g. nm, micron, mm, m, km</p>
+<p><strong>readOnly</strong>: <em>bool, DESIGNABLE</em>, Toggle read only</p>
+<p><strong>autoUpdate</strong>: <em>bool, DESIGNABLE</em>, Toggle automatic motorposition update</p>
+<p><strong>smallStep</strong>: <em>double, DESIGNABLE</em>, Distances for the small step button, same value for plus and minus</p>
+<p><strong>bigStep</strong>: <em>double, DESIGNABLE</em>, Distances for the large step button, same value for plus and minus</p>
+<p><strong>absRel</strong>: <em>bool, DESIGNABLE</em>, Toggle between absolute or relative position display. Origin can be set via context menu.</p>
+<p><strong>allowJoyStick</strong>: <em>bool, DESIGNABLE</em>, Allow a software joystick, e.g. usb or gameport, not implemented yet.</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">7.4.5.2. </span>Slots<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p><strong>void triggerActuatorStep(const int axisNo, const bool smallBig, const bool forward)</strong></p>
+<blockquote>
+<div><p>Trigger a step of axis <em>axisNo</em> with a distance either <em>bigStep (true)</em> or <em>smallStep (false)</em> and either <em>forward (true)</em> or <em>backwards (false)</em></p>
+</div></blockquote>
+<p><strong>void actuatorStatusChanged(QVector&lt;int&gt; status, QVector&lt;double&gt; actPosition)</strong></p>
+<blockquote>
+<div><p>Internal slot for c++-Code connected to the corresponding signal of the actuator. Do not call this from python.</p>
+</div></blockquote>
+<p><strong>void triggerUpdatePosition(void)</strong></p>
+<blockquote>
+<div><p>Usually called by the internal timer, the context-menu or python to update the current motor position. Uses either Signal-/Slot-communication or invokes getPos blocking.</p>
+</div></blockquote>
+<p><strong>void guiChangedSmallStep(double value)</strong></p>
+<blockquote>
+<div><p>Internal slot if the small step size is changed within the GUI (spinbox)</p>
+</div></blockquote>
+<p><strong>void guiChangedLargeStep(double value)</strong></p>
+<blockquote>
+<div><p>Internal slot if the large step size is changed within the GUI (spinbox)</p>
+</div></blockquote>
+</section>
+<section id="id8">
+<h3><span class="section-number">7.4.5.3. </span>Signals<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p><strong>void RequestStatusAndPosition(bool sendActPosition, bool sendTargetPos)</strong></p>
+<blockquote>
+<div><p>Internal signal for c++-Code connected to the corresponding slot of the actuator.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="qtdesigner.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7.3. </span>Creating customized dialogs, windows and dock widgets</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="algo-plugin.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.5. </span>Implement a  more complex GUI in a plugin (C/C++)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataobjecttable">7.4.1. DataObjectTable</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">7.4.1.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signals">7.4.1.2. Signals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-the-table-to-the-clipboard">7.4.1.3. Copy the table to the clipboard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slider2d">7.4.2. Slider2D</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7.4.2.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">7.4.2.2. Signals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dobmetadatatable">7.4.3. dObMetaDataTable</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">7.4.3.1. Properties</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluategeometricsfigure">7.4.4. EvaluateGeometricsFigure</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">7.4.4.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slots">7.4.4.2. Slots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">7.4.4.3. Signals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motorcontroller">7.4.5. MotorController</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.4.5.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.4.5.2. Slots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">7.4.5.3. Signals</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/06_extended_gui/list_custom_widgets.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

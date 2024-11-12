@@ -1,0 +1,1194 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.7. 3D plot &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_plots/vtk3dplot';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.8. Markers in plots" href="markers.html" />
+    <link rel="prev" title="6.6. isometric Plot" href="isometricPlot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6.7. 3D plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">6.11. Markers, user selections and geometric shapes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="designerPlugins.html">6.12. Programming plot designer plugins in C++</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="plots.html" class="nav-link"><span class="section-number">6. </span>Plots and Figures</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="d-plot">
+<span id="plot-3d"></span><h1><span class="section-number">6.7. </span>3D plot<a class="headerlink" href="#d-plot" title="Link to this heading">#</a></h1>
+<section id="vtk3dvisualizer">
+<h2><span class="section-number">6.7.1. </span>Vtk3dVisualizer<a class="headerlink" href="#vtk3dvisualizer" title="Link to this heading">#</a></h2>
+<p>The <strong>Vtk3dVisualizer</strong> designer plugin can be used to display arbitrary point clouds, polygonal meshes or geometric shapes like
+cylinders, spheres, pyramids, lines or cubes in one 3D plot. The first point cloud or polygonal mesh is plotted using the
+default <a class="reference internal" href="../09_reference/itom_general.html#itom.plot" title="itom.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> command. Further items are added, updated or removed by several slots that are defined and can be
+called using the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">call()</span></code>.</p>
+<p>Every item on the canvas is listed in a tree view representation using the optional name of each item. Additionally, every item
+can be configured independently (for more information see the example <strong>demo/plot/demoVtk3dVisualizer.py</strong> or <strong>demo/plot/cloudAndMeshVisualization.py</strong>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/vtk3dvisualizer.png"><img alt="../_images/vtk3dvisualizer.png" src="../_images/vtk3dvisualizer.png" style="width: 100%;" />
+</a>
+</figure>
+<p>Examples about the Vtk3dVisualizer plot can be found in the folder <strong>demo/plot</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Newer versions of VTK (compiled with OpenGL 2) might not work via a remote desktop connection under Windows, since newer OpenGL
+standards are not supported by remote desktop.</p>
+</div>
+<section id="properties">
+<h3><span class="section-number">6.7.1.1. </span>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cameraFocalPoint</span> <span class="pre">:</span> <span class="pre">seq.</span> <span class="pre">of</span> <span class="pre">3</span> <span class="pre">floats</span></span></dt>
+<dd><p>focal point of the camera</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cameraView</span> <span class="pre">:</span> <span class="pre">seq.</span> <span class="pre">of</span> <span class="pre">3</span> <span class="pre">floats</span></span></dt>
+<dd><p>view direction of the camera</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cameraPosition</span> <span class="pre">:</span> <span class="pre">seq.</span> <span class="pre">of</span> <span class="pre">3</span> <span class="pre">floats</span></span></dt>
+<dd><p>position of the camera</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">coordSysPos</span> <span class="pre">:</span> <span class="pre">seq.</span> <span class="pre">of</span> <span class="pre">3</span> <span class="pre">floats</span></span></dt>
+<dd><p>position of the coordinate system</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">parallelProjection</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>if true a parallel projection is used, else the perspective projection</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">coordSysVisible</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>sets the visibility of a coordinate system</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">coordSysScale</span> <span class="pre">:</span> <span class="pre">float</span></span></dt>
+<dd><p>sets the length / scaling of the coordinate axes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">stereoType</span> <span class="pre">:</span> <span class="pre">Stereo</span></span></dt>
+<dd><p>sets the stereo type of the canvas</p>
+<p>The type ‘Stereo’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘No’ (0)</p></li>
+<li><p>‘CrystalEyes’ (1)</p></li>
+<li><p>‘RedBlue’ (2)</p></li>
+<li><p>‘Interlaced’ (3)</p></li>
+<li><p>‘Left’ (4)</p></li>
+<li><p>‘Right’ (5)</p></li>
+<li><p>‘Dresden’ (6)</p></li>
+<li><p>‘Anaglyph’ (7)</p></li>
+<li><p>‘Checkerboard’ (8)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">showFPS</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>shows the FPS counter or not</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">backgroundColor</span> <span class="pre">:</span> <span class="pre">color</span> <span class="pre">str,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex</span></span></dt>
+<dd><p>background color of the canvas</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zAxisMinorTickVisibility</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of minor ticks along the z-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">yAxisMinorTickVisibility</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of minor ticks along the y-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">xAxisMinorTickVisibility</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of minor ticks along the x-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zAxisTickVisibility</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of major ticks along the z-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">yAxisTickVisibility</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of major ticks along the y-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">xAxisTickVisibility</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of major ticks along the x-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zDrawGridlines</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of gridlines along the z-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">yDrawGridlines</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of gridlines along the y-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">xDrawGridlines</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of gridlines along the x-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zAxisVisible</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of the z-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">yAxisVisible</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of the y-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">xAxisVisible</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Sets the visibility of the x-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zAxisLabel</span> <span class="pre">:</span> <span class="pre">str</span></span></dt>
+<dd><p>Label of the z-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">yAxisLabel</span> <span class="pre">:</span> <span class="pre">str</span></span></dt>
+<dd><p>Label of the y-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">xAxisLabel</span> <span class="pre">:</span> <span class="pre">str</span></span></dt>
+<dd><p>Label of the x-axis.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">enableViewAngleLOD</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>If enabled the actor will not be visible at a certain view angle</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">enableDistanceLOD</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>If enabled the actor will not be visible at a certain distance from the camera</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cubeAxesTickLocation</span> <span class="pre">:</span> <span class="pre">TickLocation</span></span></dt>
+<dd><p>defines the location of ticks for the cube axes</p>
+<p>The type ‘TickLocation’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘ticksInside’ (0)</p></li>
+<li><p>‘ticksOutside’ (1)</p></li>
+<li><p>‘ticksBoth’ (2)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cubeAxesFlyMode</span> <span class="pre">:</span> <span class="pre">FlyMode</span></span></dt>
+<dd><p>defines how the cube axes are positioned depending on the current camera</p>
+<p>The type ‘FlyMode’ is an enumeration that can have one of the following values (str or int):</p>
+<ul class="simple">
+<li><p>‘flyOuterEdges’ (0)</p></li>
+<li><p>‘flyClostestTriad’ (1)</p></li>
+<li><p>‘flyFurthestTriad’ (2)</p></li>
+<li><p>‘flyStaticTriad’ (3)</p></li>
+<li><p>‘flyStaticEdges’ (4)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cubeGridlinesColor</span> <span class="pre">:</span> <span class="pre">color</span> <span class="pre">str,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex</span></span></dt>
+<dd><p>sets the color of the cube gridlines</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cubeAxesColor</span> <span class="pre">:</span> <span class="pre">color</span> <span class="pre">str,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex</span></span></dt>
+<dd><p>sets the color of the cube axes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">cubeAxesVisible</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Overall visibility of the cube axes (must be set to True in order to see grids, labels, axes…)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">pointPickSphereColor</span> <span class="pre">:</span> <span class="pre">color</span> <span class="pre">str,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex</span></span></dt>
+<dd><p>Color of the possible sphere of the point pick event (see pointPickShereRadius and enablePointPick)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">pointPickSphereRadius</span> <span class="pre">:</span> <span class="pre">float</span></span></dt>
+<dd><p>If &gt; 0, a sphere with the given radius is printed around the center point of the point pick event (if enabled)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">enablePointPick</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>if True, a click to any point of the canvas emits the signal pointPicked that emits the currently clicked 3d coordinate and the index of the closest point of the cloud / mesh that has been given as pickPointCloud or pickMesh.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">propertiesSorted</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>sort the properties of one item in an alphabetical order or not</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">colorMap</span> <span class="pre">:</span> <span class="pre">str</span></span></dt>
+<dd><p>Color map (string) that should be used to colorize a non-color data object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">zAxisInterval</span> <span class="pre">:</span> <span class="pre">autoInterval</span></span></dt>
+<dd><p>Sets the visible range of the displayed z-axis (in coordinates of the data object) or (0.0, 0.0) if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">yAxisInterval</span> <span class="pre">:</span> <span class="pre">autoInterval</span></span></dt>
+<dd><p>Sets the visible range of the displayed y-axis (in coordinates of the data object) or (0.0, 0.0) if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">xAxisInterval</span> <span class="pre">:</span> <span class="pre">autoInterval</span></span></dt>
+<dd><p>Sets the visible range of the displayed x-axis (in coordinates of the data object) or (0.0, 0.0) if range should be automatically set [default].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">polygonMesh</span> <span class="pre">:</span> <span class="pre">QSharedPointer&lt;ito::PCLPolygonMesh&gt;</span></span></dt>
+<dd><p>Sets the input polygon mesh for this plot.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">pointCloud</span> <span class="pre">:</span> <span class="pre">QSharedPointer&lt;ito::PCLPointCloud&gt;</span></span></dt>
+<dd><p>Sets the input point cloud for this plot.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">dataObject</span> <span class="pre">:</span> <span class="pre">dataObject</span></span></dt>
+<dd><p>Sets the input data object for this plot.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">renderLegend</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>If this property is true, the legend are included in pixelmaps renderings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">contextMenuEnabled</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Defines whether the context menu of the plot should be enabled or not.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">toolbarVisible</span> <span class="pre">:</span> <span class="pre">bool</span></span></dt>
+<dd><p>Toggles the visibility of the toolbar of the plot.</p>
+</dd></dl>
+
+</section>
+<section id="slots">
+<h3><span class="section-number">6.7.1.2. </span>Slots<a class="headerlink" href="#slots" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setPickPointMesh(mesh)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>set mesh for pick point event. The cloud of the mesh is used only (arguments: mesh)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setPickPointCloud(pcl)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>set cloud for pick point event. Nearest point from the position of the cursor (x,y,z) position is searched (arguments: cloud)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setItemProperty(name,</span> <span class="pre">property,</span> <span class="pre">value)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>set the property of an item (arguments: key, property-name, value)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setGeometriesPosition(names,</span> <span class="pre">positions)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>changes the position of various geometries (arguments: list of keys, list of (pos_x, pos_y, pos_z)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setGeometryPose(name,</span> <span class="pre">translation,</span> <span class="pre">rotation)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>moves and/or rotates a given geometry (arguments: key, (t_x, t_y, t_z), (r_x, r_y, r_z)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">deleteGeometry(name)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>delete the geometry with key</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">deleteMesh(name)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>delete the mesh with key</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">deletePointCloud(name)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>delete the cloud with key</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">updateText(text,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">fontsize,</span> <span class="pre">name,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex,</span> <span class="pre">createIfNotExists)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>updates or creates new 2d text (arguments: text, x, y, fontsize, key, color = white, createIfNotExists = false)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addText(text,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">fontsize,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add a 2d text to a specific position (arguments: text, x, y, fontsize, key, color = white)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addPolygon(points,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>adds a 2d polygon (arguments: points, key, color = white) where points is a Mx3 data object where each line is the (x,y,z) coordinate of a point of the polygon. The point values will internally be converted to float32.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addSphere(point,</span> <span class="pre">radius,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add a sphere (arguments: [center_x, center_y, center_z], radius, key, color = red]).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addLines(points,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add m lines to the canvas. The coordinates are given by a float32 data object [m x 6] where one row is (x0,y0,z0,x1,y1,z1) (arguments: points, key, color=red).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addCube(size,</span> <span class="pre">translation,</span> <span class="pre">rotation,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add cube (arguments: [size_x, size_y, size_z], [t_x, t_y, t_z], [r_x, r_y, r_z], key, color=white)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addCuboid(points,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add cube. The 8 corner points are given in a 3x8 data object (arguments: points, key, color=white)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addPyramid(points,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add pyramid. The 5 corner points are given in a 3x5 data object (arguments: points, key, color=white)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addCylinder(point,</span> <span class="pre">orientation,</span> <span class="pre">radius,</span> <span class="pre">fullname,</span> <span class="pre">color,</span> <span class="pre">rgba</span> <span class="pre">or</span> <span class="pre">hex)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add a cylinder (arguments: (center_x, center_y, center_y), (orientation_x, orientation_y, orientation_z), radius, key, color=white)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">updatePointCloud(pcl,</span> <span class="pre">name,</span> <span class="pre">createIfNotExists)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>updates an existing cloud (arguments: cloud, key, createIfNotExists=false)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addPointCloudNormal(pcl,</span> <span class="pre">fullname)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add the given cloud with normal vectors to the tree with a key name (arguments: cloud, key)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addPointCloud(pcl,</span> <span class="pre">name)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add the given cloud to the tree with a key name (arguments: cloud, key)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">addMesh(mesh,</span> <span class="pre">fullname)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>add the given mesh to the tree with a key name (arguments: mesh, key)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">registerModel(mesh,</span> <span class="pre">modelName)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>see addMesh</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setLinePlot(x0,</span> <span class="pre">y0,</span> <span class="pre">x1,</span> <span class="pre">y1,</span> <span class="pre">destID)</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>This (virtual) slot can be invoked by python to trigger a lineplot.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">refreshPlot()</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>Triggers an update of the current plot window.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">getPlotID()</span> <span class="pre">[slot]</span></span></dt>
+<dd><p>Return window ID of this plot {int}.</p>
+</dd></dl>
+
+</section>
+<section id="signals">
+<h3><span class="section-number">6.7.1.3. </span>Signals<a class="headerlink" href="#signals" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">pointPicked(x,</span> <span class="pre">y,</span> <span class="pre">z,</span> <span class="pre">pointIndex)</span> <span class="pre">[signal]</span></span></dt>
+<dd><p>signature for connection to this signal: pointPicked(float,float,float,int)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">windowTitleModified(windowTitleSuffix)</span> <span class="pre">[signal]</span></span></dt>
+<dd><p>signature for connection to this signal: windowTitleModified(QString)</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="isometricPlot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.6. </span>isometric Plot</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="markers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.8. </span>Markers in plots</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vtk3dvisualizer">6.7.1. Vtk3dVisualizer</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">6.7.1.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slots">6.7.1.2. Slots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signals">6.7.1.3. Signals</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/05_plots/vtk3dplot.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

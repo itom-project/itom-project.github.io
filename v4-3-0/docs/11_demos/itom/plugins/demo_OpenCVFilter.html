@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>12.1.10.6.3. OpenCV filter &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '11_demos/itom/plugins/demo_OpenCVFilter';</script>
+    <link rel="icon" href="../../../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="12.1.10.6.4. Face Detection" href="demofaceDetection.html" />
+    <link rel="prev" title="12.1.10.6.2. DummyMotor" href="demo_DummyMotor.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../../demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">12.1. itom</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basics/index.html">12.1.10.1. Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dataProcessing/index.html">12.1.10.2. Data processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../embeddedMatplotlib/index.html">12.1.10.3. Matplotlib embedded</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../itom_apps/index.html">12.1.10.4. itom apps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plots/index.html">12.1.10.5. Plots</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">12.1.10.6. Plugins</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="demo_DummyGrabber.html">12.1.10.6.1. DummyGrabber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_DummyMotor.html">12.1.10.6.2. DummyMotor</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">12.1.10.6.3. OpenCV filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demofaceDetection.html">12.1.10.6.4. Face Detection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../pointClouds/index.html">12.1.10.7. PointCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ui/index.html">12.1.10.8. User interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ui_customize/index.html">12.1.10.9. Customize itom GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ui_dynamicLayout/index.html">12.1.10.10. User interface dynamic layouts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_packages/index.html">12.3. Python packages</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../demos.html" class="nav-link"><span class="section-number">12. </span>Demo scripts</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link"><span class="section-number">12.1.10.6. </span>Plugins</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-11-demos-itom-plugins-demo-opencvfilter-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="opencv-filter">
+<span id="sphx-glr-11-demos-itom-plugins-demo-opencvfilter-py"></span><h1><span class="section-number">12.1.10.6.3. </span>OpenCV filter<a class="headerlink" href="#opencv-filter" title="Link to this heading">#</a></h1>
+<p>This demo shows how OpenCV filters are applied to the <code class="docutils literal notranslate"><span class="pre">dataObject</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">dataObject</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">algorithms</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="kn">from</span> <span class="nn">itom</span> <span class="kn">import</span> <span class="n">filterHelp</span>
+
+<span class="c1"># create a randomly filled  150x150px dataObject</span>
+<span class="n">dObj</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">rand</span><span class="p">([</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Get information about the filter and its parameters.
+First, no idea about the filters name, therefore get all names containing the keyword <code class="docutils literal notranslate"><span class="pre">cv</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filterInfoDict</span> <span class="o">=</span> <span class="n">filterHelp</span><span class="p">(</span><span class="s2">&quot;cv&quot;</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">filterInfoDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]))</span>
+
+<span class="c1"># the desired filter is called &quot;cvMedianBlur&quot;, now obtain detailed information</span>
+<span class="n">medianBlurDict</span> <span class="o">=</span> <span class="n">filterHelp</span><span class="p">(</span><span class="s2">&quot;cvMedianBlur&quot;</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">medianBlurDict</span><span class="p">[</span><span class="s2">&quot;cvMedianBlur&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+        <span class="n">medianBlurDict</span><span class="p">[</span><span class="s2">&quot;cvMedianBlur&quot;</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># create an empty output image (its content will be filled within the filter-call)</span>
+<span class="n">outputImage</span> <span class="o">=</span> <span class="n">dataObject</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>cvBilateralFilter: Resizes an image
+
+The function resize resizes the image &#39;inputObject&#39; down to or up by the specific factors.
+
+To shrink an image, it will generally look best with CV_INTER_AREA interpolation, whereas to enlarge an image,
+it will generally look best with CV_INTER_CUBIC (slow) or CV_INTER_LINEAR (faster but still looks OK).
+The axisScale properties of the x- and y-axes of the outputObject are divided by fx and fy respectively, while the offset values are multiplied with fx and fy.
+cvBlur: Planewise median blur filter.
+
+This filter applies the method cv::blur to every plane in the source data object. The function smoothes the images by a simple mean-filter. Theresult is contained in the destination object. It can handle data objects of type uint8, uint16, int16, ito::tInt32, float32 and float64 only.
+
+The cv::blur internally calls the cv::boxfilter()-method.
+
+The itom-wrapping does not work inplace currently. A new dataObject is allocated.
+
+borderType: This string defines how the filter should handle pixels at the border of the matrix.Allowed is CONSTANT [default], REPLICATE, REFLECT, WRAP, REFLECT_101. In case of a constant border, only pixels inside of the element mask are considered (morphologyDefaultBorderValue)
+Warning: NaN-handling for floats not verified.
+cvCalibrateCamera: Finds the camera intrinsic and extrinsic parameters from several views of a calibration pattern.
+
+The function estimates the intrinsic camera parameters and extrinsic parameters for each of the views. The coordinates of 3D object points and their corresponding 2D projections in each view must be specified.
+That may be achieved by using an object with a known geometry and easily detectable feature points. Such an object is called a calibration rig or calibration pattern, and OpenCV has built-in support for
+a chessboard as a calibration rig (see cvFindChessboardCorners()). Currently, initialization of intrinsic parameters (when CV_CALIB_USE_INTRINSIC_GUESS is not set) is only implemented for planar
+calibration patterns (where Z-coordinates of the object points must be all zeros). 3D calibration rigs can also be used as long as initial cameraMatrix is provided.
+
+The algorithm performs the following steps:
+
+1. Compute the initial intrinsic parameters (the option only available for planar calibration patterns) or read them from the input parameters. The distortion coefficients are all set to zeros initially unless some of CV_CALIB_FIX_K? are specified.
+2. Estimate the initial camera pose as if the intrinsic parameters have been already known. This is done using solvePnP() .
+3. Run the global Levenberg-Marquardt optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points imagePoints and the projected (using the current estimates for camera parameters and the poses) object points objectPoints. See projectPoints() for details.
+
+If the reprojectionError is NaN, one or both of the matrices objectPoints or imagePoints probability contains any NaN-value after truncation. Remember that this algorithm truncates objectPoints and imagePoints
+before using it in the way that for each view, the last rows are cut where either the value in the first column of objectPoints or imagePoints is non-finite.
+cvCannyEdge: Canny Edge detector using cv::DFT.
+
+It&#39;s just Canny&#39;s edge filter
+
+cvComputeCorrespondEpilines: For points in an image of a stereo pair, computes the corresponding epilines in the other image.
+
+For every point in one of the two images of a stereo pair, the function finds the equation of the corresponding epipolar line in the other image.
+
+From the fundamental matrix definition (see findFundamentalMat()), line l^{(2)}_i in the second image for the point p^{(1)}_i in the first image (when whichImage=1) is computed as:
+
+.. math:: l^{(2)}_i = F p^{(1)}_i
+
+And vice versa, when whichImage=2, l^{(1)}_i is computed from p^{(2)}_i as:
+
+.. math:: l^{(1)}_i = F^T p^{(2)}_i
+
+Line coefficients are defined up to a scale. They are normalized so that
+
+.. math:: a_i^2+b_i^2=1.
+cvCornerSubPix: Refines the corner locations e.g. from cvFindChessboardCorners.
+
+This filter is a wrapper for the cv::method cv::cornerSubPix. Check the openCV-doku for more details
+
+cvCvtColor: Converts an image from one color space to another.
+In case of linear transformations, the range does not matter. But in case of a non-linear transformation,
+an input RGB image should be normalized to the proper value range to get the correct results, for example,
+for RGB -&gt; L*u*v* transformation. For example, if you have a 32-bit floating-point image directly
+converted from an 8-bit image without any scaling, then it will have the 0..255 value range instead of 0..1
+assumed by the function. So, before calling cvtColor , you need first to scale the image down
+
+The parameter code defines the conversion:
+
+* RGB &lt;-&gt; GRAY ( CV_BGR2GRAY = 6, CV_RGB2GRAY = 7 , CV_GRAY2BGR = 8, CV_GRAY2RGB = 8)
+* RGB &lt;-&gt; CIE XYZ.Rec 709 with D65 white point ( CV_BGR2XYZ = 32, CV_RGB2XYZ = 33, CV_XYZ2BGR = 34, CV_XYZ2RGB = 35)
+* RGB &lt;-&gt; YCrCb JPEG (or YCC) ( CV_BGR2YCrCb = 36, CV_RGB2YCrCb = 37, CV_YCrCb2BGR = 38, CV_YCrCb2RGB = 39)
+* RGB &lt;-&gt; HSV ( CV_BGR2HSV = 40, CV_RGB2HSV = 41, CV_HSV2BGR = 54, CV_HSV2RGB = 55 )
+* RGB &lt;-&gt; HLS ( CV_BGR2HLS = 52, CV_RGB2HLS = 53, CV_HLS2BGR = 60, CV_HLS2RGB = 61)
+* RGB &lt;-&gt; CIE L*a*b* ( CV_BGR2Lab = 44, CV_RGB2Lab = 45, CV_Lab2BGR = 56, CV_Lab2RGB = 57)
+* RGB &lt;-&gt; CIE L*u*v* ( CV_BGR2Luv = 50, CV_RGB2Luv = 51, CV_Luv2BGR = 58, CV_Luv2RGB = 59)
+* Bayer &lt;-&gt; RGB ( CV_BayerBG2BGR = 46, CV_BayerGB2BGR = 47, CV_BayerRG2BGR = 48, CV_BayerGR2BGR = 49, ...
+    CV_BayerBG2RGB = 48, CV_BayerGB2RGB = 49, CV_BayerRG2RGB = 46, CV_BayerGR2RGB = 47)
+
+For more details see OpenCV documentation.
+cvDilate: Dilates every plane of a data object by using a specific structuring element.
+
+This filter applies the dialation method cvDilate of OpenCV to every plane in the source data object. The result is contained in the destination object. It can handle data objects of type uint8, uint16, int16, float32 and float64 only.
+
+It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
+
+The dilation is executed using a structuring element which is (if not otherwise stated) a 3x3 kernel filled with ones. Else you can give an two-dimensional uint8 data object. Then, the function dilates the source image using the specified structuring element that determines the shape of a pixel neighborhood over which the maximum is taken:
+
+dst(x,y) = max_{(x&#39;,y&#39;):element(x&#39;,y&#39;)!=0} src(x+x&#39;,y+y&#39;)
+
+Dilation can be applied several times (parameter &#39;iterations&#39;).
+cvDrawChessboardCorners: Renders the detected chessboard corners.
+
+The function draws individual chessboard corners detected either as red circles if the board was not found, or as colored corners connected with lines if the board was found.
+cvDrawKeypoints: Draws keypoints.
+cvDrawMatcher: Draw the obtained matches points between two images.
+This function draws matches of keypoints from two images in the output image. Match is a line connecting two keypoints (circles).
+cvErode: Erodes every plane of a data object by using a specific structuring element.
+
+This filter applies the erosion method cvErode of OpenCV to every plane in the source data object. The result is contained in the destination object. It can handle data objects of type uint8, uint16, int16, float32 and float64 only.
+
+It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
+
+The erosion is executed using a structuring element which is (if not otherwise stated) a 3x3 kernel filled with ones. Else you can give an two-dimensional uint8 data object. Then, the function dilates the source image using the specified structuring element that determines the shape of a pixel neighborhood over which the maximum is taken:
+
+dst(x,y) = min_{(x&#39;,y&#39;):element(x&#39;,y&#39;)!=0} src(x+x&#39;,y+y&#39;)
+
+Erosion can be applied several times (parameter &#39;iterations&#39;).
+cvEstimateAffine3DParams: Computes an optimal affine transformation between two 3D point sets
+
+The function estimates an optimal 3D affine transformation between two 3D point sets using the RANSAC algorithm. The transformation describes then
+[destination;1] = output * [source;1] for each point in sources and destinations 3D point set.
+cvFFT1D: 1D-dimentional fourier-transformation using cv::DFT.
+
+This filter tries to perform an inplace FFT for a given line or 2D-dataObject. The FFT is calculated linewise.The result is a complex-dataObject. The axis-scales and units are invertes and modified.
+
+This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, false, false, true)-function.
+
+cvFFT2D: 2D-dimentional fourier-transformation using cv::DFT.
+
+This filter tries to perform an inplace FFT for a given 2D-dataObject. The FFT is calculated planewise.The result is a complex-dataObject. The axis-scales and units are invertes and modified.
+
+This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, false, false, false)-function.
+
+cvFindChessboardCorners: Finds the positions of internal corners of the chessboard.
+
+This filter is a wrapper for the cv::method cv::findChessboardCorners.
+The openCV-function attempts to determine whether the input image is a view of the chessboard pattern and locate the internal chessboard corners. The function returns a non-zero value if all of the corners are found and they are placed in a certain order (row by row, left to right in every row). Otherwise, if the function fails to find all the corners or reorder them, it returns 0. For example, a regular chessboard has 8 x 8 squares and 7 x 7 internal corners, that is, points where the black squares touch each other. The detected coordinates are approximate, and to determine their positions more accurately, the function calls cornerSubPix().
+
+Remark 1: This function gives only a rough estimation of the positions. For a higher resolutions, you should usethe function cornerSubPix() with different parameters if returned coordinates are not accurate enough.This function is wrapped to itom by the filter &#39;cvCornerSubPix&#39;.
+
+Remark 2: The outer frame of the dataObject / the image should not be white but have approximately the same gray value than the bright field.
+
+Remark 3: The bright fields should be free of darker dirt or dust and you should apply a coarse shading correction to improve the results.
+
+cvFindCircles: Finds circles in a grayscale image using the Hough transform.
+
+This filter is a wrapper for the OpenCV-function cv::HoughCircles.The function finds circles in a grayscale image using a modification of the Hough transform.Based on this filter, circles are identified and located.The result is a dataObject where the number of rows corresponds to the number of found circles, each row is (x,y,r).
+
+cvFindFundamentalMat: Calculates a fundamental matrix from the corresponding points in two images.
+
+The epipolar geometry is described by the following equation:
+
+.. math:: [p_2; 1]^T F [p_1; 1] = 0
+
+where F is a fundamental matrix, p_1 and p_2 are corresponding points in the first and the second images, respectively.
+
+The function calculates the fundamental matrix using one of four methods listed above and returns the found fundamental matrix.
+Normally just one matrix is found. But in case of the 7-point algorithm, the function may return up to 3 solutions (9   imes 3 matrix that stores all 3 matrices sequentially).
+cvFindHomography: Finds a perspective transformation between two planes.
+
+The functions find and return the perspective transformation H between the source and the destination planes:
+
+.. math:: s_i \begin{bmatrix}{x&#39;_i}\\{y&#39;_i}\\{1}\end{bmatrix} \sim H \begin{bmatrix}{x_i}\\{y_i}\\{1}\end{bmatrix}
+
+so that the back-projection error
+
+.. math:: \sum _i \left(x&#39;_i- \frac{h_{11} x_i + h_{12} y_i + h_{13}}{h_{31} x_i + h_{32} y_i + h_{33}} \right)^2 + \left(y&#39;_i- \frac{h_{21} x_i + h_{22} y_i + h_{23}}{h_{31} x_i + h_{32} y_i + h_{33}} \right)^2
+
+is minimized.
+
+The function is used to find initial intrinsic and extrinsic matrices. Homography matrix is determined up to a scale. Thus, it is normalized so that h_{33}=1.
+cvFlannBasedMatcher: This function uses the nearest search methods to find the best matching points. Matching methods by means of Flann matcher.
+This includes some nearest neighbour algorithms to calculate the distance between two points.
+
+If desired, this function can also return a filtered list of matches and keypoints (keypoints1 and keypoints2) that only contain matches and keypoints whose matched distances
+are bounded by max_distance. You only need to indicate parameters belonging to the best-matching process if this max_distance parameter is &gt; 0.0.
+cvFlipLeftRight: This filter flips the image left to right.
+
+This filter applies the flip method cvFlip of OpenCV with the flipCode &gt; 0 to a 2D source data object. The result is contained in the destination object
+
+It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated
+.
+cvFlipUpDown: This filter flips the image upside down.
+
+This filter applies the flip method cvFlip of OpenCV with the flipCode = 0 to a 2D source data object. The result is contained in the destination object.
+
+It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated
+.
+cvGetRotationMatrix2D: Calculates an affine matrix of 2D rotation.
+The function calculates the following matrix:
+
+| alpha beta  (1 - alpha) * center.x - beta * center.y        |
+|- beta alpha beta * center.x        + (1 - alpha) * center.y |
+
+where
+alpha = scale * cos(angle), beta = scale * sin(angle)
+The transformation maps the rotation center to itself. This is not the target, adjust the shift.
+Thr rotation can be applied by using e. g. the cvWarpAffine filter.
+
+Note:
+When you want to use the cvWarpAffine method with this rotation matrix your center coordinates must be in the pixel domain.
+cvIFFT1D: 1D-dimentional inverse fourier-transformation using cv::DFT.
+
+This filter tries to perform an inplace FFT for a given line or 2D-dataObject. The FFT is calculated linewise.The result is a real-dataObject. The axis-scales and units are invertes and modified.
+
+This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, true, true, true)-function.
+
+cvIFFT2D: 2D-dimentional inverse fourier-transformation using cv::DFT.
+
+This filter tries to perform an inplace FFT for a given 2D-dataObject. The FFT is calculated planewise.The result is a real-dataObject. The axis-scales and units are invertes and modified.
+
+This filter internally calls the ito::dObjHelper::calcCVDFT(dObjImages, true, true, false)-function.
+
+cvInitUndistortRectifyMap: Computes the undistortion and rectification transformation map.
+cvMedianBlur: Planewise median blur filter.
+
+The function smoothes an image using the median filter with the kernel-size x kernel-size aperture. Each channel of a multi-channel image is processed independently. It can handle data objects of type uint8, uint16, int16, ito::tInt32, float32 and float64 only.
+
+The itom-wrapping does not work inplace currently. A new dataObject is allocated.
+
+Warning: NaN-handling for floats not verified.
+cvMergeChannels: Reduces a [4x...xMxN] or [3x...xMxN] uint8 data object to a [...xMxN] rgba32 data object where the
+first dimension is merged into the color type. If the first dimension is equal to 4, the planes are used for the blue, green, red and alpha
+component, in case of three, the alpha component is set to the optional alpha value.
+cvMorphologyEx: Erodes every plane of a data object by using a specific structuring element.
+
+Performs advanced morphological transformations.The function cv::morphologyEx can perform advanced morphological transformations using an erosion and dilation as basic operations.MORPH_ERODE Any of the operations can be done in - place.In case of multi - channel images, each channel is processed independently.).
+cvProjectPoints: Project points from object into image space using the given calibration matrices,
+distortion coefficients rotation and tralsation vector.
+cvRemap: Applies a generic geometrical transformation to an image.
+
+The function remap transforms the source image using the specified map:
+
+.. math:: dst(x,y) = src(map1(x, y), map2(x, y))
+
+where values of pixels with non-integer coordinates are computed using one of available interpolation methods. map_x and map_y can be encoded as
+separate floating-point maps in map_1 and map_2 respectively, or interleaved floating-point maps of (x,y) in map_1 ,
+or fixed-point maps created by using convertMaps() . The reason you might want to convert from floating to fixed-point representations of a map is
+that they can yield much faster (~2x) remapping operations. In the converted case, map_1 contains pairs (cvFloor(x), cvFloor(y)) and map_2 contains
+indices in a table of interpolation coefficients.
+cvRemoveSpikes: Set single spikes at measurement edges to a new value.
+
+This filter creates a binary mask for the input object. The value of mask(y,x) will be 1 if value of input(y,x) is within the specified range and is finite.The mask is eroded and than dilated by kernel size using openCV cv::erode and cv::dilate with a single iteration. In the last step the value of output(y,x) is set to newValue if mask(y,x) is 0.
+
+It is allowed to let the filter work inplace if you give the same source and destination data object, else the destination data object is verified if it fits to the size and type of the source data object and if not a new one is allocated and the input data is copied to the new object.
+
+cvResize: Resizes an image
+
+The function resize resizes the image &#39;inputObject&#39; down to or up by the specific factors.
+
+To shrink an image, it will generally look best with CV_INTER_AREA interpolation, whereas to enlarge an image,
+it will generally look best with CV_INTER_CUBIC (slow) or CV_INTER_LINEAR (faster but still looks OK).
+The axisScale properties of the x- and y-axes of the outputObject are divided by fx and fy respectively, while the offset values are multiplied with fx and fy.
+cvRotate180: This filter rotates the image by 180°.
+
+This filter applies the flip method cvFlip from OpenCV horizontally and vertically to rotate the object. The result is contained in the destination object
+
+It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
+
+cvRotateM90: This filter rotates the image by 90° clock wise.
+
+This filter applies the flip method cvFlip and the transpose method cvTranspose of OpenCV to rotate the object. The result is contained in the destination object
+
+It is allowed to let the filter work pseudo inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
+
+cvRotateP90: This filter rotates the image by 90° count clock wise.
+
+This filter applies the flip method cvFlip and the transpose method cvTranspose of OpenCV to rotate the object. The result is contained in the destination object
+
+It is allowed to let the filter work pseudo inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
+
+cvSiftDetectorDescriptorExtractor: Implements the sift algorithm and extracts the corresponding descriptors.
+The sift algorithm is a scale invariant feature transform in which image content is transformed into local feature coordinates.
+In each octave, the initial image is repeatedly convolved with Gaussians to produce a set of scale space images. Adjacent Gaussians are subtracted to produce the DOG.
+After each octave, the Gaussian image is down-sampled by a factor of 2.
+Detect maxima and minima of difference-of-Gaussian in scale space. Each point is compared to its 8 neighbours in the current image and 9 neighbours in the scales above and below.
+reference: David G. Lowe, &quot;Distinctive image features from scale-invariant key points,&quot; International Journal of Computer Vision, 60, 2 (2004), pp. 91-110.
+cvSplitChannels: Converts a rgba32 data object (with four channels blue, green, red, alpha) into
+an output data object of type &#39;uint8&#39; and a shape that has one dimension more than the input object and the first dimension is equal to 4.
+The four color components are then distributed into the 4 planes of the first dimension.
+
+For instance a 4x5x3, rgba32 data objects leads to a 4x4x5x3 uint8 data object.
+cvThreshold: Applies a fixed-level threshold to each array element..
+
+The function applies fixed-level thresholding to a multiple-channel array.
+The function is typically used to get a bi-level (binary) image out of a grayscale image (compare could be also used for this purpose)
+or for removing a noise, that is, filtering out pixels with too small or too large values.
+There are several types of thresholding supported by the function. They are determined by type parameter.
+
+Also, the special values THRESH_OTSU or THRESH_TRIANGLE may be combined with one of the above values.
+In these cases, the function determines the optimal threshold value using the Otsu&#39;s or Triangle algorithm and uses it instead of the specified thresh.
+
+Note:
+Currently, the Otsu&#39;s and Triangle methods are implemented only for 8-bit single-channel images.
+cvUndistort: Transforms an image to compensate for lens distortion.
+
+The function transforms an image to compensate radial and tangential lens distortion.
+The function is simply a combination of cvInitUndistortRectifyMap() (with unity R) and cvRemap() (with bilinear interpolation).
+See the former function for details of the transformation being performed.
+
+Those pixels in the destination image, for which there is no correspondent pixels in the source image, are filled with zeros (black color).
+cvUndistortPoints: Computes the ideal point coordinates from the observed point coordinates.
+
+The function is similar to cvUndistort() and cvInitUndistortRectifyMap() but it operates on a sparse set of points instead of a raster image. Also the function performs a reverse transformation to cvProjectPoints() .
+In case of a 3D object, it does not reconstruct its 3D coordinates, but for a planar object, it does, up to a translation vector, if the proper R is specified.
+cvWarpAffine: Applies an affine transformation onto a 2D dataObject.
+The function warpAffine transforms the source dataObject using the specified matrix:
+
+.. math:: dst(x,y)=src(M11x+M12y+M13,M21x+M22y+M23):
+
+When the flag WARP_INVERSE_MAP is set.
+Otherwise, the transformation is first inverted with invertAffineTransform
+and then put in the formula above instead of M.
+
+Note:
+The rotation matrix of the cvGetRotationMatrix2D filter can be used.
+The matrix must correspond to the pixel domain.
+
+No metaInformation is set to the destinationObj because the physical units
+of the target object differ from each other depending on the algorithm parameter.
+cvWarpPerspective: Applies a perspective transformation to an image
+
+The function warpPerspective transforms the source image using the specified matrix H
+cvMedianBlur: Planewise median blur filter.
+
+The function smoothes an image using the median filter with the kernel-size x kernel-size aperture. Each channel of a multi-channel image is processed independently. It can handle data objects of type uint8, uint16, int16, ito::tInt32, float32 and float64 only.
+
+The itom-wrapping does not work inplace currently. A new dataObject is allocated.
+
+Warning: NaN-handling for floats not verified.
+</pre></div>
+</div>
+<p>Call the filter. The parameters after the filter name are the
+<code class="docutils literal notranslate"><span class="pre">mandatory</span></code> parameters followed by the <code class="docutils literal notranslate"><span class="pre">optional</span></code> ones (if desired):</p>
+<ol class="arabic simple">
+<li><p>parameter (mand): input image</p></li>
+<li><p>parameter (mand): output image</p></li>
+<li><p>kernellength (opt): size of squared filter kernel (default: 3)</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">algorithms</span><span class="o">.</span><span class="n">cvMedianBlur</span><span class="p">(</span><span class="n">dObj</span><span class="p">,</span> <span class="n">outputImage</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">dObj</span><span class="p">)</span>  <span class="c1"># plot original image</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">outputImage</span><span class="p">)</span>  <span class="c1"># plot filtered image</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(151, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../../_images/demoOpenCVFilter_1.png"><img alt="../../../_images/demoOpenCVFilter_1.png" src="../../../_images/demoOpenCVFilter_1.png" style="width: 100%;" />
+</a>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.161 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-itom-plugins-demo-opencvfilter-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/553f1281dab806893635cc768a0448e6/demo_OpenCVFilter.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_OpenCVFilter.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/044750ae4b5ae08c89d108c2ef11613f/demo_OpenCVFilter.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">demo_OpenCVFilter.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/24522ff8d93cefa71caa88830918e000/demo_OpenCVFilter.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">demo_OpenCVFilter.zip</span></code></a></p>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="demo_DummyMotor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12.1.10.6.2. </span>DummyMotor</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="demofaceDetection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.1.10.6.4. </span>Face Detection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/11_demos/itom/plugins/demo_OpenCVFilter.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

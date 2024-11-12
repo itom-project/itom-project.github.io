@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.5. Python Package Manager &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_itom_gui/pipManager';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5.6. Python Timer Manager" href="timerManager.html" />
+    <link rel="prev" title="5.4. User Management" href="userManagement.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mainWindow.html">5.1. Main Window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editor.html">5.2. Script Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="propertyDialog.html">5.3. Property Dialog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userManagement.html">5.4. User Management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.5. Python Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timerManager.html">5.6. Python Timer Manager</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="gui.html" class="nav-link"><span class="section-number">5. </span>The itom User Interface</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="python-package-manager">
+<span id="gui-pipmanager"></span><h1><span class="section-number">5.5. </span>Python Package Manager<a class="headerlink" href="#python-package-manager" title="Link to this heading">#</a></h1>
+<p>Python is a very modular script language. Its functionality can be enhanced by
+so called packages. One package has a certain name and a version number, such
+that updates
+are possible. Furthermore, a package might dependent on multiple other packages
+that have to be installed in order to run the package.</p>
+<p><strong>itom</strong> provides a package manager, that is accessible via the <strong>Script</strong> menu of the main window:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/pipManager1.png"><img alt="../_images/pipManager1.png" src="../_images/pipManager1.png" style="width: 745px;" />
+</a>
+</figure>
+<p>This package manager is a graphical user interface for the python package
+installation and administration tool <strong>pip</strong> (see <a class="reference external" href="https://pip.pypa.io/">https://pip.pypa.io/</a>). Pip
+itself is a package of python and comes with a python installation from python
+3.4 on. For earlier versions of python it is necessary to install pip first
+(see <a class="reference external" href="https://pip.pypa.io/en/stable/installing.html#install-pip">https://pip.pypa.io/en/stable/installing.html#install-pip</a>).</p>
+<p>Once the package manager is started, pip is detected and the version is checked.
+Then pip is asked to provide a list of currently installed packages that are
+listed in the list widget of the package manager. For this purpose an active
+internet connection is required. The connection can be further configured by
+enlarging the <em>pip settings</em> group box. All these configurations are also
+available when directly calling <em>pip</em> from the command line. The log window
+shows the output of pip. This output is finally parsed and leads to the content
+of the table <em>installed packages</em>. In case of a problem, text might also appear
+with red color in the log.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/pipManager2.png"><img alt="../_images/pipManager2.png" src="../_images/pipManager2.png" style="width: 745.0px; height: 642.0px;" />
+</a>
+</figure>
+<p>Depending on the version of pip, each package is described by</p>
+<ul class="simple">
+<li><p>its name</p></li>
+<li><p>its current version</p></li>
+<li><p>the location where the package is locally installed</p></li>
+<li><p>dependent packages that are required to run this package (comma-separated)</p></li>
+<li><p>information about possible updates in the internet (click <em>check for updates</em>
+to obtain this information)</p></li>
+<li><p>the package’s summary</p></li>
+<li><p>a homepage about the package</p></li>
+<li><p>the package’s license</p></li>
+</ul>
+<p>Click the <em>check for updates</em> button, to screen the official python package
+index (<a class="reference external" href="https://pypi.python.org">https://pypi.python.org</a>) for newer versions of the installed packages.
+<em>pip</em> itself is also listed as package.</p>
+<p>If you want to install new packages or update an existing package, click the
+<em>install…</em> button:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/pipManager3.png"><img alt="../_images/pipManager3.png" src="../_images/pipManager3.png" style="width: 497.0px; height: 459.0px;" />
+</a>
+</figure>
+<p>The radio buttons in the group <strong>Install</strong> provide four different options
+to install a package:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Install a package from a modern wheel archive file (<em>whl</em>). Indicate the path</dt><dd><p>to the <em>whl</em> file by clicking the tool button below.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Install a package from a tar.gz source archive. Indicate the path</dt><dd><p>to the <em>tar.gz</em> file by clicking the tool button below.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Indicate the name of the package only and let the package manager search</dt><dd><p>the official python package index (<a class="reference external" href="https://pypi.python.org">https://pypi.python.org</a>) for the newest
+version of this package. If found, the package is downloaded and automatically
+installed.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>It is also possible to create a <strong>requirements.txt</strong> file and list all</dt><dd><p>packages, that should be installed, in separated lines. It is further possible
+to append further versions constraints for each package in the text file.
+Then pass the path to this <strong>requirements.txt</strong> file by clicking the tool
+button. Each package is then tried to be found (either from the official
+python package index and / or from the path given in <em>find links</em>),
+downloaded (if necessary) and installed (or upgraded). An upgrade is
+only done if the version constraint in the requirements.txt file is properly
+set.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A package can be installed in <a class="reference external" href="https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#working-in-development-mode">“editable” or “develop” mode</a> to work on it.</dt><dd><p>In this case, it is not installed in the Python directory, but executed
+directly from the source directory.
+This allows work to be done on the sources without having to install it again.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>See the next section for more information about the ideal package source.</p>
+<p>If you want to upgrade an existing package, it is necessary to click the
+corresponding check box. If you want to also download all required packages,
+click the appropriate check box. Finally you can also indicate
+an alternative search location for packages using the <em>find links</em> option.
+Click OK to start the search and installation. Its progress is then shown in
+the log and the list of packages is updated at the end.</p>
+<p>It is also possible to uninstall an installed package (however if no other
+package depends on this package). If desired, click a package and click then
+the <em>uninstall</em> button.</p>
+<section id="package-sources">
+<h2><span class="section-number">5.5.1. </span>Package Sources<a class="headerlink" href="#package-sources" title="Link to this heading">#</a></h2>
+<p>If you look for small packages (e.g. <a class="reference internal" href="editor.html#gui-editor-syntax-check"><span class="std std-ref">frosted</span></a>),
+the easiest way of installing them is the direct download from the python package
+index. However, there exist also more complex packages that contain for instance
+a huge number of C files. These packages require a compiler on your computer,
+since the source code of the C files is compiled to binary files (that can be
+used by the python package) at installation time at your computer. Sometimes
+these packages also required further 3rd party libraries (e.g. Numpy, Scipy or
+Matplotlib). If so, it might be easier to directly get pre-compiled packages
+from the internet. One source for such precompiled packages is the
+website <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a>:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/pipManager4.png"><img alt="../_images/pipManager4.png" src="../_images/pipManager4.png" style="width: 678.0px; height: 329.0px;" />
+</a>
+</figure>
+<p>The packages listed by this website are only available for Windows but different
+versions of Python in 32bit and 64bit. Download the corresponding wheel file and
+use the <strong>itom</strong> python package manager to install it (don’t forget to mark the
+upgrade check box if you want to update an existing package). An advantage of
+this site is also, that some libraries are compiled using the fast MKL compiler
+from Intel. Please notice that you also need to install updates for packages
+obtained from Gohlke by downloading the updated version as wheel file and install
+it. Do not mix the source from Gohlke and the python package index.</p>
+<p>Under Linux, it is also worth and possible to install common packages, like
+Numpy, Scipy or Matplotlib from the package managers of your Linux distribution.
+This is the way to obtain prebuild binaries under Linux. The above mentioned
+website only provides Windows binaries.</p>
+</section>
+<section id="start-package-manager-only">
+<h2><span class="section-number">5.5.2. </span>Start Package Manager only<a class="headerlink" href="#start-package-manager-only" title="Link to this heading">#</a></h2>
+<p>It is possible to directly start the Pip Package Manager without the GUI of itom.
+This is useful especially if you want to upgrade or re-install Numpy, since Numpy is used by itom and can therefore not be changed after that
+Python has been loaded in itom. If you want to directly start the package manager, call the application <strong>qitom</strong> or <strong>qitom.exe</strong> with
+the argument <strong>pipManager</strong>:</p>
+<div class="highlight-rest notranslate"><div class="highlight"><pre><span></span>qitom.exe pipManager
+</pre></div>
+</div>
+<p>Under Windows, you can also create a shortcut of the <strong>qitom.exe</strong> application. Then right-click the shortcut, choose <em>properties</em> and append
+<em>pipManager</em> to the path in the text field <em>destination</em> (e.g. C:/itom/qitom.exe pipManager). Double-click the shortcut to open the package manager.</p>
+<p>Alternatively, put an empty file <strong>restart_itom_with_pip_manager.txt</strong> into the temp folder of your operating system (e.g. C:/Users/username/AppData/Local/Temp). The package manager is then started
+at the next startup of <em>itom</em>. Afterwards the file is automatically removed. This is done, once you try to install <em>Numpy</em> in an ordinary instance
+of itom. Then, this text file is created and you have to restart itom in order to get a pure instance of the package manager.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="userManagement.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.4. </span>User Management</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="timerManager.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.6. </span>Python Timer Manager</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-sources">5.5.1. Package Sources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-package-manager-only">5.5.2. Start Package Manager only</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/04_itom_gui/pipManager.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

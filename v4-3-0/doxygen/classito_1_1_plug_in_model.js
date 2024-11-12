@@ -1,0 +1,26 @@
+var classito_1_1_plug_in_model =
+[
+    [ "PlugInModel", "classito_1_1_plug_in_model.html#a424bc4eb696132c110de84ce9b8c781c", null ],
+    [ "~PlugInModel", "classito_1_1_plug_in_model.html#ab1cc678ad364862ecb98f5e30d9a6552", null ],
+    [ "columnCount", "classito_1_1_plug_in_model.html#a6d233d2c32beeb7b875e1b0f6bca0331", null ],
+    [ "data", "classito_1_1_plug_in_model.html#a1fea650dc12fe69acaa3a848791abfe3", null ],
+    [ "deleteInstance", "classito_1_1_plug_in_model.html#a0c0e48d4b8e2c20ee8b534d6fb946243", null ],
+    [ "flags", "classito_1_1_plug_in_model.html#a84e1bbbd977c5bd9c28cfd0cca6feb86", null ],
+    [ "getFilterOrWidgetNodeInfo", "classito_1_1_plug_in_model.html#a6ca18ce7a24ce85e49906d16a82649bb", null ],
+    [ "getFixedNodeInfo", "classito_1_1_plug_in_model.html#a43e666248e2663daefac258f9d6a750a", null ],
+    [ "getIndexByAddIn", "classito_1_1_plug_in_model.html#a2d32fe675a5bd55d847b53930f1166b6", null ],
+    [ "getIndexByAddInInterface", "classito_1_1_plug_in_model.html#ad30d4e92b1221777dc47b74b7ad18f35", null ],
+    [ "getInitCommand", "classito_1_1_plug_in_model.html#a62d3d95668bedf63e11bf403203995ed", null ],
+    [ "getInstanceNodeInfo", "classito_1_1_plug_in_model.html#ab6e1db5e6c62d714d5e96a82644982cd", null ],
+    [ "getIsAlgoPlugIn", "classito_1_1_plug_in_model.html#a79fc3ef6a75e74a1fa485ad3d2d9f8cb", null ],
+    [ "getIsGrabberInstance", "classito_1_1_plug_in_model.html#aec7c7ac5148d8829aed9d0b56f604562", null ],
+    [ "getModelIndexInfo", "classito_1_1_plug_in_model.html#a7dc61230d96c5d9bb6c9467a2ecfa4de", null ],
+    [ "getPluginNodeInfo", "classito_1_1_plug_in_model.html#a9c3d3ce9ff46cf9eaee8aa736d381ca3", null ],
+    [ "getTypeNode", "classito_1_1_plug_in_model.html#a345be2f06c2fa5cf574548e9f57a0502", null ],
+    [ "headerData", "classito_1_1_plug_in_model.html#a6dde7cdf02ffd2ad76d9a150af9c9752", null ],
+    [ "index", "classito_1_1_plug_in_model.html#a9b75484ff8a1c0e1c3eb8db5a82d4bee", null ],
+    [ "insertInstance", "classito_1_1_plug_in_model.html#a4918606f9056f57d7a7ead4ee9f1cc02", null ],
+    [ "parent", "classito_1_1_plug_in_model.html#a739e47df6b956f1786d633e2268a406b", null ],
+    [ "resetModel", "classito_1_1_plug_in_model.html#a5e6459aa8af9cd1724636b0fe0e0e889", null ],
+    [ "rowCount", "classito_1_1_plug_in_model.html#ae56dfca90d201601dcd52a43c59ffec9", null ]
+];

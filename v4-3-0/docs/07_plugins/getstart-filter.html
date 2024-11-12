@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8.7. Getting started with algorithm plugins (denoted as filters) &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_plugins/getstart-filter';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="8.8. Development under C++" href="development/plugin-development.html" />
+    <link rel="prev" title="8.6. Getting started with actuators" href="getstart-actuator.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basic_concept.html">8.1. Basic concept</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loading_plugins.html">8.2. Loading plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart-hardware.html">8.3. How to use hardware plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart-grabber.html">8.4. Getting started with grabbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart-adda.html">8.5. Getting started with A/D converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart-actuator.html">8.6. Getting started with actuators</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="development/plugin-development.html">8.8. Development under C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development/openCVMat.html">8.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="plugins.html" class="nav-link"><span class="section-number">8. </span>Plugins</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="getting-started-with-algorithm-plugins-denoted-as-filters">
+<span id="getstartfilter"></span><h1><span class="section-number">8.7. </span>Getting started with algorithm plugins (denoted as filters)<a class="headerlink" href="#getting-started-with-algorithm-plugins-denoted-as-filters" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2><span class="section-number">8.7.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Algorithm plugins can contain both specialised algorithms, that work faster if implemented in C++ (including further
+3rd party libraries or technologies) rathen than in Python, and / or methods, that provide complex, C++ programmed,
+GUIs. The algorithms as well as the GUIs can then be accessed via Python and integrated into ordinary Python scripts.
+However, it is also possible to call such algorithms from other plugins of itom.</p>
+<p>While single algorithms, implemented in an algorithm plugin, are called <strong>filters</strong> in <strong>itom</strong> (due to historical reasons),
+the method to create and return / open an user interface are called <strong>widgets</strong>.</p>
+</section>
+<section id="obtaining-help-for-filters-and-widgets">
+<h2><span class="section-number">8.7.2. </span>Obtaining help for filters and widgets<a class="headerlink" href="#obtaining-help-for-filters-and-widgets" title="Link to this heading">#</a></h2>
+<p>A list of <strong>filters /algorithms</strong> and <strong>widgets</strong>, that are contained in one algorithm plugin, can be seen in the
+<a class="reference internal" href="../04_itom_gui/plugins.html#gui-plugins"><span class="std std-ref">plugin toolbox</span></a>. Additional information about each filter / algorithm and widget is gained by selecting
+<strong>Info…</strong> from the context menu of each specific entry in the plugin toolbox or directly by opening the help viewer
+of <strong>itom</strong> (menu <strong>Help</strong> &gt;&gt; <strong>Plugin Help Viewer</strong>).</p>
+<p>Additionally, there are few Python methods in the <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a> module, that allow a Python-based access to information
+about each filter and widget. These information is obtained by the methods <a class="reference internal" href="../09_reference/itom_general.html#itom.filterHelp" title="itom.filterHelp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.filterHelp()</span></code></a> for <strong>filters</strong>
+and <a class="reference internal" href="../09_reference/itom_general.html#itom.widgetHelp" title="itom.widgetHelp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.widgetHelp()</span></code></a> for <strong>widgets</strong>. If these methods are called without further arguments, a list of
+all available filters or widget methods including a short info string are printed to the command line.</p>
+<p>It is also possible to filter the output by giving a string as first argument. If this string does exactly match one
+filter or widget method, detailed information about this filter or widget are printed. Else, all filters and / or
+widget methods are displayed, whose name contains the given string.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">filterHelp</span><span class="p">()</span>            <span class="c1"># list of all available filters</span>
+<span class="linenos">2</span><span class="n">filterHelp</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>      <span class="c1"># list shortened to filters containing &#39;mean&#39;</span>
+<span class="linenos">3</span><span class="n">filterHelp</span><span class="p">(</span><span class="s1">&#39;calcMeanZ&#39;</span><span class="p">)</span> <span class="c1"># detailed information on &#39;calcMeanZ&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="interruptible-filters-and-progress-information">
+<span id="filter-interruptible"></span><h2><span class="section-number">8.7.3. </span>Interruptible filters and progress information<a class="headerlink" href="#interruptible-filters-and-progress-information" title="Link to this heading">#</a></h2>
+<p>For itom 3.2.1 and older, it was not possible to interrupt calls to filters or to get progress information about
+the current state of the algorithm (e.g. if it is a long operation). This has changed from itom 3.3 on,
+such that selected filters have both the possibility to be interrupted (via the <strong>Stop Python Script Execution</strong> button)
+and / or provide information about their current progress.</p>
+<p>Filters, that might have these feature, need to be programmed based on an alternative filter interface (see
+<a class="reference internal" href="development/plugin-algo.html#plugin-class-algo-filterdefext"><span class="std std-ref">documentation about FilterDefExt</span></a>). The programmer can then indicate in the
+algorithm plugin which feature (cancellation ability, progress information) is implemented in a corresponding filter method.</p>
+<p>Use the method <a class="reference internal" href="../09_reference/itom_general.html#itom.filterHelp" title="itom.filterHelp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.filterHelp()</span></code></a> or the plugin help viewer of itom to see if a filter has these
+features implemented. If a filter can be cancelled and the user stops the script execution (KeyboardInterrupt),
+the current filter is notified about this via an interrupt-flag. As soon as the executed algorithm checks the active
+state of this flag, the algorithm is stopped and an interrupt error is returned. However, it is a matter of the
+specific implementation of the algorithm, how fast this check and interruption can be executed. Of course, the
+further Python script execution is also stopped after having clicked the button or raised the KeyboardInterrupt
+exception.</p>
+<p>It is also possible to provide a user defined instance of the class <a class="reference internal" href="../09_reference/progressObserver.html#itom.progressObserver" title="itom.progressObserver"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.progressObserver</span></code></a> to the call
+of filters, that support these new features. Then, a parameterless signal (e.g. <strong>clicked()</strong>) of a widget of a user-defined
+user interface can be directly connected to the interrupt flag of this observer. Then, the click to this widget
+will immediately set the interrupt flag of this observer, which is then checked by the underlying, long-running,
+algorithm (see the example <strong>demo/algoCancelAndProgressWidget.py</strong> for an example in Python or open the widget
+<strong>demoCancellationFunctionWidget</strong> from the <strong>demoAlgorithms</strong> plugin for the C++ demo).</p>
+<p>If the filter method provide information about its current progress, it is possible to both provide a progress bar
+and / or a label widget to this filter (via the class <a class="reference internal" href="../09_reference/progressObserver.html#itom.progressObserver" title="itom.progressObserver"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.progressObserver</span></code></a>), such that the filter can
+regularly update the integer value of the progress bar (must have a slot <strong>setValue(int)</strong>) and / or the text of
+the label (via a slot <strong>setText(QString)</strong>). The progress will be changed from a user-defined minimum value up to
+a user-defined maximum value (if the algorithm is finished).</p>
+<p>For itom 4.1 or younger, it is also possible to connect to different signals of <a class="reference internal" href="../09_reference/progressObserver.html#itom.progressObserver" title="itom.progressObserver"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.progressObserver</span></code></a>
+via the method <a class="reference internal" href="../09_reference/progressObserver.html#itom.progressObserver.connect" title="itom.progressObserver.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.progressObserver.connect()</span></code></a>, such that user defined callback methods can be created
+in Python, that are called for instance if the current progress value or progress text have changed.</p>
+</section>
+<section id="usage-of-filters">
+<h2><span class="section-number">8.7.4. </span>Usage of filters<a class="headerlink" href="#usage-of-filters" title="Link to this heading">#</a></h2>
+<p>Once you know the name of the filter you want to use, you can call it by use of the <a class="reference internal" href="../09_reference/algo.html#itom.filter" title="itom.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itom.filter()</span></code></a> command.
+From <strong>itom 5.0</strong> on, filters or algorithms can also be called like any other method: Every filter is added at runtime
+to the submodule <code class="docutils literal notranslate"><span class="pre">algorithms</span></code> or <a class="reference internal" href="../09_reference/itom_general.html#module-5" title="itom"><code class="xref py py-mod docutils literal notranslate"><span class="pre">itom</span></code></a>. This allow itom to show auto completion and calltips for
+every specific algorithm. This alternative (and recommended) approach is also shown in the code snippets below.</p>
+<p>If you want to call a default filter without cancellation or progress information features, pass the name of the
+filter as first argument (string), followed by the mandatory and optional parameters of the filter itself.
+All arguments can be passed as positional arguments and / or keyword arguments.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">itom</span>
+<span class="linenos">2</span><span class="n">itom</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;filtername&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span> <span class="c1"># mandatory parameters must be given, optional can be given</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># alternative:</span>
+<span class="linenos">5</span><span class="n">itom</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">filtername</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the called filter has optional features, like the cancellation or progress information, an optional instance
+of the class <a class="reference internal" href="../09_reference/progressObserver.html#itom.progressObserver" title="itom.progressObserver"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.progressObserver</span></code></a> can additionally be passed as keyword-based argument <strong>_observer</strong>.
+Always pass this parameter with its name (see also the example <strong>demo/algoCancelAndProgressWidget.py</strong>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">itom</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># create an observer, that updates a progressBar (name: myProgressBar)</span>
+<span class="linenos"> 4</span><span class="c1"># to the current progress value of the called filter.</span>
+<span class="linenos"> 5</span><span class="n">observer</span> <span class="o">=</span> <span class="n">itom</span><span class="o">.</span><span class="n">pythonObserver</span><span class="p">(</span><span class="n">progressBar</span> <span class="o">=</span> <span class="n">myProgressBarHandle</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># connect the clicked() signal of a button (name: btn) to the cancellation feature of the observer</span>
+<span class="linenos"> 8</span><span class="n">btn</span><span class="o">.</span><span class="n">invokeProgressObserverCancellation</span><span class="p">(</span><span class="s2">&quot;clicked()&quot;</span><span class="p">,</span> <span class="n">observer</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">itom</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">&quot;filtername&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">,</span> <span class="n">_observer</span> <span class="o">=</span> <span class="n">observer</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># or alternatively:</span>
+<span class="linenos">13</span><span class="n">itom</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">filtername</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">,</span> <span class="n">_observer</span> <span class="o">=</span> <span class="n">observer</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most filters require some sort of destination dataObject. Make sure to provide suitable dimensions and datatype.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See also in the demo file <strong>demoGaussianSpotCentroidDetection.py</strong>.</p>
+</div>
+</section>
+<section id="usage-of-widgets">
+<h2><span class="section-number">8.7.5. </span>Usage of widgets<a class="headerlink" href="#usage-of-widgets" title="Link to this heading">#</a></h2>
+<p>Every widget method, that is contained in an algorithm plugin (indicated by the small window icon in the plugin toolbox),
+returns an initialized widget or window, that can then be displayed as single child window of itom. The content and
+interaction of this widget has to be implemented in the algorithm plugin.</p>
+<p>There are two ways to initialize such a widget:</p>
+<p><strong>Access via itom GUI / plugin toolbox</strong></p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/openWidgetAlgo.png"><img alt="../_images/openWidgetAlgo.png" src="../_images/openWidgetAlgo.png" style="width: 324.0px; height: 424.0px;" />
+</a>
+</figure>
+<p>Use the action <strong>Open Widget</strong> of the context menu of the corresponding widget method to initialize and open the
+desired widget. If the widget method does not require further mandatory or optional parameter, the widget is opened
+immediately, else the default initialization dialog, known from other plugins like cameras or actuators, is displayed
+such that the user can set the configuration before the widget is initialized itself.</p>
+<p><strong>Access via Python script</strong></p>
+<p>Widgets or windows, contained in algorithm plugins, can also be initialized via Python. For this purpose, use one
+of the two possible static methods <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.createNewPluginWidget" title="itom.ui.createNewPluginWidget"><code class="xref py py-meth docutils literal notranslate"><span class="pre">createNewPluginWidget()</span></code></a> or <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.createNewPluginWidget2" title="itom.ui.createNewPluginWidget2"><code class="xref py py-meth docutils literal notranslate"><span class="pre">createNewPluginWidget2()</span></code></a>.
+Both methods return in case of a successful initialization an instance of the class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.ui</span></code></a>.</p>
+<p>The difference between these both static methods is, that the first can only create the widget with its required
+mandatory (and optional) parameters, but without further parameterization of the type of window. The latter method
+however provides these extended parameters, similar to the default constructor of the class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><code class="xref py py-class docutils literal notranslate"><span class="pre">itom.ui</span></code></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="getstart-actuator.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8.6. </span>Getting started with actuators</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="development/plugin-development.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.8. </span>Development under C++</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">8.7.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtaining-help-for-filters-and-widgets">8.7.2. Obtaining help for filters and widgets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interruptible-filters-and-progress-information">8.7.3. Interruptible filters and progress information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-of-filters">8.7.4. Usage of filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-of-widgets">8.7.5. Usage of widgets</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/07_plugins/getstart-filter.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

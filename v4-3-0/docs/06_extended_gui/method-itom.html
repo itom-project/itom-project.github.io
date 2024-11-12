@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7.2. Show messages, input boxes and default dialogs &#8212; itom Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_extended_gui/method-itom';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.3. Creating customized dialogs, windows and dock widgets" href="qtdesigner.html" />
+    <link rel="prev" title="7.1. Customize the menu bar and toolbars of itom" href="toolbar.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Content</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="toolbar.html">7.1. Customize the menu bar and toolbars of <strong>itom</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7.2. Show messages, input boxes and default dialogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtdesigner.html">7.3. Creating customized dialogs, windows and dock widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_custom_widgets.html">7.4. Custom Designer Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algo-plugin.html">7.5. Implement a  more complex GUI in a plugin (C/C++)</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="extended_gui.html" class="nav-link"><span class="section-number">7. </span>Extending the user interface of <strong>itom</strong></a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="show-messages-input-boxes-and-default-dialogs">
+<span id="msginputboxes"></span><h1><span class="section-number">7.2. </span>Show messages, input boxes and default dialogs<a class="headerlink" href="#show-messages-input-boxes-and-default-dialogs" title="Link to this heading">#</a></h1>
+<p><strong>itom</strong> gives you the possibility to show the standard message and input boxes as well as standard dialogs per <strong>Python</strong> script command.</p>
+<section id="message-boxes">
+<h2><span class="section-number">7.2.1. </span>Message boxes<a class="headerlink" href="#message-boxes" title="Link to this heading">#</a></h2>
+<p>There are three types of message boxes that you can show via a script command. These are divided into the four types <strong>Information</strong>, <strong>Warning</strong>,
+<strong>Question</strong> and <strong>Critical</strong>.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/messageBoxes.png"><img alt="../_images/messageBoxes.png" src="../_images/messageBoxes.png" style="width: 846.0px; height: 134.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Appearance of the different message boxes on a Windows 7 operating system. From left to right: <em>Information</em>, <em>Warning</em>, <em>Question</em>, <em>Critical</em></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The corresponding commands are the following static methods in the class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><code class="xref py py-class docutils literal notranslate"><span class="pre">ui</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgInformation" title="itom.ui.msgInformation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msgInformation()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgWarning" title="itom.ui.msgWarning"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msgWarning()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgQuestion" title="itom.ui.msgQuestion"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msgQuestion()</span></code></a></p></li>
+<li><p><a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.msgCritical" title="itom.ui.msgCritical"><code class="xref py py-meth docutils literal notranslate"><span class="pre">msgCritical()</span></code></a></p></li>
+</ul>
+<p>All these methods have the same syntax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">button</span><span class="p">,</span><span class="n">buttonText</span><span class="p">)</span> <span class="o">=</span> <span class="n">msgInformation</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span> <span class="p">[,</span><span class="n">buttons</span><span class="p">,</span> <span class="n">defaultButton</span><span class="p">,</span> <span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The parameters <em>title</em> and <em>text</em> are the strings for the titlebar and the content area of the message box respectively. The other three parameters
+are optional: <em>buttons</em> is an or-combination of button-IDs, denoting the different buttons you want to display at the bottom of the message box. The possible values correspond to the enumeration <strong>QMessageBox::StandardButton</strong> of the <em>Qt</em>-framework and are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumeration</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ui.MsgBoxOk</p></td>
+<td><p>1024</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxOpen</p></td>
+<td><p>8192</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxSave</p></td>
+<td><p>2048</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxCancel</p></td>
+<td><p>4194304</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxClose</p></td>
+<td><p>2097152</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxDiscard</p></td>
+<td><p>8388608</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxApply</p></td>
+<td><p>33554432</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxReset</p></td>
+<td><p>67108864</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxRestoreDefaults</p></td>
+<td><p>134217728</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxHelp</p></td>
+<td><p>16777216</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxSaveAll</p></td>
+<td><p>4096</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxYes</p></td>
+<td><p>16384</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxYesToAll</p></td>
+<td><p>32768</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxNo</p></td>
+<td><p>65536</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxNoToAll</p></td>
+<td><p>131072</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxAbort</p></td>
+<td><p>262144</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxRetry</p></td>
+<td><p>524288</p></td>
+</tr>
+<tr class="row-odd"><td><p>ui.MsgBoxIgnore</p></td>
+<td><p>1048576</p></td>
+</tr>
+<tr class="row-even"><td><p>ui.MsgBoxNoButton</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For an <strong>or</strong>-combination, use the bar-operator (<strong>|</strong>). The parameter <em>defaultButton</em> only accepts one button value of buttons, listed in the parameter <em>button</em>. The specific button then becomes the default button that is selectable by simply pressing the return-key. Additionally, you
+can let the message box be a child of any other instance of class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><code class="xref py py-class docutils literal notranslate"><span class="pre">ui</span></code></a>. This is useful, if you want to make the message box modal with
+respect to any <a class="reference internal" href="qtdesigner.html#qtdesigner"><span class="std std-ref">user defined dialog</span></a> and not with respect to the main window of <strong>itom</strong>.</p>
+<p>The return value is a tuple containing two values. The first is the value of the button that has been pressed to close the message box with respect to the enumeration values stated above. The second value is the text of the pressed button (e.g. “Ok”).</p>
+<p>An example for a question message box is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">btn</span><span class="p">,</span><span class="n">btnText</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">msgQuestion</span><span class="p">(</span><span class="s2">&quot;Silly question&quot;</span><span class="p">,</span><span class="s2">&quot;Do you like itom?&quot;</span><span class="p">,</span> \
+    <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxYes</span> <span class="o">|</span> <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxNo</span><span class="p">,</span> <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxYes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The user pressed the button&quot;</span><span class="p">,</span> <span class="n">btnText</span><span class="p">,</span> <span class="s2">&quot;with ID&quot;</span><span class="p">,</span><span class="n">btn</span><span class="p">)</span>
+<span class="k">if</span><span class="p">(</span><span class="n">btn</span> <span class="o">==</span> <span class="n">ui</span><span class="o">.</span><span class="n">MsgBoxNo</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;what can we do in order to change your opinion?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="input-boxes">
+<h2><span class="section-number">7.2.2. </span>Input boxes<a class="headerlink" href="#input-boxes" title="Link to this heading">#</a></h2>
+<p>The class <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><code class="xref py py-class docutils literal notranslate"><span class="pre">ui</span></code></a> also contains another group of static methods, that can be used in order to show modal input boxes. These are:</p>
+<section id="integer-input-box">
+<h3><span class="section-number">7.2.2.1. </span>Integer input box<a class="headerlink" href="#integer-input-box" title="Link to this heading">#</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getInt" title="itom.ui.getInt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getInt()</span></code></a> in order to ask the user for a fixed-point number:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/getInt.png"><img alt="../_images/getInt.png" src="../_images/getInt.png" style="width: 216.0px; height: 133.0px;" />
+</a>
+</figure>
+<p>The minimum and maximum value of the input box is set to the values <em>min</em> and <em>max</em> or to the full integer range, if not otherwise stated. The
+step-size <em>step</em> defines the iteration value when the arrows are clicked. The return value is a tuple that contains the current value of the input
+box and <strong>True</strong> if the dialog has been accepted, otherwise <strong>False</strong>, the value still contains the last value of the spinbox.</p>
+</section>
+<section id="double-input-box">
+<h3><span class="section-number">7.2.2.2. </span>Double input box<a class="headerlink" href="#double-input-box" title="Link to this heading">#</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getDouble" title="itom.ui.getDouble"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getDouble()</span></code></a> in order to ask the user for a double-precision floating-point number:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getDouble</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/getDouble.png"><img alt="../_images/getDouble.png" src="../_images/getDouble.png" style="width: 216.0px; height: 133.0px;" />
+</a>
+</figure>
+<p>The minimum and maximum value of the input box is set to the values <em>min</em> and <em>max</em> or to the full double range, if not otherwise stated. In this
+case you can assign the number of decimals that are shown (default:1). The step size is always set to 1. The return tuple has the same form than for
+the integer input box.</p>
+</section>
+<section id="text-input-box">
+<h3><span class="section-number">7.2.2.3. </span>Text input box<a class="headerlink" href="#text-input-box" title="Link to this heading">#</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getText" title="itom.ui.getText"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getText()</span></code></a> in order to ask the user for a string:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getText</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/getText.png"><img alt="../_images/getText.png" src="../_images/getText.png" style="width: 216.0px; height: 138.0px;" />
+</a>
+</figure>
+<p>The default text can be passed as parameter <em>defaultValue</em>. The return tuple also returns the current value of the textbox and the boolean variable <strong>True</strong> if the dialog has been accepted, else <strong>False</strong>.</p>
+</section>
+<section id="option-selection-dialog">
+<h3><span class="section-number">7.2.2.4. </span>Option selection dialog<a class="headerlink" href="#option-selection-dialog" title="Link to this heading">#</a></h3>
+<p>Use <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getItem" title="itom.ui.getItem"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getItem()</span></code></a> in order to let the user select an item from a given list of items:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">accepted</span><span class="p">)</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">stringList</span> <span class="p">[,</span><span class="n">currentIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">editable</span><span class="o">=</span><span class="kc">False</span><span class="p">])</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/getItem.png"><img alt="../_images/getItem.png" src="../_images/getItem.png" style="width: 216.0px; height: 138.0px;" />
+</a>
+</figure>
+<p>Use the parameter <em>stringList</em> in order to pass any sequence (tuple or list) of strings that are displayed as options, the user can choose. You can
+preselect any item by setting the parameter <em>currentIndex</em> to the item’s index (zero-based, default:0). Additionally it is possible to keep the
+selection dialog editable, hence, the user can also type its own string (if True, default: False).</p>
+<p>The returning tuple again contains the current active or typed string value and the boolean variable, that is only <strong>True</strong> if the dialog has been accepted.</p>
+</section>
+</section>
+<section id="standard-dialogs">
+<h2><span class="section-number">7.2.3. </span>Standard dialogs<a class="headerlink" href="#standard-dialogs" title="Link to this heading">#</a></h2>
+<p><strong>itom</strong> provides access to a standard dialog to indicate an existing directory, to choose an existing file or to indicate a path for saving a file.</p>
+<section id="indicate-existing-directory">
+<h3><span class="section-number">7.2.3.1. </span>Indicate existing directory<a class="headerlink" href="#indicate-existing-directory" title="Link to this heading">#</a></h3>
+<p>The dialog is wrapped by the static method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getExistingDirectory" title="itom.ui.getExistingDirectory"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getExistingDirectory()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getExistingDirectory</span><span class="p">(</span><span class="n">caption</span><span class="p">,</span> <span class="n">startDirectory</span> <span class="p">[,</span> <span class="n">options</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/selectDirectory.png"><img alt="../_images/selectDirectory.png" src="../_images/selectDirectory.png" style="width: 792.0px; height: 470.0px;" />
+</a>
+</figure>
+<p>The parameters are as follows:</p>
+<ul>
+<li><p><strong>caption</strong> is the title of the dialog</p></li>
+<li><p><strong>startDirectory</strong> is a string containing an absolute path to the default directory</p></li>
+<li><p><strong>options</strong> is an optional or-combination of one of the following options:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">1. ShowDirsOnly [default], only directories are shown in the dialog</div>
+<div class="line">2. DontResolveSymlinks, if indicated symbolic links are not shown</div>
+<div class="line">other values can be taken from the Qt-enumeration <strong>QFileDialog::Option</strong></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>parent</strong> can be an instance of <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui" title="itom.ui"><code class="xref py py-class docutils literal notranslate"><span class="pre">ui</span></code></a>, such that the dialog becomes modal and on top of this user defined dialog</p></li>
+</ul>
+<p>The return value <strong>ret</strong> of this dialog is either <strong>None</strong> if the dialog has been rejected or else the absolute path to the chosen directory.</p>
+</section>
+<section id="openfilename-dialog">
+<h3><span class="section-number">7.2.3.2. </span>OpenFileName-Dialog<a class="headerlink" href="#openfilename-dialog" title="Link to this heading">#</a></h3>
+<p>Use the static method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getOpenFileName" title="itom.ui.getOpenFileName"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getOpenFileName()</span></code></a> to show this dialog. By this dialog, the user can select one specific existing file in
+any directory. This is usually taken for opening files.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">([</span><span class="n">caption</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">startDirectory</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">filters</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> \
+    <span class="n">selectedFilterIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The title of the dialog can be assigned by the parameter <em>caption</em>. You can choose a default directory by the string <em>startDirectory</em>. If this is not
+given or empty, the current working directory is taken. The possible file filters are set by the string <strong>filters</strong>. This is a double-semicolon
+separated list of entries. An example is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Images</span><span class="p">(</span><span class="o">*.</span><span class="n">png</span> <span class="o">*.</span><span class="n">jpg</span><span class="p">)</span>
+<span class="n">Text</span> <span class="n">Files</span> <span class="p">(</span><span class="o">*.</span><span class="n">txt</span><span class="p">);;</span><span class="n">Itom</span> <span class="n">Data</span> <span class="n">Collection</span> <span class="p">(</span><span class="o">*.</span><span class="n">idc</span><span class="p">);;</span><span class="n">Scripts</span> <span class="p">(</span><span class="o">*.</span><span class="n">py</span> <span class="o">*.</span><span class="n">pyc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The selected, default index is given by <em>selectedFilterIndex</em>, where 0 selects the first item in <em>filters</em>.
+You can also pass some additional options to the dialog by the parameter <em>options</em>. This basically is an or-combination of the Qt-enumeration
+<em>QFileDialog::Option</em>. Reasonable values are:</p>
+<ul class="simple">
+<li><p>0x02, DontResolveSymlinks. If given, symbolic links are not shown in the dialog</p></li>
+<li><p>0x40, HideNameFilterDetails. This only shows the names of the filters, but not the pattern mask.</p></li>
+</ul>
+<p>The function returns <em>None</em> if the dialog has been rejected, else it is the absolute filename of the selected file.</p>
+</section>
+<section id="savefilename-dialog">
+<h3><span class="section-number">7.2.3.3. </span>SaveFileName-Dialog<a class="headerlink" href="#savefilename-dialog" title="Link to this heading">#</a></h3>
+<p>Use the static method <a class="reference internal" href="../09_reference/itom_GUI.html#itom.ui.getSaveFileName" title="itom.ui.getSaveFileName"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getSaveFileName()</span></code></a> to show a dialog, where the user can select a new filename or an existing file in any directory. This is usually taken for saving files.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">([</span><span class="n">caption</span><span class="p">,</span> <span class="n">startDirectory</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">filters</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> \
+    <span class="n">selectedFilterIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">parent</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The parameters are the same than for the open-file-dialog above. However for options, reasonable values are now:</p>
+<ul class="simple">
+<li><p>0x02, DontResolveSymlinks. If given, symbolic links are not shown in the dialog</p></li>
+<li><p>0x04, DontConfirmOverwrite. If given, the user don’t has to confirm if an existing file has been chosen.</p></li>
+<li><p>0x40, HideNameFilterDetails. This only shows the names of the filters, but not the pattern mask.</p></li>
+</ul>
+<p>For combining different options, use the or-operator <strong>|</strong>.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="toolbar.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7.1. </span>Customize the menu bar and toolbars of <strong>itom</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="qtdesigner.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.3. </span>Creating customized dialogs, windows and dock widgets</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-boxes">7.2.1. Message boxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-boxes">7.2.2. Input boxes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-input-box">7.2.2.1. Integer input box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-input-box">7.2.2.2. Double input box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-input-box">7.2.2.3. Text input box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-selection-dialog">7.2.2.4. Option selection dialog</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-dialogs">7.2.3. Standard dialogs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indicate-existing-directory">7.2.3.1. Indicate existing directory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openfilename-dialog">7.2.3.2. OpenFileName-Dialog</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#savefilename-dialog">7.2.3.3. SaveFileName-Dialog</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/06_extended_gui/method-itom.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
