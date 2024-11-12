@@ -37,7 +37,7 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/algorithms/basicFilters';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -46,7 +46,7 @@
     <link rel="prev" title="5.1. Basic GPL Filters" href="BasicGPLFilters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 09, 2024"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
   </head>
   
   
@@ -511,17 +511,17 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – 2D or multidimensional source data object ((u)int8, (u)int16, (u)int32, float32, float64 or rgba32)</p></li>
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – histogram data object (will be int32, [higher-dimensions x 1 x bins] where higher-dimensions corresponds to the dimensions higher than x and y of the source object. A source object of type rgba32 will lead to [higher-dimensions x 4 x bins] where the 4-sized dimension is the histogram if the [r,g,b,gray] value channels. If the given object already fits to the type and size requirements, it is used without allocating a new object.</p></li>
-<li><p><strong>bins</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Number of bins ((u)int16, (u)int32, float32 and float64 only, default: 0 leads to 1024 bins), for (u)int8 and rgba32 the number of bins is given by the total number of values represented by the data type.</p>
+<li><p><strong>bins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Number of bins ((u)int16, (u)int32, float32 and float64 only, default: 0 leads to 1024 bins), for (u)int8 and rgba32 the number of bins is given by the total number of values represented by the data type.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 4096], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>autoInterval</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Defines how to determine the interval of the histogram: -1 (default) use the limits of (u)int8 and rgba32 and auto-calculate the min/max values for floating point data types, 0: use the values given by interval, 1: automatically calculate the min/max values for all data types.</p>
+<li><p><strong>autoInterval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Defines how to determine the interval of the histogram: -1 (default) use the limits of (u)int8 and rgba32 and auto-calculate the min/max values for floating point data types, 0: use the values given by interval, 1: automatically calculate the min/max values for all data types.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, 1], Default: -1</em></div>
 </div>
 </p></li>
-<li><p><strong>interval</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>] </em><em>(</em><em>interval</em><em> [</em><em>v1</em><em>,</em><em>v2</em><em>]</em><em>)</em><em>, </em><em>optional</em>) – <p>Interval of the histogram (depending on parameter ‘autoInterval’). The first value is included in the first bin, the last value is included in the last bin.</p>
+<li><p><strong>interval</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>] </em><em>(</em><em>interval</em><em> [</em><em>v1</em><em>,</em><em>v2</em><em>]</em><em>)</em><em>, </em><em>optional</em>) – <p>Interval of the histogram (depending on parameter ‘autoInterval’). The first value is included in the first bin, the last value is included in the last bin.</p>
 <div class="line-block">
 <div class="line"><em>, All values allowed, Default: [-inf, inf]</em></div>
 </div>
@@ -540,12 +540,12 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – 3D input object of dimension [ZxMxN] with Z different planes.</p></li>
 <li><p><strong>destImg</strong> (<em>itom.dataObject</em>) – Output image of same type than input object and dimension [1xMxN] or [2xMxN] depending on parameter ‘calcStd’.</p></li>
-<li><p><strong>ignoreInf</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, Inf or NaN values will not be taken into account when calculating the mean value (default, only important for floating point data types).</p>
+<li><p><strong>ignoreInf</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, Inf or NaN values will not be taken into account when calculating the mean value (default, only important for floating point data types).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>calcStd</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, the standard deviation is also calculated and put into the second plane of ‘destImg’.</p>
+<li><p><strong>calcStd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, the standard deviation is also calculated and put into the second plane of ‘destImg’.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
@@ -564,27 +564,27 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – 2D image or single plane n-D object</p></li>
 <li><p><strong>dstSlice</strong> (<em>itom.dataObject</em>) – Slice with output data</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>x0-coordinate for slice</p>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>x0-coordinate for slice</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>y0-coordinate for slice</p>
+<li><p><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>y0-coordinate for slice</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>x1-coordinate for slice</p>
+<li><p><strong>x1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>x1-coordinate for slice</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>y1</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>y1-coordinate for slice</p>
+<li><p><strong>y1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>y1-coordinate for slice</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-3.40282e+38, 3.40282e+38], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>interpolationMode</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>0: Bresenham or Nearest Neighbour, 1: weighted (not implemented, yet).</p>
+<li><p><strong>interpolationMode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>0: Bresenham or Nearest Neighbour, 1: weighted (not implemented, yet).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 0], Default: 0</em></div>
 </div>
@@ -604,17 +604,17 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>scrImage</strong> (<em>itom.dataObject</em>) – Input image</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Output image (1xN) of the same type than the input image, where N corresponds to different radiuses.</p></li>
-<li><p><strong>radiusStep</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>step size of the radius for the discretization</p>
+<li><p><strong>radiusStep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>step size of the radius for the discretization</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-09, inf], Default: 0.01</em></div>
 </div>
 </p></li>
-<li><p><strong>centerX</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>x-coordinate of radial center</p>
+<li><p><strong>centerX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>x-coordinate of radial center</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>centerY</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>y-coordinate of radial center</p>
+<li><p><strong>centerY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>y-coordinate of radial center</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
@@ -635,22 +635,22 @@ document.write(`
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – input image [real typed data object]</p></li>
 <li><p><strong>comparisonImage</strong> (<em>itom.dataObject</em>) – input image [real typed data object] for comparison</p></li>
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – destination image (inplace possible)</p></li>
-<li><p><strong>minValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>lowest value in range</p>
+<li><p><strong>minValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>lowest value in range</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>maxValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>highest value in range</p>
+<li><p><strong>maxValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>highest value in range</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>value set to clipped values (default: 0.0)</p>
+<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>value set to clipped values (default: 0.0)</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>insideFlag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>0: clip values outside of given range (default), 1: clip inside</p>
+<li><p><strong>insideFlag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>0: clip values outside of given range (default), 1: clip inside</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -670,22 +670,22 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – input image [real typed data object]</p></li>
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – destination image (inplace possible)</p></li>
-<li><p><strong>minValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>lowest value in range</p>
+<li><p><strong>minValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>lowest value in range</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>maxValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>highest value in range</p>
+<li><p><strong>maxValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>highest value in range</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>value set to clipped values (default: 0.0)</p>
+<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>value set to clipped values (default: 0.0)</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>insideFlag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>0: clip values outside of given range (default), 1: clip inside</p>
+<li><p><strong>insideFlag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>0: clip values outside of given range (default), 1: clip inside</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -705,22 +705,22 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – Preallocated dataObject to be filled</p></li>
 <li><p><strong>geometricElement</strong> (<em>itom.dataObject</em>) – Geometric primitive according to definition</p></li>
-<li><p><strong>insideFlag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Switch between fill inside, outside or both</p>
+<li><p><strong>insideFlag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Switch between fill inside, outside or both</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 3], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>edgeFlag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Edge-Flag, currently not used</p>
+<li><p><strong>edgeFlag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Edge-Flag, currently not used</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 0], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>newValueInside</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>New value for pixels inside the geometric element</p>
+<li><p><strong>newValueInside</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>New value for pixels inside the geometric element</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>newValueOutside</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>New value for pixels outside the geometric element</p>
+<li><p><strong>newValueOutside</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>New value for pixels outside the geometric element</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
@@ -741,17 +741,17 @@ document.write(`
 <li><p><strong>labelList</strong> (<em>itom.dataObject</em>) – list of found labels</p></li>
 <li><p><strong>centers</strong> (<em>itom.dataObject</em>) – detected ellipses’ centers</p></li>
 <li><p><strong>contourPts</strong> (<em>itom.dataObject</em>) – ellipses’ contour points</p></li>
-<li><p><strong>numBorderPix</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>number of pixels for border detection</p>
+<li><p><strong>numBorderPix</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>number of pixels for border detection</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 6</em></div>
 </div>
 </p></li>
-<li><p><strong>thresBorder</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>threshold for identifying a border after differentation</p>
+<li><p><strong>thresBorder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>threshold for identifying a border after differentation</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 100], Default: 0.04</em></div>
 </div>
 </p></li>
-<li><p><strong>minPixEllCenter</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>minimum number of pixels for ellipses center detection in x and y direction</p>
+<li><p><strong>minPixEllCenter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>minimum number of pixels for ellipses center detection in x and y direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 100], Default: 6</em></div>
 </div>
@@ -794,27 +794,27 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Size of kernel in x-direction (odd values only)</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Size of kernel in x-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Size of kernel in y-direction (odd values only)</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Size of kernel in y-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>sigmaX</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>Standard deviation in x direction</p>
+<li><p><strong>sigmaX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>Standard deviation in x direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
 </div>
 </p></li>
-<li><p><strong>sigmaY</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>Standard deviation in y direction</p>
+<li><p><strong>sigmaY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>Standard deviation in y direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -847,27 +847,27 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
-<li><p><strong>sigmaX</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>Standard deviation in x direction</p>
+<li><p><strong>sigmaX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Standard deviation in x direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
 </div>
 </p></li>
-<li><p><strong>epsilonX</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>Stop condition in x-direction, the kernel in x-direction is cropped for Gaussian values below this limit</p>
+<li><p><strong>epsilonX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Stop condition in x-direction, the kernel in x-direction is cropped for Gaussian values below this limit</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-05, 1], Default: 0.001</em></div>
 </div>
 </p></li>
-<li><p><strong>sigmaY</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>Standard deviation in y direction</p>
+<li><p><strong>sigmaY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Standard deviation in y direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0.1, 5000], Default: 0.84</em></div>
 </div>
 </p></li>
-<li><p><strong>epsilonY</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>Stop condition in y-direction, the kernel in y-direction is cropped for Gaussian values below this limit</p>
+<li><p><strong>epsilonY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Stop condition in y-direction, the kernel in y-direction is cropped for Gaussian values below this limit</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-05, 1], Default: 0.001</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -893,17 +893,17 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -925,13 +925,13 @@ The returned list has the format x0,y0,x1,y1 for each label.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>itom.dataObject</em>) – image</p></li>
-<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>threshold for labeling</p>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>threshold for labeling</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 65535], Default: 50</em></div>
 </div>
 </p></li>
 <li><p><strong>labelList</strong> (<em>itom.dataObject</em>) – list of found labels</p></li>
-<li><p><strong>invalids</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a><em>, </em><em>optional</em>) – <p>invalid pixels</p>
+<li><p><strong>invalids</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>invalid pixels</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 65535], Default: 0</em></div>
 </div>
@@ -957,17 +957,17 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -993,17 +993,17 @@ and type than the input image.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -1028,17 +1028,17 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – N-dimensional dataObject of any real type. This object is processed plane-by-plane.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – Resulting dataObject that has the same size and type than the sourceImage.</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in x-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Size of kernel in y-direction (odd values only)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>If 1, NaN values of sourceImage will be replaced by interpolated filter values in destImage, else destImage also contains NaN values at these positions (0, default).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -1058,7 +1058,7 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>srcImg</strong> (<em>itom.dataObject</em>) – Input image with 3 or 4 uint8 planes</p></li>
 <li><p><strong>destImg</strong> (<em>itom.dataObject</em>) – Output image with of type rgba32</p></li>
-<li><p><strong>toggleByteOrder</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Switch between RGBA = 0, BGRA = 1, ARGB = 2, ABGR = 3</p>
+<li><p><strong>toggleByteOrder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Switch between RGBA = 0, BGRA = 1, ARGB = 2, ABGR = 3</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 3], Default: 0</em></div>
 </div>
@@ -1084,7 +1084,7 @@ and type than the input image</p>
 <dd class="field-even"><p>nrOfReplacements - number of values that have been replaced.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1098,12 +1098,12 @@ and type than the input image</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – n-dim DataObject</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – n-dim DataObject of type sourceImage</p></li>
-<li><p><strong>dir</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>derivative in x: 0, y: 1 direction or 2: 2D magnitude sqrt(dx*dx + dy*dy)</p>
+<li><p><strong>dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>derivative in x: 0, y: 1 direction or 2: 2D magnitude sqrt(dx*dx + dy*dy)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 2], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 0 NaN values in input image will be copied to output image (default)</p>
+<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 0 NaN values in input image will be copied to output image (default)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -1127,27 +1127,27 @@ filtered and the input image at the specific pixel is bigger than ‘delta’.</
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source dataObject of any real data type.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – destination dataObject (can be the same than source)</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Odd kernelsize in x</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Odd kernelsize in x</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Odd kernelsize in y</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Odd kernelsize in y</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>Delta value for comparison</p>
+<li><p><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Delta value for comparison</p>
 <div class="line-block">
 <div class="line"><em>Value range: [2.22045e-15, inf], Default: 0.05</em></div>
 </div>
 </p></li>
-<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>value set to clipped values</p>
+<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>value set to clipped values</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceSpikeByNewValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 1 (default), a spike value is replaced by the parameter ‘newValue’, else it is replaced by the value from the filtered object.</p>
+<li><p><strong>replaceSpikeByNewValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 1 (default), a spike value is replaced by the parameter ‘newValue’, else it is replaced by the value from the filtered object.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
@@ -1171,27 +1171,27 @@ filtered and the input image at the specific pixel is bigger than ‘delta’.</
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source dataObject of any real data type.</p></li>
 <li><p><strong>destImage</strong> (<em>itom.dataObject</em>) – destination dataObject (can be the same than source)</p></li>
-<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Odd kernelsize in x</p>
+<li><p><strong>kernelx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Odd kernelsize in x</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – <p>Odd kernelsize in y</p>
+<li><p><strong>kernely</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>Odd kernelsize in y</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 101], Default: 3</em></div>
 </div>
 </p></li>
-<li><p><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>Delta value for comparison</p>
+<li><p><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Delta value for comparison</p>
 <div class="line-block">
 <div class="line"><em>Value range: [2.22045e-15, inf], Default: 0.05</em></div>
 </div>
 </p></li>
-<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – <p>value set to clipped values</p>
+<li><p><strong>newValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>value set to clipped values</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>replaceSpikeByNewValue</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 1 (default), a spike value is replaced by the parameter ‘newValue’, else it is replaced by the value from the filtered object.</p>
+<li><p><strong>replaceSpikeByNewValue</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 1 (default), a spike value is replaced by the parameter ‘newValue’, else it is replaced by the value from the filtered object.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
@@ -1343,7 +1343,7 @@ filtered and the input image at the specific pixel is bigger than ‘delta’.</
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>

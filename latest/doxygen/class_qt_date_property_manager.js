@@ -13,6 +13,5 @@ var class_qt_date_property_manager =
     [ "uninitializeProperty", "class_qt_date_property_manager.html#afc48022784f8277e9658cf26e511745a", null ],
     [ "value", "class_qt_date_property_manager.html#affd190337e9a8a68480f7ebba7dfa41a", null ],
     [ "valueChanged", "class_qt_date_property_manager.html#a6ea1490e9e268a72fe529800f5fdac87", null ],
-    [ "valueText", "class_qt_date_property_manager.html#adc2df070d07f1482f5c50cb9095f9b1d", null ],
-    [ "d_ptr", "class_qt_date_property_manager.html#a00d15dda1645c4c1391a7058ec8b3f63", null ]
+    [ "valueText", "class_qt_date_property_manager.html#adc2df070d07f1482f5c50cb9095f9b1d", null ]
 ];

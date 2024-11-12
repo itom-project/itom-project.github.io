@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_plots_demoPickPointsAndMarkers.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_plots_demoPickPointsAndMarkers.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -22,10 +22,9 @@ Pick points and markers
 
 This demo shows how you can pick points and markers in the ``itom`` plot.
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-11
+.. GENERATED FROM PYTHON SOURCE LINES 5-10
 
-.. code-block:: default
-
+.. code-block:: Python
 
 
     from itom import dataObject
@@ -33,15 +32,15 @@ This demo shows how you can pick points and markers in the ``itom`` plot.
     from itom import plotItem
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-16
+.. GENERATED FROM PYTHON SOURCE LINES 12-15
 
 **Pick Points demo**
 
 Create a random 2 dimensional ``dataObject`` and plot it.
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-21
+.. GENERATED FROM PYTHON SOURCE LINES 15-20
 
-.. code-block:: default
+.. code-block:: Python
 
     obj = dataObject.randN([1024, 1024], "int16")
 
@@ -49,87 +48,93 @@ Create a random 2 dimensional ``dataObject`` and plot it.
     h["title"] = "Showcase: pick marker"
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-24
+.. GENERATED FROM PYTHON SOURCE LINES 21-23
 
 .. image:: ../../_static/demoPickPointsAndMarkers_1.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-27
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
 
 This command let the user pick maximum 4 points (earlier break with space, esc aborts the selection).
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-34
+.. GENERATED FROM PYTHON SOURCE LINES 26-33
 
-.. code-block:: default
+.. code-block:: Python
 
     pickedPoints = dataObject()
     h.pickPoints(pickedPoints, 4)
 
     print("coordinates of selected points: ")
     for numPoint in range(pickedPoints.shape[1]):
-        print("x: {}, y: {}".format(pickedPoints[0, numPoint], pickedPoints[1, numPoint]))
+        print(f"x: {pickedPoints[0, numPoint]}, y: {pickedPoints[1, numPoint]}")
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-43
+.. GENERATED FROM PYTHON SOURCE LINES 34-46
 
 Plot the ``dataObject`` again together with the previously selected points as ``marker``.
 
 The second argument of ``plotMarkers`` is a style-string (this may change) ``[color, symbol, size]``:
-=======  =====================================
-color    {b, g, r, c, m, y, k, w}
-symbol   {., o, s, d, >, v, ^, <, x, *, +, h}
-size     any integer number
-=======  =====================================
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-48
++----------+------------------------------------------+
+| color    | \{b, g, r, c, m, y, k, w\}               |
++----------+------------------------------------------+
+| symbol   | \{., o, s, d, >, v, ^, <, x, `*`, +, h\} |
++----------+------------------------------------------+
+| size     | any integer number                       |
++----------+------------------------------------------+
 
-.. code-block:: default
+
+.. GENERATED FROM PYTHON SOURCE LINES 46-53
+
+.. code-block:: Python
 
     markers = dataObject([2, 3], "float32", data=[10.1, 20.2, 30.3, 7, 100, 500])
     [nr, h] = plot2(obj)
     h["title"] = "Showcase: plot the currently selected points"
-    h.call("plotMarkers", pickedPoints, "b+10", "setName")  # 'setName' is the name for this set of markers (optional)
+    h.call(
+        "plotMarkers", pickedPoints, "b+10", "setName"
+    )  # 'setName' is the name for this set of markers (optional)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-51
+.. GENERATED FROM PYTHON SOURCE LINES 54-56
 
 .. image:: ../../_static/demoPickPointsAndMarkers_2.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-54
+.. GENERATED FROM PYTHON SOURCE LINES 58-59
 
 Delete marker set
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-57
+.. GENERATED FROM PYTHON SOURCE LINES 59-62
 
-.. code-block:: default
+.. code-block:: Python
 
     h.call("deleteMarkers", "setName")  # deletes given set
     h.call("deleteMarkers", "")  # deletes all sets
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-61
+.. GENERATED FROM PYTHON SOURCE LINES 63-66
 
 **Paint geometric shapes**
 
 Create a random 2 dimensional ``dataObject`` and plot it.
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-65
+.. GENERATED FROM PYTHON SOURCE LINES 66-70
 
-.. code-block:: default
+.. code-block:: Python
 
     obj = dataObject.randN([1024, 1024], "int16")
     [nr, h] = plot2(obj)
     h["title"] = "Showcase: paint 4 ellipses"
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 66-67
+.. GENERATED FROM PYTHON SOURCE LINES 71-72
 
 This command let the user pick maximum 4 points (earlier break with space, esc aborts the selection).
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-73
+.. GENERATED FROM PYTHON SOURCE LINES 72-78
 
-.. code-block:: default
+.. code-block:: Python
 
     geometricShapes = h.drawAndPickElements(plotItem.PrimitiveEllipse, 4)
 
@@ -138,21 +143,23 @@ This command let the user pick maximum 4 points (earlier break with space, esc a
         print(shape)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-75
+.. GENERATED FROM PYTHON SOURCE LINES 79-80
 
 Plot the ``dataObject`` again together with the previously painted ellipses ``geometricShapes``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-80
+.. GENERATED FROM PYTHON SOURCE LINES 80-87
 
-.. code-block:: default
+.. code-block:: Python
 
     [nr, hDrawInto] = plot2(obj)
     hDrawInto["title"] = "Showcase: plot painted ellipses"
-    hDrawInto.call("setGeometricShapes", geometricShapes)  # "b" and "setname" will be ignored anyway
+    hDrawInto.call(
+        "setGeometricShapes", geometricShapes
+    )  # "b" and "setname" will be ignored anyway
     shapes = hDrawInto["geometricShapes"]
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-83
+.. GENERATED FROM PYTHON SOURCE LINES 88-90
 
 .. image:: ../../_static/demoPickPointsAndMarkers_3.png
    :width: 100%
@@ -164,11 +171,14 @@ Plot the ``dataObject`` again together with the previously painted ellipses ``ge
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demoPickPointsAndMarkers.ipynb <demoPickPointsAndMarkers.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demoPickPointsAndMarkers.py <demoPickPointsAndMarkers.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demoPickPointsAndMarkers.ipynb <demoPickPointsAndMarkers.ipynb>`
+      :download:`Download zipped: demoPickPointsAndMarkers.zip <demoPickPointsAndMarkers.zip>`

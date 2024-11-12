@@ -42,6 +42,10 @@ Documentation
 	<div class="panel">
 
 Version 4.2.0:
+* `User documentation <https://itom.bitbucket.io/v4-3-0/docs>`_
+* `Doxygen source code documentation <https://itom.bitbucket.io/v4-3-0/doxygen>`_
+
+Version 4.2.0:
 
 * `User documentation <https://itom.bitbucket.io/v4-2-0/docs>`_
 * `Doxygen source code documentation <https://itom.bitbucket.io/v4-2-0/doxygen>`_

@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_basics_demo_CameraAndImages.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_basics_demo_CameraAndImages.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -25,7 +25,7 @@ how you acquire an image and apply some filters.
 
 .. GENERATED FROM PYTHON SOURCE LINES 6-15
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itom import dataIO
@@ -49,7 +49,7 @@ Initialize a ``DummyGrabber`` camera
 
 .. GENERATED FROM PYTHON SOURCE LINES 18-27
 
-.. code-block:: default
+.. code-block:: Python
 
 
     cam = dataIO("DummyGrabber")
@@ -69,7 +69,7 @@ Initialize a ``DummyGrabber`` camera
  .. code-block:: none
 
 
-    (103, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (100, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
@@ -82,7 +82,7 @@ Initialize a ``DummyGrabber`` camera
 
 .. GENERATED FROM PYTHON SOURCE LINES 32-38
 
-.. code-block:: default
+.. code-block:: Python
 
 
     currentStatus = cam.getAutoGrabbing()
@@ -109,7 +109,7 @@ Acquire 10 images in a list of dataObjects
 
 .. GENERATED FROM PYTHON SOURCE LINES 40-49
 
-.. code-block:: default
+.. code-block:: Python
 
 
     result = []
@@ -133,7 +133,7 @@ Save the list of images to the **image1.idc** file (idc is a file format for the
 
 .. GENERATED FROM PYTHON SOURCE LINES 51-53
 
-.. code-block:: default
+.. code-block:: Python
 
     saveIDC("image1.idc", {"result": result, "description": "sample 1"})
 
@@ -150,7 +150,7 @@ Load the list of images
 
 .. GENERATED FROM PYTHON SOURCE LINES 55-61
 
-.. code-block:: default
+.. code-block:: Python
 
     loaded_objects = loadIDC("image1.idc")
     result2 = loaded_objects["result"]
@@ -167,7 +167,7 @@ Load the list of images
  .. code-block:: none
 
 
-    (104, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (101, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
@@ -177,7 +177,7 @@ Acquire 10 images in an image stack
 
 .. GENERATED FROM PYTHON SOURCE LINES 63-79
 
-.. code-block:: default
+.. code-block:: Python
 
     num = 10
     sizex = cam.getParam("sizex")
@@ -204,7 +204,7 @@ Acquire 10 images in an image stack
  .. code-block:: none
 
 
-    (105, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (102, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
@@ -214,7 +214,7 @@ Calculate mean value of image stack in z-direction.
 
 .. GENERATED FROM PYTHON SOURCE LINES 81-92
 
-.. code-block:: default
+.. code-block:: Python
 
     result_mean = dataObject()
 
@@ -223,7 +223,7 @@ Calculate mean value of image stack in z-direction.
     # We squeeze it to get a 2D Object
     result_mean = result_mean.squeeze()
 
-    result_mean.setTag("title", "mean value of {} acquisitions".format(num))
+    result_mean.setTag("title", f"mean value of {num} acquisitions")
     result_mean.axisUnits = ("px", "px")
     result_mean.axisDescriptions = ("y", "x")
     plot(result_mean)
@@ -236,7 +236,7 @@ Calculate mean value of image stack in z-direction.
  .. code-block:: none
 
 
-    (106, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (103, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
@@ -249,13 +249,15 @@ Calculate mean value of image stack in z-direction.
 
 Apply Gaussian filter onto the mean image.
 
-.. GENERATED FROM PYTHON SOURCE LINES 98-102
+.. GENERATED FROM PYTHON SOURCE LINES 98-104
 
-.. code-block:: default
+.. code-block:: Python
 
     result_filter = dataObject()
     kernelVal = 9
-    algorithms.gaussianFilter(result_mean, result_filter, kernelx=kernelVal, kernely=kernelVal)
+    algorithms.gaussianFilter(
+        result_mean, result_filter, kernelx=kernelVal, kernely=kernelVal
+    )
 
 
 
@@ -264,16 +266,16 @@ Apply Gaussian filter onto the mean image.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-104
+.. GENERATED FROM PYTHON SOURCE LINES 105-106
 
 Copy meta information from source ``dataObject``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-107
+.. GENERATED FROM PYTHON SOURCE LINES 106-109
 
-.. code-block:: default
+.. code-block:: Python
 
     result_filter.copyMetaInfo(result_mean)
-    result_filter.setTag("title", "Gaussian filter with kernel {}".format(kernelVal))
+    result_filter.setTag("title", f"Gaussian filter with kernel {kernelVal}")
     plot(result_filter)
 
 
@@ -284,18 +286,18 @@ Copy meta information from source ``dataObject``.
  .. code-block:: none
 
 
-    (107, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (104, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 108-110
+.. GENERATED FROM PYTHON SOURCE LINES 110-112
 
 .. image:: ../../_static/demoCameraAndImages_2.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 110-116
+.. GENERATED FROM PYTHON SOURCE LINES 112-118
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # reset the auto grabbing functionality of possibly connected live images
@@ -313,7 +315,7 @@ Copy meta information from source ``dataObject``.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.771 seconds)
+   **Total running time of the script:** (0 minutes 0.450 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_basics_demo_CameraAndImages.py:
@@ -322,11 +324,14 @@ Copy meta information from source ``dataObject``.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_CameraAndImages.ipynb <demo_CameraAndImages.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_CameraAndImages.py <demo_CameraAndImages.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_CameraAndImages.ipynb <demo_CameraAndImages.ipynb>`
+      :download:`Download zipped: demo_CameraAndImages.zip <demo_CameraAndImages.zip>`

@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_demo_uiShape.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_demo_uiShape.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -33,9 +33,9 @@ create new shapes either in a modal or non-modal process. The first might be
 interesting if a script requires the input of a region in a plot before continuing with
 the script execution
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-196
+.. GENERATED FROM PYTHON SOURCE LINES 16-212
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itom import dataObject
@@ -82,7 +82,7 @@ the script execution
             else:
                 try:
                     # drawAndPickElements throws RuntimeError if user interrupts the process to add a new shape or new shapes
-                    # drawAndPickElements is a memeber of itom.plotItem, self.gui.plot however is of its base type uiItem.
+                    # drawAndPickElements is a member of itom.plotItem, self.gui.plot however is of its base type uiItem.
                     # Therefore, the uiItem is cast to plotItem, first.
                     shapes = plotItem(self.gui.plot).drawAndPickElements(type, nrOfElements)
                     self.gui.listLog.call(
@@ -153,14 +153,24 @@ the script execution
 
         @ItomUi.autoslot("")
         def on_btnClearSelected_clicked(self):
-            self.gui.plot.call("deleteGeometricShape", self.gui.plot["selectedGeometricShape"])
+            self.gui.plot.call(
+                "deleteGeometricShape", self.gui.plot["selectedGeometricShape"]
+            )
 
         @ItomUi.autoslot("")
         def on_btnDrawShapes_clicked(self):
-            self.gui.plot.call("addGeometricShape", shape(shape.Circle, (30, 10), 8))  # head
-            self.gui.plot.call("addGeometricShape", shape(shape.Rectangle, (24, 15), (28, 12)))  # left eye
-            self.gui.plot.call("addGeometricShape", shape(shape.Rectangle, (32, 15), (36, 12)))  # right eye
-            self.gui.plot.call("addGeometricShape", shape(shape.Ellipse, (25, 5.25), (35, 4.75)))  # mouth
+            self.gui.plot.call(
+                "addGeometricShape", shape(shape.Circle, (30, 10), 8)
+            )  # head
+            self.gui.plot.call(
+                "addGeometricShape", shape(shape.Rectangle, (24, 15), (28, 12))
+            )  # left eye
+            self.gui.plot.call(
+                "addGeometricShape", shape(shape.Rectangle, (32, 15), (36, 12))
+            )  # right eye
+            self.gui.plot.call(
+                "addGeometricShape", shape(shape.Ellipse, (25, 5.25), (35, 4.75))
+            )  # mouth
 
         @ItomUi.autoslot("")
         def on_plot_geometricShapesDeleted(self):
@@ -181,7 +191,9 @@ the script execution
         @ItomUi.autoslot("ito::Shape")
         def on_plot_geometricShapeCurrentChanged(self, shape):
             self.gui.btnClearSelected["enabled"] = shape.valid
-            self.gui.call("statusBar").call("showMessage", "Current shape changed to: %s" % str(shape), 1000)
+            self.gui.call("statusBar").call(
+                "showMessage", "Current shape changed to: %s" % str(shape), 1000
+            )
 
         @ItomUi.autoslot("QVector<ito::Shape>,bool")
         def on_plot_geometricShapeFinished(self, shapes, aborted):
@@ -189,18 +201,22 @@ the script execution
             if not aborted:
                 self.gui.listLog.call(
                     "addItem",
-                    "successfully finished to add or change the following shapes: " + str(shapes),
+                    "successfully finished to add or change the following shapes: "
+                    + str(shapes),
                 )
             else:
                 self.gui.listLog.call(
                     "addItem",
-                    "adding geometric shape(s) aborted. %i shape(s) already added" % len(shapes),
+                    "adding geometric shape(s) aborted. %i shape(s) already added"
+                    % len(shapes),
                 )
             self.gui.listLog.call("scrollToBottom")
 
         @ItomUi.autoslot("int,bool")
         def on_plot_geometricShapeStartUserInput(self, type, userInteractionReason):
-            if userInteractionReason == False:  # user selected a button in the toolbar to draw a new shape, disable buttons
+            if (
+                userInteractionReason == False
+            ):  # user selected a button in the toolbar to draw a new shape, disable buttons
                 self.drawShapeButtonsEnable(False)
 
         @ItomUi.autoslot("")
@@ -224,7 +240,7 @@ the script execution
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 198-200
+.. GENERATED FROM PYTHON SOURCE LINES 214-216
 
 .. image:: ../../_static/demoUIShape_1.png
    :width: 100%
@@ -232,7 +248,7 @@ the script execution
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.170 seconds)
+   **Total running time of the script:** (0 minutes 0.117 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_ui_demo_uiShape.py:
@@ -241,11 +257,14 @@ the script execution
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_uiShape.ipynb <demo_uiShape.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_uiShape.py <demo_uiShape.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_uiShape.ipynb <demo_uiShape.ipynb>`
+      :download:`Download zipped: demo_uiShape.zip <demo_uiShape.zip>`

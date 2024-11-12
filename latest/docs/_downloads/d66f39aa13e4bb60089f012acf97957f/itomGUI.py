@@ -1,5 +1,3 @@
-# coding=utf8
-
 """GUI integrated
 =================
 
@@ -23,7 +21,7 @@ import plotly.express as px
 # import the base class ItomUi from the module itomUi in the itom-packages subfolder
 from itomUi import ItomUi
 from itom import ui
-# sphinx_gallery_thumbnail_path = '11_demos/_static/_thumb/demoPloty.png'
+# sphinx_gallery_thumbnail_path = '11_demos/_static/_thumb/demoPlotly.png'
 
 
 class PlotlyGuiDemo(ItomUi):
@@ -45,8 +43,10 @@ class PlotlyGuiDemo(ItomUi):
         """
         with self.disableGui(disableItems=[self.gui.groupActions]):
             long_df = px.data.medals_long()
-    
-            fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
+
+            fig = px.bar(
+                long_df, x="nation", y="count", color="medal", title="Long-Form Input"
+            )
             fig.show(plotHandle=self.plotlyPlot)
 
     @ItomUi.autoslot("")
@@ -57,7 +57,14 @@ class PlotlyGuiDemo(ItomUi):
         """
         with self.disableGui(disableItems=[self.gui.groupActions]):
             df = px.data.tips()
-            fig = px.histogram(df, x="total_bill", y="tip", color="sex", marginal="rug", hover_data=df.columns)
+            fig = px.histogram(
+                df,
+                x="total_bill",
+                y="tip",
+                color="sex",
+                marginal="rug",
+                hover_data=df.columns,
+            )
             fig.show(plotHandle=self.plotlyPlot)
 
     @ItomUi.autoslot("")
@@ -68,7 +75,7 @@ class PlotlyGuiDemo(ItomUi):
         """
         with self.disableGui(disableItems=[self.gui.groupActions]):
             df = px.data.gapminder()
-    
+
             fig = px.bar(
                 df,
                 x="continent",
@@ -102,8 +109,8 @@ class PlotlyGuiDemo(ItomUi):
                 color_continuous_midpoint=2,
             )
             fig.show(plotHandle=self.plotlyPlot)
-    
-    
+
+
 if __name__ == "__main__":
     win = PlotlyGuiDemo()
     win.show()

@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_demo_cloudViewer.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_demo_cloudViewer.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -22,7 +22,7 @@ Cloud viewer
 
 .. GENERATED FROM PYTHON SOURCE LINES 5-22
 
-.. code-block:: default
+.. code-block:: Python
 
 
     import numpy as np
@@ -53,16 +53,14 @@ Cloud viewer
 Create a data objects with X, Y and Z values of a topography
 as well as a 2.5D topography in terms of a data object.
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-36
+.. GENERATED FROM PYTHON SOURCE LINES 26-34
 
-.. code-block:: default
+.. code-block:: Python
 
     [X, Y] = np.meshgrid(np.arange(0, 5, 0.1), np.arange(0, 5, 0.1))
     Z = np.sin(X * 2) + np.cos(Y * 0.5)
     I = np.random.rand(*X.shape)  # further intensity
-    C = dataObject.randN(
-        [X.shape[0], X.shape[1]], "rgba32"
-    )  # further color information
+    C = dataObject.randN([X.shape[0], X.shape[1]], "rgba32")  # further color information
     topography = dataObject(Z).astype("float32")
     topography.axisScales = (0.1, 0.1)
     topography[0, 0] = float("nan")
@@ -74,13 +72,13 @@ as well as a 2.5D topography in terms of a data object.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-38
+.. GENERATED FROM PYTHON SOURCE LINES 35-36
 
 Create a point cloud from the X, Y and Z arrays with further intensity information.
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-40
+.. GENERATED FROM PYTHON SOURCE LINES 36-38
 
-.. code-block:: default
+.. code-block:: Python
 
     cloud1 = pointCloud.fromXYZI(X, Y, Z, I)
 
@@ -91,13 +89,13 @@ Create a point cloud from the X, Y and Z arrays with further intensity informati
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 41-42
+.. GENERATED FROM PYTHON SOURCE LINES 39-40
 
 Create a point cloud from the topography image with further colour information.
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-44
+.. GENERATED FROM PYTHON SOURCE LINES 40-42
 
-.. code-block:: default
+.. code-block:: Python
 
     cloud2 = pointCloud.fromTopography(topography, color=C)
 
@@ -108,13 +106,13 @@ Create a point cloud from the topography image with further colour information.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-46
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
 
 Create a point cloud from the X, Y and Z arrays with further colour information.
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-48
+.. GENERATED FROM PYTHON SOURCE LINES 44-46
 
-.. code-block:: default
+.. code-block:: Python
 
     cloud3 = pointCloud.fromXYZRGBA(X, Y, Z, C)
 
@@ -125,13 +123,13 @@ Create a point cloud from the X, Y and Z arrays with further colour information.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-50
+.. GENERATED FROM PYTHON SOURCE LINES 47-48
 
 Create a point cloud from the X, Y and Z arrays with the Z-values as intensity information.
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-52
+.. GENERATED FROM PYTHON SOURCE LINES 48-50
 
-.. code-block:: default
+.. code-block:: Python
 
     cloud4 = pointCloud.fromXYZI(X, Y, Z - 0.1, Z)
 
@@ -142,14 +140,14 @@ Create a point cloud from the X, Y and Z arrays with the Z-values as intensity i
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-55
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 Manually create triangular polygons for the whole surface
 the polygons are regularly distributed and each rectangle is divided into two polygons.
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-70
+.. GENERATED FROM PYTHON SOURCE LINES 53-68
 
-.. code-block:: default
+.. code-block:: Python
 
     polygons = dataObject.zeros([2 * 49 * 49, 3], "uint16")
     c = 0
@@ -173,13 +171,13 @@ the polygons are regularly distributed and each rectangle is divided into two po
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-72
+.. GENERATED FROM PYTHON SOURCE LINES 69-70
 
 Create polygonal mesh structure from cloud3 and polygons.
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-74
+.. GENERATED FROM PYTHON SOURCE LINES 70-72
 
-.. code-block:: default
+.. code-block:: Python
 
     mesh = polygonMesh.fromCloudAndPolygons(cloud3, polygons)
 
@@ -190,15 +188,15 @@ Create polygonal mesh structure from cloud3 and polygons.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-78
+.. GENERATED FROM PYTHON SOURCE LINES 73-76
 
 As alternative approach you can directly create the same polygonal mesh
 from the point cloud if you know that the point cloud is organized, hence,
 the points are located like in a regular grid.
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-80
+.. GENERATED FROM PYTHON SOURCE LINES 76-78
 
-.. code-block:: default
+.. code-block:: Python
 
     mesh2 = polygonMesh.fromOrganizedCloud(cloud2)
 
@@ -209,13 +207,13 @@ the points are located like in a regular grid.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-82
+.. GENERATED FROM PYTHON SOURCE LINES 79-80
 
 Create GUI (3D Viewer)
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-98
+.. GENERATED FROM PYTHON SOURCE LINES 80-94
 
-.. code-block:: default
+.. code-block:: Python
 
     gui = ui("cloudViewer.ui", ui.TYPEWINDOW)
 
@@ -229,9 +227,7 @@ Create GUI (3D Viewer)
         "setItemProperty", "cloud4", "PointSize", 10
     )  # change the property PointSize of this point
     # gui.plot.call("addMesh",mesh,"mesh")
-    gui.plot.call(
-        "addMesh", mesh2, "mesh2"
-    )  # visualize the mesh2 under the name 'mesh2'
+    gui.plot.call("addMesh", mesh2, "mesh2")  # visualize the mesh2 under the name 'mesh2'
     gui.show()
 
 
@@ -243,7 +239,7 @@ Create GUI (3D Viewer)
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.783 seconds)
+   **Total running time of the script:** (0 minutes 0.032 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_ui_demo_cloudViewer.py:
@@ -252,11 +248,14 @@ Create GUI (3D Viewer)
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_cloudViewer.ipynb <demo_cloudViewer.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_cloudViewer.py <demo_cloudViewer.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_cloudViewer.ipynb <demo_cloudViewer.ipynb>`
+      :download:`Download zipped: demo_cloudViewer.zip <demo_cloudViewer.zip>`

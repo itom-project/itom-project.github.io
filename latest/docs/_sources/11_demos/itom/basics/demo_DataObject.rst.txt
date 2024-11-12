@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_basics_demo_DataObject.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_basics_demo_DataObject.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -22,9 +22,9 @@ DataObject
 
 This demo shows some basic features of the ``itom`` dataObject.
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-16
+.. GENERATED FROM PYTHON SOURCE LINES 5-14
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itom import dataObject
@@ -42,13 +42,13 @@ This demo shows some basic features of the ``itom`` dataObject.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-19
+.. GENERATED FROM PYTHON SOURCE LINES 16-17
 
 Creation of several data objects
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-34
+.. GENERATED FROM PYTHON SOURCE LINES 17-36
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # empty dataObject
@@ -62,8 +62,12 @@ Creation of several data objects
     objZero = dataObject.zeros([yDim, xDim], "float64")  # 2D object filled with zeros
     objOnes = dataObject.ones([yDim, xDim], "float64")  # 2D object filled with ones
     objEye = dataObject.eye(4, "uint8")  # 4x4 matrix
-    objRand = dataObject.rand([yDim, xDim], "uint8")  # 2D object filled with uniformly distributed random values
-    objRandN = dataObject.randN([yDim, xDim], "uint8")  # 2D object filled with Gaussian distributed random values
+    objRand = dataObject.rand(
+        [yDim, xDim], "uint8"
+    )  # 2D object filled with uniformly distributed random values
+    objRandN = dataObject.randN(
+        [yDim, xDim], "uint8"
+    )  # 2D object filled with Gaussian distributed random values
 
 
 
@@ -72,18 +76,18 @@ Creation of several data objects
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-37
+.. GENERATED FROM PYTHON SOURCE LINES 37-39
 
 .. hint:: the methods rand and randN create values in the full data range for integer based data types
    whereas the randomly distributed values are in the range [0,1) for floating point data types.
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-40
+.. GENERATED FROM PYTHON SOURCE LINES 41-42
 
 Type conversion
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-42
+.. GENERATED FROM PYTHON SOURCE LINES 42-44
 
-.. code-block:: default
+.. code-block:: Python
 
     objRandFloat = objRand.astype("float64")
 
@@ -94,20 +98,20 @@ Type conversion
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-44
+.. GENERATED FROM PYTHON SOURCE LINES 45-46
 
 Assign values to data objects
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-59
+.. GENERATED FROM PYTHON SOURCE LINES 46-61
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # fill the upper half of the object with 5.7 (the operator // makes an integer division)
-    obj2dim[0: yDim // 2, :] = 5.7
+    obj2dim[0 : yDim // 2, :] = 5.7
 
     # fill the bottom half of the object with 6.6 (the operator // makes an integer division)
-    obj2dim[yDim // 2:, :] = 6.6
+    obj2dim[yDim // 2 :, :] = 6.6
 
     # fill a selected rectangle with -2.0
     obj2dim[5:10, 20:100] = -2.0
@@ -115,7 +119,7 @@ Assign values to data objects
     # fill the entire 3d object with zero
     obj3dim[:, :, :] = 0
     # replace the 2nd plane of the 3d object by the random values of the casted object
-    obj3dim[1, :, :] = objRand.astype(obj3dim.dtype)  
+    obj3dim[1, :, :] = objRand.astype(obj3dim.dtype)
 
 
 
@@ -124,13 +128,13 @@ Assign values to data objects
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 60-61
+.. GENERATED FROM PYTHON SOURCE LINES 62-63
 
 Delete objects
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-63
+.. GENERATED FROM PYTHON SOURCE LINES 63-65
 
-.. code-block:: default
+.. code-block:: Python
 
     del objRandFloat
 
@@ -141,7 +145,7 @@ Delete objects
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-72
+.. GENERATED FROM PYTHON SOURCE LINES 66-74
 
 Shallow copies
 
@@ -152,9 +156,9 @@ If two objects are shallow copies to each other, the memory as well as tags and 
 However, one object can be a sub-slice, so called region of interest (ROI), of the other one, such that the
 size of the object is individual for each object.
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-87
+.. GENERATED FROM PYTHON SOURCE LINES 74-89
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # both variables point to exactly the same dataObject in memory (everything shared)
@@ -180,23 +184,23 @@ size of the object is individual for each object.
  .. code-block:: none
 
 
-    (109, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (105, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-90
+.. GENERATED FROM PYTHON SOURCE LINES 90-92
 
 .. image:: ../../_static/demoDataObject_1.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-94
+.. GENERATED FROM PYTHON SOURCE LINES 94-96
 
 Deep copy
 If you want to have a deep copy, with separated memory and meta information of a dataObject, use the copy-operator'''
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-96
+.. GENERATED FROM PYTHON SOURCE LINES 96-98
 
-.. code-block:: default
+.. code-block:: Python
 
     obj2dimCopy = obj2dim.copy()
     plot(obj2dimCopy)
@@ -209,22 +213,22 @@ If you want to have a deep copy, with separated memory and meta information of a
  .. code-block:: none
 
 
-    (110, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (106, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-99
+.. GENERATED FROM PYTHON SOURCE LINES 99-101
 
 .. image:: ../../_static/demoDataObject_2.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-102
+.. GENERATED FROM PYTHON SOURCE LINES 103-104
 
 Accessing values
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-110
+.. GENERATED FROM PYTHON SOURCE LINES 104-112
 
-.. code-block:: default
+.. code-block:: Python
 
     print("objZero at index 0,5 (row, column):", objZero[0, 5])
 
@@ -248,7 +252,7 @@ Accessing values
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 111-118
+.. GENERATED FROM PYTHON SOURCE LINES 113-120
 
 Axis scaling, offset, description and unit
 
@@ -258,9 +262,9 @@ The offset is the offset of the first value in this axis, given in pixel
 The transformation between pixel and physical coordinates is then:
 phys_coord = (px_coord - offset) * scaling
 
-.. GENERATED FROM PYTHON SOURCE LINES 118-128
+.. GENERATED FROM PYTHON SOURCE LINES 120-130
 
-.. code-block:: default
+.. code-block:: Python
 
     obj2dim.axisScales = (0.1, 0.1)  # 0.1 mm / px
     obj2dim.axisOffsets = (0, 100)  # the x-axis starts now at -10mm (100 * 0.1)
@@ -268,7 +272,7 @@ phys_coord = (px_coord - offset) * scaling
     obj2dim.axisDescriptions = ("y-axis", "x-axis")
     obj2dim.setTag("title", "obj2dim Title")
 
-    obj2dim.valueUnit = u"\xb0"  # this is a special character. To allow this, the first line of this script is relevant (right click -> insert codec)
+    obj2dim.valueUnit = "\xb0"  # this is a special character. To allow this, the first line of this script is relevant (right click -> insert codec)
     obj2dim.valueDescription = "phase"
 
     plot(obj2dim, properties={"colorBarVisible": True})
@@ -281,25 +285,25 @@ phys_coord = (px_coord - offset) * scaling
  .. code-block:: none
 
 
-    (111, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (107, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 129-131
+.. GENERATED FROM PYTHON SOURCE LINES 131-133
 
 .. image:: ../../_static/demoDataObject_3.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 133-137
+.. GENERATED FROM PYTHON SOURCE LINES 135-139
 
 Tags
 
 It is possible to add string or double valued tags to each dataObject. There are some special tags,
 that can directly be interpreted by plots (e.g. the 'title' tag). All other tags can be used for any purpose.
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-142
+.. GENERATED FROM PYTHON SOURCE LINES 139-144
 
-.. code-block:: default
+.. code-block:: Python
 
     obj3dim.setTag(
         "title",
@@ -315,21 +319,21 @@ that can directly be interpreted by plots (e.g. the 'title' tag). All other tags
  .. code-block:: none
 
 
-    (112, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (108, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 143-145
+.. GENERATED FROM PYTHON SOURCE LINES 145-147
 
 .. image:: ../../_static/demoDataObject_4.png
    :width: 100%
 
-.. GENERATED FROM PYTHON SOURCE LINES 145-182
+.. GENERATED FROM PYTHON SOURCE LINES 147-185
 
-.. code-block:: default
+.. code-block:: Python
 
 
-    # Set additional informations (meta data) as tags
+    # Set additional information (meta data) as tags
     # Use set tag "key", "value". Key / value are user defined.
     obj2dim.setTag("Creator", "itom")
     obj2dim.setTag("Type", "Measurement")
@@ -369,6 +373,7 @@ that can directly be interpreted by plots (e.g. the 'title' tag). All other tags
 
 
 
+
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
@@ -399,7 +404,7 @@ that can directly be interpreted by plots (e.g. the 'title' tag). All other tags
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.701 seconds)
+   **Total running time of the script:** (0 minutes 0.266 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_basics_demo_DataObject.py:
@@ -408,11 +413,14 @@ that can directly be interpreted by plots (e.g. the 'title' tag). All other tags
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_DataObject.ipynb <demo_DataObject.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_DataObject.py <demo_DataObject.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_DataObject.ipynb <demo_DataObject.ipynb>`
+      :download:`Download zipped: demo_DataObject.zip <demo_DataObject.zip>`

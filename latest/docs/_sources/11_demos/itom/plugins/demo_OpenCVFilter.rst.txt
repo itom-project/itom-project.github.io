@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_plugins_demo_OpenCVFilter.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_plugins_demo_OpenCVFilter.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -24,7 +24,7 @@ This demo shows how OpenCV filters are applied to the ``dataObject``.
 
 .. GENERATED FROM PYTHON SOURCE LINES 5-14
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itom import dataObject
@@ -47,9 +47,9 @@ This demo shows how OpenCV filters are applied to the ``dataObject``.
 Get information about the filter and its parameters.
 First, no idea about the filters name, therefore get all names containing the keyword ``cv``:
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-30
+.. GENERATED FROM PYTHON SOURCE LINES 18-35
 
-.. code-block:: default
+.. code-block:: Python
 
     filterInfoDict = filterHelp("cv", dictionary=1)
 
@@ -59,7 +59,12 @@ First, no idea about the filters name, therefore get all names containing the ke
     # the desired filter is called "cvMedianBlur", now obtain detailed information
     medianBlurDict = filterHelp("cvMedianBlur", dictionary=1)
 
-    print("{}: {}".format(medianBlurDict["cvMedianBlur"]["name"], medianBlurDict["cvMedianBlur"]["description"]))
+    print(
+        "{}: {}".format(
+            medianBlurDict["cvMedianBlur"]["name"],
+            medianBlurDict["cvMedianBlur"]["description"],
+        )
+    )
 
     # create an empty output image (its content will be filled within the filter-call)
     outputImage = dataObject()
@@ -82,11 +87,11 @@ First, no idea about the filters name, therefore get all names containing the ke
 
     This filter applies the method cv::blur to every plane in the source data object. The function smoothes the images by a simple mean-filter. Theresult is contained in the destination object. It can handle data objects of type uint8, uint16, int16, ito::tInt32, float32 and float64 only. 
 
-    The cv::blur interally calls the cv::boxfilter()-method.
+    The cv::blur internally calls the cv::boxfilter()-method.
 
     The itom-wrapping does not work inplace currently. A new dataObject is allocated.
 
-    borderType: This string defines how the filter should hande pixels at the border of the matrix.Allowed is CONSTANT [default], REPLICATE, REFLECT, WRAP, REFLECT_101. In case of a constant border, only pixels inside of the element mask are considered (morphologyDefaultBorderValue)
+    borderType: This string defines how the filter should handle pixels at the border of the matrix.Allowed is CONSTANT [default], REPLICATE, REFLECT, WRAP, REFLECT_101. In case of a constant border, only pixels inside of the element mask are considered (morphologyDefaultBorderValue)
     Warning: NaN-handling for floats not verified.
     cvCalibrateCamera: Finds the camera intrinsic and extrinsic parameters from several views of a calibration pattern. 
 
@@ -101,7 +106,7 @@ First, no idea about the filters name, therefore get all names containing the ke
     2. Estimate the initial camera pose as if the intrinsic parameters have been already known. This is done using solvePnP() . 
     3. Run the global Levenberg-Marquardt optimization algorithm to minimize the reprojection error, that is, the total sum of squared distances between the observed feature points imagePoints and the projected (using the current estimates for camera parameters and the poses) object points objectPoints. See projectPoints() for details. 
 
-    If the reprojectionError is NaN, one or both of the matrices objectPoints or imagePoints probabily contains any NaN-value after truncation. Remember that this algorithm truncates objectPoints and imagePoints 
+    If the reprojectionError is NaN, one or both of the matrices objectPoints or imagePoints probability contains any NaN-value after truncation. Remember that this algorithm truncates objectPoints and imagePoints 
     before using it in the way that for each view, the last rows are cut where either the value in the first column of objectPoints or imagePoints is non-finite.
     cvCannyEdge: Canny Edge detector using cv::DFT.
 
@@ -199,7 +204,7 @@ First, no idea about the filters name, therefore get all names containing the ke
 
     Remark 2: The outer frame of the dataObject / the image should not be white but have approximately the same gray value than the bright field.
 
-    Remark 3: The bright fields should be free of darker dirt or dust and you should apply a corse shading correction to improve the results. 
+    Remark 3: The bright fields should be free of darker dirt or dust and you should apply a coarse shading correction to improve the results. 
 
     cvFindCircles: Finds circles in a grayscale image using the Hough transform.
 
@@ -310,24 +315,30 @@ First, no idea about the filters name, therefore get all names containing the ke
     To shrink an image, it will generally look best with CV_INTER_AREA interpolation, whereas to enlarge an image, 
     it will generally look best with CV_INTER_CUBIC (slow) or CV_INTER_LINEAR (faster but still looks OK). 
     The axisScale properties of the x- and y-axes of the outputObject are divided by fx and fy respectively, while the offset values are multiplied with fx and fy.
-    cvRotate180: This filter rotates the image by 180?. 
+    cvRotate180: This filter rotates the image by 180°. 
 
     This filter applies the flip method cvFlip from OpenCV horizontally and vertically to rotate the object. The result is contained in the destination object
 
     It is allowed to let the filter work inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
 
-    cvRotateM90: This filter rotates the image by 90? clock wise. 
+    cvRotateM90: This filter rotates the image by 90° clock wise. 
 
     This filter applies the flip method cvFlip and the transpose method cvTranspose of OpenCV to rotate the object. The result is contained in the destination object
 
     It is allowed to let the filter work pseudo inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
 
-    cvRotateP90: This filter rotates the image by 90? count clock wise. 
+    cvRotateP90: This filter rotates the image by 90° count clock wise. 
 
     This filter applies the flip method cvFlip and the transpose method cvTranspose of OpenCV to rotate the object. The result is contained in the destination object
 
     It is allowed to let the filter work pseudo inplace if you give the same input than destination data object, else the output data object is verified if it fits to the size and type of the source data object and if not a new one is allocated.
 
+    cvSiftDetectorDescriptorExtractor: Implements the sift algorithm and extracts the corresponding descriptors. 
+    The sift algorithm is a scale invariant feature transform in which image content is transformed into local feature coordinates. 
+    In each octave, the initial image is repeatedly convolved with Gaussians to produce a set of scale space images. Adjacent Gaussians are subtracted to produce the DOG. 
+    After each octave, the Gaussian image is down-sampled by a factor of 2. 
+    Detect maxima and minima of difference-of-Gaussian in scale space. Each point is compared to its 8 neighbours in the current image and 9 neighbours in the scales above and below. 
+    reference: David G. Lowe, "Distinctive image features from scale-invariant key points," International Journal of Computer Vision, 60, 2 (2004), pp. 91-110.
     cvSplitChannels: Converts a rgba32 data object (with four channels blue, green, red, alpha) into 
     an output data object of type 'uint8' and a shape that has one dimension more than the input object and the first dimension is equal to 4. 
     The four color components are then distributed into the 4 planes of the first dimension. 
@@ -385,7 +396,7 @@ First, no idea about the filters name, therefore get all names containing the ke
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-39
+.. GENERATED FROM PYTHON SOURCE LINES 36-44
 
 Call the filter. The parameters after the filter name are the
 ``mandatory`` parameters followed by the ``optional`` ones (if desired):
@@ -396,9 +407,9 @@ Call the filter. The parameters after the filter name are the
 
 3. kernellength (opt): size of squared filter kernel (default: 3)
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-44
+.. GENERATED FROM PYTHON SOURCE LINES 44-49
 
-.. code-block:: default
+.. code-block:: Python
 
     algorithms.cvMedianBlur(dObj, outputImage, 5)
 
@@ -414,11 +425,11 @@ Call the filter. The parameters after the filter name are the
  .. code-block:: none
 
 
-    (149, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
+    (151, PlotItem(UiItem(class: Itom2dQwtPlot, name: plot0x0)))
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-46
+.. GENERATED FROM PYTHON SOURCE LINES 50-52
 
 .. image:: ../../_static/demoOpenCVFilter_1.png
    :width: 100%
@@ -426,7 +437,7 @@ Call the filter. The parameters after the filter name are the
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.309 seconds)
+   **Total running time of the script:** (0 minutes 0.161 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_plugins_demo_OpenCVFilter.py:
@@ -435,11 +446,14 @@ Call the filter. The parameters after the filter name are the
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_OpenCVFilter.ipynb <demo_OpenCVFilter.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_OpenCVFilter.py <demo_OpenCVFilter.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_OpenCVFilter.ipynb <demo_OpenCVFilter.ipynb>`
+      :download:`Download zipped: demo_OpenCVFilter.zip <demo_OpenCVFilter.zip>`

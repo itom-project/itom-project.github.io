@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_demoSimpleExample.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_demoSimpleExample.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -32,9 +32,10 @@ We want to have an auto-created vertical button bar at the right side
 (dialogButtonBar = ``ui.BUTTONBAR_VERTICAL``). The button bar
 should consist of one ``OK`` button, therefore its role is ``AcceptRole``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-25
+.. GENERATED FROM PYTHON SOURCE LINES 15-26
 
-.. code-block:: default
+.. code-block:: Python
+
 
     from itom import ui
 
@@ -47,22 +48,25 @@ should consist of one ``OK`` button, therefore its role is ``AcceptRole``.
     )
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-28
+.. GENERATED FROM PYTHON SOURCE LINES 28-29
 
 First group box: show text of textfield in a message box. Set default text of TextField with name txtMessage.
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-34
+.. GENERATED FROM PYTHON SOURCE LINES 29-38
 
-.. code-block:: default
+.. code-block:: Python
 
-    field = mainWin.txtMessage  # you can get an instance (class uiItem) of any sub-element of your user interface
+    field = (
+        mainWin.txtMessage
+    )  # you can get an instance (class uiItem) of any sub-element of your user interface
     field["text"] = "hello world"
 
     # the same can be done directly:
     mainWin.txtMessage["text"] = "hello world"
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-46
+
+.. GENERATED FROM PYTHON SOURCE LINES 39-50
 
 Now we want to connect the ``clicked`` signal of the button with the method ``showMessage``.
 How do I know which signal any GUI-element can emit?
@@ -76,9 +80,9 @@ In our case, we want to connect to the ``clicked`` signal, its argument can be a
 Finally, we connect the clicked-signal without argument (not interesting for us) with a method ``showMessage``
 This method needs to have the same number of arguments than the signal (here: 0)
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-53
+.. GENERATED FROM PYTHON SOURCE LINES 50-58
 
-.. code-block:: default
+.. code-block:: Python
 
     def showMessage():
         text = mainWin.txtMessage["text"]
@@ -88,16 +92,19 @@ This method needs to have the same number of arguments than the signal (here: 0)
     mainWin.btnShowText.connect("clicked()", showMessage)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-55
+
+.. GENERATED FROM PYTHON SOURCE LINES 59-60
 
 Second group box: show getDirectory-dialog and print the chosen directory in the text field.
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-78
+.. GENERATED FROM PYTHON SOURCE LINES 60-86
 
-.. code-block:: default
+.. code-block:: Python
 
     def showGetDirectory():
-        directory = ui.getExistingDirectory("chose directory", itom.getCurrentPath(), parent=mainWin)
+        directory = ui.getExistingDirectory(
+            "chose directory", itom.getCurrentPath(), parent=mainWin
+        )
         if directory is None:
             pass
             # cancel has been clicked
@@ -111,6 +118,7 @@ Second group box: show getDirectory-dialog and print the chosen directory in the
     # if txtDirectory has the property 'readOnly' set to true, the button btnReadOnly should be 'checked'.
     mainWin.btnReadOnly["checked"] = mainWin.txtDirectory["readOnly"]
 
+
     # if the button is toggled (check-state is changed), then we want to change the ready-only property.
     def btnReadOnlyToggled(checked):
         mainWin.txtDirectory["readOnly"] = checked
@@ -120,7 +128,7 @@ Second group box: show getDirectory-dialog and print the chosen directory in the
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-87
+.. GENERATED FROM PYTHON SOURCE LINES 87-95
 
 At first, the third group box should be hidden.
 If the checkbox checkShowThirdExample is clicked, the visibility should change.
@@ -131,9 +139,9 @@ We have two possibilities:
   ``hide`` or ``show`` from group3 (the slots are part of any widget)
   in order to show or hide the element.
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-102
+.. GENERATED FROM PYTHON SOURCE LINES 95-110
 
-.. code-block:: default
+.. code-block:: Python
 
 
 
@@ -151,7 +159,7 @@ We have two possibilities:
     mainWin.group3.call("hide")
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-108
+.. GENERATED FROM PYTHON SOURCE LINES 111-116
 
 Connect radio-button list with list-box. If you see Qt help for QListWidget,
 you will see, that there is no slot, that you can use to add items to a listWidget.
@@ -159,9 +167,9 @@ However, for some special widgets, a selection of public methods is nevertheless
 in the same way than a slot. In case of a listWidget, this is ``addItem``, ``addItems``.
 This is used, to add the names of all radio buttons to the list.
 
-.. GENERATED FROM PYTHON SOURCE LINES 108-130
+.. GENERATED FROM PYTHON SOURCE LINES 116-138
 
-.. code-block:: default
+.. code-block:: Python
 
     listBox = mainWin.listWidget
 
@@ -186,7 +194,7 @@ This is used, to add the names of all radio buttons to the list.
     listBox.connect("currentRowChanged(int)", listCurrentChanged)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 131-154
+.. GENERATED FROM PYTHON SOURCE LINES 139-163
 
 To show the dialog you have three options:
 
@@ -212,9 +220,10 @@ To show the dialog you have three options:
       mainWin.show(2)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 154-156
 
-.. code-block:: default
+.. GENERATED FROM PYTHON SOURCE LINES 163-165
+
+.. code-block:: Python
 
 
     mainWin.show(1)
@@ -226,11 +235,14 @@ To show the dialog you have three options:
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demoSimpleExample.ipynb <demoSimpleExample.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demoSimpleExample.py <demoSimpleExample.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demoSimpleExample.ipynb <demoSimpleExample.ipynb>`
+      :download:`Download zipped: demoSimpleExample.zip <demoSimpleExample.zip>`

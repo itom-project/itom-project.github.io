@@ -18,7 +18,7 @@ The benefits are:
    this method is considered to be a ``slot`` and is automatically connected with
    the ``signal``, that is emitted due to the action. Methods, that should be
    auto-connected slots must be decorated with the @ItomUi.autoslot decorator.
-   
+
 2. Use the factory function ``ItomUi.disableGui`` for with statements to
    switch some items of the GUI to a specific state (disable, enable, hide, show)
    before starting a long operation and automatically switch back to the previous
@@ -45,7 +45,9 @@ class ItomUiClassDemo(ItomUi):
 
         Use the constructor to further initialize the user interface.
         """
-        ItomUi.__init__(self, "itomUiClassDemo.ui", type=ui.TYPEWINDOW, deleteOnClose=True)
+        ItomUi.__init__(
+            self, "itomUiClassDemo.ui", type=ui.TYPEWINDOW, deleteOnClose=True
+        )
 
         # further initialization
         self.gui.progressBar["visible"] = False
@@ -157,7 +159,8 @@ class ItomUiClassDemo(ItomUi):
             time.sleep(3)
 
             raise RuntimeError(
-                "an unhandled exception occurred, but the " "GUI is turned into the original state though"
+                "an unhandled exception occurred, but the "
+                "GUI is turned into the original state though"
             )
 
 

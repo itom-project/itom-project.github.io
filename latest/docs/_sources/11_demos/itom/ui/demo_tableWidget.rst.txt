@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_demo_tableWidget.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_demo_tableWidget.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -20,7 +20,7 @@
 Table widget
 ===============
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-119
+.. GENERATED FROM PYTHON SOURCE LINES 5-111
 
 
 
@@ -28,7 +28,8 @@ Table widget
 
 
 
-.. code-block:: default
+.. code-block:: Python
+
 
     from itomUi import (
         ItomUi,
@@ -55,9 +56,7 @@ Table widget
             self.gui.table.call(
                 "setHorizontalHeaderLabels", ("label 1", "label 2", "label 3")
             )
-            self.gui.table.call(
-                "setVerticalHeaderLabels", ("text 1", "text 2", "text 3")
-            )
+            self.gui.table.call("setVerticalHeaderLabels", ("text 1", "text 2", "text 3"))
 
         @ItomUi.autoslot("")  # the signal is clicked()
         def on_btnGetStatus_clicked(self):
@@ -66,17 +65,16 @@ Table widget
             currentText = self.gui.table.call("getItem", currentRow, currentColumn)
             ui.msgInformation(
                 "Status",
-                "Row: %i, Col: %i, Text: %s"
-                % (currentRow, currentColumn, currentText),
+                "Row: %i, Col: %i, Text: %s" % (currentRow, currentColumn, currentText),
                 parent=self.gui,
             )
 
         @ItomUi.autoslot("bool")
         def on_checkReadOnly_clicked(self, value):
             if not value:
-                self.gui.table[
-                    "editTriggers"
-                ] = "DoubleClicked;EditKeyPressed;AnyKeyPressed"
+                self.gui.table["editTriggers"] = (
+                    "DoubleClicked;EditKeyPressed;AnyKeyPressed"
+                )
             else:
                 self.gui.table["editTriggers"] = 0
 
@@ -93,14 +91,10 @@ Table widget
             )  # -> special method call
             checkStateStr = ["unchecked", "partially", "checked"][checkState]
             currentText = self.gui.table.call("getItem", row, column)
-            print(
-                "Cell %i,%i (%s) changed: %s"
-                % (row, column, currentText, checkStateStr)
-            )
+            print("Cell %i,%i (%s) changed: %s" % (row, column, currentText, checkStateStr))
 
         @ItomUi.autoslot("")  # the signal is clicked()
         def on_btnAddCheckboxes_clicked(self):
-
             if not self.filled:
                 ui.msgCritical("empty table", "fill the content first")
                 return
@@ -133,9 +127,7 @@ Table widget
             for m in range(self.gui.table["rowCount"]):
                 for n in range(self.gui.table["columnCount"]):
                     f = flags[random.randint(0, len(flags) - 1)]
-                    self.gui.table.call(
-                        "setFlags", m, n, f[0]
-                    )  # -> special method call
+                    self.gui.table.call("setFlags", m, n, f[0])  # -> special method call
                     self.gui.table.call(
                         "setCheckState", m, n, f[1]
                     )  # -> special method call
@@ -148,7 +140,7 @@ Table widget
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.546 seconds)
+   **Total running time of the script:** (0 minutes 0.075 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_ui_demo_tableWidget.py:
@@ -157,11 +149,14 @@ Table widget
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_tableWidget.ipynb <demo_tableWidget.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_tableWidget.py <demo_tableWidget.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_tableWidget.ipynb <demo_tableWidget.ipynb>`
+      :download:`Download zipped: demo_tableWidget.zip <demo_tableWidget.zip>`

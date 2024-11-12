@@ -2,7 +2,7 @@
 =============================
 
 This examples shows how the ``matplotlib`` can be integrated
-into a ``GUI`` based on the ``MatplotlibPlot`` Qt Designer plugin. 
+into a ``GUI`` based on the ``MatplotlibPlot`` Qt Designer plugin.
 """
 
 import numpy as np
@@ -11,6 +11,7 @@ from itom import ui
 
 
 # sphinx_gallery_thumbnail_path = '11_demos/_static/_thumb/demoMatplotlibGUI.png'
+
 
 ###############################################################################
 # Plots spines into the ``MatplotlibPlot`` Qt Designer plugin.
@@ -54,6 +55,7 @@ def plotDroppedSpines():
 # .. image:: ../../_static/demoMatplotlibGUI_1.png
 #    :width: 75%
 
+
 ###############################################################################
 # Plots a sine curve into the ``MatplotlibPlot`` Qt Designer plugin.
 def plotSine():
@@ -65,7 +67,7 @@ def plotSine():
 
     canvas = gui.plot  # reference to matplotlibPlot widget
     fig = plt.figure(num=3, canvas=canvas)
-    
+
     if len(fig.axes) == 0:
         # create a new subplot in the figure
         ax = fig.add_subplot(111)
@@ -73,7 +75,7 @@ def plotSine():
         # reuse the existing first subplot
         ax = fig.axes[0]
         ax.clear()
-    
+
     ax.plot(t, s)
 
     plt.show()

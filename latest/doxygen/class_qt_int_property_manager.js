@@ -16,6 +16,5 @@ var class_qt_int_property_manager =
     [ "uninitializeProperty", "class_qt_int_property_manager.html#ade1279551339ebcaad47f35ded9489a8", null ],
     [ "value", "class_qt_int_property_manager.html#a8aa042ad88ed2682302d45ecc76ba2c4", null ],
     [ "valueChanged", "class_qt_int_property_manager.html#a524990cc950be2174854c0150f906776", null ],
-    [ "valueText", "class_qt_int_property_manager.html#a3b79394be85632396beceee28d007087", null ],
-    [ "d_ptr", "class_qt_int_property_manager.html#a26219e2e05ebe214d266efcb490ad3bd", null ]
+    [ "valueText", "class_qt_int_property_manager.html#a3b79394be85632396beceee28d007087", null ]
 ];

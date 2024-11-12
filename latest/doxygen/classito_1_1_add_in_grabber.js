@@ -8,9 +8,7 @@ var classito_1_1_add_in_grabber =
     [ "incGrabberStarted", "classito_1_1_add_in_grabber.html#a19e108f3d710aae43dd063abaa3af60c", null ],
     [ "retrieveData", "classito_1_1_add_in_grabber.html#aecd3d5811fae42d943f7e9c2ca43d028", null ],
     [ "sendDataToListeners", "classito_1_1_add_in_grabber.html#a34354b46f5c4e1cb49a555785f40a9dc", null ],
-    [ "setGrabberStarted", "classito_1_1_add_in_grabber.html#aae9335b914f37b81f51609747bce019f", null ],
     [ "timerEvent", "classito_1_1_add_in_grabber.html#a666a64ced4c630c88c976c9ac9d44d57", null ],
-    [ "dd", "classito_1_1_add_in_grabber.html#a8e2c45e6645a7bd8c30d7edbb67be0cd", null ],
     [ "m_data", "classito_1_1_add_in_grabber.html#ae243bc734d043ca8bb6cc2ce747aff59", null ],
     [ "m_started", "classito_1_1_add_in_grabber.html#af76aa05d6d89955aa80cf88f958567a7", null ]
 ];

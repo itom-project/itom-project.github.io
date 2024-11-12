@@ -29,8 +29,10 @@ print("myString:", session.getString("myString"))  # returns 'test' as answer in
 
 ###############################################################################
 # Creates a 2x3 random matrix in Matlab (name: myArray).
-session.setValue("myArray", dataObject.randN([2, 3], "int16"))  
-arr = session.getValue("myArray")  # returns the 2x3 array 'myArray' from Matlab as Numpy array
+session.setValue("myArray", dataObject.randN([2, 3], "int16"))
+arr = session.getValue(
+    "myArray"
+)  # returns the 2x3 array 'myArray' from Matlab as Numpy array
 print(arr)
 
 ###############################################################################

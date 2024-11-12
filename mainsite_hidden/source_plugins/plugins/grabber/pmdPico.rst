@@ -13,7 +13,6 @@
 
 Overview
 ========
-
 .. pluginsummaryextended::
     :plugin: PmdPico
 

@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_pointClouds_demo_fitGeometricElement.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_pointClouds_demo_fitGeometricElement.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -20,9 +20,9 @@
 Fit geometric element
 ========================
 
-Fit geomtric elements to pointClouds.
+Fit geometric elements to pointClouds.
 
-.. GENERATED FROM PYTHON SOURCE LINES 6-147
+.. GENERATED FROM PYTHON SOURCE LINES 6-158
 
 
 
@@ -33,8 +33,8 @@ Fit geomtric elements to pointClouds.
 
     The circle has a radius 3.0 and is centered at (-5.516839607366819e-08, -8.886476621228212e-08)
     The circle has a radius 3.000000238418579 and a angle of 44.999996150902604 and is centered at (-4.941995257468079e-08, 9.909079068393112e-08, 1.000000238418579)
-    The sphere has a radius 2.999983310699463 and is centered at (-4.9373220463166945e-06, -1.920069735206198e-06, 7.724165698164143e-06)
-    The cylinder has a radius 2.9871838092803955 and its axis is at (0.19726043939590454, -0.0008217319846153259, 0.012852191925048828) with the direction (-0.9999402761459351, 0.010918216779828072, 0.0005527765024453402)
+    The sphere has a radius 3.000039577484131 and is centered at (-5.266622611088678e-05, -4.388852175907232e-05, 3.5110817407257855e-05)
+    The cylinder has a radius 2.9833812713623047 and its axis is at (1.5903126001358032, -0.00011482834815979004, 0.01689159870147705) with the direction (-0.9999804496765137, 0.00580567866563797, 0.002306451788172126)
     The line is at (-6.0, -6.0, 1.0) with the direction (-0.7071068286895752, -0.7071068286895752, 0.0)
     The plane's direction is (1.4901089571139892e-06, 0.7071093916893005, -0.7071042060852051) with the constant 0.707102358341217
 
@@ -45,7 +45,7 @@ Fit geomtric elements to pointClouds.
 
 |
 
-.. code-block:: default
+.. code-block:: Python
 
 
     import numpy as np
@@ -67,7 +67,6 @@ Fit geomtric elements to pointClouds.
 
     for fitGeometry in geometryList:
         if fitGeometry == "line":
-
             X = np.arange(-3.1, 3.1, 0.1) * 3
             Y = np.arange(-3.1, 3.1, 0.1) * 3
             Z = np.ones(X.shape, X.dtype)
@@ -88,7 +87,6 @@ Fit geomtric elements to pointClouds.
             )
 
         elif fitGeometry == "plane":
-
             [X, Y] = np.meshgrid(np.arange(-2.0, 2.0, 0.1), np.arange(-2.0, 2.0, 0.1))
             Z = np.ones(X.shape, X.dtype) + Y * np.sin(45 * np.pi / 180)
             Y *= np.cos(45 * np.pi / 180)
@@ -100,10 +98,11 @@ Fit geomtric elements to pointClouds.
 
             [cVec, cPt, cInl] = algorithms.pclFitPlane(cloud, 1, optimizeParameters=0)
 
-            print("The plane's direction is ({}, {}, {}) with the constant {}".format(cVec[0], cVec[1], cVec[2], cPt))
+            print(
+                f"The plane's direction is ({cVec[0]}, {cVec[1]}, {cVec[2]}) with the constant {cPt}"
+            )
 
         elif fitGeometry == "circle2D":
-
             X = np.cos(np.arange(-3.1, 3.1, 0.1)) * 3
             Y = np.sin(np.arange(-3.1, 3.1, 0.1)) * 3
             Z = np.ones(X.shape, X.dtype)
@@ -113,12 +112,13 @@ Fit geomtric elements to pointClouds.
                 dataObject(Z.astype("float32")),
             )
 
-            [cPt, cRad, cInl] = algorithms.pclFitCircle2D(cloud, [1, 6], optimizeParameters=0)
+            [cPt, cRad, cInl] = algorithms.pclFitCircle2D(
+                cloud, [1, 6], optimizeParameters=0
+            )
 
-            print("The circle has a radius {} and is centered at ({}, {})".format(cRad, cPt[0], cPt[1]))
+            print(f"The circle has a radius {cRad} and is centered at ({cPt[0]}, {cPt[1]})")
 
         elif fitGeometry == "circle3D":
-
             X = np.cos(np.arange(-3.1, 3.1, 0.1)) * 3
             Y = np.sin(np.arange(-3.1, 3.1, 0.1)) * 3
             Z = np.ones(X.shape, X.dtype) + Y * np.sin(45 * np.pi / 180)
@@ -129,10 +129,19 @@ Fit geomtric elements to pointClouds.
                 dataObject(Z.astype("float32")),
             )
 
-            [cPt, cNormal, cRad, cInl] = algorithms.pclFitCircle3D(cloud, [1, 6], optimizeParameters=0)
+            [cPt, cNormal, cRad, cInl] = algorithms.pclFitCircle3D(
+                cloud, [1, 6], optimizeParameters=0
+            )
 
             angle = (
-                mathe.acos(cNormal[2] / (cNormal[0] * cNormal[0] + cNormal[1] * cNormal[1] + cNormal[2] * cNormal[2]))
+                mathe.acos(
+                    cNormal[2]
+                    / (
+                        cNormal[0] * cNormal[0]
+                        + cNormal[1] * cNormal[1]
+                        + cNormal[2] * cNormal[2]
+                    )
+                )
                 * 180
                 / np.pi
             )
@@ -146,7 +155,6 @@ Fit geomtric elements to pointClouds.
             )
 
         elif fitGeometry == "sphere":
-
             [X, Y] = np.meshgrid(np.arange(-2.0, 2.0, 0.1), np.arange(-2.0, 2.0, 0.1))
             Z = np.sqrt(9 - Y * Y - X * X)
             cloud = pointCloud.fromXYZ(
@@ -156,9 +164,10 @@ Fit geomtric elements to pointClouds.
             )
 
             [cPt, cRad, cInl] = algorithms.pclFitSphere(cloud, [1, 6], optimizeParameters=0)
-            print("The sphere has a radius {} and is centered at ({}, {}, {})".format(cRad, cPt[0], cPt[1], cPt[2]))
+            print(
+                f"The sphere has a radius {cRad} and is centered at ({cPt[0]}, {cPt[1]}, {cPt[2]})"
+            )
         elif fitGeometry == "cylinder":
-
             [X, Y] = np.meshgrid(np.arange(-2.0, 2.0, 0.1), np.arange(-2.0, 2.0, 0.1))
             Z = np.sqrt(9 - Y * Y)
             cloud = pointCloud.fromXYZ(
@@ -171,7 +180,9 @@ Fit geomtric elements to pointClouds.
             pclNorm = pointCloud()
             algorithms.pclEstimateNormals(cloud, pclNorm)
 
-            [cPt, cAxis, cRad, cInl] = algorithms.pclFitCylinder(pclNorm, [1, 6], optimizeParameters=0)
+            [cPt, cAxis, cRad, cInl] = algorithms.pclFitCylinder(
+                pclNorm, [1, 6], optimizeParameters=0
+            )
             print(
                 "The cylinder has a radius {} and its axis is at ({}, {}, {}) with the direction ({}, {}, {})".format(
                     cRad, cPt[0], cPt[1], cPt[2], cAxis[0], cAxis[1], cAxis[2]
@@ -192,7 +203,7 @@ Fit geomtric elements to pointClouds.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.851 seconds)
+   **Total running time of the script:** (0 minutes 0.339 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_pointClouds_demo_fitGeometricElement.py:
@@ -201,11 +212,14 @@ Fit geomtric elements to pointClouds.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_fitGeometricElement.ipynb <demo_fitGeometricElement.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_fitGeometricElement.py <demo_fitGeometricElement.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_fitGeometricElement.ipynb <demo_fitGeometricElement.ipynb>`
+      :download:`Download zipped: demo_fitGeometricElement.zip <demo_fitGeometricElement.zip>`

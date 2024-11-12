@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_dataProcessing_demo_CrossCorrelation_LiveImage.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_dataProcessing_demo_CrossCorrelation_LiveImage.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -23,15 +23,26 @@ Cross correlation of images
 In this demo the cross-correlation is calculated between two images
 acquired via the integrated webcam of your PC.
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-106
+.. GENERATED FROM PYTHON SOURCE LINES 7-113
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    Can not open camera with OpenCVGrabber. Probabel root cause: WebCam is not available.
+    Used Itom Dummy Grabber instead.
 
 
 
 
 
 
+|
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itom import dataIO
@@ -39,6 +50,7 @@ acquired via the integrated webcam of your PC.
     from itom import ui
     import numpy as np
     from numpy import fft
+
 
     # some methods
     def acquireImage1():
@@ -57,6 +69,7 @@ acquired via the integrated webcam of your PC.
         cam.copyVal(image2)
         gui.plot2["source"] = image2
         cam.setAutoGrabbing(g)
+
 
     def evaluate():
         """determines the offset between image1 and image2
@@ -84,6 +97,7 @@ acquired via the integrated webcam of your PC.
         gui.lbl_dx["text"] = "dx: " + str(offset_x)
         gui.lbl_dy["text"] = "dy: " + str(offset_y)
 
+
     def saveImages():
         filename = ui.getSaveFileName("Filename", filters="IDC (*.idc)", parent=gui)
         if filename:
@@ -103,8 +117,12 @@ acquired via the integrated webcam of your PC.
 
 
     # open camera (make it before you start this script)
-    cam = dataIO("OpenCVGrabber", colorMode="gray")
-    # cam = dataIO("FileGrabber","*.tif","samples",8,2)
+    try:
+        cam = dataIO("OpenCVGrabber", colorMode="gray")
+    except:
+        print("Can not open camera with OpenCVGrabber. Probabel root cause: WebCam is not available.")
+        print("Used Itom Dummy Grabber instead.")
+        cam = dataIO("DummyGrabber")
 
     # start camera
     cam.startDevice()
@@ -136,7 +154,7 @@ acquired via the integrated webcam of your PC.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.749 seconds)
+   **Total running time of the script:** (0 minutes 0.484 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_dataProcessing_demo_CrossCorrelation_LiveImage.py:
@@ -145,11 +163,14 @@ acquired via the integrated webcam of your PC.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_CrossCorrelation_LiveImage.ipynb <demo_CrossCorrelation_LiveImage.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_CrossCorrelation_LiveImage.py <demo_CrossCorrelation_LiveImage.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_CrossCorrelation_LiveImage.ipynb <demo_CrossCorrelation_LiveImage.ipynb>`
+      :download:`Download zipped: demo_CrossCorrelation_LiveImage.zip <demo_CrossCorrelation_LiveImage.zip>`

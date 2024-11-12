@@ -19,6 +19,7 @@ def pathConv(p):
 
 
 def createDocumentation(buildernames):
+
     all_files = True
     filenames = False
     confoverrides = {}
@@ -29,7 +30,9 @@ def createDocumentation(buildernames):
     confdir = pathConv(os.path.join(basedir, "source"))
 
     for buildername in buildernames:
-        outdir = pathConv(os.path.join(basedir, "build/" + buildername))
+        outdir = pathConv(
+            os.path.join(basedir, "build/" + buildername)
+        )
         doctreedir = pathConv(os.path.join(basedir, "build/doctrees"))
         postcopydir = pathConv(os.path.join(basedir, ".."))
 

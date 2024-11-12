@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_plots_demo_maskEditor.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_plots_demo_maskEditor.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -27,9 +27,9 @@ precise geometric shapes. They can then be converted to pixel-precise
 masks. For more information about shapes see the shapes demo in the main
 folder of the demo scripts.
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-16
+.. GENERATED FROM PYTHON SOURCE LINES 10-17
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itom import ui
@@ -44,13 +44,14 @@ folder of the demo scripts.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-19
+
+.. GENERATED FROM PYTHON SOURCE LINES 19-20
 
 Controls if the user can add or modify shapes by the  actions in the toolbar
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-22
+.. GENERATED FROM PYTHON SOURCE LINES 20-24
 
-.. code-block:: default
+.. code-block:: Python
 
     def checkEnableDrawingClicked(checked: bool):
         gui.plot["geometricShapesDrawingEnabled"] = checked
@@ -62,13 +63,14 @@ Controls if the user can add or modify shapes by the  actions in the toolbar
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-24
 
-Clear all existing shapes by calling the slot ``clearGeometricShapes`` 
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-27
+Clear all existing shapes by calling the slot ``clearGeometricShapes``
 
-.. code-block:: default
+.. GENERATED FROM PYTHON SOURCE LINES 26-30
+
+.. code-block:: Python
 
     def clearShapes():
         gui.plot.call("clearGeometricShapes")
@@ -80,7 +82,8 @@ Clear all existing shapes by calling the slot ``clearGeometricShapes``
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-33
+
+.. GENERATED FROM PYTHON SOURCE LINES 31-36
 
 Creates a mask where all values within the mask are set to ``255`` and
 all other values to ``0``. The mask has the same size and axes information
@@ -88,9 +91,9 @@ than the displayed ``dataObject``.
 The mask object is then set to the variable ``mask`` in the global workspace
 and displayed in a new plot window.
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-38
+.. GENERATED FROM PYTHON SOURCE LINES 36-42
 
-.. code-block:: default
+.. code-block:: Python
 
     def exportMask():
         mask = gui.plot["source"].createMask(gui.plot["geometricShapes"])
@@ -104,13 +107,14 @@ and displayed in a new plot window.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-40
+
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
 
 Exports all current shapes as a list of itom.shape objects.
 
-.. GENERATED FROM PYTHON SOURCE LINES 40-48
+.. GENERATED FROM PYTHON SOURCE LINES 44-53
 
-.. code-block:: default
+.. code-block:: Python
 
     def exportShapes():
         globals()["shapes"] = gui.plot["geometricShapes"]
@@ -127,15 +131,16 @@ Exports all current shapes as a list of itom.shape objects.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-50
+
+.. GENERATED FROM PYTHON SOURCE LINES 54-56
 
 Show the mask object as overlay image. Use the slider in the toolbox
+of the plot to change the transparency of the overlay image.
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-55
+.. GENERATED FROM PYTHON SOURCE LINES 56-61
 
-.. code-block:: default
+.. code-block:: Python
 
-     # of the plot to change the transparency of the overlay image.
     def showMaskAsOverlay():
         mask = gui.plot["source"].createMask(gui.plot["geometricShapes"])
         gui.plot["overlayImage"] = mask
@@ -147,13 +152,14 @@ Show the mask object as overlay image. Use the slider in the toolbox
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-57
+
+.. GENERATED FROM PYTHON SOURCE LINES 62-63
 
 Sets all values within any shapes to a given gray value.
 
-.. GENERATED FROM PYTHON SOURCE LINES 57-72
+.. GENERATED FROM PYTHON SOURCE LINES 63-79
 
-.. code-block:: default
+.. code-block:: Python
 
     def setColorUnderMask():
         [val, ok] = ui.getInt(
@@ -162,9 +168,9 @@ Sets all values within any shapes to a given gray value.
         if ok:
             mask = gui.plot["source"].createMask(gui.plot["geometricShapes"])
             # the mask can be inverted using ~mask
-            gui.plot["source"][
-                mask
-            ] = val  # this single command can be used to change values in the mask
+            gui.plot["source"][mask] = (
+                val  # this single command can be used to change values in the mask
+            )
             gui.plot.call(
                 "replot"
             )  # if only the source object is changed, you need to call
@@ -177,14 +183,15 @@ Sets all values within any shapes to a given gray value.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-75
+
+.. GENERATED FROM PYTHON SOURCE LINES 80-82
 
 This method is always called if any shape is added or modified and displays some
 information in the status bar of the window.
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-80
+.. GENERATED FROM PYTHON SOURCE LINES 82-88
 
-.. code-block:: default
+.. code-block:: Python
 
     def shapeModified(index: int, shape: shape):
         gui.call("statusBar").call(
@@ -198,13 +205,14 @@ information in the status bar of the window.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-82
+
+.. GENERATED FROM PYTHON SOURCE LINES 89-90
 
 This method is called if the user changes the selection of allowed operations.
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-91
+.. GENERATED FROM PYTHON SOURCE LINES 90-100
 
-.. code-block:: default
+.. code-block:: Python
 
     def listModificationChanged():
         sel = gui.listModificationTypes.call("selectedRows")
@@ -222,14 +230,15 @@ This method is called if the user changes the selection of allowed operations.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-94
+
+.. GENERATED FROM PYTHON SOURCE LINES 101-103
 
 Create demo data with axis scales and offsets to
 show that the mask will also work in this special case.
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-121
+.. GENERATED FROM PYTHON SOURCE LINES 103-128
 
-.. code-block:: default
+.. code-block:: Python
 
     image = dataObject.randN([1024, 1024])
     image.axisScales = (1e-3, 1e-3)
@@ -249,9 +258,7 @@ show that the mask will also work in this special case.
     gui.btnSetColorUnderMask.connect("clicked()", setColorUnderMask)
     gui.btnClearShapes.connect("clicked()", clearShapes)
     gui.plot.connect("geometricShapeChanged(int,ito::Shape)", shapeModified)
-    gui.listModificationTypes.connect(
-        "itemSelectionChanged()", listModificationChanged
-    )
+    gui.listModificationTypes.connect("itemSelectionChanged()", listModificationChanged)
 
     gui.plot["source"] = image
     gui.plot["colorMap"] = "hotIron"
@@ -265,7 +272,7 @@ show that the mask will also work in this special case.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 122-124
+.. GENERATED FROM PYTHON SOURCE LINES 129-131
 
 .. image:: ../../_static/demoMaskEditor.png
    :width: 100%
@@ -273,7 +280,7 @@ show that the mask will also work in this special case.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.096 seconds)
+   **Total running time of the script:** (0 minutes 0.042 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_plots_demo_maskEditor.py:
@@ -282,11 +289,14 @@ show that the mask will also work in this special case.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_maskEditor.ipynb <demo_maskEditor.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_maskEditor.py <demo_maskEditor.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_maskEditor.ipynb <demo_maskEditor.ipynb>`
+      :download:`Download zipped: demo_maskEditor.zip <demo_maskEditor.zip>`

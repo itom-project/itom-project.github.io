@@ -37,7 +37,7 @@
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'plugins/algorithms/fftwFilters';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -46,7 +46,7 @@
     <link rel="prev" title="5.4. DataObjectIO" href="dataObjectIO.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 09, 2024"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
   </head>
   
   
@@ -528,12 +528,12 @@ The axisIndex parameter is used the shift a &gt;2D dataObject in the 0 axis.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<em>itom.dataObject</em>) – Input object (n-dimensional, (u)int8, (u)int16, int32, float32, float64, complex64, complex128) which is shifted in-place.</p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>shift axis: x and y axis (-1, default), only y axis (0), only x axis (1)</p>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>shift axis: x and y axis (-1, default), only y axis (0), only x axis (1)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, 1], Default: -1</em></div>
 </div>
 </p></li>
-<li><p><strong>axisIndex</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – shift axis in the case of a &gt; 2D dataObject. (-1, default) the axis parameter is considered, (0) the 0 axis of a 3D dataObject is shifted</p></li>
+<li><p><strong>axisIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – shift axis in the case of a &gt; 2D dataObject. (-1, default) the axis parameter is considered, (0) the 0 axis of a 3D dataObject is shifted</p></li>
 </ul>
 </dd>
 </dl>
@@ -568,17 +568,17 @@ take some time but might speed-up calculations of huge objects.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<em>itom.dataObject</em>) – Input object (n-dimensional, (u)int8, (u)int16, int32, float32, float64, complex64, complex128)</p></li>
 <li><p><strong>destination</strong> (<em>itom.dataObject</em>) – Output object (inplace allowed, but only feasible if source is complex64 or complex128). Destination has the same size than the input object, the type is either complex128 (for float64 or complex128 inputs) or complex64 (else).</p></li>
-<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
+<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Axis over which to compute the FFT. If not given, the last axis is used.</p>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Axis over which to compute the FFT. If not given, the last axis is used.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, inf], Default: -1</em></div>
 </div>
 </p></li>
-<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
+<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“no”, “default”, “ortho”], Default: “default”</em></div>
 </div>
@@ -617,12 +617,12 @@ take some time but might speed-up calculations of huge objects.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<em>itom.dataObject</em>) – Input object (n-dimensional, (u)int8, (u)int16, int32, float32, float64, complex64, complex128)</p></li>
 <li><p><strong>destination</strong> (<em>itom.dataObject</em>) – Output object (inplace allowed, but only feasible if source is complex64 or complex128). Destination has the same size than the input object, the type is either complex128 (for float64 or complex128 inputs) or complex64 (else).</p></li>
-<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
+<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
+<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“no”, “default”, “ortho”], Default: “default”</em></div>
 </div>
@@ -643,12 +643,12 @@ The axisIndex parameter is used the shift a &gt;2D dataObject in the 0 axis.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<em>itom.dataObject</em>) – Input object (n-dimensional, (u)int8, (u)int16, int32, float32, float64, complex64, complex128) which is shifted in-place.</p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>shift axis: x and y axis (-1, default), only y axis (0), only x axis (1)</p>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>shift axis: x and y axis (-1, default), only y axis (0), only x axis (1)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, 1], Default: -1</em></div>
 </div>
 </p></li>
-<li><p><strong>axisIndex</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – shift axis in the case of a &gt; 2D dataObject. (-1, default) the axis parameter is considered, (0) the 0 axis of a 3D dataObject is shifted</p></li>
+<li><p><strong>axisIndex</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – shift axis in the case of a &gt; 2D dataObject. (-1, default) the axis parameter is considered, (0) the 0 axis of a 3D dataObject is shifted</p></li>
 </ul>
 </dd>
 </dl>
@@ -683,17 +683,17 @@ take some time but might speed-up calculations of huge objects.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<em>itom.dataObject</em>) – Input object (n-dimensional, (u)int8, (u)int16, int32, float32, float64, complex64, complex128)</p></li>
 <li><p><strong>destination</strong> (<em>itom.dataObject</em>) – Output object (inplace allowed, but only feasible if source is complex64 or complex128). Destination has the same size than the input object, the type is either complex128 (for float64 or complex128 inputs) or complex64 (else).</p></li>
-<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
+<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Axis over which to compute the FFT. If not given, the last axis is used.</p>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Axis over which to compute the FFT. If not given, the last axis is used.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, inf], Default: -1</em></div>
 </div>
 </p></li>
-<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
+<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“no”, “default”, “ortho”], Default: “default”</em></div>
 </div>
@@ -732,12 +732,12 @@ take some time but might speed-up calculations of huge objects.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source</strong> (<em>itom.dataObject</em>) – Input object (n-dimensional, (u)int8, (u)int16, int32, float32, float64, complex64, complex128)</p></li>
 <li><p><strong>destination</strong> (<em>itom.dataObject</em>) – Output object (inplace allowed, but only feasible if source is complex64 or complex128). Destination has the same size than the input object, the type is either complex128 (for float64 or complex128 inputs) or complex64 (else).</p></li>
-<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
+<li><p><strong>plan_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Method flag, 0: Estimate (default), 1: Measure.  Measure instructs FFTW to run and measure the execution time of several FFTs in order to find the best way to compute the transform of size n. This process takes some time (usually a few seconds), depending on your machine and on the size of the transform. Estimate, on the contrary, does not run any computation and just builds a reasonable plan that is probably sub-optimal. In short, if your program performs many transforms of the same size and initialization time is not important, use Measure; otherwise use Estimate.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
+<li><p><strong>norm</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Normalization method. no: neither fft nor ifft are scaled, default: direct transform (fft) is not scaled, inverse transform is scaled by 1/n, ortho: both direct and inverse transforms are scaled by 1/sqrt(n)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“no”, “default”, “ortho”], Default: “default”</em></div>
 </div>
@@ -868,7 +868,7 @@ take some time but might speed-up calculations of huge objects.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>

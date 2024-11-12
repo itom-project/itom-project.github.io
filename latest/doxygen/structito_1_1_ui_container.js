@@ -17,8 +17,8 @@ var structito_1_1_ui_container =
     [ "UiContainer", "structito_1_1_ui_container.html#ade6b4ec033308c6b5589bf9ffc4ad9ca", null ],
     [ "~UiContainer", "structito_1_1_ui_container.html#af7e90123a7d89a2a5b2d8339f35ebdfd", null ],
     [ "getType", "structito_1_1_ui_container.html#a6b7e4c44e11edfba8b30f73e63575f9b", null ],
-    [ "getUiDialog", "structito_1_1_ui_container.html#ae79cb779628f7b756322f68fb62f8ecc", null ],
-    [ "getUiWidget", "structito_1_1_ui_container.html#a58f15ac457ae52463e7a3e66f055c6f7", null ],
+    [ "getUiDialog", "structito_1_1_ui_container.html#a14dbaa01426432d449a36fd099aa064a", null ],
+    [ "getUiWidget", "structito_1_1_ui_container.html#a78c3ee3157c3a25f3c97bacdec15ea43", null ],
     [ "m_type", "structito_1_1_ui_container.html#a7e799b7f2236675a1c63870f758ccced", null ],
     [ "m_weakDialog", "structito_1_1_ui_container.html#ada7a6d66278dbe51092f323a517e464e", null ]
 ];

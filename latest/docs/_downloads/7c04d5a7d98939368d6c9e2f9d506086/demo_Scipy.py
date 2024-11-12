@@ -4,6 +4,7 @@
 Opens the ascent image from ``scipy.misc`` and shifts the image.
 Finally, the shift offsets are determined using cross-correlation.
 """
+
 import scipy.misc
 import numpy
 from numpy.fft import fft2
@@ -38,7 +39,7 @@ img.set_clim(0, 100)
 pylab.title("ascent (FFT), fftshift")
 
 ###############################################################################
-# Calculate the cross-correlation. 
+# Calculate the cross-correlation.
 pylab.figure()
 pylab.subplot(231)
 pylab.imshow(ascent)

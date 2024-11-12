@@ -3,7 +3,7 @@
 
 This demo shows how you can set and change the theme of your GUI.
 The style can not be entirely removed to the windows, mac or plastique style
-(usually done by ``setStyle(new QWindowsStyle())``). 
+(usually done by ``setStyle(new QWindowsStyle())``).
 It only resets the style sheet to an empty one, such that the native fallbacks to the
 os dependent style is applied. However, ``Qt::WA_StyledBackground`` is still active.
 """
@@ -27,7 +27,9 @@ class PlotStyleSheets(ItomUi):
         obj = dataObject.randN([1024, 1024], "float32")
         obj[200:300, 200:300] = float("nan")
         self.gui.plot2d["source"] = obj
-        self.gui.plot1d["source"] = dataObject(np.sin(np.arange(0, 10 * np.pi, (1 / 20) * np.pi)))
+        self.gui.plot1d["source"] = dataObject(
+            np.sin(np.arange(0, 10 * np.pi, (1 / 20) * np.pi))
+        )
 
     def show(self, modalLevel: int = 0):
         self.gui.show(modalLevel)
@@ -46,7 +48,7 @@ class PlotStyleSheets(ItomUi):
 
     @ItomUi.autoslot("")
     def on_radioDarkStyle_clicked(self):
-        with open("darkorange.qss", "rt") as f:
+        with open("darkorange.qss") as f:
             self.gui["styleSheet"] = f.read()
         self.gui.plot2d["backgroundColor"] = "#323232"
         self.gui.plot2d["axisColor"] = "#ffffff"

@@ -1,122 +1,584 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6.11. Markers, user selections and geometric shapes &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/html.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.11. Markers, user selections and geometric shapes &#8212; itom Documentation</title>
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-    <script src="../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_plots/primitives';</script>
+    <link rel="icon" href="../_static/itomLogo3_128.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.12. Programming plot designer plugins in C++" href="designerPlugins.html" />
-    <link rel="prev" title="6.10. Matplotlib" href="matplotlib.html" /> 
-</head>
+    <link rel="prev" title="6.10. Matplotlib" href="matplotlib.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> itom Documentation
-          </a>
-              <div class="version">
-                4.2.2
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00_releaseNotes/whats-new.html">1. Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_installation/install.html">3. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04_itom_gui/gui.html">5. The itom User Interface</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="plots.html">6. Plots and Figures</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6.11. Markers, user selections and geometric shapes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#drawing-items-into-a-qwt-plot">6.11.1. Drawing items into a Qwt-plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#script-based-pick-and-plot-from-to-a-qwt-widget">6.11.2. Script based pick and plot from / to a Qwt-widget</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implemented-functions-signals-and-slots">6.11.3. Implemented Functions, Signals and Slots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#indexing-for-geometric-elements">6.11.4. Indexing for Geometric Elements</a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#evaluation-of-geometric-elements">6.11.5. Evaluation of Geometric Elements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#demo-scripts-and-examples">6.11.6. Demo Scripts and Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="designerPlugins.html">6.12. Programming plot designer plugins in C++</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_plugins/plugins.html">8. Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09_reference/reference.html">10. itom Script Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11_demos/demos.html">12. Demo scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12_contributing/contributing.html">13. Contributing</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">itom Documentation</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="plots.html"><span class="section-number">6. </span>Plots and Figures</a> &raquo;</li>
-      <li><span class="section-number">6.11. </span>Markers, user selections and geometric shapes</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/05_plots/primitives.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plotOverview.html">6.1. Quick tutorial to plots and figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="figureManagement.html">6.2. Figure Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotClasses.html">6.3. Plot classes and default plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linePlots.html">6.4. line plots (1D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imagePlots.html">6.5. image plots (2D)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isometricPlot.html">6.6. isometric Plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vtk3dplot.html">6.7. 3D plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markers.html">6.8. Markers in plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shapes.html">6.9. Geometric shapes in 1D and 2D plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotlib.html">6.10. Matplotlib</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">6.11. Markers, user selections and geometric shapes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="designerPlugins.html">6.12. Programming plot designer plugins in C++</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="plots.html" class="nav-link"><span class="section-number">6. </span>Plots and Figures</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="markers-user-selections-and-geometric-shapes">
-<span id="primitives"></span><h1><span class="section-number">6.11. </span>Markers, user selections and geometric shapes<a class="headerlink" href="#markers-user-selections-and-geometric-shapes" title="Permalink to this heading">¶</a></h1>
+<span id="primitives"></span><h1><span class="section-number">6.11. </span>Markers, user selections and geometric shapes<a class="headerlink" href="#markers-user-selections-and-geometric-shapes" title="Link to this heading">#</a></h1>
 <p>The plot-widgets <a class="reference internal" href="linePlots.html#itom1dqwtplot"><span class="std std-ref">Plot of an N x M dataObject with 1 x M x-vector</span></a> and <a class="reference internal" href="imagePlots.html#itom2dqwtplot"><span class="std std-ref">Itom2dQwtPlot</span></a> (short: Qwt-plots) support displaying markers, geometric shapes by script or by user interaction.
 This section will give a short introduction about plotting, read- /write-functions and the corresponding plots and the internal geometric element structure.</p>
 <p>At last the evaluateGeomtrics-plugin for direct evaluation of geometric elements is introduced.</p>
@@ -127,12 +589,13 @@ This section will give a short introduction about plotting, read- /write-functio
 <li><p>Get the position and size of specified shapes or markers by the user and optionally display them by script.</p></li>
 </ul>
 <section id="drawing-items-into-a-qwt-plot">
-<h2><span class="section-number">6.11.1. </span>Drawing items into a Qwt-plot<a class="headerlink" href="#drawing-items-into-a-qwt-plot" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.11.1. </span>Drawing items into a Qwt-plot<a class="headerlink" href="#drawing-items-into-a-qwt-plot" title="Link to this heading">#</a></h2>
 <p>The plot functionality can be accessed by three different ways. The first way is the GUI based approach where the user presses the
 “switch draw mode”-button in the button-bar of the plot. The button represents the current item to be plotted.
 The red X (“clear button”) will delete all geometric elements within the plot either drawn by hand or by script.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/drawInto2DToolbarIcons.png"><img alt="../_images/drawInto2DToolbarIcons.png" src="../_images/drawInto2DToolbarIcons.png" style="width: 893px;" /></a>
+<a class="reference internal image-reference" href="../_images/drawInto2DToolbarIcons.png"><img alt="../_images/drawInto2DToolbarIcons.png" src="../_images/drawInto2DToolbarIcons.png" style="width: 893px;" />
+</a>
 </figure>
 <p>At the moment “itom” supports the following shapes:</p>
 <ul class="simple">
@@ -146,7 +609,8 @@ by clicking the canvas. For lines, rectangles and ellipses, you have to click on
 During the design mode, a green line indicates the current position and size of the draft, after the last necessary mouse click, the shape design
 is finished and its color turns to the corresponding inverse color of the current color palette.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/drawInto2D.png"><img alt="../_images/drawInto2D.png" src="../_images/drawInto2D.png" style="width: 893px;" /></a>
+<a class="reference internal image-reference" href="../_images/drawInto2D.png"><img alt="../_images/drawInto2D.png" src="../_images/drawInto2D.png" style="width: 893px;" />
+</a>
 </figure>
 <p>By clicking the <strong>tools &gt;&gt; clear marker</strong> menu, all current shapes are deleted. After creation the geometric elements can be edited by left-clicking one of the element handles which becomes high-lighted (squares) and moving the mouse.
 By pressing the “ctrl”-button during mouse-movement the element resize behaviour will be changed depending on the element type.
@@ -155,7 +619,7 @@ Rectangles and ellipses will be become squares or circles according to plot coor
 To avoid confusion with plot aspect, a button for fixed axis aspect ratio (“1:1”) was added to the plot bar.</p>
 </section>
 <section id="script-based-pick-and-plot-from-to-a-qwt-widget">
-<h2><span class="section-number">6.11.2. </span>Script based pick and plot from / to a Qwt-widget<a class="headerlink" href="#script-based-pick-and-plot-from-to-a-qwt-widget" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.11.2. </span>Script based pick and plot from / to a Qwt-widget<a class="headerlink" href="#script-based-pick-and-plot-from-to-a-qwt-widget" title="Link to this heading">#</a></h2>
 <p>To allow more complex user interaction with scripts, e.g. script based element picking, the plot functionality can be started by script either blocking or non-blocking.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">myImage</span> <span class="o">=</span> <span class="n">dataObject</span><span class="o">.</span><span class="n">randN</span><span class="p">([</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s1">&#39;float32&#39;</span><span class="p">)</span>
 <span class="p">[</span><span class="n">number</span><span class="p">,</span> <span class="n">handle</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">myImage</span><span class="p">,</span> <span class="s2">&quot;itom2dQwtPlot&quot;</span><span class="p">)</span>
@@ -183,7 +647,7 @@ the end of the user interaction.</p>
 <span class="n">h</span><span class="p">[</span><span class="s1">&#39;geometricShapes&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">element</span>
 </pre></div>
 </div>
-<p>For more informations see also <a class="reference internal" href="markers.html#plot-markers"><span class="std std-ref">Markers in plots</span></a></p>
+<p>For more information see also <a class="reference internal" href="markers.html#plot-markers"><span class="std std-ref">Markers in plots</span></a></p>
 <p>The geometric elements can be read any time using the property “geometricShapes”.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reading geometric elements</span>
 <span class="n">myGeometry</span> <span class="o">=</span> <span class="n">handle</span><span class="p">[</span><span class="s2">&quot;geometricShapes&quot;</span><span class="p">]</span>
@@ -194,7 +658,7 @@ This kind of reading differs from the blocking-variant (“drawAndPickElements�
 For the different definitions of the geometric elements see section “Indexing of Geometric Elements”.</p>
 </section>
 <section id="implemented-functions-signals-and-slots">
-<h2><span class="section-number">6.11.3. </span>Implemented Functions, Signals and Slots<a class="headerlink" href="#implemented-functions-signals-and-slots" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.11.3. </span>Implemented Functions, Signals and Slots<a class="headerlink" href="#implemented-functions-signals-and-slots" title="Link to this heading">#</a></h2>
 <p>The Qwt-plot widgets functions had to be updated. The Qwt-Widgets got the following properties, respectively setter- / getter-functions related to plotting:</p>
 <ul class="simple">
 <li><p>“geometricElementsCount”,    get the number of geometric elements in this plot, READONLY</p></li>
@@ -202,7 +666,7 @@ For the different definitions of the geometric elements see section “Indexing 
 <li><p>“enablePlotting”,            enable and disable plotting toolbar</p></li>
 <li><p>“selectedGeometry”,          set / get the current selected geometric element</p></li>
 </ul>
-<p>In complete theses the functionality of the drawing interface, the following slots have been added to the widgets:</p>
+<p>In complete these the functionality of the drawing interface, the following slots have been added to the widgets:</p>
 <ul class="simple">
 <li><p>“plotMarkers”                Add markers and geometric elements to plot according to dataObject and style type. For geometric “style is not used”, type in “b”.</p></li>
 <li><p>“userInteractionStart”       Start a non-blocking user interaction for “multipointpick” or geometric elements with element count.</p></li>
@@ -229,7 +693,7 @@ However, you can cast this instance to <a class="reference internal" href="../09
 </div>
 </section>
 <section id="indexing-for-geometric-elements">
-<h2><span class="section-number">6.11.4. </span>Indexing for Geometric Elements<a class="headerlink" href="#indexing-for-geometric-elements" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.11.4. </span>Indexing for Geometric Elements<a class="headerlink" href="#indexing-for-geometric-elements" title="Link to this heading">#</a></h2>
 <p>The definition of the geometric elements depends on the implementation. The “plotMarker” and its corresponding getter- / setter-function uses a Matlab orientated structure.
 The structure a dataObject with 8 rows and n columns where n depends on the number of elements.
 Points are defined by their location, while ellipses and rectangles are defined by their diagonal edges.</p>
@@ -260,16 +724,16 @@ The structure can be used row-wise as dataObject or float32-lists</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>doxygenclass: Cannot find class “ito::Shape::ShapeType” in doxygen xml output for project “itom” from directory: C:/itom_vs2017_x64_Qt5.12.6_setup4.0/build/itom\docs/doxygen/xml</p>
+<p>doxygenclass: Cannot find class “ito::Shape::ShapeType” in doxygen xml output for project “itom” from directory: C:/Workspace/itom_development_VS2019_Qt5.15.2_x64/itomProject/build/itom\docs/doxygen/xml</p>
 </div>
 </section>
 <section id="evaluation-of-geometric-elements">
-<h2><span class="section-number">6.11.5. </span>Evaluation of Geometric Elements<a class="headerlink" href="#evaluation-of-geometric-elements" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.11.5. </span>Evaluation of Geometric Elements<a class="headerlink" href="#evaluation-of-geometric-elements" title="Link to this heading">#</a></h2>
 <p>The evaluateGeomtrics-widget is designed to load geometric definition stored in a float32 dataObject with a column-size of &gt;10 elements and a row for each geometric element to display.
 Further more it allows the evaluation of geometric relations between the geometric primitives. See section <a class="reference internal" href="../06_extended_gui/list_custom_widgets.html#listcustomdesignerwidgets"><span class="std std-ref">Custom Designer Widgets</span></a> for the widget description.</p>
 </section>
 <section id="demo-scripts-and-examples">
-<h2><span class="section-number">6.11.6. </span>Demo Scripts and Examples<a class="headerlink" href="#demo-scripts-and-examples" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.11.6. </span>Demo Scripts and Examples<a class="headerlink" href="#demo-scripts-and-examples" title="Link to this heading">#</a></h2>
 <ul>
 <li><p><strong>uiMeasureToolMain.py</strong></p>
 <div class="line-block">
@@ -286,36 +750,123 @@ Further more it allows the evaluation of geometric relations between the geometr
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="matplotlib.html" class="btn btn-neutral float-left" title="6.10. Matplotlib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="designerPlugins.html" class="btn btn-neutral float-right" title="6.12. Programming plot designer plugins in C++" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="matplotlib.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.10. </span>Matplotlib</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="designerPlugins.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.12. </span>Programming plot designer plugins in C++</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawing-items-into-a-qwt-plot">6.11.1. Drawing items into a Qwt-plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-based-pick-and-plot-from-to-a-qwt-widget">6.11.2. Script based pick and plot from / to a Qwt-widget</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implemented-functions-signals-and-slots">6.11.3. Implemented Functions, Signals and Slots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-for-geometric-elements">6.11.4. Indexing for Geometric Elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-geometric-elements">6.11.5. Evaluation of Geometric Elements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-scripts-and-examples">6.11.6. Demo Scripts and Examples</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/05_plots/primitives.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

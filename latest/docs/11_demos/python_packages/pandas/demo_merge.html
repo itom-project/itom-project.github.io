@@ -1,148 +1,624 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>12.3.10.4.7. Merge data &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/html.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>12.3.10.4.5. Merge data &#8212; itom Documentation</title>
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/clipboard.min.js"></script>
-        <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '11_demos/python_packages/pandas/demo_merge';</script>
+    <link rel="icon" href="../../../_static/itomLogo3_128.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="12.3.10.4.8. Create and view an object" href="demo_create.html" />
-    <link rel="prev" title="12.3.10.4.6. Grouping data" href="demo_grouping.html" /> 
-</head>
+    <link rel="next" title="12.3.10.4.6. Missing data" href="demo_missing.html" />
+    <link rel="prev" title="12.3.10.4.4. Getting data in/out" href="demo_in_out.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> itom Documentation
-          </a>
-              <div class="version">
-                4.2.2
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../01_introduction/introduction.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../02_installation/install.html">3. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../05_plots/plots.html">6. Plots and Figures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../07_plugins/plugins.html">8. Plugins</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../09_reference/reference.html">10. itom Script Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../demos.html">12. Demo scripts</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../itom/index.html">12.1. itom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">12.3. Python packages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../index.html#matplotlib">12.3.1. Matplotlib</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#numpy">12.3.2. Numpy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#others">12.3.3. others</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#pandas">12.3.4. Pandas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#parallelization-and-threading">12.3.5. Parallelization and Threading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#plotly">12.3.6. Plotly</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#pytest">12.3.7. PyTest</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#scikit-learn">12.3.8. Scikit-learn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../index.html#scipy">12.3.9. Scipy</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#seaborn">12.3.10. Seaborn</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../matplotlib/index.html">12.3.10.1. Matplotlib</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../numpy/index.html">12.3.10.2. Numpy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../others/index.html">12.3.10.3. others</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="index.html">12.3.10.4. Pandas</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../parallelization_threading/index.html">12.3.10.5. Parallelization and Threading</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../plotly/index.html">12.3.10.6. Plotly</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../pyTest/index.html">12.3.10.7. PyTest</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../scikit-learn/index.html">12.3.10.8. Scikit-learn</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../scipy/index.html">12.3.10.9. Scipy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../seaborn/index.html">12.3.10.10. Seaborn</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../12_contributing/contributing.html">13. Contributing</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">itom Documentation</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../demos.html"><span class="section-number">12. </span>Demo scripts</a> &raquo;</li>
-          <li><a href="../index.html"><span class="section-number">12.3. </span>Python packages</a> &raquo;</li>
-          <li><a href="index.html"><span class="section-number">12.3.10.4. </span>Pandas</a> &raquo;</li>
-      <li><span class="section-number">12.3.10.4.7. </span>Merge data</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../../_sources/11_demos/python_packages/pandas/demo_merge.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../../demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../07_plugins/plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../itom/index.html">12.1. itom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">12.2. Python</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">12.3. Python packages</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../matplotlib/index.html">12.3.10.1. Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../numpy/index.html">12.3.10.2. Numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../others/index.html">12.3.10.3. others</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">12.3.10.4. Pandas</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="demo_categoricals.html">12.3.10.4.1. Categoricals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_create.html">12.3.10.4.2. Create and view an object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_grouping.html">12.3.10.4.3. Grouping data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_in_out.html">12.3.10.4.4. Getting data in/out</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">12.3.10.4.5. Merge data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_missing.html">12.3.10.4.6. Missing data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_operations.html">12.3.10.4.7. Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_plotting.html">12.3.10.4.8. Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_reshaping.html">12.3.10.4.9. Reshaping data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demo_selection.html">12.3.10.4.10. Selection of data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallelization_threading/index.html">12.3.10.5. Parallelization and Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotly/index.html">12.3.10.6. Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyTest/index.html">12.3.10.7. PyTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scikit-learn/index.html">12.3.10.8. Scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scipy/index.html">12.3.10.9. Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../seaborn/index.html">12.3.10.10. Seaborn</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../demos.html" class="nav-link"><span class="section-number">12. </span>Demo scripts</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link"><span class="section-number">12.3.10.4. </span>Pandas</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-11-demos-python-packages-pandas-demo-merge-py"><span class="std std-ref">here</span></a>
-to download the full example code</p>
+<p><a class="reference internal" href="#sphx-glr-download-11-demos-python-packages-pandas-demo-merge-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
 </div>
 <section class="sphx-glr-example-title" id="merge-data">
-<span id="sphx-glr-11-demos-python-packages-pandas-demo-merge-py"></span><h1><span class="section-number">12.3.10.4.7. </span>Merge data<a class="headerlink" href="#merge-data" title="Permalink to this heading">¶</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span id="sphx-glr-11-demos-python-packages-pandas-demo-merge-py"></span><h1><span class="section-number">12.3.10.4.5. </span>Merge data<a class="headerlink" href="#merge-data" title="Link to this heading">#</a></h1>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 <p><strong>Concat</strong></p>
 <p>Create a dataFrame</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>break in pieces</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataFrame</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dataFrame</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="n">dataFrame</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataFrame</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dataFrame</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="n">dataFrame</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
@@ -173,73 +649,73 @@ to download the full example code</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>-0.594662</td>
-      <td>1.364867</td>
-      <td>-0.650156</td>
-      <td>0.670481</td>
+      <td>-0.381824</td>
+      <td>-0.615609</td>
+      <td>0.353890</td>
+      <td>0.073478</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.862960</td>
-      <td>-0.101338</td>
-      <td>-1.251675</td>
-      <td>0.085087</td>
+      <td>-0.627941</td>
+      <td>0.523366</td>
+      <td>0.763896</td>
+      <td>-0.858404</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-0.654680</td>
-      <td>0.431838</td>
-      <td>0.757597</td>
-      <td>-0.921025</td>
+      <td>1.434160</td>
+      <td>0.695704</td>
+      <td>0.295234</td>
+      <td>0.947809</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>-0.428261</td>
-      <td>0.467367</td>
-      <td>0.634254</td>
-      <td>-0.398001</td>
+      <td>-0.318871</td>
+      <td>-0.470462</td>
+      <td>-0.500630</td>
+      <td>-1.794801</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.636669</td>
-      <td>1.327476</td>
-      <td>-0.892867</td>
-      <td>0.318646</td>
+      <td>-1.053845</td>
+      <td>0.739370</td>
+      <td>-2.324050</td>
+      <td>0.441212</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>-1.791799</td>
-      <td>0.323012</td>
-      <td>-1.138974</td>
-      <td>0.134096</td>
+      <td>0.585735</td>
+      <td>1.022914</td>
+      <td>0.216315</td>
+      <td>0.836352</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>-0.131071</td>
-      <td>0.728004</td>
-      <td>0.652262</td>
-      <td>-1.299391</td>
+      <td>-0.770376</td>
+      <td>-2.096072</td>
+      <td>0.205964</td>
+      <td>-0.445026</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>-1.250320</td>
-      <td>0.284590</td>
-      <td>-0.769879</td>
-      <td>-0.794100</td>
+      <td>-0.081697</td>
+      <td>-0.005139</td>
+      <td>0.267725</td>
+      <td>-0.149331</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>-0.188462</td>
-      <td>-1.323862</td>
-      <td>-1.481396</td>
-      <td>1.708920</td>
+      <td>0.386357</td>
+      <td>0.231614</td>
+      <td>1.104906</td>
+      <td>2.569610</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>1.075906</td>
-      <td>-1.282515</td>
-      <td>-0.251804</td>
-      <td>-0.949320</td>
+      <td>0.119584</td>
+      <td>-1.526672</td>
+      <td>0.358645</td>
+      <td>-0.081198</td>
     </tr>
   </tbody>
 </table>
@@ -247,11 +723,11 @@ to download the full example code</p>
 </div>
 <br />
 <br /><p><strong>Join</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">],</span> <span class="s2">&quot;lval&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">],</span> <span class="s2">&quot;lval&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
 <span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">],</span> <span class="s2">&quot;rval&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;key&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
@@ -309,7 +785,7 @@ to download the full example code</p>
 </div>
 <br />
 <br /><p><strong>Grouping</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="p">{</span>
         <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">],</span>
         <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;two&quot;</span><span class="p">,</span> <span class="s2">&quot;one&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">],</span>
@@ -339,6 +815,7 @@ to download the full example code</p>
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>B</th>
       <th>C</th>
       <th>D</th>
     </tr>
@@ -346,25 +823,28 @@ to download the full example code</p>
       <th>A</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>bar</th>
-      <td>1.092838</td>
-      <td>-1.140762</td>
+      <td>onethreetwo</td>
+      <td>-0.312961</td>
+      <td>0.144192</td>
     </tr>
     <tr>
       <th>foo</th>
-      <td>0.121636</td>
-      <td>-1.941217</td>
+      <td>onetwotwoonethree</td>
+      <td>-1.740804</td>
+      <td>-0.837059</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
 <br />
-<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">dataFrame</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="output_subarea output_html rendered_html output_result">
@@ -401,82 +881,154 @@ to download the full example code</p>
     <tr>
       <th rowspan="3" valign="top">bar</th>
       <th>one</th>
-      <td>2.444171</td>
-      <td>-2.047571</td>
+      <td>0.096750</td>
+      <td>0.952195</td>
     </tr>
     <tr>
       <th>three</th>
-      <td>0.264714</td>
-      <td>0.762593</td>
+      <td>0.157577</td>
+      <td>-0.027870</td>
     </tr>
     <tr>
       <th>two</th>
-      <td>-1.616048</td>
-      <td>0.144216</td>
+      <td>-0.567287</td>
+      <td>-0.780133</td>
     </tr>
     <tr>
       <th rowspan="3" valign="top">foo</th>
       <th>one</th>
-      <td>0.712266</td>
-      <td>-2.224192</td>
+      <td>0.448194</td>
+      <td>-0.132610</td>
     </tr>
     <tr>
       <th>three</th>
-      <td>-1.798597</td>
-      <td>0.724009</td>
+      <td>0.652331</td>
+      <td>0.879493</td>
     </tr>
     <tr>
       <th>two</th>
-      <td>1.207966</td>
-      <td>-0.441035</td>
+      <td>-2.841329</td>
+      <td>-1.583942</td>
     </tr>
   </tbody>
 </table>
 </div>
 </div>
 <br />
-<br /><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.017 seconds)</p>
-<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-python-packages-pandas-demo-merge-py">
+<br /><div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-11-demos-python-packages-pandas-demo-merge-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/a91fe303202009fec7f6379850dfe6f2/demo_merge.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_merge.ipynb</span></code></a></p>
+</div>
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../../_downloads/1cb4db82df0c8a3013f716a580d51a2e/demo_merge.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">demo_merge.py</span></code></a></p>
 </div>
-<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
-<p><a class="reference download internal" download="" href="../../../_downloads/a91fe303202009fec7f6379850dfe6f2/demo_merge.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">demo_merge.ipynb</span></code></a></p>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/eba292fac812c45932770393fb5acfdb/demo_merge.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">demo_merge.zip</span></code></a></p>
 </div>
 </div>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="demo_grouping.html" class="btn btn-neutral float-left" title="12.3.10.4.6. Grouping data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="demo_create.html" class="btn btn-neutral float-right" title="12.3.10.4.8. Create and view an object" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="demo_in_out.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12.3.10.4.4. </span>Getting data in/out</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="demo_missing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12.3.10.4.6. </span>Missing data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../../_sources/11_demos/python_packages/pandas/demo_merge.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

@@ -1,143 +1,609 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.8.12. Plugin class - Actuator &mdash; itom Documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/sg_gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/html.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8.8.12. Plugin class - Actuator &#8212; itom Documentation</title>
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/clipboard.min.js"></script>
-        <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/js/theme.js"></script>
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/html.css?v=a585cee4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=bf0e8745"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_plugins/development/plugin-actuator';</script>
+    <link rel="icon" href="../../_static/itomLogo3_128.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="8.8.13. Plugin class - Algo" href="plugin-algo.html" />
-    <link rel="prev" title="8.8.11. Plugin class - DataIO" href="plugin-dataIO.html" /> 
-</head>
+    <link rel="prev" title="8.8.11. Plugin class - DataIO" href="plugin-dataIO.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> itom Documentation
-          </a>
-              <div class="version">
-                4.2.2
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../00_releaseNotes/whats-new.html">1. Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../01_introduction/introduction.html">2. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../02_installation/install.html">3. Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../03_gettingStarted/getting-started.html">4. Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../04_itom_gui/gui.html">5. The itom User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../05_plots/plots.html">6. Plots and Figures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../06_extended_gui/extended_gui.html">7. Extending the user interface of <strong>itom</strong></a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../plugins.html">8. Plugins</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../basic_concept.html">8.1. Basic concept</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../loading_plugins.html">8.2. Loading plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getstart-hardware.html">8.3. How to use hardware plugins</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getstart-grabber.html">8.4. Getting started with grabbers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getstart-adda.html">8.5. Getting started with A/D converters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getstart-actuator.html">8.6. Getting started with actuators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../getstart-filter.html">8.7. Getting started with algorithm plugins (denoted as filters)</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="plugin-development.html">8.8. Development under C++</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plugin-RetVal.html">8.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-sharedSemaphore.html">8.8.2. ItomSharedSemaphore</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-dataObject.html">8.8.3. DataObject</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-params.html">8.8.4. Parameter-Container class of <strong>itom</strong></a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-paramsMeta.html">8.8.5. Parameters - Meta Information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-paramsValidate.html">8.8.6. Parameters - Validation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginStructure.html">8.8.7. Introduction to plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginInterfaceClass.html">8.8.8. Plugin interface class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-AddInBase-Ref.html">8.8.9. AddInBase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginClass.html">8.8.10. Plugin class - Basic information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-dataIO.html">8.8.11. Plugin class - DataIO</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">8.8.12. Plugin class - Actuator</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#base-idea-of-any-actuator">8.8.12.1. Base idea of any actuator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#programming-steps">8.8.12.2. Programming steps</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#actuator-plugin-class">8.8.12.3. Actuator plugin class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#signalling-the-current-position-and-status-of-any-axes">8.8.12.4. Signalling the current position and status of any axes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#interruption-of-movement">8.8.12.5. Interruption of movement</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#parameters-and-unit-conventions">8.8.12.6. Parameters and Unit Conventions</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-algo.html">8.8.13. Plugin class - Algo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginCreateCMake.html">8.8.14. Create a new plugin via CMake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">8.8.15. Automatic loading and saving of plugin parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-itomAPI.html">8.8.16. itom API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-externalLibraries.html">8.8.17. Link or load external libraries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="projectSettings.html">8.8.18. Project settings for plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-dockWidget.html">8.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plugin-configDialog.html">8.8.20. Optional configuration dialog for hardware plugins</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="openCVMat.html">8.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../08_scriptLanguage/script-language.html">9. Python Scripting Language</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../09_reference/reference.html">10. itom Script Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../10_miscellaneous/miscellaneous.html">11. Miscellaneous</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../11_demos/demos.html">12. Demo scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../12_contributing/contributing.html">13. Contributing</a></li>
-</ul>
 
-        </div>
-      </div>
-    </nav>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">itom Documentation</a>
-      </nav>
+  
+    
+  
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../plugins.html"><span class="section-number">8. </span>Plugins</a> &raquo;</li>
-          <li><a href="plugin-development.html"><span class="section-number">8.8. </span>Development under C++</a> &raquo;</li>
-      <li><span class="section-number">8.8.12. </span>Plugin class - Actuator</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/07_plugins/development/plugin-actuator.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/itomLogo3_128.png" class="logo__image only-light" alt="itom Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/itomLogo3_128.png" class="logo__image only-dark" alt="itom Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
   </ul>
-  <hr/>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../00_releaseNotes/whats-new.html">
+    Changelog
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../01_introduction/introduction.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../02_installation/install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../03_gettingStarted/getting-started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../04_itom_gui/gui.html">
+    The itom User Interface
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../05_plots/plots.html">
+    Plots and Figures
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../06_extended_gui/extended_gui.html">
+    Extending the user interface of itom
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../plugins.html">
+    Plugins
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../08_scriptLanguage/script-language.html">
+    Python Scripting Language
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../09_reference/reference.html">
+    itom Script Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../10_miscellaneous/miscellaneous.html">
+    Miscellaneous
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../11_demos/demos.html">
+    Demo scripts
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../12_contributing/contributing.html">
+    Contributing
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/itom-project" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic_concept.html">8.1. Basic concept</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loading_plugins.html">8.2. Loading plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-hardware.html">8.3. How to use hardware plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-grabber.html">8.4. Getting started with grabbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-adda.html">8.5. Getting started with A/D converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-actuator.html">8.6. Getting started with actuators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getstart-filter.html">8.7. Getting started with algorithm plugins (denoted as filters)</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="plugin-development.html">8.8. Development under C++</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plugin-RetVal.html">8.8.1. <strong>RetVal</strong> - The return type of <strong>itom</strong> methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-sharedSemaphore.html">8.8.2. ItomSharedSemaphore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-dataObject.html">8.8.3. DataObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-params.html">8.8.4. Parameter-Container class of <strong>itom</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-paramsMeta.html">8.8.5. Parameters - Meta Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-paramsValidate.html">8.8.6. Parameters - Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginStructure.html">8.8.7. Introduction to plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginInterfaceClass.html">8.8.8. Plugin interface class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-AddInBase-Ref.html">8.8.9. AddInBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginClass.html">8.8.10. Plugin class - Basic information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-dataIO.html">8.8.11. Plugin class - DataIO</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8.8.12. Plugin class - Actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-algo.html">8.8.13. Plugin class - Algo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginCreateCMake.html">8.8.14. Create a new plugin via CMake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pluginAutoLoadSavePolicy.html">8.8.15. Automatic loading and saving of plugin parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-itomAPI.html">8.8.16. itom API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-externalLibraries.html">8.8.17. Link or load external libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="projectSettings.html">8.8.18. Project settings for plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-dockWidget.html">8.8.19. Optional dock widget (toolbox) for hardware plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin-configDialog.html">8.8.20. Optional configuration dialog for hardware plugins</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="openCVMat.html">8.9. OpenCV matrices <strong>cv::Mat</strong> and <strong>cv::Mat_</strong></a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../plugins.html" class="nav-link"><span class="section-number">8. </span>Plugins</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="plugin-development.html" class="nav-link"><span class="section-number">8.8. </span>Development under C++</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="plugin-class-actuator">
-<span id="id1"></span><h1><span class="section-number">8.8.12. </span>Plugin class - Actuator<a class="headerlink" href="#plugin-class-actuator" title="Permalink to this heading">¶</a></h1>
+<span id="id1"></span><h1><span class="section-number">8.8.12. </span>Plugin class - Actuator<a class="headerlink" href="#plugin-class-actuator" title="Link to this heading">#</a></h1>
 <p>If you want to create a plugin in order to access piezo- or motor-stages, multi-axes-machines,… it is intended to derive your plugin class from <strong>ito::AddInActuator</strong>.</p>
 <section id="base-idea-of-any-actuator">
-<h2><span class="section-number">8.8.12.1. </span>Base idea of any actuator<a class="headerlink" href="#base-idea-of-any-actuator" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">8.8.12.1. </span>Base idea of any actuator<a class="headerlink" href="#base-idea-of-any-actuator" title="Link to this heading">#</a></h2>
 <p>The actuator interface has been developed with the following base ideas:</p>
 <ul class="simple">
 <li><p>The actuator can consist of different axes. The first axis is indexed with the number 0. Create the read-only, integer parameter <strong>numAxis</strong> for the number of connected axes.</p></li>
@@ -160,7 +626,7 @@
 </ul>
 </section>
 <section id="programming-steps">
-<h2><span class="section-number">8.8.12.2. </span>Programming steps<a class="headerlink" href="#programming-steps" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">8.8.12.2. </span>Programming steps<a class="headerlink" href="#programming-steps" title="Link to this heading">#</a></h2>
 <p>In order to program the actuator plugin, follow these steps:</p>
 <ol class="arabic">
 <li><p>Create the header and source file for your plugin “MyActuatorPlugin”.</p></li>
@@ -178,90 +644,90 @@
 </ol>
 </section>
 <section id="actuator-plugin-class">
-<h2><span class="section-number">8.8.12.3. </span>Actuator plugin class<a class="headerlink" href="#actuator-plugin-class" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">8.8.12.3. </span>Actuator plugin class<a class="headerlink" href="#actuator-plugin-class" title="Link to this heading">#</a></h2>
 <p>A sample header file of the actuator’s plugin class is illustrated in the following code snippet:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="cp">#define ITOM_IMPORT_API</span>
 <span class="linenos"> 2</span><span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../../common/addInInterface.h&quot;</span><span class="cp"></span>
+<span class="linenos"> 4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../../common/addInInterface.h&quot;</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dialogMyMotor.h&quot;</span><span class="cp"></span>
-<span class="linenos"> 7</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dockWidgetMyMotor.h&quot;</span><span class="cp"></span>
+<span class="linenos"> 6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dialogMyMotor.h&quot;</span>
+<span class="linenos"> 7</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dockWidgetMyMotor.h&quot;</span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="k">class</span><span class="w"> </span><span class="nc">MyMotor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AddInActuator</span><span class="w"></span>
-<span class="linenos">10</span><span class="p">{</span><span class="w"></span>
-<span class="linenos">11</span><span class="w">    </span><span class="n">Q_OBJECT</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="k">class</span><span class="w"> </span><span class="nc">MyMotor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">AddInActuator</span>
+<span class="linenos">10</span><span class="p">{</span>
+<span class="linenos">11</span><span class="w">    </span><span class="n">Q_OBJECT</span>
 <span class="linenos">12</span>
-<span class="linenos">13</span><span class="w">    </span><span class="k">protected</span><span class="o">:</span><span class="w"></span>
-<span class="linenos">14</span><span class="w">        </span><span class="o">~</span><span class="n">MyMotor</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span><span class="w">  </span><span class="cm">/*! &lt; Destructor*/</span><span class="w"></span>
-<span class="linenos">15</span><span class="w">        </span><span class="n">MyMotor</span><span class="p">();</span><span class="cm">/*! &lt; Constructor*/</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">    </span><span class="k">protected</span><span class="o">:</span>
+<span class="linenos">14</span><span class="w">        </span><span class="o">~</span><span class="n">MyMotor</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span><span class="w">  </span><span class="cm">/*! &lt; Destructor*/</span>
+<span class="linenos">15</span><span class="w">        </span><span class="n">MyMotor</span><span class="p">();</span><span class="cm">/*! &lt; Constructor*/</span>
 <span class="linenos">16</span>
-<span class="linenos">17</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">waitForDone</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="cm">/*if empty -&gt; all axis*/</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cm">/*for your use*/</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">waitForDone</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="cm">/*if empty -&gt; all axis*/</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="cm">/*for your use*/</span><span class="p">);</span>
 <span class="linenos">18</span>
-<span class="linenos">19</span><span class="w">    </span><span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="linenos">20</span><span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyMotorInterface</span><span class="p">;</span><span class="w"></span>
-<span class="linenos">21</span><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w"> </span><span class="cm">/*!&lt; Opens the modal configuration dialog (called from main thread) */</span><span class="w"></span>
-<span class="linenos">22</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="cm">/*!&lt; indicates that this plugin has got a configuration dialog */</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">    </span><span class="k">public</span><span class="o">:</span>
+<span class="linenos">20</span><span class="w">        </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MyMotorInterface</span><span class="p">;</span>
+<span class="linenos">21</span><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">showConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="w"> </span><span class="cm">/*!&lt; Opens the modal configuration dialog (called from main thread) */</span>
+<span class="linenos">22</span><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="nf">hasConfDialog</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="cm">/*!&lt; indicates that this plugin has got a configuration dialog */</span>
 <span class="linenos">23</span>
-<span class="linenos">24</span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span>
 <span class="linenos">25</span><span class="w">        </span><span class="c1">//! get/set parameters</span>
-<span class="linenos">26</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">27</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">26</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="n">getParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">27</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setParam</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="linenos">28</span>
 <span class="linenos">29</span><span class="w">        </span><span class="c1">//! init/close method</span>
-<span class="linenos">30</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">31</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">30</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsMand</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="n">ito</span><span class="o">::</span><span class="n">Param</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">paramsOpt</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">31</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 <span class="linenos">32</span>
 <span class="linenos">33</span><span class="w">        </span><span class="c1">//! calibration for single or multiple axis</span>
-<span class="linenos">34</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">calib</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">35</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">calib</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">34</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">calib</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">35</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">calib</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="linenos">36</span>
 <span class="linenos">37</span><span class="w">        </span><span class="c1">//! current axis position is new zero-position</span>
-<span class="linenos">38</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setOrigin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">39</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setOrigin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">38</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setOrigin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">39</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setOrigin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="linenos">40</span>
 <span class="linenos">41</span><span class="w">        </span><span class="c1">//! Reads out status request answer and gives back ito::retOk or ito::retError</span>
-<span class="linenos">42</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">42</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">(</span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 <span class="linenos">43</span>
 <span class="linenos">44</span><span class="w">        </span><span class="c1">//! get current position of single or multiple axis (in mm or degree)</span>
-<span class="linenos">45</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getPos</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">46</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getPos</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">45</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getPos</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
+<span class="linenos">46</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">getPos</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QSharedPointer</span><span class="o">&lt;</span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="p">);</span>
 <span class="linenos">47</span>
 <span class="linenos">48</span><span class="w">        </span><span class="c1">//! move one or more axis to certain absolute positions (in mm or degree)</span>
-<span class="linenos">49</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosAbs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">50</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosAbs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">49</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosAbs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">50</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosAbs</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="linenos">51</span>
 <span class="linenos">52</span><span class="w">        </span><span class="c1">//! move one or more axis by certain relative distances (in mm or degree)</span>
-<span class="linenos">53</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosRel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
-<span class="linenos">54</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosRel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">53</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosRel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="linenos">54</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">setPosRel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">ItomSharedSemaphore</span><span class="w"> </span><span class="o">*</span><span class="n">waitCond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="linenos">55</span>
 <span class="linenos">56</span><span class="w">        </span><span class="c1">//! if this slot is triggered, the current status and position is emitted (e.g. for actualizing a dock widget)</span>
-<span class="linenos">57</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">RequestStatusAndPosition</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">sendActPosition</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">sendTargetPos</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">57</span><span class="w">        </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="w"> </span><span class="nf">RequestStatusAndPosition</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">sendActPosition</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">sendTargetPos</span><span class="p">);</span>
 <span class="linenos">58</span>
 <span class="linenos">59</span><span class="w">        </span><span class="c1">//ito::RetVal requestStatusAndPosition(bool sendCurrentPos, bool sendTargetPos); //!see notes above</span>
 <span class="linenos">60</span>
-<span class="linenos">61</span><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span><span class="w"></span>
-<span class="linenos">62</span><span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">visible</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="cm">/*!&lt; this slot is invoked if the visibility of the dock widget has changed */</span><span class="w"></span>
-<span class="linenos">63</span><span class="p">};</span><span class="w"></span>
+<span class="linenos">61</span><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">slots</span><span class="o">:</span>
+<span class="linenos">62</span><span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">dockWidgetVisibilityChanged</span><span class="p">(</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">visible</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="cm">/*!&lt; this slot is invoked if the visibility of the dock widget has changed */</span>
+<span class="linenos">63</span><span class="p">};</span>
 </pre></div>
 </div>
 <p>The corresponding source file should start with something like this:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#define ITOM_IMPORT_API</span>
 <span class="linenos">2</span><span class="cp">#define ITOM_IMPORT_PLOTAPI</span>
 <span class="linenos">3</span>
-<span class="linenos">4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;yourHeaderFile.h&quot;</span><span class="cp"></span>
+<span class="linenos">4</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;yourHeaderFile.h&quot;</span>
 <span class="linenos">5</span>
 <span class="linenos">6</span><span class="c1">//implement your code here</span>
 </pre></div>
 </div>
 </section>
 <section id="signalling-the-current-position-and-status-of-any-axes">
-<h2><span class="section-number">8.8.12.4. </span>Signalling the current position and status of any axes<a class="headerlink" href="#signalling-the-current-position-and-status-of-any-axes" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">8.8.12.4. </span>Signalling the current position and status of any axes<a class="headerlink" href="#signalling-the-current-position-and-status-of-any-axes" title="Link to this heading">#</a></h2>
 <p>Each actuator has the possibility to signalize the target position, the current position and the current status of each axis. Then its own toolbox or other widgets or slots (general: listeners) can be connected to the corresponding signals in order to be informed about the current activity. The base class <strong>ito::AddInActuator</strong> provides the necessary structures for this:</p>
 <p>1. The vector <strong>m_currentPos</strong> must be initialized to a length corresponding to the number of axes and contains the current position of every axis using the units stated below. Whenever
 the actuator registers a change of any current position, the corresponding value should be changed as well. Listeners are finally informed about this change by calling the method</p>
 <blockquote>
-<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sendStatusUpdate</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span><span class="w"></span>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sendStatusUpdate</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The argument <strong>false</strong> means that not only a change of the current status happened, but also a change of any current position. This method internally emits the signal <strong>actuatorStatusChanged</strong>.</p>
@@ -269,7 +735,7 @@ the actuator registers a change of any current position, the corresponding value
 <ol class="arabic" start="2">
 <li><p>The vector <strong>m_targetPos</strong> must also be initialized to a length corresponding to the number of axes. Whenever a positioning operation starts, set the target value of specific axes to the new target value and call</p>
 <blockquote>
-<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sendTargetUpdate</span><span class="p">()</span><span class="w"></span>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">sendTargetUpdate</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>that finally emits the signal <strong>targetChanged</strong>.</p>
@@ -307,38 +773,38 @@ the actuator registers a change of any current position, the corresponding value
 </ul>
 </div></blockquote>
 <p>You can either manually set the necessary bit-combination of moving, status and switch flags for signalling the right status of the axis. There are three methods defined in <strong>ito::AddInActuator</strong> that simplify this process:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">setStatus</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newFlags</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">keepMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="n">setStatus</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newFlags</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">keepMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">setStatus</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newFlags</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">keepMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="n">setStatus</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newFlags</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">keepMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Use this methods to the set the status of one or multiple axis. The parameter <strong>newFlags</strong> should contain an or-combination of all flags that should be set. The status flags are then set to this value (hence, old values are overwritten). If you want to keep the current bit values of a certain group, pass the specific mask as argument <strong>keepMask</strong>. For instance, if you want to the status of the second axis to <strong>actuatorMoving</strong> without changing the <strong>status flags</strong>, use the following command:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">setStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">setStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span>
 <span class="cp"># this command will set all bits of the switches mask to 0!</span>
 </pre></div>
 </div>
 <p>The equivalent command for multiple axis, requires a vector with axes-indices as first argument. This example does the same for the first and third axis:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">;</span><span class="w"></span>
-<span class="n">axis</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
-<span class="n">setStatus</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">axis</span><span class="p">;</span>
+<span class="n">axis</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">setStatus</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actStatusFlags</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The similar commands <strong>replaceStatus</strong></p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">replaceStatus</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">existingFlag</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">replaceFlag</span><span class="p">)</span><span class="w"></span>
-<span class="n">replaceStatus</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">existingFlag</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">replaceFlag</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">replaceStatus</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">existingFlag</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">replaceFlag</span><span class="p">)</span>
+<span class="n">replaceStatus</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QVector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">axis</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">existingFlag</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">replaceFlag</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>can be used to replace one status flag by another one without changing the other bits. If the bit corresponding to the <strong>existingFlag</strong> is set, it is set to zero and the bit of the <strong>replaceFlag</strong> is set to 1. In the following example, the flag of the first axis is set from moving to atTarget:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">replaceStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorAtTarget</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">replaceStatus</span><span class="p">(</span><span class="n">m_currentStatus</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorMoving</span><span class="p">,</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">actuatorAtTarget</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>After using one of these functions to set the current status, call <strong>sendStatusUpdate</strong> to emit the signal <strong>actuatorStatusChanged</strong> such that connected listeners can for instance visualize the current status.</p>
 </section>
 <section id="interruption-of-movement">
-<h2><span class="section-number">8.8.12.5. </span>Interruption of movement<a class="headerlink" href="#interruption-of-movement" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">8.8.12.5. </span>Interruption of movement<a class="headerlink" href="#interruption-of-movement" title="Link to this heading">#</a></h2>
 <p>It is possible to implement an interrupt button in the toolbox of the actuator that becomes active once at least one axis is moving. Once the button is clicked it must <strong>directly</strong> call the thread-safe function <strong>setInterrupt()</strong> of the actuator plugin (If the toolbox inherits from <strong>ito::AbstractAddInDockWidget</strong> call its method <strong>setActuatorInterrupt()</strong>.</p>
 <p>In the method <strong>waitForDone</strong> regularly check if the interrupt flag has been set, using the actuator’s method <strong>isInterrupted()</strong>. If this method
 returns true, set the moving state of all moving axes to <strong>ito::actuatorInterrupted</strong> and return with an appropriate return value, like:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">return</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retError</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;movement interrupted&quot;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">return</span><span class="w"> </span><span class="n">ito</span><span class="o">::</span><span class="n">RetVal</span><span class="p">(</span><span class="n">ito</span><span class="o">::</span><span class="n">retError</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;movement interrupted&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -347,7 +813,7 @@ returns true, set the moving state of all moving axes to <strong>ito::actuatorIn
 </div>
 </section>
 <section id="parameters-and-unit-conventions">
-<h2><span class="section-number">8.8.12.6. </span>Parameters and Unit Conventions<a class="headerlink" href="#parameters-and-unit-conventions" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">8.8.12.6. </span>Parameters and Unit Conventions<a class="headerlink" href="#parameters-and-unit-conventions" title="Link to this heading">#</a></h2>
 <p>In order to have a unified behaviour of all actuator plugins, respect the following unit conventions. That means, the plugin should store related parameters using these conventions, such that <strong>getParam</strong> and <strong>setParam</strong> returns and obtains values using these units. Internally, it is sometimes
 necessary to convert these units to the units required by the interface of the real actuator device.</p>
 <ul class="simple">
@@ -396,36 +862,123 @@ necessary to convert these units to the units required by the interface of the r
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plugin-dataIO.html" class="btn btn-neutral float-left" title="8.8.11. Plugin class - DataIO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plugin-algo.html" class="btn btn-neutral float-right" title="8.8.13. Plugin class - Algo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2011-2022, Institut fuer Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
-      <span class="lastupdated">Last updated on Sep 19, 2022.
-      </span></p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plugin-dataIO.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8.8.11. </span>Plugin class - DataIO</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+    <a class="right-next"
+       href="plugin-algo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8.8.13. </span>Plugin class - Algo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-idea-of-any-actuator">8.8.12.1. Base idea of any actuator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programming-steps">8.8.12.2. Programming steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actuator-plugin-class">8.8.12.3. Actuator plugin class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signalling-the-current-position-and-status-of-any-axes">8.8.12.4. Signalling the current position and status of any axes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interruption-of-movement">8.8.12.5. Interruption of movement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-and-unit-conventions">8.8.12.6. Parameters and Unit Conventions</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/07_plugins/development/plugin-actuator.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2011-2024, Institut für Technische Optik (ITO), Universität Stuttgart. Bug report: https://github.com/itom-project/itom/issues.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>

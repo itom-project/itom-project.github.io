@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_demo_stylesheetEditor.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_demo_stylesheetEditor.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -37,10 +37,9 @@ click the "load resources" button to load icons from a rcc
 resource file, first. Then paste your desired stylesheet into
 the editor. Whenever you want to update the GUI click the update button.
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-74
+.. GENERATED FROM PYTHON SOURCE LINES 21-90
 
-.. code-block:: default
-
+.. code-block:: Python
 
 
     from itomUi import (
@@ -53,7 +52,6 @@ the editor. Whenever you want to update the GUI click the update button.
 
     class StyleSheetEditor(ItomUi):  # StyleCreator is inherited from ItomUi
         def __init__(self):  # constructor
-
             # call constructor of ItomUi like it would be the constructor of the class itom.ui:
             ItomUi.__init__(self, "stylesheetEditor.ui", ui.TYPEWINDOW)
 
@@ -63,7 +61,25 @@ the editor. Whenever you want to update the GUI click the update button.
             self.gui.itom2dQwtPlot["source"] = dataObject.randN([100, 512, 768], "uint8")
             self.gui.itom2dQwtPlot["overlayImage"] = dataObject.rand([512, 768], "float32")
             self.gui.itom2dQwtPlot_2["source"] = dataObject.randN([100, 512, 768], "uint8")
-            self.gui.itom2dQwtPlot_2["overlayImage"] = dataObject.randN([512, 768], "float32")
+            self.gui.itom2dQwtPlot_2["overlayImage"] = dataObject.randN(
+                [512, 768], "float32"
+            )
+            dObj = dataObject.rand([10, 10])
+            dObj.setAxisDescription(0, "y axis")
+            dObj.setAxisDescription(1, "x axis")
+            dObj.setAxisUnit(0, "µm")
+            dObj.setAxisUnit(1, "mm")
+            dObj.setAxisOffset(0, 10)
+            dObj.setAxisOffset(1, 10)
+            dObj.setAxisScale(0, 100)
+            dObj.setAxisScale(1, 10)
+            dObj.valueDescription = "value"
+            dObj.valueUnit = "a.u."
+            dObj.addToProtocol("created and set to stylesheeteditor")
+            dObj.setTag("title", "dObj title")
+            self.dObj = dObj
+            self.gui.dataObjectTable["data"] = dObj
+            self.gui.dataObjectMetaWidget["data"] = dObj
 
             self.gui.call("statusBar").call("showMessage", "Status bar message...")
 
@@ -101,7 +117,7 @@ the editor. Whenever you want to update the GUI click the update button.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-78
+.. GENERATED FROM PYTHON SOURCE LINES 92-94
 
 .. image:: ../../_static/demoStyleSheetEditor_1.png
    :width: 100%
@@ -109,7 +125,7 @@ the editor. Whenever you want to update the GUI click the update button.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.781 seconds)
+   **Total running time of the script:** (0 minutes 0.464 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_ui_demo_stylesheetEditor.py:
@@ -118,11 +134,14 @@ the editor. Whenever you want to update the GUI click the update button.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_stylesheetEditor.ipynb <demo_stylesheetEditor.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_stylesheetEditor.py <demo_stylesheetEditor.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_stylesheetEditor.ipynb <demo_stylesheetEditor.ipynb>`
+      :download:`Download zipped: demo_stylesheetEditor.zip <demo_stylesheetEditor.zip>`

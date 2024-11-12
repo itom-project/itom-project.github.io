@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_dynamicLayout_demo_multiplePlotsInHorizontalLayout.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_dynamicLayout_demo_multiplePlotsInHorizontalLayout.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -22,9 +22,9 @@ Multiple plots in horizontal layout
 
 Example for dynamically changing the content of a form layout.
 
-.. GENERATED FROM PYTHON SOURCE LINES 6-182
+.. GENERATED FROM PYTHON SOURCE LINES 6-188
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itomUi import (
@@ -38,7 +38,6 @@ Example for dynamically changing the content of a form layout.
 
     class MultiPlotHorLayout(ItomUi):
         def __init__(self):  # constructor
-
             # call constructor of ItomUi like it would be the constructor of the class itom.ui:
             ItomUi.__init__(self, "multiplePlotsInHorizontalLayout.ui", ui.TYPEWINDOW)
 
@@ -93,7 +92,6 @@ Example for dynamically changing the content of a form layout.
 
         @ItomUi.autoslot("")
         def on_btnInsertButton_clicked(self):
-
             idx, valid = ui.getInt(
                 "Position",
                 "At which index should the button be inserted (-1: end)?",
@@ -126,7 +124,8 @@ Example for dynamically changing the content of a form layout.
                     "insertItemFromUiFile",
                     idx,  # index
                     "container.ui",  # filename to ui file
-                    "_%i" % self.numWidgets,  # prefix, added to the objectNames of all new widgets and layouts
+                    "_%i"
+                    % self.numWidgets,  # prefix, added to the objectNames of all new widgets and layouts
                 )
 
                 self.gui.btnRemove["enabled"] = self.numWidgets > 0
@@ -134,11 +133,13 @@ Example for dynamically changing the content of a form layout.
 
         @ItomUi.autoslot("")
         def on_btnRemove_clicked(self):
-
             if self.numWidgets <= 0:
                 return
 
-            labels = [self.layout.call("itemAt", idx)["objectName"] for idx in range(self.numWidgets)]
+            labels = [
+                self.layout.call("itemAt", idx)["objectName"]
+                for idx in range(self.numWidgets)
+            ]
 
             name, valid = ui.getItem(
                 "Widget to remove",
@@ -156,15 +157,17 @@ Example for dynamically changing the content of a form layout.
 
         @ItomUi.autoslot("")
         def on_btnSetStretch_clicked(self):
-
             if self.numWidgets <= 0:
                 return
 
-            stretchs = [str(self.layout.call("stretch", idx)) for idx in range(self.numWidgets)]
+            stretchs = [
+                str(self.layout.call("stretch", idx)) for idx in range(self.numWidgets)
+            ]
 
             text, valid = ui.getText(
                 "Stretch",
-                f"Indicate a comma-separated list of stretch " f"factors for up to {self.numWidgets} widgets",
+                f"Indicate a comma-separated list of stretch "
+                f"factors for up to {self.numWidgets} widgets",
                 ",".join(stretchs),
             )
 
@@ -174,7 +177,8 @@ Example for dynamically changing the content of a form layout.
                 if len(stretchs) > self.numWidgets:
                     ui.msgCritical(
                         "Wrong input",
-                        f"Stretchs must be a comma separated list of " f"integers (max. {self.numWidgets} entries)",
+                        f"Stretchs must be a comma separated list of "
+                        f"integers (max. {self.numWidgets} entries)",
                         parent=self.gui,
                     )
                     return
@@ -194,7 +198,9 @@ Example for dynamically changing the content of a form layout.
 
         def _buttonClicked(self):
             # slot, called if any button is clicked
-            ui.msgInformation("Button clicked", "The button has been clicked", parent=self.gui)
+            ui.msgInformation(
+                "Button clicked", "The button has been clicked", parent=self.gui
+            )
 
 
     # create a first instance of AutoConnectExample and the gui
@@ -209,7 +215,7 @@ Example for dynamically changing the content of a form layout.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 184-186
+.. GENERATED FROM PYTHON SOURCE LINES 190-192
 
 .. image:: ../../_static/demoMultiplePlotsLayout_1.png
    :width: 100%
@@ -217,7 +223,7 @@ Example for dynamically changing the content of a form layout.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.704 seconds)
+   **Total running time of the script:** (0 minutes 0.038 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_ui_dynamicLayout_demo_multiplePlotsInHorizontalLayout.py:
@@ -226,11 +232,14 @@ Example for dynamically changing the content of a form layout.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_multiplePlotsInHorizontalLayout.ipynb <demo_multiplePlotsInHorizontalLayout.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_multiplePlotsInHorizontalLayout.py <demo_multiplePlotsInHorizontalLayout.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_multiplePlotsInHorizontalLayout.ipynb <demo_multiplePlotsInHorizontalLayout.ipynb>`
+      :download:`Download zipped: demo_multiplePlotsInHorizontalLayout.zip <demo_multiplePlotsInHorizontalLayout.zip>`

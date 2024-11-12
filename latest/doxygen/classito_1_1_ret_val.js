@@ -10,7 +10,6 @@ var classito_1_1_ret_val =
     [ "containsWarning", "classito_1_1_ret_val.html#abe0256ce33a1af58e1b1a07cd586b391", null ],
     [ "containsWarningOrError", "classito_1_1_ret_val.html#ad32bf4cf7ed7c4957edbe09d497ec813", null ],
     [ "errorCode", "classito_1_1_ret_val.html#ab4335dfd58a4d1875eba5ff3cfec10a4", null ],
-    [ "errorMessage", "classito_1_1_ret_val.html#a44ec02dc05319d995ac620d781424972", null ],
     [ "format", "classito_1_1_ret_val.html#a2d3267350002111b695e8c80de47becd", null ],
     [ "hasErrorMessage", "classito_1_1_ret_val.html#a7db1e3fa289a2af508ba4f4f1d0ed263", null ],
     [ "operator!=", "classito_1_1_ret_val.html#a94cfd4f0210a550aff57709314c4b6cd", null ],
@@ -21,6 +20,5 @@ var classito_1_1_ret_val =
     [ "operator==", "classito_1_1_ret_val.html#a50bef2798f13d81319c3deb1b7768ad9", null ],
     [ "operator==", "classito_1_1_ret_val.html#a12682e72c2bace8519a84e3e1cd18a7d", null ],
     [ "m_retCode", "classito_1_1_ret_val.html#a2b3e066f85f955c4e9ef0691b56c7408", null ],
-    [ "m_retMessage", "classito_1_1_ret_val.html#a7829cb019b993bb0e8fec9cbf49f26ae", null ],
     [ "m_retValue", "classito_1_1_ret_val.html#aac34275b25e7d31b89022ebbc02b576a", null ]
 ];

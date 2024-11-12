@@ -2,7 +2,7 @@
 =======================
 
 
-This demo shows how to programatically set pickers
+This demo shows how to programmatically set pickers
 to the line of a 1D plot.
 
 The most important ``slots`` for these features are implemented
@@ -27,7 +27,7 @@ set ``physicalCoordinates`` to False.
 """
 
 import numpy as np
-from itom import plot 
+from itom import plot
 from itom import dataObject
 # sphinx_gallery_thumbnail_path = '11_demos/_static/_thumb/demoDrawPickers1DPlot.png'
 

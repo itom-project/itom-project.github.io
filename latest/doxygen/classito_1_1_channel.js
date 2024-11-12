@@ -24,6 +24,5 @@ var classito_1_1_channel =
     [ "propagateUpdatePending", "classito_1_1_channel.html#a1d706010d7587617f85f17020e0f54f2", null ],
     [ "Q_DECLARE_PRIVATE", "classito_1_1_channel.html#ab4d34fd0832d22ac8212e941ee0cae44", null ],
     [ "resetUpdateState", "classito_1_1_channel.html#a666b8e61003f5f1a11f1bf38deb3d6fa", null ],
-    [ "setUpdateReceived", "classito_1_1_channel.html#ae30f1d4b2e6523d8bc76c9189db5a000", null ],
-    [ "d_ptr", "classito_1_1_channel.html#a1ada5ba381ba0c19d75638e395ce282c", null ]
+    [ "setUpdateReceived", "classito_1_1_channel.html#ae30f1d4b2e6523d8bc76c9189db5a000", null ]
 ];

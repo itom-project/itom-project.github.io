@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_ui_demo_observedParallelFunctions.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_ui_demo_observedParallelFunctions.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -21,7 +21,7 @@ Observe parallel functions
 =============================
 
 This demo shows how to use a customized progressObserver to observer and
-possibly cancel multiple 'complex' function calls, that are executed in 
+possibly cancel multiple 'complex' function calls, that are executed in
 parallel in four different background threads.
 
 Each single function call has its own progressObserver (member observer of class
@@ -30,7 +30,7 @@ the total state of all coomplex functions call (each lasting for 10 seconds).
 
 In this demo script, we do not only use the pre-defined possibilities of
 the class ``itom.progressObserver`` to show the current progress value and
-text in a given ``itom.uiItem`` of the GUI, but we use the 
+text in a given ``itom.uiItem`` of the GUI, but we use the
 ``itom.progressObserver.connect`` method to connect different callable python
 methods to signals of the progressObserver such that customized actions
 can be done.
@@ -50,7 +50,7 @@ Hint: Algorithm calls of itom algorithms will release the Python GIL during the
 entire time of the function call, therefore other Python thread can work in the
 meantime.
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-245
+.. GENERATED FROM PYTHON SOURCE LINES 34-242
 
 
 
@@ -58,7 +58,7 @@ meantime.
 
 
 
-.. code-block:: default
+.. code-block:: Python
 
 
     from itomUi import ItomUi
@@ -68,8 +68,7 @@ meantime.
 
 
     class FunctionCall:
-        """This class wraps GUI items, the thread and observer of one function call.
-        """
+        """This class wraps GUI items, the thread and observer of one function call."""
 
         def __init__(self, label, progress, abortButton, overallObserver):
             """Constructor."""
@@ -116,7 +115,7 @@ meantime.
             if self.observer:
                 self.abortBtn["enabled"] = False
                 # force the observer to cancel the running algorithm. The algorithm
-                # has to regularily check for this request and terminate the algorithm
+                # has to regularly check for this request and terminate the algorithm
                 # (with an exception set) as soon as possible.
                 self.observer.requestCancellation()
 
@@ -127,17 +126,17 @@ meantime.
 
         def cancel(self):
             """Method to request a cancellation of the algorithm call as public interface.
-        
+
             This method is usually called if the global abort button is clicked."""
             self.observer.requestCancellation()
 
         def run(self):
             """Run method, executed in a thread.
-        
+
             This method mainly starts the itom algorithm ``demoCancellationFunction``
             and passes the local observer to this function. If this observer should
             be requested to cancel, the algorithm will return with a RuntimeError.
-        
+
             This exception is handled. At the end, the contribution to the global
             progress of this function is set to the maximum of 25% (Even in the case
             of a cancellation).
@@ -181,7 +180,7 @@ meantime.
 
         def on_progressText_changed(self, text):
             """Callback if the local observer reports a new progress text.
-        
+
             Hint: it makes no real sense to change the toolTip. It is just an example."""
             self.label["toolTip"] = text
 
@@ -199,9 +198,7 @@ meantime.
             """Constructor."""
             ItomUi.__init__(self, "observedParallelFunctions.ui")
 
-            self.sets = (
-                []
-            )  # sets of widgets in the GUI for each parallel function execution
+            self.sets = []  # sets of widgets in the GUI for each parallel function execution
 
             # this overallObserver gives 25% to each of the 4 parallel function calls.
             self.overallObserver = progressObserver(
@@ -275,7 +272,7 @@ meantime.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.164 seconds)
+   **Total running time of the script:** (0 minutes 0.081 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_ui_demo_observedParallelFunctions.py:
@@ -284,11 +281,14 @@ meantime.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_observedParallelFunctions.ipynb <demo_observedParallelFunctions.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_observedParallelFunctions.py <demo_observedParallelFunctions.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_observedParallelFunctions.ipynb <demo_observedParallelFunctions.ipynb>`
+      :download:`Download zipped: demo_observedParallelFunctions.zip <demo_observedParallelFunctions.zip>`

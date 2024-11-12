@@ -10,8 +10,8 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_11_demos_itom_plugins_demo_DummyMotor.py>`
-        to download the full example code
+        :ref:`Go to the end <sphx_glr_download_11_demos_itom_plugins_demo_DummyMotor.py>`
+        to download the full example code.
 
 .. rst-class:: sphx-glr-example-title
 
@@ -25,7 +25,7 @@ how grabber and cameras are used in ``itom``.
 
 .. GENERATED FROM PYTHON SOURCE LINES 6-10
 
-.. code-block:: default
+.. code-block:: Python
 
 
     import time
@@ -44,7 +44,7 @@ Initialisation of an actuator (e.g: ``DummyMotor``).
 
 .. GENERATED FROM PYTHON SOURCE LINES 13-26
 
-.. code-block:: default
+.. code-block:: Python
 
     stage = actuator("DummyMotor", 3)
 
@@ -68,12 +68,12 @@ Initialisation of an actuator (e.g: ``DummyMotor``).
 
 .. GENERATED FROM PYTHON SOURCE LINES 27-29
 
-**Synchronous movement**: 
+**Synchronous movement**:
    The script waits until the movement has been finished!
 
 .. GENERATED FROM PYTHON SOURCE LINES 29-57
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # Set pos of 1. axis (index 0) to the absolute value 10.2 mm
@@ -119,7 +119,7 @@ Initialisation of an actuator (e.g: ``DummyMotor``).
 
 .. GENERATED FROM PYTHON SOURCE LINES 58-63
 
-**Asynchronous movement**: 
+**Asynchronous movement**:
    The script continuous its executing during the movement. However,
    the actuator is **blocked** until the end of the movement, since the script
    will wait before the next ``setParam``, ``setPosAbs``, ``setPosRel``,
@@ -127,10 +127,10 @@ Initialisation of an actuator (e.g: ``DummyMotor``).
 
 .. GENERATED FROM PYTHON SOURCE LINES 63-67
 
-.. code-block:: default
+.. code-block:: Python
 
 
-    # now switch the motor to an asychronous movement
+    # now switch the motor to an asynchronous movement
     stage.setParam("async", 1)
 
 
@@ -147,7 +147,7 @@ Control the state of the actuator by the properties:
 
 .. GENERATED FROM PYTHON SOURCE LINES 70-82
 
-.. code-block:: default
+.. code-block:: Python
 
 
     # use the currentStatus, currentPositions or targetPositions properties to control the state of the device
@@ -178,9 +178,10 @@ Control the state of the actuator by connecting to the
    executing is finished. Therefore, this approach is better suited for GUI applications which are
    mainly based on events.
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-98
+.. GENERATED FROM PYTHON SOURCE LINES 90-100
 
-.. code-block:: default
+.. code-block:: Python
+
 
 
     # use an event-driven approach to control the current status and position:
@@ -197,7 +198,8 @@ Control the state of the actuator by connecting to the
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-104
+
+.. GENERATED FROM PYTHON SOURCE LINES 101-106
 
 The method ``statusChanged`` can only be called if the script is not executing any more.
 Therefore this approach is made for GUI applications
@@ -205,12 +207,14 @@ since the ``actuatorStatusChanged`` signal might be emitted very often, a minimu
 be added to the connection, such that the ``statusChanged slot`` is only called after 100ms again. All intermediate
 calls are ignored (new in itom 3.2)
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-110
+.. GENERATED FROM PYTHON SOURCE LINES 106-114
 
-.. code-block:: default
+.. code-block:: Python
 
     stage.connect(
-        "actuatorStatusChanged(QVector<int>,QVector<double>)", statusChanged, 100,
+        "actuatorStatusChanged(QVector<int>,QVector<double>)",
+        statusChanged,
+        100,
     )
 
     stage.setPosAbs(0, 0.0, 1, 0.0)
@@ -222,7 +226,7 @@ calls are ignored (new in itom 3.2)
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 111-114
+.. GENERATED FROM PYTHON SOURCE LINES 115-119
 
 The DummyMotor Toolbox dockWidget will appear below the Plugins dockWidget.
 
@@ -232,7 +236,7 @@ The DummyMotor Toolbox dockWidget will appear below the Plugins dockWidget.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.682 seconds)
+   **Total running time of the script:** (0 minutes 2.644 seconds)
 
 
 .. _sphx_glr_download_11_demos_itom_plugins_demo_DummyMotor.py:
@@ -241,11 +245,14 @@ The DummyMotor Toolbox dockWidget will appear below the Plugins dockWidget.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
+
+      :download:`Download Jupyter notebook: demo_DummyMotor.ipynb <demo_DummyMotor.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: demo_DummyMotor.py <demo_DummyMotor.py>`
 
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
+    .. container:: sphx-glr-download sphx-glr-download-zip
 
-      :download:`Download Jupyter notebook: demo_DummyMotor.ipynb <demo_DummyMotor.ipynb>`
+      :download:`Download zipped: demo_DummyMotor.zip <demo_DummyMotor.zip>`

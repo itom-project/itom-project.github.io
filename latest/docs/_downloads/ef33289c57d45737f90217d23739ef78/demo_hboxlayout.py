@@ -17,12 +17,12 @@ num = 100
 t = time.time()
 for i in range(num):
     hlayout: uiItem = gui.horLayout  # access the layout item
-print(time.time()-t)
+print(time.time() - t)
 t = time.time()
 
 for i in range(num):
     hlayout = gui.getChild("horLayout")
-print(time.time()-t)
+print(time.time() - t)
 
 # remove the 2nd widget at index position 1
 hlayout.call("removeItemAt", 1)
@@ -43,4 +43,3 @@ spinBox["value"] = 7
 
 print(time.time() - t)
 gui.show()  # show the user interface
-
