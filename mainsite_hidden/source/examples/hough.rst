@@ -16,7 +16,7 @@ More Info on how to code `Canny in Python <http://opencv-python-tutroals.readthe
 
 .. raw:: html
 
-	<hr>
+    <hr>
 
 The next screenshot shows the application of the so-called Hough transform used to find (in this case: long) lines in a very noisy image.
 For more information: `Hough Line Transform <http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_houghlines/py_houghlines.html>`_
@@ -28,7 +28,4 @@ For more information: `Hough Line Transform <http://opencv-python-tutroals.readt
 
 .. raw:: html
 
-	<hr>
-
-
-
+    <hr>

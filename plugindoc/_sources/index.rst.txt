@@ -1,9 +1,9 @@
 .. include:: /include/global.inc
-   
+
 |logo| Itom Plugin Documentation
 #######################################################
 
-.. |logo| image:: itomLogo3_64.png  
+.. |logo| image:: itomLogo3_64.png
 
 .. toctree::
     :numbered:

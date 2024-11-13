@@ -15,7 +15,7 @@ def scanForRstFiles(folder, recursive=True):
             if recursive:
                 result += scanForRstFiles(path, recursive)
         else:  # file
-            if re.match(".*\.rst", entry):
+            if re.match(r".*\.rst", entry):
                 result.append([entry, path])
 
     return result

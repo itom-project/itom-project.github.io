@@ -1,13 +1,12 @@
 #Copyright by https://github.com/conda/conda-docs/tree/master/web
 
-from __future__ import absolute_import
 from docutils import nodes
 import jinja2
 #from sphinx.util.compat import Directive
 from docutils.parsers.rst import Directive
 from docutils.parsers.rst.directives import unchanged
 
-BUTTON_TEMPLATE = jinja2.Template(u"""
+BUTTON_TEMPLATE = jinja2.Template("""
 <a target="_blank" href="{{ link }}" class="mdl-cell mdl-button mdl-button--accent mdl-button--raised mdl-js-button mdl-js-ripple-effect">{{ text }}</a>
 """)
 

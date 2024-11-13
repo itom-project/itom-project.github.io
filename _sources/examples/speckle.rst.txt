@@ -16,9 +16,3 @@ the imaging system (and the wavelength).
     :alt: Speckle
     :width: 90%
     :align: center
-
-
-
-
-
-

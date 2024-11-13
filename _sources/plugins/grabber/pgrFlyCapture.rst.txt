@@ -10,20 +10,20 @@
 **Devices**:    Point Grey cameras (USB3) supported by Fly Capture driver. (GigE possible, but not implemented yet)
 **Author**:     :pluginauthor:`PGRFlyCapture`
 =============== ========================================================================================================
- 
+
 Overview
 ========
 
 .. pluginsummaryextended::
     :plugin: PGRFlyCapture
-    
+
 This plugin has mainly been tested with cameras of type Flea3 and Grasshopper3.
 
 Initialization
 ==============
-  
+
 The following parameters are mandatory or optional for initializing an instance of this plugin:
-    
+
     .. plugininitparams::
         :plugin: PGRFlyCapture
 
@@ -101,13 +101,13 @@ Image Acquisition
 ===================
 
 If you acquire an image, the obtained data object has some tags defined if the parameter 'metadata' is set to 1::
-    
+
     obj = dataObject()
     cam.acquire() #cam must be started before
     cam.getVal(obj)
-    
+
     print(obj.tags)
-    
+
 The tags are:
 
 * timestamp: timestamp of image acquisition in seconds
@@ -127,7 +127,7 @@ next image. With respect to this documentation, most changes will be applied to 
 If the camera is in free-run mode (trigger_mode = -1), it sometimes needs up to 4 frames until changes become visible!
 
 Usually, the plugin does not acquire any idle grabs after having changed any parameter. However, if you set the parameter 'num_idle_grabs_after_param_change'
-to any value bigger than zero, the number of images are acquired. This happens at the next call of **startDevice** if the camera is currently stopped 
+to any value bigger than zero, the number of images are acquired. This happens at the next call of **startDevice** if the camera is currently stopped
 or immediately at the end of the **setParam** command.
 
 Changelog

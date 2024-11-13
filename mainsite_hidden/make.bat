@@ -3,7 +3,7 @@
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
-    set SPHINXBUILD=C:\Python32\Scripts\sphinx-build
+    set SPHINXBUILD=C:\itom\3rdParty\Python\Scripts\sphinx-build
 )
 set BUILDDIR=build
 set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% source
@@ -65,10 +65,10 @@ if "%1" == "html" (
     if errorlevel 1 exit /b 1
     echo.
     echo.Build finished. The HTML pages are in %BUILDDIR%/html.
-    
+
     echo.The files from %BUILDDIR%/html will now be copied to ../
     XCOPY "%BUILDDIR%/html" "./.." /w /e /y /f
-    
+
     goto end
 )
 

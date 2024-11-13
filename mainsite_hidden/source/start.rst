@@ -10,27 +10,27 @@ Get Started
 Introduction
 --------------
 
-| The itom software (ITOM) allows to interactively create measurements with labratory equipment down to simple webcams.
+| The itom software (ITOM) allows to interactively create measurements with laboratory equipment down to simple webcams.
 | It is also capable of data generation, data mining, data analysis and much more data stuff...
 | The built-in Qt-designer enables the user to create neat looking GUIs for end-user measurement processes or automation.
 | In short, it combines many advantages of both **Matlab** and **Labview** in one free software!
 
 .. glossary::
 
-	Measurement software
-		| Data aquisition, Image recording and Signal detection with Plug'n'Play hardware integration.
-		| Equipped with its own filters, algorithms and data analysis plugins.
-		| Plot the data in awesome looking graphs, save and export data results in various formats.
-		
-	Easy programming (PYTHON)
-		| ITOM is one of the best **PYTHON IDE** on the web with lots of features to make your python experience alot easier
-		| Create your own **Scripts** or type in commands directly into to **Console**
-		| Install any python packages with our simple **Package Manager**
-		| Debug your scripts on-the-fly with the our included **Debugger**
-		
-	Python packages
-		| Powerful through the greatest range of additional extensions: **Python packages**
-		| Examples are: Matplotlib, Scipy, Numpy for easy mathematical calculations - up to skimage, scikit-learn and TensorFlow for MachineLearning and AI
+    Measurement software
+        | Data acquisition, Image recording and Signal detection with Plug'n'Play hardware integration.
+        | Equipped with its own filters, algorithms and data analysis plugins.
+        | Plot the data in awesome looking graphs, save and export data results in various formats.
+
+    Easy programming (PYTHON)
+        | ITOM is one of the best **PYTHON IDE** on the web with lots of features to make your python experience a lot easier
+        | Create your own **Scripts** or type in commands directly into to **Console**
+        | Install any python packages with our simple **Package Manager**
+        | Debug your scripts on-the-fly with the our included **Debugger**
+
+    Python packages
+        | Powerful through the greatest range of additional extensions: **Python packages**
+        | Examples are: Matplotlib, Scipy, Numpy for easy mathematical calculations - up to skimage, scikit-learn and TensorFlow for MachineLearning and AI
 
 
 
@@ -45,44 +45,44 @@ Currently the Setup-Version is only available for WINDOWS OS. MacOS and Linux Di
 
 .. container:: mdl-grid
 
-	.. button:: :text: SourceForge
-	   :link: https://sourceforge.net/projects/itom/files/latest/download
+    .. button:: :text: SourceForge
+       :link: https://sourceforge.net/projects/itom/files/latest/download
 
 .. glossary::
 
-	Run the Setup file
-		| After the download, proceed with the installation by opening the Setup.exe. (You might be asked for *Administrator rights* to continue)
-		| 
-		
-	Select the Destination folder:
-	
-		|setup1|
-		
-	Choose Components and Packages to include:
-		| Python packages: Numpy, SciPy and Matplotlib need to be included
-		| itom SDK is needed if you want to include further plugins
-		
-		|setup2|
-		
-	Click on **Install** in the summary:
-		
-		|setup3|
-		
-	*Optional: If not already installed, VisualC++ will be installed*
-		
-		|setupVC|
-		
-	Automatic install of Python packages:
-		
-		|setupPip|
-		
-	Install done:
-	
-		|setup4|
-		
-	Open itom.exe to start:
-	
-		|setup5|
+    Run the Setup file
+        | After the download, proceed with the installation by opening the Setup.exe. (You might be asked for *Administrator rights* to continue)
+        |
+
+    Select the Destination folder:
+
+        |setup1|
+
+    Choose Components and Packages to include:
+        | Python packages: Numpy, SciPy and Matplotlib need to be included
+        | itom SDK is needed if you want to include further plugins
+
+        |setup2|
+
+    Click on **Install** in the summary:
+
+        |setup3|
+
+    *Optional: If not already installed, VisualC++ will be installed*
+
+        |setupVC|
+
+    Automatic install of Python packages:
+
+        |setupPip|
+
+    Install done:
+
+        |setup4|
+
+    Open itom.exe to start:
+
+        |setup5|
 
 .. |setup1| image:: _static\\setup1.jpg
                          :width: 400px
@@ -108,4 +108,4 @@ First of all, let's introduce you to the IDE and your first steps using itom.
 
 * Use our `Cheatsheet for Python with itom <documents/itom_cheatsheet.pdf>`_ to learn some basics
 
-*	See `Documentation <https://itom-project.github.io/latest/docs/index.html>`_ for information on itom details and functions
+* See `Documentation <https://itom-project.github.io/latest/docs/index.html>`_ for information on itom details and functions

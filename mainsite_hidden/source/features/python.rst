@@ -23,7 +23,7 @@ The layout of itom's GUI is simplicit and intuitively designed with a Command Co
 
 The Command console is for direct input and output of python commands.
 Additionally, the scripting window allows to create own scripts and offers tabs for browsing between several scripts.
-For writing and revising your programm code we have included syntax highlighting, auto completion, debugging possibilities, workspace introspection and much more...
+For writing and revising your program code we have included syntax highlighting, auto completion, debugging possibilities, workspace introspection and much more...
 The IDE is highly customizable - Dark Theme, colors, fonts, indentation, dockable windows, etc.
 
 .. image:: ..\\_static\\features\\itomdebug.png

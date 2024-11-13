@@ -7,20 +7,20 @@ Features
 
 **Itom** is an open source software suite for operating measurement systems, laboratory automation and data evaluation.
 
-One main application of **itom** is the development and operation of sensor and measurement system for instance in a laboratory environment. 
-Therefore, the software has to be able to communicate with a wide range of different hardware devices, such as cameras or actuators and should provide a diversified and as complete as possible set of evaluation and data processing methods. 
-Additionally, the rapid prototyping of modern measurement and inspection setups requires a system, where parameters or components can easily be changed at runtime, necessitating the availability of an embedded scripting language. 
+One main application of **itom** is the development and operation of sensor and measurement system for instance in a laboratory environment.
+Therefore, the software has to be able to communicate with a wide range of different hardware devices, such as cameras or actuators and should provide a diversified and as complete as possible set of evaluation and data processing methods.
+Additionally, the rapid prototyping of modern measurement and inspection setups requires a system, where parameters or components can easily be changed at runtime, necessitating the availability of an embedded scripting language.
 Finally, when operating a measurement system, it is also desirable to extend the graphical user interface by system adapted dialogs and windows.
 
 Itom is freely available and actively maintained end extended by the ITOM community. The CORE development is currently centered at the Institute of Applied Optics at University of Stuttgart, Germany.
 
 .. raw:: html
 
-	<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--12-col">
-				<img class="" src="_static/desk_lg.jpg" width="130%" style="position:relative; ; left:-15%; margin:0 0" alt="itom desk"/>
-			</div>
-	</div>
+    <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+                <img class="" src="_static/desk_lg.jpg" width="130%" style="position:relative; ; left:-15%; margin:0 0" alt="itom desk"/>
+            </div>
+    </div>
 
 When using itom you benefit from the following main features:
 
@@ -42,7 +42,7 @@ Implementation
 .. toctree::
    :maxdepth: 1
    :hidden:
-   
+
    features/python.rst
    features/opencv.rst
    features/qt.rst

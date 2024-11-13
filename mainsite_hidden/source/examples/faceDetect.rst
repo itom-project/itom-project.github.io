@@ -19,67 +19,67 @@ If you need further assistance, check out the links below.
 
 .. code::
 
-	import cv2
-	import numpy as np
+    import cv2
+    import numpy as np
 
-	def detect(img, cascade):
-		rects = cascade.detectMultiScale(img, scaleFactor=1.3, minNeighbors=4)
-		if len(rects) == 0:
-			return []
-		rects[:,2:] += rects[:,:2]
-		return rects
+    def detect(img, cascade):
+        rects = cascade.detectMultiScale(img, scaleFactor=1.3, minNeighbors=4)
+        if len(rects) == 0:
+            return []
+        rects[:,2:] += rects[:,:2]
+        return rects
 
-	def draw_rects(img, faces, color):
-		for x1, y1, x2, y2 in faces:
-			cv2.rectangle(img, (x1, y1), (x2, y2), color, 3)
+    def draw_rects(img, faces, color):
+        for x1, y1, x2, y2 in faces:
+            cv2.rectangle(img, (x1, y1), (x2, y2), color, 3)
 
-	def autoGrabbing_changed(checked):
-		if(checked):
-			cam.enableAutoGrabbing()
-		else:
-			cam.disableAutoGrabbing()
-			
-	def snap():
-		d = dataObject()
-		cam.startDevice()
-		autoGrabbingStatus = cam.getAutoGrabbing()
-		cam.disableAutoGrabbing()
-		cam.acquire()
-		cam.getVal(d)
-		img=np.array(d)
-		faces = detect(img, cascade)
-		draw_rects(img, faces, (255, 255, 255))
-		win.plot["source"] = img
-		if(autoGrabbingStatus):
-			cam.enableAutoGrabbing()
-		cam.stopDevice()
+    def autoGrabbing_changed(checked):
+        if(checked):
+            cam.enableAutoGrabbing()
+        else:
+            cam.disableAutoGrabbing()
 
-	def live():
-		win.plot["camera"] = cam
+    def snap():
+        d = dataObject()
+        cam.startDevice()
+        autoGrabbingStatus = cam.getAutoGrabbing()
+        cam.disableAutoGrabbing()
+        cam.acquire()
+        cam.getVal(d)
+        img=np.array(d)
+        faces = detect(img, cascade)
+        draw_rects(img, faces, (255, 255, 255))
+        win.plot["source"] = img
+        if(autoGrabbingStatus):
+            cam.enableAutoGrabbing()
+        cam.stopDevice()
 
-	def __del__():
-		del cam
-		gc()
+    def live():
+        win.plot["camera"] = cam
 
-	if __name__ == '__main__':
+    def __del__():
+        del cam
+        gc()
 
-		win = ui("FaceDetect.ui", ui.TYPEWINDOW, childOfMainWindow = True)
-		cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-		nested = cv2.CascadeClassifier('haarcascade_eye.xml')
+    if __name__ == '__main__':
 
-		try:
-			cam= dataIO("OpenCVGrabber",0,'gray')
-		except Exception:
-			cam = dataIO("DummyGrabber",2048,1024,8)
+        win = ui("FaceDetect.ui", ui.TYPEWINDOW, childOfMainWindow = True)
+        cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+        nested = cv2.CascadeClassifier('haarcascade_eye.xml')
 
-		#Connect buttons to program
-		win.btnSnap.connect("clicked()", snap)
-		win.btnLive.connect("clicked()", live)
-		win.checkAutoGrabbing.connect("clicked(bool)", autoGrabbing_changed)
-		#Initialize gui elements
-		win.checkAutoGrabbing["checked"] = cam.getAutoGrabbing()
-		#start GUI
-		win.show(0)
+        try:
+            cam= dataIO("OpenCVGrabber",0,'gray')
+        except Exception:
+            cam = dataIO("DummyGrabber",2048,1024,8)
+
+        #Connect buttons to program
+        win.btnSnap.connect("clicked()", snap)
+        win.btnLive.connect("clicked()", live)
+        win.checkAutoGrabbing.connect("clicked(bool)", autoGrabbing_changed)
+        #Initialize gui elements
+        win.checkAutoGrabbing["checked"] = cam.getAutoGrabbing()
+        #start GUI
+        win.show(0)
 
 
 Result
@@ -89,10 +89,10 @@ Result
     :alt: Facedetection
     :width: 90%
     :align: center
-	
+
 .. raw:: html
-	
-	<hr>
+
+    <hr>
 
 Resources
 -------------------------------
@@ -101,5 +101,4 @@ Resources
 
 .. raw:: html
 
-	<iframe width="560" height="315" src="https://www.youtube.com/embed/88HdqNDQsEk?rel=0" frameborder="0" allowfullscreen></iframe>
-
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/88HdqNDQsEk?rel=0" frameborder="0" allowfullscreen></iframe>

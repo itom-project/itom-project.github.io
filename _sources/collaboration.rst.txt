@@ -3,7 +3,7 @@
 Collaboration
 ==============
 
-The main development of **itom** is done by **Institut für Technische Optik** of university of Stuttgart in Germany.
+The main development of **itom** is done by **Institut fÃ¼r Technische Optik** of university of Stuttgart in Germany.
 However, the core development team is supported by further institutions and companies, that provide further plugins,
 do bug fixes, develop new features or participate in the general development of **itom**.
 
@@ -16,11 +16,11 @@ Among others, we thank the following institutions for their support:
    :target: http://www.twip-os.com
 
    Company |twip optical solutions GmbH|_
-   
+
    for their intense contribution to the core, to many plugins as well as designer plugins.
    They also provide their own plugin repository for **itom** under http://twipos.bitbucket.org/
    where you can find an enhanced 3D visualization plugin (also part of the **itom** Windows setup).
-   
+
    **twip optical solutions** also offers commercial support for **itom** as well as the development of plugins. For more
    information see `TWIP <http://www.twip-os.com/?lang=en#services>`_.
 
@@ -32,8 +32,8 @@ Among others, we thank the following institutions for their support:
    :alt: IPROM, TU Braunschweig
    :target: http://iprom.tu-bs.de/
 
-   |Institut für Produktionsmesstechnik, TU Braunschweig|_
-   
+   |Institut fÃ¼r Produktionsmesstechnik, TU Braunschweig|_
+
    for their development and contribution to several plugins (e.g. AVTVimba).
 
 -----
@@ -45,7 +45,7 @@ Among others, we thank the following institutions for their support:
    :target: http://www.pulsar-photonics.de
 
    Company |Pulsar Photonics GmbH|_
-   
+
    for their contribution to several plugins (e.g. IDSuEye, AerotechEnsemble).
 
 -----
@@ -57,7 +57,7 @@ Among others, we thank the following institutions for their support:
    :target: http://www.swansea.ac.uk/biosci/researchgroups/slam/
 
    |Group Swansea Lab for Animal Movement - Animal ecology and behaviour of Swansea University(UK)|_
-   
+
    for their contribution to plugins (QImaging camera).
 
 -----
@@ -66,13 +66,13 @@ Among others, we thank the following institutions for their support:
 
 You can also register to the `mailing list <https://lists.sourceforge.net/lists/listinfo/itom-discussions>`_ in order to obtain news about *itom*. You can also use this mailing list if you have questions or comments.
 
-                       
+
 
 .. |twip optical solutions GmbH| replace:: *twip optical solutions GmbH*
 .. _twip optical solutions GmbH: http://www.twip-os.com/
 
-.. |Institut für Produktionsmesstechnik, TU Braunschweig| replace:: *Institut für Produktionsmesstechnik, TU Braunschweig*
-.. _Institut für Produktionsmesstechnik, TU Braunschweig: http://iprom.tu-bs.de/
+.. |Institut fÃ¼r Produktionsmesstechnik, TU Braunschweig| replace:: *Institut fÃ¼r Produktionsmesstechnik, TU Braunschweig*
+.. _Institut fÃ¼r Produktionsmesstechnik, TU Braunschweig: http://iprom.tu-bs.de/
 
 .. |Pulsar Photonics GmbH| replace:: *Pulsar Photonics GmbH*
 .. _Pulsar Photonics GmbH: http://www.pulsar-photonics.de

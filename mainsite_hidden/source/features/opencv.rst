@@ -45,7 +45,7 @@ The image shows noise reduction while keeping small details (in this case the pe
 
 .. raw:: html
 
-	<hr>
+    <hr>
 
 Something more sophisticated: Haar Cascades for feature detection (face detection):
 
@@ -56,7 +56,7 @@ Something more sophisticated: Haar Cascades for feature detection (face detectio
 
 .. raw:: html
 
-	<hr>
+    <hr>
 
 And a local histogram equalization in order to make local features visible (see the edge of the cup and the wood texture).
 
@@ -67,7 +67,7 @@ And a local histogram equalization in order to make local features visible (see 
 
 .. raw:: html
 
-	<hr>
+    <hr>
 
 The following screenshot shows the application of the so-called Hough transform
 used to find (in this case: long) lines in a very noisy image.
@@ -79,7 +79,7 @@ used to find (in this case: long) lines in a very noisy image.
 
 .. raw:: html
 
-	<hr>
+    <hr>
 
 Often, edge detection and noise reduction are first applied in order
 to perform further processing like the Hough transform.
@@ -93,17 +93,16 @@ or edge detection: Laplacian filtering and the famous Canny filter.
 
 .. raw:: html
 
-	<hr>
+    <hr>
 
 Books
 ------
 
 * Digitale Bildverarbeitung (http://www.oimv.de/bv100.pdf)::
-	
-	Haist, Tobias. "Digitale Bildverarbeitung mit einer Einfuehrung in Python, OpenCV & ITOM", ITO Stuttgart (2018).
+
+    Haist, Tobias. "Digitale Bildverarbeitung mit einer Einfuehrung in Python, OpenCV & ITOM", ITO Stuttgart (2018).
 
 
 * Learning OpenCV 3 (http://shop.oreilly.com/product/0636920044765.do)::
-   
+
    Kaehler, Adrian, and Gary Bradski. "Learning OpenCV 3: computer vision in C++ with the OpenCV library." "O'Reilly Media, Inc." (2016).
-   

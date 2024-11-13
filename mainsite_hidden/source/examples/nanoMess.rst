@@ -16,8 +16,3 @@ To the right side of **MainWindow** one can type in coordinates for new points, 
     :alt: GUI Nanomess
     :width: 90%
     :align: center
-
-
-
-
-

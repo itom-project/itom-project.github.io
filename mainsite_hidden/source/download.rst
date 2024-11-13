@@ -12,46 +12,46 @@ Latest End-User Installer & Portable (x64)
 
 .. container:: mdl-grid--no-spacing
 
-	.. button:: :text: ITOM Setup EXE
-	 :link: https://sourceforge.net/projects/itom/files/latest/download
+    .. button:: :text: ITOM Setup EXE
+     :link: https://sourceforge.net/projects/itom/files/latest/download
 
-	.. button:: :text: ITOM Portable ZIP
-	 :link: https://sourceforge.net/projects/itom/files/v4.2.2/itom4.2.2_portable.zip/download
+    .. button:: :text: ITOM Portable ZIP
+     :link: https://sourceforge.net/projects/itom/files/v4.2.2/itom4.2.2_portable.zip/download
 
-| **Windows:**	Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
-| **Linux:**	(Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom-project.github.io/latest/docs/02_installation/build_debian.html>`_)
-| **Mac:**		(OS X) Clone git source code (`MacOS instructions <https://itom-project.github.io/latest/docs/02_installation/build_osx.html>`_)
+| **Windows:**    Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
+| **Linux:**    (Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom-project.github.io/latest/docs/02_installation/build_debian.html>`_)
+| **Mac:**        (OS X) Clone git source code (`MacOS instructions <https://itom-project.github.io/latest/docs/02_installation/build_osx.html>`_)
 
 Source Repository
 *****************
 
 .. container:: mdl-grid--no-spacing
 
-	.. button:: :text: source itom project
-	 :link: https://github.com/itom-project
+    .. button:: :text: source itom project
+     :link: https://github.com/itom-project
 
-	.. button:: :text: source itom core
-	 :link: https://github.com/itom-project/itom
+    .. button:: :text: source itom core
+     :link: https://github.com/itom-project/itom
 
-	.. button:: :text: source plugins
-	 :link: https://github.com/itom-project/plugins
+    .. button:: :text: source plugins
+     :link: https://github.com/itom-project/plugins
 
-	.. button:: :text: source designer plugins
-	 :link: https://github.com/itom-project/designerPlugins
+    .. button:: :text: source designer plugins
+     :link: https://github.com/itom-project/designerPlugins
 
-| **source itom core:** 		itom core repository
-| **source plugins:** 			plugins repository
-| **source designer plugins:** 	desinger repository
+| **source itom core:**         itom core repository
+| **source plugins:**             plugins repository
+| **source designer plugins:**     designer repository
 
 Developer SDK
 *************
 
 .. container:: mdl-grid--no-spacing
 
-	.. button:: :text: Source SDK Kit
-	 :link: https://sourceforge.net/projects/itom/files/all-in-one-build-setup
+    .. button:: :text: Source SDK Kit
+     :link: https://sourceforge.net/projects/itom/files/all-in-one-build-setup
 
-| **SDK:**						Includes all tools to build the software from source with instructions and automated script files.
+| **SDK:**                        Includes all tools to build the software from source with instructions and automated script files.
 
 itom End-User Setup 3rd parties
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,21 +94,21 @@ The current version 4.2.2 is available from
 .. important::
 
     Error message regarding PYTHONHOME variable
-        If a new itom setup version is installed on a computer with an already installed itom and Python can not be started, 
-        it may be a problem with python environment variables. First, delete this variable, reboot your system und install itom again. 
+        If a new itom setup version is installed on a computer with an already installed itom and Python can not be started,
+        it may be a problem with python environment variables. First, delete this variable, reboot your system und install itom again.
 
 
 .. note::
-    
+
     Error message from Python packages
-        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded, 
-        the Visual C++ Redistributable is not correctly installed. Try to reinstall it. 
+        If some Python packages (**matplotlib, scipy, numpy**) return an error message that a dll-file can not be loaded,
+        the Visual C++ Redistributable is not correctly installed. Try to reinstall it.
         The current version can be downloaded here: https://www.microsoft.com/de-de/download/details.aspx?id=48145
 
 .. raw:: html
 
-	<button class="accordion" style="font-family:Roboto">Old versions</button>
-	<div class="panel">
+    <button class="accordion" style="font-family:Roboto">Old versions</button>
+    <div class="panel">
 
 * `itom 4.2.0 <http://sourceforge.net/projects/itom/files/v4.2.0/>`_
 * `itom 4.1.0 <http://sourceforge.net/projects/itom/files/v4.1.0/>`_
@@ -131,13 +131,13 @@ The current version 4.2.2 is available from
 
 .. raw:: html
 
-	</div>
+    </div>
 
 .. raw:: html
 
-	<button class="accordion" style="font-family:Roboto">Components of old versions</button>
-	<div class="panel">
-	
+    <button class="accordion" style="font-family:Roboto">Components of old versions</button>
+    <div class="panel">
+
 **Version 4.2.0** compiled using:
 
 * Qt 5.12.6
@@ -328,7 +328,7 @@ The current version 4.2.2 is available from
 * openCV 3.1.0
 * QScintilla 2.9.1
 * Pip 9.0.1
-* Numpy 1.11.3 + MKL 
+* Numpy 1.11.3 + MKL
 * Scipy 0.19.0
 * six 1.10.0
 * pytz 2017.2
@@ -354,7 +354,7 @@ The current version 4.2.2 is available from
 * compiled using Qt5.6.1-1
 * Python 3.5.1
 * Pip 8.1.2
-* Numpy 1.11.1 + MKL 
+* Numpy 1.11.1 + MKL
 * Scipy 0.18.0
 * six 1.10.0
 * pytz 2016.6
@@ -377,7 +377,7 @@ The current version 4.2.2 is available from
 * compiled using Qt5.3.2
 * Python 3.5.1
 * Pip 8.0.3
-* Numpy 1.10.4 + MKL 
+* Numpy 1.10.4 + MKL
 * Scipy 0.17.0
 * six 1.10.0
 * pytz 2015.7
@@ -397,7 +397,7 @@ The current version 4.2.2 is available from
 
 * compiled using Qt5.3.2
 * Python 3.4.2
-* Numpy 1.9.2 + MKL 
+* Numpy 1.9.2 + MKL
 * Scipy 0.15.1
 * Matplotlib 1.4.3
 * Frosted 1.4.1
@@ -419,4 +419,4 @@ The current version 4.2.2 is available from
 
 .. raw:: html
 
-	</div>
+    </div>
