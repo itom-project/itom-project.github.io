@@ -1,0 +1,50 @@
+How to update the itom website
+==============================
+
+Pre-requirements
+----------------
+
+itom, plugins and designerplugin must be compiled and loaded by itom. 
+Install the Python Package **requirementsDocuBuild.txt** from [itom](https://github.com/itom-project/itom) form the subfolder ``itom/docs/userDoc/``.
+
+* Delete all files in ``../mainsite_hidden/build/``
+* If there are new plugin copy the ``*.rst`` file from [plugin](https://github.com/itom-project/plugin) source repository to ``../mainsite_hidden/source_plugins/``
+* Start ITOM (As Admin)
+
+pre-commit hooks
+----------------
+
+After the first cloning of the repositories, the [pre-commit](https://pre-commit.com/ "pre-commit") hooks should be installed once.
+
+```bash
+python -m pre_commit install
+```
+
+#### (optional) run against all files
+
+It's usually a good idea to run the hooks against all of the files when adding new hooks (usually ``pre-commit`` will only run on the changed files during git hooks).
+
+```bash
+python -m pre-commit run --all-files
+```
+
+Update Plugin-Doc
+-----------------
+
+* Run script: ``../mainsite_hidden/update_plugindoc_source_plugins.py``. Skript will ask you for a folder. Select the ``itomProject/plugins`` folder. Script will update exsiting plugin's ``*.rst`` files.
+* Run Script: ``../mainsite_hidden/create_plugin_documentation.py``. This creates the plugin docu for the website. 
+
+Update Website
+--------------	
+* Run Script: ``../mainsite_hidden/create_html_documentation.py``. This creates the itom website and is copied to main website dir. 
+
+Update USER-DOC
+---------------
+* Update ``..mainsite_hidde/source/documentation.rst`` file with new itom version.
+* Create new folder ``../vM.M.P``. 
+* Run script ``../build/itom/doc/userDoc/create-doc.py`` in the build folder of [itom](https://github.com/itom-project/itom).
+* Check in line 44 for ``buildernames = ["qthelp", "html", "latex"]`` to at least build in several formats.
+* Copy the folder ``../build/itom/docs/userDoc/build/html/`` to the folder ``../latest`` of this repository. 
+* Script will ask you if you want to run doxygen. Select the ``doxygen.exe``.  
+* Copy ``../build/itom/doc/doxygen/html/`` files to the folder ``../latest/doxygen/``
+* Finally commit and push to the repository. The website is available afterwards. 
