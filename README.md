@@ -11,6 +11,23 @@ Install the Python Package **requirementsDocuBuild.txt** from [itom](https://git
 * If there are new plugin copy the ``*.rst`` file from [plugin](https://github.com/itom-project/plugin) source repository to ``../mainsite_hidden/source_plugins/``
 * Start ITOM (As Admin)
 
+pre-commit hooks
+----------------
+
+After the first cloning of the repositories, the [pre-commit](https://pre-commit.com/ "pre-commit") hooks should be installed once.
+
+```bash
+python -m pre_commit install
+```
+
+#### (optional) run against all files
+
+It's usually a good idea to run the hooks against all of the files when adding new hooks (usually ``pre-commit`` will only run on the changed files during git hooks).
+
+```bash
+python -m pre-commit run --all-files
+```
+
 Update Plugin-Doc
 -----------------
 
