@@ -9,32 +9,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5.6. Fitting Filters &#8212; itom Plugins</title>
-
-
-
+  
+  
+  
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
 
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/html.css" />
-
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
@@ -46,35 +49,25 @@
     <link rel="prev" title="5.5. FFTW-Filter" href="fftwFilters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 12, 2024"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="Nov 14, 2024"/>
   </head>
-
-
+  
+  
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-
-
+  
+  
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
+  
   <div id="pst-scroll-pixel-helper"></div>
-
+  
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -82,7 +75,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -90,50 +82,50 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
-
+  
     <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
   </button>
-
-
+  
+  
   <div class="col-lg-3 navbar-header-items__start">
-
+    
       <div class="navbar-item">
 
-
-
-
+  
+    
+  
 
 <a class="navbar-brand logo" href="../../index.html">
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
     <p class="title logo__title">itom Plugins</p>
-
+  
 </a></div>
-
+    
   </div>
-
+  
   <div class="col-lg-9 navbar-header-items">
-
+    
     <div class="me-auto navbar-header-items__center">
-
+      
         <div class="navbar-item">
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
-
+    
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../grabbers.html">
     Camera/ Grabber
@@ -170,115 +162,104 @@
 
   </ul>
 </nav></div>
-
+      
     </div>
-
-
+    
+    
     <div class="navbar-header-items__end">
-
+      
         <div class="navbar-item navbar-persistent--container">
+          
 
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
-
-
+      
+      
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
-
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
-
-
-
-
-
-
-
-
+          
+          
+          
+          
+          
+          
+          
+          
           <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
-
-
-
-
-
-
-
-
+          
+          
+          
+          
+          
+          
+          
+          
           <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
         </li>
 </ul></div>
-
+      
     </div>
-
+    
   </div>
-
-
+  
+  
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
+  
 
-
-
+  
     <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
     </button>
-
+  
 </div>
 
     </header>
-
+  
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
 
-
-
-      <div class="bd-sidebar-primary bd-sidebar">
-
-
-
+  
   <div class="sidebar-header-items sidebar-primary__section">
-
-
+    
+    
       <div class="sidebar-header-items__center">
-
-
-
+        
+          
+          
             <div class="navbar-item">
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
-
+    
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../grabbers.html">
     Camera/ Grabber
@@ -315,57 +296,53 @@ document.write(`
 
   </ul>
 </nav></div>
-
-
+          
+        
       </div>
-
-
-
+    
+    
+    
       <div class="sidebar-header-items__end">
-
+        
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
-
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
-
-
-
-
-
-
-
-
+          
+          
+          
+          
+          
+          
+          
+          
           <a href="https://github.com/itom-project/plugins" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
-
-
-
-
-
-
-
-
+          
+          
+          
+          
+          
+          
+          
+          
           <a href="https://www.ito.uni-stuttgart.de/" title="ITO" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/ITO_Logo_neu_II.png" class="icon-link-image" alt="ITO"/></a>
         </li>
 </ul></div>
-
+        
       </div>
-
+    
   </div>
-
+  
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 <nav class="bd-docs-nav bd-links"
@@ -388,59 +365,57 @@ document.write(`
 </div>
 </nav></div>
     </div>
-
-
+  
+  
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
-
+  
   <div id="rtd-footer-container"></div>
 
 
       </div>
-
+      
       <main id="main-content" class="bd-main" role="main">
-
-
+        
+        
           <div class="bd-content">
             <div class="bd-article-container">
-
+              
               <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-
+  
     <div class="header-article-items__start">
-
+      
         <div class="header-article-item">
-
-
 
 <nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
-
+    
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../../index.html" class="nav-link" aria-label="Home">
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-
+    
     <li class="breadcrumb-item"><a href="../algorithms.html" class="nav-link"><span class="section-number">5. </span>Algorithms/ Filters</a></li>
-
-    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis"><span class="section-number">5.6. </span>Fitting Filters</span></li>
   </ul>
 </nav>
 </div>
-
+      
     </div>
-
-
+  
+  
 </div>
 </div>
-
-
-
-
+              
+              
+              
+                
 <div id="searchbox"></div>
                 <article class="bd-article">
-
+                  
   <section id="fitting-filters">
 <h1><span class="section-number">5.6. </span>Fitting Filters<a class="headerlink" href="#fitting-filters" title="Link to this heading">#</a></h1>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -523,32 +498,32 @@ The extend is the maximum horizontal and vertical distance from a edge element o
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inputObject</strong> (<em>itom.dataObject</em>) – input real-valued data object with possible NaN values (float32, float64).</p></li>
 <li><p><strong>outputObject</strong> (<em>itom.dataObject</em>) – output real-valued data object that equals ‘inputObject’ but NaN values are filled with interpolated values (float32, float64).</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>LeastSquaresPlane (default), LMedSPlane (Least median of squares), Median, Mean</p>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>LeastSquaresPlane (default), LMedSPlane (Least median of squares), Median, Mean</p>
 <div class="line-block">
 <div class="line"><em>Match: [“LeastSquaresPlane”, “LMedSPlane”, “Median”, “Mean”], Default: “LeastSquaresPlane”</em></div>
 </div>
 </p></li>
-<li><p><strong>regionType</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>BoundingBox (default): a bounding box is set around each invalid area and the interpolation is done over all valid values within the bounding box. For other region types see the description of this filter.</p>
+<li><p><strong>regionType</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>BoundingBox (default): a bounding box is set around each invalid area and the interpolation is done over all valid values within the bounding box. For other region types see the description of this filter.</p>
 <div class="line-block">
 <div class="line"><em>Match: [“BoundingBox”, “ErodeRect”, “ErodeEllipse”], Default: “BoundingBox”</em></div>
 </div>
 </p></li>
-<li><p><strong>regionExtend</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – <p>The invalid region is extend by the ‘regionType’. The size of the extend in x- and y- direction is given by this parameter as tuple (dx,dy).</p>
+<li><p><strong>regionExtend</strong> (<em>Sequence</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – <p>The invalid region is extend by the ‘regionType’. The size of the extend in x- and y- direction is given by this parameter as tuple (dx,dy).</p>
 <div class="line-block">
 <div class="line"><em>2 values required, Value range: [1, 2001], Default: [3, 3]</em></div>
 </div>
 </p></li>
-<li><p><strong>maxAreaSize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Only invalid area whose number of pixels is below this value are filled by interpolated values.</p>
+<li><p><strong>maxAreaSize</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>Only invalid area whose number of pixels is below this value are filled by interpolated values.</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, inf], Default: inf</em></div>
 </div>
 </p></li>
-<li><p><strong>validPointProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFitPlane)</p>
+<li><p><strong>validPointProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFitPlane)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 0.999999], Default: 0.2</em></div>
 </div>
 </p></li>
-<li><p><strong>allowedErrorProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFitPlane)</p>
+<li><p><strong>allowedErrorProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFitPlane)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-07, 1], Default: 0.001</em></div>
 </div>
@@ -560,13 +535,13 @@ The extend is the maximum horizontal and vertical distance from a edge element o
 <dd class="field-even"><p>numTotalInvalidAreas - total number of detected invalid areas</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+<dd class="field-odd"><p>int</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>numFilledAreas - number of areas that where filled (their area size was &lt;= maxAreaSize and the interpolation values based on surrounding pixels are valid).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -582,22 +557,22 @@ The extend is the maximum horizontal and vertical distance from a edge element o
 <p>The probability values are only important for the least median fit and determine the number of iterations for the
 a random search using the equation</p>
 <div class="math">
-<p><img src="../../_images/math/ae2d0419592f12256743f0318e8272911c555259.png" alt="iterations &gt;= ceil(log(allowedErrorProbability)/log(1-validPointProbability)))"/></p>
+<p><span class="math">iterations &gt;= ceil(log(allowedErrorProbability)/log(1-validPointProbability)))</span></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source image data object</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>fitting method (leastSquareFit [default], leastSquareFitSVD, leastMedianFit)</p>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>fitting method (leastSquareFit [default], leastSquareFitSVD, leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“leastSquareFit”, “leastSquareFitSVD”, “leastMedianFit”], Default: “leastSquareFit”</em></div>
 </div>
 </p></li>
-<li><p><strong>validPointProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</p>
+<li><p><strong>validPointProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 0.999999], Default: 0.2</em></div>
 </div>
 </p></li>
-<li><p><strong>allowedErrorProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</p>
+<li><p><strong>allowedErrorProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-07, 1], Default: 0.001</em></div>
 </div>
@@ -608,19 +583,19 @@ a random search using the equation</p>
 <dd class="field-even"><p>A - Parameter A of regression plane z = A + Bx + Cy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p>float</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>B - Parameter B of regression plane z = A + Bx + Cy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p>float</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>C - Parameter C of regression plane z = A + Bx + Cy</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -640,16 +615,16 @@ The residual is the sum of the quadratical errors from each valid pixel to the f
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>itom.dataObject</em>) – input data object (3 dimensions, [z,y,x]).</p></li>
 <li><p><strong>polynoms</strong> (<em>itom.dataObject</em>) – float64, size: [(order+2),y,x]. The first (order+1) planes contain the coefficients, the last plane contains the residual error for each polynomial fit.</p></li>
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order</p>
+<li><p><strong>order</strong> (<em>int</em>) – <p>polynomial order</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 7], Default: 1</em></div>
 </div>
 </p></li>
 <li><p><strong>weights</strong> (<em>itom.dataObject</em><em>, </em><em>optional</em>) – weights (same dimensions than data)</p></li>
-<li><p><strong>xVals</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – x-value vector (length must be the same than z-size of data) [default: equally spaced values are assumed using scale and offset of the data object in z-direction]</p></li>
-<li><p><strong>numThreads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>number of threads used for the parallel determination</p>
+<li><p><strong>xVals</strong> (<em>Sequence</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – x-value vector (length must be the same than z-size of data) [default: equally spaced values are assumed using scale and offset of the data object in z-direction]</p></li>
+<li><p><strong>numThreads</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>number of threads used for the parallel determination</p>
 <div class="line-block">
-<div class="line"><em>Value range: [1, 12], Default: 1</em></div>
+<div class="line"><em>Value range: [1, 16], Default: 1</em></div>
 </div>
 </p></li>
 </ul>
@@ -671,9 +646,9 @@ return the coefficients for the polynomial. Use polyfitWeighted2d if you want to
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source image data object</p></li>
 <li><p><strong>fittedImage</strong> (<em>itom.dataObject</em>) – destination data object with fitted values</p></li>
-<li><p><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – order of the fitting polynomial in x-direction</p></li>
-<li><p><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – order of the fitting polynomial y-direction</p></li>
-<li><p><strong>replaceNaN</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>if 0 infinite values in input image will be copied to output</p>
+<li><p><strong>orderX</strong> (<em>int</em>) – order of the fitting polynomial in x-direction</p></li>
+<li><p><strong>orderY</strong> (<em>int</em>) – order of the fitting polynomial y-direction</p></li>
+<li><p><strong>replaceNaN</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>if 0 infinite values in input image will be copied to output</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 0</em></div>
 </div>
@@ -684,7 +659,7 @@ return the coefficients for the polynomial. Use polyfitWeighted2d if you want to
 <dd class="field-even"><p>sigma - Variance value <em>sigma</em> of polynomial fit.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -706,18 +681,18 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dataObj</strong> (<em>itom.dataObject</em>) – input real-valued data object (2D or ROI containing only one plane).</p></li>
 <li><p><strong>coordsSubPix</strong> (<em>itom.dataObject</em>) – input Nx2 data object containing the sub-pixel (column,row) coordinates of each point (given in scale value of dataObj).</p></li>
-<li><p><strong>searchRect</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – [height, width] of the search rectangle for the linear interpolation. A plane fit is executed for all finite values within the rectangle and the output value is determined based on the plane coefficients. If the size if even, its size drifts towards the trend direction given by the coordinate value.</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>LeastSquares (default), LMedS (Least median of squares)</p>
+<li><p><strong>searchRect</strong> (<em>Sequence</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – [height, width] of the search rectangle for the linear interpolation. A plane fit is executed for all finite values within the rectangle and the output value is determined based on the plane coefficients. If the size if even, its size drifts towards the trend direction given by the coordinate value.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>LeastSquares (default), LMedS (Least median of squares)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“LeastSquares”, “LMedS”], Default: “LeastSquares”</em></div>
 </div>
 </p></li>
-<li><p><strong>validPointProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</p>
+<li><p><strong>validPointProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 0.999999], Default: 0.2</em></div>
 </div>
 </p></li>
-<li><p><strong>allowedErrorProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</p>
+<li><p><strong>allowedErrorProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-07, 1], Default: 0.001</em></div>
 </div>
@@ -728,7 +703,7 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <dd class="field-even"><p>values - output vector of type ito::float64 containing the interpolated values (NaN if no value could be found)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+<dd class="field-odd"><p>Sequence[float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -743,12 +718,12 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <div><p>if (orderX &lt;= orderY):</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/349d2156b3dd1bc59daf4baaeb0f98e9c40c64bd.png" alt="f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 <p>else:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/6cfd499b5fa24c54618f65c5d855a054ed7b7397.png" alt="f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 </div></blockquote>
 <p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
@@ -758,18 +733,18 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inputData</strong> (<em>itom.dataObject</em>) – input data object, the fit is based on the regular grid (x,y) defined by the scaling and offset of this data object</p></li>
-<li><p><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in x-direction</p>
+<li><p><strong>orderX</strong> (<em>int</em>) – <p>polynomial order in x-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
 </p></li>
-<li><p><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in y-direction</p>
+<li><p><strong>orderY</strong> (<em>int</em>) – <p>polynomial order in y-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
 </p></li>
 <li><p><strong>weights</strong> (<em>itom.dataObject</em><em>, </em><em>optional</em>) – weights, if not given all values are equally weighted</p></li>
-<li><p><strong>reduceFactor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>If this factor is &gt;= 1.0, every plane of the data object is divided into fields (reduceFactor * (orderXorY+1)) in x-direction and y-direction respectively, where one random, valid value is picked. If &lt; 1.0 (e.g. -1.0 [default]) all valid points are picked</p>
+<li><p><strong>reduceFactor</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>If this factor is &gt;= 1.0, every plane of the data object is divided into fields (reduceFactor * (orderXorY+1)) in x-direction and y-direction respectively, where one random, valid value is picked. If &lt; 1.0 (e.g. -1.0 [default]) all valid points are picked</p>
 <div class="line-block">
 <div class="line"><em>Value range: [-1, 100000], Default: -1</em></div>
 </div>
@@ -780,7 +755,7 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <dd class="field-even"><p>coefficients - fitted polynomial coefficients</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+<dd class="field-odd"><p>Sequence[float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -796,12 +771,12 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <div><p>if (orderX &lt;= orderY):</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/393831dcc924c84c2a5e3f2bfc8d9fd9067f15af.png" alt="z = f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">z = f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 <p>else:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/11f5ac58de160662699c2ac226c097e8931e689a.png" alt="z = f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">z = f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 </div></blockquote>
 <p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
@@ -813,12 +788,12 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <li><p><strong>xData</strong> (<em>itom.dataObject</em>) – input data object with x-coordinates of points</p></li>
 <li><p><strong>yData</strong> (<em>itom.dataObject</em>) – input data object with y-coordinates of points</p></li>
 <li><p><strong>zData</strong> (<em>itom.dataObject</em>) – input data object with z-coordinates of points</p></li>
-<li><p><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in x-direction</p>
+<li><p><strong>orderX</strong> (<em>int</em>) – <p>polynomial order in x-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
 </p></li>
-<li><p><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in y-direction</p>
+<li><p><strong>orderY</strong> (<em>int</em>) – <p>polynomial order in y-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
@@ -830,7 +805,7 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <dd class="field-even"><p>coefficients - fitted polynomial coefficients</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+<dd class="field-odd"><p>Sequence[float]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -845,12 +820,12 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <div><p>if (orderX &lt;= orderY):</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/349d2156b3dd1bc59daf4baaeb0f98e9c40c64bd.png" alt="f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 <p>else:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/6cfd499b5fa24c54618f65c5d855a054ed7b7397.png" alt="f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 </div></blockquote>
 <p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
@@ -858,13 +833,13 @@ the rectangle. If this is not possible, NaN is returned as value.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dataZ</strong> (<em>itom.dataObject</em>) – data object with given size and data type including scale and offset value. Depending on these values, this data object is finally filled with the evaluated polynomial function</p></li>
-<li><p><strong>coefficients</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – polynom coefficients as they come from polyfitWeighted2D</p></li>
-<li><p><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in x-direction</p>
+<li><p><strong>coefficients</strong> (<em>Sequence</em><em>[</em><em>float</em><em>]</em>) – polynom coefficients as they come from polyfitWeighted2D</p></li>
+<li><p><strong>orderX</strong> (<em>int</em>) – <p>polynomial order in x-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
 </p></li>
-<li><p><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in y-direction</p>
+<li><p><strong>orderY</strong> (<em>int</em>) – <p>polynomial order in y-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
@@ -884,12 +859,12 @@ The polynomial coefficients (p0, p1, …) are those returned by the filter ‘fi
 <div><p>if (orderX &lt;= orderY):</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/349d2156b3dd1bc59daf4baaeb0f98e9c40c64bd.png" alt="f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">f(x,y) = \sum_{i=0}^{orderX} \sum_{j=0}^{orderY-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 <p>else:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../../_images/math/6cfd499b5fa24c54618f65c5d855a054ed7b7397.png" alt="f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j"/></p>
+<p><span class="math">f(x,y) = \sum_{j=0}^{orderY} \sum_{i=0}^{orderX-i} p_{ij} x^i y^j</span></p>
 </div></div></blockquote>
 </div></blockquote>
 <p>The coefficients p_ij are stored in the coefficients vector in the order they appear in the equation above.</p>
@@ -899,13 +874,13 @@ The polynomial coefficients (p0, p1, …) are those returned by the filter ‘fi
 <li><p><strong>dataX</strong> (<em>itom.dataObject</em>) – data object with x-coordinates (interpreted as float64).</p></li>
 <li><p><strong>dataY</strong> (<em>itom.dataObject</em>) – data object with y-coordinates (interpreted as float64).</p></li>
 <li><p><strong>dataZ</strong> (<em>itom.dataObject</em>) – This data object is finally filled with the evaluated polynomial function (float64)</p></li>
-<li><p><strong>coefficients</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em>) – polynom coefficients as they come from polyfitWeighted2D</p></li>
-<li><p><strong>orderX</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in x-direction</p>
+<li><p><strong>coefficients</strong> (<em>Sequence</em><em>[</em><em>float</em><em>]</em>) – polynom coefficients as they come from polyfitWeighted2D</p></li>
+<li><p><strong>orderX</strong> (<em>int</em>) – <p>polynomial order in x-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
 </p></li>
-<li><p><strong>orderY</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order in y-direction</p>
+<li><p><strong>orderY</strong> (<em>int</em>) – <p>polynomial order in y-direction</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1000], Default: 2</em></div>
 </div>
@@ -927,19 +902,19 @@ for the line regression fits and a singular value decomposition for all other ca
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input</strong> (<em>itom.dataObject</em>) – real valued input object (1D or 2D)</p></li>
 <li><p><strong>output</strong> (<em>itom.dataObject</em>) – resulting output object (same than input is allowed, else output has the same type and size than input)</p></li>
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – <p>polynomial order</p>
+<li><p><strong>order</strong> (<em>int</em>) – <p>polynomial order</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1, 7], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>axis index along which the 1d regressions are independently determined and subtracted (0: vertical, 1: horizontal).</p>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>axis index along which the 1d regressions are independently determined and subtracted (0: vertical, 1: horizontal).</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 1], Default: 1</em></div>
 </div>
 </p></li>
-<li><p><strong>numThreads</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – <p>number of threads used for the parallel determination</p>
+<li><p><strong>numThreads</strong> (<em>int</em><em>, </em><em>optional</em>) – <p>number of threads used for the parallel determination</p>
 <div class="line-block">
-<div class="line"><em>Value range: [1, 12], Default: 1</em></div>
+<div class="line"><em>Value range: [1, 16], Default: 1</em></div>
 </div>
 </p></li>
 </ul>
@@ -958,17 +933,17 @@ for the line regression fits and a singular value decomposition for all other ca
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source image data object</p></li>
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – destination image data object</p></li>
-<li><p><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Parameter A of regression plane z = A + Bx + Cy, which is subtracted</p>
+<li><p><strong>A</strong> (<em>float</em>) – <p>Parameter A of regression plane z = A + Bx + Cy, which is subtracted</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Parameter B of regression plane z = A + Bx + Cy, which is subtracted</p>
+<li><p><strong>B</strong> (<em>float</em>) – <p>Parameter B of regression plane z = A + Bx + Cy, which is subtracted</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
 </p></li>
-<li><p><strong>C</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – <p>Parameter C of regression plane z = A + Bx + Cy, which is subtracted</p>
+<li><p><strong>C</strong> (<em>float</em>) – <p>Parameter C of regression plane z = A + Bx + Cy, which is subtracted</p>
 <div class="line-block">
 <div class="line"><em>All values allowed, Default: 0</em></div>
 </div>
@@ -988,17 +963,17 @@ for the line regression fits and a singular value decomposition for all other ca
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sourceImage</strong> (<em>itom.dataObject</em>) – source image data object</p></li>
 <li><p><strong>destinationImage</strong> (<em>itom.dataObject</em>) – destination image data object</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>fitting method (leastSquareFit [default], leastSquareFitSVD, leastMedianFit)</p>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>fitting method (leastSquareFit [default], leastSquareFitSVD, leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Match: [“leastSquareFit”, “leastSquareFitSVD”, “leastMedianFit”], Default: “leastSquareFit”</em></div>
 </div>
 </p></li>
-<li><p><strong>validPointProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</p>
+<li><p><strong>validPointProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>probability that 3 randomly selected point of all points only contain trustful (valid) points. (only important for leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [0, 0.999999], Default: 0.2</em></div>
 </div>
 </p></li>
-<li><p><strong>allowedErrorProbability</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</p>
+<li><p><strong>allowedErrorProbability</strong> (<em>float</em><em>, </em><em>optional</em>) – <p>allowed probability that the fit is based on a possible outlier (non correct fit). (only important for leastMedianFit)</p>
 <div class="line-block">
 <div class="line"><em>Value range: [1e-07, 1], Default: 0.001</em></div>
 </div>
@@ -1019,13 +994,13 @@ for the line regression fits and a singular value decomposition for all other ca
 
 
                 </article>
-
-
-
-
-
+              
+              
+              
+              
+              
                 <footer class="prev-next-footer d-print-none">
-
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="fftwFilters.html"
@@ -1047,12 +1022,13 @@ for the line regression fits and a singular value decomposition for all other ca
     </a>
 </div>
                 </footer>
-
+              
             </div>
-
-
-
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1093,36 +1069,36 @@ for the line regression fits and a singular value decomposition for all other ca
 </div>
 
 </div></div>
-
-
+              
+            
           </div>
           <footer class="bd-footer-content">
-
+            
           </footer>
-
+        
       </main>
     </div>
   </div>
-
+  
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-
+  
     <div class="footer-items__start">
-
+      
         <div class="footer-item">
 
   <p class="copyright">
-
+    
       © Copyright 2011-2024, Institut für Technische Optik (ITO), University Stuttgart. Bug report: https://github.com/itom-project/plugins/issues.
       <br/>
-
+    
   </p>
 </div>
-
+      
         <div class="footer-item">
 
   <p class="sphinx-version">
@@ -1130,20 +1106,20 @@ for the line regression fits and a singular value decomposition for all other ca
     <br/>
   </p>
 </div>
-
+      
     </div>
-
-
-
+  
+  
+  
     <div class="footer-items__end">
-
+      
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
 </p></div>
-
+      
     </div>
-
+  
 </div>
 
   </footer>
