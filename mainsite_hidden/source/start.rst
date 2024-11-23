@@ -46,7 +46,7 @@ Currently the Setup-Version is only available for WINDOWS OS. MacOS and Linux Di
 .. container:: mdl-grid
 
     .. button:: :text: SourceForge
-       :link: https://sourceforge.net/projects/itom/files/latest/download
+       :link: https://github.com/itom-project/itomProject/releases/download/v4.3.0/itom_setup_v4.3.0.exe
 
 .. glossary::
 

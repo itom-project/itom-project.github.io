@@ -13,7 +13,7 @@ Latest End-User Installer & Portable (x64)
 .. container:: mdl-grid--no-spacing
 
     .. button:: :text: ITOM Setup EXE
-     :link: https://sourceforge.net/projects/itom/files/latest/download
+     :link: https://github.com/itom-project/itomProject/releases/download/v4.3.0/itom_setup_v4.3.0.exe
 
     .. button:: :text: ITOM Portable ZIP
      :link: https://sourceforge.net/projects/itom/files/v4.2.2/itom4.2.2_portable.zip/download
