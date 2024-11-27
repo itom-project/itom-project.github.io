@@ -16,7 +16,7 @@ Latest End-User Installer & Portable (x64)
      :link: https://github.com/itom-project/itomProject/releases/download/v4.3.0/itom_setup_v4.3.0.exe
 
     .. button:: :text: ITOM Portable ZIP
-     :link: https://sourceforge.net/projects/itom/files/v4.2.2/itom4.2.2_portable.zip/download
+     :link: https://github.com/itom-project/itomProject/releases/download/v4.3.0/itom_portable_v4.3.0.zip
 
 | **Windows:**    Choose either End-User Setup **OR** Development Kit **OR** Git-clone the Source
 | **Linux:**    (Fedora, Ubuntu, Raspbian) Clone source repository and build (`Linux instructions <https://itom-project.github.io/latest/docs/02_installation/build_debian.html>`_)
